@@ -30,7 +30,7 @@ public class LoginController extends HttpServlet {
                     session.setAttribute("username", user.getUsername()); // Lưu giá trị vào session
                     //Cập  nhật trạng thái
                     userService.UpdateStatusUser("Đang hoạt động",user.getId());
-                    resp.sendRedirect(req.getContextPath() + "/home.jsp");
+                    resp.sendRedirect(req.getContextPath() + "/list-product");
                 } else {
                     req.setAttribute("error_login", "Không tìm thấy người dùng");
                     req.getRequestDispatcher("users/page/login-signup.jsp").forward(req, resp);

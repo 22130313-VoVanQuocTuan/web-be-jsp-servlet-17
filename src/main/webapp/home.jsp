@@ -47,7 +47,7 @@
             <div class="menu">
                 <!-- Logo bên trái -->
                 <div class="logo">
-                    <a href="home.html"><img src="users/img/logo.png" alt="Logo"></a>
+                    <a href="home.jsp"><img src="users/img/logo.png" alt="Logo"></a>
                 </div>
 
                 <!-- Thanh tìm kiếm ở giữa -->

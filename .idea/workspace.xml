@@ -9,40 +9,42 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6b85d910-f57c-4291-8e10-7e8e5953bd3b" name="Changes" comment="">
+    <list default="true" id="819bef2a-1a22-4c62-a0cd-aa675bc132e8" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/webContexts.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/users/page/buying-help.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/users/page/buying-help.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/users/page/cart.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/users/page/cart.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/users/page/check-pay.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/users/page/check-pay.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/users/page/confirmation.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/users/page/confirmation.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/users/page/informationCustomer.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/users/page/informationCustomer.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/users/page/introduce.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/users/page/introduce.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/classes/hcmuaf/nlu/edu/vn/controller/user/account/SignUpController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/classes/hcmuaf/nlu/edu/vn/controller/user/account/SignUpController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/classes/hcmuaf/nlu/edu/vn/service/UserService.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/classes/hcmuaf/nlu/edu/vn/service/UserService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/home.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/tqh/home.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/css/login-signup.css" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/tqh/users/css/login-signup.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/js/login-signup.js" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/tqh/users/js/login-signup.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/js/reset-password.js" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/tqh/users/js/reset-password.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/page/login-signup.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/tqh/users/page/login-signup.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/page/reset-password.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/tqh/users/page/reset-password.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/controller/user/account/SignUpController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/controller/user/account/SignUpController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/home.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/home.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/users/css/login-signup.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/users/css/login-signup.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/users/js/login-signup.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/users/js/login-signup.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/users/js/reset-password.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/users/js/reset-password.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/users/page/login-signup.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/users/page/login-signup.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/users/page/product-detail.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/users/page/product-detail.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/users/page/product.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/users/page/product.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/users/page/product_unit.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/users/page/product_unit.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/users/page/reset-password.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/users/page/reset-password.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/users/page/term_and_services.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/users/page/term_and_services.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="Class" />
-      </list>
-    </option>
-  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="KubernetesApiPersistence">{}</component>
-  <component name="KubernetesApiProvider">{
-  &quot;isMigrated&quot;: true
-}</component>
+  <component name="KubernetesApiPersistence"><![CDATA[{}]]></component>
+  <component name="KubernetesApiProvider"><![CDATA[{
+  "isMigrated": true
+}]]></component>
   <component name="LogFilters">
     <option name="FILTER_ERRORS" value="false" />
     <option name="FILTER_WARNINGS" value="false" />
@@ -57,51 +59,34 @@
       </MavenGeneralSettings>
     </option>
   </component>
-  <component name="ProjectColorInfo">{
-  &quot;associatedIndex&quot;: 7
-}</component>
-  <component name="ProjectId" id="2q3s8gene1U3wlimKrZ3uZUt6n6" />
+  <component name="ProjectColorInfo"><![CDATA[{
+  "customColor": "",
+  "associatedIndex": 7
+}]]></component>
+  <component name="ProjectId" id="2q4WuTaKLO4BMyFBqf2ZxJzVzYf" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "Maven.VLXD-TQH [clean].executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
     "Tomcat Server.Tomcat 10.1.31.executor": "Run",
     "git-widget-placeholder": "master",
-    "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/web-be-jsp-servlet-17",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.13479263",
+    "project.structure.last.edited": "Artifacts",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\VLXD-TQH\src\main\resources" />
-      <recent name="D:\VLXD-TQH\src\main\webapp\users" />
-      <recent name="D:\VLXD-TQH\src\main\webapp" />
-      <recent name="D:\VLXD-TQH\src\main\java\hcmuaf\nlu\edu\vn\controller\user\account\" />
-      <recent name="D:\VLXD-TQH\src\main\java\hcmuaf\nlu\edu\vn" />
-    </key>
-    <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="" />
-    </key>
-  </component>
   <component name="RunManager">
     <configuration name="Tomcat 10.1.31" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 10.1.31" ALTERNATIVE_JRE_ENABLED="false" nameIsGenerated="true">
-      <option name="OPEN_IN_BROWSER_URL" value="http://localhost:8080/tqh/" />
-      <option name="BROWSER_ID" value="37cae5b9-e8b2-4949-9172-aafa37fbc09c" />
       <option name="UPDATING_POLICY" value="restart-server" />
       <deployment>
         <artifact name="tqh">
@@ -111,7 +96,7 @@
         </artifact>
       </deployment>
       <server-settings>
-        <option name="BASE_DIRECTORY_NAME" value="1a2a939a-dc27-4503-89fb-f61a7a2f3ddd" />
+        <option name="BASE_DIRECTORY_NAME" value="23386912-af93-44b0-a451-c8617020947c" />
       </server-settings>
       <predefined_log_file enabled="true" id="Tomcat" />
       <predefined_log_file enabled="true" id="Tomcat Catalina" />
@@ -119,7 +104,7 @@
       <predefined_log_file id="Tomcat Host Manager" />
       <predefined_log_file id="Tomcat Localhost Access" />
       <RunnerSettings RunnerId="Debug">
-        <option name="DEBUG_PORT" value="54433" />
+        <option name="DEBUG_PORT" value="57419" />
       </RunnerSettings>
       <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Cover">
         <option name="USE_ENV_VARIABLES" value="true" />
@@ -192,21 +177,20 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-fdfe4dae3a2d-intellij.indexing.shared.core-IU-243.21565.193" />
-        <option value="bundled-js-predefined-d6986cc7102b-e768b9ed790e-JavaScript-IU-243.21565.193" />
+        <option value="bundled-jdk-9823dce3aa75-28b599e66164-intellij.indexing.shared.core-IU-242.23339.11" />
+        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-IU-242.23339.11" />
       </set>
     </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="6b85d910-f57c-4291-8e10-7e8e5953bd3b" name="Changes" comment="" />
-      <created>1733902437955</created>
+      <changelist id="819bef2a-1a22-4c62-a0cd-aa675bc132e8" name="Changes" comment="" />
+      <created>1733922552626</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1733902437955</updated>
-      <workItem from="1733902439119" duration="5965000" />
-      <workItem from="1733910946966" duration="2614000" />
+      <updated>1733922552626</updated>
+      <workItem from="1733922555350" duration="7282000" />
     </task>
     <servers />
   </component>
