@@ -29,20 +29,24 @@ public class LoginController extends HttpServlet {
                     session.setAttribute("user", user);
                     session.setAttribute("username", user.getUsername()); // Lưu giá trị vào session
                     //Cập  nhật trạng thái
-                    userService.UpdateStatusUser("Đang hoạt động",user.getId());
-                    resp.sendRedirect(req.getContextPath() + "/list-product");
+                    if ("admin".equalsIgnoreCase(user.getRole())) {
+                        req.getRequestDispatcher(req.getContextPath() + "/admin/pages/index.jsp").forward(req, resp); // Redirect admin
+                    } else if ("user".equalsIgnoreCase(user.getRole())) {
+                        req.getRequestDispatcher(req.getContextPath() + "/list-product-home").forward(req, resp); // Redirect user
+
+                    } else {
+                        req.setAttribute("error_login", "Không tìm thấy người dùng");
+                        req.getRequestDispatcher("users/page/login-signup.jsp").forward(req, resp);
+                    }
+
                 } else {
-                    req.setAttribute("error_login", "Không tìm thấy người dùng");
+                    req.setAttribute("error_login", "Tài khoản hoặc mật khẩu không chính xác");
                     req.getRequestDispatcher("users/page/login-signup.jsp").forward(req, resp);
                 }
-
-            } else {
-                req.setAttribute("error_login", "Tài khoản hoặc mật khẩu không chính xác");
-                req.getRequestDispatcher("users/page/login-signup.jsp").forward(req, resp);
             }
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
     }
-    }
+}
