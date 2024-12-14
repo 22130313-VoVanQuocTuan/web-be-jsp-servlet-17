@@ -74,7 +74,7 @@
                 </div>
                 <div class="cart">
                     <div class="cart-wrapper">
-                        <a id="carts" href="#">
+                        <a id="carts" href="cart-items">
                             <i class="fas fa-shopping-cart" style="color: #15283e;"></i>
                         </a>
                         <span class="cart-count" id="cart-count">0</span>
@@ -125,7 +125,7 @@
                 <li class="propClone"><a href="home-page"><i class="fa-brands fa-product-hunt"></i>
                     &nbsp;&nbsp;SẢN PHẨM</a>
                 </li>
-                <li class="propClone"><a id="cartss" href="users/page/cart.jsp"><i
+                <li class="propClone"><a id="" href="cart-items"><i
                         class="fas fa-shopping-cart"></i>&nbsp;&nbsp; GIỎ
                     HÀNG</a>
                 </li>

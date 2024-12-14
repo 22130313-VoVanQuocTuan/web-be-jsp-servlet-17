@@ -22,6 +22,7 @@ public class AddCartController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         ProductService productService = new ProductService();
+        //Gọi hàm lấy ra sản phẩm theo id
         Product pid = productService.getProductById(Integer.parseInt(req.getParameter("id")));
         HttpSession session = req.getSession();
         // gọi hàm thêm vào giỏ hàng

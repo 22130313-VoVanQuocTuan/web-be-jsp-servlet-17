@@ -12,8 +12,8 @@
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4-beta3/css/all.min.css" />
-<link rel="stylesheet" href="../css/home.css">
-<link rel="stylesheet" href="../css/cart.css">
+<link rel="stylesheet" href="<c:url value="/users/css/home.css"/>">
+<link rel="stylesheet" href="<c:url value="/users/css/cart.css"/>">
 
 <body>
     <div id="section-header1">
@@ -56,7 +56,7 @@
                 <div class="menu">
                     <!-- Logo bên trái -->
                     <div class="logo">
-                        <a href="../../home.jsp"><img src="../img/logo.png" alt="Logo"></a>
+                        <a href="../../home.jsp"><img src="${pageContext.request.contextPath}/users/img/logo.png" alt="Logo"></a>
                     </div>
 
                     <!-- Thanh tìm kiếm ở giữa -->
@@ -166,103 +166,29 @@
                             <th></th>
                         </tr>
                     </thead>
-                    <tbody id="cart-items-container" class="cart-items-container">
-                        <tr class="cart-item" data-id="1">
-                            <td>Gạch-inax</td>
-                            <td><img src="../img_product/gachxaydung/gachdinhdac.png" alt="${product.name}"></td>
-                            <td>
-                                <div class="quantity">
-                                    <button class="qty-btn minus-btn">-</button>
-                                    <input title="input" type="number" value="1" class="qty-input" min="1" />
-                                    <button class="qty-btn plus-btn">+</button>
-                                </div>
-                            </td>
-                            <td id="price" class="price-after-discount">200.000 ₫</td> 
-                            <td id="total-price" class="total-after-discount">20.000 ₫</td> 
-                            <td id="total-price" class="total-after-discount">180.000 ₫</td> 
-                            <td><button class="remove-from-cart-button">Xóa</button></td>
-                        </tr>
-                        <tr class="cart-item" data-id="2">
-                            <td>Gạch không nung</td>
-                            <td><img src="../img_product/gachxaydung/gachkhongnung.png" alt="${product.name}"></td>
-                            <td>
-                                <div class="quantity">
-                                    <button class="qty-btn minus-btn">-</button>
-                                    <input title="input" type="number" value="1" class="qty-input" min="1" />
-                                    <button class="qty-btn plus-btn">+</button>
-                                </div>
-                            </td>
-                            <td id ="price" class="price-after-discount">200.000 ₫</td> 
-                            <td id="total-price" class="total-after-discount">20.000 ₫</td> 
-                            <td id="total-price" class="total-after-discount">180.000 ₫</td> 
-                            <td><button id="delete" class="remove-from-cart-button">Xóa</button>
-                            </td>
-                        </tr>
-                        <tr class="cart-item" data-id="3">
-                            <td>Ngói nóc</td>
-                            <td><img src="../img_product/ngoi/Ngói%20cuối%20nóc.png" alt="${product.name}"></td>
-                            <td>
-                                <div class="quantity">
-                                    <button class="qty-btn minus-btn">-</button>
-                                    <input title="input" type="number" value="1" class="qty-input" min="1" />
-                                    <button class="qty-btn plus-btn">+</button>
-                                </div>
-                            </td>
-                            <td id ="price" class="price-after-discount">200.000 ₫</td> 
-                            <td id="total-price" class="total-after-discount">20.000 ₫</td> 
-                            <td id="total-price" class="total-after-discount">180.000 ₫</td> 
-                            <td><button id="delete" class="remove-from-cart-button">Xóa</button>
-                            </td>
-                        </tr>
-                        <tr class="cart-item" data-id="3">
-                            <td>Thép BCL</td>
-                            <td><img src="../img_product/thepvasat/image2.png" alt="${product.name}"></td>
-                            <td>
-                                <div class="quantity">
-                                    <button class="qty-btn minus-btn">-</button>
-                                    <input title="input" type="number" value="1" class="qty-input" min="1" />
-                                    <button class="qty-btn plus-btn">+</button>
-                                </div>
-                            </td>
-                            <td id ="price" class="price-after-discount">200.000 ₫</td> 
-                            <td id="total-price" class="total-after-discount">20.000 ₫</td> 
-                            <td id="total-price" class="total-after-discount">180.000 ₫</td> 
-                            <td><button id="delete" class="remove-from-cart-button">Xóa</button>
-                            </td>
-                        </tr>
-                        <tr class="cart-item" data-id="4">
-                            <td>Sơn Dulux</td>
-                            <td><img src="../img_product/son/Sơn%20nước%20ngoại%20thất%20Dulux%20Weathershield%20Powerflexx%20Bề%20Mặt.png" alt="${product.name}"></td>
-                            <td>
-                                <div class="quantity">
-                                    <button class="qty-btn minus-btn">-</button>
-                                    <input title="input" type="number" value="1" class="qty-input" min="1" />
-                                    <button class="qty-btn plus-btn">+</button>
-                                </div>
-                            </td>
-                            <td id ="price" class="price-after-discount">200.000 ₫</td> 
-                            <td id="total-price" class="total-after-discount">20.000 ₫</td> 
-                            <td id="total-price" class="total-after-discount">180.000 ₫</td> 
-                            <td><button id="delete" class="remove-from-cart-button">Xóa</button>
-                            </td>
-                        </tr>
-                        <tr class="cart-item" data-id="5">
-                            <td>Gạch không nung</td>
-                            <td><img src="../img_product/gachxaydung/gachkhongnung.png" alt="${product.name}"></td>
-                            <td>
-                                <div class="quantity">
-                                    <button class="qty-btn minus-btn">-</button>
-                                    <input title="input" type="number" value="1" class="qty-input" min="1" />
-                                    <button class="qty-btn plus-btn">+</button>
-                                </div>
-                            </td>
-                            <td id ="price" class="price-after-discount">200.000 ₫</td> 
-                            <td id="total-price" class="total-after-discount">20.000 ₫</td> 
-                            <td id="total-price" class="total-after-discount">180.000 ₫</td> 
-                            <td><button id="delete" class="remove-from-cart-button">Xóa</button>
-                            </td>
-                        </tr>
+                    <c:forEach var="item" items="${listItems}">
+                        <tbody id="cart-items-container" class="cart-items-container">
+                                 <tr class="cart-item" data-id="${item.id}">
+                                <td>${item.product.name}</td>
+                                <td><img src="${item.product.imageUrl}" alt="${item.product.name}" width="50" height="50"></td>
+                                <td>
+                                    <div class="quantity">
+                                        <button class="qty-btn minus-btn">-</button>
+                                        <input title="input" type="number" value="${item.quantity}" class="qty-input" min="1" />
+                                        <button class="qty-btn plus-btn">+</button>
+                                    </div>
+                                </td>
+                                <td>${item.product.price} ₫</td>
+                                <td>${item.discountAmount} ₫</td>
+                                <td>${item.totalPrice} ₫</td>
+                                <td>
+                                    <a href="add-cart?id=${item.id}" class="remove-from-cart-button">Xóa</a>
+                                </td>
+                            </tr>
+
+
                     </tbody>
+                    </c:forEach>
                 </table>
                 <div class="cart-buttons">
                     <a href="product.jsp"><button class="continue-btn">← Tiếp tục xem sản
@@ -357,9 +283,9 @@
 
     </div>
 
-    <script src="../js/login-signup.js"></script>
-    <script src="/src/Users/js/scripts.js" defer></script>
-    <script src="/src/Users/js/cart.js" defer></script>
+    <script src="<c:url value="/users/js/login-signup.js"/>"></script>
+    <script src="<c:url value="/users/js/scripts.js"/>" defer></script>
+    <script src="<c:url value="/users/js/cart.js"/>" defer></script>
 </body>
 
 </html>
