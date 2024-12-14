@@ -9,7 +9,7 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
-@WebFilter(filterName = "admin-filter", urlPatterns = "/admin/*")
+@WebFilter(filterName = "user-filter", urlPatterns = {"/"})
 public class UserFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
@@ -20,19 +20,17 @@ public class UserFilter implements Filter {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse res = (HttpServletResponse) response;
 
-        HttpSession session = req.getSession(false); // nếu chưa đăng nhập thì ko tạo ra session mới
+        HttpSession session = req.getSession(false); // Không tạo session mới nếu chưa đăng nhập
         Users user = (session != null) ? (Users) session.getAttribute("user") : null;
 
-        if (user == null || !user.getRole().equals("user")) {
-            res.sendRedirect(req.getContextPath() + "/users/page/login-signup.jsp"); // Redirect đến trang đăng nếu không phải user
-            return;
+        if (user == null || !"user".equalsIgnoreCase(user.getRole())) {
+            res.sendRedirect(req.getContextPath() + "/users/page/login-signup.jsp"); // Redirect đến trang login nếu không phải user
+        } else {
+            chain.doFilter(request, response); // Nếu là user, tiếp tục xử lý
         }
-
-        chain.doFilter(request, response); // Tiếp tục xử lý nếu là user
     }
+
     @Override
     public void destroy() {
-
     }
 }
-

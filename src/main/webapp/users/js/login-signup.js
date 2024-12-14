@@ -45,39 +45,43 @@ document.addEventListener('DOMContentLoaded', function () {
 
     
   // Xử lý đăng nhập
-    const  username_errorlog = document.getElementById('username-errorlog')
-    const  password_errorlog = document.getElementById('password-errorlog')
-      if (loginForm) {
+    const usernameErrorLog = document.getElementById('username-errorlog');
+    const passwordErrorLog = document.getElementById('password-errorlog');
+
+    if (loginForm) {
         loginForm.addEventListener('submit', function (event) {
             event.preventDefault();
             const username = document.getElementById('login-username').value;
             const password = document.getElementById('login-password').value;
 
             let isValid = true;
+
             // Kiểm tra tên đăng nhập
             if (username === '') {
-                username_errorlog.textContent = 'Tên đăng nhập không được để trống';
-                username_errorlog.style.display = 'block';
+                usernameErrorLog.textContent = 'Tên đăng nhập không được để trống';
+                usernameErrorLog.style.display = 'block';
                 isValid = false;
             } else {
-                username_errorlog.style.display = 'none';
+                usernameErrorLog.style.display = 'none';
             }
-             // Kiểm tra mật khẩu
+
+            // Kiểm tra mật khẩu
             if (password === '') {
-                password_errorlog.textContent = 'Mật khẩu không được để trống';
-                password_errorlog.style.display = 'block';
+                passwordErrorLog.textContent = 'Mật khẩu không được để trống';
+                passwordErrorLog.style.display = 'block';
                 isValid = false;
             } else {
-                password_errorlog.style.display = 'none';
+                passwordErrorLog.style.display = 'none';
             }
+
             const errorMessageElement = document.getElementById('error-login');
+
             // Nếu hợp lệ, xử lý đăng nhập
             if (isValid) {
                 errorMessageElement.innerText = "";
                 loginForm.submit(); // Gửi form nếu hợp lệ
-
-        }
-    });
+            }
+        });
     }
 
     // Hiển thị thông tin người dùng nếu đã đăng nhập

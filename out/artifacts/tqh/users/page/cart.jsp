@@ -25,12 +25,26 @@
                     </p>
                 </div>
                 <div class="top-right">
-                    <span id="user-greeting" style="display: none; color: #ffffff;">Xin chào, <span id="username"></span>!</span>
-                    <a href="informationCustomer.jsp" class="account-link" id="signup-link" style="display: none;">
-                        <i class="fas fa-user-circle"  ></i> Tài khoản
-                    </a>
-                    <a href="login-signup.jsp" id="login-link"><span><i class="fa fa-fw fa-user"></i> Đăng Nhập</span></a>
-                    <a href="login-signup.jsp" id="logout-link" style="display: none;"><span>Đăng Xuất</span></a>
+                    <span id="user-greeting" style="display: none; color: #ffffff;">
+                           Xin chào,  <span
+                            id="username">${sessionScope.user.username != null ? sessionScope.user.username : ''}</span>!</span>
+
+                    <form action="account" method="post">
+                        <button type="submit" class="account-link" id="signup-link"
+                                style="display: none;">
+                            <i class="fas fa-user-circle"></i> Tài khoản
+                        </button>
+                    </form>
+                    <form action="login" method="post">
+                        <input name="action" type="hidden" value="login" />
+                        <button type="submit" id="login-link">
+                            <span><i class="fa fa-fw fa-user"></i> Đăng Nhập</span>
+                        </button>
+                    </form>
+                    <form action="logout" method="post">
+                        <button type="submit" id="logout-link"
+                                style="display: none;"><span>Đăng Xuất</span></button>
+                    </form>
                 </div>
             </div>
 

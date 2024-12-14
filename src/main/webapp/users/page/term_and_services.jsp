@@ -125,7 +125,7 @@
                             <li><a href="product_unit.jsp">&nbsp;&nbsp;<i
                                         class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;BẢNG ĐƠN VỊ SẢN PHẨM</a>
                             </li>
-                            <li><a href="term_and_services.html">&nbsp;&nbsp;<i
+                            <li><a href="term_and_services.jsp">&nbsp;&nbsp;<i
                                         class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;ĐIỀU KHOẢN
                                     VÀ DỊCH VỤ</a>
                             </li>

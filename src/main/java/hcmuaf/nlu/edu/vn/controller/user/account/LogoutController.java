@@ -14,18 +14,20 @@ import java.sql.SQLException;
 
 @WebServlet(name = "logout", value = "/logout")
 public class LogoutController extends HttpServlet {
+
     private final UserService userService;
     public LogoutController() {
         this.userService = new UserService();
     }
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        try{
+
+          try{
             HttpSession session = req.getSession();
             Users user = (Users) session.getAttribute("user");
             if (user == null) {
                 // Nếu user không tồn
-                resp.sendRedirect(req.getContextPath() + "/users/page/login-signup.jsp");
+                req.getRequestDispatcher( "/users/page/login-signup.jsp").forward(req, resp);
                 return;
             }
             // Cập nhật trạng thái người dùng thành "Không hoạt động"
@@ -34,7 +36,7 @@ public class LogoutController extends HttpServlet {
             // Hủy session (đăng xuất)
             req.getSession().invalidate();
             // Chuyển hướng tới trang đăng nhập
-            resp.sendRedirect(req.getContextPath() + "/users/page/login-signup.jsp");
+            req.getRequestDispatcher( "/users/page/login-signup.jsp").forward(req, resp);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

@@ -66,16 +66,13 @@
             </p>
         </div>
         <div class="top-right">
-                       <span id="user-greeting" style="display: none; color: #ffffff;">
-                           Xin chào,  <span
-                               id="username">${sessionScope.username != null ? sessionScope.username : ''}</span>!</span>
+            <form action="login" method="post">
+                <input name="action" type="hidden" value="login" />
+                <button type="submit" id="login-link">
+                    <span><i class="fa fa-fw fa-user"></i> Đăng Nhập</span>
+                </button>
+            </form>
 
-            <a href="users/page/informationCustomer.html" class="account-link" id="signup-link" style="display: none;">
-                <i class="fas fa-user-circle"></i> Tài khoản
-            </a>
-            <a href="users/page/login-signup.jsp" id="login-link"><span><i class="fa fa-fw fa-user"></i> Đăng
-                            Nhập</span></a>
-            <a href="users/page/login-signup.jsp" id="logout-link" style="display: none;"><span>Đăng Xuất</span></a>
         </div>
     </div>
 </div>
@@ -188,7 +185,7 @@
 
 
             <div class="form-container sign-up">
-                    <form id="register-form" action="/tqh/signup-user" method="post">
+                    <form id="register-form" action="signup-user" method="post">
                     <h1>Tạo tài khoản</h1>
                     <div class="social-icons">
                         <a href="" class="icon-logo google"><i class="fa-brands fa-google-plus-g g"></i></a>
@@ -220,7 +217,7 @@
 
 
         <div class="form-container sign-in none">
-            <form id="login-form" action="/tqh/login" method="post">
+            <form id="login-form" action="login" method="post">
                 <h1>Đăng nhập</h1>
                 <div class="social-icons">
                     <a href="#" class="icon-logo"><i class="fa-brands fa-google-plus-g g"></i></a>
@@ -271,7 +268,7 @@
                     <h1>Xác thực email</h1>
 
                     <!-- Form xác thực email -->
-                    <form id="verification-form" action="/tqh/verify-email" method="post">
+                    <form id="verification-form" action="verify-email" method="post">
                         <div class="verification-code-inputs " style="display: flex; gap: 10px;">
                             <input class="verification-code" type="text" name="code1" maxlength="1">
                             <input class="verification-code" type="text" name="code2" maxlength="1">
@@ -289,7 +286,7 @@
                     </form>
 
                     <!-- Form gửi lại mã -->
-                    <form id="reset-password-form" action="/tqh/reset-code" method="post">
+                    <form id="reset-password-form" action="reset-code" method="post">
                         <button type="submit" class="reset">Gửi lại</button>
                     </form>
                 </div>
