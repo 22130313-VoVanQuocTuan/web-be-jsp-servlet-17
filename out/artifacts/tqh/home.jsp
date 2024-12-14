@@ -189,7 +189,7 @@
             <c:forEach var="product" items="${products}">
                 <div class="product-one-content-item">
                     <div class="img-product">
-                        <a href="users/page/product-detail.jsp"><img
+                        <a href="${pageContext.request.contextPath}/product-detail?id=${product.id}"><img
                                 src="${product.imageUrl}"
                                 alt="${product.name}"></a>
                         <span class="sale-box">${product.discountPercent}%</span>
