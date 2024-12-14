@@ -14,4 +14,5 @@ public class ProductService {
     public List<Product> getListProductDiscount (){
         return getListPDiscountDao.getistProductDiscount();
     }
+
 }
