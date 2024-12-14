@@ -17,8 +17,11 @@ public class CartService {
 
     // Lấy giỏ hàng từ session
     public Carts getCartFromSession(HttpSession session) {
-        Carts cart = (Carts) session.getAttribute("cart");
-        return cart;
+        // Kiểm tra session trước khi lấy giỏ hàng
+        if (session == null) {
+            return null;
+        }
+        return (Carts) session.getAttribute("cart");
     }
 
     // Xóa sản phẩm khỏi giỏ hàng
