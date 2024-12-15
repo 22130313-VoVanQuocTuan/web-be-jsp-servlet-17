@@ -28,7 +28,7 @@
                            Xin chào,  <span
                                id="username">${sessionScope.user.username != null ? sessionScope.user.username : ''}</span>!</span>
 
-                <form action="account" method="post">
+                <form action="informationCustomer" method="get">
                     <button type="submit" class="account-link" id="signup-link"
                    style="display: none;">
                     <i class="fas fa-user-circle"></i> Tài khoản
@@ -74,10 +74,10 @@
                 </div>
                 <div class="cart">
                     <div class="cart-wrapper">
-                        <a id="carts" href="cart-items">
-                            <i class="fas fa-shopping-cart" style="color: #15283e;"></i>
+                        <a href="cart-items">
+                            <i class="fas fa-shopping-cart"></i>
                         </a>
-                        <span class="cart-count" id="cart-count">0</span>
+                        <span class="cart-count" id="cart-count">${sessionScope.cartItemCount}</span>
                     </div>
                 </div>
             </div>
@@ -158,12 +158,12 @@
             bạn!</p>
         <div class="slide-show-content-image">
 
-            <img src="src/Users/img/slider1.png" alt="baner">
-            <img src="src/Users/img/slider2.png" alt="baner">
-            <img src="src/Users/img/slider3.png" alt="baner">
-            <img src="src/Users/img/slider4.png" alt="baner">
-            <img src="src/Users/img/slider5.png" alt="baner">
-            <img src="src/Users/img/slider6.png" alt="baner">
+            <img src="<c:url value="/users/img/slider1.png"/>" alt="baner">
+            <img src="<c:url value="/users/img/slider2.png"/>" alt="baner">
+            <img src="<c:url value="/users/img/slider3.png"/>" alt="baner">
+            <img src="<c:url value="/users/img/slider4.png"/>" alt="baner">
+            <img src="<c:url value="/users/img/slider5.png"/>" alt="baner">
+            <img src="<c:url value="/users/img/slider6.png"/>" alt="baner">
         </div>
         .
         <div class="slide-show-content-btn">

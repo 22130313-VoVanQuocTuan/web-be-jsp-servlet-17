@@ -8,7 +8,7 @@ import jakarta.servlet.annotation.*;
 import java.io.IOException;
 import java.sql.SQLException;
 
-@WebServlet(name = "OrderController", value = "/informationCustomer")
+@WebServlet(name = "informationCustomer", value = "/informationCustomer")
 public class OrderController extends HttpServlet {
     private final OrderService orderService;
 

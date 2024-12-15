@@ -29,7 +29,7 @@
                            Xin chào,  <span
                             id="username">${sessionScope.user.username != null ? sessionScope.user.username : ''}</span>!</span>
 
-                    <form action="account" method="post">
+                    <form action="informationCustomer" method="get">
                         <button type="submit" class="account-link" id="signup-link"
                                 style="display: none;">
                             <i class="fas fa-user-circle"></i> Tài khoản
@@ -74,10 +74,10 @@
                     </div>
                     <div class="cart">
                         <div class="cart-wrapper">
-                            <a href="cart.html">
+                            <a href="cart-items">
                                 <i class="fas fa-shopping-cart"></i>
                             </a>
-                            <span class="cart-count" id="cart-count">0</span>
+                            <span class="cart-count" id="cart-count">${sessionScope.cartItemCount}</span>
                         </div>
                     </div>
                 </div>
@@ -121,12 +121,12 @@
                                     ĐIỆN NƯỚC</a></li>
                         </ul>
                     </li>
-                    <li class="propClone"><a href="../../home.jsp"><i class="fa-solid fa-house"></i>&nbsp;&nbsp; TRANG CHỦ
+                    <li class="propClone"><a href="home-page"><i class="fa-solid fa-house"></i>&nbsp;&nbsp; TRANG CHỦ
                         </a></li>
                     <li class="propClone"><a href="product.jsp"><i class="fa-brands fa-product-hunt"></i>
                             &nbsp;&nbsp;SẢN PHẨM</a>
                     </li>
-                    <li class="propClone"> <a href="cart.html"><i class="fas fa-shopping-cart"></i>&nbsp;&nbsp; GIỎ
+                    <li class="propClone"> <a href="cart-items"><i class="fas fa-shopping-cart"></i>&nbsp;&nbsp; GIỎ
                             HÀNG</a>
                     </li>
                     <li class="propClone">
@@ -179,11 +179,11 @@
                                         <button class="qty-btn plus-btn">+</button>
                                     </div>
                                 </td>
-                                <td>${item.price} ₫</td>
-                                <td>${item.discountAmount} ₫</td>
-                                <td>${item.totalPrice} ₫</td>
+                                <td><fmt:formatNumber value=" ${item.price}" type="number" groupingUsed="true"/>₫</td>
+                                <td><fmt:formatNumber value=" ${item.discountAmount}" type="number" groupingUsed="true"/>₫</td>
+                                <td><fmt:formatNumber value=" ${item.totalPrice}" type="number" groupingUsed="true"/>₫</td>
                                 <td>
-                                    <a href="add-cart?id=${item.id}" class="remove-from-cart-button">Xóa</a>
+                                    <a href="cart-remove?id=${item.id}" class="remove-from-cart-button">Xóa</a>
                                 </td>
                             </tr>
                         </c:forEach>
@@ -191,7 +191,7 @@
 
                 </table>
                 <div class="cart-buttons">
-                    <a href="product.jsp"><button class="continue-btn">← Tiếp tục xem sản
+                    <a href="list-product"><button class="continue-btn">← Tiếp tục xem sản
                             phẩm</button></a>
                 </div>
             </div>
@@ -202,16 +202,16 @@
                 <div class="cart-summary">
                     <div class="summary-item">
                         <span>Tạm tính:</span>
-                        <span id="subtotal">180.000₫</span>
+                        <span id="subtotal"><fmt:formatNumber value=" ${totalPrice}" type="number" groupingUsed="true"/>₫</span>
                     </div>
                     <div class="summary-item">
                         <span>Phí vận chuyển:</span>
-                        <span id="vat">14.400₫</span>
+                        <span id="vat"><fmt:formatNumber value=" ${totalShippingFee}" type="number" groupingUsed="true"/>₫</span>
                     </div>
                 </div>
                 <div class="summary-item total">
                     <span>Tổng cộng:</span>
-                    <span id="total">194.400₫</span>
+                    <span id="total"><fmt:formatNumber value=" ${totalShippingFee + totalPrice} " type="number" groupingUsed="true"/>₫</span>
                 </div>
                 <a href="confirmation.jsp"><button class="checkout-btn">Tiến hành thanh toán</button></a>
 

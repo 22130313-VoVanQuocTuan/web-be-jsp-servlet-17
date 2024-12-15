@@ -32,13 +32,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    // Xóa sản phẩm
-    cartItemsContainer.addEventListener('click', function (event) {
-        if (event.target.classList.contains('remove-from-cart-button')) {
-            const cartItem = event.target.closest('.cart-item');
-            cartItem.remove();
-        }
-    });
+
 
     // Áp dụng mã giảm giá
     const applyBtn = document.getElementById('apply-btn');

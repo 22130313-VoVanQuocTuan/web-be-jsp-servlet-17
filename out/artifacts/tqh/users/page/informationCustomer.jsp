@@ -29,7 +29,7 @@
                            Xin chào,  <span
                  id="username">${sessionScope.user.username != null ? sessionScope.user.username : ''}</span>!</span>
 
-                    <form action="account" method="post">
+                    <form action="informationCustomer" method="get">
                         <button type="submit" class="account-link" id="signup-link"
                                 style="display: none;">
                             <i class="fas fa-user-circle"></i> Tài khoản
@@ -56,7 +56,7 @@
                 <div class="menu">
                     <!-- Logo bên trái -->
                     <div class="logo">
-                        <a href="../../home.jsp"><img src="../img/logo.png" alt="Logo"></a>
+                        <a href="../../home.jsp"><img src="${pageContext.request.contextPath}/users/img/logo.png" alt="Logo"></a>
                     </div>
 
                     <!-- Thanh tìm kiếm ở giữa -->
@@ -77,7 +77,7 @@
                             <a href="cart.jsp">
                                 <i class="fas fa-shopping-cart"></i>
                             </a>
-                            <span class="cart-count" id="cart-count">0</span>
+                            <span class="cart-count" id="cart-count">${sessionScope.cartItemCount}</span>
                         </div>
                     </div>
                 </div>
@@ -154,7 +154,7 @@
     <div id="section-content-1">
         <div class="account-info-page">
             <h1>Thông tin tài khoản</h1>
-            <p class="greeting">Xin chào, ${sessionScope.username != null ? sessionScope.username : ''}</p>
+            <p class="greeting">Xin chào, ${sessionScope.user.username != null ? sessionScope.user.username : ''}</p>
 
             <div class="content">
                 <!-- Đơn hàng gần nhất -->
@@ -326,24 +326,7 @@
     <script src="<c:url value="/users/js/scripts.js"/>" ></script>
     <script src="<c:url value="/users/js/login-signup.js"/>"></script>
     <script src="<c:url value="/users/js/informationCustomer.js"/>"></script>
-    <script>
-        // Mở banner tự động khi trang tải xong
-        window.onload = function () {
-            openPopup(); // Gọi hàm mở popup
-        };
 
-        function openPopup() {
-            // Hiển thị banner và ngừng cuộn trang
-            document.getElementById("popupBanner").style.display = "flex";
-            document.body.classList.add("no-scroll");
-        }
-
-        function closePopup() {
-            // Ẩn banner và khôi phục cuộn trang
-            document.getElementById("popupBanner").style.display = "none";
-            document.body.classList.remove("no-scroll");
-        }
-    </script>
 
 </body>
 

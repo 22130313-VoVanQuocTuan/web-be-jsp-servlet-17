@@ -13,12 +13,13 @@ public class CartItems {
     private double discountAmount;
     private String imageUrl;
     private String name;
+    private double shippingFee;
 
 
     public CartItems() {
     }
     public CartItems(int id, int cartId, int productId, int quantity, double price, double totalPrice,
-                     double discountAmount,String imageUrl, String name) {
+                     double discountAmount,String imageUrl, String name, double shippingFee) {
         this.id = id;
         this.cartId = cartId;
         this.productId = productId;
@@ -28,6 +29,7 @@ public class CartItems {
         this.discountAmount = discountAmount;
         this.imageUrl = imageUrl;
         this.name = name;
+        this.shippingFee = shippingFee;
 
     }
 
@@ -60,8 +62,11 @@ public class CartItems {
     }
 
     public void setQuantity(int quantity) {
+
+        if(quantity < 1){
+            quantity = 1;
+        }
         this.quantity = quantity;
-        this.totalPrice = quantity * price;
     }
 
     public double getPrice() {
@@ -102,5 +107,13 @@ public class CartItems {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public double getShippingFee() {
+        return shippingFee;
+    }
+
+    public void setShippingFee(double shippingFee) {
+        this.shippingFee = shippingFee;
     }
 }

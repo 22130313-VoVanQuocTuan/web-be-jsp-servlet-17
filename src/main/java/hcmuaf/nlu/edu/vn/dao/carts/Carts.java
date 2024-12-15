@@ -5,30 +5,21 @@ import hcmuaf.nlu.edu.vn.model.Product;
 import java.util.*;
 
 public class Carts {
-    private int id;
-    private int userId;
-    private int promotionalId;
-    private int totalItem;
-    private double totalPrice;
-    private double discountAmount;
-    private double shippingFee;
-    private Date createDate;
-    private Date updateDate;
     private Map<Integer, CartItems> items;
 
     public Carts() {
         this.items = new HashMap<>();
     }
     // Thêm sản phẩm vào giỏ hàng
-    public boolean addItem(Product product) {
+    public void addItem(Product product) {
         if (product == null) {
-            return false;
+            return;
         }
         if (items.containsKey(product.getId())) {
-            return updateQuantity(product.getId(), items.get(product.getId()).getQuantity() + 1);
+            updateQuantity(product.getId(), items.get(product.getId()).getQuantity() + 1);
+            return;
         }
         items.put(product.getId(), convert(product));
-        return true;
     }
     // Xóa sản phẩm khỏi giỏ hàng
     public void removeItem(int productId) {
@@ -41,36 +32,45 @@ public class Carts {
         return items.values().stream().mapToInt(CartItems::getQuantity).sum();
     }
 
+    // Tính tổng giá của các sản phẩm trong  giỏ
     public double getTotalPrice() {
         return items.values().stream().mapToDouble(CartItems::getTotalPrice).sum();
     }
+    // Tính tổng tiền phí vận chuyển
+    public double getTotalPriceShippingFee() {
+        double totalPrice = getTotalPrice();
+         return totalPrice *  10/100;
+    }
 
-    public boolean updateQuantity(int id , int quantity) {
-        if(items.containsKey(id) || quantity <1 ) return false;
+    // Cập nhật  số  luợng
+    public void updateQuantity(int id, int quantity) {
+        if (!items.containsKey(id) || quantity < 1) return;
         CartItems item = items.get(id);
-        item.setQuantity(item.getQuantity() + quantity );
+        item.setQuantity(quantity);
+        item.setPrice( item.getPrice() * item.getQuantity());
+        item.setTotalPrice(item.getTotalPrice() * item.getQuantity());
+        item.setDiscountAmount(item.getDiscountAmount() * item.getQuantity());
         items.put(id, item);
-        return true;
+
 
     }
+    //Lấy ra danh sách sản phẩm trong giỏ
     public List<CartItems> listItems (){
         return new ArrayList<>(items.values());
     }
 
+    //Map product qua cart
     private CartItems convert(Product product) {
         CartItems item = new CartItems();
         item.setId(product.getId());
         item.setImageUrl(product.getImageUrl());
-        item.setQuantity(1);
-        item.setPrice(product.getPrice());
-        item.setTotalPrice(product.getPrice());
-        item.setDiscountAmount(product.getDiscountPercent());
+        item.setQuantity(item.getQuantity());
+        item.setPrice(product.getPrice() * item.getQuantity());
+        item.setTotalPrice(product.getDiscountPrice() * item.getQuantity());
+        item.setDiscountAmount((product.getPrice()* product.getDiscountPercent()/100) * item.getQuantity() );
         item.setName(product.getName());
-
         return item;
     }
-
-
 
 }
 
