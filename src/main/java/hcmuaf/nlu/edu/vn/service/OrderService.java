@@ -16,4 +16,8 @@ public class OrderService {
     public List<Orders> getAllOrders() throws SQLException {
         return orderDao.getAllOrders();
     }
+
+//    public List<Orders> getOrderById(int orderId) throws SQLException {
+//        return orderDao.getOrderById(orderId);
+//    }
 }
