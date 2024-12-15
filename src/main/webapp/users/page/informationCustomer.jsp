@@ -1,5 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="f" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!doctype html>
 <html lang="en">
@@ -154,7 +154,7 @@
     <div id="section-content-1">
         <div class="account-info-page">
             <h1>Thông tin tài khoản</h1>
-            <p class="greeting">Xin chào, ${sessionScope.username != null ? sessionScope.username : ''}</p>
+            <p class="greeting">Xin chào, ${sessionScope.user.username != null ? sessionScope.user.username : ''}</p>
 
             <div class="content">
                 <!-- Đơn hàng gần nhất -->
@@ -191,7 +191,7 @@
                 <!-- Thông tin khách hàng -->
                 <div class="customer-info">
                     <h2>Thông tin khách hàng</h2>
-                    <p><strong>Tên:</strong>${users.name}</p>
+                    <p><strong>Tên:</strong></p>
                     <p><strong>Email:</strong> 22130098@st.hcmuaf.edu.vn</p>
                     <p><strong>Số điện thoại:</strong> 082464746</p>
                     <p><strong>Địa chỉ:</strong> Quận Thủ Đức, TP.HCM</p>
@@ -227,16 +227,18 @@
 
                         </tbody>
                     </table>
+
                     <div class="order-info">
                         <p><strong>Mã đơn hàng:</strong> <span class="info-highlight">22</span></p>
-                        <p><strong>Mã khách hàng:</strong> <span class="info-highlight">12</span></p>
-                        <p><strong>Ngày đặt hàng:</strong> <span class="info-highlight">2024-12-12</span></p>
-                        <p><strong>Tổng tiền:</strong> <span class="info-highlight total-price">2.000.000 ₫</span></p>
-                        <p><strong>Trạng thái:</strong> <span class="badge success">Đã thanh toán</span></p>
-                        <p><strong>Địa chỉ:</strong> Bình Thạnh</p>
-                        <p><strong>Người nhận hàng:</strong> Tuấn</p>
+                        <p><strong>Mã khách hàng:</strong> <span class="info-highlight"></span></p>
+                        <p><strong>Ngày đặt hàng:</strong> <span class="info-highlight"></span></p>
+                        <p><strong>Tổng tiền:</strong> <span class="info-highlight total-price"><f:formatNumber value="${o.totalPrice}" type="number" groupingUsed="true" />₫</span></p>
+                        <p><strong>Trạng thái:</strong> <span class="badge success"></span></p>
+                        <p><strong>Địa chỉ:</strong>${o.shippingAddress}</p>
+                        <p><strong>Người nhận hàng:</strong>${sessionScope.user.username != null ? sessionScope.user.username : ''}</p>
                         <p><strong>Ghi chú:</strong> Giao tới tận nhà cho tôi</p>
                     </div>
+
                 </div>
             </div>
         </div>
@@ -326,24 +328,6 @@
     <script src="<c:url value="/users/js/scripts.js"/>" ></script>
     <script src="<c:url value="/users/js/login-signup.js"/>"></script>
     <script src="<c:url value="/users/js/informationCustomer.js"/>"></script>
-    <script>
-        // Mở banner tự động khi trang tải xong
-        window.onload = function () {
-            openPopup(); // Gọi hàm mở popup
-        };
-
-        function openPopup() {
-            // Hiển thị banner và ngừng cuộn trang
-            document.getElementById("popupBanner").style.display = "flex";
-            document.body.classList.add("no-scroll");
-        }
-
-        function closePopup() {
-            // Ẩn banner và khôi phục cuộn trang
-            document.getElementById("popupBanner").style.display = "none";
-            document.body.classList.remove("no-scroll");
-        }
-    </script>
 
 </body>
 

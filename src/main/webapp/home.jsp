@@ -28,7 +28,7 @@
                            Xin chào,  <span
                                id="username">${sessionScope.user.username != null ? sessionScope.user.username : ''}</span>!</span>
 
-                <form action="account" method="post">
+                <form action="informationCustomer" method="get">
                     <button type="submit" class="account-link" id="signup-link"
                    style="display: none;">
                     <i class="fas fa-user-circle"></i> Tài khoản
