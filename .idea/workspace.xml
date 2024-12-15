@@ -9,6 +9,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
+<<<<<<< HEAD
     <list default="true" id="a260baaa-1779-406c-9e11-a44ede06005f" name="Changes" comment="">
       <change afterPath="$PROJECT_DIR$/.idea/webContexts.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/model/OrderItem.java" afterDir="false" />
@@ -325,6 +326,17 @@
       <change beforePath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/service/OrderService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/service/OrderService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/home.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/home.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/users/page/informationCustomer.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/users/page/informationCustomer.jsp" afterDir="false" />
+=======
+    <list default="true" id="819bef2a-1a22-4c62-a0cd-aa675bc132e8" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/classes/hcmuaf/nlu/edu/vn/controller/user/carts/GetListCartItems.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/classes/hcmuaf/nlu/edu/vn/controller/user/carts/GetListCartItems.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/classes/hcmuaf/nlu/edu/vn/dao/carts/Carts.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/classes/hcmuaf/nlu/edu/vn/dao/carts/Carts.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/page/cart.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/tqh/users/page/cart.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/controller/user/carts/GetListCartItems.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/controller/user/carts/GetListCartItems.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/dao/carts/Carts.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/dao/carts/Carts.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/service/CartService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/service/CartService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/users/page/cart.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/users/page/cart.jsp" afterDir="false" />
+>>>>>>> e9dc22deab3b9a1712299ec8858ad64c5c64447c
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -499,8 +511,17 @@
       <created>1734245730093</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
+<<<<<<< HEAD
       <updated>1734245730093</updated>
       <workItem from="1734245731844" duration="7090000" />
+=======
+      <updated>1733922552626</updated>
+      <workItem from="1733922555350" duration="7282000" />
+      <workItem from="1733929893517" duration="333000" />
+      <workItem from="1734084477939" duration="744000" />
+      <workItem from="1734139533445" duration="46824000" />
+      <workItem from="1734226728123" duration="4512000" />
+>>>>>>> e9dc22deab3b9a1712299ec8858ad64c5c64447c
     </task>
     <servers />
   </component>
