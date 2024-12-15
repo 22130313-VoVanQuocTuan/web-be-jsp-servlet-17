@@ -28,7 +28,7 @@
                            Xin chào,  <span
                                id="username">${sessionScope.username != null ? sessionScope.username : ''}</span>!</span>
 
-                <a href="users/page/informationCustomer.jsp" class="account-link" id="signup-link"
+                <a href="informationCustomer" class="account-link" id="signup-link"
                    style="display: none;">
                     <i class="fas fa-user-circle"></i> Tài khoản
                 </a>
