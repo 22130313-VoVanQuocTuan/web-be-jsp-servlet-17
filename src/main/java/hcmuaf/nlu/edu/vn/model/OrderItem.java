@@ -13,6 +13,8 @@ public class OrderItem {
     private Date createdAt;
     private Date updatedAt;
 
+    public OrderItem() {}
+
     public OrderItem(int id, int orderId, int productId, int quantity, double price, double totalPrice, double discount, Date createdAt, Date updatedAt) {
         this.id = id;
         this.orderId = orderId;
