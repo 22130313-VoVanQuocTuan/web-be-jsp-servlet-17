@@ -166,11 +166,12 @@
                             <th></th>
                         </tr>
                     </thead>
-                    <c:forEach var="item" items="${listItems}">
+
                         <tbody id="cart-items-container" class="cart-items-container">
-                                 <tr class="cart-item" data-id="${item.id}">
-                                <td>${item.product.name}</td>
-                                <td><img src="${item.product.imageUrl}" alt="${item.product.name}" width="50" height="50"></td>
+                        <c:forEach var="item" items="${listItems}">
+                                <tr class="cart-item" data-id="${item.id}">
+                                <td>${item.name}</td>
+                                <td><img src="${item.imageUrl}" alt="${item.name}" width="50" height="50"></td>
                                 <td>
                                     <div class="quantity">
                                         <button class="qty-btn minus-btn">-</button>
@@ -178,17 +179,16 @@
                                         <button class="qty-btn plus-btn">+</button>
                                     </div>
                                 </td>
-                                <td>${item.product.price} ₫</td>
+                                <td>${item.price} ₫</td>
                                 <td>${item.discountAmount} ₫</td>
                                 <td>${item.totalPrice} ₫</td>
                                 <td>
                                     <a href="add-cart?id=${item.id}" class="remove-from-cart-button">Xóa</a>
                                 </td>
                             </tr>
-
-
+                        </c:forEach>
                     </tbody>
-                    </c:forEach>
+
                 </table>
                 <div class="cart-buttons">
                     <a href="product.jsp"><button class="continue-btn">← Tiếp tục xem sản

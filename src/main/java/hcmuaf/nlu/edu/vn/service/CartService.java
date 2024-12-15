@@ -12,7 +12,7 @@ public class CartService {
             cart = new Carts();
             session.setAttribute("cart", cart);
         }
-        cart.addItem(product);
+         cart.addItem(product);
     }
 
     // Lấy giỏ hàng từ session

@@ -21,8 +21,11 @@ public class Carts {
     }
     // Thêm sản phẩm vào giỏ hàng
     public boolean addItem(Product product) {
-        if(items.containsKey(product.getId())) {
-            return updateQuantity(product.getId(), items.get(product.getId()).getQuantity()+1);
+        if (product == null) {
+            return false;
+        }
+        if (items.containsKey(product.getId())) {
+            return updateQuantity(product.getId(), items.get(product.getId()).getQuantity() + 1);
         }
         items.put(product.getId(), convert(product));
         return true;
@@ -32,10 +35,6 @@ public class Carts {
         items.remove(productId);
     }
 
-    // Lấy danh sách các sản phẩm trong giỏ hàng
-    public Map<Integer, CartItems> getItems() {
-        return items;
-    }
 
     // Tính tổng số lượng sản phẩm và tổng giá
     public int getTotalItem() {
