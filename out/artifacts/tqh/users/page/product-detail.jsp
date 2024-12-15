@@ -12,8 +12,8 @@
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4-beta3/css/all.min.css" />
-<link rel="stylesheet" href="../css/home.css">
-<link rel="stylesheet" href="../css/product-detail.css">
+<link rel="stylesheet" href="<c:url value="/users/css/home.css"/>">
+<link rel="stylesheet" href="<c:url value="/users/css/product-detail.css"/>">
 
 
 <body>
@@ -26,12 +26,26 @@
                     </p>
                 </div>
                 <div class="top-right">
-                    <span id="user-greeting" style="display: none; color: #ffffff;">Xin chào, <span id="username"></span>!</span>
-                    <a href="informationCustomer.jsp" class="account-link" id="signup-link" style="display: none;">
-                        <i class="fas fa-user-circle"  ></i> Tài khoản
-                    </a>
-                    <a href="login-signup.jsp" id="login-link"><span><i class="fa fa-fw fa-user"></i> Đăng Nhập</span></a>
-                    <a href="login-signup.jsp" id="logout-link" style="display: none;"><span>Đăng Xuất</span></a>
+                <span id="user-greeting" style="display: none; color: #ffffff;">
+                           Xin chào,  <span
+                        id="username">${sessionScope.user.username != null ? sessionScope.user.username : ''}</span>!</span>
+
+                    <form action="account" method="post">
+                        <button type="submit" class="account-link" id="signup-link"
+                                style="display: none;">
+                            <i class="fas fa-user-circle"></i> Tài khoản
+                        </button>
+                    </form>
+                    <form action="login" method="post">
+                        <input name="action" type="hidden" value="login" />
+                        <button type="submit" id="login-link">
+                            <span><i class="fa fa-fw fa-user"></i> Đăng Nhập</span>
+                        </button>
+                    </form>
+                    <form action="logout" method="post">
+                        <button type="submit" id="logout-link"
+                                style="display: none;"><span>Đăng Xuất</span></button>
+                    </form>
                 </div>
             </div>
 
@@ -142,7 +156,7 @@
         <div class="product-details">
             <!-- Hình ảnh sản phẩm -->
             <div class="product-image">
-                <img src="../img_product/Da_cat_soi/catden.png" alt="Product Image" />
+                <img src="${product.imageUrl}" alt="${product.name}" />
                 <div class="review-product">
                     <div class="review">
                         <h2>Bình luận</h2>
@@ -154,23 +168,22 @@
                 </div>
             </div>
             <!-- Thông tin sản phẩm -->
+
             <div class="product-info">
-                <h2 id="title-pro" class="product-title">Tên Sản Phẩm: Cát đen</h2>
+                <h2 id="title-pro" class="product-title">Tên Sản Phẩm: ${product.name}</h2>
                 <p class="product-description">
-                    Loại cát xây dựng có màu sẫm gần giống với màu đen, thường có màu sẫm đến xám trắng, được khai thác
-                    nhiều và sử dụng rất phổ biến trong xây dựng. Thành phần cát sạch, không lẫn tạp chất. Hạt nhỏ và
-                    mịn. Cát đen thường có giá rẻ hơn cát vàng rất nhiều.
+                    ${product.description}
                 </p>
-                <p><strong>Màu sắc: </strong>Đen</p>
-                <p><strong>Kích thước: </strong>Tuỳ chỉnh</p>
-                <p><strong>Đơn vị tính: </strong>m<sup>3</sup></p>
-                <p><strong>Nhà phân phối: </strong>PPP</p>
-                <p class="product-price">Giá: <strong>500,000 VND</strong></p>
+                <p><strong>Màu sắc: </strong>${product.color}</p>
+                <p><strong>Kích thước: </strong>${product.size}</p>
+                <p><strong>Đơn vị tính: </strong>${product.unit}</p>
+                <p><strong>Nhà phân phối: </strong>${product.supplier}</p>
+                <p class="product-price">Giá: <strong><fmt:formatNumber value="${product.discountPrice}" type="number" groupingUsed="true" /> ₫</strong></p>
                 <div class="product-options">
                     <label for="quantity">Số lượng:</label>
                     <input type="number" id="quantity" name="quantity" min="1" value="1" />
                 </div>
-                <button class="add-to-cart-btn">Thêm vào giỏ hàng</button>
+                <button class="add-to-cart-btn"><a href="add-cart?id=${product.id}" style="color: #ffffff; text-decoration: none" >Thêm vào giỏ hàng</a></button>
                 <p class="contact">
                     Liên hệ: <strong>0366633518</strong> hoặc <strong>0905.090.252 (Mr.Huy)</strong>
                 </p>
@@ -269,8 +282,8 @@
     </div>
  
    
-    <script src="../js/login-signup.js"></script>
-    <script src="/src/Users/js/scripts.js" defer></script>
+    <script src="<c:url value="/users/js/login-signup.js"/>"></script>
+    <script src="<c:url value="/users/js/scripts.js"/>" defer></script>
 </body>
 
 </html>

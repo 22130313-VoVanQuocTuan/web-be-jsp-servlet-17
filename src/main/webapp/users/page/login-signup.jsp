@@ -66,16 +66,13 @@
             </p>
         </div>
         <div class="top-right">
-                       <span id="user-greeting" style="display: none; color: #ffffff;">
-                           Xin chào,  <span
-                               id="username">${sessionScope.username != null ? sessionScope.username : ''}</span>!</span>
+            <form action="login" method="post">
+                <input name="action" type="hidden" value="login" />
+                <button type="submit" id="login-link">
+                    <span><i class="fa fa-fw fa-user"></i> Đăng Nhập</span>
+                </button>
+            </form>
 
-            <a href="users/page/informationCustomer.html" class="account-link" id="signup-link" style="display: none;">
-                <i class="fas fa-user-circle"></i> Tài khoản
-            </a>
-            <a href="users/page/login-signup.jsp" id="login-link"><span><i class="fa fa-fw fa-user"></i> Đăng
-                            Nhập</span></a>
-            <a href="users/page/login-signup.jsp" id="logout-link" style="display: none;"><span>Đăng Xuất</span></a>
         </div>
     </div>
 </div>
@@ -186,8 +183,9 @@
 <div class="content">
     <div class="container" id="container">
 
+
             <div class="form-container sign-up">
-                   <form id="register-form" action="/tqh/signup-user" method="post">
+                    <form id="register-form" action="signup-user" method="post">
                     <h1>Tạo tài khoản</h1>
                     <div class="social-icons">
                         <a href="" class="icon-logo google"><i class="fa-brands fa-google-plus-g g"></i></a>
@@ -196,17 +194,17 @@
                     <span>Hoặc sử dụng email để đăng kí tài khoản</span>
 
                     <!-- Nhập Email -->
-                    <input type="email" name="email" id="register-email" placeholder="Email" value="${email}" required>
-                    <div id="email-error" style="color: red;"></div>
+                    <input type="email" name="email" id="register-email" placeholder="Email" value="${email}" >
+                    <div id="email-error" style="color: red; font-size: 10px;"></div>
 
                     <!-- Nhập Username -->
-                    <input type="text" name="username" id="register-username" placeholder="UserName" required>
-                    <div id="username-error" style="color: red;"></div>
+                    <input type="text" name="username" id="register-username" placeholder="UserName" >
+                    <div id="username-error" style="color: red; font-size: 10px;"></div>
 
                     <!-- Nhập Password -->
-                    <input type="password" name="password" id="register-password" placeholder="Password" required>
-                    <div id="password-error" style="color: red;"></div>
-                    <div id="error-server" style="color: red;">
+                    <input type="password" name="password" id="register-password" placeholder="Password" >
+                    <div id="password-error" style="color: red; font-size: 10px;"></div>
+                    <div id="error-server" style="color: red; font-size: 10px;">
                         <c:if test="${not empty error_register}">
                             ${error_register}
                         </c:if>
@@ -214,11 +212,12 @@
                     <!-- Nút đăng ký -->
                     <button type="submit" id="submit-register">Đăng kí</button>
                 </form>
-           </div>
+             </div>
+
 
 
         <div class="form-container sign-in none">
-            <form id="login-form" action="/tqh/login" method="post">
+            <form id="login-form" action="login" method="post">
                 <h1>Đăng nhập</h1>
                 <div class="social-icons">
                     <a href="#" class="icon-logo"><i class="fa-brands fa-google-plus-g g"></i></a>
@@ -226,10 +225,10 @@
                 </div>
                 <span>Hoặc sử dụng tài khoản đã đăng kí</span>
                 <input type="text" name="username" id="login-username" placeholder="UserName">
-                <span id="username-errorlog" class="error-message"></span> <!-- Thông báo lỗi tên đăng nhập -->
+                <span id="username-errorlog" style="color: red; font-size: 10px;" class="error-message"></span> <!-- Thông báo lỗi tên đăng nhập -->
                 <input type="password" name="password" id="login-password" placeholder="Password">
-                <span id="password-errorlog" class="error-message"></span> <!-- Thông báo lỗi mật khẩu -->
-                <div id="error-login" style="color: red;">
+                <span id="password-errorlog" style="color: red; font-size: 10px;" class="error-message"></span> <!-- Thông báo lỗi mật khẩu -->
+                <div id="error-login" style="color: red; font-size: 10px;">
                     <c:if test="${not empty error_login}">
                         ${error_login}
                     </c:if>
@@ -269,7 +268,7 @@
                     <h1>Xác thực email</h1>
 
                     <!-- Form xác thực email -->
-                    <form id="verification-form" action="/tqh/verify-email" method="post">
+                    <form id="verification-form" action="verify-email" method="post">
                         <div class="verification-code-inputs " style="display: flex; gap: 10px;">
                             <input class="verification-code" type="text" name="code1" maxlength="1">
                             <input class="verification-code" type="text" name="code2" maxlength="1">
@@ -287,7 +286,7 @@
                     </form>
 
                     <!-- Form gửi lại mã -->
-                    <form id="reset-password-form" action="/tqh/reset-code" method="post">
+                    <form id="reset-password-form" action="reset-code" method="post">
                         <button type="submit" class="reset">Gửi lại</button>
                     </form>
                 </div>

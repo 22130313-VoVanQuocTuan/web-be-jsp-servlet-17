@@ -11,7 +11,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name = "list-product", value = "/list-product")
+@WebServlet(name = "home-page", value = "/home-page")
 public class GetListPDiscountController extends HttpServlet {
     private  final ProductService productService ;
     public GetListPDiscountController() {
@@ -29,4 +29,5 @@ public class GetListPDiscountController extends HttpServlet {
             e.printStackTrace();
         }
     }
-}
+
+  }

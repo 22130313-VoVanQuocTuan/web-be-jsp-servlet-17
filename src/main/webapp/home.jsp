@@ -26,17 +26,26 @@
             <div class="top-right">
                        <span id="user-greeting" style="display: none; color: #ffffff;">
                            Xin chào,  <span
-                               id="username">${sessionScope.username != null ? sessionScope.username : ''}</span>!</span>
+                               id="username">${sessionScope.user.username != null ? sessionScope.user.username : ''}</span>!</span>
 
-                <a href="informationCustomer" class="account-link" id="signup-link"
+                <form action="account" method="post">
+                    <button type="submit" class="account-link" id="signup-link"
                    style="display: none;">
                     <i class="fas fa-user-circle"></i> Tài khoản
-                </a>
-                <a href="users/page/login-signup.jsp" id="login-link"><span><i class="fa fa-fw fa-user"></i> Đăng
-                            Nhập</span></a>
-                <a href="<%= request.getContextPath() %>/logout" id="logout-link"
-                   style="display: none;"><span>Đăng Xuất</span></a>
+                </button>
+                </form>
+                <form action="login" method="post">
+                    <input name="action" type="hidden" value="login" />
+                    <button type="submit" id="login-link">
+                        <span><i class="fa fa-fw fa-user"></i> Đăng Nhập</span>
+                    </button>
+                </form>
+                <form action="logout" method="post">
+                    <button type="submit" id="logout-link"
+                   style="display: none;"><span>Đăng Xuất</span></button>
+                </form>
             </div>
+
         </div>
 
     </div>
@@ -47,7 +56,7 @@
             <div class="menu">
                 <!-- Logo bên trái -->
                 <div class="logo">
-                    <a href="home.html"><img src="users/img/logo.png" alt="Logo"></a>
+                    <a href="home.jsp"><img src="users/img/logo.png" alt="Logo"></a>
                 </div>
 
                 <!-- Thanh tìm kiếm ở giữa -->
@@ -65,7 +74,7 @@
                 </div>
                 <div class="cart">
                     <div class="cart-wrapper">
-                        <a id="carts" href="#">
+                        <a id="carts" href="cart-items">
                             <i class="fas fa-shopping-cart" style="color: #15283e;"></i>
                         </a>
                         <span class="cart-count" id="cart-count">0</span>
@@ -113,10 +122,10 @@
                     </ul>
                 </li>
                 <li class="propClone"><a href="#"><i class="fa-solid fa-house"></i>&nbsp;&nbsp; TRANG CHỦ </a></li>
-                <li class="propClone"><a href="/tqh/list-product"><i class="fa-brands fa-product-hunt"></i>
+                <li class="propClone"><a href="home-page"><i class="fa-brands fa-product-hunt"></i>
                     &nbsp;&nbsp;SẢN PHẨM</a>
                 </li>
-                <li class="propClone"><a id="cartss" href="users/page/cart.jsp"><i
+                <li class="propClone"><a id="" href="cart-items"><i
                         class="fas fa-shopping-cart"></i>&nbsp;&nbsp; GIỎ
                     HÀNG</a>
                 </li>
@@ -180,7 +189,7 @@
             <c:forEach var="product" items="${products}">
                 <div class="product-one-content-item">
                     <div class="img-product">
-                        <a href="users/page/product-detail.jsp"><img
+                        <a href="${pageContext.request.contextPath}/product-detail?id=${product.id}"><img
                                 src="${product.imageUrl}"
                                 alt="${product.name}"></a>
                         <span class="sale-box">${product.discountPercent}%</span>

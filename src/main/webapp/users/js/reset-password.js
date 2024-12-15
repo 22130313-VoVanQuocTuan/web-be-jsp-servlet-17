@@ -39,12 +39,25 @@ document.addEventListener('DOMContentLoaded', function() {
             const confirmPassword = document.getElementById('confirm-password').value;
             const passwordError = document.getElementById('password-error');
 
-            if (newPassword !== confirmPassword) {
-                passwordError.style.display = 'block';
-                passwordError.textContent = "Mật khẩu không khớp.";
-            } else {
-                passwordError.style.display = 'none';
-                newPasswordForm.submit();
+            let valid = true;
+            // Xóa thông báo lỗi
+            if (passwordError) passwordError.textContent = '';
+
+            // Kiểm tra mật khẩu mới
+            const newPasswordPattern = /^[a-zA-Z0-9]{5,10}$/;
+            if (newPassword === '' || !newPasswordPattern.test(newPassword)) {
+                if (passwordError) passwordError.textContent = 'Mật khẩu mới phải từ 5-10 ký tự và không chứa ký tự đặc biệt';
+                valid = false;
+            }
+
+            // Kiểm tra xác nhận mật khẩu
+            if (confirmPassword !== newPassword) {
+                if (passwordError) passwordError.textContent = 'Xác nhận mật khẩu không khớp';
+                valid = false;
+            }
+
+            if (valid) {
+                newPasswordForm.submit();  // Nếu hợp lệ, submit form
             }
         });
     }

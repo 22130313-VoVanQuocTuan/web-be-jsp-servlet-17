@@ -33,11 +33,12 @@ public class SignUpController extends HttpServlet {
             } else {
                 // Xử lý lỗi (ví dụ: email đã tồn tại)
                 request.setAttribute("error_register", "Email hoặc tài khoản đã tồn tại.");
+
             }
         } catch (Exception e) {
             // Xử lý lỗi khi có lỗi hệ thống
-            e.printStackTrace();
             request.setAttribute("error_register", "Đã xảy ra lỗi, vui lòng thử lại.");
+
         }
 
         // Giữ lại trang đăng ký và thông báo lỗi
