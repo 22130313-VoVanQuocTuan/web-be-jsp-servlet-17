@@ -47,7 +47,7 @@ public class UserService {
             int userId = signUpDao.getUserIdByEmail(email);
             // Tạo mã xác thực và gửi email
             String verificationCode = generateVerificationCode();
-            emailUtil.sendEmailAsync(email, "Mã xác thực email" ,"Mã xác thực của baạn là: "+ verificationCode);
+            emailUtil.sendEmailAsync(email, "Mã xác thực email" ,"Mã xác thực của bạn là: "+ verificationCode);
 
             // Lưu mã xác thực vào cơ sở dữ liệu
             return signUpDao.addEmailVerification(email, verificationCode, userId);

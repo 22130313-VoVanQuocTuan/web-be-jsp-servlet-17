@@ -12,8 +12,8 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4-beta3/css/all.min.css" />
-<link rel="stylesheet" href="../css/informationCustomer.css">
-<link rel="stylesheet" href="../css/home.css">
+<link rel="stylesheet" href="<c:url value="/users/css/informationCustomer.css"/>">
+<link rel="stylesheet" href="<c:url value="/users/css/home.css"/>">
 
 <body>
     <div id="section-header1">
@@ -25,14 +25,26 @@
                     </p>
                 </div>
                 <div class="top-right">
-                    <span id="user-greeting" style="display: none; color: #ffffff;">Xin chào, <span
-                            id="username"></span>!</span>
-                    <a href="informationCustomer.html" class="account-link" id="signup-link" style="display: none;">
-                        <i class="fas fa-user-circle"></i> Tài khoản
-                    </a>
-                    <a href="login-signup.jsp" id="login-link"><span><i class="fa fa-fw fa-user"></i> Đăng
-                            Nhập</span></a>
-                    <a href="login-signup.jsp" id="logout-link" style="display: none;"><span>Đăng Xuất</span></a>
+         <span id="user-greeting" style="display: none; color: #ffffff;">
+                           Xin chào,  <span
+                 id="username">${sessionScope.user.username != null ? sessionScope.user.username : ''}</span>!</span>
+
+                    <form action="informationCustomer" method="get">
+                        <button type="submit" class="account-link" id="signup-link"
+                                style="display: none;">
+                            <i class="fas fa-user-circle"></i> Tài khoản
+                        </button>
+                    </form>
+                    <form action="login" method="post">
+                        <input name="action" type="hidden" value="login" />
+                        <button type="submit" id="login-link">
+                            <span><i class="fa fa-fw fa-user"></i> Đăng Nhập</span>
+                        </button>
+                    </form>
+                    <form action="logout" method="post">
+                        <button type="submit" id="logout-link"
+                                style="display: none;"><span>Đăng Xuất</span></button>
+                    </form>
                 </div>
             </div>
 
@@ -44,7 +56,7 @@
                 <div class="menu">
                     <!-- Logo bên trái -->
                     <div class="logo">
-                        <a href="../../home.jsp"><img src="../img/logo.png" alt="Logo"></a>
+                        <a href="../../home.jsp"><img src="${pageContext.request.contextPath}/users/img/logo.png" alt="Logo"></a>
                     </div>
 
                     <!-- Thanh tìm kiếm ở giữa -->
@@ -65,7 +77,7 @@
                             <a href="cart.jsp">
                                 <i class="fas fa-shopping-cart"></i>
                             </a>
-                            <span class="cart-count" id="cart-count">0</span>
+                            <span class="cart-count" id="cart-count">${sessionScope.cartItemCount}</span>
                         </div>
                     </div>
                 </div>
@@ -142,7 +154,7 @@
     <div id="section-content-1">
         <div class="account-info-page">
             <h1>Thông tin tài khoản</h1>
-            <p class="greeting">Xin chào, Huy Lam</p>
+            <p class="greeting">Xin chào, ${sessionScope.user.username != null ? sessionScope.user.username : ''}</p>
 
             <div class="content">
                 <!-- Đơn hàng gần nhất -->
@@ -158,41 +170,28 @@
                                 <th>Chi tiết đơn hàng</th>
                             </tr>
                         </thead>
+
                         <tbody>
+                        <c:forEach var="order" items="${orders}">
                             <tr>
-                                <td>SP001</td>
-                                <td>22/12/2024</td>
-                                <td>Đại Học Nông Lâm TPHCM</td>
-                                <td> Đã thanh toán</td>
+                                <td>${order.id}</td>
+                                <td>${order.createdAt}</td>
+                                <td>${order.shippingAddress}</td>
+                                <td>${order.paymentStatus}</td>
                                 <td>
                                     <button class="view-detail-btn" onclick="showOrderDetail('SP001')">Xem</button>
                                 </td>
                             </tr>
-                            <tr>
-                                <td>SP002</td>
-                                <td>19/12/2024</td>
-                                <td>Đại Học Nông Lâm TPHCM</td>
-                                <td> Chưa thanh toán</td>
-                                <td> <button class="view-detail-btn" onclick="showOrderDetail('SP001')">Xem</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>SP003</td>
-                                <td>19/12/2024</td>
-                                <td>Đại Học Nông Lâm TPHCM</td>
-                                <td> Chưa thanh toán</td>
-                                <td> <button class="view-detail-btn" onclick="showOrderDetail('SP001')">Xem</button>
-                                </td>
-                            </tr>
-
+                        </c:forEach>
                         </tbody>
+
                     </table>
                 </div>
 
                 <!-- Thông tin khách hàng -->
                 <div class="customer-info">
                     <h2>Thông tin khách hàng</h2>
-                    <p><strong>Tên:</strong>Huy Lam</p>
+                    <p><strong>Tên:</strong>${users.name}</p>
                     <p><strong>Email:</strong> 22130098@st.hcmuaf.edu.vn</p>
                     <p><strong>Số điện thoại:</strong> 082464746</p>
                     <p><strong>Địa chỉ:</strong> Quận Thủ Đức, TP.HCM</p>
@@ -219,19 +218,13 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td> Xi măng BC</td>
+                                <td></td>
                                 <td>20</td>
                                 <td>1.000.000 ₫</td>
                                 <td>0 ₫</td>
                                 <td>1.000.000 ₫</td>
                             </tr>
-                            <tr>
-                                <td> Gạch BC</td>
-                                <td>100</td>
-                                <td>1.000.000 ₫</td>
-                                <td>0 ₫</td>
-                                <td>1.000.000 ₫</td>
-                            </tr>
+
                         </tbody>
                     </table>
                     <div class="order-info">
@@ -330,27 +323,10 @@
         </div>
         <button id="backToTop" title="Quay về đầu trang">⬆</button>
     </div>
-    <script src="/src/Users/js/scripts.js" defer></script>
-    <script src="../js/login-signup.js"></script>
-    <script src="../js/informationCustomer.js"></script>
-    <script>
-        // Mở banner tự động khi trang tải xong
-        window.onload = function () {
-            openPopup(); // Gọi hàm mở popup
-        };
+    <script src="<c:url value="/users/js/scripts.js"/>" ></script>
+    <script src="<c:url value="/users/js/login-signup.js"/>"></script>
+    <script src="<c:url value="/users/js/informationCustomer.js"/>"></script>
 
-        function openPopup() {
-            // Hiển thị banner và ngừng cuộn trang
-            document.getElementById("popupBanner").style.display = "flex";
-            document.body.classList.add("no-scroll");
-        }
-
-        function closePopup() {
-            // Ẩn banner và khôi phục cuộn trang
-            document.getElementById("popupBanner").style.display = "none";
-            document.body.classList.remove("no-scroll");
-        }
-    </script>
 
 </body>
 

@@ -12,8 +12,8 @@
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4-beta3/css/all.min.css" />
-<link rel="stylesheet" href="../css/home.css">
-<link rel="stylesheet" href="../css/cart.css">
+<link rel="stylesheet" href="<c:url value="/users/css/home.css"/>">
+<link rel="stylesheet" href="<c:url value="/users/css/cart.css"/>">
 
 <body>
     <div id="section-header1">
@@ -25,12 +25,26 @@
                     </p>
                 </div>
                 <div class="top-right">
-                    <span id="user-greeting" style="display: none; color: #ffffff;">Xin chào, <span id="username"></span>!</span>
-                    <a href="informationCustomer.jsp" class="account-link" id="signup-link" style="display: none;">
-                        <i class="fas fa-user-circle"  ></i> Tài khoản
-                    </a>
-                    <a href="login-signup.jsp" id="login-link"><span><i class="fa fa-fw fa-user"></i> Đăng Nhập</span></a>
-                    <a href="login-signup.jsp" id="logout-link" style="display: none;"><span>Đăng Xuất</span></a>
+                    <span id="user-greeting" style="display: none; color: #ffffff;">
+                           Xin chào,  <span
+                            id="username">${sessionScope.user.username != null ? sessionScope.user.username : ''}</span>!</span>
+
+                    <form action="informationCustomer" method="get">
+                        <button type="submit" class="account-link" id="signup-link"
+                                style="display: none;">
+                            <i class="fas fa-user-circle"></i> Tài khoản
+                        </button>
+                    </form>
+                    <form action="login" method="post">
+                        <input name="action" type="hidden" value="login" />
+                        <button type="submit" id="login-link">
+                            <span><i class="fa fa-fw fa-user"></i> Đăng Nhập</span>
+                        </button>
+                    </form>
+                    <form action="logout" method="post">
+                        <button type="submit" id="logout-link"
+                                style="display: none;"><span>Đăng Xuất</span></button>
+                    </form>
                 </div>
             </div>
 
@@ -42,7 +56,7 @@
                 <div class="menu">
                     <!-- Logo bên trái -->
                     <div class="logo">
-                        <a href="../../home.jsp"><img src="../img/logo.png" alt="Logo"></a>
+                        <a href="../../home.jsp"><img src="${pageContext.request.contextPath}/users/img/logo.png" alt="Logo"></a>
                     </div>
 
                     <!-- Thanh tìm kiếm ở giữa -->
@@ -60,10 +74,10 @@
                     </div>
                     <div class="cart">
                         <div class="cart-wrapper">
-                            <a href="cart.html">
+                            <a href="cart-items">
                                 <i class="fas fa-shopping-cart"></i>
                             </a>
-                            <span class="cart-count" id="cart-count">0</span>
+                            <span class="cart-count" id="cart-count">${sessionScope.cartItemCount}</span>
                         </div>
                     </div>
                 </div>
@@ -107,12 +121,12 @@
                                     ĐIỆN NƯỚC</a></li>
                         </ul>
                     </li>
-                    <li class="propClone"><a href="../../home.jsp"><i class="fa-solid fa-house"></i>&nbsp;&nbsp; TRANG CHỦ
+                    <li class="propClone"><a href="home-page"><i class="fa-solid fa-house"></i>&nbsp;&nbsp; TRANG CHỦ
                         </a></li>
                     <li class="propClone"><a href="product.jsp"><i class="fa-brands fa-product-hunt"></i>
                             &nbsp;&nbsp;SẢN PHẨM</a>
                     </li>
-                    <li class="propClone"> <a href="cart.html"><i class="fas fa-shopping-cart"></i>&nbsp;&nbsp; GIỎ
+                    <li class="propClone"> <a href="cart-items"><i class="fas fa-shopping-cart"></i>&nbsp;&nbsp; GIỎ
                             HÀNG</a>
                     </li>
                     <li class="propClone">
@@ -152,106 +166,32 @@
                             <th></th>
                         </tr>
                     </thead>
-                    <tbody id="cart-items-container" class="cart-items-container">
-                        <tr class="cart-item" data-id="1">
-                            <td>Gạch-inax</td>
-                            <td><img src="../img_product/gachxaydung/gachdinhdac.png" alt="${product.name}"></td>
-                            <td>
-                                <div class="quantity">
-                                    <button class="qty-btn minus-btn">-</button>
-                                    <input title="input" type="number" value="1" class="qty-input" min="1" />
-                                    <button class="qty-btn plus-btn">+</button>
-                                </div>
-                            </td>
-                            <td id="price" class="price-after-discount">200.000 ₫</td> 
-                            <td id="total-price" class="total-after-discount">20.000 ₫</td> 
-                            <td id="total-price" class="total-after-discount">180.000 ₫</td> 
-                            <td><button class="remove-from-cart-button">Xóa</button></td>
-                        </tr>
-                        <tr class="cart-item" data-id="2">
-                            <td>Gạch không nung</td>
-                            <td><img src="../img_product/gachxaydung/gachkhongnung.png" alt="${product.name}"></td>
-                            <td>
-                                <div class="quantity">
-                                    <button class="qty-btn minus-btn">-</button>
-                                    <input title="input" type="number" value="1" class="qty-input" min="1" />
-                                    <button class="qty-btn plus-btn">+</button>
-                                </div>
-                            </td>
-                            <td id ="price" class="price-after-discount">200.000 ₫</td> 
-                            <td id="total-price" class="total-after-discount">20.000 ₫</td> 
-                            <td id="total-price" class="total-after-discount">180.000 ₫</td> 
-                            <td><button id="delete" class="remove-from-cart-button">Xóa</button>
-                            </td>
-                        </tr>
-                        <tr class="cart-item" data-id="3">
-                            <td>Ngói nóc</td>
-                            <td><img src="../img_product/ngoi/Ngói%20cuối%20nóc.png" alt="${product.name}"></td>
-                            <td>
-                                <div class="quantity">
-                                    <button class="qty-btn minus-btn">-</button>
-                                    <input title="input" type="number" value="1" class="qty-input" min="1" />
-                                    <button class="qty-btn plus-btn">+</button>
-                                </div>
-                            </td>
-                            <td id ="price" class="price-after-discount">200.000 ₫</td> 
-                            <td id="total-price" class="total-after-discount">20.000 ₫</td> 
-                            <td id="total-price" class="total-after-discount">180.000 ₫</td> 
-                            <td><button id="delete" class="remove-from-cart-button">Xóa</button>
-                            </td>
-                        </tr>
-                        <tr class="cart-item" data-id="3">
-                            <td>Thép BCL</td>
-                            <td><img src="../img_product/thepvasat/image2.png" alt="${product.name}"></td>
-                            <td>
-                                <div class="quantity">
-                                    <button class="qty-btn minus-btn">-</button>
-                                    <input title="input" type="number" value="1" class="qty-input" min="1" />
-                                    <button class="qty-btn plus-btn">+</button>
-                                </div>
-                            </td>
-                            <td id ="price" class="price-after-discount">200.000 ₫</td> 
-                            <td id="total-price" class="total-after-discount">20.000 ₫</td> 
-                            <td id="total-price" class="total-after-discount">180.000 ₫</td> 
-                            <td><button id="delete" class="remove-from-cart-button">Xóa</button>
-                            </td>
-                        </tr>
-                        <tr class="cart-item" data-id="4">
-                            <td>Sơn Dulux</td>
-                            <td><img src="../img_product/son/Sơn%20nước%20ngoại%20thất%20Dulux%20Weathershield%20Powerflexx%20Bề%20Mặt.png" alt="${product.name}"></td>
-                            <td>
-                                <div class="quantity">
-                                    <button class="qty-btn minus-btn">-</button>
-                                    <input title="input" type="number" value="1" class="qty-input" min="1" />
-                                    <button class="qty-btn plus-btn">+</button>
-                                </div>
-                            </td>
-                            <td id ="price" class="price-after-discount">200.000 ₫</td> 
-                            <td id="total-price" class="total-after-discount">20.000 ₫</td> 
-                            <td id="total-price" class="total-after-discount">180.000 ₫</td> 
-                            <td><button id="delete" class="remove-from-cart-button">Xóa</button>
-                            </td>
-                        </tr>
-                        <tr class="cart-item" data-id="5">
-                            <td>Gạch không nung</td>
-                            <td><img src="../img_product/gachxaydung/gachkhongnung.png" alt="${product.name}"></td>
-                            <td>
-                                <div class="quantity">
-                                    <button class="qty-btn minus-btn">-</button>
-                                    <input title="input" type="number" value="1" class="qty-input" min="1" />
-                                    <button class="qty-btn plus-btn">+</button>
-                                </div>
-                            </td>
-                            <td id ="price" class="price-after-discount">200.000 ₫</td> 
-                            <td id="total-price" class="total-after-discount">20.000 ₫</td> 
-                            <td id="total-price" class="total-after-discount">180.000 ₫</td> 
-                            <td><button id="delete" class="remove-from-cart-button">Xóa</button>
-                            </td>
-                        </tr>
+
+                        <tbody id="cart-items-container" class="cart-items-container">
+                        <c:forEach var="item" items="${listItems}">
+                                <tr class="cart-item" data-id="${item.id}">
+                                <td>${item.name}</td>
+                                <td><img src="${item.imageUrl}" alt="${item.name}" width="50" height="50"></td>
+                                <td>
+                                    <div class="quantity">
+                                        <button class="qty-btn minus-btn">-</button>
+                                        <input title="input" type="number" value="${item.quantity}" class="qty-input" min="1" />
+                                        <button class="qty-btn plus-btn">+</button>
+                                    </div>
+                                </td>
+                                <td><fmt:formatNumber value=" ${item.price}" type="number" groupingUsed="true"/>₫</td>
+                                <td><fmt:formatNumber value=" ${item.discountAmount}" type="number" groupingUsed="true"/>₫</td>
+                                <td><fmt:formatNumber value=" ${item.totalPrice}" type="number" groupingUsed="true"/>₫</td>
+                                <td>
+                                    <a href="cart-remove?id=${item.id}" class="remove-from-cart-button">Xóa</a>
+                                </td>
+                            </tr>
+                        </c:forEach>
                     </tbody>
+
                 </table>
                 <div class="cart-buttons">
-                    <a href="product.jsp"><button class="continue-btn">← Tiếp tục xem sản
+                    <a href="list-product"><button class="continue-btn">← Tiếp tục xem sản
                             phẩm</button></a>
                 </div>
             </div>
@@ -262,16 +202,16 @@
                 <div class="cart-summary">
                     <div class="summary-item">
                         <span>Tạm tính:</span>
-                        <span id="subtotal">180.000₫</span>
+                        <span id="subtotal"><fmt:formatNumber value=" ${totalPrice}" type="number" groupingUsed="true"/>₫</span>
                     </div>
                     <div class="summary-item">
                         <span>Phí vận chuyển:</span>
-                        <span id="vat">14.400₫</span>
+                        <span id="vat"><fmt:formatNumber value=" ${totalShippingFee}" type="number" groupingUsed="true"/>₫</span>
                     </div>
                 </div>
                 <div class="summary-item total">
                     <span>Tổng cộng:</span>
-                    <span id="total">194.400₫</span>
+                    <span id="total"><fmt:formatNumber value=" ${totalShippingFee + totalPrice} " type="number" groupingUsed="true"/>₫</span>
                 </div>
                 <a href="confirmation.jsp"><button class="checkout-btn">Tiến hành thanh toán</button></a>
 
@@ -343,9 +283,9 @@
 
     </div>
 
-    <script src="../js/login-signup.js"></script>
-    <script src="/src/Users/js/scripts.js" defer></script>
-    <script src="/src/Users/js/cart.js" defer></script>
+    <script src="<c:url value="/users/js/login-signup.js"/>"></script>
+    <script src="<c:url value="/users/js/scripts.js"/>" defer></script>
+    <script src="<c:url value="/users/js/cart.js"/>" defer></script>
 </body>
 
 </html>

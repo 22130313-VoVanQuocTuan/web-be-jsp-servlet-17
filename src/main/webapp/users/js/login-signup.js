@@ -12,19 +12,11 @@ document.addEventListener('DOMContentLoaded', function () {
     const loginLink = document.getElementById('login-link');
     const signupLink = document.getElementById('signup-link');
     const logoutLink = document.getElementById('logout-link');
-    const cartItemCount = document.getElementById('cart-count');
 
-    const registerForm = document.getElementById('submit-register');
-    const emailInput = document.getElementById('register-email');
-    const usernameInput = document.getElementById('register-username');
-    const passwordInput = document.getElementById('register-password');
-    const emailError = document.getElementById('email-error');
-    const usernameError = document.getElementById('username-error');
-    const passwordError = document.getElementById('password-error');
 
-    const verifyModal = document.getElementById('verification-modal');
+
     const verifyButton = document.getElementById('verify-button');
-    const overlay = document.getElementById('overlay');
+
     const closeButton = document.getElementById('close-button');
 
     // Hàm kiểm tra định dạng email
@@ -53,39 +45,43 @@ document.addEventListener('DOMContentLoaded', function () {
 
     
   // Xử lý đăng nhập
-    const  username_errorlog = document.getElementById('username-errorlog')
-    const  password_errorlog = document.getElementById('password-errorlog')
-      if (loginForm) {
+    const usernameErrorLog = document.getElementById('username-errorlog');
+    const passwordErrorLog = document.getElementById('password-errorlog');
+
+    if (loginForm) {
         loginForm.addEventListener('submit', function (event) {
             event.preventDefault();
             const username = document.getElementById('login-username').value;
             const password = document.getElementById('login-password').value;
 
             let isValid = true;
+
             // Kiểm tra tên đăng nhập
             if (username === '') {
-                username_errorlog.textContent = 'Tên đăng nhập không được để trống';
-                username_errorlog.style.display = 'block';
+                usernameErrorLog.textContent = 'Tên đăng nhập không được để trống';
+                usernameErrorLog.style.display = 'block';
                 isValid = false;
             } else {
-                username_errorlog.style.display = 'none';
+                usernameErrorLog.style.display = 'none';
             }
-             // Kiểm tra mật khẩu
+
+            // Kiểm tra mật khẩu
             if (password === '') {
-                password_errorlog.textContent = 'Mật khẩu không được để trống';
-                password_errorlog.style.display = 'block';
+                passwordErrorLog.textContent = 'Mật khẩu không được để trống';
+                passwordErrorLog.style.display = 'block';
                 isValid = false;
             } else {
-                password_errorlog.style.display = 'none';
+                passwordErrorLog.style.display = 'none';
             }
+
             const errorMessageElement = document.getElementById('error-login');
+
             // Nếu hợp lệ, xử lý đăng nhập
             if (isValid) {
                 errorMessageElement.innerText = "";
                 loginForm.submit(); // Gửi form nếu hợp lệ
-
-        }
-    });
+            }
+        });
     }
 
     // Hiển thị thông tin người dùng nếu đã đăng nhập
@@ -106,20 +102,20 @@ document.addEventListener('DOMContentLoaded', function () {
         document.getElementById("login-link").style.display = "inline";
     }
 
-    // // Xử lý đăng xuất
-    // if (logoutLink) {
-    //     logoutLink.addEventListener('click', function (event) {
-    //         event.preventDefault();
-    //         localStorage.removeItem('username');
-    //         window.location.href = "../page/login-signup.jsp";
-    //     });
-    // }
 
-    // Xử lý đăng ký
+    const emailInput = document.getElementById('register-email');
+    const usernameInput = document.getElementById('register-username');
+    const passwordInput = document.getElementById('register-password');
+    const emailError = document.getElementById('email-error');
+    const usernameError = document.getElementById('username-error');
+    const passwordError = document.getElementById('password-error');
+    const registerForm = document.getElementById('register-form');
+
     if (registerForm) {
         registerForm.addEventListener('submit', function (event) {
-           let isValid = true;
+            event.preventDefault();  // Ngăn form tự động submit
 
+            let valid = true;
             // Xóa thông báo lỗi
             if (emailError) emailError.textContent = '';
             if (usernameError) usernameError.textContent = '';
@@ -128,27 +124,32 @@ document.addEventListener('DOMContentLoaded', function () {
             // Kiểm tra email
             if (!emailInput.value) {
                 if (emailError) emailError.textContent = 'Vui lòng nhập email';
-                isValid = false;
+                valid = false;
             } else if (!validateEmail(emailInput.value)) {
                 if (emailError) emailError.textContent = 'Email không đúng định dạng';
-                isValid = false;
+                valid = false;
             }
 
-            // Kiểm tra tên đăng nhập
-            if (!usernameInput.value) {
-                if (usernameError) usernameError.textContent = 'Vui lòng nhập tên đăng nhập';
-                isValid = false;
+            // Kiểm tra tên đăng nhập: không chứa ký tự đặc biệt, độ dài 5-10 ký tự
+            const usernamePattern = /^[a-zA-Z0-9]{5,10}$/;
+            if (!usernameInput.value || !usernamePattern.test(usernameInput.value)) {
+                if (usernameError) usernameError.textContent = 'Tên đăng nhập phải từ 5-10 ký tự và không chứa ký tự đặc biệt';
+                valid = false;
             }
 
-            // Kiểm tra mật khẩu
-            if (!passwordInput.value) {
-                if (passwordError) passwordError.textContent = 'Vui lòng nhập mật khẩu';
-                isValid = false;
+            // Kiểm tra mật khẩu: không chứa ký tự đặc biệt, độ dài 5-10 ký tự
+            const passwordPattern = /^[a-zA-Z0-9]{5,10}$/;
+            if (!passwordInput.value || !passwordPattern.test(passwordInput.value)) {
+                if (passwordError) passwordError.textContent = 'Mật khẩu phải từ 5-10 ký tự và không chứa ký tự đặc biệt';
+                valid = false;
             }
 
-
+            if (valid) {
+                registerForm.submit();  // Nếu hợp lệ, submit form
+            }
         });
-    }   // Xử lý sự kiện đóng form xác thực
+    }
+    // Xử lý sự kiện đóng form xác thực
     if (closeButton) {
         closeButton.addEventListener('click', function () {
              const modal = document.getElementById("verification-modal") ;

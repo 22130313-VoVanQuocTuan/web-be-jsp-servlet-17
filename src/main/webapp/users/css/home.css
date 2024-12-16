@@ -57,21 +57,25 @@ p {
 }
 
 #section-header1 .top-right {
+    display: flex;
     float: right;
     margin-top: 18px;
     margin-right: 113px;
 }
 
-#section-header1 .top-right a {
+#section-header1 .top-right button {
     font-weight: bolder;
     color: white;
     text-decoration: none;
     margin-left: 20px;
     transition: color 0.3s;
+    background-color: #00000000;
+    cursor: pointer;
 }
 
-#section-header1 .top-right a:hover {
+#section-header1 .top-right button:hover {
     color: #d1d1d1
+
 }
 
 /* ---------------section-header2------------------ */

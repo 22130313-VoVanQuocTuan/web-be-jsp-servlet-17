@@ -17,6 +17,12 @@ public class LoginController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String action = req.getParameter("action");
+        if("login".equals(action)) {
+            req.getRequestDispatcher("/users/page/login-signup.jsp").forward(req, resp);
+            return;
+        }
+        // đăng nhập
         UserService userService = new UserService();
         String username = req.getParameter("username");
         String password = req.getParameter("password");
@@ -24,25 +30,35 @@ public class LoginController extends HttpServlet {
             if (userService.login(username, password)) {
                 Users user = userService.getUser(username);
                 if (user != null && user.getIsEmailVerified() == 1) {
-                    //thiết lập session
+                    // lưu session
                     HttpSession session = req.getSession();
                     session.setAttribute("user", user);
-                    session.setAttribute("username", user.getUsername()); // Lưu giá trị vào session
-                    //Cập  nhật trạng thái
-                    userService.UpdateStatusUser("Đang hoạt động",user.getId());
-                    resp.sendRedirect(req.getContextPath() + "/home.jsp");
-                } else {
-                    req.setAttribute("error_login", "Không tìm thấy người dùng");
-                    req.getRequestDispatcher("users/page/login-signup.jsp").forward(req, resp);
-                }
 
+                    //cập nhật trạng thái
+                    userService.UpdateStatusUser("Đang hoạt động", user.getId());
+
+                    // Redirect based on role
+                    if ("admin".equals(user.getRole())) {
+                        resp.sendRedirect(req.getContextPath() + "/admin/pages/index.jsp");
+                    } else if ("user".equals(user.getRole())) {
+                        resp.sendRedirect(req.getContextPath() + "/home-page");
+                    } else {
+                        req.setAttribute("error_login", "Không tìm thấy người dùng");
+                        req.getRequestDispatcher( "/users/page/login-signup.jsp").forward(req, resp);
+                    }
+                } else {
+                    req.setAttribute("error_login", "Tài khoản chưa được xác thực");
+                    req.getRequestDispatcher( "/users/page/login-signup.jsp").forward(req, resp);
+                }
             } else {
                 req.setAttribute("error_login", "Tài khoản hoặc mật khẩu không chính xác");
-                req.getRequestDispatcher("users/page/login-signup.jsp").forward(req, resp);
+                req.getRequestDispatcher( "/users/page/login-signup.jsp").forward(req, resp);
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            req.setAttribute("error_login", "Lỗi hệ thống: " + e.getMessage());
+            req.getRequestDispatcher("/users/page/login-signup.jsp").forward(req, resp);
         }
+    }
 
-    }
-    }
+
+}
