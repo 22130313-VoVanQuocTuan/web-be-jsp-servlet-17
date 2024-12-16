@@ -223,9 +223,6 @@
         <button id="backToTop" title="Quay về đầu trang">⬆</button>
 
     </div>
-
-
-
     <script src="${pageContext.request.contextPath}/users/js/login-signup.js"></script>
     <script src="${pageContext.request.contextPath}/users/js/scripts.js" defer></script>
     <script src="${pageContext.request.contextPath}/users/js/reset-password.js"></script>
