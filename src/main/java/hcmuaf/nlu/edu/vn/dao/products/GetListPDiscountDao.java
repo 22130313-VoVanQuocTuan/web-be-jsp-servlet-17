@@ -31,7 +31,7 @@ public class GetListPDiscountDao {
                 product.setQuantity(rs.getInt("quantity"));
                 product.setImageUrl(rs.getString("imageUrl"));
                 product.setDescription(rs.getString("description"));
-                product.setCategoryId(rs.getString("categoryId"));
+                product.setCategoryId(rs.getInt("categoryId"));
                 product.setStatus(rs.getString("status"));
                 product.setSupplier(rs.getString("supplier"));
                 product.setColor(rs.getString("color"));

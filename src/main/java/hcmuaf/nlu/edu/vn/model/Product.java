@@ -9,7 +9,7 @@ public class Product {
     private int quantity;
     private String imageUrl;
     private String description;
-    private String categoryId;
+    private int categoryId;
     private String status;
     private String supplier;
     private String color;
@@ -25,7 +25,7 @@ public class Product {
     public Product() {
     }
 
-    public Product(int id, String name, double price, int quantity, String imageUrl, String description, String categoryId, String status, String supplier, String color, String size, String unit, int view, int soldCount, double discountPercent,double discountPrice, Timestamp createDate, Timestamp updateDate) {
+    public Product(int id, String name, double price, int quantity, String imageUrl, String description, int categoryId, String status, String supplier, String color, String size, String unit, int view, int soldCount, double discountPercent,double discountPrice, Timestamp createDate, Timestamp updateDate) {
         this.id = id;
         this.name = name;
         this.price = price;
@@ -94,11 +94,11 @@ public class Product {
         this.description = description;
     }
 
-    public String getCategoryId() {
+    public int getCategoryId() {
         return categoryId;
     }
 
-    public void setCategoryId(String categoryId) {
+    public void setCategoryId(int categoryId) {
         this.categoryId = categoryId;
     }
 
