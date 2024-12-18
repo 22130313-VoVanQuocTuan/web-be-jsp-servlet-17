@@ -11,7 +11,7 @@ import java.util.List;
 
 
 public class UserService {
-    private final EmailUtil emailUtil;
+    private final EmailUtilService emailUtil;
     private final SignUpDao signUpDao;
     private final LoginDao usersDao;
     private final ResetCodeDao resetCodeDao;
@@ -22,7 +22,7 @@ public class UserService {
     private final UpdateInfoDao updateInfoDao;
 
     public UserService() {
-        this.emailUtil = new EmailUtil();
+        this.emailUtil = new EmailUtilService();
         this.signUpDao = new SignUpDao();
         this.usersDao = new LoginDao();
         this.resetCodeDao = new ResetCodeDao();

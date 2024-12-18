@@ -196,7 +196,7 @@
                         <span class="sale-box">${product.discountPercent}%</span>
                     </div>
                     <div class="product-title">
-                        <div class="name-product"><a href="${pageContext.request.contextPath}/product-detail?id=${product.id}">${product.name}</a></div>
+                        <div class="name-product"><a href="product-detail?id=${product.id}">${product.name}</a></div>
                         <div class="product-price">
                             <li><fmt:formatNumber value="${product.discountPrice}" type="number" groupingUsed="true" />₫</li>
                             <li><fmt:formatNumber value="${product.price}" type="number" groupingUsed="true" />₫</li>
