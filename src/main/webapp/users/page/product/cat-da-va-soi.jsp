@@ -107,7 +107,7 @@
                                 ĐIỆN NƯỚC</a></li>
                         </ul>
                     </li>
-                    <li class="propClone"><a href="../../../home.jsp"><i class="fa-solid fa-house"></i>&nbsp;&nbsp; TRANG CHỦ
+                    <li class="propClone"><a href="/tqh/home-page"><i class="fa-solid fa-house"></i>&nbsp;&nbsp; TRANG CHỦ
                         </a></li>
                     <li class="propClone"><a href="../product.jsp"><i class="fa-brands fa-product-hunt"></i>
                             &nbsp;&nbsp;SẢN PHẨM</a>
