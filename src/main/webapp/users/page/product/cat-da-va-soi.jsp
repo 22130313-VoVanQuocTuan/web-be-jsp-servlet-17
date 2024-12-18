@@ -42,7 +42,7 @@
                 <div class="menu">
                     <!-- Logo bên trái -->
                     <div class="logo">
-                        <a href="../../../home.jsp"><img src="/src/Users/img/logo.png" alt="Logo"></a>
+                        <a href="/tqh/home-page"><img src="users/img/logo.png" alt="Logo"></a>
                     </div>
 
                     <!-- Thanh tìm kiếm ở giữa -->
