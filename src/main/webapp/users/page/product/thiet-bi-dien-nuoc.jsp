@@ -111,7 +111,7 @@
                                 ĐIỆN NƯỚC</a></li>
                         </ul>
                     </li>
-                    <li class="propClone"><a href="../../../home.jsp"><i class="fa-solid fa-house"></i>&nbsp;&nbsp; TRANG CHỦ
+                    <li class="propClone"><a href="/tqh/home-page"><i class="fa-solid fa-house"></i>&nbsp;&nbsp; TRANG CHỦ
                     </a></li>
                     <li class="propClone"><a href="../product.jsp"><i class="fa-brands fa-product-hunt"></i>
                         &nbsp;&nbsp;SẢN PHẨM</a>
@@ -194,273 +194,31 @@
                 </div>
             </div>
             <div class="row ps-5" id="product-list">
-                <!-- Sản phẩm 1 đến 18 -->
-                <div class="name-cart">
-                    <a href="../product-detail.jsp"><img src="/src/Users/img_product/thietbi-diennuoc/image1.png"
-                                                         alt="thiet-bi-dien-nuoc"></a>
-                    <h3>Máy bơm tăng áp A-130 JAK – Panasonic</h3>
-                    <p>Giá: <del>2,150,000₫</del></p>
-                    <p style="color: red;">Giá đã giảm:1,505,000₫</p>
-                    <p>Giảm giá: 30%</p>
-                    <span style="margin-left: 10px;">
-                        <i class="fas fa-eye"></i> <!-- Icon mắt Font Awesome -->
-                        <span style="font-size: 0.9em;">50</span> <!-- Số lượt xem -->
+                <!-- Sử dụng JSTL để hiển thị sản phẩm -->
+                <c:forEach var="product" items="${products}">
+                    <div class="name-cart">
+                        <p style="position: absolute; padding: 8px; background-color: #ff0000; z-index: 5; border-radius: 10px;">
+                                ${product.discountPercent}%</p>
+                        <a href="src/Users/page/product-detail.html"><img src="${product.imageUrl}"
+                                                                          alt="${product.name}"></a>
+                        <h3>${product.name}</h3>
+                        <p>Giá:
+                            <del><fmt:formatNumber value="${product.price}" type="number" groupingUsed="true"/>₫</del>
+                        </p>
+                        <p style="color: #ff0000;">Giá đã giảm: <fmt:formatNumber value="${product.discountPrice}"
+                                                                                  type="number" groupingUsed="true"/>₫</p>
+                        <p>Giảm giá: ${product.discountPercent}%</p>
+                        <span style="margin-left: 10px;">
+                        <i class="fas fa-eye"></i>
+                        <span style="font-size: 0.9em;">${product.view}</span>
                     </span>
-                    <span style="margin-left: 20px;">
-                        <i class="fas fa-shopping-cart"></i> <!-- Icon giỏ hàng Font Awesome -->
-                        <span style="font-size: 0.9em;">đã bán:300</span> <!-- Số lượt mua -->
+                        <span style="margin-left: 20px;">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span style="font-size: 0.9em;">${product.soldCount}</span>
                     </span>
-                    <a href="../cart.jsp" class="add-cart"><i class="ri-add-circle-line"></i>Thêm</a>
-                </div>
-                <div class="name-cart">
-                    <a href="../product-detail.jsp"><img src="/src/Users/img_product/thietbi-diennuoc/image2.png"
-                                                         alt="thiet-bi-dien-nuoc"></a>
-                    <h3>Máy bơm tăng áp Panasonic JAK-100% lõi đồng </h3>
-                    <p>Giá: <del>2.500.000₫</del></p>
-                    <p style="color: red;">Giá đã giảm: 1.750.000₫</p>
-                    <p>Giảm giá: 30%</p>
-                    <span style="margin-left: 10px;">
-                        <i class="fas fa-eye"></i> <!-- Icon mắt Font Awesome -->
-                        <span style="font-size: 0.9em;">50</span> <!-- Số lượt xem -->
-                    </span>
-                    <span style="margin-left: 20px;">
-                        <i class="fas fa-shopping-cart"></i> <!-- Icon giỏ hàng Font Awesome -->
-                        <span style="font-size: 0.9em;">đã bán:300</span> <!-- Số lượt mua -->
-                    </span>
-                    <a href="../cart.jsp" class="add-cart"><i class="ri-add-circle-line"></i>Thêm</a>
-                </div>
-                <div class="name-cart">
-                    <a href="../product-detail.jsp"><img src="/src/Users/img_product/thietbi-diennuoc/image3.png"
-                                                         alt="thiet-bi-dien-nuoc"></a>
-                    <h3>Máy bơm tăng áp Panasonic JAK- có nắp che mưa </h3>
-                    <p>Giá: <del>2,590,000₫</del></p>
-                    <p style="color: red;">Giá đã giảm: 1.680.000₫</p>
-                    <p>Giảm giá: 35%</p>
-                    <span style="margin-left: 10px;">
-                        <i class="fas fa-eye"></i> <!-- Icon mắt Font Awesome -->
-                        <span style="font-size: 0.9em;">50</span> <!-- Số lượt xem -->
-                    </span>
-                    <span style="margin-left: 20px;">
-                        <i class="fas fa-shopping-cart"></i> <!-- Icon giỏ hàng Font Awesome -->
-                        <span style="font-size: 0.9em;">đã bán:300</span> <!-- Số lượt mua -->
-                    </span>
-                    <a href="../cart.jsp" class="add-cart"><i class="ri-add-circle-line"></i>Thêm</a>
-                </div>
-                <!-- Tiếp tục tạo các thẻ sản phẩm tương tự -->
-                <div class="name-cart">
-                    <a href="../product-detail.jsp"><img src="/src/Users/img_product/thietbi-diennuoc/image4.png"
-                                                         alt="thiet-bi-dien-nuoc"></a>
-                    <h3>Máy Bơm Đẩy Cao Panasonic GP-350JA-SV5 350W </h3>
-                    <p>Giá: <del> 4,490,000₫,</del></p>
-                    <p style="color: red;">Giá đã giảm: 2,918,500₫</p>
-                    <p>Giảm giá: 35%</p>
-                    <span style="margin-left: 10px;">
-                        <i class="fas fa-eye"></i> <!-- Icon mắt Font Awesome -->
-                        <span style="font-size: 0.9em;">50</span> <!-- Số lượt xem -->
-                    </span>
-                    <span style="margin-left: 20px;">
-                        <i class="fas fa-shopping-cart"></i> <!-- Icon giỏ hàng Font Awesome -->
-                        <span style="font-size: 0.9em;">đã bán:300</span> <!-- Số lượt mua -->
-                    </span>
-                    <a href="../cart.jsp" class="add-cart"><i class="ri-add-circle-line"></i>Thêm</a>
-                </div>
-                <!-- ... Tạo các thẻ sản phẩm cho đến sản phẩm thứ 18 -->
-                <div class="name-cart">
-                    <a href="../product-detail.jsp"><img src="/src/Users/img_product/thietbi-diennuoc/image5.png"
-                                                         alt="thiet-bi-dien-nuoc"></a>
-                    <h3>Máy bơm nước đẩy cao Panasonic GP-129JXK-SV5 125W</h3>
-                    <p>Giá: <del>1,470,000₫</del></p>
-                    <p style="color: red;">Giá đã giảm: 968,000₫</p>
-                    <p>Giảm giá: 34%</p>
-                    <span style="margin-left: 10px;">
-                        <i class="fas fa-eye"></i> <!-- Icon mắt Font Awesome -->
-                        <span style="font-size: 0.9em;">50</span> <!-- Số lượt xem -->
-                    </span>
-                    <span style="margin-left: 20px;">
-                        <i class="fas fa-shopping-cart"></i> <!-- Icon giỏ hàng Font Awesome -->
-                        <span style="font-size: 0.9em;">đã bán:300</span> <!-- Số lượt mua -->
-                    </span>
-                    <a href="../cart.jsp" class="add-cart"><i class="ri-add-circle-line"></i>Thêm</a>
-                </div>
-                <!-- Sản phẩm 1 đến 18 -->
-                <div class="name-cart">
-                    <a href="../product-detail.jsp"><img src="/src/Users/img_product/thietbi-diennuoc/image6.png"
-                                                         alt="thiet-bi-dien-nuoc"></a>
-                    <h3>Bồn nước inox 1000L Đứng Tân Á Đại Thành</h3>
-                    <p>Giá: <del>5.099.000₫</del></p>
-                    <p style="color: red;">Giá đã giảm: 3.900.000₫</p>
-                    <p>Giảm giá: 24%</p>
-                    <span style="margin-left: 10px;">
-                        <i class="fas fa-eye"></i> <!-- Icon mắt Font Awesome -->
-                        <span style="font-size: 0.9em;">50</span> <!-- Số lượt xem -->
-                    </span>
-                    <span style="margin-left: 20px;">
-                        <i class="fas fa-shopping-cart"></i> <!-- Icon giỏ hàng Font Awesome -->
-                        <span style="font-size: 0.9em;">đã bán:300</span> <!-- Số lượt mua -->
-                    </span>
-                    <a href="../cart.jsp" class="add-cart"><i class="ri-add-circle-line"></i>Thêm</a>
-                </div>
-                <div class="name-cart">
-                    <a href="../product-detail.jsp"><img src="/src/Users/img_product/thietbi-diennuoc/image7.png"
-                                                         alt="thiet-bi-dien-nuoc"></a>
-                    <h3>Bình nóng lạnh năng lượng mặt trời</h3>
-                    <p>Giá: <del>8.200.000₫</del></p>
-                    <p style="color: red;">Giá đã giảm: 6.100.000₫</p>
-                    <p>Giảm giá: 25%</p>
-                    <span style="margin-left: 10px;">
-                        <i class="fas fa-eye"></i> <!-- Icon mắt Font Awesome -->
-                        <span style="font-size: 0.9em;">50</span> <!-- Số lượt xem -->
-                    </span>
-                    <span style="margin-left: 20px;">
-                        <i class="fas fa-shopping-cart"></i> <!-- Icon giỏ hàng Font Awesome -->
-                        <span style="font-size: 0.9em;">đã bán:300</span> <!-- Số lượt mua -->
-                    </span>
-                    <a href="../cart.jsp" class="add-cart"><i class="ri-add-circle-line"></i>Thêm</a>
-                </div>
-                <div class="name-cart">
-                    <a href="../product-detail.jsp"><img src="/src/Users/img_product/thietbi-diennuoc/image8.png"
-                                                         alt="thiet-bi-dien-nuoc"></a>
-                    <h3>Đồng hồ điện điện tử LSE LS142 có 1 pha 2 dây </h3>
-                    <p>Giá: <del>200.000₫</del></p>
-                    <p style="color: red;">Giá đã giảm: 190.000₫</p>
-                    <p>Giảm giá: 10%</p>
-                    <span style="margin-left: 10px;">
-                        <i class="fas fa-eye"></i> <!-- Icon mắt Font Awesome -->
-                        <span style="font-size: 0.9em;">50</span> <!-- Số lượt xem -->
-                    </span>
-                    <span style="margin-left: 20px;">
-                        <i class="fas fa-shopping-cart"></i> <!-- Icon giỏ hàng Font Awesome -->
-                        <span style="font-size: 0.9em;">đã bán:300</span> <!-- Số lượt mua -->
-                    </span>
-                    <a href="../cart.jsp" class="add-cart"><i class="ri-add-circle-line"></i>Thêm</a>
-                </div>
-                <!-- Tiếp tục tạo các thẻ sản phẩm tương tự -->
-                <div class="name-cart">
-                    <a href="../product-detail.jsp"><img src="/src/Users/img_product/thietbi-diennuoc/image9.png"
-                                                         alt="thiet-bi-dien-nuoc"></a>
-                    <h3>Đồng Hồ Điện Một Pha EMIC 10(40A) – Có Giấy Kiểm Định</h3>
-                    <p>Giá: <del>250,000₫</del></p>
-                    <p style="color: red;">Giá đã giảm: 220,000₫</p>
-                    <p>Giảm giá: 12%</p>
-                    <span style="margin-left: 10px;">
-                        <i class="fas fa-eye"></i> <!-- Icon mắt Font Awesome -->
-                        <span style="font-size: 0.9em;">50</span> <!-- Số lượt xem -->
-                    </span>
-                    <span style="margin-left: 20px;">
-                        <i class="fas fa-shopping-cart"></i> <!-- Icon giỏ hàng Font Awesome -->
-                        <span style="font-size: 0.9em;">đã bán:300</span> <!-- Số lượt mua -->
-                    </span>
-                    <a href="../cart.jsp" class="add-cart"><i class="ri-add-circle-line"></i>Thêm</a>
-                </div>
-                <!-- ... Tạo các thẻ sản phẩm cho đến sản phẩm thứ 18 -->
-                <div class="name-cart">
-                    <a href="../product-detail.jsp"><img src="/src/Users/img_product/thietbi-diennuoc/image10.png"
-                                                         alt="thiet-bi-dien-nuoc"></a>
-                    <h3>Máy nước nóng Beko BWI35S1N-213</h3>
-                    <p>Giá: <del>2.450.000₫</del></p>
-                    <p style="color: red;">Giá đã giảm: 2.199.000₫</p>
-                    <p>Giảm giá: 10%</p>
-                    <span style="margin-left: 10px;">
-                        <i class="fas fa-eye"></i> <!-- Icon mắt Font Awesome -->
-                        <span style="font-size: 0.9em;">50</span> <!-- Số lượt xem -->
-                    </span>
-                    <span style="margin-left: 20px;">
-                        <i class="fas fa-shopping-cart"></i> <!-- Icon giỏ hàng Font Awesome -->
-                        <span style="font-size: 0.9em;">đã bán:300</span> <!-- Số lượt mua -->
-                    </span>
-                    <a href="../cart.jsp" class="add-cart"><i class="ri-add-circle-line"></i>Thêm</a>
-                </div>
-                <!-- Sản phẩm 1 đến 18 -->
-                <div class="name-cart">
-                    <a href="../product-detail.jsp"><img src="/src/Users/img_product/thietbi-diennuoc/image11.png"
-                                                         alt="thiet-bi-dien-nuoc"></a>
-                    <h3>Máng đèn Anfaco T8 0.6m - 14W</h3>
-                    <p>Giá: <del>150.000₫</del></p>
-                    <p style="color: red;">Giá đã giảm: 120.000₫</p>
-                    <p>Giảm giá: 20%</p>
-                    <span style="margin-left: 10px;">
-                        <i class="fas fa-eye"></i> <!-- Icon mắt Font Awesome -->
-                        <span style="font-size: 0.9em;">50</span> <!-- Số lượt xem -->
-                    </span>
-                    <span style="margin-left: 20px;">
-                        <i class="fas fa-shopping-cart"></i> <!-- Icon giỏ hàng Font Awesome -->
-                        <span style="font-size: 0.9em;">đã bán:300</span> <!-- Số lượt mua -->
-                    </span>
-                    <a href="../cart.jsp" class="add-cart"><i class="ri-add-circle-line"></i>Thêm</a>
-                </div>
-                <div class="name-cart">
-                    <a href="../product-detail.jsp"><img src="/src/Users/img_product/thietbi-diennuoc/image12.png"
-                                                         alt="thiet-bi-dien-nuoc"></a>
-                    <h3>Đèn LED Duhal âm trần cao cấp KBNL830 30W</h3>
-                    <p>Giá: <del>200.000₫</del></p>
-                    <p style="color: red;">Giá đã giảm: 180.000₫</p>
-                    <p>Giảm giá: 20%</p>
-                    <span style="margin-left: 10px;">
-                        <i class="fas fa-eye"></i> <!-- Icon mắt Font Awesome -->
-                        <span style="font-size: 0.9em;">50</span> <!-- Số lượt xem -->
-                    </span>
-                    <span style="margin-left: 20px;">
-                        <i class="fas fa-shopping-cart"></i> <!-- Icon giỏ hàng Font Awesome -->
-                        <span style="font-size: 0.9em;">đã bán:300</span> <!-- Số lượt mua -->
-                    </span>
-                    <a href="../cart.jsp" class="add-cart"><i class="ri-add-circle-line"></i>Thêm</a>
-                </div>
-                <div class="name-cart">
-                    <a href="../product-detail.jsp"><img src="/src/Users/img_product/thietbi-diennuoc/image13.png"
-                                                         alt="thiet-bi-dien-nuoc"></a>
-                    <h3>
-                        Công tơ điện 3 pha 4 dây cơ mã LS3E4 chính hãng LSE
-                    </h3>
-                    <p>Giá: <del>1.750.000₫</del></p>
-                    <p style="color: red;">Giá đã giảm:
-                        1.312.500₫
-                    </p>
-                    <p>Giảm giá: 25%</p>
-                    <span style="margin-left: 10px;">
-                        <i class="fas fa-eye"></i> <!-- Icon mắt Font Awesome -->
-                        <span style="font-size: 0.9em;">50</span> <!-- Số lượt xem -->
-                    </span>
-                    <span style="margin-left: 20px;">
-                        <i class="fas fa-shopping-cart"></i> <!-- Icon giỏ hàng Font Awesome -->
-                        <span style="font-size: 0.9em;">đã bán:300</span> <!-- Số lượt mua -->
-                    </span>
-                    <a href="../cart.jsp" class="add-cart"><i class="ri-add-circle-line"></i>Thêm</a>
-                </div>
-                <!-- Tiếp tục tạo các thẻ sản phẩm tương tự -->
-                <div class="name-cart">
-                    <a href="../product-detail.jsp"><img src="/src/Users/img_product/thietbi-diennuoc/image14.png"
-                                                         alt="thiet-bi-dien-nuoc"></a>
-                    <h3>Máy bơm tăng áp A-130JTX 150W </h3>
-                    <p>Giá: <del>3,412,500đ</del></p>
-                    <p style="color: red;">Giá đã giảm: 2,730,000₫</p>
-                    <p>Giảm giá: 10%</p>
-                    <span style="margin-left: 10px;">
-                        <i class="fas fa-eye"></i> <!-- Icon mắt Font Awesome -->
-                        <span style="font-size: 0.9em;">50</span> <!-- Số lượt xem -->
-                    </span>
-                    <span style="margin-left: 20px;">
-                        <i class="fas fa-shopping-cart"></i> <!-- Icon giỏ hàng Font Awesome -->
-                        <span style="font-size: 0.9em;">đã bán:300</span> <!-- Số lượt mua -->
-                    </span>
-                    <a href="../cart.jsp" class="add-cart"><i class="ri-add-circle-line"></i>Thêm</a>
-                </div>
-                <!-- ... Tạo các thẻ sản phẩm cho đến sản phẩm thứ 18 -->
-                <div class="name-cart">
-                    <a href="../product-detail.jsp"><img src="/src/Users/img_product/thietbi-diennuoc/image15.png"
-                                                         alt="thiet-bi-dien-nuoc"></a>
-                    <h3>MCB 3 pha 6A Panasonic</h3>
-                    <p>Giá: <del>350.000₫</del></p>
-                    <p style="color: red;">Giá đã giảm: 329.000₫</p>
-                    <p>Giảm giá: 6%</p> <span style="margin-left: 10px;">
-                        <i class="fas fa-eye"></i> <!-- Icon mắt Font Awesome -->
-                        <span style="font-size: 0.9em;">50</span> <!-- Số lượt xem -->
-                    </span>
-                    <span style="margin-left: 20px;">
-                        <i class="fas fa-shopping-cart"></i> <!-- Icon giỏ hàng Font Awesome -->
-                        <span style="font-size: 0.9em;">đã bán:300</span> <!-- Số lượt mua -->
-                    </span>
-                    <a href="../cart.jsp" class="add-cart"><i class="ri-add-circle-line"></i>Thêm</a>
-                </div>
+                        <a href="add-cart?id=${product.id}" class="add-cart"><i class="ri-add-circle-line"></i>Thêm</a>
+                    </div>
+                </c:forEach>
             </div>
 
             <!--pagination-->
@@ -471,9 +229,7 @@
                         <button id="next" onclick="changePage(1)">>></button>
             </div>
         </div>
-
     </div>
-
     <div id="section-footer">
         <div class="container">
             <div class="contact-info">

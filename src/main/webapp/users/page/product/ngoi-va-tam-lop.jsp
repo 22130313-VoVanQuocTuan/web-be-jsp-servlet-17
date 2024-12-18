@@ -109,7 +109,7 @@
                                 ĐIỆN NƯỚC</a></li>
                         </ul>
                     </li>
-                    <li class="propClone"><a href="../../../home.jsp"><i class="fa-solid fa-house"></i>&nbsp;&nbsp; TRANG CHỦ
+                    <li class="propClone"><a href="/tqh/home-page"><i class="fa-solid fa-house"></i>&nbsp;&nbsp; TRANG CHỦ
                     </a></li>
                     <li class="propClone"><a href="../product.jsp"><i class="fa-brands fa-product-hunt"></i>
                         &nbsp;&nbsp;SẢN PHẨM</a>
@@ -192,362 +192,31 @@
                 </div>
             </div>
             <div class="row ps-5" id="product-list">
-                <!-- Sản phẩm 1 đến 18 -->
-                <div class="name-cart">
-                    <a href="../product-detail.jsp"><img
-                            src="/src/Users/img_product/ngoi/NGÓI BITUM CANA ĐỒNG PHẲNG.png" alt="Ngói và tấm lợp"></a>
-                    <h3>Ngói BITUM CANA Đồng Phẳng</h3>
-                    <p>Giá: <del>200.000₫</del></p>
-                    <p style="color: red;">Giá đã giảm: 10.000₫</p>
-                    <p>Giảm giá: 10%</p>
-                    <span style="margin-left: 10px;">
-                        <i class="fas fa-eye"></i> <!-- Icon mắt Font Awesome -->
-                        <span style="font-size: 0.9em;">50</span> <!-- Số lượt xem -->
+                <!-- Sử dụng JSTL để hiển thị sản phẩm -->
+                <c:forEach var="product" items="${products}">
+                    <div class="name-cart">
+                        <p style="position: absolute; padding: 8px; background-color: #ff0000; z-index: 5; border-radius: 10px;">
+                                ${product.discountPercent}%</p>
+                        <a href="src/Users/page/product-detail.html"><img src="${product.imageUrl}"
+                                                                          alt="${product.name}"></a>
+                        <h3>${product.name}</h3>
+                        <p>Giá:
+                            <del><fmt:formatNumber value="${product.price}" type="number" groupingUsed="true"/>₫</del>
+                        </p>
+                        <p style="color: #ff0000;">Giá đã giảm: <fmt:formatNumber value="${product.discountPrice}"
+                                                                                  type="number" groupingUsed="true"/>₫</p>
+                        <p>Giảm giá: ${product.discountPercent}%</p>
+                        <span style="margin-left: 10px;">
+                        <i class="fas fa-eye"></i>
+                        <span style="font-size: 0.9em;">${product.view}</span>
                     </span>
-                    <span style="margin-left: 20px;">
-                        <i class="fas fa-shopping-cart"></i> <!-- Icon giỏ hàng Font Awesome -->
-                        <span style="font-size: 0.9em;">đã bán:200</span> <!-- Số lượt mua -->
+                        <span style="margin-left: 20px;">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span style="font-size: 0.9em;">${product.soldCount}</span>
                     </span>
-                    <a href="../cart.jsp" class="add-cart"><i class="ri-add-circle-line"></i>Thêm</a>
-                </div>
-                <div class="name-cart">
-                    <a href="../product-detail.jsp"><img src="/src/Users/img_product/ngoi/Ngói nóc.png"
-                                                         alt="Ngói và tấm lợp"></a>
-                    <h3>Ngói Nóc</h3>
-                    <p>Giá: <del>200.000₫</del></p>
-                    <p style="color: red;">Giá đã giảm: 10.000₫</p>
-                    <p>Giảm giá: 10%</p>
-                    <span style="margin-left: 10px;">
-                        <i class="fas fa-eye"></i> <!-- Icon mắt Font Awesome -->
-                        <span style="font-size: 0.9em;">50</span> <!-- Số lượt xem -->
-                    </span>
-                    <span style="margin-left: 20px;">
-                        <i class="fas fa-shopping-cart"></i> <!-- Icon giỏ hàng Font Awesome -->
-                        <span style="font-size: 0.9em;">đã bán:300</span> <!-- Số lượt mua -->
-                    </span>
-                    <a href="../cart.jsp" class="add-cart"><i class="ri-add-circle-line"></i>Thêm</a>
-                </div>
-                <div class="name-cart">
-                    <a href="#"><img src="/src/Users/img_product/ngoi/Ngói Thái SCG dạng sóng M16.png"
-                            alt="Ngói và tấm lợp"></a>
-                    <h3>Ngói Thái SCG dạng sóng M16</h3>
-                    <p>Giá: <del>200.000₫</del></p>
-                    <p style="color: red;">Giá đã giảm: 10.000₫</p>
-                    <p>Giảm giá: 10%</p>
-                    <span style="margin-left: 10px;">
-                        <i class="fas fa-eye"></i> <!-- Icon mắt Font Awesome -->
-                        <span style="font-size: 0.9em;">50</span> <!-- Số lượt xem -->
-                    </span>
-                    <span style="margin-left: 20px;">
-                        <i class="fas fa-shopping-cart"></i> <!-- Icon giỏ hàng Font Awesome -->
-                        <span style="font-size: 0.9em;">đã bán:300</span> <!-- Số lượt mua -->
-                    </span>
-                    <a href="../cart.jsp" class="add-cart"><i class="ri-add-circle-line"></i>Thêm</a>
-                </div>
-                <!-- Tiếp tục tạo các thẻ sản phẩm tương tự -->
-                <div class="name-cart">
-                    <a href="../product-detail.jsp"><img
-                            src="/src/Users/img_product/ngoi/Tấm Cemboard Ốp Trần Vân Gỗ Smartboard Có Rãnh.png"
-                            alt="Ngói và tấm lợp"></a>
-                    <h3>Tấm Cemboard Ốp Trần Vân Gỗ Smartboard Có Rãnh</h3>
-                    <p>Giá: <del>200.000₫</del></p>
-                    <p style="color: red;">Giá đã giảm: 190.000₫</p>
-                    <p>Giảm giá: 10%</p>
-                    <span style="margin-left: 10px;">
-                        <i class="fas fa-eye"></i> <!-- Icon mắt Font Awesome -->
-                        <span style="font-size: 0.9em;">50</span> <!-- Số lượt xem -->
-                    </span>
-                    <span style="margin-left: 20px;">
-                        <i class="fas fa-shopping-cart"></i> <!-- Icon giỏ hàng Font Awesome -->
-                        <span style="font-size: 0.9em;">đã bán:300</span> <!-- Số lượt mua -->
-                    </span>
-                    <a href="../cart.jsp" class="add-cart"><i class="ri-add-circle-line"></i>Thêm</a>
-                </div>
-                <!-- ... Tạo các thẻ sản phẩm cho đến sản phẩm thứ 18 -->
-                <div class="name-cart">
-                    <a href="../product-detail.jsp"><img
-                            src="/src/Users/img_product/ngoi/Tôn Sáng Sóng Vuông Polycacbonate Tấm.png"
-                            alt="Ngói và tấm lợp"></a>
-                    <h3>Tôn Sáng Sóng Vuông Polycacbonate</h3>
-                    <p>Giá: <del>200.000₫</del></p>
-                    <p style="color: red;">Giá đã giảm: 190.000₫</p>
-                    <p>Giảm giá: 10%</p>
-                    <span style="margin-left: 10px;">
-                        <i class="fas fa-eye"></i> <!-- Icon mắt Font Awesome -->
-                        <span style="font-size: 0.9em;">50</span> <!-- Số lượt xem -->
-                    </span>
-                    <span style="margin-left: 20px;">
-                        <i class="fas fa-shopping-cart"></i> <!-- Icon giỏ hàng Font Awesome -->
-                        <span style="font-size: 0.9em;">đã bán:300</span> <!-- Số lượt mua -->
-                    </span>
-                    <a href="../cart.jsp" class="add-cart"><i class="ri-add-circle-line"></i>Thêm</a>
-                </div>
-                <!-- Sản phẩm 1 đến 18 -->
-                <div class="name-cart">
-                    <a href="../product-detail.jsp"><img
-                            src="/src/Users/img_product/ngoi/Ngói Thái SCG Elite Series Dạng Sóng Gold.png"
-                            alt="Ngói và tấm lợp"></a>
-                    <h3>Ngói Thái SCG Elite Series Dạng Sóng Gold</h3>
-                    <p>Giá: <del>200.000₫</del></p>
-                    <p style="color: red;">Giá đã giảm: 190.000₫</p>
-                    <p>Giảm giá: 10%</p>
-                    <span style="margin-left: 10px;">
-                        <i class="fas fa-eye"></i> <!-- Icon mắt Font Awesome -->
-                        <span style="font-size: 0.9em;">50</span> <!-- Số lượt xem -->
-                    </span>
-                    <span style="margin-left: 20px;">
-                        <i class="fas fa-shopping-cart"></i> <!-- Icon giỏ hàng Font Awesome -->
-                        <span style="font-size: 0.9em;">đã bán:300</span> <!-- Số lượt mua -->
-                    </span>
-                    <a href="../cart.jsp" class="add-cart"><i class="ri-add-circle-line"></i>Thêm</a>
-                </div>
-                <div class="name-cart">
-                    <a href=""><img
-                            src="/src/Users/img_product/ngoi/Ngói Thái SCG Elite Series Dạng Sóng Classic-Xám.png"
-                            alt="Ngói và tấm lợp"></a>
-                    <h3>Ngói Thái SCG Elite Series Dạng Sóng Classic-Xám</h3>
-                    <p>Giá: <del>200.000₫</del></p>
-                    <p style="color: red;">Giá đã giảm: 190.000₫</p>
-                    <p>Giảm giá: 10%</p>
-                    <span style="margin-left: 10px;">
-                        <i class="fas fa-eye"></i> <!-- Icon mắt Font Awesome -->
-                        <span style="font-size: 0.9em;">50</span> <!-- Số lượt xem -->
-                    </span>
-                    <span style="margin-left: 20px;">
-                        <i class="fas fa-shopping-cart"></i> <!-- Icon giỏ hàng Font Awesome -->
-                        <span style="font-size: 0.9em;">đã bán:300</span> <!-- Số lượt mua -->
-                    </span>
-                    <a href="../cart.jsp" class="add-cart"><i class="ri-add-circle-line"></i>Thêm</a>
-                </div>
-                <div class="name-cart">
-                    <a href="#"><img
-                            src="/src/Users/img_product/ngoi/Ngói Thái SCG Elite Series Dạng Sóng Classic-Nâu.png"
-                            alt="Ngói và tấm lợp"></a>
-                    <h3>Ngói Thái SCG Elite Series Dạng Sóng Classic-Nâu</h3>
-                    <p>Giá: <del>200.000₫</del></p>
-                    <p style="color: red;">Giá đã giảm: 190.000₫</p>
-                    <p>Giảm giá: 10%</p>
-                    <span style="margin-left: 10px;">
-                        <i class="fas fa-eye"></i> <!-- Icon mắt Font Awesome -->
-                        <span style="font-size: 0.9em;">50</span> <!-- Số lượt xem -->
-                    </span>
-                    <span style="margin-left: 20px;">
-                        <i class="fas fa-shopping-cart"></i> <!-- Icon giỏ hàng Font Awesome -->
-                        <span style="font-size: 0.9em;">đã bán:300</span> <!-- Số lượt mua -->
-                    </span>
-                    <a href="../cart.jsp" class="add-cart"><i class="ri-add-circle-line"></i>Thêm</a>
-                </div>
-                <!-- Tiếp tục tạo các thẻ sản phẩm tương tự -->
-                <div class="name-cart">
-                    <a href="#"><img
-                            src="/src/Users/img_product/ngoi/Ngói Thái SCG Elite Series Dạng Sóng Classic-Nâu Socola.png"
-                            alt="Ngói và tấm lợp"></a>
-                    <h3>Ngói Thái SCG Elite Series Dạng Sóng Classic-Nâu Socola</h3>
-                    <p>Giá: <del>200.000₫</del></p>
-                    <p style="color: red;">Giá đã giảm: 190.000₫</p>
-                    <p>Giảm giá: 10%</p>
-                    <span style="margin-left: 10px;">
-                        <i class="fas fa-eye"></i> <!-- Icon mắt Font Awesome -->
-                        <span style="font-size: 0.9em;">50</span> <!-- Số lượt xem -->
-                    </span>
-                    <span style="margin-left: 20px;">
-                        <i class="fas fa-shopping-cart"></i> <!-- Icon giỏ hàng Font Awesome -->
-                        <span style="font-size: 0.9em;">đã bán:300</span> <!-- Số lượt mua -->
-                    </span>
-                    <a href="../cart.jsp" class="add-cart"><i class="ri-add-circle-line"></i>Thêm</a>
-                </div>
-                <!-- ... Tạo các thẻ sản phẩm cho đến sản phẩm thứ 18 -->
-                <div class="name-cart">
-                    <a href="#"><img src="/src/Users/img_product/ngoi/NGÓI BITUM PHỦ ĐÁ TEGOLA CAO CẤP NHẬP KHẨU Ý.png"
-                            alt="Ngói và tấm lợp"></a>
-                    <h3>NGÓI BITUM PHỦ ĐÁ TEGOLA CAO CẤP NHẬP KHẨU Ý</h3>
-                    <p>Giá: <del>200.000₫</del></p>
-                    <p style="color: red;">Giá đã giảm: 190.000₫</p>
-                    <p>Giảm giá: 10%</p>
-                    <span style="margin-left: 10px;">
-                        <i class="fas fa-eye"></i> <!-- Icon mắt Font Awesome -->
-                        <span style="font-size: 0.9em;">50</span> <!-- Số lượt xem -->
-                    </span>
-                    <span style="margin-left: 20px;">
-                        <i class="fas fa-shopping-cart"></i> <!-- Icon giỏ hàng Font Awesome -->
-                        <span style="font-size: 0.9em;">đã bán:300</span> <!-- Số lượt mua -->
-                    </span>
-                    <a href="../cart.jsp" class="add-cart"><i class="ri-add-circle-line"></i>Thêm</a>
-                </div>
-                <!-- Sản phẩm 1 đến 18 -->
-                <div class="name-cart">
-                    <a href="#"><img
-                            src="/src/Users/img_product/ngoi/NGÓI BITUM PHỦ ĐÁ TEGOLA CAO CẤP NHẬP KHẨU Ý-Đấ tầng.png"
-                            alt="Ngói và tấm lợp"></a>
-                    <h3>NGÓI BITUM PHỦ ĐÁ TEGOLA CAO CẤP NHẬP KHẨU Ý-Đá tầng</h3>
-                    <p>Giá: <del>200.000₫</del></p>
-                    <p style="color: red;">Giá đã giảm: 190.000₫</p>
-                    <p>Giảm giá: 10%</p>
-                    <span style="margin-left: 10px;">
-                        <i class="fas fa-eye"></i> <!-- Icon mắt Font Awesome -->
-                        <span style="font-size: 0.9em;">50</span> <!-- Số lượt xem -->
-                    </span>
-                    <span style="margin-left: 20px;">
-                        <i class="fas fa-shopping-cart"></i> <!-- Icon giỏ hàng Font Awesome -->
-                        <span style="font-size: 0.9em;">đã bán:300</span> <!-- Số lượt mua -->
-                    </span>
-                    <a href="../cart.jsp" class="add-cart"><i class="ri-add-circle-line"></i>Thêm</a>
-                </div>
-                <div class="name-cart">
-                    <a href="#"><img
-                            src="/src/Users/img_product/ngoi/NGÓI BITUM PHỦ ĐÁ TEGOLA CAO CẤP NHẬP KHẨU Ý – DẠNG VẢY CÁ.png"
-                            alt="Ngói và tấm lợp"></a>
-                    <h3>NGÓI BITUM PHỦ ĐÁ TEGOLA CAO CẤP NHẬP KHẨU Ý – DẠNG VẢY CÁ</h3>
-                    <p>Giá: <del>200.000₫</del></p>
-                    <p style="color: red;">Giá đã giảm: 190.000₫</p>
-                    <p>Giảm giá: 10%</p>
-                    <span style="margin-left: 10px;">
-                        <i class="fas fa-eye"></i> <!-- Icon mắt Font Awesome -->
-                        <span style="font-size: 0.9em;">50</span> <!-- Số lượt xem -->
-                    </span>
-                    <span style="margin-left: 20px;">
-                        <i class="fas fa-shopping-cart"></i> <!-- Icon giỏ hàng Font Awesome -->
-                        <span style="font-size: 0.9em;">đã bán:300</span> <!-- Số lượt mua -->
-                    </span>
-                    <a href="../cart.jsp" class="add-cart"><i class="ri-add-circle-line"></i>Thêm</a>
-                </div>
-                <div class="name-cart">
-                    <a href="#"><img src="/src/Users/img_product/ngoi/NgoiThaiSCGDangPhang.png"
-                            alt="Ngói và tấm lợp"></a>
-                    <h3>Ngói Thái SCG Dạng Thẳng</h3>
-                    <p>Giá: <del>200.000₫</del></p>
-                    <p style="color: red;">Giá đã giảm: 190.000₫</p>
-                    <p>Giảm giá: 10%</p>
-                    <span style="margin-left: 10px;">
-                        <i class="fas fa-eye"></i> <!-- Icon mắt Font Awesome -->
-                        <span style="font-size: 0.9em;">50</span> <!-- Số lượt xem -->
-                    </span>
-                    <span style="margin-left: 20px;">
-                        <i class="fas fa-shopping-cart"></i> <!-- Icon giỏ hàng Font Awesome -->
-                        <span style="font-size: 0.9em;">đã bán:300</span> <!-- Số lượt mua -->
-                    </span>
-                    <a href="../cart.jsp" class="add-cart"><i class="ri-add-circle-line"></i>Thêm</a>
-                </div>
-                <!-- Tiếp tục tạo các thẻ sản phẩm tương tự -->
-                <div class="name-cart">
-                    <a href="#"><img src="/src/Users/img_product/ngoi/Ngói chạc ba chữ Y.png" alt="Ngói và tấm lợp"></a>
-                    <h3>Ngói chạc ba chữ Y</h3>
-                    <p>Giá: <del>200.000₫</del></p>
-                    <p style="color: red;">Giá đã giảm: 190.000₫</p>
-                    <p>Giảm giá: 10%</p>
-                    <span style="margin-left: 10px;">
-                        <i class="fas fa-eye"></i> <!-- Icon mắt Font Awesome -->
-                        <span style="font-size: 0.9em;">50</span> <!-- Số lượt xem -->
-                    </span>
-                    <span style="margin-left: 20px;">
-                        <i class="fas fa-shopping-cart"></i> <!-- Icon giỏ hàng Font Awesome -->
-                        <span style="font-size: 0.9em;">đã bán:300</span> <!-- Số lượt mua -->
-                    </span>
-                    <a href="../cart.jsp" class="add-cart"><i class="ri-add-circle-line"></i>Thêm</a>
-                </div>
-                <!-- ... Tạo các thẻ sản phẩm cho đến sản phẩm thứ 18 -->
-                <div class="name-cart">
-                    <a href="#"><img src="/src/Users/img_product/ngoi/Ngói cuối nóc.png" alt="Ngói và tấm lợp"></a>
-                    <h3>Ngói cuối nóc</h3>
-                    <p>Giá: <del>200.000₫</del></p>
-                    <p style="color: red;">Giá đã giảm: 190.000₫</p>
-                    <p>Giảm giá: 10%</p> <span style="margin-left: 10px;">
-                        <i class="fas fa-eye"></i> <!-- Icon mắt Font Awesome -->
-                        <span style="font-size: 0.9em;">50</span> <!-- Số lượt xem -->
-                    </span>
-                    <span style="margin-left: 20px;">
-                        <i class="fas fa-shopping-cart"></i> <!-- Icon giỏ hàng Font Awesome -->
-                        <span style="font-size: 0.9em;">đã bán:300</span> <!-- Số lượt mua -->
-                    </span>
-                    <a href="../cart.jsp" class="add-cart"><i class="ri-add-circle-line"></i>Thêm</a>
-                </div>
-                <div class="name-cart">
-                    <a href="#"><img src="/src/Users/img_product/ngoi/Ngói cuối rìa.png" alt="Ngói và tấm lợp"></a>
-                    <h3>Ngói cuối rìa</h3>
-                    <p>Giá: <del>200.000₫</del></p>
-                    <p style="color: red;">Giá đã giảm: 190.000₫</p>
-                    <p>Giảm giá: 10%</p>
-                    <span style="margin-left: 10px;">
-                        <i class="fas fa-eye"></i> <!-- Icon mắt Font Awesome -->
-                        <span style="font-size: 0.9em;">50</span> <!-- Số lượt xem -->
-                    </span>
-                    <span style="margin-left: 20px;">
-                        <i class="fas fa-shopping-cart"></i> <!-- Icon giỏ hàng Font Awesome -->
-                        <span style="font-size: 0.9em;">đã bán:300</span> <!-- Số lượt mua -->
-                    </span>
-                    <a href="../cart.jsp" class="add-cart"><i class="ri-add-circle-line"></i>Thêm</a>
-                </div>
-                <div class="name-cart">
-                    <a href="#"><img src="/src/Users/img_product/ngoi/NGÓI BITUM PHỦ ĐÁ DẠNG TỔ ONG – MÀU XANH RÊU.png"
-                            alt="Ngói và tấm lợp"></a>
-                    <h3>NGÓI BITUM PHỦ ĐÁ DẠNG TỔ ONG – MÀU XANH RÊU</h3>
-                    <p>Giá: <del>200.000₫</del></p>
-                    <p style="color: red;">Giá đã giảm: 190.000₫</p>
-                    <p>Giảm giá: 10%</p>
-                    <span style="margin-left: 10px;">
-                        <i class="fas fa-eye"></i> <!-- Icon mắt Font Awesome -->
-                        <span style="font-size: 0.9em;">50</span> <!-- Số lượt xem -->
-                    </span>
-                    <span style="margin-left: 20px;">
-                        <i class="fas fa-shopping-cart"></i> <!-- Icon giỏ hàng Font Awesome -->
-                        <span style="font-size: 0.9em;">đã bán:300</span> <!-- Số lượt mua -->
-                    </span>
-                    <a href="../cart.jsp" class="add-cart"><i class="ri-add-circle-line"></i>Thêm</a>
-                </div>
-                <div class="name-cart">
-                    <a href="#"><img
-                            src="/src/Users/img_product/ngoi/NGÓI BITUM PHỦ ĐÁ DẠNG VẢY RỒNG – MÀU XANH DƯƠNG.png"
-                            alt="Ngói và tấm lợp"></a>
-                    <h3>NGÓI BITUM PHỦ ĐÁ DẠNG VẢY RỒNG – MÀU XANH DƯƠNG</h3>
-                    <p>Giá: <del>200.000₫</del></p>
-                    <p style="color: red;">Giá đã giảm: 190.000₫</p>
-                    <p>Giảm giá: 10%</p>
-                    <span style="margin-left: 10px;">
-                        <i class="fas fa-eye"></i> <!-- Icon mắt Font Awesome -->
-                        <span style="font-size: 0.9em;">50</span> <!-- Số lượt xem -->
-                    </span>
-                    <span style="margin-left: 20px;">
-                        <i class="fas fa-shopping-cart"></i> <!-- Icon giỏ hàng Font Awesome -->
-                        <span style="font-size: 0.9em;">đã bán:300</span> <!-- Số lượt mua -->
-                    </span>
-                    <a href="../cart.jsp" class="add-cart"><i class="ri-add-circle-line"></i>Thêm</a>
-                </div>
-                <div class="name-cart">
-                    <a href="#"><img src="/src/Users/img_product/ngoi/NGÓI BITUM PHỦ ĐÁ DẠNG ĐỒNG PHẲNG – MÀU XÁM.png"
-                            alt="Ngói và tấm lợp"></a>
-                    <h3>NGÓI BITUM PHỦ ĐÁ DẠNG ĐỒNG PHẲNG – MÀU XÁM</h3>
-                    <p>Giá: <del>200.000₫</del></p>
-                    <p style="color: red;">Giá đã giảm: 190.000₫</p>
-                    <p>Giảm giá: 10%</p>
-                    <span style="margin-left: 10px;">
-                        <i class="fas fa-eye"></i> <!-- Icon mắt Font Awesome -->
-                        <span style="font-size: 0.9em;">50</span> <!-- Số lượt xem -->
-                    </span>
-                    <span style="margin-left: 20px;">
-                        <i class="fas fa-shopping-cart"></i> <!-- Icon giỏ hàng Font Awesome -->
-                        <span style="font-size: 0.9em;">đã bán:300</span> <!-- Số lượt mua -->
-                    </span>
-                    <a href="../cart.jsp" class="add-cart"><i class="ri-add-circle-line"></i>Thêm</a>
-                </div>
-                <div class="name-cart">
-                    <a href="#"><img src="/src/Users/img_product/ngoi/Tấm Lợp Lấy Sáng Polycarbonate Đặc Ruột.png"
-                            alt="Ngói và tấm lợp"></a>
-                    <h3>Tấm Lợp Lấy Sáng Polycarbonate Đặc Ruột</h3>
-                    <p>Giá: <del>200.000₫</del></p>
-                    <p style="color: red;">Giá đã giảm: 190.000₫</p>
-                    <p>Giảm giá: 10%</p>
-                    <span style="margin-left: 10px;">
-                        <i class="fas fa-eye"></i> <!-- Icon mắt Font Awesome -->
-                        <span style="font-size: 0.9em;">50</span> <!-- Số lượt xem -->
-                    </span>
-                    <span style="margin-left: 20px;">
-                        <i class="fas fa-shopping-cart"></i> <!-- Icon giỏ hàng Font Awesome -->
-                        <span style="font-size: 0.9em;">đã bán:300</span> <!-- Số lượt mua -->
-                    </span>
-                    <a href="../cart.jsp" class="add-cart"><i class="ri-add-circle-line"></i>Thêm</a>
-                </div>
-
-
+                        <a href="add-cart?id=${product.id}" class="add-cart"><i class="ri-add-circle-line"></i>Thêm</a>
+                    </div>
+                </c:forEach>
             </div>
 
             <!--pagination-->
