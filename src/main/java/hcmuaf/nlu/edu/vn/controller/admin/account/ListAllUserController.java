@@ -1,5 +1,27 @@
-package hcmuaf.nlu.edu.vn.controller.admin;
+package hcmuaf.nlu.edu.vn.controller.admin.account;
 
+import hcmuaf.nlu.edu.vn.model.Users;
+import hcmuaf.nlu.edu.vn.service.UserService;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
-public class UserController {
+import java.io.IOException;
+import java.util.List;
+
+@WebServlet(name = "listAccount", value = "/accounts")
+public class ListAllUserController extends HttpServlet {
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        UserService userService = new UserService();
+        try {
+            List<Users> list = userService.getListUsers();
+            req.setAttribute("list_user", list);
+            req.getRequestDispatcher("/admin/pages/user.jsp").forward(req, resp);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

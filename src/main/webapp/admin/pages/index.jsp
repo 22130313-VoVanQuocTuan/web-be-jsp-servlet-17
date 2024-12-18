@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bảng điều khiển Quản trị viên </title>
     <!------------------ Kiểu dáng ------------------>
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="<c:url value="/admin/css/style.css"/>">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 
 </head>
@@ -38,7 +38,7 @@
                 </li>
 
                 <li>
-                    <a href="user.html">
+                    <a href="accounts">
                         <span class="icon">
                             <ion-icon name="people-outline"></ion-icon>
                         </span>
@@ -338,7 +338,7 @@
     </div>
 
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-    <script src="../js/index.js"></script>
+    <script src="<c:url value="/admin/js/index.js"/>"></script>
 </body>
 
 </html>

@@ -56,7 +56,7 @@
                 <div class="menu">
                     <!-- Logo bên trái -->
                     <div class="logo">
-                        <a href="../../home.jsp"><img src="${pageContext.request.contextPath}/users/img/logo.png" alt="Logo"></a>
+                        <a href="home-page"><img src="${pageContext.request.contextPath}/users/img/logo.png" alt="Logo"></a>
                     </div>
 
                     <!-- Thanh tìm kiếm ở giữa -->
@@ -92,38 +92,38 @@
                             MỤC SẢN
                             PHẨM</span>
                         <ul class="items">
-                            <li> <a href="product/gach-xay-dung.jsp">&nbsp;&nbsp;<i
-                                        class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;GẠCH XÂY
-                                    DỰNG</a></li>
-                            <li><a href="product/xi-mang-va-vua.jsp">&nbsp;&nbsp;<i
-                                        class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;XI MĂNG VÀ
-                                    VỮA</a></li>
-                            <li><a href="product/cat-da-va-soi.jsp">&nbsp;&nbsp;<i
-                                        class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;CÁT, ĐÁ VÀ
-                                    SỎI</a></li>
-                            <li><a href="product/thep-va-sat.jsp">&nbsp;&nbsp;<i
-                                        class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;THÉP VÀ
-                                    SẮT</a></li>
-                            <li><a href="product/go-va-vat-lieu-go.jsp">&nbsp;&nbsp;<i
-                                        class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;GỖ VÀ VẬT
-                                    LIỆU GỖ</a></li>
-                            <li><a href="product/son-va-phu-gia.jsp">&nbsp;&nbsp;<i
-                                        class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;SƠN VÀ PHỤ
-                                    GIA</a></li>
-                            <li><a href="product/ngoi-va-tam-lop.jsp">&nbsp;&nbsp;<i
-                                        class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;NGÓI VÀ TẤM
-                                    LỢP</a></li>
-                            <li><a href="product/ong-nuoc-va-phu-kien.jsp">&nbsp;&nbsp;<i
-                                        class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;ỐNG NƯỚC VÀ
-                                    PHỤ KIỆN</a></li>
-                            <li><a href="product/thiet-bi-dien-nuoc.jsp">&nbsp;&nbsp;<i
-                                        class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;THIẾT BỊ
-                                    ĐIỆN NƯỚC</a></li>
+                            <li><a href="/tqh/product-category?categoryId=1">&nbsp;&nbsp;<i
+                                    class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;GẠCH XÂY
+                                DỰNG</a></li>
+                            <li><a href="/tqh/product-category?categoryId=2">&nbsp;&nbsp;<i
+                                    class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;XI MĂNG VÀ
+                                VỮA</a></li>
+                            <li><a href="/tqh/product-category?categoryId=3">&nbsp;&nbsp;<i
+                                    class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;CÁT, ĐÁ VÀ
+                                SỎI</a></li>
+                            <li><a href="/tqh/product-category?categoryId=4">&nbsp;&nbsp;<i
+                                    class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;THÉP VÀ
+                                SẮT</a></li>
+                            <li><a href="/tqh/product-category?categoryId=5">&nbsp;&nbsp;<i
+                                    class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;GỖ VÀ VẬT
+                                LIỆU GỖ</a></li>
+                            <li><a href="/tqh/product-category?categoryId=6">&nbsp;&nbsp;<i
+                                    class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;SƠN VÀ PHỤ
+                                GIA</a></li>
+                            <li><a href="/tqh/product-category?categoryId=7">&nbsp;&nbsp;<i
+                                    class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;NGÓI VÀ TẤM
+                                LỢP</a></li>
+                            <li><a href="/tqh/product-category?categoryId=8">&nbsp;&nbsp;<i
+                                    class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;ỐNG NƯỚC VÀ
+                                PHỤ KIỆN</a></li>
+                            <li><a href="/tqh/product-category?categoryId=9">&nbsp;&nbsp;<i
+                                    class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;THIẾT BỊ
+                                ĐIỆN NƯỚC</a></li>
                         </ul>
                     </li>
                     <li class="propClone"><a href="home-page"><i class="fa-solid fa-house"></i>&nbsp;&nbsp; TRANG CHỦ
                         </a></li>
-                    <li class="propClone"><a href="product.jsp"><i class="fa-brands fa-product-hunt"></i>
+                    <li class="propClone"><a href="product"><i class="fa-brands fa-product-hunt"></i>
                             &nbsp;&nbsp;SẢN PHẨM</a>
                     </li>
                     <li class="propClone"> <a href="cart-items"><i class="fas fa-shopping-cart"></i>&nbsp;&nbsp; GIỎ
@@ -132,14 +132,14 @@
                     <li class="propClone">
                         <span class="none-a"> <i class="fa-solid fa-book"></i> &nbsp;&nbsp; HƯỚNG DẪN </span>
                         <ul class="items">
-                            <li><a href="buying-help.jsp">&nbsp;&nbsp;<i
+                            <li><a href="<c:url value="/users/page/buying-help.jsp"/>">&nbsp;&nbsp;<i
                                         class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;HƯỚNG DẪN
                                     MUA HÀNG</a>
                             </li>
-                            <li><a href="product_unit.jsp">&nbsp;&nbsp;<i
+                            <li><a href="<c:url value="/users/page/product_unit.jsp"/>">&nbsp;&nbsp;<i
                                         class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;BẢNG ĐƠN VỊ SẢN PHẨM</a>
                             </li>
-                            <li><a href="term_and_services.jsp">&nbsp;&nbsp;<i
+                            <li><a href="<c:url value="/users/page/term_and_services.jsp"/>">&nbsp;&nbsp;<i
                                         class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;ĐIỀU KHOẢN
                                     VÀ DỊCH VỤ</a>
                             </li>
@@ -174,16 +174,16 @@
                                 <td><img src="${item.imageUrl}" alt="${item.name}" width="50" height="50"></td>
                                 <td>
                                     <div class="quantity">
-                                        <button class="qty-btn minus-btn">-</button>
+                                        <button class="qty-btn minus-btn"><a style="text-decoration: none " href="update-cart?id=${item.id}&quantity=${item.quantity - 1}">-</a></button>
                                         <input title="input" type="number" value="${item.quantity}" class="qty-input" min="1" />
-                                        <button class="qty-btn plus-btn">+</button>
+                                        <button class="qty-btn plus-btn"><a style="text-decoration: none " href="update-cart?id=${item.id}&quantity=${item.quantity + 1}">+</a></button>
                                     </div>
                                 </td>
                                 <td><fmt:formatNumber value=" ${item.price}" type="number" groupingUsed="true"/>₫</td>
                                 <td><fmt:formatNumber value=" ${item.discountAmount}" type="number" groupingUsed="true"/>₫</td>
                                 <td><fmt:formatNumber value=" ${item.totalPrice}" type="number" groupingUsed="true"/>₫</td>
                                 <td>
-                                    <a href="cart-remove?id=${item.id}" class="remove-from-cart-button">Xóa</a>
+                                    <a style="text-decoration: none" href="cart-remove?id=${item.id}" class="remove-from-cart-button">Xóa</a>
                                 </td>
                             </tr>
                         </c:forEach>
@@ -211,17 +211,24 @@
                 </div>
                 <div class="summary-item total">
                     <span>Tổng cộng:</span>
-                    <span id="total"><fmt:formatNumber value=" ${totalShippingFee + totalPrice} " type="number" groupingUsed="true"/>₫</span>
+                    <span id="total"><fmt:formatNumber value=" ${totalFinalPrice} " type="number" groupingUsed="true"/>₫</span>
                 </div>
                 <a href="confirmation.jsp"><button class="checkout-btn">Tiến hành thanh toán</button></a>
 
                 <div class="voucher">
                     <label for="voucher">Phiếu ưu đãi</label>
-                    <input type="text" id="voucher" placeholder="Mã ưu đãi" />
-                    <button id="apply-btn" class="apply-btn">
+                    <form action="voucher" method="get">
+                    <input type="text" name="voucher" id="voucher" placeholder="Mã ưu đãi" />
+                    <button type="submit" id="apply-btn" class="apply-btn">
                         Áp dụng
                     </button>
-                    <span id="voucher-error" class="error-message" style="color: red; display:none;">Mã ưu đãi không hợp lệ hoặc đã hết hạn.</span>
+                        <div id="error-message" style="color: red; font-size: 10px;">
+                            <c:if test="${not empty error_code}">
+                                ${error_code}
+                            </c:if>
+                        </div>
+                    </form>
+
 
                     <div class="help">
                         <p><i style="font-size: 15px;" class="fas fa-question-circle spinning-icon"></i></p>
@@ -248,8 +255,8 @@
             <div class="links">
                 <h3>Liên kết</h3>
                 <ul>
-                    <li><a href="introduce.jsp">Giới thiệu</a></li>
-                    <li><a href="term_and_services.jsp">Điều khoản và dịch vụ</a></li>
+                    <li><a href="<c:url value="/users/page/introduce.jsp"/>">Giới thiệu</a></li>
+                    <li><a href="<c:url value="/users/page/term_and_services.jsp"/>">Điều khoản và dịch vụ</a></li>
                 </ul>
             </div>
             <div class="social-media">

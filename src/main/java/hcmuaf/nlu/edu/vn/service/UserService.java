@@ -7,6 +7,7 @@ import hcmuaf.nlu.edu.vn.model.Users;
 import java.security.SecureRandom;
 import java.sql.SQLException;
 import java.util.Base64;
+import java.util.List;
 
 
 public class UserService {
@@ -17,6 +18,7 @@ public class UserService {
     private final VerifyEmailDao verifyEmailDao;
     private final LogoutDao logoutDao;
     private final ResetPasswordDao resetPasswordDao;
+    private final GetListAccountDao getListAccountDao;
     public UserService() {
         this.emailUtil = new EmailUtil();
         this.signUpDao = new SignUpDao();
@@ -25,6 +27,7 @@ public class UserService {
         this.verifyEmailDao = new VerifyEmailDao();
         this.logoutDao = new LogoutDao();
         this.resetPasswordDao = new ResetPasswordDao();
+        this.getListAccountDao = new GetListAccountDao();
     }
 
     // Đăng ký người dùng mới
@@ -149,6 +152,12 @@ public class UserService {
     // Cập nhật lại resetPassword khi thành công
     public void invalidateToken(String token) throws Exception {
         resetPasswordDao.invalidateToken(token);
+    }
+
+
+    // Lấy ra danh sách người dùng
+    public List<Users> getListUsers() throws Exception {
+          return  getListAccountDao.getListAccount();
     }
 }
 

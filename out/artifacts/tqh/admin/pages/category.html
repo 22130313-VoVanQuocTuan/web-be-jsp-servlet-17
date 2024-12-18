@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bảng điều khiển Quản trị viên </title>
+    <!------------------ Kiểu dáng ------------------>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/user.css">
+    <link rel="stylesheet" href="../css/category.css">
+</head>
+<style>
+    .add-category {
+
+        margin-bottom: 15px;
+        text-align: center;
+    }
+
+    .add-category button {
+    background-color: #202a3b;
+    color: #f1f1f1;
+    border-radius: 5px;
+    font-size: 17px;
+    cursor: pointer;
+    padding: 0px 10px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.add-category button:hover {
+    transform: scale(1.1); /* Phóng to mà không ảnh hưởng đến bố cục */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3); /* Thêm hiệu ứng bóng */
+}
+</style>
+
+<body>
+    <!-- ------------------ Điều hướng -------------------->
+    <div class="container">
+        <div class="navigation">
+            <ul>
+                <li>
+                    <a href="index.html">
+                        <span class="icon">
+                            <img src="/src/Users/img/logo.png" alt="">
+                        </span>
+                        <span class="title">Bán Vật Liệu Xây Dựng </span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="index.html">
+                        <span class="icon">
+                            <ion-icon name="home-outline"></ion-icon>
+                        </span>
+                        <span class="title">Trang chủ</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="user.jsp">
+                        <span class="icon">
+                            <ion-icon name="people-outline"></ion-icon>
+                        </span>
+                        <span class="title">Khách Hàng</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="products.html">
+                        <span class="icon">
+                            <ion-icon name="cube-outline"></ion-icon>
+                        </span>
+                        <span class="title">Sản phẩm</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="order.html">
+                        <span class="icon">
+                            <ion-icon name="receipt-outline"></ion-icon>
+                        </span>
+                        <span class="title">Hóa đơn</span>
+                    </a>
+                </li>
+
+
+                <li>
+                    <a href="discount.html">
+                        <span class="icon">
+                            <ion-icon name="help-outline"></ion-icon>
+                        </span>
+                        <span class="title">Khuyến Mãi</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="promotional.html">
+                        <span class="icon">
+                            <ion-icon name="pricetag-outline"></ion-icon>
+                        </span>
+                        <span class="title">Mã giảm giá</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="category.html">
+                        <span class="icon">
+                            <ion-icon name="list-outline"></ion-icon>
+                        </span>
+                        <span class="title">Danh mục</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="review.html">
+                        <span class="icon">
+                            <ion-icon name="chatbubble-outline"></ion-icon>
+                        </span>
+                        <span class="title">Review</span>
+                    </a>
+                </li>
+
+
+                <li>
+                    <a href="passwordManagement.html">
+                        <span class="icon">
+                            <ion-icon name="lock-closed-outline"></ion-icon>
+                        </span>
+                        <span class="title">Tài khoản</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/src/Users/page/login-signup.jsp">
+                        <span class="icon">
+                            <ion-icon name="log-out-outline"></ion-icon>
+                        </span>
+                        <span class="title" onclick="lockout()">Đăng Xuất</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <!------------------- Chính ------------------>
+        <div class="main">
+            <div class="topbar">
+                <div class="toggle">
+                    <ion-icon name="menu-outline"></ion-icon>
+                </div>
+
+
+                <div class="search">
+                    <label>
+                        <input type="text" placeholder="Tìm kiếm ở đây">
+                        <ion-icon name="search-outline"></ion-icon>
+                    </label>
+                </div>
+
+                <div class="user">
+                    <a href="passwordManagement.html"> <ion-icon name="person" style="color: #000000; font-size: 25px;"></ion-icon></a>
+
+                </div>
+            </div>
+
+
+
+            <!-------------------- Danh Sách Chi Tiết người dùng------------------ -->
+            <div class="details-user">
+                <div class="recentOrders">
+                    <div class="cardHeader">
+                        <h2>Danh sách danh mục</h2>
+                        <a href="#" class="btn">Xem Tất Cả</a>
+                    </div>
+                    <div class="add-category">
+                        <p style="font-size: 20px; margin-bottom: 10px;">Thêm danh mục</p>
+
+                        <input type="text" style="font-size: 17px; border-radius: 5px;" placeholder="Nhập tên danh mục">
+                        <button onclick="updateUserStatus()">Thêm</button>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <td>id</td>
+                                <td>Tên danh mục</td>
+                                <td>Ngày tạo</td>
+
+                                <td>Hành động</td>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Gạch xây dựng</td>
+                                <td>2024/07/19</td>
+
+                                <td>
+                                    <div class="v">
+                                        <button class="delete-btn" data-id="1">Xóa</button>
+                                    </div>
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>Xi măng và vựa</td>
+                                <td>2024/07/19</td>
+
+                                <td>
+                                    <div class="v">
+                                        <button class="delete-btn" data-id="1">Xóa</button>
+                                    </div>
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>Cát,Đá và Sỏi</td>
+                                <td>2024/07/19</td>
+
+                                <td>
+                                    <div class="v">
+                                        <button class="delete-btn" data-id="1">Xóa</button>
+                                    </div>
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>Thép và sắt</td>
+                                <td>2024/07/19</td>
+
+                                <td>
+                                    <div class="v">
+                                        <button class="delete-btn" data-id="1">Xóa</button>
+                                    </div>
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td>Gỗ và Vậ liệu gỗ</td>
+                                <td>2024/07/19</td>
+
+                                <td>
+                                    <div class="v">
+                                        <button class="delete-btn" data-id="1">Xóa</button>
+                                    </div>
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td>6</td>
+                                <td>Sơn và Phụ gia</td>
+                                <td>2024/07/19</td>
+
+                                <td>
+                                    <div class="v">
+                                        <button class="delete-btn" data-id="1">Xóa</button>
+                                    </div>
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td>7</td>
+                                <td>Ngói và tấm lợp</td>
+                                <td>2024/07/19</td>
+
+                                <td>
+                                    <div class="v">
+                                        <button class="delete-btn" data-id="1">Xóa</button>
+                                    </div>
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td>8</td>
+                                <td>Ống nước và Phụ kiện</td>
+                                <td>2024/07/19</td>
+
+                                <td>
+                                    <div class="v">
+                                        <button class="delete-btn" data-id="1">Xóa</button>
+                                    </div>
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td>9</td>
+                                <td>Thiết bị điện nước</td>
+                                <td>2024/07/19</td>
+
+                                <td>
+                                    <div class="v">
+                                        <button class="delete-btn" data-id="1">Xóa</button>
+                                    </div>
+                                </td>
+
+                            </tr>
+
+
+
+                        </tbody>
+                    </table>
+                </div>
+                 <!-- Modal Xóa tài khoản -->
+                 <div id="delete-modal" class="modal">
+                    <div class="modal-content">
+                        <h3>Xác nhận xóa</h3>
+                        <label>Bạn có chắc chắn muốn xóa tài khoản này?</label>
+                        <div class="button-container">
+                            <button class="confirm-delete">Xóa</button>
+                            <button class="close-modal">Hủy</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script src="../js/index.js"></script>
+    <script src="../js/user.js"></script>
+    <script src="../js/category.js"></script>
+
+
+</body>
+
+</html>

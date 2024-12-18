@@ -9,9 +9,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GetListAccount {
+public class GetListAccountDao {
     private final DBConnect dbConnect;
-    public GetListAccount() {
+    public GetListAccountDao() {
         dbConnect = new DBConnect();
     }
 
@@ -19,19 +19,24 @@ public class GetListAccount {
     public List<Users> getListAccount() {
         List<Users> listAccount = new ArrayList<>();
         String sql = "select * from users";
-        try(PreparedStatement ptm = dbConnect.preparedStatement(sql)){
+        try (PreparedStatement ptm = dbConnect.preparedStatement(sql)) {
             ResultSet rs = ptm.executeQuery();
-            while (rs.next()){
-               int id = rs.getInt("id");
-               String username = rs.getString("username");
-               String email = rs.getString("email");
-               String phoneNumber = rs.getString("phoneNumber");
-               String status = rs.getString("status");
-               
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String username = rs.getString("username");
+                String email = rs.getString("email");
+                String phoneNumber = rs.getString("phoneNumber");
+                String status = rs.getString("status");
+                String role = rs.getString("role");
 
+                Users user = new Users(id, username, email, phoneNumber, status, role);
+                listAccount.add(user);
             }
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+        return listAccount;
     }
+
 }

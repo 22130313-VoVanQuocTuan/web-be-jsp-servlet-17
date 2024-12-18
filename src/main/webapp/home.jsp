@@ -123,7 +123,7 @@
                 </li>
                 <li class="propClone"><a href="#"><i class="fa-solid fa-house"></i>&nbsp;&nbsp; TRANG CHỦ </a></li>
 
-                <li class="propClone"><a href="/tqh/product"><i class="fa-brands fa-product-hunt"></i>
+                <li class="propClone"><a href="product"><i class="fa-brands fa-product-hunt"></i>
                     &nbsp;&nbsp;SẢN PHẨM</a>
                 </li>
                 <li class="propClone"><a id="" href="cart-items"><i

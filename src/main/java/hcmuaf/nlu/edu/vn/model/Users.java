@@ -18,6 +18,14 @@ public class Users {
 
     public Users() {
     }
+    public Users(int id, String username, String email, String phoneNumber,String status,String role){
+        this.id = id;
+        this.username = username;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.status = status;
+        this.role = role;
+    }
 
     public Users(int id, String email, String fullName,
                  String username, String password, String address,

@@ -1,3 +1,6 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="vi">
 
@@ -8,8 +11,8 @@
     <title>Bảng điều khiển Quản trị viên </title>
     <!------------------ Kiểu dáng ------------------>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/user.css">
+    <link rel="stylesheet" href="<c:url value="/admin/css/style.css"/>">
+    <link rel="stylesheet" href="<c:url value="/admin/css/user.css"/>">
     
 </head>
 
@@ -37,7 +40,7 @@
                 </li>
 
                 <li>
-                    <a href="user.html">
+                    <a href="list-account">
                         <span class="icon">
                             <ion-icon name="people-outline"></ion-icon>
                         </span>
@@ -173,82 +176,23 @@
                         </thead>
 
                         <tbody>
+                        <c:forEach var="list_account" items="${list_user}">
                             <tr>
-                                <td>1</td>
-                                <td>TuanDev</td>
-                                <td>22130313@gmail.com</td>
-                                <td>0386394258</td>
-                                <td><span class="statusText">Hoạt động</span></td>
-                                <td>user</td>
+                                <td>${list_account.id}</td>
+                                <td>${list_account.username}</td>
+                                <td>${list_account.email}</td>
+                                <td>${list_account.phoneNumber}</td>
+                                <td><span class="statusText">${list_account.status}</span></td>
+                                <td>${list_account.role}</td>
                                 <td>
                                     <div class="v">
-                                        <button class="delete-btn" data-id="1">Xóa</button>
-                                    </div>
-                                </td>
-
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>TuanDev2</td>
-                                <td>122130313@gmail.com</td>
-                                <td>0386394258</td>
-                                <td><span class="statusText">Không hoạt động</span></td>
-                                <td>user</td>
-                                <td>
-                                    <div class="v">
-                                        <button class="delete-btn" data-id="2">Xóa</button>
-
-                                    </div>
-                                </td>
-
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>TuanDev3</td>
-                                <td>322130313@gmail.com</td>
-
-                                <td>0386394258</td>
-                                <td><span class="statusText">Hoạt động</span></td>
-                                <td>user</td>
-                                <td>
-                                    <div class="v">
-                                        <button class="delete-btn" data-id="3">Xóa</button>
-
-                                    </div>
-                                </td>
-
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td>TuanDev4</td>
-                                <td>422130313@gmail.com</td>
-                                <td>0386394258</td>
-                                <td><span class="statusText">Bị đình chỉ</span></td>
-                                <td>user</td>
-                                <td>
-                                    <div class="v">
-                                        <button class="delete-btn" data-id="4">Xóa</button>
-
-                                    </div>
-                                </td>
-
-                            </tr>
-                            <tr>
-                                <td>5</td>
-                                <td>TuanDev5</td>
-                                <td>522130313@gmail.com</td>
-
-                                <td>0386394258</td>
-                                <td><span class="statusText">Đang chờ xử lý</span></td>
-                                <td>user</td>
-                                <td>
-                                    <div class="v">
-                                        <button class="delete-btn" data-id="5">Xóa</button>
+                                        <button class="delete-btn" ><a href="remove-account?id=${list_account.id}"></a> Xóa</button>
                                     </div>
                                 </td>
 
                             </tr>
 
+                        </c:forEach>
 
 
                         </tbody>
@@ -275,8 +219,8 @@
     </div>
 
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-    <script src="../js/index.js"></script>
-    <script src="../js/passwordManagement.js"></script>
+    <script src="<c:url value="/admin/js/index.js"/>"></script>
+    <script src="<c:url value="/admin/js/passwordManagement.js"/>"></script>
 
 
 </body>
