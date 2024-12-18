@@ -45,7 +45,7 @@
             <div class="menu">
                 <!-- Logo bên trái -->
                 <div class="logo">
-                    <a href="../../home.jsp"><img src="../img/logo.png" alt="Logo"></a>
+                    <a href="/tqh/home-page"><img src="users/img/logo.png" alt="Logo"></a>
                 </div>
 
                 <!-- Thanh tìm kiếm ở giữa -->
@@ -110,26 +110,26 @@
                             ĐIỆN NƯỚC</a></li>
                     </ul>
                 </li>
-                <li class="propClone"><a href="../../home.jsp"><i class="fa-solid fa-house"></i>&nbsp;&nbsp; TRANG CHỦ
+                <li class="propClone"><a href="../../../home.jsp"><i class="fa-solid fa-house"></i>&nbsp;&nbsp; TRANG CHỦ
                 </a></li>
-                <li class="propClone"><a href="product.html"><i class="fa-brands fa-product-hunt"></i>
+                <li class="propClone"><a href="../product.jsp"><i class="fa-brands fa-product-hunt"></i>
                     &nbsp;&nbsp;SẢN PHẨM</a>
                 </li>
-                <li class="propClone"><a id="cartss" href="cart.jsp"><i
-                        class="fas fa-shopping-cart"></i>&nbsp;&nbsp; GIỎ
+                <li class="propClone"> <a href="../cart.jsp"><i class="fas fa-shopping-cart"></i>&nbsp;&nbsp; GIỎ
                     HÀNG</a>
                 </li>
                 <li class="propClone">
                     <span class="none-a"> <i class="fa-solid fa-book"></i> &nbsp;&nbsp; HƯỚNG DẪN </span>
                     <ul class="items">
-                        <li><a href="buying-help.jsp">&nbsp;&nbsp;<i
+                        <li><a href="../buying-help.jsp">&nbsp;&nbsp;<i
                                 class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;HƯỚNG DẪN
                             MUA HÀNG</a>
                         </li>
-                        <li><a href="product_unit.jsp">&nbsp;&nbsp;<i
+                        <li><a href="../product_unit.jsp">&nbsp;&nbsp;<i
                                 class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;BẢNG ĐƠN VỊ SẢN PHẨM</a>
                         </li>
-                        <li><a href="term_and_services.jsp">&nbsp;&nbsp;<i
+
+                        <li><a href="../term_and_services.jsp">&nbsp;&nbsp;<i
                                 class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;ĐIỀU KHOẢN
                             VÀ DỊCH VỤ</a>
                         </li>
@@ -157,7 +157,7 @@
             <h3><a href="/tqh/product-category?categoryId=4">Thép và Sắt</a></h3>
         </div>
         <div class="item" data-category="go-va-vat-lieu-go">
-            <h3><a href=/tqh/product-category?categoryId=5">Gỗ và Vật liệu gỗ</a></h3>
+            <h3><a href="/tqh/product-category?categoryId=5">Gỗ và Vật liệu gỗ</a></h3>
         </div>
         <div class="item" data-category="son-va-phu-gia">
             <h3><a href="/tqh/product-category?categoryId=6">Sơn và Phụ gia</a></h3>
@@ -171,22 +171,6 @@
         <div class="item" data-category="thiet-bi-dien-nuoc">
             <h3><a href="/tqh/product-category?categoryId=9">Thiết bị điện nước</a></h3>
         </div>
-
-        <div class="slide-discount">
-            <div class="discount">
-                <span class="discount-label">Giảm giá 20%</span>
-                <span class="discount-description">CNNNSDVT</span>
-            </div>
-            <div class="discount">
-                <span class="discount-label">Giảm giá 15%</span>
-                <span class="discount-description">HKLDCBBB</span>
-            </div>
-            <div class="discount">
-                <span class="discount-label">Giảm giá 10%</span>
-                <span class="discount-description">GH2DVB56</span>
-            </div>
-        </div>
-
     </div>
 
     <!--conten_right-->

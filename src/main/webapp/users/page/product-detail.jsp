@@ -159,7 +159,7 @@
                 <img src="${product.imageUrl}" alt="${product.name}" />
                 <div class="review-product">
                     <div class="review">
-                        <h2>Bình luận</h2>
+                        <h2>Đánh giá</h2>
                         <form id="commentform" class="comment-form">
                             <textarea rows="3" placeholder="Ý kiến của bạn..." required></textarea>
                             <button type="submit">Gửi</button>
@@ -185,7 +185,7 @@
                 </div>
                 <button class="add-to-cart-btn"><a href="add-cart?id=${product.id}" style="color: #ffffff; text-decoration: none" >Thêm vào giỏ hàng</a></button>
                 <p class="contact">
-                    Liên hệ: <strong>0366633518</strong> hoặc <strong>0905.090.252 (Mr.Huy)</strong>
+                    Liên hệ: <strong>0366633518</strong> hoặc <strong>0824.646.746 (Mr.Huy)</strong>
                 </p>
             </div>
         </div>
