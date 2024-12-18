@@ -19,6 +19,8 @@ public class UserService {
     private final LogoutDao logoutDao;
     private final ResetPasswordDao resetPasswordDao;
     private final GetListAccountDao getListAccountDao;
+    private final UpdateInfoDao updateInfoDao;
+
     public UserService() {
         this.emailUtil = new EmailUtilService();
         this.signUpDao = new SignUpDao();
@@ -28,6 +30,8 @@ public class UserService {
         this.logoutDao = new LogoutDao();
         this.resetPasswordDao = new ResetPasswordDao();
         this.getListAccountDao = new GetListAccountDao();
+        this.updateInfoDao = new UpdateInfoDao();
+
     }
 
     // Đăng ký người dùng mới
@@ -158,6 +162,11 @@ public class UserService {
     // Lấy ra danh sách người dùng
     public List<Users> getListUsers() throws Exception {
           return  getListAccountDao.getListAccount();
+    }
+
+    // cập nhật thông tin user
+    public void setUpdateInfoUser(int id, Users user) throws Exception {
+        updateInfoDao.updateInfo(id, user);
     }
 }
 

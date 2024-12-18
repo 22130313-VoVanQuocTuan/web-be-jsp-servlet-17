@@ -12,8 +12,8 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
       crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4-beta3/css/all.min.css"/>
-<link rel="stylesheet" href="<c:url value="/users/css/home.css"/>">
-<link rel="stylesheet" href="<c:url value="/users/css/login-signup.css"/>">
+    <link rel="stylesheet" href="<c:url value="/users/css/home.css"/>">
+    <link rel="stylesheet" href="<c:url value="/users/css/login-signup.css"/>">
 
 <!-- CSS để hiển thị Modal -->
 <style>

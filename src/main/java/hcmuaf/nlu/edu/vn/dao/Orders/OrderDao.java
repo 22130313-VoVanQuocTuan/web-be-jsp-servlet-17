@@ -2,6 +2,7 @@ package hcmuaf.nlu.edu.vn.dao.Orders;
 
 import hcmuaf.nlu.edu.vn.dao.DBConnect;
 import hcmuaf.nlu.edu.vn.model.Orders;
+import hcmuaf.nlu.edu.vn.model.Users;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -89,6 +90,26 @@ public class OrderDao {
             }
         }
         return orderItem;
+    }
+
+
+    // Lấy thông tin user
+    public Users getInfoUser (int id){
+        String sql = "SELECT fullName, email, phoneNumber, address FROM users WHERE id = ?";
+        try(PreparedStatement ptm = dbConnect.preparedStatement(sql)){
+            ptm.setInt(1, id);
+            ResultSet rs = ptm.executeQuery();
+            if(rs.next()){
+                String fullName = rs.getString("fullName");
+                String email = rs.getString("email");
+                String phoneNumber = rs.getString("phoneNumber");
+                String address = rs.getString("address");
+                return new Users(fullName, email, phoneNumber, address);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return null;
     }
 
 }

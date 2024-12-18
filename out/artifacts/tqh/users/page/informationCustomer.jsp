@@ -192,10 +192,10 @@
                 <!-- Thông tin khách hàng -->
                 <div class="customer-info">
                     <h2>Thông tin khách hàng</h2>
-                    <p><strong>Tên:</strong>${users.name}</p>
-                    <p><strong>Email:</strong> 22130098@st.hcmuaf.edu.vn</p>
-                    <p><strong>Số điện thoại:</strong> 082464746</p>
-                    <p><strong>Địa chỉ:</strong> Quận Thủ Đức, TP.HCM</p>
+                    <p><strong>Tên:</strong>${info.fullName}</p>
+                    <p><strong>Email:</strong> ${info.email}</p>
+                    <p><strong>Số điện thoại:</strong>${info.phoneNumber}</p>
+                    <p><strong>Địa chỉ:</strong> ${info.address}</p>
                     <button class="edit-btn" onclick="openModal1()">Chỉnh sửa thông tin</button>
                 </div>
             </div>
@@ -247,31 +247,40 @@
             <div class="modal-content">
                 <span class="close-btn " onclick="closeModal1()" &times;></span>
                 <h2 class="modal-title">Chỉnh sửa thông tin</h2>
+
                 <div class="editInformationContent">
                     <!-- Form chỉnh sửa thông tin -->
-                    <form id="editInfoForm">
+                    <form id="editInfoForm" action="update-info" method="post">
                         <div class="mb-3">
-                            <label for="name" class="form-label">Tên</label>
-                            <input type="text" class="form-control" id="name" placeholder="Nhập tên của bạn">
+                            <label for="name"  class="form-label">Tên</label>
+                            <input type="text" name="fullName" class="form-control" id="name" placeholder="Nhập tên của bạn" required>
                         </div>
                         <div class="mb-3">
-                            <label for="email" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="email" placeholder="Nhập email của bạn">
+                            <label for="email"  class="form-label">Email</label>
+                            <input type="email" name="email" class="form-control" id="email" placeholder="Nhập email của bạn" required>
                         </div>
                         <div class="mb-3">
-                            <label for="phone" class="form-label">Số điện thoại</label>
-                            <input type="tel" class="form-control" id="phone" placeholder="Nhập số điện thoại">
+                            <label for="phone"  class="form-label">Số điện thoại</label>
+                            <input type="tel" name="phoneNumber" class="form-control" id="phone" placeholder="Nhập số điện thoại" required>
                         </div>
                         <div class="mb-3">
-                            <label for="address" class="form-label">Địa chỉ</label>
-                            <textarea class="form-control" id="address" rows="3" placeholder="Nhập địa chỉ"></textarea>
+                            <label for="address"  class="form-label">Địa chỉ</label>
+                            <textarea class="form-control" name="address" id="address" rows="3" placeholder="Nhập địa chỉ" required></textarea>
+                        </div>
+                        <!-- Thông báo lỗi -->
+                        <div id="error-message" class="error-message">
+                            <c:if test="${not empty error_info}">
+                                ${error_info}
+                            </c:if>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary" id="saveChanges">Lưu thay đổi</button>
+                            <button type="button" class="btn btn-secondary" onclick="closeModal1()">Hủy</button>
                         </div>
                     </form>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" id="saveChanges">Lưu thay đổi</button>
-                    <button type="button" class="btn btn-secondary" onclick="closeModal1()">Hủy</button>
-                </div>
+
+
             </div>
         </div>
     </div>
