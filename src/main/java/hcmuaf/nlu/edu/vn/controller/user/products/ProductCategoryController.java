@@ -11,10 +11,9 @@ import java.sql.SQLException;
 import java.util.List;
 
 @WebServlet(name = "ProductControllerCategory", value = "/product-category")
-public class ProductControllerCategory extends HttpServlet {
+public class ProductCategoryController extends HttpServlet {
     private ProductService productService = new ProductService();
-
-    public ProductControllerCategory() {
+    public ProductCategoryController() {
         this.productService = new ProductService();
     }
 
@@ -25,11 +24,12 @@ public class ProductControllerCategory extends HttpServlet {
         String categoryIdParam = request.getParameter("categoryId");
         int categoryId;
 
+
         try {
             categoryId = Integer.parseInt(categoryIdParam);
         } catch (NumberFormatException | NullPointerException e) {
             // Chuyển hướng về trang chủ hoặc hiển thị thông báo lỗi
-            response.sendRedirect("/home");
+            response.sendRedirect("/home-page");
             return;
         }
         try {
@@ -43,12 +43,14 @@ public class ProductControllerCategory extends HttpServlet {
             List<Product> products = productService.getAllProductsCategory(categoryId);
             request.setAttribute("products", products);
             // Forward đến JSP
+            request.setAttribute("categoryId", categoryId);
             request.getRequestDispatcher("/users/page/product.jsp").forward(request, response);
         } catch (SQLException e) {
             // Xử lý lỗi truy vấn cơ sở dữ liệu
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Database error");
         }
     }
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     }

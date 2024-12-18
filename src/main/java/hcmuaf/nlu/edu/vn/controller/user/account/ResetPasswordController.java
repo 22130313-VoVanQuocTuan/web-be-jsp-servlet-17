@@ -2,7 +2,7 @@ package hcmuaf.nlu.edu.vn.controller.user.account;
 
 import hcmuaf.nlu.edu.vn.model.PasswordReset;
 import hcmuaf.nlu.edu.vn.model.Users;
-import hcmuaf.nlu.edu.vn.service.EmailUtil;
+import hcmuaf.nlu.edu.vn.service.EmailUtilService;
 import hcmuaf.nlu.edu.vn.service.UserService;
 
 
@@ -23,11 +23,11 @@ import java.sql.Timestamp;
 @WebServlet(name = "reset-password", value = "/reset-password")
 public class ResetPasswordController extends HttpServlet {
     private final UserService userService;
-    private final EmailUtil emailUtil;
+    private final EmailUtilService emailUtil;
 
     public ResetPasswordController() {
         this.userService = new UserService();
-        this.emailUtil = new EmailUtil();
+        this.emailUtil = new EmailUtilService();
     }
 
 

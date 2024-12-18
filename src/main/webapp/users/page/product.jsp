@@ -27,14 +27,28 @@
                 </p>
             </div>
             <div class="top-right">
-                <span id="user-greeting" style="display: none; color: #ffffff;">Xin chào, <span
-                        id="username"></span>!</span>
-                <a href="informationCustomer.jsp" class="account-link" id="signup-link" style="display: none;">
-                    <i class="fas fa-user-circle"></i> Tài khoản
-                </a>
-                <a href="login-signup.jsp" id="login-link"><span><i class="fa fa-fw fa-user"></i> Đăng Nhập</span></a>
-                <a href="login-signup.jsp" id="logout-link" style="display: none;"><span>Đăng Xuất</span></a>
+                       <span id="user-greeting" style="display: none; color: #ffffff;">
+                           Xin chào,  <span
+                               id="username">${sessionScope.user.username != null ? sessionScope.user.username : ''}</span>!</span>
+
+                <form action="informationCustomer" method="get">
+                    <button type="submit" class="account-link" id="signup-link"
+                            style="display: none;">
+                        <i class="fas fa-user-circle"></i> Tài khoản
+                    </button>
+                </form>
+                <form action="login" method="post">
+                    <input name="action" type="hidden" value="login"/>
+                    <button type="submit" id="login-link">
+                        <span><i class="fa fa-fw fa-user"></i> Đăng Nhập</span>
+                    </button>
+                </form>
+                <form action="logout" method="post">
+                    <button type="submit" id="logout-link"
+                            style="display: none;"><span>Đăng Xuất</span></button>
+                </form>
             </div>
+
         </div>
 
     </div>
@@ -63,10 +77,10 @@
                 </div>
                 <div class="cart">
                     <div class="cart-wrapper">
-                        <a href="cart.jsp">
+                        <a href="cart-items">
                             <i class="fas fa-shopping-cart"></i>
                         </a>
-                        <span class="cart-count" id="cart-count">0</span>
+                        <span class="cart-count" id="cart-count">${sessionScope.cartItemCount}</span>
                     </div>
                 </div>
             </div>
@@ -110,26 +124,26 @@
                             ĐIỆN NƯỚC</a></li>
                     </ul>
                 </li>
-                <li class="propClone"><a href="/tqh/home-page"><i class="fa-solid fa-house"></i>&nbsp;&nbsp; TRANG CHỦ
+                <li class="propClone"><a href="home-page"><i class="fa-solid fa-house"></i>&nbsp;&nbsp; TRANG CHỦ
                 </a></li>
-                <li class="propClone"><a href="../product.jsp"><i class="fa-brands fa-product-hunt"></i>
+                <li class="propClone"><a href="product"><i class="fa-brands fa-product-hunt"></i>
                     &nbsp;&nbsp;SẢN PHẨM</a>
                 </li>
-                <li class="propClone"> <a href="../cart.jsp"><i class="fas fa-shopping-cart"></i>&nbsp;&nbsp; GIỎ
+                <li class="propClone"><a href="cart-items"><i class="fas fa-shopping-cart"></i>&nbsp;&nbsp; GIỎ
                     HÀNG</a>
                 </li>
                 <li class="propClone">
                     <span class="none-a"> <i class="fa-solid fa-book"></i> &nbsp;&nbsp; HƯỚNG DẪN </span>
                     <ul class="items">
-                        <li><a href="../buying-help.jsp">&nbsp;&nbsp;<i
+                        <li><a href="/tqh/users/page/buying-help.jsp">&nbsp;&nbsp;<i
                                 class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;HƯỚNG DẪN
                             MUA HÀNG</a>
                         </li>
-                        <li><a href="../product_unit.jsp">&nbsp;&nbsp;<i
+                        <li><a href="/tqh/users/page/product_unit.jsp">&nbsp;&nbsp;<i
                                 class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;BẢNG ĐƠN VỊ SẢN PHẨM</a>
                         </li>
 
-                        <li><a href="../term_and_services.jsp">&nbsp;&nbsp;<i
+                        <li><a href="/tqh/users/page/term_and_services.jsp">&nbsp;&nbsp;<i
                                 class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;ĐIỀU KHOẢN
                             VÀ DỊCH VỤ</a>
                         </li>
@@ -176,50 +190,62 @@
     <!--conten_right-->
     <div class="right">
         <div class="filter">
-            <p style=" background-color: #c8c8c8; padding: 10px; border-radius: 5px;font-size: 15px; height: 15px;">Sắp
+            <p style="background-color: #c8c8c8; padding: 10px; border-radius: 5px;font-size: 15px; height: 15px;">Sắp
                 xếp theo
                 <i class="fa-sharp fa-solid fa-arrow-right" style="margin-left: 15px;"></i>
             </p>
-            <p class="sort">Phổ biến</p>
-            <p class="sort">Mới nhất</p>
-            <div class=" sort-price">
+            <p class="sort">
+                <a style="text-decoration: none; color:#111111" href="product-filter?filter=popular&categoryId=${categoryId}">Phổ biến</a>
+            </p>
+            <p class="sort"><a style="text-decoration: none; color:#111111" href="product-filter?filter=newest&categoryId=${categoryId}">Mới
+                nhất</a></p>
+            <div class="sort-price">
                 <p class="sort" style="width: auto;">Bán chạy <i class="fa-solid fa-angle-up fa-rotate-180"
-                                                                 style="color: #000000; "></i></p>
+                                                                 style="color: #000000;"></i></p>
                 <div class="dropdown">
                     <ul class="dropdown-content">
-                        <li>Giá: Thấp đến cao</li>
-                        <li>Giá: Cao đến thấp</li>
+                        <li><a style="text-decoration: none ;color:#111111" href="">Giá:
+                            Thấp đến cao</a></li>
+                        <li><a style="text-decoration: none ;color:#111111" href="">Giá:
+                            Cao đến thấp</a></li>
                     </ul>
                 </div>
             </div>
         </div>
+
+
         <div class="row ps-5" id="product-list">
-            <!-- Sử dụng JSTL để hiển thị sản phẩm -->
-            <c:forEach var="product" items="${products}">
-                <div class="name-cart">
-                    <p style="position: absolute; padding: 8px; background-color: #ff0000; z-index: 5; border-radius: 10px;">
-                            ${product.discountPercent}%</p>
-                    <a href="src/Users/page/product-detail.html"><img src="${product.imageUrl}"
-                                                                      alt="${product.name}"></a>
-                    <h3>${product.name}</h3>
-                    <p>Giá:
-                        <del><fmt:formatNumber value="${product.price}" type="number" groupingUsed="true"/>₫</del>
-                    </p>
-                    <p style="color: #ff0000;">Giá đã giảm: <fmt:formatNumber value="${product.discountPrice}"
-                                                                              type="number" groupingUsed="true"/>₫</p>
-                    <p>Giảm giá: ${product.discountPercent}%</p>
-                    <span style="margin-left: 10px;">
-                        <i class="fas fa-eye"></i>
-                        <span style="font-size: 0.9em;">${product.view}</span>
-                    </span>
-                    <span style="margin-left: 20px;">
-                        <i class="fas fa-shopping-cart"></i>
-                        <span style="font-size: 0.9em;">${product.soldCount}</span>
-                    </span>
-                    <a href="add-cart?id=${product.id}" class="add-cart"><i class="ri-add-circle-line"></i>Thêm</a>
-                </div>
-            </c:forEach>
+            <c:if test="${not empty products}">
+                <c:forEach var="product" items="${products}">
+                    <div class="name-cart">
+                        <p style="position: absolute; padding: 8px; background-color: #ff0000; z-index: 5; border-radius: 10px;">
+                                ${product.discountPercent}%</p>
+                        <a href="product-detail?id=${product.id}"><img src="${product.imageUrl}"
+                                                                       alt="${product.name}"></a>
+                        <h3><a style="color: #110ec6" href="product-detail?id=${product.id}">${product.name}</a></h3>
+                        <p>Giá:
+                            <del><fmt:formatNumber value="${product.price}" type="number" groupingUsed="true"/>₫</del>
+                        </p>
+                        <p style="color: #ff0000;">Giá đã giảm: <fmt:formatNumber value="${product.discountPrice}"
+                                                                                  type="number" groupingUsed="true"/>₫</p>
+                        <p>Giảm giá: ${product.discountPercent}%</p>
+                        <span style="margin-left: 10px;">
+                    <i class="fas fa-eye"></i>
+                    <span style="font-size: 0.9em;">${product.view}</span>
+                </span>
+                        <span style="margin-left: 20px;">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span style="font-size: 0.9em;">${product.soldCount}</span>
+                </span>
+                        <a href="add-cart?id=${product.id}" class="add-cart"><i class="ri-add-circle-line"></i>Thêm</a>
+                    </div>
+                </c:forEach>
+            </c:if>
+            <c:if test="${empty products}">
+                <p>Không có sản phẩm nào phù hợp với bộ lọc này.</p>
+            </c:if>
         </div>
+
 
         <!--pagination-->
         <div id="pagination" class="pagination">
