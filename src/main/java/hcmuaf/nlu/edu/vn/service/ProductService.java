@@ -54,12 +54,29 @@ public class ProductService {
     public List<Product> getNewestProducts() throws SQLException {
         return productFilterDao.getNewestProducts();
     }
-    public List<Product> getPopularProductsByCategory(int categoryId) throws SQLException{
+
+    public List<Product> getPopularProductsByCategory(int categoryId) throws SQLException {
         return productFilterDao.getPopularProductsByCategory(categoryId);
     }
 
-    public List<Product> getNewestProductsByCategory(int categoryId) throws SQLException{
+    public List<Product> getNewestProductsByCategory(int categoryId) throws SQLException {
         return productFilterDao.getNewestProductsByCategory(categoryId);
+    }
+
+    public List<Product> getProductsByPriceDescending() throws SQLException {
+        return productFilterDao.getProductsByPriceDescending();
+    }
+
+    public List<Product> getProductsByPriceAscending() throws SQLException {
+        return productFilterDao.getProductsByPriceAscending();
+    }
+
+    public List<Product> getProductsByPriceDescendingAndCategoryId(int categoryId) throws SQLException {
+        return productFilterDao.getProductsByPriceDescendingAndCategoryId( categoryId);
+    }
+
+    public List<Product> getProductsByPriceAscendingAndCategoryId(int categoryId) throws SQLException {
+        return productFilterDao.getProductsByPriceAscendingAndCategoryId(categoryId);
     }
 
 }

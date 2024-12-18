@@ -45,6 +45,23 @@ public class ProductFilterController extends HttpServlet {
                             products = productService.getNewestProducts();
                         }
                         break;
+                    case "priceDesc":
+                        if (categoryIdParam != null && !categoryIdParam.isEmpty()) {
+                            int categoryId = Integer.parseInt(categoryIdParam);
+                            products = productService.getProductsByPriceDescendingAndCategoryId(categoryId); // Lọc sản phẩm theo categoryId
+                        } else {
+                            products = productService.getProductsByPriceDescending();
+                        }
+                        break;
+                    case "priceAsc":
+                        if (categoryIdParam != null && !categoryIdParam.isEmpty()) {
+                            int categoryId = Integer.parseInt(categoryIdParam);
+                            products = productService.getProductsByPriceAscendingAndCategoryId(categoryId); // Lọc sản phẩm theo categoryId
+                        } else {
+                            products = productService.getProductsByPriceAscending();
+                        }
+                        break;
+
                     default:
                         // Trường hợp không hợp lệ, trả về tất cả sản phẩm
                         products = productService.getAllProducts();

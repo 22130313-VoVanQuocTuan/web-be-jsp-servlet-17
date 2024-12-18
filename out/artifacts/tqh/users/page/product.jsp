@@ -204,9 +204,9 @@
                                                                  style="color: #000000;"></i></p>
                 <div class="dropdown">
                     <ul class="dropdown-content">
-                        <li><a style="text-decoration: none ;color:#111111" href="">Giá:
+                        <li><a style="text-decoration: none ;color:#111111" href="product-filter?filter=priceAsc&categoryId=${categoryId}">Giá:
                             Thấp đến cao</a></li>
-                        <li><a style="text-decoration: none ;color:#111111" href="">Giá:
+                        <li><a style="text-decoration: none ;color:#111111" href="product-filter?filter=priceDesc&categoryId=${categoryId}">Giá:
                             Cao đến thấp</a></li>
                     </ul>
                 </div>
