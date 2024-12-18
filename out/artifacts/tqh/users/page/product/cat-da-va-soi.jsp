@@ -8,14 +8,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vật Liệu Xây Dựng TQH </title>
 </head>
-
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4-beta3/css/all.min.css"/>
 <link rel="stylesheet" href="../css/home.css">
 <link rel="stylesheet" href="../css/product.css">
 <link rel="stylesheet" href="users/css/home.css">
 <link rel="stylesheet" href="users/css/product.css">
-
 <body>
     <div id="section-header1">
         <div class="container">
@@ -36,7 +34,6 @@
                     <a href="../login-signup.jsp" id="logout-link" style="display: none;"><span>Đăng Xuất</span></a>
                 </div>
             </div>
-
         </div>
     </div>
     <div class="fixed">
@@ -111,27 +108,27 @@
                         </ul>
                     </li>
                     <li class="propClone"><a href="/tqh/home-page"><i class="fa-solid fa-house"></i>&nbsp;&nbsp; TRANG CHỦ
-                    </a></li>
+                        </a></li>
                     <li class="propClone"><a href="../product.jsp"><i class="fa-brands fa-product-hunt"></i>
-                        &nbsp;&nbsp;SẢN PHẨM</a>
+                            &nbsp;&nbsp;SẢN PHẨM</a>
                     </li>
                     <li class="propClone"> <a href="../cart.jsp"><i class="fas fa-shopping-cart"></i>&nbsp;&nbsp; GIỎ
-                        HÀNG</a>
+                            HÀNG</a>
                     </li>
                     <li class="propClone">
                         <span class="none-a"> <i class="fa-solid fa-book"></i> &nbsp;&nbsp; HƯỚNG DẪN </span>
                         <ul class="items">
                             <li><a href="../buying-help.jsp">&nbsp;&nbsp;<i
-                                    class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;HƯỚNG DẪN
-                                MUA HÀNG</a>
+                                        class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;HƯỚNG DẪN
+                                    MUA HÀNG</a>
                             </li>
                             <li><a href="../product_unit.jsp">&nbsp;&nbsp;<i
-                                    class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;BẢNG ĐƠN VỊ SẢN PHẨM</a>
+                                        class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;BẢNG ĐƠN VỊ SẢN PHẨM</a>
                             </li>
 
                             <li><a href="../term_and_services.jsp">&nbsp;&nbsp;<i
-                                    class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;ĐIỀU KHOẢN
-                                VÀ DỊCH VỤ</a>
+                                        class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;ĐIỀU KHOẢN
+                                    VÀ DỊCH VỤ</a>
                             </li>
                         </ul>
                     </li>
@@ -183,7 +180,7 @@
                 <p class="sort">Mới nhất</p>
                 <div class=" sort-price">
                     <p class="sort" style="width: auto;">Bán chạy <i class="fa-solid fa-angle-up fa-rotate-180"
-                        style="color: #000000;"></i></p>
+                            style="color: #000000;"></i></p>
                     <div class="dropdown">
                         <ul class="dropdown-content">
                             <li>Giá: Thấp đến cao</li>
@@ -219,7 +216,6 @@
                     </div>
                 </c:forEach>
             </div>
-
             <!--pagination-->
             <div id="pagination" class="pagination">
                 <button id="prev" onclick="changePage(-1)">
@@ -228,7 +224,6 @@
                         <button id="next" onclick="changePage(1)">>></button>
             </div>
         </div>
-
     </div>
 
     <div id="section-footer">
@@ -277,11 +272,9 @@
         </div>
         <button id="backToTop" title="Quay về đầu trang">⬆</button>
     </div>
-
     <script src="${pageContext.request.contextPath}/users/js/login-signup.js"></script>
     <script src="${pageContext.request.contextPath}/users/js/product.js"></script>
     <script src="${pageContext.request.contextPath}/users/js/scripts.js"></script>
     <script src="${pageContext.request.contextPath}/users/js/home.js"></script>
 </body>
-
 </html>

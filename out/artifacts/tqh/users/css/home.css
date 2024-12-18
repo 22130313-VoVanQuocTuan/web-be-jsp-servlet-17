@@ -789,8 +789,9 @@ p {
 
 @media screen and (min-width: 480px) {
     .product-one-content-items {
-        display: flex;
+        display: flex ;
         justify-content: space-evenly;
+        flex-wrap: wrap;
     }
 
     .product-one-content-item {

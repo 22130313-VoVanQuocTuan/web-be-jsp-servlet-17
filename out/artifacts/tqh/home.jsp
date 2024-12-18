@@ -121,7 +121,7 @@
                             ĐIỆN NƯỚC</a></li>
                     </ul>
                 </li>
-                <li class="propClone"><a href="#"><i class="fa-solid fa-house"></i>&nbsp;&nbsp; TRANG CHỦ </a></li>
+                <li class="propClone"><a href="home.jsp"><i class="fa-solid fa-house"></i>&nbsp;&nbsp; TRANG CHỦ </a></li>
 
                 <li class="propClone"><a href="product"><i class="fa-brands fa-product-hunt"></i>
                     &nbsp;&nbsp;SẢN PHẨM</a>
@@ -196,7 +196,7 @@
                         <span class="sale-box">${product.discountPercent}%</span>
                     </div>
                     <div class="product-title">
-                        <div class="name-product"><a href="users/page/product-detail.jsp">${product.name}</a></div>
+                        <div class="name-product"><a href="${pageContext.request.contextPath}/product-detail?id=${product.id}">${product.name}</a></div>
                         <div class="product-price">
                             <li><fmt:formatNumber value="${product.discountPrice}" type="number" groupingUsed="true" />₫</li>
                             <li><fmt:formatNumber value="${product.price}" type="number" groupingUsed="true" />₫</li>

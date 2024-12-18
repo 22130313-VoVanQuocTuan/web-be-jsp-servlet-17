@@ -3,6 +3,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!doctype html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -111,27 +112,27 @@
                         </ul>
                     </li>
                     <li class="propClone"><a href="/tqh/home-page"><i class="fa-solid fa-house"></i>&nbsp;&nbsp; TRANG CHỦ
-                    </a></li>
+                        </a></li>
                     <li class="propClone"><a href="../product.jsp"><i class="fa-brands fa-product-hunt"></i>
-                        &nbsp;&nbsp;SẢN PHẨM</a>
+                            &nbsp;&nbsp;SẢN PHẨM</a>
                     </li>
                     <li class="propClone"> <a href="../cart.jsp"><i class="fas fa-shopping-cart"></i>&nbsp;&nbsp; GIỎ
-                        HÀNG</a>
+                            HÀNG</a>
                     </li>
                     <li class="propClone">
                         <span class="none-a"> <i class="fa-solid fa-book"></i> &nbsp;&nbsp; HƯỚNG DẪN </span>
                         <ul class="items">
                             <li><a href="../buying-help.jsp">&nbsp;&nbsp;<i
-                                    class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;HƯỚNG DẪN
-                                MUA HÀNG</a>
+                                        class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;HƯỚNG DẪN
+                                    MUA HÀNG</a>
                             </li>
                             <li><a href="../product_unit.jsp">&nbsp;&nbsp;<i
-                                    class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;BẢNG ĐƠN VỊ SẢN PHẨM</a>
+                                        class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;BẢNG ĐƠN VỊ SẢN PHẨM</a>
                             </li>
 
                             <li><a href="../term_and_services.jsp">&nbsp;&nbsp;<i
-                                    class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;ĐIỀU KHOẢN
-                                VÀ DỊCH VỤ</a>
+                                        class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;ĐIỀU KHOẢN
+                                    VÀ DỊCH VỤ</a>
                             </li>
                         </ul>
                     </li>
@@ -281,7 +282,8 @@
     <script src="${pageContext.request.contextPath}/users/js/login-signup.js"></script>
     <script src="${pageContext.request.contextPath}/users/js/product.js"></script>
     <script src="${pageContext.request.contextPath}/users/js/scripts.js"></script>
-    <script src="${pageContext.request.contextPath}/users/js/home.js"></script>
+    <script src="${pageContext.request.contextPath}/users/js/home.js"></script>s
+
 </body>
 
 </html>

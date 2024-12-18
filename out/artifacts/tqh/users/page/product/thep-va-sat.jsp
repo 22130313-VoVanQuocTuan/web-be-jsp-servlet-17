@@ -1,3 +1,6 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!doctype html>
 <html lang="en">
 
@@ -7,10 +10,12 @@
     <title>Vật Liệu Xây Dựng TQH </title>
 </head>
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4-beta3/css/all.min.css" />
-<link rel="stylesheet" href="/src/Users/css/home.css">
-<link rel="stylesheet" href="/src/Users/css/product.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4-beta3/css/all.min.css"/>
+<link rel="stylesheet" href="../css/home.css">
+<link rel="stylesheet" href="../css/product.css">
+<link rel="stylesheet" href="users/css/home.css">
+<link rel="stylesheet" href="users/css/product.css">
 
 <body>
     <div id="section-header1">
@@ -41,7 +46,7 @@
                 <div class="menu">
                     <!-- Logo bên trái -->
                     <div class="logo">
-                        <a href="../../../home.jsp"><img src="/src/Users/img/logo.png" alt="Logo"></a>
+                        <a href="/tqh/home-page"><img src="users/img/logo.png" alt="Logo"></a>
                     </div>
 
                     <!-- Thanh tìm kiếm ở giữa -->
@@ -77,49 +82,57 @@
                             MỤC SẢN
                             PHẨM</span>
                         <ul class="items">
-                            <li> <a href="gach-xay-dung.jsp">&nbsp;&nbsp;<i
-                                        class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;GẠCH XÂY DỰNG</a></li>
-                            <li><a href="xi-mang-va-vua.jsp">&nbsp;&nbsp;<i
-                                        class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;XI MĂNG VÀ VỮA</a></li>
-                            <li><a href="cat-da-va-soi.jsp">&nbsp;&nbsp;<i
-                                        class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;CÁT, ĐÁ VÀ SỎI</a> </li>
-                            <li><a href="./thep-va-sat.html">&nbsp;&nbsp;<i
-                                        class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;THÉP VÀ
-                                    SẮT</a></li>
-                            <li><a href="go-va-vat-lieu-go.jsp">&nbsp;&nbsp;<i
-                                        class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;GỖ VÀ VẬT LIỆU GỖ</a></li>
-                            <li><a href="son-va-phu-gia.jsp">&nbsp;&nbsp;<i
-                                        class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;SƠN VÀ PHỤ GIA</a></li>
-                            <li><a href="ngoi-va-tam-lop.jsp">&nbsp;&nbsp;<i
-                                        class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;NGÓI VÀ TẤM LỢP</a></li>
-                            <li><a href="ong-nuoc-va-phu-kien.jsp">&nbsp;&nbsp;<i
-                                        class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;ỐNG NƯỚC VÀ PHỤ KIỆN</a></li>
-                            <li><a href="thiet-bi-dien-nuoc.jsp">&nbsp;&nbsp;<i
-                                        class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;THIẾT BỊ ĐIỆN NƯỚC</a></li>
+                            <li><a href="/tqh/product-category?categoryId=1">&nbsp;&nbsp;<i
+                                    class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;GẠCH XÂY
+                                DỰNG</a></li>
+                            <li><a href="/tqh/product-category?categoryId=2">&nbsp;&nbsp;<i
+                                    class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;XI MĂNG VÀ
+                                VỮA</a></li>
+                            <li><a href="/tqh/product-category?categoryId=3">&nbsp;&nbsp;<i
+                                    class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;CÁT, ĐÁ VÀ
+                                SỎI</a></li>
+                            <li><a href="/tqh/product-category?categoryId=4">&nbsp;&nbsp;<i
+                                    class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;THÉP VÀ
+                                SẮT</a></li>
+                            <li><a href="/tqh/product-category?categoryId=5">&nbsp;&nbsp;<i
+                                    class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;GỖ VÀ VẬT
+                                LIỆU GỖ</a></li>
+                            <li><a href="/tqh/product-category?categoryId=6">&nbsp;&nbsp;<i
+                                    class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;SƠN VÀ PHỤ
+                                GIA</a></li>
+                            <li><a href="/tqh/product-category?categoryId=7">&nbsp;&nbsp;<i
+                                    class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;NGÓI VÀ TẤM
+                                LỢP</a></li>
+                            <li><a href="/tqh/product-category?categoryId=8">&nbsp;&nbsp;<i
+                                    class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;ỐNG NƯỚC VÀ
+                                PHỤ KIỆN</a></li>
+                            <li><a href="/tqh/product-category?categoryId=9">&nbsp;&nbsp;<i
+                                    class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;THIẾT BỊ
+                                ĐIỆN NƯỚC</a></li>
                         </ul>
                     </li>
-                    <li class="propClone"><a href="../../../home.jsp"><i class="fa-solid fa-house"></i>&nbsp;&nbsp; TRANG CHỦ
-                        </a></li>
+                    <li class="propClone"><a href="/tqh/home-page"><i class="fa-solid fa-house"></i>&nbsp;&nbsp; TRANG CHỦ
+                    </a></li>
                     <li class="propClone"><a href="../product.jsp"><i class="fa-brands fa-product-hunt"></i>
-                            &nbsp;&nbsp;SẢN PHẨM</a>
+                        &nbsp;&nbsp;SẢN PHẨM</a>
                     </li>
                     <li class="propClone"> <a href="../cart.jsp"><i class="fas fa-shopping-cart"></i>&nbsp;&nbsp; GIỎ
-                            HÀNG</a>
+                        HÀNG</a>
                     </li>
                     <li class="propClone">
                         <span class="none-a"> <i class="fa-solid fa-book"></i> &nbsp;&nbsp; HƯỚNG DẪN </span>
                         <ul class="items">
                             <li><a href="../buying-help.jsp">&nbsp;&nbsp;<i
-                                        class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;HƯỚNG DẪN
-                                    MUA HÀNG</a>
+                                    class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;HƯỚNG DẪN
+                                MUA HÀNG</a>
                             </li>
                             <li><a href="../product_unit.jsp">&nbsp;&nbsp;<i
-                                        class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;BẢNG ĐƠN VỊ SẢN PHẨM</a>
+                                    class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;BẢNG ĐƠN VỊ SẢN PHẨM</a>
                             </li>
 
                             <li><a href="../term_and_services.jsp">&nbsp;&nbsp;<i
-                                        class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;ĐIỀU KHOẢN
-                                    VÀ DỊCH VỤ</a>
+                                    class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;ĐIỀU KHOẢN
+                                VÀ DỊCH VỤ</a>
                             </li>
                         </ul>
                     </li>
@@ -133,31 +146,31 @@
             <div class="danhmuc"><i class="fa-solid fa-list" style="color: #000000; margin-right: 10px;"></i>Danh mục
             </div>
             <div class="item" data-category="gach-xay-dung">
-                <h3><a href="gach-xay-dung.jsp">Gạch xây dựng</a></h3>
+                <h3><a href="/tqh/product-category?categoryId=1"></i>Gạch xây dựng</a></h3>
             </div>
             <div class="item" data-category="xi-mang-va-vua">
-                <h3><a href="xi-mang-va-vua.jsp">Xi măng và Vữa</a></h3>
+                <h3><a href="/tqh/product-category?categoryId=2">Xi măng và Vữa</a></h3>
             </div>
             <div class="item" data-category="cat-da-va-soi">
-                <h3><a href="cat-da-va-soi.jsp">Cát, Đá và Sỏi</a></h3>
+                <h3><a href="/tqh/product-category?categoryId=3">Cát, Đá và Sỏi</a></h3>
             </div>
             <div class="item" data-category="thep-va-sat">
-                <h3><a href="thep-va-sat.html">Thép và Sắt</a></h3>
+                <h3><a href="/tqh/product-category?categoryId=4">Thép và Sắt</a></h3>
             </div>
             <div class="item" data-category="go-va-vat-lieu-go">
-                <h3><a href="go-va-vat-lieu-go.jsp">Gỗ và Vật liệu gỗ</a></h3>
+                <h3><a href=/tqh/product-category?categoryId=5">Gỗ và Vật liệu gỗ</a></h3>
             </div>
             <div class="item" data-category="son-va-phu-gia">
-                <h3><a href="son-va-phu-gia.jsp">Sơn và Phụ gia</a></h3>
+                <h3><a href="/tqh/product-category?categoryId=6">Sơn và Phụ gia</a></h3>
             </div>
             <div class="item" data-category="ngoi-va-tam-lop">
-                <h3><a href="ngoi-va-tam-lop.jsp">Ngói và Tấm lợp</a></h3>
+                <h3><a href="/tqh/product-category?categoryId=7">Ngói và Tấm lợp</a></h3>
             </div>
             <div class="item" data-category="ong-nuoc-va-phu-kien">
-                <h3><a href="ong-nuoc-va-phu-kien.jsp">Ống nước và Phụ kiện</a></h3>
+                <h3><a href="/tqh/product-category?categoryId=8">Ống nước và Phụ kiện</a></h3>
             </div>
             <div class="item" data-category="thiet-bi-dien-nuoc">
-                <h3><a href="thiet-bi-dien-nuoc.jsp">Thiết bị điện nước</a></h3>
+                <h3><a href="/tqh/product-category?categoryId=9">Thiết bị điện nước</a></h3>
             </div>
         </div>
 
@@ -181,256 +194,31 @@
                 </div>
             </div>
             <div class="row ps-5" id="product-list">
-                <!-- Sản phẩm 1 đến 18 -->
-                <div class="name-cart">
-                    <a href="../product-detail.jsp"><img src="/src/Users/img_product/thepvasat/image1.png"
-                                                         alt="Thep"></a>
-                    <h3>Thép cốt bê tông</h3>
-                    <p>Giá: <del>300.000₫</del></p>
-                    <p style="color: red;">Giá đã giảm: 290.000₫</p>
-                    <p>Giảm giá: 10%</p>
-                    <span style="margin-left: 10px;">
-                        <i class="fas fa-eye"></i> <!-- Icon mắt Font Awesome -->
-                        <span style="font-size: 0.9em;">50</span> <!-- Số lượt xem -->
+                <!-- Sử dụng JSTL để hiển thị sản phẩm -->
+                <c:forEach var="product" items="${products}">
+                    <div class="name-cart">
+                        <p style="position: absolute; padding: 8px; background-color: #ff0000; z-index: 5; border-radius: 10px;">
+                                ${product.discountPercent}%</p>
+                        <a href="src/Users/page/product-detail.html"><img src="${product.imageUrl}"
+                                                                          alt="${product.name}"></a>
+                        <h3>${product.name}</h3>
+                        <p>Giá:
+                            <del><fmt:formatNumber value="${product.price}" type="number" groupingUsed="true"/>₫</del>
+                        </p>
+                        <p style="color: #ff0000;">Giá đã giảm: <fmt:formatNumber value="${product.discountPrice}"
+                                                                                  type="number" groupingUsed="true"/>₫</p>
+                        <p>Giảm giá: ${product.discountPercent}%</p>
+                        <span style="margin-left: 10px;">
+                        <i class="fas fa-eye"></i>
+                        <span style="font-size: 0.9em;">${product.view}</span>
                     </span>
-                    <span style="margin-left: 20px;">
-                        <i class="fas fa-shopping-cart"></i> <!-- Icon giỏ hàng Font Awesome -->
-                        <span style="font-size: 0.9em;">đã bán:300</span> <!-- Số lượt mua -->
+                        <span style="margin-left: 20px;">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span style="font-size: 0.9em;">${product.soldCount}</span>
                     </span>
-                    <a href="../cart.jsp" class="add-cart"><i class="ri-add-circle-line"></i>Thêm</a>
-                </div>
-                <div class="name-cart">
-                    <a href="../product-detail.jsp"><img src="/src/Users/img_product/thepvasat/image2.png"
-                                                         alt="Thep"></a>
-                    <h3>Thép cuộn SS400</h3>
-                    <p>Giá: <del>200.000₫</del></p>
-                    <p style="color: red;">Giá đã giảm: 190.000₫</p>
-                    <p>Giảm giá: 10%</p>
-                    <span style="margin-left: 10px;">
-                        <i class="fas fa-eye"></i> <!-- Icon mắt Font Awesome -->
-                        <span style="font-size: 0.9em;">50</span> <!-- Số lượt xem -->
-                    </span>
-                    <span style="margin-left: 20px;">
-                        <i class="fas fa-shopping-cart"></i> <!-- Icon giỏ hàng Font Awesome -->
-                        <span style="font-size: 0.9em;">đã bán:300</span> <!-- Số lượt mua -->
-                    </span>
-                    <a href="../cart.jsp" class="add-cart"><i class="ri-add-circle-line"></i>Thêm</a>
-                </div>
-                <div class="name-cart">
-                    <a href="#"><img src="/src/Users/img_product/thepvasat/image3.png" alt="Thep"></a>
-                    <h3>Thép thanh vằn </h3>
-                    <p>Giá: <del>200.000₫</del></p>
-                    <p style="color: red;">Giá đã giảm: 190.000₫</p>
-                    <p>Giảm giá: 10%</p>
-                    <span style="margin-left: 10px;">
-                        <i class="fas fa-eye"></i> <!-- Icon mắt Font Awesome -->
-                        <span style="font-size: 0.9em;">50</span> <!-- Số lượt xem -->
-                    </span>
-                    <span style="margin-left: 20px;">
-                        <i class="fas fa-shopping-cart"></i> <!-- Icon giỏ hàng Font Awesome -->
-                        <span style="font-size: 0.9em;">đã bán:300</span> <!-- Số lượt mua -->
-                    </span>
-                    <a href="../cart.jsp" class="add-cart"><i class="ri-add-circle-line"></i>Thêm</a>
-                </div>
-                <!-- Tiếp tục tạo các thẻ sản phẩm tương tự -->
-                <div class="name-cart">
-                    <a href="#"><img src="/src/Users/img_product/thepvasat/image4.png" alt="Thep"></a>
-                    <h3>Thanh thép hình I</h3>
-                    <p>Giá: <del>200.000₫</del></p>
-                    <p style="color: red;">Giá đã giảm: 190.000₫</p>
-                    <p>Giảm giá: 10%</p>
-                    <span style="margin-left: 10px;">
-                        <i class="fas fa-eye"></i> <!-- Icon mắt Font Awesome -->
-                        <span style="font-size: 0.9em;">50</span> <!-- Số lượt xem -->
-                    </span>
-                    <span style="margin-left: 20px;">
-                        <i class="fas fa-shopping-cart"></i> <!-- Icon giỏ hàng Font Awesome -->
-                        <span style="font-size: 0.9em;">đã bán:300</span> <!-- Số lượt mua -->
-                    </span>
-                    <a href="../cart.jsp" class="add-cart"><i class="ri-add-circle-line"></i>Thêm</a>
-                </div>
-                <!-- ... Tạo các thẻ sản phẩm cho đến sản phẩm thứ 18 -->
-                <div class="name-cart">
-                    <a href="#"><img src="/src/Users/img_product/thepvasat/image5.png" alt="Thep"></a>
-                    <h3>Ống thép mạ kẽm</h3>
-                    <p>Giá: <del>200.000₫</del></p>
-                    <p style="color: red;">Giá đã giảm: 190.000₫</p>
-                    <p>Giảm giá: 10%</p>
-                    <span style="margin-left: 10px;">
-                        <i class="fas fa-eye"></i> <!-- Icon mắt Font Awesome -->
-                        <span style="font-size: 0.9em;">50</span> <!-- Số lượt xem -->
-                    </span>
-                    <span style="margin-left: 20px;">
-                        <i class="fas fa-shopping-cart"></i> <!-- Icon giỏ hàng Font Awesome -->
-                        <span style="font-size: 0.9em;">đã bán:300</span> <!-- Số lượt mua -->
-                    </span>
-                    <a href="../cart.jsp" class="add-cart"><i class="ri-add-circle-line"></i>Thêm</a>
-                </div>
-                <!-- Sản phẩm 1 đến 18 -->
-                <div class="name-cart">
-                    <a href="#"><img src="/src/Users/img_product/thepvasat/image6.png" alt="Thep"></a>
-                    <h3>Ống thép hộp</h3>
-                    <p>Giá: <del>200.000₫</del></p>
-                    <p style="color: red;">Giá đã giảm: 190.000₫</p>
-                    <p>Giảm giá: 10%</p>
-                    <span style="margin-left: 10px;">
-                        <i class="fas fa-eye"></i> <!-- Icon mắt Font Awesome -->
-                        <span style="font-size: 0.9em;">50</span> <!-- Số lượt xem -->
-                    </span>
-                    <span style="margin-left: 20px;">
-                        <i class="fas fa-shopping-cart"></i> <!-- Icon giỏ hàng Font Awesome -->
-                        <span style="font-size: 0.9em;">đã bán:300</span> <!-- Số lượt mua -->
-                    </span>
-                    <a href="../cart.jsp" class="add-cart"><i class="ri-add-circle-line"></i>Thêm</a>
-                </div>
-                <div class="name-cart">
-                    <a href="#"><img src="/src/Users/img_product/thepvasat/image7.png" alt="Thep"></a>
-                    <h3>Thép hộp chữ nhật</h3>
-                    <p>Giá: <del>200.000₫</del></p>
-                    <p style="color: red;">Giá đã giảm: 190.000₫</p>
-                    <p>Giảm giá: 10%</p>
-                    <span style="margin-left: 10px;">
-                        <i class="fas fa-eye"></i> <!-- Icon mắt Font Awesome -->
-                        <span style="font-size: 0.9em;">50</span> <!-- Số lượt xem -->
-                    </span>
-                    <span style="margin-left: 20px;">
-                        <i class="fas fa-shopping-cart"></i> <!-- Icon giỏ hàng Font Awesome -->
-                        <span style="font-size: 0.9em;">đã bán:300</span> <!-- Số lượt mua -->
-                    </span>
-                    <a href="../cart.jsp" class="add-cart"><i class="ri-add-circle-line"></i>Thêm</a>
-                </div>
-                <div class="name-cart">
-                    <a href="#"><img src="/src/Users/img_product/thepvasat/image8.png" alt="Thep"></a>
-                    <h3>Thanh thép chữ A </h3>
-                    <p>Giá: <del>200.000₫</del></p>
-                    <p style="color: red;">Giá đã giảm: 190.000₫</p>
-                    <p>Giảm giá: 10%</p>
-                    <span style="margin-left: 10px;">
-                        <i class="fas fa-eye"></i> <!-- Icon mắt Font Awesome -->
-                        <span style="font-size: 0.9em;">50</span> <!-- Số lượt xem -->
-                    </span>
-                    <span style="margin-left: 20px;">
-                        <i class="fas fa-shopping-cart"></i> <!-- Icon giỏ hàng Font Awesome -->
-                        <span style="font-size: 0.9em;">đã bán:300</span> <!-- Số lượt mua -->
-                    </span>
-                    <a href="../cart.jsp" class="add-cart"><i class="ri-add-circle-line"></i>Thêm</a>
-                </div>
-                <!-- Tiếp tục tạo các thẻ sản phẩm tương tự -->
-                <div class="name-cart">
-                    <a href="#"><img src="/src/Users/img_product/thepvasat/image9.png" alt="Thep"></a>
-                    <h3>Cuộn thép đặc biệt</h3>
-                    <p>Giá: <del>200.000₫</del></p>
-                    <p style="color: red;">Giá đã giảm: 190.000₫</p>
-                    <p>Giảm giá: 10%</p>
-                    <span style="margin-left: 10px;">
-                        <i class="fas fa-eye"></i> <!-- Icon mắt Font Awesome -->
-                        <span style="font-size: 0.9em;">50</span> <!-- Số lượt xem -->
-                    </span>
-                    <span style="margin-left: 20px;">
-                        <i class="fas fa-shopping-cart"></i> <!-- Icon giỏ hàng Font Awesome -->
-                        <span style="font-size: 0.9em;">đã bán:300</span> <!-- Số lượt mua -->
-                    </span>
-                    <a href="../cart.jsp" class="add-cart"><i class="ri-add-circle-line"></i>Thêm</a>
-                </div>
-                <!-- ... Tạo các thẻ sản phẩm cho đến sản phẩm thứ 18 -->
-                <div class="name-cart">
-                    <a href="#"><img src="/src/Users/img_product/thepvasat/image10.png" alt="Thep"></a>
-                    <h3>Hàng rào sắt</h3>
-                    <p>Giá: <del>200.000₫</del></p>
-                    <p style="color: red;">Giá đã giảm: 190.000₫</p>
-                    <p>Giảm giá: 10%</p>
-                    <span style="margin-left: 10px;">
-                        <i class="fas fa-eye"></i> <!-- Icon mắt Font Awesome -->
-                        <span style="font-size: 0.9em;">50</span> <!-- Số lượt xem -->
-                    </span>
-                    <span style="margin-left: 20px;">
-                        <i class="fas fa-shopping-cart"></i> <!-- Icon giỏ hàng Font Awesome -->
-                        <span style="font-size: 0.9em;">đã bán:300</span> <!-- Số lượt mua -->
-                    </span>
-                    <a href="../cart.jsp" class="add-cart"><i class="ri-add-circle-line"></i>Thêm</a>
-                </div>
-                <!-- Sản phẩm 1 đến 18 -->
-                <div class="name-cart">
-                    <a href="#"><img src="/src/Users/img_product/thepvasat/image11.png" alt="Thep"></a>
-                    <h3>Lưới sắt</h3>
-                    <p>Giá: <del>200.000₫</del></p>
-                    <p style="color: red;">Giá đã giảm: 190.000₫</p>
-                    <p>Giảm giá: 10%</p>
-                    <span style="margin-left: 10px;">
-                        <i class="fas fa-eye"></i> <!-- Icon mắt Font Awesome -->
-                        <span style="font-size: 0.9em;">50</span> <!-- Số lượt xem -->
-                    </span>
-                    <span style="margin-left: 20px;">
-                        <i class="fas fa-shopping-cart"></i> <!-- Icon giỏ hàng Font Awesome -->
-                        <span style="font-size: 0.9em;">đã bán:300</span> <!-- Số lượt mua -->
-                    </span>
-                    <a href="../cart.jsp" class="add-cart"><i class="ri-add-circle-line"></i>Thêm</a>
-                </div>
-                <div class="name-cart">
-                    <a href="#"><img src="/src/Users/img_product/thepvasat/image12.png" alt="Thep"></a>
-                    <h3>Cuộn thép gai</h3>
-                    <p>Giá: <del>200.000₫</del></p>
-                    <p style="color: red;">Giá đã giảm: 190.000₫</p>
-                    <p>Giảm giá: 10%</p>
-                    <span style="margin-left: 10px;">
-                        <i class="fas fa-eye"></i> <!-- Icon mắt Font Awesome -->
-                        <span style="font-size: 0.9em;">50</span> <!-- Số lượt xem -->
-                    </span>
-                    <span style="margin-left: 20px;">
-                        <i class="fas fa-shopping-cart"></i> <!-- Icon giỏ hàng Font Awesome -->
-                        <span style="font-size: 0.9em;">đã bán:300</span> <!-- Số lượt mua -->
-                    </span>
-                    <a href="../cart.jsp" class="add-cart"><i class="ri-add-circle-line"></i>Thêm</a>
-                </div>
-                <div class="name-cart">
-                    <a href="#"><img src="/src/Users/img_product/thepvasat/image13.png" alt="Thep"></a>
-                    <h3>Thép cuộn Pomina</h3>
-                    <p>Giá: <del>200.000₫</del></p>
-                    <p style="color: red;">Giá đã giảm: 190.000₫</p>
-                    <p>Giảm giá: 10%</p>
-                    <span style="margin-left: 10px;">
-                        <i class="fas fa-eye"></i> <!-- Icon mắt Font Awesome -->
-                        <span style="font-size: 0.9em;">50</span> <!-- Số lượt xem -->
-                    </span>
-                    <span style="margin-left: 20px;">
-                        <i class="fas fa-shopping-cart"></i> <!-- Icon giỏ hàng Font Awesome -->
-                        <span style="font-size: 0.9em;">đã bán:300</span> <!-- Số lượt mua -->
-                    </span>
-                    <a href="../cart.jsp" class="add-cart"><i class="ri-add-circle-line"></i>Thêm</a>
-                </div>
-                <!-- Tiếp tục tạo các thẻ sản phẩm tương tự -->
-                <div class="name-cart">
-                    <a href="#"><img src="/src/Users/img_product/thepvasat/image14.png" alt="Thep"></a>
-                    <h3>Thép hộp vuông mạ kẽm Sendo </h3>
-                    <p>Giá: <del>200.000₫</del></p>
-                    <p style="color: red;">Giá đã giảm: 190.000₫</p>
-                    <p>Giảm giá: 10%</p>
-                    <span style="margin-left: 10px;">
-                        <i class="fas fa-eye"></i> <!-- Icon mắt Font Awesome -->
-                        <span style="font-size: 0.9em;">50</span> <!-- Số lượt xem -->
-                    </span>
-                    <span style="margin-left: 20px;">
-                        <i class="fas fa-shopping-cart"></i> <!-- Icon giỏ hàng Font Awesome -->
-                        <span style="font-size: 0.9em;">đã bán:300</span> <!-- Số lượt mua -->
-                    </span>
-                    <a href="../cart.jsp" class="add-cart"><i class="ri-add-circle-line"></i>Thêm</a>
-                </div>
-                <!-- ... Tạo các thẻ sản phẩm cho đến sản phẩm thứ 18 -->
-                <div class="name-cart">
-                    <a href="#"><img src="/src/Users/img_product/thepvasat/image15.png" alt="Thep"></a>
-                    <h3>Thép hình chữ V Miền Nam</h3>
-                    <p>Giá: <del>200.000₫</del></p>
-                    <p style="color: red;">Giá đã giảm: 190.000₫</p>
-                    <p>Giảm giá: 10%</p> <span style="margin-left: 10px;">
-                        <i class="fas fa-eye"></i> <!-- Icon mắt Font Awesome -->
-                        <span style="font-size: 0.9em;">50</span> <!-- Số lượt xem -->
-                    </span>
-                    <span style="margin-left: 20px;">
-                        <i class="fas fa-shopping-cart"></i> <!-- Icon giỏ hàng Font Awesome -->
-                        <span style="font-size: 0.9em;">đã bán:300</span> <!-- Số lượt mua -->
-                    </span>
-                    <a href="../cart.jsp" class="add-cart"><i class="ri-add-circle-line"></i>Thêm</a>
-                </div>
+                        <a href="add-cart?id=${product.id}" class="add-cart"><i class="ri-add-circle-line"></i>Thêm</a>
+                    </div>
+                </c:forEach>
             </div>
 
             <!--pagination-->
@@ -490,10 +278,10 @@
         </div>
         <button id="backToTop" title="Quay về đầu trang">⬆</button>
     </div>
-
-    <script src="/src/Users/js/product.js"></script>
-    <script src="/src/Users/js/scripts.js" defer></script>
-    <script src="/src/Users/js/login-signup.js"></script>
+    <script src="${pageContext.request.contextPath}/users/js/login-signup.js"></script>
+    <script src="${pageContext.request.contextPath}/users/js/product.js"></script>
+    <script src="${pageContext.request.contextPath}/users/js/scripts.js"></script>
+    <script src="${pageContext.request.contextPath}/users/js/home.js"></script>
 </body>
 
 </html>
