@@ -199,38 +199,14 @@
                 <h3>Sản phẩm tương tự</h3>
             </div>
             <div class="list-similar">
-                <div class="similar">
-                    <a href="product-detail.html"><img src="../img_product/Da_cat_soi/catbetong.png" alt=""></a>
-                    <h3>Cát bê tông</h3>
-                </div>
-                <div class="similar">
-                    <a href="product-detail.html"><img src="../img_product/Da_cat_soi/catsanlap.png" alt=""></a>
-                    <h3>Cát san lấp</h3>
-                </div>
-                <div class="similar">
-                    <a href="product-detail.html"><img src="../img_product/Da_cat_soi/catsong.png" alt=""></a>
-                    <h3>Cát sông</h3>
-                </div>
-                <div class="similar">
-                    <a href="product-detail.html"><img src="../img_product/Da_cat_soi/catvang.png" alt=""></a>
-                    <h3>Cát vàng</h3>
-                </div>
-                <div class="similar">
-                    <a href="product-detail.html"><img src="../img_product/Da_cat_soi/catxayto.png" alt=""></a>
-                    <h3>Cát xây to</h3>
-                </div>
-                <div class="similar">
-                    <a href="product-detail.html"><img src="../img_product/Da_cat_soi/dabazan.png" alt=""></a>
-                    <h3>Đá bazan</h3>
-                </div>
-                <div class="similar">
-                    <a href="product-detail.html"><img src="../img_product/Da_cat_soi/dacat.png" alt=""></a>
-                    <h3>Đá cát</h3>
-                </div>
-                <div class="similar">
-                    <a href="product-detail.html"><img src="../img_product/Da_cat_soi/da12.png" alt=""></a>
-                    <h3>Đá 12</h3>
-                </div>
+                <c:forEach var="productCategory" items="${productCategory}" begin="0" end="11">
+                    <div class="similar">
+                        <a href="product-detail?id=${productCategory.id}&categoryId=${productCategory.categoryId}">
+                            <img src="${productCategory.imageUrl}" alt="${productCategory.name}">
+                        </a>
+                        <h3>${productCategory.name}</h3>
+                    </div>
+                </c:forEach>
             </div>
         </div>
     </div>

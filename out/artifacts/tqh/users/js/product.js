@@ -78,28 +78,5 @@ document.addEventListener('click', function(event) {
         // Xóa lớp "active" khỏi tất cả các mục
         items.forEach(el => el.classList.remove('active'));
     }
-
-
 });
 
-
-
-document.addEventListener('DOMContentLoaded', function() {
-    const addCart = document.querySelectorAll('.add-cart');
-    
-    console.log(addCart); // Kiểm tra xem có chọn đúng các phần tử không
-    addCart.forEach(function(a) {
-       
-        a.addEventListener('click', function(event) {
-            event.preventDefault(); // Ngăn chặn hành động mặc định (ngừng chuyển hướng)
-            const session = localStorage.getItem('username');
-            console.log(session); // Kiểm tra xem giá trị session có đúng không
-
-            if (session === null) {
-                window.location.href = "../../src/Users/page/login-signup.jsp";
-            } else {
-                window.location.href = "../page/cart.jsp";
-            }
-        });
-    });
-});

@@ -62,6 +62,7 @@ public class ProductDao {
         product.setImageUrl(rs.getString("imageUrl"));
         product.setPrice(rs.getDouble("price"));
         product.setQuantity(rs.getInt("quantity"));
+        product.setCategoryId(rs.getInt("categoryId"));
         product.setView(rs.getInt("view"));
         product.setSoldCount(rs.getInt("soldCount"));
         product.setDiscountPercent(rs.getDouble("discountPercent") * 100);

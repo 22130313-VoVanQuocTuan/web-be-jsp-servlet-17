@@ -185,7 +185,16 @@
         <div class="item" data-category="thiet-bi-dien-nuoc">
             <h3><a href="/tqh/product-category?categoryId=9">Thiết bị điện nước</a></h3>
         </div>
+<%--        <div class="slide-discount">--%>
+<%--            <c:forEach var="promotional" items="promotionals">--%>
+<%--                <div class="discount">--%>
+<%--                    <span class="discount-label">Giảm giá:${promotional.value}%</span>--%>
+<%--                    <span class="discount-description">${promotional.code}</span>--%>
+<%--                </div>--%>
+<%--            </c:forEach>--%>
+<%--        </div>--%>
     </div>
+
 
     <!--conten_right-->
     <div class="right">
@@ -195,18 +204,22 @@
                 <i class="fa-sharp fa-solid fa-arrow-right" style="margin-left: 15px;"></i>
             </p>
             <p class="sort">
-                <a style="text-decoration: none; color:#111111" href="product-filter?filter=popular&categoryId=${categoryId}">Phổ biến</a>
+                <a style="text-decoration: none; color:#111111"
+                   href="product-filter?filter=popular&categoryId=${categoryId}">Phổ biến</a>
             </p>
-            <p class="sort"><a style="text-decoration: none; color:#111111" href="product-filter?filter=newest&categoryId=${categoryId}">Mới
+            <p class="sort"><a style="text-decoration: none; color:#111111"
+                               href="product-filter?filter=newest&categoryId=${categoryId}">Mới
                 nhất</a></p>
             <div class="sort-price">
                 <p class="sort" style="width: auto;">Bán chạy <i class="fa-solid fa-angle-up fa-rotate-180"
                                                                  style="color: #000000;"></i></p>
                 <div class="dropdown">
                     <ul class="dropdown-content">
-                        <li><a style="text-decoration: none ;color:#111111" href="product-filter?filter=priceAsc&categoryId=${categoryId}">Giá:
+                        <li><a style="text-decoration: none ;color:#111111"
+                               href="product-filter?filter=priceAsc&categoryId=${categoryId}">Giá:
                             Thấp đến cao</a></li>
-                        <li><a style="text-decoration: none ;color:#111111" href="product-filter?filter=priceDesc&categoryId=${categoryId}">Giá:
+                        <li><a style="text-decoration: none ;color:#111111"
+                               href="product-filter?filter=priceDesc&categoryId=${categoryId}">Giá:
                             Cao đến thấp</a></li>
                     </ul>
                 </div>
@@ -220,14 +233,18 @@
                     <div class="name-cart">
                         <p style="position: absolute; padding: 8px; background-color: #ff0000; z-index: 5; border-radius: 10px;">
                                 ${product.discountPercent}%</p>
-                        <a href="product-detail?id=${product.id}"><img src="${product.imageUrl}"
-                                                                       alt="${product.name}"></a>
-                        <h3><a style="color: #110ec6" href="product-detail?id=${product.id}">${product.name}</a></h3>
+                        <a href="product-detail?id=${product.id}&categoryId=${product.categoryId}"><img
+                                src="${product.imageUrl}"
+                                alt="${product.name}"></a>
+                        <h3><a style="color: #110ec6"
+                               href="product-detail?id=${product.id}&categoryId=${product.categoryId}">${product.name}</a>
+                        </h3>
                         <p>Giá:
                             <del><fmt:formatNumber value="${product.price}" type="number" groupingUsed="true"/>₫</del>
                         </p>
                         <p style="color: #ff0000;">Giá đã giảm: <fmt:formatNumber value="${product.discountPrice}"
-                                                                                  type="number" groupingUsed="true"/>₫</p>
+                                                                                  type="number"
+                                                                                  groupingUsed="true"/>₫</p>
                         <p>Giảm giá: ${product.discountPercent}%</p>
                         <span style="margin-left: 10px;">
                     <i class="fas fa-eye"></i>

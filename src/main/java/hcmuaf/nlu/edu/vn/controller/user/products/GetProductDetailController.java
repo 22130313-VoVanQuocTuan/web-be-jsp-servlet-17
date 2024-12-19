@@ -9,9 +9,10 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.util.List;
 
 
- @WebServlet(name = "product", value = "/product-detail")
+@WebServlet(name = "product", value = "/product-detail")
 public class GetProductDetailController extends HttpServlet {
     private  final  ProductService productService ;
     public GetProductDetailController() {
@@ -21,9 +22,12 @@ public class GetProductDetailController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int id = Integer.parseInt(req.getParameter("id"));
+        int categoryId = Integer.parseInt(req.getParameter("categoryId"));
         try {
             Product product = productService.getProductById(id);
+            List<Product> allProductsCategory = productService.getAllProductsCategory(categoryId);
             req.setAttribute("product", product);
+            req.setAttribute("productCategory", allProductsCategory);
             req.getRequestDispatcher("/users/page/product-detail.jsp").forward(req, resp);
 
         }catch (Exception e){

@@ -1,13 +1,9 @@
 package hcmuaf.nlu.edu.vn.service;
 
-import hcmuaf.nlu.edu.vn.dao.products.GetListPDiscountDao;
+import hcmuaf.nlu.edu.vn.dao.products.*;
 
-import hcmuaf.nlu.edu.vn.dao.products.ProductDao;
-
-import hcmuaf.nlu.edu.vn.dao.products.GetProductDao;
-
-import hcmuaf.nlu.edu.vn.dao.products.ProductFilterDao;
 import hcmuaf.nlu.edu.vn.model.Product;
+import hcmuaf.nlu.edu.vn.model.Promotionals;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -16,6 +12,7 @@ public class ProductService {
     private final GetListPDiscountDao getListPDiscountDao;
 
     private final ProductDao productDAO = new ProductDao();
+    private final PromotionalDao promotionalDao ;
     private final ProductFilterDao productFilterDao = new ProductFilterDao();
 
     private final GetProductDao getProductDao;
@@ -23,6 +20,7 @@ public class ProductService {
     public ProductService() {
         this.getListPDiscountDao = new GetListPDiscountDao();
         this.getProductDao = new GetProductDao();
+        this.promotionalDao = new PromotionalDao();
     }
 
     //Lấy ra danh  sách sản phẩm khuyến mãi
@@ -79,5 +77,9 @@ public class ProductService {
         return productFilterDao.getProductsByPriceAscendingAndCategoryId(categoryId);
     }
 
+    public List<Promotionals> getListPromotional() {
+        return promotionalDao.getListPromotional();
+
+    }
 }
 

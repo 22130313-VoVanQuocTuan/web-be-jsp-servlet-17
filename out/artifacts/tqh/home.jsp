@@ -187,16 +187,16 @@
             </div>
         </div>
         <div class="product-one-content-items">
-            <c:forEach var="product" items="${products}">
+            <c:forEach var="product" items="${products}" begin="0" end="7">
                 <div class="product-one-content-item">
                     <div class="img-product">
-                        <a href="${pageContext.request.contextPath}/product-detail?id=${product.id}"><img
+                        <a href="product-detail?id=${product.id}&categoryId=${product.categoryId}"><img
                                 src="${product.imageUrl}"
                                 alt="${product.name}"></a>
                         <span class="sale-box">${product.discountPercent}%</span>
                     </div>
                     <div class="product-title">
-                        <div class="name-product"><a href="product-detail?id=${product.id}">${product.name}</a></div>
+                        <div class="name-product"><a href="product-detail?id=${product.id}&categoryId=${product.categoryId}">${product.name}</a></div>
                         <div class="product-price">
                             <li><fmt:formatNumber value="${product.discountPrice}" type="number" groupingUsed="true" />₫</li>
                             <li><fmt:formatNumber value="${product.price}" type="number" groupingUsed="true" />₫</li>
