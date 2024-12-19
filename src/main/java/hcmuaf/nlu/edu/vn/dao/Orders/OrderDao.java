@@ -104,7 +104,7 @@ public class OrderDao {
                 String email = rs.getString("email");
                 String phoneNumber = rs.getString("phoneNumber");
                 String address = rs.getString("address");
-                return new Users(fullName, email, phoneNumber, address);
+                return new Users(fullName,email, phoneNumber, address);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);

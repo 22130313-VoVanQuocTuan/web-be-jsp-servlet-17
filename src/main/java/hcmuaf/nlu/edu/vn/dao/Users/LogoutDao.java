@@ -12,12 +12,13 @@ public class LogoutDao {
     }
 
     // Đăng  xuất tài khoản
-    public void UpdateStatusUser(String status, int id) throws SQLException {
+    public boolean UpdateStatusUser(String status, int id) throws SQLException {
         String sql = "UPDATE users SET status = ? WHERE id = ?;";
         try(PreparedStatement ptm = dbConnect.preparedStatement(sql)){
             ptm.setString(1,status);
             ptm.setInt(2,id);
-            ptm.executeUpdate();
+         int row =    ptm.executeUpdate();
+         return row > 0;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

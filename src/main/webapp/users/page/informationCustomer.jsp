@@ -255,11 +255,7 @@
                             <label for="name"  class="form-label">Tên</label>
                             <input type="text" name="fullName" class="form-control" id="name" placeholder="Nhập tên của bạn" required>
                         </div>
-                        <div class="mb-3">
-                            <label for="email"  class="form-label">Email</label>
-                            <input type="email" name="email" class="form-control" id="email" placeholder="Nhập email của bạn" required>
-                        </div>
-                        <div class="mb-3">
+                         <div class="mb-3">
                             <label for="phone"  class="form-label">Số điện thoại</label>
                             <input type="tel" name="phoneNumber" class="form-control" id="phone" placeholder="Nhập số điện thoại" required>
                         </div>
@@ -268,11 +264,9 @@
                             <textarea class="form-control" name="address" id="address" rows="3" placeholder="Nhập địa chỉ" required></textarea>
                         </div>
                         <!-- Thông báo lỗi -->
-                        <div id="error-message" class="error-message">
-                            <c:if test="${not empty error_info}">
-                                ${error_info}
-                            </c:if>
-                        </div>
+                        <c:if test="${not empty error}">
+                            <p style="color: red;">${error}</p> <!-- Hiển thị lỗi nếu có -->
+                        </c:if>
                         <div class="modal-footer">
                             <button type="submit" class="btn btn-primary" id="saveChanges">Lưu thay đổi</button>
                             <button type="button" class="btn btn-secondary" onclick="closeModal1()">Hủy</button>
@@ -336,7 +330,16 @@
     <script src="<c:url value="/users/js/scripts.js"/>" ></script>
     <script src="<c:url value="/users/js/login-signup.js"/>"></script>
     <script src="<c:url value="/users/js/informationCustomer.js"/>"></script>
-
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Kiểm tra nếu cần hiển thị modal
+            const showModal = "${showModal}" === "true";
+            if (showModal) {
+                const modal = document.getElementById('addAccount');
+                modal.style.display = 'block';
+            }
+        });
+    </script>
 
 </body>
 

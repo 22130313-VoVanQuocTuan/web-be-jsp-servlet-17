@@ -24,33 +24,22 @@ public class UpdateInfoController extends HttpServlet {
             int id = user.getId(); // Lấy ID từ session
 
             String fullName = request.getParameter("fullName");
-            String email = request.getParameter("email");
             String phoneNumber = request.getParameter("phoneNumber");
             String address = request.getParameter("address");
 
-            // Kiểm tra dữ liệu đầu vào
-            if (fullName == null || email == null || phoneNumber == null || address == null) {
-                request.setAttribute("verificationRequested", false);
-                request.setAttribute("error_info", "Dữ liệu không hợp lệ");
-                request.getRequestDispatcher("/informationCustomer").forward(request, response); // Forward về trang lỗi
-                return;
+            // Tạo đối tượng Users và gán dữ liệu từ form
+            Users updatedUser = new Users(fullName, phoneNumber, address);
+            if (userService.setUpdateInfoUser(id, updatedUser)) {    // Gọi service để cập nhật thông tin người dùng
+                // Chuyển hướng về trang thông báo hoặc danh sách người dùng
+                response.sendRedirect(request.getContextPath() + "/informationCustomer");
+            } else {
+                request.setAttribute("error", "có lỗi xảy ra, vui lòng thử lại!");
+                request.setAttribute("showModal", true); // Thêm thuộc tính hiển thị modal
+                request.getRequestDispatcher("/informationCustomer").forward(request, response); // Hiển thị lại form với thông báo lỗi
             }
 
-            // Tạo đối tượng Users và gán dữ liệu từ form
-            Users updatedUser = new Users(fullName, email, phoneNumber, address);
-            userService.setUpdateInfoUser(id, updatedUser); // Gọi service để cập nhật thông tin người dùng
 
-            // Chuyển hướng về trang thông báo hoặc danh sách người dùng
-            response.sendRedirect(request.getContextPath() + "/informationCustomer");
-
-        } catch (NumberFormatException e) {
-            request.setAttribute("verificationRequested", false);
-            request.setAttribute("error_info", "ID không hợp lệ");
-            request.getRequestDispatcher("/informationCustomer").forward(request, response); // Forward về trang lỗi
         } catch (Exception e) {
-            request.setAttribute("verificationRequested", false);
-            request.setAttribute("error_info", "Lỗi khi cập nhật thông tin người dùng");
-            request.getRequestDispatcher("/informationCustomer").forward(request, response); // Forward về trang lỗi
+            throw new RuntimeException(e);
         }
-    }
-}
+    }}

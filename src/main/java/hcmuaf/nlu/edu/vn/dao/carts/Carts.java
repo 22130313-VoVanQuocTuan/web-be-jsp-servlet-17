@@ -81,8 +81,8 @@ public class Carts {
         item.setImageUrl(product.getImageUrl());
         item.setQuantity(1);
         item.setPrice(product.getPrice() * item.getQuantity());
-        item.setTotalPrice(product.getDiscountPrice() * item.getQuantity());
-        item.setDiscountAmount((product.getPrice()* product.getDiscountPercent()/100) * item.getQuantity() );
+        item.setTotalPrice(product.getPrice()-(product.getPrice()*product.getDiscountPercent()) );
+        item.setDiscountAmount((product.getPrice()* product.getDiscountPercent()) * item.getQuantity() );
         item.setName(product.getName());
         return item;
     }
