@@ -54,6 +54,7 @@ public class LoginDao {
                 user.setUsername(rs.getString("username"));
                 user.setRole(rs.getString("role"));
                 user.setIsEmailVerified(rs.getInt("isEmailVerified"));
+                user.setStatus(rs.getString("status"));
                return user;
             }
             return null;

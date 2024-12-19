@@ -14,19 +14,19 @@ public class UpdateInfoDao {
     }
 
     //Cập nhật thông tin user
-    public void     updateInfo(int id, Users user) {
-        String sql = "UPDATE users SET fullName= ? , email =?, phoneNumber =?, address =?  WHERE id =?";
+    public boolean    updateInfo(int id, Users user) {
+        String sql = "UPDATE users SET fullName= ? , phoneNumber =?, address =?  WHERE id =?";
         try(PreparedStatement ptm = dbConnect.preparedStatement(sql)){
             ptm.setString(1, user.getFullName());
-            ptm.setString(2, user.getEmail());
-            ptm.setString(3, user.getPhoneNumber());
-            ptm.setString(4, user.getAddress());
-            ptm.setInt(5, id);
+            ptm.setString(2, user.getPhoneNumber());
+            ptm.setString(3, user.getAddress());
+            ptm.setInt(4, id);
 
             int rowsUpdated = ptm.executeUpdate(); // Trả về số lượng dòng được cập nhật
             if (rowsUpdated == 0) {
                 throw new SQLException("Không tìm thấy người dùng với ID " + id);
             }
+            return true;
         } catch (SQLException e) {
             throw new RuntimeException("Lỗi khi cập nhật thông tin user", e);
         }

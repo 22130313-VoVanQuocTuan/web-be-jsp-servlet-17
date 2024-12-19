@@ -29,13 +29,19 @@ public class LoginController extends HttpServlet {
         try {
             if (userService.login(username, password)) {
                 Users user = userService.getUser(username);
-                if (user != null && user.getIsEmailVerified() == 1) {
+
+                 if( user != null && user.getIsEmailVerified() == 1) {
+                     if("Bị đình chỉ".equals(user.getStatus())) {
+                         req.setAttribute("error_login", "Tài khoản đã bị cấm");
+                         req.getRequestDispatcher("/users/page/login-signup.jsp").forward(req, resp);
+                         return;
+                     }
                     // lưu session
                     HttpSession session = req.getSession();
                     session.setAttribute("user", user);
 
                     //cập nhật trạng thái
-                    userService.UpdateStatusUser("Đang hoạt động", user.getId());
+                    userService.UpdateStatusUser("Hoạt động", user.getId());
 
                     // Redirect based on role
                     if ("admin".equals(user.getRole())) {

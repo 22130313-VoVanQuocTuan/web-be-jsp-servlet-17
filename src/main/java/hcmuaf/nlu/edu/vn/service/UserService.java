@@ -20,6 +20,8 @@ public class UserService {
     private final ResetPasswordDao resetPasswordDao;
     private final GetListAccountDao getListAccountDao;
     private final UpdateInfoDao updateInfoDao;
+    private final AddDeleteUpdateAccountInAdminDao addDeleteUpdateAccountInAdminDao;
+
 
     public UserService() {
         this.emailUtil = new EmailUtilService();
@@ -31,6 +33,7 @@ public class UserService {
         this.resetPasswordDao = new ResetPasswordDao();
         this.getListAccountDao = new GetListAccountDao();
         this.updateInfoDao = new UpdateInfoDao();
+        this.addDeleteUpdateAccountInAdminDao = new AddDeleteUpdateAccountInAdminDao();
 
     }
 
@@ -110,8 +113,8 @@ public class UserService {
     }
 
     // Cập nhật trạng thái user
-    public void UpdateStatusUser (String status, int id) throws SQLException {
-        logoutDao.UpdateStatusUser(status, id);
+    public boolean UpdateStatusUser (String status, int id) throws SQLException {
+      return  logoutDao.UpdateStatusUser(status, id);
     }
 
 
@@ -165,8 +168,28 @@ public class UserService {
     }
 
     // cập nhật thông tin user
-    public void setUpdateInfoUser(int id, Users user) throws Exception {
-        updateInfoDao.updateInfo(id, user);
+    public boolean setUpdateInfoUser(int id, Users user) throws Exception {
+            return  updateInfoDao.updateInfo(id, user);
+    }
+
+    // ------ thêm sửa xóa tài khoản-----
+    public boolean addAccount(String username, String password, String email, String role) throws SQLException {
+        // Kiểm tra xem email và tên tài khoản đã tồn tại
+        if (signUpDao.checkExistence(email, username)) {
+            return false;
+        }
+        // Thêm người dùng vào cơ sở dữ liệu
+        Users newUser = new Users();
+        newUser.setEmail(email);
+        newUser.setUsername(username);
+        newUser.setPassword(password);  // Mã hóa mật khẩu
+        newUser.setRole(role);
+        return  addDeleteUpdateAccountInAdminDao.addAccount(newUser);
+    }
+
+    //Xóa tài khoản
+    public boolean deleteAccount(String id) {
+        return addDeleteUpdateAccountInAdminDao.deleteAccount(id);
     }
 }
 
