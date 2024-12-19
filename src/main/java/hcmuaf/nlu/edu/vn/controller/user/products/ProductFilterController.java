@@ -74,10 +74,9 @@ public class ProductFilterController extends HttpServlet {
 
             // Truyền danh sách sản phẩm sang JSP
             request.setAttribute("products", products);
+            request.setAttribute("categoryId", categoryIdParam);
             // Chuyển hướng tới JSP để hiển thị
             request.getRequestDispatcher("/users/page/product.jsp").forward(request, response);
-//             response.sendRedirect(request.getContextPath() + "/product-category");
-
         } catch (SQLException e) {
             e.printStackTrace();
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Lỗi khi lấy sản phẩm từ cơ sở dữ liệu");
