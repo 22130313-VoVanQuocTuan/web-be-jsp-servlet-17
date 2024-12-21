@@ -7,24 +7,34 @@ import hcmuaf.nlu.edu.vn.model.Users;
 import java.security.SecureRandom;
 import java.sql.SQLException;
 import java.util.Base64;
+import java.util.List;
 
 
 public class UserService {
-    private final EmailUtil emailUtil;
+    private final EmailUtilService emailUtil;
     private final SignUpDao signUpDao;
     private final LoginDao usersDao;
     private final ResetCodeDao resetCodeDao;
     private final VerifyEmailDao verifyEmailDao;
     private final LogoutDao logoutDao;
     private final ResetPasswordDao resetPasswordDao;
+    private final GetListAccountDao getListAccountDao;
+    private final UpdateInfoDao updateInfoDao;
+    private final AddDeleteUpdateAccountInAdminDao addDeleteUpdateAccountInAdminDao;
+
+
     public UserService() {
-        this.emailUtil = new EmailUtil();
+        this.emailUtil = new EmailUtilService();
         this.signUpDao = new SignUpDao();
         this.usersDao = new LoginDao();
         this.resetCodeDao = new ResetCodeDao();
         this.verifyEmailDao = new VerifyEmailDao();
         this.logoutDao = new LogoutDao();
         this.resetPasswordDao = new ResetPasswordDao();
+        this.getListAccountDao = new GetListAccountDao();
+        this.updateInfoDao = new UpdateInfoDao();
+        this.addDeleteUpdateAccountInAdminDao = new AddDeleteUpdateAccountInAdminDao();
+
     }
 
     // Đăng ký người dùng mới
@@ -103,8 +113,8 @@ public class UserService {
     }
 
     // Cập nhật trạng thái user
-    public void UpdateStatusUser (String status, int id) throws SQLException {
-        logoutDao.UpdateStatusUser(status, id);
+    public boolean UpdateStatusUser (String status, int id) throws SQLException {
+      return  logoutDao.UpdateStatusUser(status, id);
     }
 
 
@@ -149,6 +159,37 @@ public class UserService {
     // Cập nhật lại resetPassword khi thành công
     public void invalidateToken(String token) throws Exception {
         resetPasswordDao.invalidateToken(token);
+    }
+
+
+    // Lấy ra danh sách người dùng
+    public List<Users> getListUsers() throws Exception {
+          return  getListAccountDao.getListAccount();
+    }
+
+    // cập nhật thông tin user
+    public boolean setUpdateInfoUser(int id, Users user) throws Exception {
+            return  updateInfoDao.updateInfo(id, user);
+    }
+
+    // ------ thêm sửa xóa tài khoản-----
+    public boolean addAccount(String username, String password, String email, String role) throws SQLException {
+        // Kiểm tra xem email và tên tài khoản đã tồn tại
+        if (signUpDao.checkExistence(email, username)) {
+            return false;
+        }
+        // Thêm người dùng vào cơ sở dữ liệu
+        Users newUser = new Users();
+        newUser.setEmail(email);
+        newUser.setUsername(username);
+        newUser.setPassword(password);  // Mã hóa mật khẩu
+        newUser.setRole(role);
+        return  addDeleteUpdateAccountInAdminDao.addAccount(newUser);
+    }
+
+    //Xóa tài khoản
+    public boolean deleteAccount(String id) {
+        return addDeleteUpdateAccountInAdminDao.deleteAccount(id);
     }
 }
 

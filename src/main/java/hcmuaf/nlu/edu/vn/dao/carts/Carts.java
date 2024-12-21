@@ -6,9 +6,11 @@ import java.util.*;
 
 public class Carts {
     private Map<Integer, CartItems> items;
+    private double discountAmount; // Lưu giá trị giảm giá từ voucher
 
     public Carts() {
         this.items = new HashMap<>();
+        this.discountAmount = 0; // Ban đầu không có giảm giá
     }
     // Thêm sản phẩm vào giỏ hàng
     public void addItem(Product product) {
@@ -42,17 +44,30 @@ public class Carts {
          return totalPrice *  10/100;
     }
 
-    // Cập nhật  số  luợng
+    // Tính tổng thanh toán cuối cùng
+    public double getFinalTotalPrice() {
+        double totalPrice = getTotalPrice();
+        double shippingFee = getTotalPriceShippingFee();
+        return Math.max(0, totalPrice - discountAmount + shippingFee); // Đảm bảo không âm
+    }
+
+    // Cập nhật số lượng sản phẩm
     public void updateQuantity(int id, int quantity) {
         if (!items.containsKey(id) || quantity < 1) return;
         CartItems item = items.get(id);
+
+        // Lưu lại giá gốc cho mỗi sản phẩm
+        double originalPrice = item.getPrice() / item.getQuantity();
+        double originalTotalPrice = item.getTotalPrice() / item.getQuantity();
+        double originalDiscount = item.getDiscountAmount() / item.getQuantity();
+
+        // Cập nhật số lượng và tính lại các giá trị khác
         item.setQuantity(quantity);
-        item.setPrice( item.getPrice() * item.getQuantity());
-        item.setTotalPrice(item.getTotalPrice() * item.getQuantity());
-        item.setDiscountAmount(item.getDiscountAmount() * item.getQuantity());
+        item.setPrice(originalPrice * quantity);
+        item.setTotalPrice(originalTotalPrice * quantity);
+        item.setDiscountAmount(originalDiscount * quantity);
+
         items.put(id, item);
-
-
     }
     //Lấy ra danh sách sản phẩm trong giỏ
     public List<CartItems> listItems (){
@@ -64,13 +79,23 @@ public class Carts {
         CartItems item = new CartItems();
         item.setId(product.getId());
         item.setImageUrl(product.getImageUrl());
-        item.setQuantity(item.getQuantity());
+        item.setQuantity(1);
         item.setPrice(product.getPrice() * item.getQuantity());
-        item.setTotalPrice(product.getDiscountPrice() * item.getQuantity());
-        item.setDiscountAmount((product.getPrice()* product.getDiscountPercent()/100) * item.getQuantity() );
+        item.setTotalPrice(product.getPrice()-(product.getPrice()*product.getDiscountPercent()) );
+        item.setDiscountAmount((product.getPrice()* product.getDiscountPercent()) * item.getQuantity() );
         item.setName(product.getName());
         return item;
     }
 
+
+    // Cập nhật giảm giá từ voucher
+    public void applyVoucher(double voucherValue) {
+        this.discountAmount = voucherValue; // Lưu giá trị giảm giá
+    }
+
+    // Getter cho giá trị giảm giá
+    public double getDiscountAmount() {
+        return discountAmount;
+    }
 }
 

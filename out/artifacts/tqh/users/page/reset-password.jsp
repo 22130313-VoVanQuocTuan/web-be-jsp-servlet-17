@@ -23,16 +23,26 @@
                     </p>
                 </div>
                 <div class="top-right">
-                       <span id="user-greeting" style="display: none; color: #ffffff;">
+              <span id="user-greeting" style="display: none; color: #ffffff;">
                            Xin chào,  <span
-                               id="username">${sessionScope.username != null ? sessionScope.username : ''}</span>!</span>
+                      id="username">${sessionScope.user.username != null ? sessionScope.user.username : ''}</span>!</span>
 
-                    <a href="informationCustomer.jsp" class="account-link" id="signup-link" style="display: none;">
-                        <i class="fas fa-user-circle"></i> Tài khoản
-                    </a>
-                    <a href="users/page/login-signup.jsp" id="login-link"><span><i class="fa fa-fw fa-user"></i> Đăng
-                            Nhập</span></a>
-                    <a href="users/page/login-signup.jsp" id="logout-link" style="display: none;"><span>Đăng Xuất</span></a>
+                    <form action="account" method="post">
+                        <button type="submit" class="account-link" id="signup-link"
+                                style="display: none;">
+                            <i class="fas fa-user-circle"></i> Tài khoản
+                        </button>
+                    </form>
+                    <form action="login" method="post">
+                        <input name="action" type="hidden" value="login" />
+                        <button type="submit" id="login-link">
+                            <span><i class="fa fa-fw fa-user"></i> Đăng Nhập</span>
+                        </button>
+                    </form>
+                    <form action="logout" method="post">
+                        <button type="submit" id="logout-link"
+                                style="display: none;"><span>Đăng Xuất</span></button>
+                    </form>
                 </div>
             </div>
         </div>
@@ -64,72 +74,73 @@
                 </div>
             </div>
         </div>
-        <div id="section-nav">
-            <div class="container">
-                <button class="menu-toggle"><i class="fa-solid fa-bars"></i> Menu</button>
-                <ul class="nav navbar-nav navbar-center">
-                    <li class="propClone">
+            <div id="section-nav">
+                <div class="container">
+                    <button class="menu-toggle"><i class="fa-solid fa-bars"></i> Menu</button>
+                    <ul class="nav navbar-nav navbar-center">
+                        <li class="propClone">
                         <span class="none-a"><i class="fa-solid fa-list" style="color: #d0cdcd;"></i> &nbsp;&nbsp; DANH
                             MỤC SẢN
                             PHẨM</span>
-                        <ul class="items">
-                            <li> <a href="product/gach-xay-dung.html">&nbsp;&nbsp;<i
+                            <ul class="items">
+                                <li><a href="/tqh/product-category?categoryId=1">&nbsp;&nbsp;<i
                                         class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;GẠCH XÂY
                                     DỰNG</a></li>
-                            <li><a href="product/xi-mang-va-vua.html">&nbsp;&nbsp;<i
+                                <li><a href="/tqh/product-category?categoryId=2">&nbsp;&nbsp;<i
                                         class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;XI MĂNG VÀ
                                     VỮA</a></li>
-                            <li><a href="product/cat-da-va-soi.html">&nbsp;&nbsp;<i
+                                <li><a href="/tqh/product-category?categoryId=3">&nbsp;&nbsp;<i
                                         class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;CÁT, ĐÁ VÀ
                                     SỎI</a></li>
-                            <li><a href="product/thep-va-sat.html">&nbsp;&nbsp;<i
+                                <li><a href="/tqh/product-category?categoryId=4">&nbsp;&nbsp;<i
                                         class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;THÉP VÀ
                                     SẮT</a></li>
-                            <li><a href="product/go-va-vat-lieu-go.html">&nbsp;&nbsp;<i
+                                <li><a href="/tqh/product-category?categoryId=5">&nbsp;&nbsp;<i
                                         class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;GỖ VÀ VẬT
                                     LIỆU GỖ</a></li>
-                            <li><a href="product/son-va-phu-gia.html">&nbsp;&nbsp;<i
+                                <li><a href="/tqh/product-category?categoryId=6">&nbsp;&nbsp;<i
                                         class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;SƠN VÀ PHỤ
                                     GIA</a></li>
-                            <li><a href="product/ngoi-va-tam-lop.html">&nbsp;&nbsp;<i
+                                <li><a href="/tqh/product-category?categoryId=7">&nbsp;&nbsp;<i
                                         class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;NGÓI VÀ TẤM
                                     LỢP</a></li>
-                            <li><a href="product/ong-nuoc-va-phu-kien.html">&nbsp;&nbsp;<i
+                                <li><a href="/tqh/product-category?categoryId=8">&nbsp;&nbsp;<i
                                         class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;ỐNG NƯỚC VÀ
                                     PHỤ KIỆN</a></li>
-                            <li><a href="product/thiet-bi-dien-nuoc.html">&nbsp;&nbsp;<i
+                                <li><a href="/tqh/product-category?categoryId=9">&nbsp;&nbsp;<i
                                         class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;THIẾT BỊ
                                     ĐIỆN NƯỚC</a></li>
-                        </ul>
-                    </li>
-                    <li class="propClone"><a href="${pageContext.request.contextPath}/home.jsp"><i class="fa-solid fa-house"></i>&nbsp;&nbsp; TRANG CHỦ
+                            </ul>
+                        </li>
+                        <li class="propClone"><a href="../../../home.jsp"><i class="fa-solid fa-house"></i>&nbsp;&nbsp; TRANG CHỦ
                         </a></li>
-                    <li class="propClone"><a href="${pageContext.request.contextPath}/users/page/product.jsp"><i class="fa-brands fa-product-hunt"></i>
+                        <li class="propClone"><a href="../product.jsp"><i class="fa-brands fa-product-hunt"></i>
                             &nbsp;&nbsp;SẢN PHẨM</a>
-                    </li>
-                    <li class="propClone"> <a href="${pageContext.request.contextPath}/users/page/login-signup.jsp"><i class="fas fa-shopping-cart"></i>&nbsp;&nbsp; GIỎ
+                        </li>
+                        <li class="propClone"> <a href="../cart.jsp"><i class="fas fa-shopping-cart"></i>&nbsp;&nbsp; GIỎ
                             HÀNG</a>
-                    </li>
-                    <li class="propClone">
-                        <span class="none-a"> <i class="fa-solid fa-book"></i> &nbsp;&nbsp; HƯỚNG DẪN </span>
-                        <ul class="items">
-                            <li><a href="buying-help.jsp">&nbsp;&nbsp;<i
+                        </li>
+                        <li class="propClone">
+                            <span class="none-a"> <i class="fa-solid fa-book"></i> &nbsp;&nbsp; HƯỚNG DẪN </span>
+                            <ul class="items">
+                                <li><a href="../buying-help.jsp">&nbsp;&nbsp;<i
                                         class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;HƯỚNG DẪN
                                     MUA HÀNG</a>
-                            </li>
-                            <li><a href="product_unit.jsp">&nbsp;&nbsp;<i
+                                </li>
+                                <li><a href="../product_unit.jsp">&nbsp;&nbsp;<i
                                         class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;BẢNG ĐƠN VỊ SẢN PHẨM</a>
-                            </li>
-                            <li><a href="term_and_services.jsp">&nbsp;&nbsp;<i
+                                </li>
+
+                                <li><a href="../term_and_services.jsp">&nbsp;&nbsp;<i
                                         class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;ĐIỀU KHOẢN
                                     VÀ DỊCH VỤ</a>
-                            </li>
-                        </ul>
-                    </li>
+                                </li>
+                            </ul>
+                        </li>
 
-                </ul>
+                    </ul>
+                </div>
             </div>
-        </div>
     </div>
 
     <!-- Content-->

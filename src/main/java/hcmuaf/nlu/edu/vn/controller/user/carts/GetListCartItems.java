@@ -44,6 +44,8 @@ public class GetListCartItems  extends HttpServlet {
         req.setAttribute("totalPrice", totalPrice);
         double totalShippingFee = carts.getTotalPriceShippingFee();
         req.setAttribute("totalShippingFee", totalShippingFee);
+        double totalFinalPrice = carts.getFinalTotalPrice();
+        req.setAttribute("totalFinalPrice", totalFinalPrice);
         int totalItem = carts.getTotalItem();
         req.setAttribute("totalItem", totalItem);
         session.setAttribute("cartItemCount", totalItem); // Lưu số lượng sản phẩm vào session

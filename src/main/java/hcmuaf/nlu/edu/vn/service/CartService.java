@@ -1,10 +1,17 @@
 package hcmuaf.nlu.edu.vn.service;
 
 import hcmuaf.nlu.edu.vn.dao.carts.Carts;
+import hcmuaf.nlu.edu.vn.dao.carts.VoucherDao;
 import hcmuaf.nlu.edu.vn.model.Product;
 import jakarta.servlet.http.HttpSession;
 
+import java.security.PublicKey;
+
 public class CartService {
+    private VoucherDao voucherDao;
+    public CartService() {
+        this.voucherDao = new VoucherDao();
+    }
     // Thêm sản phẩm vào giỏ hàng
     public void addToCart(HttpSession session, Product product) {
         Carts cart = getCartFromSession(session);
@@ -31,5 +38,11 @@ public class CartService {
             cart.removeItem(productId);
         }
     }
+    // áp mã ưu đâĩ
+    public double applyVoucher(String voucher) {
+        return voucherDao.checkVoucher(voucher);
+    }
+
+
 }
 

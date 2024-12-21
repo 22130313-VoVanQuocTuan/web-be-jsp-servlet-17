@@ -12,7 +12,7 @@
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4-beta3/css/all.min.css"/>
-<link rel="stylesheet" href="users/css/home.css">
+<link rel="stylesheet" href="<c:url value="/users/css/home.css"/>">
 
 <body>
 <div id="section-header1">
@@ -121,12 +121,9 @@
                             ĐIỆN NƯỚC</a></li>
                     </ul>
                 </li>
-                <li class="propClone"><a href="#"><i class="fa-solid fa-house"></i>&nbsp;&nbsp; TRANG CHỦ </a></li>
-<<<<<<< HEAD
-                <li class="propClone"><a href="/tqh/product"><i class="fa-brands fa-product-hunt"></i>
-=======
-                <li class="propClone"><a href="home-page"><i class="fa-brands fa-product-hunt"></i>
->>>>>>> 393686b09a4987320194cae7f5deafe2d69e3fbd
+                <li class="propClone"><a href="home.jsp"><i class="fa-solid fa-house"></i>&nbsp;&nbsp; TRANG CHỦ </a></li>
+
+                <li class="propClone"><a href="product"><i class="fa-brands fa-product-hunt"></i>
                     &nbsp;&nbsp;SẢN PHẨM</a>
                 </li>
                 <li class="propClone"><a id="" href="cart-items"><i
@@ -190,16 +187,16 @@
             </div>
         </div>
         <div class="product-one-content-items">
-            <c:forEach var="product" items="${products}">
+            <c:forEach var="product" items="${products}" begin="0" end="7">
                 <div class="product-one-content-item">
                     <div class="img-product">
-                        <a href="${pageContext.request.contextPath}/product-detail?id=${product.id}"><img
+                        <a href="product-detail?id=${product.id}&categoryId=${product.categoryId}"><img
                                 src="${product.imageUrl}"
                                 alt="${product.name}"></a>
                         <span class="sale-box">${product.discountPercent}%</span>
                     </div>
                     <div class="product-title">
-                        <div class="name-product"><a href="users/page/product-detail.jsp">${product.name}</a></div>
+                        <div class="name-product"><a href="product-detail?id=${product.id}&categoryId=${product.categoryId}">${product.name}</a></div>
                         <div class="product-price">
                             <li><fmt:formatNumber value="${product.discountPrice}" type="number" groupingUsed="true" />₫</li>
                             <li><fmt:formatNumber value="${product.price}" type="number" groupingUsed="true" />₫</li>
