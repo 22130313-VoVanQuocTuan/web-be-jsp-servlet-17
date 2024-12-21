@@ -2,6 +2,7 @@ package hcmuaf.nlu.edu.vn.dao.Orders;
 
 import hcmuaf.nlu.edu.vn.dao.DBConnect;
 import hcmuaf.nlu.edu.vn.model.Orders;
+import hcmuaf.nlu.edu.vn.model.ItemOrder;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -73,8 +74,8 @@ public class OrderDao {
 //        return orders;
 //    }
 
-    public List<Orders> getOrderItems(int id) throws SQLException {
-        List<Orders> orderItem = new ArrayList<>();
+    public List<ItemOrder> getOrderItems(int id) throws SQLException {
+        List<ItemOrder> orderItem = new ArrayList<>();
         String query = "SELECT o.id, o.totalPrice, o.shippingFee, o.discountAmount, o.paymentMethod, o.paymentStatus, o.shippingAddress, oi.product_id, p.name, oi.quantity, oi.price, as.email, as.name, as.phone_number " +
                 "FROM orders o JOIN order_items oi ON o.id = oi.order_id" +
                 "JOIN products p ON oi.product_id = p.id " +
@@ -84,8 +85,23 @@ public class OrderDao {
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                Orders order = new Orders();
-
+                ItemOrder itemOrder = new ItemOrder();
+                itemOrder.setId(rs.getInt("id"));
+                itemOrder.setTotalPrice(rs.getDouble("totalPrice"));
+                itemOrder.setShippingFee(rs.getDouble("shippingFee"));
+                itemOrder.setDiscountAmount(rs.getDouble("discountAmount"));
+                itemOrder.setPaymentMethod(rs.getString("paymentMethod"));
+                itemOrder.setPaymentStatus(rs.getString("paymentStatus"));
+                itemOrder.setShippingAddress(rs.getString("shippingAddress"));
+                itemOrder.setProductId(rs.getInt("product_id"));
+                itemOrder.setName(rs.getString("name"));
+                itemOrder.setQuantity(rs.getInt("quantity"));
+                itemOrder.setItem_price(rs.getDouble("price"));
+                itemOrder.setEmail(rs.getString("email"));
+                itemOrder.setName(rs.getString("name"));
+                itemOrder.setPhone(rs.getString("phone_number"));
+                itemOrder.setAddress(rs.getString("address"));
+                orderItem.add(itemOrder);
             }
         }
         return orderItem;
