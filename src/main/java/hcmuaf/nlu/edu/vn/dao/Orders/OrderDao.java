@@ -2,11 +2,8 @@ package hcmuaf.nlu.edu.vn.dao.Orders;
 
 import hcmuaf.nlu.edu.vn.dao.DBConnect;
 import hcmuaf.nlu.edu.vn.model.Orders;
-<<<<<<< HEAD
 import hcmuaf.nlu.edu.vn.model.ItemOrder;
-=======
 import hcmuaf.nlu.edu.vn.model.Users;
->>>>>>> d186fa439da3f8fccc67a4dccdff7892a685a6d9
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
