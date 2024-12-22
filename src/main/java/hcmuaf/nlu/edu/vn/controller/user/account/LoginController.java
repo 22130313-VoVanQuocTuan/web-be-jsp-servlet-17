@@ -22,6 +22,11 @@ public class LoginController extends HttpServlet {
             req.getRequestDispatcher("/users/page/login-signup.jsp").forward(req, resp);
             return;
         }
+
+        if("reset".equals(action)) {
+            resp.sendRedirect(req.getContextPath() + "/reset-password.jsp");
+            return;
+        }
         // đăng nhập
         UserService userService = new UserService();
         String username = req.getParameter("username");

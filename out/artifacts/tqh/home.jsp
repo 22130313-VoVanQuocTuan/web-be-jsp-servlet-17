@@ -30,19 +30,19 @@
 
                 <form action="informationCustomer" method="get">
                     <button type="submit" class="account-link" id="signup-link"
-                   style="display: none;">
-                    <i class="fas fa-user-circle"></i> Tài khoản
-                </button>
+                            style="display: none;">
+                        <i class="fas fa-user-circle"></i> Tài khoản
+                    </button>
                 </form>
                 <form action="login" method="post">
-                    <input name="action" type="hidden" value="login" />
+                    <input name="action" type="hidden" value="login"/>
                     <button type="submit" id="login-link">
                         <span><i class="fa fa-fw fa-user"></i> Đăng Nhập</span>
                     </button>
                 </form>
                 <form action="logout" method="post">
                     <button type="submit" id="logout-link"
-                   style="display: none;"><span>Đăng Xuất</span></button>
+                            style="display: none;"><span>Đăng Xuất</span></button>
                 </form>
             </div>
 
@@ -121,7 +121,8 @@
                             ĐIỆN NƯỚC</a></li>
                     </ul>
                 </li>
-                <li class="propClone"><a href="home.jsp"><i class="fa-solid fa-house"></i>&nbsp;&nbsp; TRANG CHỦ </a></li>
+                <li class="propClone"><a href="home.jsp"><i class="fa-solid fa-house"></i>&nbsp;&nbsp; TRANG CHỦ </a>
+                </li>
 
                 <li class="propClone"><a href="product"><i class="fa-brands fa-product-hunt"></i>
                     &nbsp;&nbsp;SẢN PHẨM</a>
@@ -196,10 +197,14 @@
                         <span class="sale-box">${product.discountPercent}%</span>
                     </div>
                     <div class="product-title">
-                        <div class="name-product"><a href="product-detail?id=${product.id}&categoryId=${product.categoryId}">${product.name}</a></div>
+                        <div class="name-product"><a
+                                href="product-detail?id=${product.id}&categoryId=${product.categoryId}">${product.name}</a>
+                        </div>
                         <div class="product-price">
-                            <li><fmt:formatNumber value="${product.discountPrice}" type="number" groupingUsed="true" />₫</li>
-                            <li><fmt:formatNumber value="${product.price}" type="number" groupingUsed="true" />₫</li>
+                            <li><fmt:formatNumber value="${product.discountPrice}" type="number"
+                                                  groupingUsed="true"/>₫
+                            </li>
+                            <li><fmt:formatNumber value="${product.price}" type="number" groupingUsed="true"/>₫</li>
                             <a href="add-cart?id=${product.id}" class="add-to-cart">Thêm vào giỏ hàng</a>
                         </div>
                     </div>
@@ -211,395 +216,940 @@
     <!-- SẢN PHẨM BÁN CHẠY -->
     <div class="selling-products-container">
         <div class="imgSale">
-            <img src="src/Users/img_product/inax-khuyen-mai-mua-dong.png" alt="">
+            <img src="users/img_product/inax-khuyen-mai-mua-dong.png" alt="">
         </div>
         <div class="selling-products-content">
             <h4><i class="fa-regular fa-gem" style="color: #f8f9fc;"></i>TOP SẢN PHẨM BÁN CHẠY</h4>
             <div class="content-products">
-                <c:forEach var="productSelling" items="product-selling">
+                <c:forEach var="product" items="${productPopular}" begin="0" end="3">
                 <div class="content-product">
-                    <div class="img-product"><img src="src/Users/img_product/gachxaydung/gachmen.png" alt="Sản phẩm 1">
+                    <div class="img-product">
+                        <a href="product-detail?id=${product.id}&categoryId=${product.categoryId}"><img
+                                src="${product.imageUrl}"
+                                alt="${product.name}"></a>
                     </div>
-                    <div class="nameProduct-price">
-                        <li><a href="">Gạch Men 60x60 cm</a></li>
-                        <li>Giá: 340.000đ</li>
-                    </div>
+                <div class="nameProduct-price">
+                    <li><a href="product-detail?id=${product.id}&categoryId=${product.categoryId}">${product.name}</a></li>
+                    <li>Giá: <fmt:formatNumber value="${product.price}" type="number" groupingUsed="true"/>₫</li>
                 </div>
+            </div>
+            </c:forEach>
+        </div>
+    </div>
+</div>
+<!-- List Slider Products 1 -->
+<div class="slider-product-one-content">
+    <div class="slider-product-one-content-title">
+        <div class="title">
+            <h3>Gạch Xây Dựng</h3>
+            <span><a class="highlight-text" href="/tqh/product-category?categoryId=1">Xem thêm</a></span>
+        </div>
+    </div>
+    <div class="slider-product-one-content-container">
+        <div class="slider-product-one-content-items-content">
+            <div class="slider-product-one-content-items">
+                <c:forEach var="product" items="${productsCategory}">
+                    <c:if test="${product.categoryId == 1}">
+                        <div class="slider-product-one-content-item">
+                            <div class="img-product">
+                                <a href="product-detail?id=${product.id}&categoryId=${product.categoryId}"><img
+                                        src="${product.imageUrl}"
+                                        alt="${product.name}"></a>
+                            </div>
+                            <div class="product-title">
+                                <div class="name-product"><a href="product-detail?id=${product.id}&categoryId=${product.categoryId}">${product.name}</a></div>
+                                <div class="product-price">
+                                    <li><fmt:formatNumber value="${product.price}" type="number" groupingUsed="true"/>₫</li>
+                                    <a href="add-cart?id=${product.id}" class="add-to-cart">Thêm vào giỏ hàng</a>
+                                </div>
+                            </div>
+                        </div>
+                    </c:if>
                 </c:forEach>
-
+            </div>
+            <div class="slider-product-one-content-items">
+                <c:forEach var="product" items="${productsCategory}">
+                    <c:if test="${product.categoryId == 1}">
+                        <div class="slider-product-one-content-item">
+                            <div class="img-product">
+                                <a href="product-detail?id=${product.id}&categoryId=${product.categoryId}"><img
+                                        src="${product.imageUrl}"
+                                        alt="${product.name}"></a>
+                            </div>
+                            <div class="product-title">
+                                <div class="name-product"><a href="product-detail?id=${product.id}&categoryId=${product.categoryId}">${product.name}</a></div>
+                                <div class="product-price">
+                                    <li><fmt:formatNumber value="${product.price}" type="number" groupingUsed="true"/>₫</li>
+                                    <a href="add-cart?id=${product.id}" class="add-to-cart">Thêm vào giỏ hàng</a>
+                                </div>
+                            </div>
+                        </div>
+                    </c:if>
+                </c:forEach>
+            </div>
+            <div class="slider-product-one-content-items">
+                <c:forEach var="product" items="${productsCategory}">
+                    <c:if test="${product.categoryId == 1}">
+                        <div class="slider-product-one-content-item">
+                            <div class="img-product">
+                                <a href="product-detail?id=${product.id}&categoryId=${product.categoryId}"><img
+                                        src="${product.imageUrl}"
+                                        alt="${product.name}"></a>
+                            </div>
+                            <div class="product-title">
+                                <div class="name-product"><a href="product-detail?id=${product.id}&categoryId=${product.categoryId}">${product.name}</a></div>
+                                <div class="product-price">
+                                    <li><fmt:formatNumber value="${product.price}" type="number" groupingUsed="true"/>₫</li>
+                                    <a href="add-cart?id=${product.id}" class="add-to-cart">Thêm vào giỏ hàng</a>
+                                </div>
+                            </div>
+                        </div>
+                    </c:if>
+                </c:forEach>
+            </div>
+            <div class="slider-product-one-content-items">
+                <c:forEach var="product" items="${productsCategory}">
+                    <c:if test="${product.categoryId == 1}">
+                        <div class="slider-product-one-content-item">
+                            <div class="img-product">
+                                <a href="product-detail?id=${product.id}&categoryId=${product.categoryId}"><img
+                                        src="${product.imageUrl}"
+                                        alt="${product.name}"></a>
+                            </div>
+                            <div class="product-title">
+                                <div class="name-product"><a href="product-detail?id=${product.id}&categoryId=${product.categoryId}">${product.name}</a></div>
+                                <div class="product-price">
+                                    <li><fmt:formatNumber value="${product.price}" type="number" groupingUsed="true"/>₫</li>
+                                    <a href="add-cart?id=${product.id}" class="add-to-cart">Thêm vào giỏ hàng</a>
+                                </div>
+                            </div>
+                        </div>
+                    </c:if>
+                </c:forEach>
+            </div>
+        </div>
+        <div class="slider-product-one-content-btn">
+            <div class="nut_trai-1">
+                <i class="fa-solid fa-chevron-left"></i>
+            </div>
+            <div class="nut_phai-1">
+                <i class="fa-solid fa-chevron-right"></i>
             </div>
         </div>
     </div>
-    <!-- List Slider Products 1 -->
-    <div class="slider-product-one-content">
-        <div class="slider-product-one-content-title">
-            <div class="title">
-                <h3>Gạch Xây Dựng</h3>
-                <span><a class="highlight-text" href="src/Users/page/product/gach-xay-dung.html">Xem thêm</a></span>
-            </div>
+</div>
+<!-- List Slider Products 2 -->
+<div class="slider-product-two-content">
+    <div class="slider-product-two-content-title">
+        <div class="title">
+            <h3>Xi Măng Và Vữa</h3>
+            <span><a class="highlight-text" href="/tqh/product-category?categoryId=2">Xem thêm</a></span>
         </div>
-        <div class="slider-product-one-content-container">
-            <div class="slider-product-one-content-items-content">
-                <div class="slider-product-one-content-items">
-                    <div class="slider-product-one-content-item">
-                        <div class="img-product">
-                            <a href="src/Users/page/product-detail.html"> <img
-                                    src="src/Users/img_product/gachxaydung/gach-xay-tuong.png" alt=""></a>
-                        </div>
-                        <div class="product-title">
-                            <div class="name-product"><a href="">Gạch xây tường</a></div>
-                            <div class="product-price">
-                                <li>150.000₫</li>
-                                <button class="add-to-cart">Thêm vào giỏ hàng</button>
+    </div>
+    <div class="slider-product-two-content-container">
+        <div class="slider-product-two-content-items-content">
+            <div class="slider-product-two-content-items">
+                <c:forEach var="product" items="${productsCategory}">
+                    <c:if test="${product.categoryId == 2}">
+                        <div class="slider-product-two-content-item">
+                            <div class="img-product">
+                                <a href="product-detail?id=${product.id}&categoryId=${product.categoryId}"><img
+                                        src="${product.imageUrl}"
+                                        alt="${product.name}"></a>
+                            </div>
+                            <div class="product-title">
+                                <div class="name-product"><a href="product-detail?id=${product.id}&categoryId=${product.categoryId}">${product.name}</a></div>
+                                <div class="product-price">
+                                    <li><fmt:formatNumber value="${product.price}" type="number" groupingUsed="true"/>₫</li>
+                                    <a href="add-cart?id=${product.id}" class="add-to-cart">Thêm vào giỏ hàng</a>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
+                    </c:if>
+                </c:forEach>
             </div>
-            <div class="slider-product-one-content-btn">
-                <div class="nut_trai-1">
-                    <i class="fa-solid fa-chevron-left"></i>
-                </div>
-                <div class="nut_phai-1">
-                    <i class="fa-solid fa-chevron-right"></i>
-                </div>
+            <div class="slider-product-two-content-items">
+                <c:forEach var="product" items="${productsCategory}">
+                    <c:if test="${product.categoryId == 2}">
+                        <div class="slider-product-two-content-item">
+                            <div class="img-product">
+                                <a href="product-detail?id=${product.id}&categoryId=${product.categoryId}"><img
+                                        src="${product.imageUrl}"
+                                        alt="${product.name}"></a>
+                            </div>
+                            <div class="product-title">
+                                <div class="name-product"><a href="product-detail?id=${product.id}&categoryId=${product.categoryId}">${product.name}</a></div>
+                                <div class="product-price">
+                                    <li><fmt:formatNumber value="${product.price}" type="number" groupingUsed="true"/>₫</li>
+                                    <a href="add-cart?id=${product.id}" class="add-to-cart">Thêm vào giỏ hàng</a>
+                                </div>
+                            </div>
+                        </div>
+                    </c:if>
+                </c:forEach>
+            </div>
+            <div class="slider-product-two-content-items">
+                <c:forEach var="product" items="${productsCategory}">
+                    <c:if test="${product.categoryId == 2}">
+                        <div class="slider-product-two-content-item">
+                            <div class="img-product">
+                                <a href="product-detail?id=${product.id}&categoryId=${product.categoryId}"><img
+                                        src="${product.imageUrl}"
+                                        alt="${product.name}"></a>
+                            </div>
+                            <div class="product-title">
+                                <div class="name-product"><a href="product-detail?id=${product.id}&categoryId=${product.categoryId}">${product.name}</a></div>
+                                <div class="product-price">
+                                    <li><fmt:formatNumber value="${product.price}" type="number" groupingUsed="true"/>₫</li>
+                                    <a href="add-cart?id=${product.id}" class="add-to-cart">Thêm vào giỏ hàng</a>
+                                </div>
+                            </div>
+                        </div>
+                    </c:if>
+                </c:forEach>
+            </div>
+            <div class="slider-product-two-content-items">
+                <c:forEach var="product" items="${productsCategory}">
+                    <c:if test="${product.categoryId == 2}">
+                        <div class="slider-product-two-content-item">
+                            <div class="img-product">
+                                <a href="product-detail?id=${product.id}&categoryId=${product.categoryId}"><img
+                                        src="${product.imageUrl}"
+                                        alt="${product.name}"></a>
+                            </div>
+                            <div class="product-title">
+                                <div class="name-product"><a href="product-detail?id=${product.id}&categoryId=${product.categoryId}">${product.name}</a></div>
+                                <div class="product-price">
+                                    <li><fmt:formatNumber value="${product.price}" type="number" groupingUsed="true"/>₫</li>
+                                    <a href="add-cart?id=${product.id}" class="add-to-cart">Thêm vào giỏ hàng</a>
+                                </div>
+                            </div>
+                        </div>
+                    </c:if>
+                </c:forEach>
+            </div>
+        </div>
+        <div class="slider-product-two-content-btn">
+            <div class="nut_trai-2">
+                <i class="fa-solid fa-chevron-left"></i>
+            </div>
+            <div class="nut_phai-2">
+                <i class="fa-solid fa-chevron-right"></i>
             </div>
         </div>
     </div>
-    <!-- List Slider Products 2 -->
-    <div class="slider-product-two-content">
-        <div class="slider-product-two-content-title">
-            <div class="title">
-                <h3>Xi Măng Và Vữa</h3>
-                <span><a class="highlight-text" href="src/Users/page/product/xi-mang-va-vua.html">Xem thêm</a></span>
-            </div>
+</div>
+<!-- List Slider Products 3 -->
+<div class="slider-product-three-content">
+    <div class="slider-product-three-content-title">
+        <div class="title">
+            <h3>Cát,Đá Và Sỏi</h3>
+            <span><a class="highlight-text" href="/tqh/product-category?categoryId=3">Xem thêm</a></span>
         </div>
-        <div class="slider-product-two-content-container">
-            <div class="slider-product-two-content-items-content">
-                <div class="slider-product-two-content-items">
-                    <div class="slider-product-two-content-item">
-                        <div class="img-product">
-                            <a href="src/Users/page/product-detail.html"> <img
-                                    src="/src/Users/img_product/xingmang/image1.png" alt=""></a>
-                        </div>
-                        <div class="product-title">
-                            <div class="name-product"><a href="">Xi măng SCG-PC40-ELE</a></div>
-                            <div class="product-price">
-                                <li>290.000₫</li>
-                                <button class="add-to-cart">Thêm vào giỏ hàng</button>
+    </div>
+    <div class="slider-product-three-content-container">
+        <div class="slider-product-three-content-items-content">
+            <div class="slider-product-three-content-items">
+                <c:forEach var="product" items="${productsCategory}">
+                    <c:if test="${product.categoryId == 3}">
+                        <div class="slider-product-three-content-item">
+                            <div class="img-product">
+                                <a href="product-detail?id=${product.id}&categoryId=${product.categoryId}"><img
+                                        src="${product.imageUrl}"
+                                        alt="${product.name}"></a>
+                            </div>
+                            <div class="product-title">
+                                <div class="name-product"><a href="product-detail?id=${product.id}&categoryId=${product.categoryId}">${product.name}</a></div>
+                                <div class="product-price">
+                                    <li><fmt:formatNumber value="${product.price}" type="number" groupingUsed="true"/>₫</li>
+                                    <a href="add-cart?id=${product.id}" class="add-to-cart">Thêm vào giỏ hàng</a>
+                                </div>
                             </div>
                         </div>
-                    </div>
-
-                </div>
+                    </c:if>
+                </c:forEach>
             </div>
-            <div class="slider-product-two-content-btn">
-                <div class="nut_trai-2">
-                    <i class="fa-solid fa-chevron-left"></i>
-                </div>
-                <div class="nut_phai-2">
-                    <i class="fa-solid fa-chevron-right"></i>
-                </div>
+            <div class="slider-product-three-content-items">
+                <c:forEach var="product" items="${productsCategory}">
+                    <c:if test="${product.categoryId == 3}">
+                        <div class="slider-product-three-content-item">
+                            <div class="img-product">
+                                <a href="product-detail?id=${product.id}&categoryId=${product.categoryId}"><img
+                                        src="${product.imageUrl}"
+                                        alt="${product.name}"></a>
+                            </div>
+                            <div class="product-title">
+                                <div class="name-product"><a href="product-detail?id=${product.id}&categoryId=${product.categoryId}">${product.name}</a></div>
+                                <div class="product-price">
+                                    <li><fmt:formatNumber value="${product.price}" type="number" groupingUsed="true"/>₫</li>
+                                    <a href="add-cart?id=${product.id}" class="add-to-cart">Thêm vào giỏ hàng</a>
+                                </div>
+                            </div>
+                        </div>
+                    </c:if>
+                </c:forEach>
+            </div>
+            <div class="slider-product-three-content-items">
+                <c:forEach var="product" items="${productsCategory}">
+                    <c:if test="${product.categoryId == 3}">
+                        <div class="slider-product-three-content-item">
+                            <div class="img-product">
+                                <a href="product-detail?id=${product.id}&categoryId=${product.categoryId}"><img
+                                        src="${product.imageUrl}"
+                                        alt="${product.name}"></a>
+                            </div>
+                            <div class="product-title">
+                                <div class="name-product"><a href="product-detail?id=${product.id}&categoryId=${product.categoryId}">${product.name}</a></div>
+                                <div class="product-price">
+                                    <li><fmt:formatNumber value="${product.price}" type="number" groupingUsed="true"/>₫</li>
+                                    <a href="add-cart?id=${product.id}" class="add-to-cart">Thêm vào giỏ hàng</a>
+                                </div>
+                            </div>
+                        </div>
+                    </c:if>
+                </c:forEach>
+            </div>
+            <div class="slider-product-three-content-items">
+                <c:forEach var="product" items="${productsCategory}">
+                    <c:if test="${product.categoryId == 3}">
+                        <div class="slider-product-three-content-item">
+                            <div class="img-product">
+                                <a href="product-detail?id=${product.id}&categoryId=${product.categoryId}"><img
+                                        src="${product.imageUrl}"
+                                        alt="${product.name}"></a>
+                            </div>
+                            <div class="product-title">
+                                <div class="name-product"><a href="product-detail?id=${product.id}&categoryId=${product.categoryId}">${product.name}</a></div>
+                                <div class="product-price">
+                                    <li><fmt:formatNumber value="${product.price}" type="number" groupingUsed="true"/>₫</li>
+                                    <a href="add-cart?id=${product.id}" class="add-to-cart">Thêm vào giỏ hàng</a>
+                                </div>
+                            </div>
+                        </div>
+                    </c:if>
+                </c:forEach>
+            </div>
+        </div>
+        <div class="slider-product-three-content-btn">
+            <div class="nut_trai-3">
+                <i class="fa-solid fa-chevron-left"></i>
+            </div>
+            <div class="nut_phai-3">
+                <i class="fa-solid fa-chevron-right"></i>
             </div>
         </div>
     </div>
-    <!-- List Slider Products 3 -->
-    <div class="slider-product-three-content">
-        <div class="slider-product-three-content-title">
-            <div class="title">
-                <h3>Cát,Đá Và Sỏi</h3>
-                <span><a class="highlight-text" href="src/Users/page/product/cat-da-va-soi.html">Xem thêm</a></span>
-            </div>
+</div>
+<!--List Slider product 4-->
+<div class="slider-product-four-content">
+    <div class="slider-product-four-content-title">
+        <div class="title">
+            <h3>Thép và Sắt</h3>
+            <span><a href="/tqh/product-category?categoryId=4" class="highlight-text">Xem thêm</a></span>
         </div>
-        <div class="slider-product-three-content-container">
-            <div class="slider-product-three-content-items-content">
-                <div class="slider-product-three-content-items">
-                    <div class="slider-product-three-content-item">
-                        <div class="img-product">
-                            <a href="src/Users/page/product-detail.html"> <img
-                                    src="/src/Users/img_product/Da_cat_soi/catbetong.png" alt=""></a>
-                        </div>
-                        <div class="product-title">
-                            <div class="name-product"><a href="">Cát bê tông</a></div>
-                            <div class="product-price">
-                                <li>200.000₫</li>
-                                <button class="add-to-cart">Thêm vào giỏ hàng</button>
+    </div>
+    <div class="slider-product-four-content-container">
+        <div class="slider-product-four-content-items-content">
+            <div class="slider-product-four-content-items">
+                <c:forEach var="product" items="${productsCategory}">
+                    <c:if test="${product.categoryId == 4}">
+                        <div class="slider-product-four-content-item">
+                            <div class="img-product">
+                                <a href="product-detail?id=${product.id}&categoryId=${product.categoryId}"><img
+                                        src="${product.imageUrl}"
+                                        alt="${product.name}"></a>
+                            </div>
+                            <div class="product-title">
+                                <div class="name-product"><a href="product-detail?id=${product.id}&categoryId=${product.categoryId}">${product.name}</a></div>
+                                <div class="product-price">
+                                    <li><fmt:formatNumber value="${product.price}" type="number" groupingUsed="true"/>₫</li>
+                                    <a href="add-cart?id=${product.id}" class="add-to-cart">Thêm vào giỏ hàng</a>
+                                </div>
                             </div>
                         </div>
-                    </div>
-
-
-                </div>
+                    </c:if>
+                </c:forEach>
             </div>
-            <div class="slider-product-three-content-btn">
-                <div class="nut_trai-3">
-                    <i class="fa-solid fa-chevron-left"></i>
-                </div>
-                <div class="nut_phai-3">
-                    <i class="fa-solid fa-chevron-right"></i>
-                </div>
+            <div class="slider-product-four-content-items">
+                <c:forEach var="product" items="${productsCategory}">
+                    <c:if test="${product.categoryId == 4}">
+                        <div class="slider-product-four-content-item">
+                            <div class="img-product">
+                                <a href="product-detail?id=${product.id}&categoryId=${product.categoryId}"><img
+                                        src="${product.imageUrl}"
+                                        alt="${product.name}"></a>
+                            </div>
+                            <div class="product-title">
+                                <div class="name-product"><a href="product-detail?id=${product.id}&categoryId=${product.categoryId}">${product.name}</a></div>
+                                <div class="product-price">
+                                    <li><fmt:formatNumber value="${product.price}" type="number" groupingUsed="true"/>₫</li>
+                                    <a href="add-cart?id=${product.id}" class="add-to-cart">Thêm vào giỏ hàng</a>
+                                </div>
+                            </div>
+                        </div>
+                    </c:if>
+                </c:forEach>
+            </div>
+            <div class="slider-product-four-content-items">
+                <c:forEach var="product" items="${productsCategory}">
+                    <c:if test="${product.categoryId == 4}">
+                        <div class="slider-product-four-content-item">
+                            <div class="img-product">
+                                <a href="product-detail?id=${product.id}&categoryId=${product.categoryId}"><img
+                                        src="${product.imageUrl}"
+                                        alt="${product.name}"></a>
+                            </div>
+                            <div class="product-title">
+                                <div class="name-product"><a href="product-detail?id=${product.id}&categoryId=${product.categoryId}">${product.name}</a></div>
+                                <div class="product-price">
+                                    <li><fmt:formatNumber value="${product.price}" type="number" groupingUsed="true"/>₫</li>
+                                    <a href="add-cart?id=${product.id}" class="add-to-cart">Thêm vào giỏ hàng</a>
+                                </div>
+                            </div>
+                        </div>
+                    </c:if>
+                </c:forEach>
+            </div>
+            <div class="slider-product-four-content-items">
+                <c:forEach var="product" items="${productsCategory}">
+                    <c:if test="${product.categoryId == 4}">
+                        <div class="slider-product-four-content-item">
+                            <div class="img-product">
+                                <a href="product-detail?id=${product.id}&categoryId=${product.categoryId}"><img
+                                        src="${product.imageUrl}"
+                                        alt="${product.name}"></a>
+                            </div>
+                            <div class="product-title">
+                                <div class="name-product"><a href="product-detail?id=${product.id}&categoryId=${product.categoryId}">${product.name}</a></div>
+                                <div class="product-price">
+                                    <li><fmt:formatNumber value="${product.price}" type="number" groupingUsed="true"/>₫</li>
+                                    <a href="add-cart?id=${product.id}" class="add-to-cart">Thêm vào giỏ hàng</a>
+                                </div>
+                            </div>
+                        </div>
+                    </c:if>
+                </c:forEach>
+            </div>
+        </div>
+        <div class="slider-product-four-content-btn">
+            <div class="nut_trai-4">
+                <i class="fa-solid fa-chevron-left"></i>
+            </div>
+            <div class="nut_phai-4">
+                <i class="fa-solid fa-chevron-right"></i>
             </div>
         </div>
     </div>
-
-
-    <!--List Slider product 4-->
-    <div class="slider-product-four-content">
-        <div class="slider-product-four-content-title">
-            <div class="title">
-                <h3>Thép và Sắt</h3>
-                <span><a href="src/Users/page/product/thep-va-sat.html" class="highlight-text">Xem thêm</a></span>
+</div>
+<!--List Slider product 5-->
+<div class="slider-product-five-content">
+    <div class="slider-product-five-content-title">
+        <div class="title">
+            <h3>Gỗ và Vật liệu gỗ</h3>
+            <span><a href="/tqh/product-category?categoryId=5" class="highlight-text">Xem thêm</a></span>
+        </div>
+    </div>
+    <div class="slider-product-five-content-container">
+        <div class="slider-product-five-content-items-content">
+            <div class="slider-product-five-content-items">
+                <c:forEach var="product" items="${productsCategory}">
+                    <c:if test="${product.categoryId == 5}">
+                        <div class="slider-product-five-content-item">
+                            <div class="img-product">
+                                <a href="product-detail?id=${product.id}&categoryId=${product.categoryId}"><img
+                                        src="${product.imageUrl}"
+                                        alt="${product.name}"></a>
+                            </div>
+                            <div class="product-title">
+                                <div class="name-product"><a href="product-detail?id=${product.id}&categoryId=${product.categoryId}">${product.name}</a></div>
+                                <div class="product-price">
+                                    <li><fmt:formatNumber value="${product.price}" type="number" groupingUsed="true"/>₫</li>
+                                    <a href="add-cart?id=${product.id}" class="add-to-cart">Thêm vào giỏ hàng</a>
+                                </div>
+                            </div>
+                        </div>
+                    </c:if>
+                </c:forEach>
+            </div>
+            <div class="slider-product-five-content-items">
+                <c:forEach var="product" items="${productsCategory}">
+                    <c:if test="${product.categoryId == 5}">
+                        <div class="slider-product-five-content-item">
+                            <div class="img-product">
+                                <a href="product-detail?id=${product.id}&categoryId=${product.categoryId}"><img
+                                        src="${product.imageUrl}"
+                                        alt="${product.name}"></a>
+                            </div>
+                            <div class="product-title">
+                                <div class="name-product"><a href="product-detail?id=${product.id}&categoryId=${product.categoryId}">${product.name}</a></div>
+                                <div class="product-price">
+                                    <li><fmt:formatNumber value="${product.price}" type="number" groupingUsed="true"/>₫</li>
+                                    <a href="add-cart?id=${product.id}" class="add-to-cart">Thêm vào giỏ hàng</a>
+                                </div>
+                            </div>
+                        </div>
+                    </c:if>
+                </c:forEach>
+            </div>
+            <div class="slider-product-five-content-items">
+                <c:forEach var="product" items="${productsCategory}">
+                    <c:if test="${product.categoryId == 5}">
+                        <div class="slider-product-five-content-item">
+                            <div class="img-product">
+                                <a href="product-detail?id=${product.id}&categoryId=${product.categoryId}"><img
+                                        src="${product.imageUrl}"
+                                        alt="${product.name}"></a>
+                            </div>
+                            <div class="product-title">
+                                <div class="name-product"><a href="product-detail?id=${product.id}&categoryId=${product.categoryId}">${product.name}</a></div>
+                                <div class="product-price">
+                                    <li><fmt:formatNumber value="${product.price}" type="number" groupingUsed="true"/>₫</li>
+                                    <a href="add-cart?id=${product.id}" class="add-to-cart">Thêm vào giỏ hàng</a>
+                                </div>
+                            </div>
+                        </div>
+                    </c:if>
+                </c:forEach>
+            </div>
+            <div class="slider-product-five-content-items">
+                <c:forEach var="product" items="${productsCategory}">
+                    <c:if test="${product.categoryId == 5}">
+                        <div class="slider-product-five-content-item">
+                            <div class="img-product">
+                                <a href="product-detail?id=${product.id}&categoryId=${product.categoryId}"><img
+                                        src="${product.imageUrl}"
+                                        alt="${product.name}"></a>
+                            </div>
+                            <div class="product-title">
+                                <div class="name-product"><a href="product-detail?id=${product.id}&categoryId=${product.categoryId}">${product.name}</a></div>
+                                <div class="product-price">
+                                    <li><fmt:formatNumber value="${product.price}" type="number" groupingUsed="true"/>₫</li>
+                                    <a href="add-cart?id=${product.id}" class="add-to-cart">Thêm vào giỏ hàng</a>
+                                </div>
+                            </div>
+                        </div>
+                    </c:if>
+                </c:forEach>
             </div>
         </div>
-        <div class="slider-product-four-content-container">
-            <div class="slider-product-four-content-items-content">
-                <div class="slider-product-four-content-items">
-                    <div class="slider-product-four-content-item">
-                        <div class="img-product">
-                            <a href="src/Users/page/product-detail.html"> <img
-                                    src="src/Users/img_product/thepvasat/image1.png" alt=""></a>
-                        </div>
-                        <div class="product-title">
-                            <div class="name-product"><a href="src/Users/page/product-detail.html">Thép cốt bê tông</a>
-                            </div>
-                            <div class="product-price">
-                                <li>600.000đ</li>
-                                <button class="add-to-cart">Thêm vào giỏ hàng</button>
-                            </div>
-                        </div>
-                    </div>
-
-
-                </div>
+        <div class="slider-product-five-content-btn">
+            <div class="nut_trai-5">
+                <i class="fa-solid fa-chevron-left"></i>
             </div>
-            <div class="slider-product-four-content-btn">
-                <div class="nut_trai-4">
-                    <i class="fa-solid fa-chevron-left"></i>
-                </div>
-                <div class="nut_phai-4">
-                    <i class="fa-solid fa-chevron-right"></i>
-                </div>
+            <div class="nut_phai-5">
+                <i class="fa-solid fa-chevron-right"></i>
             </div>
         </div>
     </div>
-
-    <!--List Slider product 5-->
-    <div class="slider-product-five-content">
-        <div class="slider-product-five-content-title">
-            <div class="title">
-                <h3>Gỗ và Vật liệu gỗ</h3>
-                <span><a href="src/Users/page/product/go-va-vat-lieu-go.html" class="highlight-text">Xem thêm</a></span>
+</div>
+<!--List Slider product 6-->
+<div class="slider-product-six-content">
+    <div class="slider-product-six-content-title">
+        <div class="title">
+            <h3>Sơn và Phụ gia</h3>
+            <span><a href="/tqh/product-category?categoryId=6" class="highlight-text">Xem thêm</a></span>
+        </div>
+    </div>
+    <div class="slider-product-six-content-container">
+        <div class="slider-product-six-content-items-content">
+            <div class="slider-product-six-content-items">
+                <c:forEach var="product" items="${productsCategory}">
+                    <c:if test="${product.categoryId == 6}">
+                        <div class="slider-product-six-content-item">
+                            <div class="img-product">
+                                <a href="product-detail?id=${product.id}&categoryId=${product.categoryId}"><img
+                                        src="${product.imageUrl}"
+                                        alt="${product.name}"></a>
+                            </div>
+                            <div class="product-title">
+                                <div class="name-product"><a href="product-detail?id=${product.id}&categoryId=${product.categoryId}">${product.name}</a></div>
+                                <div class="product-price">
+                                    <li><fmt:formatNumber value="${product.price}" type="number" groupingUsed="true"/>₫</li>
+                                    <a href="add-cart?id=${product.id}" class="add-to-cart">Thêm vào giỏ hàng</a>
+                                </div>
+                            </div>
+                        </div>
+                    </c:if>
+                </c:forEach>
+            </div>
+            <div class="slider-product-six-content-items">
+                <c:forEach var="product" items="${productsCategory}">
+                    <c:if test="${product.categoryId == 6}">
+                        <div class="slider-product-six-content-item">
+                            <div class="img-product">
+                                <a href="product-detail?id=${product.id}&categoryId=${product.categoryId}"><img
+                                        src="${product.imageUrl}"
+                                        alt="${product.name}"></a>
+                            </div>
+                            <div class="product-title">
+                                <div class="name-product"><a href="product-detail?id=${product.id}&categoryId=${product.categoryId}">${product.name}</a></div>
+                                <div class="product-price">
+                                    <li><fmt:formatNumber value="${product.price}" type="number" groupingUsed="true"/>₫</li>
+                                    <a href="add-cart?id=${product.id}" class="add-to-cart">Thêm vào giỏ hàng</a>
+                                </div>
+                            </div>
+                        </div>
+                    </c:if>
+                </c:forEach>
+            </div>
+            <div class="slider-product-six-content-items">
+                <c:forEach var="product" items="${productsCategory}">
+                    <c:if test="${product.categoryId == 6}">
+                        <div class="slider-product-six-content-item">
+                            <div class="img-product">
+                                <a href="product-detail?id=${product.id}&categoryId=${product.categoryId}"><img
+                                        src="${product.imageUrl}"
+                                        alt="${product.name}"></a>
+                            </div>
+                            <div class="product-title">
+                                <div class="name-product"><a href="product-detail?id=${product.id}&categoryId=${product.categoryId}">${product.name}</a></div>
+                                <div class="product-price">
+                                    <li><fmt:formatNumber value="${product.price}" type="number" groupingUsed="true"/>₫</li>
+                                    <a href="add-cart?id=${product.id}" class="add-to-cart">Thêm vào giỏ hàng</a>
+                                </div>
+                            </div>
+                        </div>
+                    </c:if>
+                </c:forEach>
+            </div>
+            <div class="slider-product-six-content-items">
+                <c:forEach var="product" items="${productsCategory}">
+                    <c:if test="${product.categoryId == 6}">
+                        <div class="slider-product-six-content-item">
+                            <div class="img-product">
+                                <a href="product-detail?id=${product.id}&categoryId=${product.categoryId}"><img
+                                        src="${product.imageUrl}"
+                                        alt="${product.name}"></a>
+                            </div>
+                            <div class="product-title">
+                                <div class="name-product"><a href="product-detail?id=${product.id}&categoryId=${product.categoryId}">${product.name}</a></div>
+                                <div class="product-price">
+                                    <li><fmt:formatNumber value="${product.price}" type="number" groupingUsed="true"/>₫</li>
+                                    <a href="add-cart?id=${product.id}" class="add-to-cart">Thêm vào giỏ hàng</a>
+                                </div>
+                            </div>
+                        </div>
+                    </c:if>
+                </c:forEach>
             </div>
         </div>
-        <div class="slider-product-five-content-container">
-            <div class="slider-product-five-content-items-content">
-                <div class="slider-product-five-content-items">
-                    <div class="slider-product-five-content-item">
-                        <div class="img-product">
-                            <a href="src/Users/page/product-detail.html"><img
-                                    src="src/Users/img_product/vat_lieu_go/gobachduong.png" alt=""></a>
-                        </div>
-                        <div class="product-title">
-                            <div class="name-product"><a href="src/Users/page/product-detail.html">Gỗ bạch dương</a>
-                            </div>
-                            <div class="product-price">
-                                <li>1.000.000đ</li>
-                                <button class="add-to-cart">Thêm vào giỏ hàng</button>
-                            </div>
-                        </div>
-                    </div>
-
-
-
-                </div>
+        <div class="slider-product-six-content-btn">
+            <div class="nut_trai-6">
+                <i class="fa-solid fa-chevron-left"></i>
             </div>
-            <div class="slider-product-five-content-btn">
-                <div class="nut_trai-5">
-                    <i class="fa-solid fa-chevron-left"></i>
-                </div>
-                <div class="nut_phai-5">
-                    <i class="fa-solid fa-chevron-right"></i>
-                </div>
+            <div class="nut_phai-6">
+                <i class="fa-solid fa-chevron-right"></i>
             </div>
         </div>
     </div>
-
-
-    <!--List Slider product 6-->
-    <div class="slider-product-six-content">
-        <div class="slider-product-six-content-title">
-            <div class="title">
-                <h3>Sơn và Phụ gia</h3>
-                <span><a href="src/Users/page/product/son-va-phu-gia.html" class="highlight-text">Xem thêm</a></span>
-            </div>
+</div>
+<!--List Slider product 7-->
+<div class="slider-product-seven-content">
+    <div class="slider-product-seven-content-title">
+        <div class="title">
+            <h3>Ngói và Tấm lợp</h3>
+            <span><a href="/tqh/product-category?categoryId=7" class="highlight-text">Xem thêm</a></span>
         </div>
-        <div class="slider-product-six-content-container">
-            <div class="slider-product-six-content-items-content">
-                <div class="slider-product-six-content-items">
-                    <div class="slider-product-six-content-item">
-                        <div class="img-product">
-                            <a href="src/Users/page/product-detail.html"><img
-                                    src="src/Users/img_product/son/Phụ%20gia%20chống%20thấm%20BS-8430%20Latex.png"
-                                    alt=""></a>
-                        </div>
-                        <div class="product-title">
-                            <div class="name-product"><a href="src/Users/page/product-detail.html">Phụ gia chống thấm
-                                BS-8430
-                                Latex</a></div>
-                            <div class="product-price">
-                                <li>890.000đ</li>
-                                <button class="add-to-cart">Thêm vào giỏ hàng</button>
+    </div>
+    <div class="slider-product-seven-content-container">
+        <div class="slider-product-seven-content-items-content">
+            <div class="slider-product-seven-content-items">
+                <c:forEach var="product" items="${productsCategory}">
+                    <c:if test="${product.categoryId == 7}">
+                        <div class="slider-product-seven-content-item">
+                            <div class="img-product">
+                                <a href="product-detail?id=${product.id}&categoryId=${product.categoryId}"><img
+                                        src="${product.imageUrl}"
+                                        alt="${product.name}"></a>
+                            </div>
+                            <div class="product-title">
+                                <div class="name-product"><a href="product-detail?id=${product.id}&categoryId=${product.categoryId}">${product.name}g</a></div>
+                                <div class="product-price">
+                                    <li><fmt:formatNumber value="${product.price}" type="number" groupingUsed="true"/>₫</li>
+                                    <a href="add-cart?id=${product.id}" class="add-to-cart">Thêm vào giỏ hàng</a>
+                                </div>
                             </div>
                         </div>
-                    </div>
-
-
-
-                </div>
+                    </c:if>
+                </c:forEach>
             </div>
-            <div class="slider-product-six-content-btn">
-                <div class="nut_trai-6">
-                    <i class="fa-solid fa-chevron-left"></i>
-                </div>
-                <div class="nut_phai-6">
-                    <i class="fa-solid fa-chevron-right"></i>
-                </div>
+            <div class="slider-product-seven-content-items">
+                <c:forEach var="product" items="${productsCategory}">
+                    <c:if test="${product.categoryId == 7}">
+                        <div class="slider-product-seven-content-item">
+                            <div class="img-product">
+                                <a href="product-detail?id=${product.id}&categoryId=${product.categoryId}"><img
+                                        src="${product.imageUrl}"
+                                        alt="${product.name}"></a>
+                            </div>
+                            <div class="product-title">
+                                <div class="name-product"><a href="product-detail?id=${product.id}&categoryId=${product.categoryId}">${product.name}g</a></div>
+                                <div class="product-price">
+                                    <li><fmt:formatNumber value="${product.price}" type="number" groupingUsed="true"/>₫</li>
+                                    <a href="add-cart?id=${product.id}" class="add-to-cart">Thêm vào giỏ hàng</a>
+                                </div>
+                            </div>
+                        </div>
+                    </c:if>
+                </c:forEach>
+            </div>
+            <div class="slider-product-seven-content-items">
+                <c:forEach var="product" items="${productsCategory}">
+                    <c:if test="${product.categoryId == 7}">
+                        <div class="slider-product-seven-content-item">
+                            <div class="img-product">
+                                <a href="product-detail?id=${product.id}&categoryId=${product.categoryId}"><img
+                                        src="${product.imageUrl}"
+                                        alt="${product.name}"></a>
+                            </div>
+                            <div class="product-title">
+                                <div class="name-product"><a href="product-detail?id=${product.id}&categoryId=${product.categoryId}">${product.name}g</a></div>
+                                <div class="product-price">
+                                    <li><fmt:formatNumber value="${product.price}" type="number" groupingUsed="true"/>₫</li>
+                                    <a href="add-cart?id=${product.id}" class="add-to-cart">Thêm vào giỏ hàng</a>
+                                </div>
+                            </div>
+                        </div>
+                    </c:if>
+                </c:forEach>
+            </div>
+            <div class="slider-product-seven-content-items">
+                <c:forEach var="product" items="${productsCategory}">
+                    <c:if test="${product.categoryId == 7}">
+                        <div class="slider-product-seven-content-item">
+                            <div class="img-product">
+                                <a href="product-detail?id=${product.id}&categoryId=${product.categoryId}"><img
+                                        src="${product.imageUrl}"
+                                        alt="${product.name}"></a>
+                            </div>
+                            <div class="product-title">
+                                <div class="name-product"><a href="product-detail?id=${product.id}&categoryId=${product.categoryId}">${product.name}g</a></div>
+                                <div class="product-price">
+                                    <li><fmt:formatNumber value="${product.price}" type="number" groupingUsed="true"/>₫</li>
+                                    <a href="add-cart?id=${product.id}" class="add-to-cart">Thêm vào giỏ hàng</a>
+                                </div>
+                            </div>
+                        </div>
+                    </c:if>
+                </c:forEach>
+            </div>
+        </div>
+
+        <div class="slider-product-seven-content-btn">
+            <div class="nut_trai-7">
+                <i class="fa-solid fa-chevron-left"></i>
+            </div>
+            <div class="nut_phai-7">
+                <i class="fa-solid fa-chevron-right"></i>
             </div>
         </div>
     </div>
-
-
-    <!--List Slider product 7-->
-    <div class="slider-product-seven-content">
-        <div class="slider-product-seven-content-title">
-            <div class="title">
-                <h3>Ngói và Tấm lợp</h3>
-                <span><a href="src/Users/page/product/ngoi-va-tam-lop.html" class="highlight-text">Xem thêm</a></span>
-            </div>
+</div>
+<!--List Slider product 8-->
+<div class="slider-product-eight-content">
+    <div class="slider-product-eight-content-title">
+        <div class="title">
+            <h3>Ống nước và Phụ kiện</h3>
+            <span><a href="/tqh/product-category?categoryId=8"
+                     class="highlight-text">Xem thêm</a></span>
         </div>
-        <div class="slider-product-seven-content-container">
-            <div class="slider-product-seven-content-items-content">
-                <div class="slider-product-seven-content-items">
-                    <div class="slider-product-seven-content-item">
-                        <div class="img-product">
-                            <a href="src/Users/page/product-detail.html"><img
-                                    src="src/Users/img_product/ngoi/NgoiThaiSCGDangPhang.png" alt=""></a>
-                        </div>
-                        <div class="product-title">
-                            <div class="name-product"><a
-                                    href="src/Users/page/product-detail.html">NgoiThaiSCGDangPhang</a></div>
-                            <div class="product-price">
-                                <li>300.000đ</li>
-                                <button class="add-to-cart">Thêm vào giỏ hàng</button>
+    </div>
+    <div class="slider-product-eight-content-container">
+        <div class="slider-product-eight-content-items-content">
+            <div class="slider-product-eight-content-items">
+                <c:forEach var="product" items="${productsCategory}">
+                    <c:if test="${product.categoryId == 8}">
+                        <div class="slider-product-eight-content-item">
+                            <div class="img-product">
+                                <a href="product-detail?id=${product.id}&categoryId=${product.categoryId}"><img
+                                        src="${product.imageUrl}"
+                                        alt="${product.name}"></a>
+                            </div>
+                            <div class="product-title">
+                                <div class="name-product"><a href="product-detail?id=${product.id}&categoryId=${product.categoryId}">${product.name}</a></div>
+                                <div class="product-price">
+                                    <li><fmt:formatNumber value="${product.price}" type="number" groupingUsed="true"/>₫</li>
+                                    <a href="add-cart?id=${product.id}" class="add-to-cart">Thêm vào giỏ hàng</a>
+                                </div>
                             </div>
                         </div>
-                    </div>
-
-
-
-                </div>
+                    </c:if>
+                </c:forEach>
             </div>
+            <div class="slider-product-eight-content-items">
+                <c:forEach var="product" items="${productsCategory}">
+                    <c:if test="${product.categoryId == 8}">
+                        <div class="slider-product-eight-content-item">
+                            <div class="img-product">
+                                <a href="product-detail?id=${product.id}&categoryId=${product.categoryId}"><img
+                                        src="${product.imageUrl}"
+                                        alt="${product.name}"></a>
+                            </div>
+                            <div class="product-title">
+                                <div class="name-product"><a href="product-detail?id=${product.id}&categoryId=${product.categoryId}">${product.name}</a></div>
+                                <div class="product-price">
+                                    <li><fmt:formatNumber value="${product.price}" type="number" groupingUsed="true"/>₫</li>
+                                    <a href="add-cart?id=${product.id}" class="add-to-cart">Thêm vào giỏ hàng</a>
+                                </div>
+                            </div>
+                        </div>
+                    </c:if>
+                </c:forEach>
+            </div>
+            <div class="slider-product-eight-content-items">
+                <c:forEach var="product" items="${productsCategory}">
+                    <c:if test="${product.categoryId == 8}">
+                        <div class="slider-product-eight-content-item">
+                            <div class="img-product">
+                                <a href="product-detail?id=${product.id}&categoryId=${product.categoryId}"><img
+                                        src="${product.imageUrl}"
+                                        alt="${product.name}"></a>
+                            </div>
+                            <div class="product-title">
+                                <div class="name-product"><a href="product-detail?id=${product.id}&categoryId=${product.categoryId}">${product.name}</a></div>
+                                <div class="product-price">
+                                    <li><fmt:formatNumber value="${product.price}" type="number" groupingUsed="true"/>₫</li>
+                                    <a href="add-cart?id=${product.id}" class="add-to-cart">Thêm vào giỏ hàng</a>
+                                </div>
+                            </div>
+                        </div>
+                    </c:if>
+                </c:forEach>
+            </div>
+            <div class="slider-product-eight-content-items">
+                <c:forEach var="product" items="${productsCategory}">
+                    <c:if test="${product.categoryId == 8}">
+                        <div class="slider-product-eight-content-item">
+                            <div class="img-product">
+                                <a href="product-detail?id=${product.id}&categoryId=${product.categoryId}"><img
+                                        src="${product.imageUrl}"
+                                        alt="${product.name}"></a>
+                            </div>
+                            <div class="product-title">
+                                <div class="name-product"><a href="product-detail?id=${product.id}&categoryId=${product.categoryId}">${product.name}</a></div>
+                                <div class="product-price">
+                                    <li><fmt:formatNumber value="${product.price}" type="number" groupingUsed="true"/>₫</li>
+                                    <a href="add-cart?id=${product.id}" class="add-to-cart">Thêm vào giỏ hàng</a>
+                                </div>
+                            </div>
+                        </div>
+                    </c:if>
+                </c:forEach>
+            </div>
+        </div>
 
-            <div class="slider-product-seven-content-btn">
-                <div class="nut_trai-7">
-                    <i class="fa-solid fa-chevron-left"></i>
-                </div>
-                <div class="nut_phai-7">
-                    <i class="fa-solid fa-chevron-right"></i>
-                </div>
+        <div class="slider-product-eight-content-btn">
+            <div class="nut_trai-8">
+                <i class="fa-solid fa-chevron-left"></i>
+            </div>
+            <div class="nut_phai-8">
+                <i class="fa-solid fa-chevron-right"></i>
             </div>
         </div>
     </div>
-
-    <!--List Slider product 8-->
-    <div class="slider-product-eight-content">
-        <div class="slider-product-eight-content-title">
-            <div class="title">
-                <h3>Ống nước và Phụ kiện</h3>
-                <span><a href="src/Users/page/product/ong-nuoc-va-phu-kien.html"
-                         class="highlight-text">Xem thêm</a></span>
-            </div>
+</div>
+<!--List Slider product 9-->
+<div class="slider-product-nine-content">
+    <div class="slider-product-nine-content-title">
+        <div class="title">
+            <h3>Thiết bị điện nước</h3>
+            <span><a href="/tqh/product-category?categoryId=9"
+                     class="highlight-text">Xem thêm</a></span>
         </div>
-        <div class="slider-product-eight-content-container">
-            <div class="slider-product-eight-content-items-content">
-                <div class="slider-product-eight-content-items">
-                    <div class="slider-product-eight-content-item">
-                        <div class="img-product">
-                            <a href="src/Users/page/product-detail.html"><img
-                                    src="src/Users/img_product/ong-nuoc-phu-kien/Ống%20nhựa%20mềm%20lõi%20thép%20Ø50mm,%20cuộn%2050m.png"
-                                    alt=""></a>
-                        </div>
-                        <div class="product-title">
-                            <div class="name-product"><a href="src/Users/page/product-detail.html">Ống nhựa mềm lõi thép
-                                Ø50mm,
-                                cuộn
-                                50m</a></div>
-                            <div class="product-price">
-                                <li>300.000đ</li>
-                                <button class="add-to-cart">Thêm vào giỏ hàng</button>
+    </div>
+    <div class="slider-product-nine-content-container">
+        <div class="slider-product-nine-content-items-content">
+            <div class="slider-product-nine-content-items">
+                <c:forEach var="product" items="${productsCategory}">
+                    <c:if test="${product.categoryId == 9}">
+                        <div class="slider-product-nine-content-item">
+                            <div class="img-product">
+                                <a href="product-detail?id=${product.id}&categoryId=${product.categoryId}"><img
+                                        src="${product.imageUrl}"
+                                        alt="${product.name}"></a>
+                            </div>
+                            <div class="product-title">
+                                <div class="name-product"><a href="product-detail?id=${product.id}&categoryId=${product.categoryId}">${product.name}</a></div>
+                                <div class="product-price">
+                                    <li><fmt:formatNumber value="${product.price}" type="number" groupingUsed="true"/>₫</li>
+                                    <a href="add-cart?id=${product.id}" class="add-to-cart">Thêm vào giỏ hàng</a>
+                                </div>
                             </div>
                         </div>
-                    </div>
-
-
-
-                </div>
+                    </c:if>
+                </c:forEach>
             </div>
-
-            <div class="slider-product-eight-content-btn">
-                <div class="nut_trai-8">
-                    <i class="fa-solid fa-chevron-left"></i>
-                </div>
-                <div class="nut_phai-8">
-                    <i class="fa-solid fa-chevron-right"></i>
-                </div>
+            <div class="slider-product-nine-content-items">
+                <c:forEach var="product" items="${productsCategory}">
+                    <c:if test="${product.categoryId == 9}">
+                        <div class="slider-product-nine-content-item">
+                            <div class="img-product">
+                                <a href="product-detail?id=${product.id}&categoryId=${product.categoryId}"><img
+                                        src="${product.imageUrl}"
+                                        alt="${product.name}"></a>
+                            </div>
+                            <div class="product-title">
+                                <div class="name-product"><a href="product-detail?id=${product.id}&categoryId=${product.categoryId}">${product.name}</a></div>
+                                <div class="product-price">
+                                    <li><fmt:formatNumber value="${product.price}" type="number" groupingUsed="true"/>₫</li>
+                                    <a href="add-cart?id=${product.id}" class="add-to-cart">Thêm vào giỏ hàng</a>
+                                </div>
+                            </div>
+                        </div>
+                    </c:if>
+                </c:forEach>
+            </div>
+            <div class="slider-product-nine-content-items">
+                <c:forEach var="product" items="${productsCategory}">
+                    <c:if test="${product.categoryId == 9}">
+                        <div class="slider-product-nine-content-item">
+                            <div class="img-product">
+                                <a href="product-detail?id=${product.id}&categoryId=${product.categoryId}"><img
+                                        src="${product.imageUrl}"
+                                        alt="${product.name}"></a>
+                            </div>
+                            <div class="product-title">
+                                <div class="name-product"><a href="product-detail?id=${product.id}&categoryId=${product.categoryId}">${product.name}</a></div>
+                                <div class="product-price">
+                                    <li><fmt:formatNumber value="${product.price}" type="number" groupingUsed="true"/>₫</li>
+                                    <a href="add-cart?id=${product.id}" class="add-to-cart">Thêm vào giỏ hàng</a>
+                                </div>
+                            </div>
+                        </div>
+                    </c:if>
+                </c:forEach>
+            </div>
+            <div class="slider-product-nine-content-items">
+                <c:forEach var="product" items="${productsCategory}">
+                    <c:if test="${product.categoryId == 9}">
+                        <div class="slider-product-nine-content-item">
+                            <div class="img-product">
+                                <a href="product-detail?id=${product.id}&categoryId=${product.categoryId}"><img
+                                        src="${product.imageUrl}"
+                                        alt="${product.name}"></a>
+                            </div>
+                            <div class="product-title">
+                                <div class="name-product"><a href="product-detail?id=${product.id}&categoryId=${product.categoryId}">${product.name}</a></div>
+                                <div class="product-price">
+                                    <li><fmt:formatNumber value="${product.price}" type="number" groupingUsed="true"/>₫</li>
+                                    <a href="add-cart?id=${product.id}" class="add-to-cart">Thêm vào giỏ hàng</a>
+                                </div>
+                            </div>
+                        </div>
+                    </c:if>
+                </c:forEach>
+            </div>
+        </div>
+        <div class="slider-product-nine-content-btn">
+            <div class="nut_trai-9">
+                <i class="fa-solid fa-chevron-left"></i>
+            </div>
+            <div class="nut_phai-9">
+                <i class="fa-solid fa-chevron-right"></i>
             </div>
         </div>
     </div>
-
-    <!--List Slider product 9-->
-    <div class="slider-product-nine-content">
-        <div class="slider-product-nine-content-title">
-            <div class="title">
-                <h3>Thiết bị điện nước</h3>
-                <span><a href="src/Users/page/product/thiet-bi-dien-nuoc.html"
-                         class="highlight-text">Xem thêm</a></span>
-            </div>
-        </div>
-        <div class="slider-product-nine-content-container">
-            <div class="slider-product-nine-content-items-content">
-                <div class="slider-product-nine-content-items">
-                    <div class="slider-product-nine-content-item">
-                        <div class="img-product">
-                            <a href="src/Users/page/product-detail.html"> <img
-                                    src="src/Users/img_product/thietbi-diennuoc/image1.png" alt=""></a>
-                        </div>
-                        <div class="product-title">
-                            <div class="name-product"><a href="src/Users/page/product-detail.html">Máy bơm tăng áp A-130
-                                JAK –
-                                Panasonic</a></div>
-                            <div class="product-price">
-                                <li>600.000đ</li>
-                                <button class="add-to-cart">Thêm vào giỏ hàng</button>
-                            </div>
-                        </div>
-                    </div>
-
-
-
-                </div>
-            </div>
-            <div class="slider-product-nine-content-btn">
-                <div class="nut_trai-9">
-                    <i class="fa-solid fa-chevron-left"></i>
-                </div>
-                <div class="nut_phai-9">
-                    <i class="fa-solid fa-chevron-right"></i>
-                </div>
-            </div>
-        </div>
-    </div>
-
+</div>
 </div>
 
 <!-- Banner -->
@@ -674,11 +1224,11 @@
 
     <button id="backToTop" title="Quay về đầu trang">⬆</button>
 </div>
-<script src="users/js/slider_Image-home.js"></script>
-<script src="users/js/slider-products.js"></script>
-<script src="users/js/home.js"></script>
-<script type="text/javascript" src="users/js/login-signup.js"></script>
-<script src="users/js/scripts.js"></script>
+<script src="<c:url value="/users/js/slider_Image-home.js"/>"></script>
+<script src="<c:url value="/users/js/slider-products.js"/>"></script>
+<script src="<c:url value="/users/js/home.js"/>"></script>
+<script type="$/text/javascript" src="<c:url value="/users/js/login-signup.js"/>"></script>
+<script src="<c:url value="/users/js/scripts.js"/>"></script>
 <script>
     // Mở banner tự động khi trang tải xong
     window.onload = function () {

@@ -47,7 +47,7 @@
                 </li>
 
                 <li>
-                    <a href="products.html">
+                    <a href="products-list">
                         <span class="icon">
                             <ion-icon name="cube-outline"></ion-icon>
                         </span>

@@ -233,7 +233,8 @@
                         ${error_login}
                     </c:if>
                 </div>
-                <a class="blue" href="reset-password.jsp">Quên mật khẩu?</a>
+
+                <a class="blue" href="turn-page">Quên mật khẩu?</a>
                 <button type="submit" id="login-button">Đăng nhập</button>
             </form>
         </div>

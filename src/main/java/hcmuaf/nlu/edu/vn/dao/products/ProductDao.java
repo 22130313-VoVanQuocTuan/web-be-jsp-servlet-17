@@ -44,6 +44,7 @@ public class ProductDao {
             }
             try (ResultSet rs = stmt.executeQuery()) {
                 while (rs.next()) {
+
                     products.add(mapResultSetToProduct(rs));
                 }
             }
@@ -65,6 +66,7 @@ public class ProductDao {
         product.setCategoryId(rs.getInt("categoryId"));
         product.setView(rs.getInt("view"));
         product.setSoldCount(rs.getInt("soldCount"));
+        product.setStatus(rs.getString("status"));
         product.setDiscountPercent(rs.getDouble("discountPercent") * 100);
         product.setDiscountPrice(product.getPrice() - (product.getPrice() * product.getDiscountPercent() / 100));
         product.setCreateDate(rs.getTimestamp("createDate"));
