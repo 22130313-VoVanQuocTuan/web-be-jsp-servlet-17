@@ -171,6 +171,7 @@ public class ProductFilterDao {
         product.setPrice(rs.getDouble("price"));
         product.setQuantity(rs.getInt("quantity"));
         product.setView(rs.getInt("view"));
+        product.setCategoryId(rs.getInt("categoryId"));
         product.setSoldCount(rs.getInt("soldCount"));
         product.setDiscountPercent(rs.getDouble("discountPercent") * 100);
         product.setDiscountPrice(product.getPrice() - (product.getPrice() * product.getDiscountPercent() / 100));

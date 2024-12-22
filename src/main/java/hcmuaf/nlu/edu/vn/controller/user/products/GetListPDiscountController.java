@@ -22,6 +22,11 @@ public class GetListPDiscountController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
             List<Product> products = productService.getListProductDiscount();
+            List<Product> productsCategory = productService.getAllProducts();
+            List<Product> productPopular = productService.getPopularProducts();
+            // Gửi dữ liệu sản phẩm và categoryId đến JSP để hiển thị
+            req.setAttribute("productsCategory", productsCategory);
+            req.setAttribute("productPopular", productPopular);
             req.setAttribute("products", products);
             req.getRequestDispatcher("home.jsp").forward(req, resp);
 
