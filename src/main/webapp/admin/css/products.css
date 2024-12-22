@@ -138,14 +138,35 @@ td {
 
 .modal-content {
   background: linear-gradient(to right, #4f3131, #15283e);
-  padding: 20px;
-  border-radius: 8px;
-  width: 400px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
-  text-align: left;
+  padding: 10px; /* Giảm thêm padding để nội dung gọn */
+  border-radius: 10px; /* Bo góc đẹp hơn */
+  width: 80%; /* Giảm chiều rộng */
+  max-width: 400px; /* Giới hạn chiều rộng tối đa nhỏ hơn */
+  max-height: 70%; /* Giới hạn chiều cao */
+  overflow-y: auto; /* Thanh cuộn khi nội dung quá dài */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5); /* Tạo hiệu ứng nổi */
   color: #f1f1f1;
+  animation: fadeIn 0.3s ease-in-out; /* Thêm hiệu ứng khi modal xuất hiện */
   margin-left: 20%;
 }
+/* Tùy chỉnh scrollbar */
+.modal-content::-webkit-scrollbar {
+  width: 8px; /* Độ rộng của scrollbar */
+}
+
+.modal-content::-webkit-scrollbar-thumb {
+  background: #f7d774; /* Màu thanh cuộn */
+  border-radius: 4px; /* Bo góc */
+}
+
+.modal-content::-webkit-scrollbar-thumb:hover {
+  background: #f88e62; /* Màu khi hover vào thanh cuộn */
+}
+
+.modal-content::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1); /* Màu nền của track */
+}
+
 .modal-content:hover {
   transform: scale(1.02);
 }

@@ -10,19 +10,29 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="532fc101-98ee-4e43-b5a2-5e3357da0e84" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/controller/admin/product/GetProductController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/controller/user/account/TurnPage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/classes/hcmuaf/nlu/edu/vn/controller/user/products/GetListPDiscountController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/classes/hcmuaf/nlu/edu/vn/controller/user/products/GetListPDiscountController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/classes/hcmuaf/nlu/edu/vn/controller/user/products/ProductCategoryController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/classes/hcmuaf/nlu/edu/vn/controller/user/products/ProductCategoryController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/classes/hcmuaf/nlu/edu/vn/controller/user/account/LoginController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/classes/hcmuaf/nlu/edu/vn/controller/user/account/LoginController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/classes/hcmuaf/nlu/edu/vn/controller/user/account/ResetCodeController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/classes/hcmuaf/nlu/edu/vn/controller/user/account/ResetCodeController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/classes/hcmuaf/nlu/edu/vn/dao/Orders/OrderDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/classes/hcmuaf/nlu/edu/vn/dao/Orders/OrderDao.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/classes/hcmuaf/nlu/edu/vn/dao/products/ProductDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/classes/hcmuaf/nlu/edu/vn/dao/products/ProductDao.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/classes/hcmuaf/nlu/edu/vn/dao/products/ProductFilterDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/classes/hcmuaf/nlu/edu/vn/dao/products/ProductFilterDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/home.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/tqh/home.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/xingmang/ximamg allybuild.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/js/slider-products.js" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/tqh/users/js/slider-products.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/controller/user/products/GetListPDiscountController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/controller/user/products/GetListPDiscountController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/controller/user/products/ProductCategoryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/controller/user/products/ProductCategoryController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/admin/css/products.css" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/tqh/admin/css/products.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/admin/js/products.js" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/tqh/admin/js/products.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/admin/pages/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/tqh/admin/pages/index.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/admin/pages/products.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/page/login-signup.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/tqh/users/page/login-signup.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/controller/user/account/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/controller/user/account/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/controller/user/account/ResetCodeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/controller/user/account/ResetCodeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/dao/Orders/OrderDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/dao/Orders/OrderDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/dao/products/ProductDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/dao/products/ProductDao.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/dao/products/ProductFilterDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/dao/products/ProductFilterDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/home.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/home.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/users/img_product/xingmang/ximamg allybuild.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/users/img_product/xingmang/ximamgallybuild.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/users/js/slider-products.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/users/js/slider-products.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/admin/css/products.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/admin/css/products.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/admin/js/products.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/admin/js/products.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/admin/pages/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/admin/pages/index.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/admin/pages/products.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/admin/pages/products.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/users/page/login-signup.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/users/page/login-signup.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,8 +42,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Servlet" />
         <option value="Class" />
+        <option value="Servlet" />
       </list>
     </option>
   </component>
@@ -201,11 +211,24 @@
       <workItem from="1734503868507" duration="16482000" />
       <workItem from="1734573951794" duration="22673000" />
       <workItem from="1734696576258" duration="11929000" />
-      <workItem from="1734831845275" duration="4960000" />
+      <workItem from="1734831845275" duration="7742000" />
+      <workItem from="1734840593775" duration="775000" />
+      <workItem from="1734843885128" duration="8076000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>
