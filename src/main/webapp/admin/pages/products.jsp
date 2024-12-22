@@ -170,20 +170,20 @@
                     <tbody>
                     <!-- Các sản phẩm sẽ được thêm vào đây -->
                     <c:forEach var="product" items="${products}" begin="0" end="9">
-                    <tr>
-                        <td><img src="${product.imageUrl}" alt="${product.name}"></td>
-                        <td>${product.id}</td>
-                        <td>${product.name}</td>
-                        <td><fmt:formatNumber value="${product.discountPrice}" type="number"
-                                              groupingUsed="true"/>₫</td>
-                        <td>${product.quantity}</td>
-                        <td>${product.status}</td>
-                        <td> <fmt:formatDate value="${product.createDate}" pattern="dd-MM-yyyy HH:mm:ss" /></td>
-                        <td class="v">
-                            <button id="edit-product">Sửa</button>
-                            <button id="deleteBtn">Xóa</button>
-                        </td>
-                    </tr>
+                        <tr>
+                            <td><img src="${product.imageUrl}" alt="${product.name}"></td>
+                            <td>${product.id}</td>
+                            <td>${product.name}</td>
+                            <td><fmt:formatNumber value="${product.discountPrice}" type="number"
+                                                  groupingUsed="true"/>₫</td>
+                            <td>${product.quantity}</td>
+                            <td>${product.status}</td>
+                            <td> <fmt:formatDate value="${product.createDate}" pattern="dd-MM-yyyy HH:mm:ss" /></td>
+                            <td class="v">
+                                <button id="edit-product">Sửa</button>
+                                <button id="deleteBtn" data-product-id="${product.id}">Xóa</button>
+                            </td>
+                        </tr>
                     </c:forEach>
                     </tbody>
                 </table>
