@@ -52,7 +52,18 @@ public class ProductDao {
         return products;
     }
 
-
+    // Hàm xóa sản phẩm
+    public boolean deleteProduct(String id) {
+        String sql = "DELETE FROM products WHERE id = ?";
+        try (PreparedStatement stmt = dbConnect.preparedStatement(sql)) {
+            stmt.setString(1, id);
+            int rowsDeleted = stmt.executeUpdate();
+            return rowsDeleted > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 
 
     // Chuyển đổi (mapping) dữ liệu từ một đối tượng ResultSet

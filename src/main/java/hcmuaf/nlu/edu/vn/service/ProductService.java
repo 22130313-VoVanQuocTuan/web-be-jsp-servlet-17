@@ -43,6 +43,9 @@ public class ProductService {
         return getProductDao.getProduct(id);
     }
 
+    // Hàm xóa sản phẩm
+    public boolean deleteProduct(String id){return productDAO.deleteProduct(id);}
+
     // -------------------Các phương thức filter sản phẩm-------------------------
     // Các sản phẩm phổ biến thoe lượt bán
     public List<Product> getPopularProducts() throws SQLException {

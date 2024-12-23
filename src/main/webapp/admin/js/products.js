@@ -1,14 +1,21 @@
 // lấy các phần tử
 const closeModalBtns = document.querySelectorAll(".close-modal");
-const deleteBtn = document.getElementById('deleteBtn');
+const deleteBtns = document.querySelectorAll("#deleteBtn");
 const deleteModal = document.getElementById('deleteModal');
 const confirmDeleteBtn = document.getElementById('confirmDelete');
-// hiển modal "Xóa"
-deleteBtn.addEventListener('click', () => {
-    deleteModal.style.display = 'flex';
+let productIdToDelete = null;  // Biến để lưu id sản phẩm cần xóa
+// Hiển thị modal "Xóa"
+deleteBtns.forEach(deleteBtn => {
+    deleteBtn.addEventListener('click', (e) => {
+        productIdToDelete = e.target.getAttribute('data-product-id');  // Lấy id sản phẩm từ data-product-id
+        deleteModal.style.display = 'flex';  // Hiển thị modal
+    });
 });
 // xác nhận xóa
 confirmDeleteBtn.addEventListener('click', () => {
+    if (productIdToDelete) {
+        window.location.href = `/tqh/delete-product?id=${productIdToDelete}`;  // Gửi yêu cầu xóa đến controller
+    }
     deleteModal.style.display = 'none';
 });
 // đóng modal
@@ -17,7 +24,6 @@ closeModalBtns.forEach(btn => {
         deleteModal.style.display = "none";  // Đóng modal đúng
     });
 });
-
 // ----------------------------------------------------------------------------------------------------------
 //  Thêm sản phẩm
 const addProductbtn = document.getElementById("add-product");
