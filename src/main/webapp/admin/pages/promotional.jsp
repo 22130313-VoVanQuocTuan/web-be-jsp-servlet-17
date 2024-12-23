@@ -171,7 +171,6 @@
                                 <td>id</td>
                                 <td>Mã ưu đãi</td>
                                 <td>Giá trị</td>
-                                <td>Giá trị hoá đơn tối thiểu</td>
                                 <td>Ngày bắt đầu</td>
                                 <td>Ngày kết thúc</td>
                                 <td>Trạng thái</td>
@@ -180,13 +179,11 @@
                         </thead>
 
                         <tbody>
-                        <c:forEach var="promotion" items="listPromotional">
+                        <c:forEach var="promotion" items="${listPromotional}">
                             <tr>
                                 <td>${promotion.id}</td>
                                 <td>${promotion.code}</td>
                                 <td><fmt:formatNumber value="${promotion.value}" type="number"
-                                                      groupingUsed="true"/>đ</td>
-                                <td><fmt:formatNumber value="${promotion.minPriceCart}" type="number"
                                                       groupingUsed="true"/>đ</td>
                                 <td><fmt:formatDate value="${promotion.startDate}" pattern="dd-MM-yyyy HH:mm:ss" /></td>
                                 <td><fmt:formatDate value="${promotion.endDate}" pattern="dd-MM-yyyy HH:mm:ss" /></td>
@@ -209,33 +206,37 @@
                 <div id="addPromotionModal" class="modal">
                     <div class="modal-content">
                         <h3>Thêm mã ưu đãi mới</h3>
-                        <form id="addPromotionForm">
-                            <label for="productCode">Mã ưu đãi:</label>
-                            <input type="text" id="promotionCode">
+                        <form id="addPromotionForm" action="add-promotional" method="post">
+                            <label >Mã ưu đãi:</label>
+                            <input type="text" id="promotionCode" name="code" required>
 
-                            <label for="productName">Giá trị:</label>
-                            <input type="text" id="promotionName">
+                            <label >Giá trị:</label>
+                            <input type="text" id="promotionName" name="value" required>
 
-                            <label for="startDate">Ngày bắt đầu:</label>
-                            <input type="date" id="promotionDateStart">
+                            <label >Ngày bắt đầu:</label>
+                            <input type="datetime-local" id="promotionDateStart" name="startDate" required>
 
-                            <label for="endDate">Ngày kết thúc:</label>
-                            <input type="date" id="promotionDateEnd">
+                            <label>Ngày kết thúc:</label>
+                            <input type="datetime-local" id="promotionDateEnd" name="endDate" required>
 
-                            <button id="save_Product">Lưu ưu đãi</button>
-                            <button class="close_modal">Thoát</button>
+                            <c:if test="${not empty error}">
+                                <p style="color: red;">${error}</p> <!-- Hiển thị lỗi nếu có -->
+                            </c:if>
+                            <button type="submit" id="save_Product">Lưu ưu đãi</button>
+                            <button type="button" class="close-modal">Thoát</button>
                         </form>
+
                     </div>
                 </div>
 
-                <!-- Modal Xóa tài khoản -->
+                <!-- Modal Xóa ưu đãi -->
                 <div id="delete-modal" class="modal">
                     <div class="modal-content">
                         <h3>Xác nhận xóa</h3>
-                        <label>Bạn có chắc chắn muốn xóa tài khoản này?</label>
+                        <label>Bạn có chắc chắn muốn xóa ưu đãi này?</label>
                         <div class="button-container">
-                            <button class="confirm-delete">Xóa</button>
-                            <button class="close-modal">Hủy</button>
+                            <button id="confirm-delete"  class="confirm-delete">Xóa</button>
+                            <button type="button"  class="close-modal">Hủy</button>
                         </div>
                     </div>
                 </div>
@@ -246,6 +247,16 @@
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script src="<c:url value="/admin/js/index.js"/>"></script>
     <script src="<c:url value="/admin/js/promotional.js"/>"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Kiểm tra nếu cần hiển thị modal
+            const showModal = "${showModal}" === "true";
+            if (showModal) {
+                const modal = document.getElementById('addPromotionModal');
+                modal.style.display = 'block';
+            }
+        });
+    </script>
 
 </body>
 

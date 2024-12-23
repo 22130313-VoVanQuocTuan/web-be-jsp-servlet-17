@@ -32,10 +32,10 @@ public class AddDeleteUpdateAccountInAdminDao {
     }
 
 
-    public boolean deleteAccount(String id) {
+    public boolean deleteAccount(int id) {
         String sql = "DELETE FROM users WHERE id = ?";
         try (PreparedStatement ptm = dbConnect.preparedStatement(sql)) {
-            ptm.setString(1, id);
+            ptm.setInt(1, id);
             int rowsDeleted = ptm.executeUpdate();
             return rowsDeleted > 0;
         } catch (SQLException e) {

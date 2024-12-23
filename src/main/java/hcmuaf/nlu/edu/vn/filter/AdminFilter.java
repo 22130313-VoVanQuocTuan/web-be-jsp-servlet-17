@@ -10,7 +10,8 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
-@WebFilter(filterName = "admin-filter", urlPatterns = "")
+@WebFilter(filterName = "admin-filter", urlPatterns = {"/add-account", "/delete-account", "/accounts", "/status-account",
+"/add-promotional", "/delete-promotional", "/promotional-list"})
 public class AdminFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
@@ -25,7 +26,7 @@ public class AdminFilter implements Filter {
         Users user = (session != null) ? (Users) session.getAttribute("user") : null;
 
         if (user == null || !user.getRole().equals("admin")) {
-            res.sendRedirect(req.getContextPath() + "/users/page/login-signup.jsp"); // Redirect đến trang lỗi nếu không phải admin
+            req.getRequestDispatcher( "/users/page/login-signup.jsp").forward(req, res); // Redirect đến trang lỗi nếu không phải admin
             return;
         }
 

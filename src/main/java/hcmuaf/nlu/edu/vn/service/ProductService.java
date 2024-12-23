@@ -12,7 +12,7 @@ public class ProductService {
     private final GetListPDiscountDao getListPDiscountDao;
 
     private final ProductDao productDAO = new ProductDao();
-    private final PromotionalDao promotionalDao ;
+    private final ApplyPromotionalInCartDao promotionalDao ;
     private final ProductFilterDao productFilterDao = new ProductFilterDao();
 
     private final GetProductDao getProductDao;
@@ -20,7 +20,7 @@ public class ProductService {
     public ProductService() {
         this.getListPDiscountDao = new GetListPDiscountDao();
         this.getProductDao = new GetProductDao();
-        this.promotionalDao = new PromotionalDao();
+        this.promotionalDao = new ApplyPromotionalInCartDao();
     }
 
     //Lấy ra danh  sách sản phẩm khuyến mãi
@@ -81,5 +81,7 @@ public class ProductService {
         return promotionalDao.getListPromotional();
 
     }
+
+
 }
 

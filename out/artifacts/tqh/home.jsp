@@ -1224,11 +1224,11 @@
 
     <button id="backToTop" title="Quay về đầu trang">⬆</button>
 </div>
-<script src="<c:url value="/users/js/slider_Image-home.js"/>"></script>
-<script src="<c:url value="/users/js/slider-products.js"/>"></script>
-<script src="<c:url value="/users/js/home.js"/>"></script>
-<script type="$/text/javascript" src="<c:url value="/users/js/login-signup.js"/>"></script>
-<script src="<c:url value="/users/js/scripts.js"/>"></script>
+<script src="users/js/slider_Image-home.js"></script>
+<script src="users/js/slider-products.js"></script>
+<script src="users/js/home.js"></script>
+<script src="<c:url value="/users/js/login-signup.js"/>"></script>
+<script src="users/js/scripts.js"></script>
 <script>
     // Mở banner tự động khi trang tải xong
     window.onload = function () {

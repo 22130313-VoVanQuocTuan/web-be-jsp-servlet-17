@@ -188,7 +188,7 @@ public class UserService {
     }
 
     //Xóa tài khoản
-    public boolean deleteAccount(String id) {
+    public boolean deleteAccount(int id) {
         return addDeleteUpdateAccountInAdminDao.deleteAccount(id);
     }
 }
