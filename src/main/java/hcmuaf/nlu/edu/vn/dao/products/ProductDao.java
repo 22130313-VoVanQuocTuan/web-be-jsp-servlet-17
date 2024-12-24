@@ -44,6 +44,7 @@ public class ProductDao {
             }
             try (ResultSet rs = stmt.executeQuery()) {
                 while (rs.next()) {
+
                     products.add(mapResultSetToProduct(rs));
                 }
             }
@@ -51,7 +52,18 @@ public class ProductDao {
         return products;
     }
 
-
+    // Hàm xóa sản phẩm
+    public boolean deleteProduct(String id) {
+        String sql = "DELETE FROM products WHERE id = ?";
+        try (PreparedStatement stmt = dbConnect.preparedStatement(sql)) {
+            stmt.setString(1, id);
+            int rowsDeleted = stmt.executeUpdate();
+            return rowsDeleted > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 
 
     // Chuyển đổi (mapping) dữ liệu từ một đối tượng ResultSet
@@ -65,6 +77,7 @@ public class ProductDao {
         product.setCategoryId(rs.getInt("categoryId"));
         product.setView(rs.getInt("view"));
         product.setSoldCount(rs.getInt("soldCount"));
+        product.setStatus(rs.getString("status"));
         product.setDiscountPercent(rs.getDouble("discountPercent") * 100);
         product.setDiscountPrice(product.getPrice() - (product.getPrice() * product.getDiscountPercent() / 100));
         product.setCreateDate(rs.getTimestamp("createDate"));

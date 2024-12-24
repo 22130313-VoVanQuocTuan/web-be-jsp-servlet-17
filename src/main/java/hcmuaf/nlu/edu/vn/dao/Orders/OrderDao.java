@@ -6,7 +6,10 @@ import hcmuaf.nlu.edu.vn.model.Orders;
 import hcmuaf.nlu.edu.vn.model.ItemOrder;
 
 import hcmuaf.nlu.edu.vn.model.Users;
+<<<<<<< HEAD
 import org.springframework.security.core.userdetails.User;
+=======
+>>>>>>> 201937b2ccb91bcb85cb43555aa3627b40b621a1
 
 
 import java.sql.PreparedStatement;

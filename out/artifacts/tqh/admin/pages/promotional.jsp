@@ -1,3 +1,6 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="vi">
 
@@ -9,9 +12,9 @@
     <!------------------ Kiểu dáng ------------------>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 
-    <link rel="stylesheet" href="../css/user.css">
-    <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/promotional.css">
+    <link rel="stylesheet" href="<c:url value="/admin/css/user.css"/>">
+    <link rel="stylesheet" href="<c:url value="/admin/css/style.css"/>">
+    <link rel="stylesheet" href="<c:url value="/admin/css/promotional.css"/>">
 
 </head>
 
@@ -168,7 +171,6 @@
                                 <td>id</td>
                                 <td>Mã ưu đãi</td>
                                 <td>Giá trị</td>
-                                <td>Giá trị hoá đơn tối thiểu</td>
                                 <td>Ngày bắt đầu</td>
                                 <td>Ngày kết thúc</td>
                                 <td>Trạng thái</td>
@@ -177,85 +179,25 @@
                         </thead>
 
                         <tbody>
+                        <c:forEach var="promotion" items="${listPromotional}">
                             <tr>
-                                <td>1</td>
-                                <td>QƯERTYUIOP123</td>
-                                <td>100.000đ</td>
-                                <td>1.000.000đ</td>
-                                <td>10/10/2024</td>
-                                <td>10/10/2025</td>
-                                <td><span class="statusText">Hoạt động</span></td>
+                                <td>${promotion.id}</td>
+                                <td>${promotion.code}</td>
+                                <td><fmt:formatNumber value="${promotion.value}" type="number"
+                                                      groupingUsed="true"/>đ</td>
+                                <td><fmt:formatDate value="${promotion.startDate}" pattern="dd-MM-yyyy HH:mm:ss" /></td>
+                                <td><fmt:formatDate value="${promotion.endDate}" pattern="dd-MM-yyyy HH:mm:ss" /></td>
+                                <td><span class="statusText">${promotion.status}</span></td>
                                 <td>
                                     <div class="v">
-                                        <button class="delete-btn" data-id="1">Xóa</button>
+                                        <button class="delete-btn" data-id="${promotion.id}">Xóa</button>
                                         <button>Sửa</button>
                                     </div>
                                 </td>
 
                             </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>ASDFGHJKL123</td>
-                                <td>50.000đ</td>
-                                <td>500.000đ</td>
-                                <td>20/10/2024</td>
-                                <td>20/10/2025</td>
-                                <td><span class="statusText">Hoạt động</span></td>
-                                <td>
-                                    <div class="v">
-                                        <button class="delete-btn" data-id="1">Xóa</button>
-                                        <button>Sửa</button>
-                                    </div>
-                                </td>
+                        </c:forEach>
 
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>ZXCVBNM123</td>
-                                <td>200.000đ</td>
-                                <td>888.888đ</td>
-                                <td>20/11/2024</td>
-                                <td>20/11/2025</td>
-                                <td><span class="statusText">Hoạt động</span></td>
-                                <td>
-                                    <div class="v">
-                                        <button class="delete-btn" data-id="1">Xóa</button>
-                                        <button>Sửa</button>
-                                    </div>
-                                </td>
-
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td>QAZWSXEDC123</td>
-                                <td>99.000đ</td>
-                                <td>1.000.000</td>
-                                <td>11/11/2024</td>
-                                <td>12/11/2024</td>
-                                <td><span class="statusText">Không hoạt động</span></td>
-                                <td>
-                                    <div class="v">
-                                        <button class="delete-btn" data-id="1">Xóa</button>
-                                        <button>Sửa</button>
-                                    </div>
-                                </td>
-
-                            </tr>
-                            <tr>
-                                <td>5</td>
-                                <td>RFVTGBYHN123</td>
-                                <td>150.000đ</td>
-                                <td>1.000.000đ</td>
-                                <td>12/12/2024</td>
-                                <td>12/12/2025</td>
-                                <td><span class="statusText">Không hoạt động</span></td>
-                                <td>
-                                    <div class="v">
-                                        <button class="delete-btn" data-id="1">Xóa</button>
-                                        <button>Sửa</button>
-                                    </div>
-                                </td>
-                            </tr>
                         </tbody>
                     </table>
                
@@ -264,33 +206,37 @@
                 <div id="addPromotionModal" class="modal">
                     <div class="modal-content">
                         <h3>Thêm mã ưu đãi mới</h3>
-                        <form id="addPromotionForm">
-                            <label for="productCode">Mã ưu đãi:</label>
-                            <input type="text" id="promotionCode">
+                        <form id="addPromotionForm" action="add-promotional" method="post">
+                            <label >Mã ưu đãi:</label>
+                            <input type="text" id="promotionCode" name="code" required>
 
-                            <label for="productName">Giá trị:</label>
-                            <input type="text" id="promotionName">
+                            <label >Giá trị:</label>
+                            <input type="text" id="promotionName" name="value" required>
 
-                            <label for="startDate">Ngày bắt đầu:</label>
-                            <input type="date" id="promotionDateStart">
+                            <label >Ngày bắt đầu:</label>
+                            <input type="datetime-local" id="promotionDateStart" name="startDate" required>
 
-                            <label for="endDate">Ngày kết thúc:</label>
-                            <input type="date" id="promotionDateEnd">
+                            <label>Ngày kết thúc:</label>
+                            <input type="datetime-local" id="promotionDateEnd" name="endDate" required>
 
-                            <button id="save_Product">Lưu ưu đãi</button>
-                            <button class="close_modal">Thoát</button>
+                            <c:if test="${not empty error}">
+                                <p style="color: red;">${error}</p> <!-- Hiển thị lỗi nếu có -->
+                            </c:if>
+                            <button type="submit" id="save_Product">Lưu ưu đãi</button>
+                            <button type="button" class="close-modal">Thoát</button>
                         </form>
+
                     </div>
                 </div>
 
-                <!-- Modal Xóa tài khoản -->
+                <!-- Modal Xóa ưu đãi -->
                 <div id="delete-modal" class="modal">
                     <div class="modal-content">
                         <h3>Xác nhận xóa</h3>
-                        <label>Bạn có chắc chắn muốn xóa tài khoản này?</label>
+                        <label>Bạn có chắc chắn muốn xóa ưu đãi này?</label>
                         <div class="button-container">
-                            <button class="confirm-delete">Xóa</button>
-                            <button class="close-modal">Hủy</button>
+                            <button id="confirm-delete"  class="confirm-delete">Xóa</button>
+                            <button type="button"  class="close-modal">Hủy</button>
                         </div>
                     </div>
                 </div>
@@ -299,9 +245,18 @@
         </div>
     </div>
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-    <script src="../js/index.js"></script>
-    <script src="../js/user.js"></script>
-    <script src="../js/promotional.js"></script>
+    <script src="<c:url value="/admin/js/index.js"/>"></script>
+    <script src="<c:url value="/admin/js/promotional.js"/>"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Kiểm tra nếu cần hiển thị modal
+            const showModal = "${showModal}" === "true";
+            if (showModal) {
+                const modal = document.getElementById('addPromotionModal');
+                modal.style.display = 'block';
+            }
+        });
+    </script>
 
 </body>
 

@@ -8,29 +8,21 @@ document.addEventListener('DOMContentLoaded', function () {
         modal.style.display = 'block';
     }
 
-    // Hàm đóng modal
-    function closeModal() {
-        const modals = document.querySelectorAll('.modal');
-        modals.forEach(modal => modal.style.display = 'none');
-    }
 
-    //  Khi nhấn vào nút xóa
-    deleteButtons.forEach(button => {
-        button.addEventListener('click', function () {
-            const row = button.closest('tr');
-            const id = button.getAttribute('data-id');
-            // Hiển thị modal xóa
-            showModal('delete-modal');
-
-            // Xử lý khi nhấn "Xóa" trong modal
+    // Xử lý khi nhấn "Xóa" trong modal
             const confirmDeleteButton = document.querySelector('.confirm-delete');
-            confirmDeleteButton.onclick = function () {
-                // Xóa dòng khỏi bảng
-                row.remove();  // Xóa dòng tương ứng trong bảng
-                closeModal();  // Đóng modal sau khi xóa
-                console.log('Xóa tài khoản với ID:', id);  // Hiển thị ID bị xóa
-            };
-        });
+            document.querySelectorAll('.delete-btn').forEach(function(button) {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault(); // Ngăn chặn hành động mặc định (như điều hướng lại trang)
+                    showModal('delete-modal');
+                    const promotionId = this.getAttribute('data-id'); // Lấy ID từ thuộc tính data-id
+                    const url = `delete-promotional?id=${promotionId}`; // Đường dẫn xóa tài khoản kèm ID
+
+                    confirmDeleteButton.addEventListener('click', function() {
+                        window.location.href = url; // Chuyển hướng đến URL xóa tài khoản
+                    });
+                });
+
     });
 
 
@@ -39,6 +31,12 @@ document.addEventListener('DOMContentLoaded', function () {
     closeButtons.forEach(button => {
         button.addEventListener('click', closeModal);
     });
+    // Hàm đóng modal
+    function closeModal() {
+        const modals = document.querySelectorAll('.modal');
+        modals.forEach(modal => modal.style.display = 'none');
+    }
+
 });
 
 //Thêm sản phẩm
