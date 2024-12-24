@@ -1,8 +1,6 @@
 package hcmuaf.nlu.edu.vn.controller.user.Orders;
 
 import hcmuaf.nlu.edu.vn.model.ItemOrder;
-import hcmuaf.nlu.edu.vn.model.OrderItem;
-import hcmuaf.nlu.edu.vn.model.Orders;
 import hcmuaf.nlu.edu.vn.service.OrderService;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
@@ -10,12 +8,13 @@ import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 
 @WebServlet(name = "OrderView", value = "/OrderView")
-public class OrderView extends HttpServlet {
+public class OrderViewController extends HttpServlet {
     private final OrderService orderService;
 
-    public OrderView() {
+    public OrderViewController() {
         this.orderService = new OrderService();
     }
 
@@ -24,7 +23,8 @@ public class OrderView extends HttpServlet {
 
         int id = Integer.parseInt(request.getParameter("id"));
         try {
-            request.setAttribute("orderInfo", orderService.getItemOrders(id));
+            List<ItemOrder> orderItem = orderService.getItemOrders(id);
+            request.setAttribute("orderInfo", orderItem);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
