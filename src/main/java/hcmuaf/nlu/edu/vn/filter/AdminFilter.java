@@ -11,7 +11,7 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 
 @WebFilter(filterName = "admin-filter", urlPatterns = {"/add-account", "/delete-account", "/accounts", "/status-account",
-"/add-promotional", "/delete-promotional", "/promotional-list"})
+"/add-promotional", "/delete-promotional", "/promotional-list", "/update-status-pro","/list-rating" ,"/delete-rating"})
 public class AdminFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
@@ -26,7 +26,16 @@ public class AdminFilter implements Filter {
         Users user = (session != null) ? (Users) session.getAttribute("user") : null;
 
         if (user == null || !user.getRole().equals("admin")) {
-            req.getRequestDispatcher( "/users/page/login-signup.jsp").forward(req, res); // Redirect đến trang lỗi nếu không phải admin
+            // Lưu URL hiện tại
+            String currentUrl = req.getRequestURI();
+            String queryString = req.getQueryString();
+            if (queryString != null) {
+                currentUrl += "?" + queryString; // Gắn query string nếu có
+            }
+            req.getSession(true).setAttribute("redirectUrl", currentUrl);
+
+            // Chuyển đến trang đăng nhập
+            req.getRequestDispatcher("/users/page/login-signup.jsp").forward(req, res);
             return;
         }
 

@@ -26,4 +26,14 @@ public class PromotionalService {
     public boolean deletePromotional(int id) {
         return promotionalDao.deletePromotion(id);
     }
+
+    //Cập nhật ưu đâĩ
+    public boolean updatePromotional(int id,double value, Timestamp startTimestamp, Timestamp endTimestamp) {
+        return promotionalDao.updatePromotional(id,value,startTimestamp,endTimestamp);
+    }
+
+    //Cập nhật trạng thái ưu đãi
+    public boolean updateStatusProm(int id, String status) {
+        return promotionalDao.updateStatusProm(id,status);
+    }
 }

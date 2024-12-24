@@ -70,4 +70,39 @@ public class PromotionalDao {
         }
         return false;
     }
+
+    //Cập nhật ưu đãi
+    public boolean updatePromotional(int id, double value, Timestamp startTimestamp, Timestamp endTimestamp) {
+        String sql = "UPDATE promotional SET value = ?, startDate =?, endDate=? WHERE id = ?";
+        try(PreparedStatement ptm = dbConnect.preparedStatement(sql)){
+            ptm.setDouble(1, value);
+            ptm.setTimestamp(2, startTimestamp);
+            ptm.setTimestamp(3, endTimestamp);
+            ptm.setInt(4,id);
+            int row = ptm.executeUpdate();
+            if (row > 0) {
+                return true;
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return false;
+    }
+
+    //Cập nhật trạng thái ưu  đãi
+    public boolean updateStatusProm(int id, String status) {
+        String sql = "UPDATE promotional SET status = ? WHERE id = ?";
+        try(PreparedStatement ptm = dbConnect.preparedStatement(sql)){
+            ptm.setString(1, status);
+            ptm.setInt(2, id);
+            int row = ptm.executeUpdate();
+            if (row > 0) {
+                return true;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return false;
+    }
 }

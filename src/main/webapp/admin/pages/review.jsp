@@ -1,3 +1,6 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="vi">
 
@@ -9,8 +12,8 @@
     <!------------------ Kiểu dáng ------------------>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 
-    <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/review.css">
+    <link rel="stylesheet" href="<c:url value="/admin/css/style.css"/>">
+    <link rel="stylesheet" href="<c:url value="/admin/css/review.css"/>">
 </head>
 <style>
     .add-category {
@@ -53,7 +56,7 @@
                 </li>
 
                 <li>
-                    <a href="user.jsp">
+                    <a href="accounts">
                         <span class="icon">
                             <ion-icon name="people-outline"></ion-icon>
                         </span>
@@ -62,7 +65,7 @@
                 </li>
 
                 <li>
-                    <a href="products.html">
+                    <a href="products-list">
                         <span class="icon">
                             <ion-icon name="cube-outline"></ion-icon>
                         </span>
@@ -79,7 +82,7 @@
                 </li>
 
                 <li>
-                    <a href="promotional.html">
+                    <a href="promotional-list">
                         <span class="icon">
                             <ion-icon name="pricetag-outline"></ion-icon>
                         </span>
@@ -96,7 +99,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="review.html">
+                    <a href="list-rating">
                         <span class="icon">
                             <ion-icon name="chatbubble-outline"></ion-icon>
                         </span>
@@ -115,7 +118,7 @@
                 </li>
 
                 <li>
-                    <a href="/src/Users/page/login-signup.jsp">
+                    <a href="logout">
                         <span class="icon">
                             <ion-icon name="log-out-outline"></ion-icon>
                         </span>
@@ -164,97 +167,18 @@
                             </tr>
                         </thead>
                         <tbody>
+                            <c:forEach var="rating" items="${listRating}">
                             <tr>
-                                <td>SP001</td>
-                                <td>KH001</td>
-                                <td>Rất hài lòng với chất lượng</td>
-                                <td>2024-11-10</td>
+                                <td>${rating.productId}</td>
+                                <td>${rating.userId}</td>
+                                <td>${rating.content}</td>
+                                <td>${rating.createdAt}</td>
                                 <td class="v">
-                                    <button class="delete-btn" data-id="1">Xóa</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>SP002</td>
-                                <td>KH002</td>
-                                <td>Giao hàng nhanh, chất lượng ổn</td>
-                                <td>2024-11-12</td>
-                                <td class="v">
-                                    <button class="delete-btn" data-id="1">Xóa</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>SP001</td>
-                                <td>KH001</td>
-                                <td>Rất hài lòng với chất lượng</td>
-                                <td>2024-11-10</td>
-                                <td class="v">
-                                    <button class="delete-btn" data-id="1">Xóa</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>SP001</td>
-                                <td>KH001</td>
-                                <td>Rất hài lòng với chất lượng</td>
-                                <td>2024-11-10</td>
-                                <td class="v">
-                                    <button class="delete-btn" data-id="1">Xóa</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>SP001</td>
-                                <td>KH001</td>
-                                <td>Rất hài lòng với chất lượng</td>
-                                <td>2024-11-10</td>
-                                <td class="v">
-                                    <button class="delete-btn" data-id="1">Xóa</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>SP001</td>
-                                <td>KH001</td>
-                                <td>Rất hài lòng với chất lượng</td>
-                                <td>2024-11-10</td>
-                                <td class="v">
-                                    <button class="delete-btn" data-id="1">Xóa</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>SP001</td>
-                                <td>KH001</td>
-                                <td>Rất hài lòng với chất lượng</td>
-                                <td>2024-11-10</td>
-                                <td class="v">
-                                    <button class="delete-btn" data-id="1">Xóa</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>SP001</td>
-                                <td>KH001</td>
-                                <td>Rất hài lòng với chất lượng</td>
-                                <td>2024-11-10</td>
-                                <td class="v">
-                                    <button class="delete-btn" data-id="1">Xóa</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>SP001</td>
-                                <td>KH001</td>
-                                <td>Rất hài lòng với chất lượng</td>
-                                <td>2024-11-10</td>
-                                <td class="v">
-                                    <button class="delete-btn" data-id="1">Xóa</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>SP001</td>
-                                <td>KH001</td>
-                                <td>Rất hài lòng với chất lượng</td>
-                                <td>2024-11-10</td>
-                                <td class="v">
-                                    <button class="delete-btn" data-id="1">Xóa</button>
+                                    <button class="delete-btn" data-id="${rating.id}">Xóa</button>
                                 </td>
                             </tr>
 
+                            </c:forEach>
                             <!-- Thêm các dòng dữ liệu khác tại đây -->
                         </tbody>
                     </table>
@@ -268,21 +192,18 @@
                     <h3>Xác nhận xóa</h3>
                     <label>Bạn có chắc chắn muốn xóa tài khoản này?</label>
                     <div class="button-container">
-                        <button class="confirm-delete">Xóa</button>
-                        <button class="close-modal">Hủy</button>
+                        <button id="confirm-delete" class="confirm-delete">Xóa</button>
+                        <button  class="close-modal">Hủy</button>
                     </div>
                 </div>
             </div>
-
-
         </div>
     </div>
 
 
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-    <script src="../js/index.js"></script>
-    <script src="../js/user.js"></script>
-    <script src ="../js/review.js"></script>
+    <script src="<c:url value="/admin/js/index.js"/>"></script>
+    <script src ="<c:url value="/admin/js/review.js"/>"></script>
 
 </body>
 

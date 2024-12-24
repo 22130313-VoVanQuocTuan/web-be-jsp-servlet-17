@@ -1,6 +1,5 @@
 package hcmuaf.nlu.edu.vn.dao.review;
 
-import com.mysql.cj.xdevapi.PreparableStatement;
 import hcmuaf.nlu.edu.vn.dao.DBConnect;
 import hcmuaf.nlu.edu.vn.model.Rating;
 
@@ -11,9 +10,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ReviewDao {
+public class RatingDao {
     private final DBConnect dbConnect;
-    public ReviewDao() {
+
+    public RatingDao() {
         dbConnect = new DBConnect();
     }
 
@@ -21,10 +21,10 @@ public class ReviewDao {
     public List<Rating> getListRating() {
         String sql = "select * from rating";
 
-        try(PreparedStatement ptm = dbConnect.preparedStatement(sql)){
+        try (PreparedStatement ptm = dbConnect.preparedStatement(sql)) {
             ResultSet rs = ptm.executeQuery();
             List<Rating> list = new ArrayList<>();
-            while(rs.next()){
+            while (rs.next()) {
                 int id = rs.getInt("id");
                 int productId = rs.getInt("productId");
                 int userId = rs.getInt("userId");
@@ -39,6 +39,18 @@ public class ReviewDao {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        
+
+    }
+
+    // Xóa đánh giá
+    public boolean deleteRating(int id) {
+        String sql = "delete from rating where id = ?";
+        try (PreparedStatement ptm = dbConnect.preparedStatement(sql)) {
+            ptm.setInt(1, id);
+            int row = ptm.executeUpdate();
+            return row > 0;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

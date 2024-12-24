@@ -212,3 +212,85 @@ button {
   #delete-modal .modal-content .button-container button:hover{
     transform: scale(1.1);
   }
+
+/*------------------------ Form Edit Information -----------------------------------------------*/
+/* Style cho Modal */
+.editPromotional {
+  width: 100%;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+#editInfoForm {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+#editInfoForm .mb-3 {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+#editInfoForm label {
+  font-size: 17px;
+  font-weight: bold;
+  color: #ffffff;
+}
+
+/* Placeholder */
+.form-control::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+  font-family: 'Arial', sans-serif;
+}
+
+
+#editInfoForm input[type="datetime-local"],
+[type="number"],
+textarea {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 8px;
+  font-size: 17px;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  transition: all 0.3s ease-in-out;
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+
+.modal-footer {
+  text-align: center;
+  margin-top: 12px;
+}
+
+.modal-footer button {
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s ease, transform 0.2s ease;
+}
+
+.modal-footer .btn-secondary {
+  background: #6c757d;
+  color: white;
+  margin-right: 10px;
+}
+
+.modal-footer .btn-secondary:hover {
+  background: #5a6268;
+  transform: scale(1.05);
+}
+
+.modal-footer .btn-primary {
+  background: linear-gradient(135deg, #ff6b6b, #d43f3f);
+  color: white;
+}
+
+.modal-footer .btn-primary:hover {
+  background: linear-gradient(135deg, #d43f3f, #a93232);
+  transform: scale(1.05);
+}
