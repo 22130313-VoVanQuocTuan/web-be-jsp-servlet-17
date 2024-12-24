@@ -2,11 +2,12 @@ package hcmuaf.nlu.edu.vn.dao.Orders;
 
 import hcmuaf.nlu.edu.vn.dao.DBConnect;
 import hcmuaf.nlu.edu.vn.model.Orders;
-<<<<<<< HEAD
+
 import hcmuaf.nlu.edu.vn.model.ItemOrder;
-=======
+
 import hcmuaf.nlu.edu.vn.model.Users;
->>>>>>> d186fa439da3f8fccc67a4dccdff7892a685a6d9
+import org.springframework.security.core.userdetails.User;
+
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -79,12 +80,12 @@ public class OrderDao {
 //    }
 
     public List<ItemOrder> getOrderItems(int id) throws SQLException {
-        List<ItemOrder> orderItem = new ArrayList<>();
+        List<ItemOrder> itemOrders = new ArrayList<>();
         String query = "SELECT o.id, o.totalPrice, o.shippingFee, o.discountAmount, o.paymentMethod, o.paymentStatus, o.shippingAddress, oi.product_id, p.name, oi.quantity, oi.price, as.email, as.name, as.phone_number " +
-                "FROM orders o JOIN order_items oi ON o.id = oi.order_id" +
+                "FROM orders o JOIN orderitems oi ON o.id = oi.order_id" +
                 "JOIN products p ON oi.product_id = p.id " +
                 "JOIN users u ON o.user_id = u.id " +
-                "JOIN address_shipping as ON u.id = as.user_id WHERE order_id=?";
+                "JOIN addressshipping as ON u.id = as.user_id WHERE order_id=?";
         try(PreparedStatement ps = dbConnect.preparedStatement(query)) {
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
@@ -98,19 +99,20 @@ public class OrderDao {
                 itemOrder.setPaymentStatus(rs.getString("paymentStatus"));
                 itemOrder.setShippingAddress(rs.getString("shippingAddress"));
                 itemOrder.setProductId(rs.getInt("product_id"));
-                itemOrder.setName(rs.getString("name"));
+                itemOrder.setName(rs.getString("product_name"));
                 itemOrder.setQuantity(rs.getInt("quantity"));
                 itemOrder.setItem_price(rs.getDouble("price"));
                 itemOrder.setEmail(rs.getString("email"));
                 itemOrder.setName(rs.getString("name"));
                 itemOrder.setPhone(rs.getString("phone_number"));
                 itemOrder.setAddress(rs.getString("address"));
-                orderItem.add(itemOrder);
+                itemOrders.add(itemOrder);
             }
+        } catch (RuntimeException e) {
+            throw new RuntimeException(e);
         }
-        return orderItem;
+        return itemOrders;
     }
-
 
     // Lấy thông tin user
     public Users getInfoUser (int id){
