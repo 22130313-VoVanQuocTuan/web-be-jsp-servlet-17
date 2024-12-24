@@ -85,7 +85,7 @@ public class OrderDao {
                 "FROM orders o JOIN orderitems oi ON o.id = oi.order_id" +
                 "JOIN products p ON oi.product_id = p.id " +
                 "JOIN users u ON o.user_id = u.id " +
-                "JOIN addressshipping as ON u.id = as.user_id WHERE order_id=?";
+                "JOIN addressshipping as ON u.id = as.ugitser_id WHERE order_id=?";
         try(PreparedStatement ps = dbConnect.preparedStatement(query)) {
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
