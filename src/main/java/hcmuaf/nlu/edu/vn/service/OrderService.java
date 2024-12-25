@@ -17,9 +17,14 @@ public class OrderService {
         this.addOrderDao = new AddOrderDao();
     }
 
-    //Lấy danh sách đơn hàng
+    //Lấy ra tất cả danh sách hoá đơn
     public List<Orders> getAllOrders() throws SQLException {
         return orderDao.getAllOrders();
+    }
+
+    //Lấy danh sách đơn hàng theo id
+    public List<Orders> getOrderById(int id) throws SQLException {
+        return orderDao.getOrderById(id);
     }
 
     // Lấy thông tin người dùng
@@ -28,15 +33,25 @@ public class OrderService {
     }
 
     //Xem chi tiết hoá đơn
-    public List<ItemOrder> getItemOrders(int id) throws SQLException {
-        return orderDao.getOrderItems(id);
+    public OrderDetail getItemOrders(int id) throws SQLException {
+        return orderDao.getOrderDetail(id);
     }
 
+    //Lấy ra chi tiết hoá đơn
+    public List<OrderItem> getOrderItems(int id) throws SQLException {
+        return orderDao.orderItems(id);
+    }
+
+    //Lấy ra thông tin địa chỉ giao hàng
     public AddressShipping getInfoAddressShipping(int id) throws SQLException {
        return addOrderDao.getInfoAddressShipping(id);
     }
 
     public Payments getPayment(int id) throws SQLException {
         return addOrderDao.getPayment(id);
+    }
+
+    public boolean deleteOrder(int id) throws SQLException {
+        return orderDao.deleteOrder(id);
     }
 }

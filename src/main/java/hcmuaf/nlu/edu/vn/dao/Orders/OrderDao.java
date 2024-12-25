@@ -1,15 +1,7 @@
 package hcmuaf.nlu.edu.vn.dao.Orders;
 
 import hcmuaf.nlu.edu.vn.dao.DBConnect;
-import hcmuaf.nlu.edu.vn.model.Orders;
-
-import hcmuaf.nlu.edu.vn.model.ItemOrder;
-
-import hcmuaf.nlu.edu.vn.model.Users;
-<<<<<<< HEAD
-import org.springframework.security.core.userdetails.User;
-=======
->>>>>>> 201937b2ccb91bcb85cb43555aa3627b40b621a1
+import hcmuaf.nlu.edu.vn.model.*;
 
 
 import java.sql.PreparedStatement;
@@ -25,7 +17,7 @@ public class OrderDao {
         this.dbConnect = new DBConnect();
     }
 
-    //Xem danh sách hoá đơn
+//    //Xem danh sách hoá đơn
     public List<Orders> getAllOrders() throws SQLException {
         List<Orders> orders = new ArrayList<Orders>();
         String query = "SELECT * FROM orders";
@@ -53,69 +45,101 @@ public class OrderDao {
         return orders;
     }
 
-    // xem chi tiet hoa don
-//    public List<Orders> getOrderById(int id) {
-//        List<Orders> orders = new ArrayList<>();
-//        String query = "SELECT * FROM orders WHERE user_id = ?";
-//        try(PreparedStatement preparedStatement = dbConnect.preparedStatement(query)) {
-//            ResultSet rs = preparedStatement.executeQuery();
-//            preparedStatement.setInt(1, id);
-//            while (rs.next()) {
-//                Orders order = new Orders();
-//                order.setId(rs.getInt("id"));
-//                order.setUser_id(rs.getInt("userId"));
-//                order.setStatus(rs.getString("status"));
-//                order.setTotalPrice(rs.getDouble("totalPrice"));
-//                order.setDiscountAmount(rs.getDouble("discountAmount"));
-//                order.setPaymentMethod(rs.getString("paymentMethod"));
-//                order.setPaymentStatus(rs.getString("paymentStatus"));
-//                order.setShippingFee(rs.getDouble("shippingFee"));
-//                order.setShippingAddress(rs.getString("shippingAddress"));
-//                order.setCreatedAt(order.getCreatedAt());
-//                order.setUpdatedAt(order.getUpdatedAt());
-//                orders.add(order);
-//            }
-//        } catch (SQLException e) {
-//            throw new RuntimeException(e);
-//        }
-//
-//        return orders;
-//    }
-
-    public List<ItemOrder> getOrderItems(int id) throws SQLException {
-        List<ItemOrder> itemOrders = new ArrayList<>();
-        String query = "SELECT o.id, o.totalPrice, o.shippingFee, o.discountAmount, o.paymentMethod, o.paymentStatus, o.shippingAddress, oi.product_id, p.name, oi.quantity, oi.price, as.email, as.name, as.phone_number " +
-                "FROM orders o JOIN orderitems oi ON o.id = oi.order_id" +
-                "JOIN products p ON oi.product_id = p.id " +
-                "JOIN users u ON o.user_id = u.id " +
-                "JOIN addressshipping as ON u.id = as.ugitser_id WHERE order_id=?";
+    // Lấy ra hoá đơn
+    public List<Orders> getOrderById(int id) {
+        List<Orders> orders = new ArrayList<>();
+        String query = "SELECT * FROM orders WHERE userId = ?";
         try(PreparedStatement ps = dbConnect.preparedStatement(query)) {
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                ItemOrder itemOrder = new ItemOrder();
-                itemOrder.setId(rs.getInt("id"));
-                itemOrder.setTotalPrice(rs.getDouble("totalPrice"));
-                itemOrder.setShippingFee(rs.getDouble("shippingFee"));
-                itemOrder.setDiscountAmount(rs.getDouble("discountAmount"));
-                itemOrder.setPaymentMethod(rs.getString("paymentMethod"));
-                itemOrder.setPaymentStatus(rs.getString("paymentStatus"));
-                itemOrder.setShippingAddress(rs.getString("shippingAddress"));
-                itemOrder.setProductId(rs.getInt("product_id"));
-                itemOrder.setName(rs.getString("product_name"));
-                itemOrder.setQuantity(rs.getInt("quantity"));
-                itemOrder.setItem_price(rs.getDouble("price"));
-                itemOrder.setEmail(rs.getString("email"));
-                itemOrder.setName(rs.getString("name"));
-                itemOrder.setPhone(rs.getString("phone_number"));
-                itemOrder.setAddress(rs.getString("address"));
-                itemOrders.add(itemOrder);
+                Orders order = new Orders();
+                order.setId(rs.getInt("id"));
+                order.setUser_id(rs.getInt("userId"));
+                order.setStatus(rs.getString("status"));
+                order.setTotalPrice(rs.getDouble("totalPrice"));
+                order.setDiscountAmount(rs.getDouble("discountAmount"));
+                order.setPaymentMethod(rs.getString("paymentMethod"));
+                order.setPaymentStatus(rs.getString("paymentStatus"));
+                order.setShippingFee(rs.getDouble("shippingFee"));
+                order.setShippingAddress(rs.getString("shippingAddress"));
+                order.setCreatedAt(order.getCreatedAt());
+                order.setUpdatedAt(order.getUpdatedAt());
+                orders.add(order);
             }
-        } catch (RuntimeException e) {
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return itemOrders;
+
+        return orders;
     }
+
+    public OrderDetail getOrderDetail(int id) throws SQLException {
+
+        String query = "SELECT o.id, o.totalPrice, o.shippingFee, o.discountAmount, o.paymentMethod, o.paymentStatus, o.shippingAddress, oi.productId,  Sum(oi.quantity) AS quantity, a.email, a.name, a.phoneNumber " +
+                "FROM orders o " +
+                "JOIN orderitems oi ON o.id = oi.orderId " +  // Thêm dấu cách sau ON oi.orderId
+                "JOIN products p ON oi.productId = p.id " +
+                "JOIN users u ON o.userId = u.id " +
+                "JOIN addressshipping a ON u.id = a.userId " +
+                "WHERE o.id=?";
+
+        OrderDetail orderDetail = null;
+        try (PreparedStatement ps = dbConnect.preparedStatement(query)) {
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                // Khởi tạo đơn hàng
+            int ids = rs.getInt("id");
+              double totalPrice = rs.getDouble("totalPrice");
+              double shippingFee = rs.getDouble("shippingFee");
+              double discountAmount = rs.getDouble("discountAmount");
+              String paymentMethod = rs.getString("paymentMethod");
+              String paymentStatus = rs.getString("paymentStatus");
+              String shippingAddress = rs.getString("shippingAddress");
+              int productId = rs.getInt("productId");
+              int quantity = rs.getInt("quantity");
+              String email = rs.getString("email");
+              String name = rs.getString("name");
+               String phoneNumber = rs.getString("phoneNumber");
+
+               orderDetail = new OrderDetail(ids, totalPrice, shippingFee,discountAmount,paymentMethod,paymentStatus,shippingAddress,
+                      productId, quantity, email,name,phoneNumber);
+
+
+            }
+            return orderDetail;
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+    //Lấy sản phẩm của hoá đơn
+    public List<OrderItem> orderItems(int id) throws SQLException {
+        String query = "SELECT * FROM orderitems WHERE orderId = ?";
+        try(PreparedStatement ps = dbConnect.preparedStatement(query)) {
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            List<OrderItem> orderItems = new ArrayList<>();
+            while (rs.next()) {
+                OrderItem orderItem = new OrderItem();
+                orderItem.setProductName(rs.getString("productName"));
+                orderItem.setQuantity(rs.getInt("quantity"));
+                orderItem.setPrice(rs.getDouble("price"));
+                orderItem.setDiscount(rs.getDouble("discount"));
+                orderItem.setTotalPrice(rs.getDouble("totalPrice"));
+
+                orderItems.add(orderItem);
+            }
+            return orderItems;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 
     // Lấy thông tin user
     public Users getInfoUser (int id){
@@ -134,6 +158,19 @@ public class OrderDao {
             throw new RuntimeException(e);
         }
         return null;
+    }
+
+    //Xoá sản phẩm
+    public boolean deleteOrder(int id) throws SQLException {
+        String query = "DELETE FROM orders WHERE id = ?";
+        try(PreparedStatement ps = dbConnect.preparedStatement(query)){
+            ps.setInt(1, id);
+            int rowDeleted = ps.executeUpdate();
+            return rowDeleted > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
 }

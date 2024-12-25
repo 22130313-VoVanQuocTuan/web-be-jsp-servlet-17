@@ -55,7 +55,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="order.html">
+                    <a href="order">
                         <span class="icon">
                             <ion-icon name="receipt-outline"></ion-icon>
                         </span>

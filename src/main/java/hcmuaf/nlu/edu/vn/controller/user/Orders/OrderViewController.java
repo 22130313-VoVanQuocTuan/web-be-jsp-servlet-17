@@ -1,6 +1,8 @@
 package hcmuaf.nlu.edu.vn.controller.user.Orders;
 
-import hcmuaf.nlu.edu.vn.model.ItemOrder;
+import hcmuaf.nlu.edu.vn.model.OrderDetail;
+import hcmuaf.nlu.edu.vn.model.OrderItem;
+import hcmuaf.nlu.edu.vn.model.Orders;
 import hcmuaf.nlu.edu.vn.service.OrderService;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
@@ -21,14 +23,24 @@ public class OrderViewController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        int id = Integer.parseInt(request.getParameter("id"));
+       int id = Integer.parseInt(request.getParameter("id"));
         try {
-            List<ItemOrder> orderItem = orderService.getItemOrders(id);
-            request.setAttribute("orderInfo", orderItem);
+            List<OrderItem> orderItems = orderService.getOrderItems(id);
+            OrderDetail orderDetail = orderService.getItemOrders(id);
+
+            request.setAttribute("orderInfo", orderDetail);
+            request.setAttribute("orderItem",orderItems);
+
+
+            HttpSession session = request.getSession();
+            session.setAttribute("showModal", true);
+            request.getRequestDispatcher("/informationCustomer").forward(request, response);
+
         } catch (SQLException e) {
+
             throw new RuntimeException(e);
         }
-        request.getRequestDispatcher("users/page/informationCustomer.jsp").forward(request, response);
+
     }
 
     @Override

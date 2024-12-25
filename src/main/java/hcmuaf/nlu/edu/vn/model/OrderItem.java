@@ -6,6 +6,7 @@ public class OrderItem {
     private int id;
     private int orderId;
     private int productId;
+    private String productName;
     private int quantity;
     private double price;
     private double totalPrice;
@@ -25,6 +26,21 @@ public class OrderItem {
         this.discount = discount;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
+    }
+    public OrderItem(String productName, int quantity, double price, double discount, double totalPrice) {
+        this.productName = productName;
+        this.quantity = quantity;
+        this.price = price;
+        this.discount = discount;
+        this.totalPrice = totalPrice;
+    }
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
     }
 
     public int getId() {

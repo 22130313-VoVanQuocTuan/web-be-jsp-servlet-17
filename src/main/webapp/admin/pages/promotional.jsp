@@ -59,7 +59,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="order.html">
+                    <a href="order.jsp">
                         <span class="icon">
                             <ion-icon name="receipt-outline"></ion-icon>
                         </span>
