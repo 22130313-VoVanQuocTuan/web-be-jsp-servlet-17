@@ -13,7 +13,9 @@ public class AddressShipping {
     private Date createDate;
     private Date updateDate;
 
-    public AddressShipping(String name, String email, String phoneNumber, String address, String note) {}
+    public AddressShipping() {
+
+    }
 
     public AddressShipping(int id, int userId, String address, String name, String email, String phoneNumber, String note, Date createDate, Date updateDate) {
         this.id = id;
@@ -25,6 +27,10 @@ public class AddressShipping {
         this.note = note;
         this.createDate = createDate;
         this.updateDate = updateDate;
+    }
+
+    public AddressShipping(String name, String email, String phoneNumber, String address, String note) {
+
     }
 
     public int getId() {

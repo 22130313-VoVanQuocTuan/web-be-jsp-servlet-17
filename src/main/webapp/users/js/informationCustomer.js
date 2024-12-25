@@ -1,9 +1,6 @@
 
 //------------------------------------------------- Hàm hiển thị chi tiết hóa đơn----------------------------------------------------
-function showOrderDetail() {
-    // Mở modal
-    document.getElementById('orderDetailModal').style.display = "block";
-}
+
 // Hàm đóng modal
 function closeModal() {
     document.getElementById('orderDetailModal').style.display = "none";

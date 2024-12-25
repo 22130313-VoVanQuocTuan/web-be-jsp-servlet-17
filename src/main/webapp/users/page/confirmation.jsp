@@ -270,7 +270,7 @@
                 <tr>
                     <td>${c.name}</td>
                     <td>${c.quantity}</td>
-                    <td><fmt:formatNumber value="${c.totalPrice}" type="number"/>đ</td>
+                    <td><fmt:formatNumber value="${c.price}" type="number"/>đ</td>
                 </tr>
                 </c:forEach>
 
