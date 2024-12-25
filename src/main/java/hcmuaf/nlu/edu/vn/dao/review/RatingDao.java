@@ -53,4 +53,23 @@ public class RatingDao {
             throw new RuntimeException(e);
         }
     }
+
+    //Thêm đánh giá
+    public boolean addRating(Rating rating) {
+    String sql = "INSERT INTO rating (productId, userId, content, createdAt) VALUES (?,?,?,NOW())";
+    try(PreparedStatement ptm = dbConnect.preparedStatement(sql)){
+        ptm.setInt(1, rating.getProductId());
+        ptm.setInt(2, rating.getUserId());
+        ptm.setString(3, rating.getContent());
+
+        int row = ptm.executeUpdate();
+        if(row > 0){
+            return true;
+        }
+
+    } catch (SQLException e) {
+        throw new RuntimeException(e);
+    }
+    return false;
+    }
 }

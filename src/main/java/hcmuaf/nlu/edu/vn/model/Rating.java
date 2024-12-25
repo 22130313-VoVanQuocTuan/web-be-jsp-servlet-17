@@ -16,6 +16,11 @@ public class Rating {
         this.content = content;
         this.createdAt = createdAt;
     }
+    public  Rating(int productId, int userId, String content) {
+        this.productId = productId;
+        this.userId = userId;
+        this.content = content;
+    }
 
     public int getId() {
         return id;

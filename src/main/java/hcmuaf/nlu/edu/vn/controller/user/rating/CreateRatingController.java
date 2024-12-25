@@ -1,0 +1,50 @@
+package hcmuaf.nlu.edu.vn.controller.user.rating;
+
+import hcmuaf.nlu.edu.vn.model.Rating;
+import hcmuaf.nlu.edu.vn.service.RatingService;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
+import java.io.IOException;
+
+@WebServlet(name = "CreateRating", value = "/create-rating")
+public class CreateRatingController extends HttpServlet {
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        int productId = Integer.parseInt(req.getParameter("productId"));
+        int userId = Integer.parseInt(req.getParameter("userId"));
+        String content = req.getParameter("content");
+
+        int categoryId = Integer.parseInt(req.getParameter("categoryId"));
+        try{
+        RatingService ratingService = new RatingService();
+        Rating rating = new Rating(productId,userId,content);
+
+        if(ratingService.addRating(rating)){
+            req.setAttribute("rating", "Đánh giá thành công");
+            resp.sendRedirect(req.getContextPath() + "/product-detail?id=" + productId + "&categoryId=" + categoryId + "&rating=success");
+        }else{
+            req.setAttribute("rating", "Đánh giá thất bại");
+            resp.sendRedirect(req.getContextPath() + "/product-detail?id=" + productId + "&categoryId=" + categoryId + "&rating=fail");
+
+        }
+
+
+    }
+    catch(Exception e){
+        req.setAttribute("rating", "lỗi hệ thống");
+        req.setAttribute("categoryId", categoryId);
+        req.setAttribute("id", productId);
+        resp.sendRedirect(req.getContextPath() + "/product-detail?id=" + productId + "&categoryId=" + categoryId + "&rating=fail");
+      }
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        doPost(req, resp);
+    }
+}

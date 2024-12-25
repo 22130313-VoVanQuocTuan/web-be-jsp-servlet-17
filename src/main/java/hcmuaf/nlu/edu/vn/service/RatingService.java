@@ -20,4 +20,11 @@ public class RatingService {
     public boolean deleteRating(int id) {
         return ratingDao.deleteRating(id);
     }
+
+    // Taạo đánh giá
+    public boolean addRating(Rating rating) {
+        return ratingDao.addRating(rating);
+    }
+
+
 }

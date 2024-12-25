@@ -51,7 +51,7 @@
             </li>
 
             <li>
-                <a href="products.html">
+                <a href="products-list">
                         <span class="icon">
                             <ion-icon name="cube-outline"></ion-icon>
                         </span>
@@ -85,7 +85,7 @@
                 </a>
             </li>
             <li>
-                <a href="review.html">
+                <a href="list-rating">
                         <span class="icon">
                             <ion-icon name="chatbubble-outline"></ion-icon>
                         </span>
