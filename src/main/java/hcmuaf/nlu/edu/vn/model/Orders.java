@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class Orders {
     private int id;
-    private int user_id;
+    private int userid;
     private double totalPrice;
     private double shippingFee;
     private double discountAmount;
@@ -18,9 +18,9 @@ public class Orders {
     public Orders() {
     }
 
-    public Orders(int id, int user_id, double totalPrice, double shippingFee, double discountAmount, String status, String paymentMethod, String paymentStatus, String shippingAddress, Date createdAt, Date updatedAt) {
+    public Orders(int id, int userid, double totalPrice, double shippingFee, double discountAmount, String status, String paymentMethod, String paymentStatus, String shippingAddress, Date createdAt, Date updatedAt) {
         this.id = id;
-        this.user_id = user_id;
+        this.userid = userid;
         this.totalPrice = totalPrice;
         this.shippingFee = shippingFee;
         this.discountAmount = discountAmount;
@@ -41,11 +41,11 @@ public class Orders {
     }
 
     public int getUser_id() {
-        return user_id;
+        return userid;
     }
 
     public void setUser_id(int user_id) {
-        this.user_id = user_id;
+        this.userid = user_id;
     }
 
     public double getTotalPrice() {
@@ -124,7 +124,7 @@ public class Orders {
     public String toString() {
         return "Orders{" +
                 "id=" + id +
-                ", user_id=" + user_id +
+                ", user_id=" + userid +
                 ", totalPrice=" + totalPrice +
                 ", shippingFee=" + shippingFee +
                 ", discountAmount=" + discountAmount +
