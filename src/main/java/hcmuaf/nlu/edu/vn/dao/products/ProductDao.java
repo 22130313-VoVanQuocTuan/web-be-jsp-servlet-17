@@ -51,6 +51,38 @@ public class ProductDao {
         }
         return products;
     }
+    //Hàm thêm sản phẩm
+    public boolean addProduct(Product product) {
+        // Giá đã giảm
+        String sql = "INSERT INTO products (name, price, quantity, imageUrl, description, categoryId, status, " +
+                "supplier, color, size, unit, view, soldCount, discountPercent, discountPrice, createDate, updateDate) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        try (PreparedStatement stmt = dbConnect.preparedStatement(sql);) {
+            stmt.setString(1, product.getName());
+            stmt.setDouble(2, product.getPrice());
+            stmt.setInt(3, product.getQuantity());
+            stmt.setString(4, product.getImageUrl());
+            stmt.setString(5, product.getDescription());
+            stmt.setInt(6, product.getCategoryId());
+            stmt.setString(7, product.getStatus());
+            stmt.setString(8, product.getSupplier());
+            stmt.setString(9, product.getColor());
+            stmt.setString(10, product.getSize());
+            stmt.setString(11, product.getUnit());
+            stmt.setInt(12, product.getView());
+            stmt.setInt(13, product.getSoldCount());
+            stmt.setDouble(14, product.getDiscountPercent());
+            stmt.setDouble(15, product.getDiscountPrice());
+            stmt.setTimestamp(16, product.getCreateDate());
+            stmt.setTimestamp(17, product.getUpdateDate());
+            // chèn data vào table
+            int rowsAdded = stmt.executeUpdate();
+            return rowsAdded > 0;// add thành công trả về true k vè false.
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 
     // Hàm xóa sản phẩm
     public boolean deleteProduct(String id) {

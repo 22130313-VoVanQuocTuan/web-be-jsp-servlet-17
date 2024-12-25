@@ -12,7 +12,7 @@ public class ProductService {
     private final GetListPDiscountDao getListPDiscountDao;
 
     private final ProductDao productDAO = new ProductDao();
-    private final ApplyPromotionalInCartDao promotionalDao ;
+    private final ApplyPromotionalInCartDao promotionalDao;
     private final ProductFilterDao productFilterDao = new ProductFilterDao();
 
     private final GetProductDao getProductDao;
@@ -43,8 +43,15 @@ public class ProductService {
         return getProductDao.getProduct(id);
     }
 
+    //Hàm thêm sản phẩm
+    public boolean addProduct(Product product) {
+        return productDAO.addProduct(product);
+    }
+
     // Hàm xóa sản phẩm
-    public boolean deleteProduct(String id){return productDAO.deleteProduct(id);}
+    public boolean deleteProduct(String id) {
+        return productDAO.deleteProduct(id);
+    }
 
     // -------------------Các phương thức filter sản phẩm-------------------------
     // Các sản phẩm phổ biến thoe lượt bán
@@ -73,7 +80,7 @@ public class ProductService {
     }
 
     public List<Product> getProductsByPriceDescendingAndCategoryId(int categoryId) throws SQLException {
-        return productFilterDao.getProductsByPriceDescendingAndCategoryId( categoryId);
+        return productFilterDao.getProductsByPriceDescendingAndCategoryId(categoryId);
     }
 
     public List<Product> getProductsByPriceAscendingAndCategoryId(int categoryId) throws SQLException {
