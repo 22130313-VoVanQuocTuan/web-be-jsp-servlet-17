@@ -47,6 +47,13 @@ saveProductbtn.addEventListener("click", (event) => {
     addProductModal.style.display = "none";
 });
 
+const alert = document.querySelector(".alert");
+if (alert) {
+    alert.style.display = "block";  // Hiển thị thông báo
+    setTimeout(() => {
+        alert.style.display = "none";  // Ẩn thông báo sau 3 giây
+    }, 3000);
+}
 // ----------------------------------------------------------------------------------------------------------
 
 //Sửa sản phẩm

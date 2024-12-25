@@ -180,7 +180,7 @@
                                 <td>${order.shippingAddress}</td>
                                 <td>${order.paymentStatus}</td>
                                 <td>
-                                    <button class="view-detail-btn" onclick="showOrderDetail('SP001')">Xem</button>
+                                    <a href="OrderView?id=${order.id}" class="view-detail-btn">Xem</a>
                                 </td>
                             </tr>
                         </c:forEach>
@@ -219,23 +219,23 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td></td>
-                                <td>20</td>
-                                <td>1.000.000 ₫</td>
-                                <td>0 ₫</td>
-                                <td>1.000.000 ₫</td>
+                                <td>${orderInfo.product_name}</td>
+                                <td>${orderInfo.quantity}</td>
+                                <td>${orderInfo.totalPrice}</td>
+                                <td>${orderInfo.discountAmount}</td>
+                                <td>${orderInfo.totalPrica - orderInfo.discountAmount}</td>
                             </tr>
 
                         </tbody>
                     </table>
                     <div class="order-info">
-                        <p><strong>Mã đơn hàng:</strong> <span class="info-highlight">22</span></p>
-                        <p><strong>Mã khách hàng:</strong> <span class="info-highlight">12</span></p>
-                        <p><strong>Ngày đặt hàng:</strong> <span class="info-highlight">2024-12-12</span></p>
-                        <p><strong>Tổng tiền:</strong> <span class="info-highlight total-price">2.000.000 ₫</span></p>
-                        <p><strong>Trạng thái:</strong> <span class="badge success">Đã thanh toán</span></p>
-                        <p><strong>Địa chỉ:</strong> Bình Thạnh</p>
-                        <p><strong>Người nhận hàng:</strong> Tuấn</p>
+                        <p><strong>Mã đơn hàng:</strong> <span class="info-highlight">${orderInfo.id}</span></p>
+                        <p><strong>Mã khách hàng:</strong> <span class="info-highlight">${orderInfo.user_id}</span></p>
+                        <p><strong>Ngày đặt hàng:</strong> <span class="info-highlight"></span></p>
+                        <p><strong>Tổng tiền:</strong> <span class="info-highlight total-price"><fmt:formatNumber>${orderInfo.totalPrice}</fmt:formatNumber> ₫</span></p>
+                        <p><strong>Trạng thái:</strong> <span class="badge success">${orderInfo.paymentStatus}</span></p>
+                        <p><strong>Địa chỉ:</strong>${info.address}</p>
+                        <p><strong>Người nhận hàng:</strong>${info.fullName}</p>
                         <p><strong>Ghi chú:</strong> Giao tới tận nhà cho tôi</p>
                     </div>
                 </div>
