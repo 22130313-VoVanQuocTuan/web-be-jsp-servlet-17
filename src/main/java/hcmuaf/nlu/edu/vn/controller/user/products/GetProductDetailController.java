@@ -23,6 +23,16 @@ public class GetProductDetailController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int id = Integer.parseInt(req.getParameter("id"));
         int categoryId = Integer.parseInt(req.getParameter("categoryId"));
+
+
+        // nếu có đánh giá
+        String ratingStatus = req.getParameter("rating");
+        if ("success".equals(ratingStatus)) {
+            req.setAttribute("rating", "Đánh giá thành công");
+        } else if ("fail".equals(ratingStatus)) {
+            req.setAttribute("rating", "Đánh giá thất bại");
+        }
+        //KHÔNG CÓ ĐÁNH GIÁ
         try {
             Product product = productService.getProductById(id);
             List<Product> allProductsCategory = productService.getAllProductsCategory(categoryId);
@@ -35,4 +45,8 @@ public class GetProductDetailController extends HttpServlet {
         }
     }
 
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        doGet(req, resp);
+    }
 }

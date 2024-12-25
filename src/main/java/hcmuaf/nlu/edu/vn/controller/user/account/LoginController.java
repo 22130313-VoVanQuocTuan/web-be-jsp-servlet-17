@@ -48,17 +48,23 @@ public class LoginController extends HttpServlet {
                     //cập nhật trạng thái
                     userService.UpdateStatusUser("Hoạt động", user.getId());
 
-                    // Redirect based on role
-                    if ("admin".equals(user.getRole())) {
-                        resp.sendRedirect(req.getContextPath() + "/admin/pages/index.jsp");
-                    } else if ("user".equals(user.getRole())) {
-                        resp.sendRedirect(req.getContextPath() + "/home-page");
-                    } else {
-                        req.setAttribute("error_login", "Không tìm thấy người dùng");
-                        req.getRequestDispatcher( "/users/page/login-signup.jsp").forward(req, resp);
-                    }
+                    // Quay vể trang gần nhất
+                     String redirectUrl = (String) session.getAttribute("redirectUrl");
+                     if (redirectUrl != null) {
+                         session.removeAttribute("redirectUrl"); // Xóa redirectUrl khỏi session
+                         resp.sendRedirect(redirectUrl); // Quay về URL trước đó
+                     }else
+                         if ("admin".equals(user.getRole())) {
+                             resp.sendRedirect(req.getContextPath() + "/admin/pages/index.jsp");
+                         } else if ("user".equals(user.getRole())) {
+                             resp.sendRedirect(req.getContextPath() + "/home-page");
+                         } else {
+                             req.setAttribute("error_login", "Không tìm thấy người dùng");
+                             req.getRequestDispatcher("/users/page/login-signup.jsp").forward(req, resp);
+
+                     }
                 } else {
-                    req.setAttribute("error_login", "Tài khoản chưa được xác thực");
+                    req.setAttribute("error_login", "Tài khoản chưa được xác thực, hoặc không tồn tại");
                     req.getRequestDispatcher( "/users/page/login-signup.jsp").forward(req, resp);
                 }
             } else {

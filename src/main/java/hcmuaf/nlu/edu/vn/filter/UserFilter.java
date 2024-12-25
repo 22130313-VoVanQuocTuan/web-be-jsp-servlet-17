@@ -9,7 +9,7 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
-@WebFilter(filterName = "user-filter", urlPatterns = {"/add-cart", "/cart-remove", "/cart-items", "/OrderView", "/informationCustomer"})
+@WebFilter(filterName = "user-filter", urlPatterns = {"/add-cart", "/cart-remove", "/cart-items","/create-rating"})
 public class UserFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
@@ -24,6 +24,14 @@ public class UserFilter implements Filter {
         Users user = (session != null) ? (Users) session.getAttribute("user") : null;
 
         if (user == null || !"user".equalsIgnoreCase(user.getRole())) {
+            // Lưu URL hiện tại
+            String currentUrl = req.getRequestURI();
+            String queryString = req.getQueryString();
+            if (queryString != null) {
+                currentUrl += "?" + queryString; // Gắn query string nếu có
+            }
+            req.getSession(true).setAttribute("redirectUrl", currentUrl);
+
             req.getRequestDispatcher ("/users/page/login-signup.jsp").forward(req,res); // Redirect đến trang login nếu không phải user
         } else {
             chain.doFilter(request, response); // Nếu là user, tiếp tục xử lý

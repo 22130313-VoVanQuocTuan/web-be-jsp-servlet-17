@@ -22,8 +22,18 @@ document.addEventListener('DOMContentLoaded', function () {
                         window.location.href = url; // Chuyển hướng đến URL xóa tài khoản
                     });
                 });
+            });
+            // ---------------------------------------------------------Form Edit Information -----------------------------------------------------
+            document.querySelectorAll('.edit-btn').forEach(function(button) {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault(); // Ngăn chặn hành động mặc định
+                    showModal('editPromotional');
 
-    });
+                    // Lấy ID từ nút bấm
+                    const promotionId = this.getAttribute('data-id-update');
+                    document.getElementById('promotionId').value = promotionId; // Gán vào trường hidden
+                });
+            });
 
 
     // Đóng tất cả các modal khi nhấn nút đóng

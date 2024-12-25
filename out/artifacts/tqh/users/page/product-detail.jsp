@@ -161,10 +161,18 @@
                 <div class="review-product">
                     <div class="review">
                         <h2>Đánh giá</h2>
-                        <form id="commentform" class="comment-form">
-                            <textarea rows="3" placeholder="Ý kiến của bạn..." required></textarea>
-                            <button type="submit">Gửi</button>
+                        <form id="commentform" class="comment-form" action="create-rating" method="post">
+                            <input type="hidden" name="productId" value="${product.id}">
+                            <input type="hidden" name="userId" value="${sessionScope.user.id}"></input>
+                            <input type="hidden" name="categoryId" value="${product.categoryId}"></input>
+                            </input>
+                            <textarea name="content" rows="3" placeholder="Ý kiến của bạn..." required></textarea>
+                            <c:if test="${not empty rating}">
+                                <p style="color: red;">${rating}</p> <!-- Hiển thị lỗi nếu có -->
+                            </c:if>
+                            <button type="submit" >Gửi</button>
                         </form>
+
                     </div>
                 </div>
             </div>

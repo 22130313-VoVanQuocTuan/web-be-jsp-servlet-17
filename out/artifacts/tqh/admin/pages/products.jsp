@@ -15,7 +15,131 @@
 
 </head>
 
+<style>
+    /* Định dạng chung cho thông báo lỗi */
+    .alert-error {
+        background-color: #f44336; /* Màu đỏ để dễ nhận diện lỗi */
+        color: white; /* Màu chữ trắng */
+        padding: 20px; /* Khoảng cách bên trong */
+        border-radius: 8px; /* Bo góc mềm mại */
+        margin: 15px 0; /* Khoảng cách giữa các thông báo lỗi */
+        font-family: 'Arial', sans-serif; /* Phông chữ dễ đọc */
+        font-size: 16px; /* Kích thước chữ */
+        position: fixed; /* Đặt vị trí cố định trên màn hình */
+        top: 50%; /* Căn giữa theo chiều dọc */
+        left: 50%; /* Căn giữa theo chiều ngang */
+        transform: translate(-50%, -50%); /* Di chuyển lại 1 nửa chiều rộng và chiều cao để hoàn toàn căn giữa */
+        z-index: 1000; /* Đảm bảo thông báo luôn nổi bật trên các phần tử khác */
+        width: 80%; /* Chiều rộng của thông báo */
+        max-width: 500px; /* Chiều rộng tối đa */
+        text-align: center; /* Căn giữa nội dung */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Bóng đổ nhẹ cho thông báo */
+        transition: all 0.3s ease; /* Hiệu ứng chuyển động mượt mà */
+    }
 
+    /* Kiểu danh sách lỗi */
+    .alert-error ul {
+        list-style-type: none; /* Loại bỏ dấu chấm đầu dòng */
+        padding: 0;
+        margin: 0;
+    }
+
+    /* Kiểu cho mỗi mục lỗi */
+    .alert-error ul li {
+        margin-bottom: 10px; /* Khoảng cách giữa các lỗi */
+        padding: 10px; /* Khoảng cách trong mỗi lỗi */
+        border: 1px solid #ff0000; /* Viền đỏ quanh mỗi lỗi để làm nổi bật */
+        border-radius: 4px; /* Bo góc của các mục lỗi */
+        background-color: #d32f2f; /* Nền hơi sáng hơn một chút */
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Bóng đổ cho mỗi mục lỗi */
+        text-align: left; /* Căn trái cho các thông báo lỗi */
+        font-weight: bold; /* In đậm văn bản */
+    }
+
+    /* Nút đóng thông báo */
+    .alert-error .close {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        font-size: 20px;
+        color: white;
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        transition: transform 0.2s ease;
+    }
+
+    /* Hiệu ứng khi di chuột vào nút đóng */
+    .alert-error .close:hover {
+        transform: rotate(90deg); /* Xoay nút khi di chuột vào */
+    }
+
+    /* Ẩn thông báo khi có class hidden */
+    .alert-error.hidden {
+        display: none; /* Khi có class hidden, ẩn thông báo */
+    }
+
+    /* Thông báo thành công */
+    .alert-success {
+        background-color: #4CAF50; /* Màu xanh lá cây */
+        color: white;
+        padding: 20px;
+        border-radius: 8px;
+        margin: 15px 0;
+        font-family: 'Arial', sans-serif;
+        font-size: 16px;
+        position: fixed;
+        top: 50%;
+        left: 60%;
+        transform: translate(-50%, -50%);
+        z-index: 1000;
+        width: 80%;
+        max-width: 500px;
+        text-align: center;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+    }
+
+    /* Thông báo lỗi */
+    .alert-error {
+        background-color: #f44336; /* Màu đỏ */
+        color: white;
+        padding: 20px;
+        border-radius: 8px;
+        margin: 15px 0;
+        font-family: 'Arial', sans-serif;
+        font-size: 16px;
+        position: fixed;
+        top: 50%;
+        left: 60%;
+        transform: translate(-50%, -50%);
+        z-index: 1000;
+        width: 80%;
+        max-width: 500px;
+        text-align: center;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+    }
+
+    /* Nút đóng */
+    .alert .close {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        font-size: 20px;
+        color: white;
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        transition: transform 0.2s ease;
+    }
+
+    /* Hiệu ứng khi di chuột vào nút đóng */
+    .alert .close:hover {
+        transform: rotate(90deg);
+    }
+
+</style>
 <body>
 <!-- ------------------ Điều hướng -------------------->
 <div class="container">
@@ -65,15 +189,6 @@
                 </a>
             </li>
 
-
-            <li>
-                <a href="discount.html">
-                        <span class="icon">
-                            <ion-icon name="help-outline"></ion-icon>
-                        </span>
-                    <span class="title">Khuyến Mãi</span>
-                </a>
-            </li>
             <li>
                 <a href="promotional.html">
                         <span class="icon">
@@ -175,10 +290,11 @@
                             <td>${product.id}</td>
                             <td>${product.name}</td>
                             <td><fmt:formatNumber value="${product.discountPrice}" type="number"
-                                                  groupingUsed="true"/>₫</td>
+                                                  groupingUsed="true"/>₫
+                            </td>
                             <td>${product.quantity}</td>
                             <td>${product.status}</td>
-                            <td> <fmt:formatDate value="${product.createDate}" pattern="dd-MM-yyyy HH:mm:ss" /></td>
+                            <td><fmt:formatDate value="${product.createDate}" pattern="dd-MM-yyyy HH:mm:ss"/></td>
                             <td class="v">
                                 <button id="edit-product">Sửa</button>
                                 <button id="deleteBtn" data-product-id="${product.id}">Xóa</button>
@@ -187,62 +303,87 @@
                     </c:forEach>
                     </tbody>
                 </table>
-                <!-- Toast notification -->
-                <div id="toast" class="toast">Thành công!</div>
-                <!-- mẫu điền thêm sản phẩm  -->
+
+                <!-- Kiểm tra và hiển thị tất cả thông báo lỗi -->
+                <c:if test="${not empty errors}">
+                    <div class="alert alert-error">
+                        <ul>
+                            <c:forEach var="error" items="${errors}">
+                                <li>${error}</li>
+                            </c:forEach>
+                        </ul>
+                        <span class="close" onclick="this.parentElement.style.display='none';">&times;</span>
+                    </div>
+                </c:if>
+
+                <!-- Kiểm tra và hiển thị thông báo thành công hoặc thất bại -->
+                <c:if test="${not empty message}">
+                    <div class="alert alert-success">
+                        <span>${message}</span>
+                    </div>
+                </c:if>
+
+                <!-- Mẫu điền thêm sản phẩm -->
                 <div id="addProductModal" class="modal">
                     <div class="modal-content">
                         <h3>Thêm sản phẩm mới</h3>
-                        <form id="addProductForm">
+                        <form id="addProductForm" action="/tqh/add-product" method="post">
                             <label for="productName">Tên sản phẩm:</label>
-                            <input type="text" id="productName">
+                            <input type="text" id="productName" name="name">
 
                             <label for="productPrice">Giá:</label>
-                            <input type="text" id="productPrice">
+                            <input type="text" id="productPrice" name="price">
 
                             <label for="productCategory">Danh mục:</label>
-                            <input type="text" id="productCategory">
+                            <input type="text" id="productCategory" name="categoryId">
+
+                            <label for="discountPercent">Tỷ lệ giảm giá (0 - 1):</label>
+                            <input type="text" id="discountPercent" name="discountPercent">
 
                             <label for="productStock">Tồn kho:</label>
-                            <input type="number" id="productStock">
+                            <input type="number" id="productStock" name="quantity">
 
                             <div class="modal-field">
                                 <label for="npp">Nhà phân phối:</label>
-                                <input type="text" id="npp" placeholder="Nhập nhà phân phối">
+                                <input type="text" id="npp" name="supplier" placeholder="Nhập nhà phân phối">
                             </div>
+
                             <div class="modal-field">
                                 <label for="size">Kích thước:</label>
-                                <input type="text" id="size" placeholder="Nhập kích thước">
+                                <input type="text" id="size" name="size" placeholder="Nhập kích thước">
                             </div>
 
                             <div class="modal-field">
                                 <label for="color">Màu sắc:</label>
-                                <input type="text" id="color" placeholder="Nhập màu sắc">
+                                <input type="text" id="color" name="color" placeholder="Nhập màu sắc">
                             </div>
 
                             <div class="modal-field">
                                 <label for="unit">Đơn vị tính:</label>
-                                <input type="text" id="unit" placeholder="Nhập đơn vị tính">
+                                <input type="text" id="unit" name="unit" placeholder="Nhập đơn vị tính">
                             </div>
 
                             <div class="modal-field">
                                 <label for="description">Mô tả:</label>
-                                <textarea id="description" rows="3" placeholder="Nhập mô tả sản phẩm"></textarea>
+                                <textarea id="description" name="description" rows="3"
+                                          placeholder="Nhập mô tả sản phẩm"></textarea>
                             </div>
+
                             <label for="productStatus">Trạng thái:</label>
-                            <select id="productStatus">
+                            <select id="productStatus" name="status">
                                 <option value="active">Còn hàng</option>
                                 <option value="inactive">Hết hàng</option>
                             </select>
 
                             <label for="productImage">Hình ảnh:</label>
-                            <input type="file" id="productImage">
+                            <input type="file" id="productImage" name="imageUrl">
 
-                            <button id="save-Product">Lưu sản phẩm</button>
-                            <button class="close-modal">Thoát</button>
+                            <button type="submit" id="save-Product">Lưu sản phẩm</button>
+                            <button type="button" class="close-modal" onclick="closeModal()">Thoát</button>
                         </form>
                     </div>
                 </div>
+
                 <!-- Modal sửa thông tin sản phẩm -->
                 <div id="editProductModal" class="modal">
                     <div class="modal-content">
@@ -312,7 +453,6 @@
                 </div>
             </div>
         </div>
-
     </div>
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script src="<c:url value="/admin/js/order.js"/>"></script>
