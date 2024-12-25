@@ -9,18 +9,20 @@ public class AddressShipping {
     private String name;
     private String email;
     private String phoneNumber;
+    private String note;
     private Date createDate;
     private Date updateDate;
 
-    public AddressShipping() {}
+    public AddressShipping(String name, String email, String phoneNumber, String address, String note) {}
 
-    public AddressShipping(int id, int userId, String address, String name, String email, String phoneNumber, Date createDate, Date updateDate) {
+    public AddressShipping(int id, int userId, String address, String name, String email, String phoneNumber, String note, Date createDate, Date updateDate) {
         this.id = id;
         this.userId = userId;
         this.address = address;
         this.name = name;
         this.email = email;
         this.phoneNumber = phoneNumber;
+        this.note = note;
         this.createDate = createDate;
         this.updateDate = updateDate;
     }
@@ -71,6 +73,14 @@ public class AddressShipping {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
     }
 
     public Date getCreateDate() {

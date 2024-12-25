@@ -213,7 +213,7 @@
                     <span>Tổng cộng:</span>
                     <span id="total"><fmt:formatNumber value=" ${totalFinalPrice} " type="number" groupingUsed="true"/>₫</span>
                 </div>
-                <a href="confirmation.jsp"><button class="checkout-btn">Tiến hành thanh toán</button></a>
+                <a href="confirmation"><button class="checkout-btn">Tiến hành thanh toán</button></a>
 
                 <div class="voucher">
                     <label for="voucher">Phiếu ưu đãi</label>
