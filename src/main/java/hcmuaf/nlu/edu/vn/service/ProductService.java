@@ -32,6 +32,10 @@ public class ProductService {
     public List<Product> getAllProducts() throws SQLException {
         return productDAO.getAllProducts();
     }
+    // Lấy số lượng sản phẩm giới hạn (ví dụ: 10 sản phẩm)
+    public List<Product> getTopProducts(int limit) throws SQLException {
+        return productDAO.getTop(limit);
+    }
 
     // Lấy ra danh sách tát cả sản phẩm của danh mục
     public List<Product> getAllProductsCategory(int categoryId) throws SQLException {
