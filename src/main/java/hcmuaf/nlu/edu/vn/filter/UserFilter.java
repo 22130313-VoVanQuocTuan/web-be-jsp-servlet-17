@@ -9,7 +9,7 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
-@WebFilter(filterName = "user-filter", urlPatterns = {"/add-cart", "/cart-remove", "/cart-items","/create-rating"})
+@WebFilter(filterName = "user-filter", urlPatterns = {"/add-cart", "/cart-remove", "/cart-items","/create-rating", "/update-info-shipping"})
 public class UserFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {

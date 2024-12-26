@@ -193,30 +193,31 @@
         <div class="box1">
             <div class="form-group1">
                 <div class="info"> Thông tin nhận hàng</div>
+                <form action="update-info-shipping" method="post">
                 <div class="form-group">
-                    <input type="email" id="email" class="back email" placeholder="Email" required>
+                    <input type="email" name="email" id="email" class="back email" placeholder="Email" required value="${shippingAddress.email}">
                     <div id="email-error" class="error-message" style="color: red; display: none;">Vui lòng nhập
                         email.
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <input type="text" id="name" class="back name" placeholder="Họ và tên" required>
+                    <input type="text" name="name" id="name" class="back name" placeholder="Họ và tên" required value="${shippingAddress.name}">
                     <div id="name-error" class="error-message" style="color: red; display: none;">Vui lòng nhập
                         họ và tên.
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <input type="tel" id="phone" class="back phone" placeholder="Số điện thoại" required>
+                    <input type="tel" name="phoneNumber" id="phone" class="back phone" placeholder="Số điện thoại" required value="${shippingAddress.phoneNumber}">
                     <div id="phone-error" class="error-message" style="color: red; display: none;">Vui lòng nhập
                         số điện thoại.
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <input type="text" id="address" class="back address" placeholder="Nhập địa chỉ (tùy chọn)"
-                           required>
+                    <input type="text" name="address" id="address" class="back address" placeholder="Nhập địa chỉ (tùy chọn)"
+                           required value="${shippingAddress.address}">
                     <div id="address-error" class="error-message" style="color: red; display: none;">Vui lòng
                         nhập địa chỉ.
                     </div>
@@ -224,10 +225,16 @@
 
 
                 <div class="form-group">
-                        <textarea style="font-family: Arial, Helvetica, sans-serif; width: 95%;" type="text" id="note"
-                                  class="note" placeholder="Ghi chú (tùy chọn)"></textarea>
+                        <textarea style="font-family: Arial, Helvetica, sans-serif; width: 95%;" type="text" name="note"  id="note"
+                                  class="note" placeholder="Ghi chú (tùy chọn)">${shippingAddress.note}</textarea>
                 </div>
-                <button class="save" title="bt">Lưu</button>
+
+                    <c:if test="${not empty error}">
+                        <div class="alert alert-danger">${error}</div>
+                    </c:if>
+                <button class="save" title="bt">Cập nhật</button>
+
+                </form>
 
             </div>
 
