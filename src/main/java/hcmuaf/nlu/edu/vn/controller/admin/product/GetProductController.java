@@ -21,8 +21,15 @@ public class GetProductController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Product> products = null;
+        // Lấy tham số "all" từ request
+        String all = request.getParameter("all");
         try {
-            products = productService.getAllProducts();
+            // Nếu all=true thì lấy tất cả sản phẩm, ngược lại lấy 10 sản phẩm đầu
+            if ("true".equalsIgnoreCase(all)) {
+                products = productService.getAllProducts(); // Lấy tất cả sản phẩm
+            } else {
+                products = productService.getTopProducts(10); // Lấy 10 sản phẩm đầu
+            }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -34,6 +41,7 @@ public class GetProductController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    doGet(request, response);
     }
 
 }
