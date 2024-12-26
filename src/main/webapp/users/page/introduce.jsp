@@ -12,8 +12,8 @@
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4-beta3/css/all.min.css" />
-<link rel="stylesheet" href="../css/home.css">
-<link rel="stylesheet" href="../css/introduce.css">
+<link rel="stylesheet" href="<c:url value="/users/css/home.css"/>">
+<link rel="stylesheet" href="<c:url value="/users/css/introduce.css"/>">
 
 <body>
     <div id="section-header1">
@@ -29,7 +29,7 @@
                            Xin chào,  <span
               id="username">${sessionScope.user.username != null ? sessionScope.user.username : ''}</span>!</span>
 
-                    <form action="account" method="post">
+                    <form action="informationCustomer" method="post">
                         <button type="submit" class="account-link" id="signup-link"
                                 style="display: none;">
                             <i class="fas fa-user-circle"></i> Tài khoản
@@ -56,7 +56,7 @@
                 <div class="menu">
                     <!-- Logo bên trái -->
                     <div class="logo">
-                        <a href="../../home.jsp"><img src="../img/logo.png" alt="Logo"></a>
+                        <a href="home-page"><img src="${pageContext.request.contextPath}/users/img/logo.png" alt="Logo"></a>
                     </div>
 
                     <!-- Thanh tìm kiếm ở giữa -->
@@ -121,26 +121,26 @@
                                 ĐIỆN NƯỚC</a></li>
                         </ul>
                     </li>
-                    <li class="propClone"><a href="../../../home.jsp"><i class="fa-solid fa-house"></i>&nbsp;&nbsp; TRANG CHỦ
+                    <li class="propClone"><a href="home-page"><i class="fa-solid fa-house"></i>&nbsp;&nbsp; TRANG CHỦ
                     </a></li>
-                    <li class="propClone"><a href="../product.jsp"><i class="fa-brands fa-product-hunt"></i>
+                    <li class="propClone"><a href="product"><i class="fa-brands fa-product-hunt"></i>
                         &nbsp;&nbsp;SẢN PHẨM</a>
                     </li>
-                    <li class="propClone"> <a href="../cart.jsp"><i class="fas fa-shopping-cart"></i>&nbsp;&nbsp; GIỎ
+                    <li class="propClone"> <a href="cart-items"><i class="fas fa-shopping-cart"></i>&nbsp;&nbsp; GIỎ
                         HÀNG</a>
                     </li>
                     <li class="propClone">
                         <span class="none-a"> <i class="fa-solid fa-book"></i> &nbsp;&nbsp; HƯỚNG DẪN </span>
                         <ul class="items">
-                            <li><a href="../buying-help.jsp">&nbsp;&nbsp;<i
+                            <li><a href="turn-page?action=buyingHelp">&nbsp;&nbsp;<i
                                     class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;HƯỚNG DẪN
                                 MUA HÀNG</a>
                             </li>
-                            <li><a href="../product_unit.jsp">&nbsp;&nbsp;<i
+                            <li><a href="turn-page?action=productUnit">&nbsp;&nbsp;<i
                                     class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;BẢNG ĐƠN VỊ SẢN PHẨM</a>
                             </li>
 
-                            <li><a href="../term_and_services.jsp">&nbsp;&nbsp;<i
+                            <li><a href="turn-page?action=termAndService">&nbsp;&nbsp;<i
                                     class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;ĐIỀU KHOẢN
                                 VÀ DỊCH VỤ</a>
                             </li>
@@ -236,8 +236,8 @@
             <div class="links">
                 <h3>Liên kết</h3>
                 <ul>
-                    <li><a href="introduce.html">Giới thiệu</a></li>
-                    <li><a href="term_and_services.jsp">Điều khoản và dịch vụ</a></li>
+                    <li><a href="turn-page?action=introduce">Giới thiệu</a></li>
+                    <li><a href="turn-page?action=termAndService">Điều khoản và dịch vụ</a></li>
                 </ul>
             </div>
             <div class="social-media">
@@ -272,8 +272,8 @@
 
     </div>
 
-    <script src="../js/login-signup.js"></script>
-    <script src="/src/Users/js/scripts.js" defer></script>
+    <script src="<c:url value="/users/js/login-signup.js"/>"></script>
+    <script src="<c:url value="/users/js/scripts.js"/>" defer></script>
 </body>
 
 </html>

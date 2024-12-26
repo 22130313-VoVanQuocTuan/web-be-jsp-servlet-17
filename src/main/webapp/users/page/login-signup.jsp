@@ -82,7 +82,7 @@
             <div class="menu">
                 <!-- Logo bên trái -->
                 <div class="logo">
-                    <a href="../../home.jsp"><img src="${pageContext.request.contextPath}/users/img/logo.png" alt="Logo"></a>
+                    <a href="home-page"><img src="${pageContext.request.contextPath}/users/img/logo.png" alt="Logo"></a>
                 </div>
 
                 <!-- Thanh tìm kiếm ở giữa -->
@@ -100,7 +100,7 @@
                 </div>
                 <div class="cart">
                     <div class="cart-wrapper">
-                        <a id="carts" href="#">
+                        <a id="carts" href="cart-items">
                             <i class="fas fa-shopping-cart" style="color: #15283e;"></i>
                         </a>
                         <span class="cart-count" id="cart-count">0</span>
@@ -147,26 +147,26 @@
                             ĐIỆN NƯỚC</a></li>
                     </ul>
                 </li>
-                <li class="propClone"><a href="../../../home.jsp"><i class="fa-solid fa-house"></i>&nbsp;&nbsp; TRANG CHỦ
+                <li class="propClone"><a href="home-page"><i class="fa-solid fa-house"></i>&nbsp;&nbsp; TRANG CHỦ
                 </a></li>
-                <li class="propClone"><a href="../product.jsp"><i class="fa-brands fa-product-hunt"></i>
+                <li class="propClone"><a href="product"><i class="fa-brands fa-product-hunt"></i>
                     &nbsp;&nbsp;SẢN PHẨM</a>
                 </li>
-                <li class="propClone"> <a href="../cart.jsp"><i class="fas fa-shopping-cart"></i>&nbsp;&nbsp; GIỎ
+                <li class="propClone"> <a href="cart-items"><i class="fas fa-shopping-cart"></i>&nbsp;&nbsp; GIỎ
                     HÀNG</a>
                 </li>
                 <li class="propClone">
                     <span class="none-a"> <i class="fa-solid fa-book"></i> &nbsp;&nbsp; HƯỚNG DẪN </span>
                     <ul class="items">
-                        <li><a href="../buying-help.jsp">&nbsp;&nbsp;<i
+                        <li><a href="turn-page?action=buyingHelp">&nbsp;&nbsp;<i
                                 class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;HƯỚNG DẪN
                             MUA HÀNG</a>
                         </li>
-                        <li><a href="../product_unit.jsp">&nbsp;&nbsp;<i
+                        <li><a href="turn-page?action=productUnit">&nbsp;&nbsp;<i
                                 class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;BẢNG ĐƠN VỊ SẢN PHẨM</a>
                         </li>
 
-                        <li><a href="../term_and_services.jsp">&nbsp;&nbsp;<i
+                        <li><a href="turn-page?action=termAndService">&nbsp;&nbsp;<i
                                 class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;ĐIỀU KHOẢN
                             VÀ DỊCH VỤ</a>
                         </li>
@@ -234,7 +234,7 @@
                     </c:if>
                 </div>
 
-                <a class="blue" href="turn-page">Quên mật khẩu?</a>
+                <a class="blue" href="turn-page?action=resetPass">Quên mật khẩu?</a>
                 <button type="submit" id="login-button">Đăng nhập</button>
             </form>
         </div>
@@ -244,13 +244,13 @@
                     <h1>Chào mừng, trở lại!</h1>
                     <p>Nhập thông tin cá nhân của bạn để sử dụng tất cả các tính năng của trang web</p>
                     <button class="hidden" id="login">Đăng nhập</button>
-                    <button class="hidden" id="home">Trang chủ</button>
+                    <button class="hidden" id="home"><a href="home-page" style="text-decoration: none ;color: #FFFFFF">Trang chủ</a></button>
                 </div>
                 <div class="toggle-panel toggle-right">
                     <h1>Chào, bạn!</h1>
                     <p>Đăng ký với thông tin cá nhân của bạn để sử dụng tất cả các tính năng của trang web</p>
                     <button class="hidden" id="register">Đăng kí</button>
-                    <button class="hidden" id="HOME">Trang chủ</button>
+                    <button class="hidden" id="HOME"><a href="home-page" style="text-decoration: none ;color: #FFFFFF" >Trang chủ</a></button>
                 </div>
             </div>
         </div>
@@ -310,8 +310,8 @@
         <div class="links">
             <h3>Liên kết</h3>
             <ul>
-                <li><a href="introduce.jsp">Giới thiệu</a></li>
-                <li><a href="term_and_services.jsp">Điều khoản và dịch vụ</a></li>
+                <li><a href="turn-page?action=introduce">Giới thiệu</a></li>
+                <li><a href="turn-page?action=termAndService">Điều khoản và dịch vụ</a></li>
             </ul>
         </div>
         <div class="social-media">

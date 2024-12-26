@@ -10,13 +10,28 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8c98b123-52eb-4c06-9c6a-f8ffa47e53d2" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/controller/user/TurnPageUrl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/page/confirmation.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/tqh/users/page/confirmation.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/controller/user/Orders/ConfirmationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/controller/user/Orders/ConfirmationController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/controller/user/carts/GetListCartItems.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/controller/user/carts/GetListCartItems.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/dao/carts/Carts.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/dao/carts/Carts.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/page/informationCustomer.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/tqh/users/page/informationCustomer.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/controller/user/account/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/controller/user/account/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/controller/user/account/ResetPasswordController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/controller/user/account/ResetPasswordController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/controller/user/account/TurnPage.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/controller/user/account/VerifyEmailController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/controller/user/account/VerifyEmailController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/controller/user/products/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/controller/user/products/ProductController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/home.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/home.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/users/page/buying-help.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/users/page/buying-help.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/users/page/cart.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/users/page/cart.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/users/page/check-pay.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/users/page/check-pay.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/users/page/confirmation.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/users/page/confirmation.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/users/page/informationCustomer.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/users/page/informationCustomer.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/users/page/introduce.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/users/page/introduce.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/users/page/login-signup.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/users/page/login-signup.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/users/page/product-detail.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/users/page/product-detail.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/users/page/product.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/users/page/product.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/users/page/product_unit.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/users/page/product_unit.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/users/page/reset-password.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/users/page/reset-password.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/users/page/term_and_services.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/users/page/term_and_services.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -183,7 +198,8 @@
       <option name="presentableId" value="Default" />
       <updated>1735200685115</updated>
       <workItem from="1735200688717" duration="1038000" />
-      <workItem from="1735202758825" duration="6355000" />
+      <workItem from="1735202758825" duration="6935000" />
+      <workItem from="1735233534404" duration="5812000" />
     </task>
     <servers />
   </component>

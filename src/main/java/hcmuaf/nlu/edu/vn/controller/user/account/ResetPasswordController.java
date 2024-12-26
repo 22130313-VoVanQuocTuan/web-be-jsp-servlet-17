@@ -117,7 +117,7 @@ public class ResetPasswordController extends HttpServlet {
             userService.invalidateToken(token);
 
             // Chuyển hướng đến trang login
-            resp.sendRedirect(req.getContextPath() + "/users/page/login-signup.jsp");
+            req.getRequestDispatcher( "/users/page/login-signup.jsp").forward(req,resp);
         } else {
             req.setAttribute("verificationRequested", true);
             req.setAttribute("error_token", "Token không hợp lệ hoặc đã hết hạn.");

@@ -132,16 +132,17 @@
                     <li class="propClone">
                         <span class="none-a"> <i class="fa-solid fa-book"></i> &nbsp;&nbsp; HƯỚNG DẪN </span>
                         <ul class="items">
-                            <li><a href="<c:url value="/users/page/buying-help.jsp"/>">&nbsp;&nbsp;<i
-                                        class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;HƯỚNG DẪN
-                                    MUA HÀNG</a>
+                            <li><a href="turn-page?action=buyingHelp">&nbsp;&nbsp;<i
+                                    class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;HƯỚNG DẪN
+                                MUA HÀNG</a>
                             </li>
-                            <li><a href="<c:url value="/users/page/product_unit.jsp"/>">&nbsp;&nbsp;<i
-                                        class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;BẢNG ĐƠN VỊ SẢN PHẨM</a>
+                            <li><a href="turn-page?action=productUnit">&nbsp;&nbsp;<i
+                                    class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;BẢNG ĐƠN VỊ SẢN PHẨM</a>
                             </li>
-                            <li><a href="<c:url value="/users/page/term_and_services.jsp"/>">&nbsp;&nbsp;<i
-                                        class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;ĐIỀU KHOẢN
-                                    VÀ DỊCH VỤ</a>
+
+                            <li><a href="turn-page?action=termAndService">&nbsp;&nbsp;<i
+                                    class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;ĐIỀU KHOẢN
+                                VÀ DỊCH VỤ</a>
                             </li>
                         </ul>
                     </li>
@@ -258,8 +259,8 @@
             <div class="links">
                 <h3>Liên kết</h3>
                 <ul>
-                    <li><a href="<c:url value="/users/page/introduce.jsp"/>">Giới thiệu</a></li>
-                    <li><a href="<c:url value="/users/page/term_and_services.jsp"/>">Điều khoản và dịch vụ</a></li>
+                    <li><a href="turn-page?action=introduce">Giới thiệu</a></li>
+                    <li><a href="turn-page?action=termAndService">Điều khoản và dịch vụ</a></li>
                 </ul>
             </div>
             <div class="social-media">
