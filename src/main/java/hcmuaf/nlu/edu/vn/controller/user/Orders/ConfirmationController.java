@@ -30,8 +30,11 @@ public class ConfirmationController extends HttpServlet {
         Users user = (Users) session.getAttribute("user");
 
         List<CartItems> ci = cartService.getCartFromSession(session).listItems();
-        if(ci ==null){
-            response.sendRedirect(request.getContextPath()+"/home-page");
+        if (ci == null || ci.isEmpty()) {
+            // Lưu thông báo vào session hoặc request để hiển thị trên trang
+            request.setAttribute("message", "Giỏ hàng của bạn hiện tại không có sản phẩm nào.");
+            // Chuyển hướng về trang chủ
+            request.getRequestDispatcher("/cart-items").forward(request, response);
             return;
         }
 

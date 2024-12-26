@@ -286,14 +286,16 @@
                 <div class="total p"></div>
             </div>
             <div class="totals">
-                <c:forEach var="c" items="${itemCart}">
-                <div class="total p">Giảm giá: <fmt:formatNumber value="${c.discountAmount}" type="number"/>đ
+
+                <div class="total p">Giảm giá: <fmt:formatNumber value="${sessionScope.totalDiscount}" type="number"/>₫
+                </div>
+                <div class="total p">Phí vận chuyển: <fmt:formatNumber value="${sessionScope.totalShippingFee}" type="number"/>₫
                 </div>
                 <div class="totals">
-                    <div class="total p">Tổng cộng: <fmt:formatNumber value="${c.totalPrice}" type="number" />đ
+                    <div class="total p">Tổng cộng: <fmt:formatNumber value="${sessionScope.totalFinalPrice}" type="number" />₫
                     </div>
                 </div>
-                </c:forEach>
+
 
                 <div class="sub">
                     <div class="hrep p"><a href="cart-items" style="text-decoration: none;">

@@ -202,17 +202,20 @@
                 <div class="cart-summary">
                     <div class="summary-item">
                         <span>Tạm tính:</span>
-                        <span id="subtotal"><fmt:formatNumber value=" ${totalPrice}" type="number" groupingUsed="true"/>₫</span>
+                        <span id="subtotal"><fmt:formatNumber value=" ${sessionScope.totalPrice}" type="number" groupingUsed="true"/>₫</span>
                     </div>
                     <div class="summary-item">
                         <span>Phí vận chuyển:</span>
-                        <span id="vat"><fmt:formatNumber value=" ${totalShippingFee}" type="number" groupingUsed="true"/>₫</span>
+                        <span id="vat"><fmt:formatNumber value=" ${sessionScope.totalShippingFee}" type="number" groupingUsed="true"/>₫</span>
                     </div>
                 </div>
                 <div class="summary-item total">
                     <span>Tổng cộng:</span>
-                    <span id="total"><fmt:formatNumber value=" ${totalFinalPrice} " type="number" groupingUsed="true"/>₫</span>
+                    <span id="total"><fmt:formatNumber value=" ${sessionScope.totalFinalPrice} " type="number" groupingUsed="true"/>₫</span>
                 </div>
+                <c:if test="${not empty message}">
+                    <div class="alert alert-danger">${message}</div>
+                </c:if>
                 <a href="confirmation"><button class="checkout-btn">Tiến hành thanh toán</button></a>
 
                 <div class="voucher">
