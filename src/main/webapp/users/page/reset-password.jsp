@@ -27,7 +27,7 @@
                            Xin chào,  <span
                       id="username">${sessionScope.user.username != null ? sessionScope.user.username : ''}</span>!</span>
 
-                    <form action="account" method="post">
+                    <form action="informationCustomer" method="post">
                         <button type="submit" class="account-link" id="signup-link"
                                 style="display: none;">
                             <i class="fas fa-user-circle"></i> Tài khoản
@@ -52,7 +52,7 @@
                 <div class="menu">
                     <!-- Logo bên trái -->
                     <div class="logo">
-                        <a href="../../home.jsp"><img src="${pageContext.request.contextPath}/users/img/logo.png" alt="Logo"></a>
+                        <a href="home-page"><img src="${pageContext.request.contextPath}/users/img/logo.png" alt="Logo"></a>
                     </div>
 
                     <!-- Thanh tìm kiếm ở giữa -->
@@ -69,7 +69,12 @@
                         </div>
                     </div>
                     <div class="cart">
-                        <a href="${pageContext.request.contextPath}/users/page/login-signup.jsp"><i class="fas fa-shopping-cart"></i></a>
+                        <div class="cart-wrapper">
+                            <a href="cart-items">
+                                <i class="fas fa-shopping-cart"></i>
+                            </a>
+                            <span class="cart-count" id="cart-count">0</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -112,26 +117,26 @@
                                     ĐIỆN NƯỚC</a></li>
                             </ul>
                         </li>
-                        <li class="propClone"><a href="../../../home.jsp"><i class="fa-solid fa-house"></i>&nbsp;&nbsp; TRANG CHỦ
+                        <li class="propClone"><a href="home-page"><i class="fa-solid fa-house"></i>&nbsp;&nbsp; TRANG CHỦ
                         </a></li>
-                        <li class="propClone"><a href="../product.jsp"><i class="fa-brands fa-product-hunt"></i>
+                        <li class="propClone"><a href="product"><i class="fa-brands fa-product-hunt"></i>
                             &nbsp;&nbsp;SẢN PHẨM</a>
                         </li>
-                        <li class="propClone"> <a href="../cart.jsp"><i class="fas fa-shopping-cart"></i>&nbsp;&nbsp; GIỎ
+                        <li class="propClone"> <a href="cart-items"><i class="fas fa-shopping-cart"></i>&nbsp;&nbsp; GIỎ
                             HÀNG</a>
                         </li>
                         <li class="propClone">
                             <span class="none-a"> <i class="fa-solid fa-book"></i> &nbsp;&nbsp; HƯỚNG DẪN </span>
                             <ul class="items">
-                                <li><a href="../buying-help.jsp">&nbsp;&nbsp;<i
+                                <li><a href="turn-page?action=buyingHelp">&nbsp;&nbsp;<i
                                         class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;HƯỚNG DẪN
                                     MUA HÀNG</a>
                                 </li>
-                                <li><a href="../product_unit.jsp">&nbsp;&nbsp;<i
+                                <li><a href="turn-page?action=productUnit">&nbsp;&nbsp;<i
                                         class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;BẢNG ĐƠN VỊ SẢN PHẨM</a>
                                 </li>
 
-                                <li><a href="../term_and_services.jsp">&nbsp;&nbsp;<i
+                                <li><a href="turn-page?action=termAndService">&nbsp;&nbsp;<i
                                         class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;ĐIỀU KHOẢN
                                     VÀ DỊCH VỤ</a>
                                 </li>
@@ -160,7 +165,7 @@
                                 </c:if>
                             </div>
                             <button type="submit">Gửi liên kết đặt lại mật khẩu</button>
-                            <p><a href="users/page/login-signup.jsp" id="back-to-login">Quay lại đăng nhập</a></p>
+                            <p><a href="login?action=login" id="back-to-login">Quay lại đăng nhập</a></p>
                         </form>
                     </div>
                 </c:if>
@@ -168,7 +173,7 @@
                 <!-- Form đặt lại mật khẩu mới (ẩn khi không có token hợp lệ) -->
                 <c:if test="${not empty verificationRequested}">
                     <div class="form-container set-new-password">
-                        <form id="new-password-form" action="/tqh/reset-password" method="post">
+                        <form id="new-password-form" action="reset-password" method="post">
                             <h1>Đặt lại mật khẩu mới</h1>
                             <input type="hidden" name="action" value="reset" />
                             <input type="hidden" name="token" value="${token}" /> <!-- Đưa token vào trong form -->
@@ -200,8 +205,8 @@
             <div class="links">
                 <h3>Liên kết</h3>
                 <ul>
-                    <li><a href="introduce.html">Giới thiệu</a></li>
-                    <li><a href="term_and_services.html">Điều khoản và dịch vụ</a></li>
+                    <li><a href="turn-page?action=introduce">Giới thiệu</a></li>
+                    <li><a href="turn-page?action=termAndService">Điều khoản và dịch vụ</a></li>
                 </ul>
             </div>
             <div class="social-media">

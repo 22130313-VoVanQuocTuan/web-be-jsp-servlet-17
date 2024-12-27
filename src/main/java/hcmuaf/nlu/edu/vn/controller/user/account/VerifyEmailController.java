@@ -45,7 +45,7 @@ public class VerifyEmailController extends HttpServlet {
             request.setAttribute("error_code", "Đã xảy ra lỗi, vui lòng thử lại.");
         }
         // Giữ lại form ký và thông báo lỗi
-        request.getRequestDispatcher("users/page/login-signup.jsp").forward(request, response);
+        request.getRequestDispatcher("/users/page/login-signup.jsp").forward(request, response);
 
     }
 

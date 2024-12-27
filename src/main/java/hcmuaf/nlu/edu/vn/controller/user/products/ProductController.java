@@ -31,8 +31,9 @@ public class ProductController extends HttpServlet {
             throw new RuntimeException(e);
         }
 
+        HttpSession session = request.getSession();
         // Truyền danh sách sản phẩm vào request để hiển thị trong JSP
-        request.setAttribute("promotionals", list);
+        session.setAttribute("promotionals", list);
         request.setAttribute("products", products);
         request.getRequestDispatcher("users/page/product.jsp").forward(request, response);
     }

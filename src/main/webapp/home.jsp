@@ -56,7 +56,7 @@
             <div class="menu">
                 <!-- Logo bên trái -->
                 <div class="logo">
-                    <a href="home.jsp"><img src="users/img/logo.png" alt="Logo"></a>
+                    <a href="home-page"><img src="users/img/logo.png" alt="Logo"></a>
                 </div>
 
                 <!-- Thanh tìm kiếm ở giữa -->
@@ -121,7 +121,7 @@
                             ĐIỆN NƯỚC</a></li>
                     </ul>
                 </li>
-                <li class="propClone"><a href="home.jsp"><i class="fa-solid fa-house"></i>&nbsp;&nbsp; TRANG CHỦ </a>
+                <li class="propClone"><a href="home-page"><i class="fa-solid fa-house"></i>&nbsp;&nbsp; TRANG CHỦ </a>
                 </li>
 
                 <li class="propClone"><a href="product"><i class="fa-brands fa-product-hunt"></i>
@@ -134,14 +134,15 @@
                 <li class="propClone">
                     <span class="none-a"> <i class="fa-solid fa-book"></i> &nbsp;&nbsp; HƯỚNG DẪN </span>
                     <ul class="items">
-                        <li><a href="users/page/buying-help.jsp">&nbsp;&nbsp;<i
-                                class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp; HƯỚNG DẪN
+                        <li><a href="turn-page?action=buyingHelp">&nbsp;&nbsp;<i
+                                class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;HƯỚNG DẪN
                             MUA HÀNG</a>
                         </li>
-                        <li><a href="users/page/product_unit.jsp">&nbsp;&nbsp;<i
+                        <li><a href="turn-page?action=productUnit">&nbsp;&nbsp;<i
                                 class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;BẢNG ĐƠN VỊ SẢN PHẨM</a>
                         </li>
-                        <li><a href="users/page/term_and_services.jsp">&nbsp;&nbsp;<i
+
+                        <li><a href="turn-page?action=termAndService">&nbsp;&nbsp;<i
                                 class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;ĐIỀU KHOẢN
                             VÀ DỊCH VỤ</a>
                         </li>
@@ -1162,7 +1163,7 @@
         <div class="banner-details">
             <h2 class="banner-title">Sự Kiện Giảm Giá Đặc Biệt Mừng Giáng Sinh</h2>
             <p class="banner-desc">Giảm giá lên đến 50% cho các sản phẩm</p>
-            <a href="users/page/product.jsp" class="banner-btn">Mua Ngay</a>
+            <a href="product" class="banner-btn">Mua Ngay</a>
         </div>
 
         <!-- Nút đóng banner -->
@@ -1184,8 +1185,8 @@
         <div class="links">
             <h3>Liên kết</h3>
             <ul>
-                <li><a href="users/page/introduce.jsp">Giới thiệu</a></li>
-                <li><a href="users/page/term_and_services.jsp">Điều khoản và dịch vụ</a></li>
+                <li><a href="turn-page?action=introduce">Giới thiệu</a></li>
+                <li><a href="turn-page?action=termAndService">Điều khoản và dịch vụ</a></li>
             </ul>
         </div>
         <div class="social-media">

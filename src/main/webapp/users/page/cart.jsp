@@ -132,16 +132,17 @@
                     <li class="propClone">
                         <span class="none-a"> <i class="fa-solid fa-book"></i> &nbsp;&nbsp; HƯỚNG DẪN </span>
                         <ul class="items">
-                            <li><a href="<c:url value="/users/page/buying-help.jsp"/>">&nbsp;&nbsp;<i
-                                        class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;HƯỚNG DẪN
-                                    MUA HÀNG</a>
+                            <li><a href="turn-page?action=buyingHelp">&nbsp;&nbsp;<i
+                                    class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;HƯỚNG DẪN
+                                MUA HÀNG</a>
                             </li>
-                            <li><a href="<c:url value="/users/page/product_unit.jsp"/>">&nbsp;&nbsp;<i
-                                        class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;BẢNG ĐƠN VỊ SẢN PHẨM</a>
+                            <li><a href="turn-page?action=productUnit">&nbsp;&nbsp;<i
+                                    class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;BẢNG ĐƠN VỊ SẢN PHẨM</a>
                             </li>
-                            <li><a href="<c:url value="/users/page/term_and_services.jsp"/>">&nbsp;&nbsp;<i
-                                        class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;ĐIỀU KHOẢN
-                                    VÀ DỊCH VỤ</a>
+
+                            <li><a href="turn-page?action=termAndService">&nbsp;&nbsp;<i
+                                    class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;ĐIỀU KHOẢN
+                                VÀ DỊCH VỤ</a>
                             </li>
                         </ul>
                     </li>
@@ -202,17 +203,20 @@
                 <div class="cart-summary">
                     <div class="summary-item">
                         <span>Tạm tính:</span>
-                        <span id="subtotal"><fmt:formatNumber value=" ${totalPrice}" type="number" groupingUsed="true"/>₫</span>
+                        <span id="subtotal"><fmt:formatNumber value=" ${sessionScope.totalPrice}" type="number" groupingUsed="true"/>₫</span>
                     </div>
                     <div class="summary-item">
                         <span>Phí vận chuyển:</span>
-                        <span id="vat"><fmt:formatNumber value=" ${totalShippingFee}" type="number" groupingUsed="true"/>₫</span>
+                        <span id="vat"><fmt:formatNumber value=" ${sessionScope.totalShippingFee}" type="number" groupingUsed="true"/>₫</span>
                     </div>
                 </div>
                 <div class="summary-item total">
                     <span>Tổng cộng:</span>
-                    <span id="total"><fmt:formatNumber value=" ${totalFinalPrice} " type="number" groupingUsed="true"/>₫</span>
+                    <span id="total"><fmt:formatNumber value=" ${sessionScope.totalFinalPrice} " type="number" groupingUsed="true"/>₫</span>
                 </div>
+                <c:if test="${not empty message}">
+                    <div class="alert alert-danger">${message}</div>
+                </c:if>
                 <a href="confirmation"><button class="checkout-btn">Tiến hành thanh toán</button></a>
 
                 <div class="voucher">
@@ -255,8 +259,8 @@
             <div class="links">
                 <h3>Liên kết</h3>
                 <ul>
-                    <li><a href="<c:url value="/users/page/introduce.jsp"/>">Giới thiệu</a></li>
-                    <li><a href="<c:url value="/users/page/term_and_services.jsp"/>">Điều khoản và dịch vụ</a></li>
+                    <li><a href="turn-page?action=introduce">Giới thiệu</a></li>
+                    <li><a href="turn-page?action=termAndService">Điều khoản và dịch vụ</a></li>
                 </ul>
             </div>
             <div class="social-media">

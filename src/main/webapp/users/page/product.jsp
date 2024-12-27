@@ -12,10 +12,10 @@
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4-beta3/css/all.min.css"/>
-<link rel="stylesheet" href="../css/home.css">
-<link rel="stylesheet" href="../css/product.css">
-<link rel="stylesheet" href="users/css/home.css">
-<link rel="stylesheet" href="users/css/product.css">
+<link rel="stylesheet" href="<c:url value="/users/css/home.css"/>">
+<link rel="stylesheet" href="<c:url value="/users/css/product.css"/>">
+<link rel="stylesheet" href="<c:url value="/users/css/home.css"/>">
+<link rel="stylesheet" href="<c:url value="/users/css/product.css"/>">
 
 <body>
 <div id="section-header1">
@@ -59,7 +59,7 @@
             <div class="menu">
                 <!-- Logo bên trái -->
                 <div class="logo">
-                    <a href="/tqh/home-page"><img src="users/img/logo.png" alt="Logo"></a>
+                    <a href="home-page"><img src="${pageContext.request.contextPath}/users/img/logo.png" alt="Logo"></a>
                 </div>
 
                 <!-- Thanh tìm kiếm ở giữa -->
@@ -135,15 +135,15 @@
                 <li class="propClone">
                     <span class="none-a"> <i class="fa-solid fa-book"></i> &nbsp;&nbsp; HƯỚNG DẪN </span>
                     <ul class="items">
-                        <li><a href="/tqh/users/page/buying-help.jsp">&nbsp;&nbsp;<i
+                        <li><a href="turn-page?action=buyingHelp">&nbsp;&nbsp;<i
                                 class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;HƯỚNG DẪN
                             MUA HÀNG</a>
                         </li>
-                        <li><a href="/tqh/users/page/product_unit.jsp">&nbsp;&nbsp;<i
+                        <li><a href="turn-page?action=productUnit">&nbsp;&nbsp;<i
                                 class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;BẢNG ĐƠN VỊ SẢN PHẨM</a>
                         </li>
 
-                        <li><a href="/tqh/users/page/term_and_services.jsp">&nbsp;&nbsp;<i
+                        <li><a href="turn-page?action=termAndService">&nbsp;&nbsp;<i
                                 class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;ĐIỀU KHOẢN
                             VÀ DỊCH VỤ</a>
                         </li>
@@ -185,14 +185,14 @@
         <div class="item" data-category="thiet-bi-dien-nuoc">
             <h3><a href="/tqh/product-category?categoryId=9">Thiết bị điện nước</a></h3>
         </div>
-<%--        <div class="slide-discount">--%>
-<%--            <c:forEach var="promotional" items="promotionals">--%>
-<%--                <div class="discount">--%>
-<%--                    <span class="discount-label">Giảm giá:${promotional.value}%</span>--%>
-<%--                    <span class="discount-description">${promotional.code}</span>--%>
-<%--                </div>--%>
-<%--            </c:forEach>--%>
-<%--        </div>--%>
+        <div class="slide-discount">
+            <c:forEach var="promotional" items="${sessionScope.promotionals}">
+                <div class="discount">
+                    <span class="discount-label">Giảm giá:<fmt:formatNumber value="${promotional.value}" type="number" groupingUsed="true"/>₫</span>
+                    <span class="discount-description">${promotional.code}</span>
+                </div>
+            </c:forEach>
+        </div>
     </div>
 
 
@@ -288,8 +288,8 @@
         <div class="links">
             <h3>Liên kết</h3>
             <ul>
-                <li><a href="introduce.jsp">Giới thiệu</a></li>
-                <li><a href="term_and_services.jsp">Điều khoản và dịch vụ</a></li>
+                <li><a href="turn-page?action=introduce">Giới thiệu</a></li>
+                <li><a href="turn-page?action=termAndService">Điều khoản và dịch vụ</a></li>
             </ul>
         </div>
         <div class="social-media">
