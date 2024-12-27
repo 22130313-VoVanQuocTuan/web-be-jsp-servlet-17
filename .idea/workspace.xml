@@ -10,362 +10,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c1c06880-591f-40ee-8543-d3905e4deadd" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/classes/db.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/classes/hcmuaf/nlu/edu/vn/controller/admin/account/AddAccountController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/classes/hcmuaf/nlu/edu/vn/controller/admin/account/DeleteAccountController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/classes/hcmuaf/nlu/edu/vn/controller/admin/account/ListAllUserController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/classes/hcmuaf/nlu/edu/vn/controller/admin/account/UpdateStatusAccountController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/classes/hcmuaf/nlu/edu/vn/controller/admin/product/DeleteProductController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/classes/hcmuaf/nlu/edu/vn/controller/admin/product/GetProductController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/classes/hcmuaf/nlu/edu/vn/controller/admin/promotional/AddPromotionalController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/classes/hcmuaf/nlu/edu/vn/controller/admin/promotional/DeletePromotionalController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/classes/hcmuaf/nlu/edu/vn/controller/admin/promotional/GetListPromotional.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/classes/hcmuaf/nlu/edu/vn/controller/user/Orders/OrderController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/classes/hcmuaf/nlu/edu/vn/controller/user/account/LoginController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/classes/hcmuaf/nlu/edu/vn/controller/user/account/LogoutController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/classes/hcmuaf/nlu/edu/vn/controller/user/account/ResetCodeController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/classes/hcmuaf/nlu/edu/vn/controller/user/account/ResetPasswordController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/classes/hcmuaf/nlu/edu/vn/controller/user/account/SignUpController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/classes/hcmuaf/nlu/edu/vn/controller/user/account/TurnPage.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/classes/hcmuaf/nlu/edu/vn/controller/user/account/UpdateInfoController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/classes/hcmuaf/nlu/edu/vn/controller/user/account/VerifyEmailController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/classes/hcmuaf/nlu/edu/vn/controller/user/carts/AddCartController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/classes/hcmuaf/nlu/edu/vn/controller/user/carts/GetListCartItems.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/classes/hcmuaf/nlu/edu/vn/controller/user/carts/RemoveCartItems.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/classes/hcmuaf/nlu/edu/vn/controller/user/carts/UpdateQuantity.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/classes/hcmuaf/nlu/edu/vn/controller/user/carts/Voucher.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/classes/hcmuaf/nlu/edu/vn/controller/user/products/GetListPDiscountController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/classes/hcmuaf/nlu/edu/vn/controller/user/products/GetProductDetailController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/classes/hcmuaf/nlu/edu/vn/controller/user/products/ProductCategoryController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/classes/hcmuaf/nlu/edu/vn/controller/user/products/ProductController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/classes/hcmuaf/nlu/edu/vn/controller/user/products/ProductFilterController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/classes/hcmuaf/nlu/edu/vn/dao/DBConnect.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/classes/hcmuaf/nlu/edu/vn/dao/DBProperties.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/classes/hcmuaf/nlu/edu/vn/dao/Orders/OrderDao.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/classes/hcmuaf/nlu/edu/vn/dao/Users/AddDeleteUpdateAccountInAdminDao.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/classes/hcmuaf/nlu/edu/vn/dao/Users/GetListAccountDao.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/classes/hcmuaf/nlu/edu/vn/dao/Users/LoginDao.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/classes/hcmuaf/nlu/edu/vn/dao/Users/LogoutDao.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/classes/hcmuaf/nlu/edu/vn/dao/Users/ResetCodeDao.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/classes/hcmuaf/nlu/edu/vn/dao/Users/ResetPasswordDao.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/classes/hcmuaf/nlu/edu/vn/dao/Users/SignUpDao.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/classes/hcmuaf/nlu/edu/vn/dao/Users/UpdateInfoDao.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/classes/hcmuaf/nlu/edu/vn/dao/Users/VerifyEmailDao.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/classes/hcmuaf/nlu/edu/vn/dao/carts/CartItems.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/classes/hcmuaf/nlu/edu/vn/dao/carts/Carts.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/classes/hcmuaf/nlu/edu/vn/dao/carts/VoucherDao.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/classes/hcmuaf/nlu/edu/vn/dao/products/ApplyPromotionalInCartDao.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/classes/hcmuaf/nlu/edu/vn/dao/products/GetListPDiscountDao.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/classes/hcmuaf/nlu/edu/vn/dao/products/GetProductDao.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/classes/hcmuaf/nlu/edu/vn/dao/products/ProductDao.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/classes/hcmuaf/nlu/edu/vn/dao/products/ProductFilterDao.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/classes/hcmuaf/nlu/edu/vn/dao/promotional/PromotionalDao.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/classes/hcmuaf/nlu/edu/vn/filter/AdminFilter.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/classes/hcmuaf/nlu/edu/vn/filter/UserFilter.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/classes/hcmuaf/nlu/edu/vn/model/AddressShipping.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/classes/hcmuaf/nlu/edu/vn/model/ItemOrder.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/classes/hcmuaf/nlu/edu/vn/model/OrderItem.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/classes/hcmuaf/nlu/edu/vn/model/Orders.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/classes/hcmuaf/nlu/edu/vn/model/PasswordReset.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/classes/hcmuaf/nlu/edu/vn/model/Product.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/classes/hcmuaf/nlu/edu/vn/model/Promotionals.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/classes/hcmuaf/nlu/edu/vn/model/Users.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/classes/hcmuaf/nlu/edu/vn/service/CartService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/classes/hcmuaf/nlu/edu/vn/service/EmailUtilService$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/classes/hcmuaf/nlu/edu/vn/service/EmailUtilService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/classes/hcmuaf/nlu/edu/vn/service/OrderService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/classes/hcmuaf/nlu/edu/vn/service/ProductService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/classes/hcmuaf/nlu/edu/vn/service/PromotionalService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/classes/hcmuaf/nlu/edu/vn/service/UserService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/lib/activation-1.1.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/lib/jakarta.el-api-5.0.0.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/lib/jakarta.servlet.jsp.jstl-3.0.1.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/lib/jakarta.servlet.jsp.jstl-api-3.0.1.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/lib/javax.mail-1.6.2.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/lib/javax.mail-api-1.6.2.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/lib/micrometer-commons-1.12.9.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/lib/micrometer-observation-1.12.9.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/lib/mysql-connector-j-8.4.0.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/lib/protobuf-java-3.25.1.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/lib/spring-aop-6.1.12.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/lib/spring-beans-6.1.12.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/lib/spring-context-6.1.12.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/lib/spring-core-6.1.12.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/lib/spring-expression-6.1.12.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/lib/spring-jcl-6.1.12.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/lib/spring-security-core-6.3.2.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/lib/spring-security-crypto-6.3.2.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/web.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/admin/css/category.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/admin/css/order.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/admin/css/passwordManagement.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/admin/css/products.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/admin/css/promotional.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/admin/css/review.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/admin/css/style.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/admin/css/user.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/admin/js/category.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/admin/js/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/admin/js/order.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/admin/js/passwordManagement.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/admin/js/products.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/admin/js/promotional.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/admin/js/review.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/admin/pages/category.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/admin/pages/index.jsp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/admin/pages/order.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/admin/pages/passwordManagement.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/admin/pages/products.jsp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/admin/pages/promotional.jsp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/admin/pages/user.jsp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/db.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/hcmuaf/nlu/edu/vn/controller/admin/ListProductController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/hcmuaf/nlu/edu/vn/controller/user/account/LoginController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/hcmuaf/nlu/edu/vn/controller/user/account/LogoutController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/hcmuaf/nlu/edu/vn/controller/user/account/ResetCodeController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/hcmuaf/nlu/edu/vn/controller/user/account/ResetPasswordController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/hcmuaf/nlu/edu/vn/controller/user/account/SignUpController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/hcmuaf/nlu/edu/vn/controller/user/account/VerifyEmailController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/hcmuaf/nlu/edu/vn/controller/user/products/GetListPDiscountController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/hcmuaf/nlu/edu/vn/dao/DBConnect.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/hcmuaf/nlu/edu/vn/dao/DBProperties.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/hcmuaf/nlu/edu/vn/dao/Users/LoginDao.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/hcmuaf/nlu/edu/vn/dao/Users/LogoutDao.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/hcmuaf/nlu/edu/vn/dao/Users/ResetCodeDao.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/hcmuaf/nlu/edu/vn/dao/Users/ResetPasswordDao.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/hcmuaf/nlu/edu/vn/dao/Users/SignUpDao.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/hcmuaf/nlu/edu/vn/dao/Users/VerifyEmailDao.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/hcmuaf/nlu/edu/vn/dao/products/GetListPDiscountDao.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/hcmuaf/nlu/edu/vn/model/PasswordReset.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/hcmuaf/nlu/edu/vn/model/Product.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/hcmuaf/nlu/edu/vn/model/Users.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/hcmuaf/nlu/edu/vn/service/EmailUtil$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/hcmuaf/nlu/edu/vn/service/EmailUtil.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/hcmuaf/nlu/edu/vn/service/ProductService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/hcmuaf/nlu/edu/vn/service/UserService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/home.jsp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/css/buying-help.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/css/cart.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/css/check-pay.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/css/confirmation.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/css/home.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/css/informationCustomer.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/css/introduce.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/css/login-signup.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/css/product-detail.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/css/product.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/css/product_unit.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/css/reset-password.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/css/terms_and_services.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img/baner.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img/logo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img/slider1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img/slider2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img/slider3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img/slider4.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img/slider5.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img/slider6.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/Da_cat_soi/catbetong.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/Da_cat_soi/catden.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/Da_cat_soi/catsanlap.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/Da_cat_soi/catsong.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/Da_cat_soi/catvang.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/Da_cat_soi/catxayto.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/Da_cat_soi/da12.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/Da_cat_soi/da24.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/Da_cat_soi/da46.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/Da_cat_soi/da57.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/Da_cat_soi/dabazan.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/Da_cat_soi/dacat.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/Da_cat_soi/dache.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/Da_cat_soi/dacmthach.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/Da_cat_soi/dahoacuong.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/Da_cat_soi/dahoc.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/Da_cat_soi/damibui.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/Da_cat_soi/damisang.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/Da_cat_soi/daphien.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/Da_cat_soi/datrang.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/Da_cat_soi/davoi.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/Da_cat_soi/daxanhphugiao.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/gachxaydung/gach-xay-tuong.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/gachxaydung/gachbong.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/gachxaydung/gachcaosu.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/gachxaydung/gachchiulua.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/gachxaydung/gachdaden.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/gachxaydung/gachdanaBU03.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/gachxaydung/gachdinhdac.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/gachxaydung/gachhiephung717.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/gachxaydung/gachkhongnung.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/gachxaydung/gachkinh.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/gachxaydung/gachmen.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/gachxaydung/gachnhua.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/gachxaydung/gachtau.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/gachxaydung/gachtuynel.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/gachxaydung/gachtuynelhieuthao.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/gachxaydung/gachtuynelngocchung.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/gachxaydung/gachtuynelngochung.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/gachxaydung/gachtuynelsangtrongnghia.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/inax-khuyen-mai-mua-dong.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/ngoi/NGÓI BITUM CANA ĐỒNG PHẲNG.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/ngoi/NGÓI BITUM PHỦ ĐÁ DẠNG TỔ ONG – MÀU XANH RÊU.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/ngoi/NGÓI BITUM PHỦ ĐÁ DẠNG VẢY RỒNG – MÀU XANH DƯƠNG.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/ngoi/NGÓI BITUM PHỦ ĐÁ DẠNG ĐỒNG PHẲNG – MÀU XÁM.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/ngoi/NGÓI BITUM PHỦ ĐÁ TEGOLA CAO CẤP NHẬP KHẨU Ý – DẠNG VẢY CÁ.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/ngoi/NGÓI BITUM PHỦ ĐÁ TEGOLA CAO CẤP NHẬP KHẨU Ý-Đấ tầng.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/ngoi/NGÓI BITUM PHỦ ĐÁ TEGOLA CAO CẤP NHẬP KHẨU Ý.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/ngoi/NGÓI TRÁNG MEN HAI SÓNG PRIME WAVE S 1214 MÀU XANH RÊU.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/ngoi/NgoiThaiSCGDangPhang.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/ngoi/Ngói Thái SCG Elite Series Dạng Sóng Classic-Nâu Socola.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/ngoi/Ngói Thái SCG Elite Series Dạng Sóng Classic-Nâu.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/ngoi/Ngói Thái SCG Elite Series Dạng Sóng Classic-Xám.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/ngoi/Ngói Thái SCG Elite Series Dạng Sóng Gold.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/ngoi/Ngói Thái SCG dạng sóng M16.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/ngoi/Ngói chạc ba chữ Y.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/ngoi/Ngói cuối nóc.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/ngoi/Ngói cuối rìa.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/ngoi/Ngói nóc.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/ngoi/Tôn Sáng Sóng Vuông Polycacbonate Tấm.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/ngoi/Tấm Cemboard Ốp Trần Vân Gỗ Smartboard Có Rãnh.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/ngoi/Tấm Lợp Lấy Sáng Polycarbonate Đặc Ruột.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/ong-nuoc-phu-kien/2 inch, áp suất PN20 Bar.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/ong-nuoc-phu-kien/Bồn nước inox.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/ong-nuoc-phu-kien/Co 90 độ trơn phi 21 Nhựa Bình Minh.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/ong-nuoc-phu-kien/Co 90⁰ Ø6mm dùng cho máy lọc nước RO.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/ong-nuoc-phu-kien/Co giảm PVC phi 60-42.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/ong-nuoc-phu-kien/Khớp nối sống ( Rắc Co nhựa ) Ø27, Nhựa PVC-U Bình Minh.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/ong-nuoc-phu-kien/Nắp khóa, bịt đầu ống loại ren ngoài Ø21 nhựa PVC BÌNH MINH, giá tính theo cái.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/ong-nuoc-phu-kien/Nắp khóa, bịt đầu ống Ø90 (loại đầu bằng, không ren) nhựa PVC-U Tiền Phong.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/ong-nuoc-phu-kien/Nối ren trong Ø21 D cho ống nhựa cứng PVCU Bình Minh.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/ong-nuoc-phu-kien/Nối rút trơn 90 x 42 M , nhựa PVC-U Bình Minh.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/ong-nuoc-phu-kien/Nối ống chữ T nhựa PVC Bình Minh một đầu ren trong phi 21.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/ong-nuoc-phu-kien/Nối ống dạng T Ø49 D nhựa PVC BÌNH MINH, áp suất PN12 bar.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/ong-nuoc-phu-kien/Phao cơ inox 304 27mm Rossa.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/ong-nuoc-phu-kien/Van nhựa Ø34 Bình Minh.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/ong-nuoc-phu-kien/Đồng hồ nước Trung Đức phi 49 DN40.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/ong-nuoc-phu-kien/Ống nhựa Bình Minh PVC-U.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/ong-nuoc-phu-kien/Ống nhựa PVC lưới mềm ø25mm Luco, cuộn 50m màu xanh dương.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/ong-nuoc-phu-kien/Ống nhựa mềm lõi thép Ø50mm, cuộn 50m.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/ong-nuoc-phu-kien/Ống nhựa mềm Ø35mm Luco, cuộn 40m trong suốt.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/ong-nuoc-phu-kien/Ống nóng ppr phi 32x5.4mm.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/son/Phụ gia chống thấm BS-8430 Latex.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/son/SƠN LÓT LẤP TIM LÀM MỊN GỖ LOTUS SANDING SEALER.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/son/SƠN NƯỚC NGOẠI THẤT SUPERTECH PRO EXTERIOR.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/son/Sơn Lót Ngoại Thất Siêu Cao Cấp Dulux Weathershield Chống Kiềm.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/son/Sơn Lót Ngoại Thất Siêu Cao Cấp Dulux Weathershield Powersealer.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/son/Sơn Ngoại Thất Dulux Inspire Sắc Màu Bền Đẹp Bề Mặt.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/son/Sơn Nội Thất Cao Cấp Dulux Easyclean Lau Chùi Hiệu Quả Bề Mặt Bóng.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/son/Sơn Nội Thất DULUX AMBIANCE 5 IN1 PEARL GLOW Bóng mờ.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/son/Sơn Nội Thất Dulux Ambiance 5in1 Superflexx.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/son/Sơn Nội Thất Dulux EasyClean Chống Bám Bẩn Kháng Virus.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/son/Sơn Nội Thất Dulux EasyClean Chống Bám Bẩn.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/son/Sơn Nội Thất Dulux Inspire Sắc Màu Bền Đẹp Bề Mặt Bóng.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/son/Sơn Nội Thất Dulux Inspire Sắc Màu Bền Đẹp Bề Mặt Mờ.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/son/Sơn Sắt Giả Gỗ Lotus Meta Coat Primer – 1 Sơn Lót + 1 Sơn Phủ.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/son/Sơn nước ngoại thất Dulux Weathershield Bề Mặt .png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/son/Sơn nước ngoại thất Dulux Weathershield Colour Protect Bề Mặt.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/son/Sơn nước ngoại thất Dulux Weathershield Powerflexx Bề Mặt.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/son/Sơn nước ngoại thất Maxilite Tough từ Dulux Bề Mặt.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/son/Sơn nước nội thất cao cấp TOA Nanoclean.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/son/Sơn nước nội thất sinh học DULUX BETTER LIVING AIR CLEAN.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/thepvasat/image1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/thepvasat/image10.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/thepvasat/image11.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/thepvasat/image12.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/thepvasat/image13.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/thepvasat/image14.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/thepvasat/image15.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/thepvasat/image2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/thepvasat/image3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/thepvasat/image4.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/thepvasat/image5.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/thepvasat/image6.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/thepvasat/image7.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/thepvasat/image8.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/thepvasat/image9.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/thietbi-diennuoc/image1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/thietbi-diennuoc/image10.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/thietbi-diennuoc/image11.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/thietbi-diennuoc/image12.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/thietbi-diennuoc/image13.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/thietbi-diennuoc/image14.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/thietbi-diennuoc/image15.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/thietbi-diennuoc/image2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/thietbi-diennuoc/image3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/thietbi-diennuoc/image4.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/thietbi-diennuoc/image5.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/thietbi-diennuoc/image6.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/thietbi-diennuoc/image7.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/thietbi-diennuoc/image8.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/thietbi-diennuoc/image9.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/vat_lieu_go/gobachduong.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/vat_lieu_go/gocamlai.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/vat_lieu_go/gocamxe.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/vat_lieu_go/gohong.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/vat_lieu_go/gohuong.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/vat_lieu_go/gooccho.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/vat_lieu_go/gothong.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/vat_lieu_go/gotro.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/vat_lieu_go/image1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/vat_lieu_go/image10.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/vat_lieu_go/image11.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/vat_lieu_go/image12.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/vat_lieu_go/image2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/vat_lieu_go/image3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/vat_lieu_go/image4.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/vat_lieu_go/image5.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/vat_lieu_go/image6.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/vat_lieu_go/image7.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/vat_lieu_go/image8.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/vat_lieu_go/image9.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/xingmang/image1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/xingmang/image2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/xingmang/image3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/xingmang/ximagfico.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/xingmang/ximamgallybuild.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/xingmang/ximamgholikem.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/xingmang/ximangcampha.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/xingmang/ximangchongtham.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/xingmang/ximanginsee.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/xingmang/ximanginseeeco.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/xingmang/ximangpc40.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/xingmang/ximangshahcement.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/xingmang/ximangtanthang.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/xingmang/ximangtaydo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/xingmang/ximangthanglong.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/xingmang/ximangunicorn.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/xingmang/ximangvicemhalong.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/img_product/xingmang/ximangvicemhatien.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/js/cart.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/js/comfirmation.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/js/home.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/js/informationCustomer.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/js/login-signup.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/js/product.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/js/reset-password.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/js/scripts.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/js/slider-products.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/js/slider_Image-home.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/page/buying-help.jsp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/page/cart.jsp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/page/check-pay.jsp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/page/confirmation.jsp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/page/informationCustomer.jsp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/page/introduce.jsp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/page/login-signup.jsp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/page/product-detail.jsp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/page/product.jsp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/page/product_unit.jsp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/page/reset-password.jsp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/page/term_and_services.jsp" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/controller/admin/product/AddProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/controller/admin/product/AddProductController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/controller/admin/product/DeleteProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/controller/admin/product/DeleteProductController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/controller/admin/product/GetProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/controller/admin/product/GetProductController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/dao/products/ProductDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/dao/products/ProductDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/dao/review/ReviewDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/dao/review/RatingDao.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/service/ProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/service/ProductService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/admin/js/products.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/admin/js/products.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/admin/pages/products.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/admin/pages/products.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -389,34 +40,34 @@
       </MavenGeneralSettings>
     </option>
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "customColor": "",
-  "associatedIndex": 8
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 8
+}</component>
   <component name="ProjectId" id="2qhBrRuM50Aqr7DUsCctkfyYLhe" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "Tomcat Server.Tomcat 10.1.31.executor": "Run",
-    "git-widget-placeholder": "master",
-    "kotlin-language-version-configured": "true",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Artifacts",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.13479263",
-    "settings.editor.selected.configurable": "com.poratu.idea.plugins.tomcat.setting.TomcatServersConfigurable",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;Tomcat Server.Tomcat 10.1.31.executor&quot;: &quot;Run&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Artifacts&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.13479263&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.poratu.idea.plugins.tomcat.setting.TomcatServersConfigurable&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="Tomcat 10.1.31" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 10.1.31" ALTERNATIVE_JRE_ENABLED="false" nameIsGenerated="true">
       <option name="UPDATING_POLICY" value="restart-server" />
@@ -523,6 +174,10 @@
       <option name="presentableId" value="Default" />
       <updated>1735105125241</updated>
       <workItem from="1735105126925" duration="15575000" />
+      <workItem from="1735142962611" duration="36000" />
+      <workItem from="1735203499125" duration="36000" />
+      <workItem from="1735205048453" duration="2299000" />
+      <workItem from="1735265330737" duration="481000" />
     </task>
     <servers />
   </component>
