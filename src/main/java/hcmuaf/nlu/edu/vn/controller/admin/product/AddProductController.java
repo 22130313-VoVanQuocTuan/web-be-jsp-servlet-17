@@ -6,6 +6,7 @@ import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 
+import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.sql.Timestamp;
@@ -13,8 +14,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet(name = "AddProductController", value = "/add-product")
+@MultipartConfig(maxFileSize = 10485760, // 10MB
+        maxRequestSize = 20971520, // 20MB
+        fileSizeThreshold = 0 // Kích thước tối thiểu của tệp khi được chuyển vào bộ nhớ
+)
 public class AddProductController extends HttpServlet {
     private final ProductService productService = new ProductService();
+    private static final String UPLOAD_DIRECTORY = "users/img"; // Đảm bảo rằng thư mục này nằm trong thư mục gốc của frontend
+
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -23,13 +30,33 @@ public class AddProductController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<String> errorMessages = new ArrayList<>(); // Danh sách lưu trữ thông báo lỗi
-
+        String imageUrl = ""; // Biến lưu đường dẫn ảnh
         try {
+            // Lấy phần file ảnh từ form
+            Part filePart = request.getPart("imageUrl"); // Lấy phần "image" từ form
+            String fileName = getFileName(filePart);
+
+            // Kiểm tra nếu có file ảnh được tải lên
+            if (fileName != null && !fileName.isEmpty()) {
+                // Đảm bảo thư mục lưu ảnh đã tồn tại
+                String uploadPath = getServletContext().getRealPath("") + File.separator + UPLOAD_DIRECTORY;
+                File uploadDir = new File(uploadPath);
+                if (!uploadDir.exists()) {
+                    uploadDir.mkdirs(); // Tạo thư mục nếu chưa tồn tại
+                }
+                System.out.println("Upload path: " + uploadPath); // Kiểm tra đường dẫn
+
+                // Tạo đối tượng File và lưu ảnh vào thư mục
+                File file = new File(uploadPath + File.separator + fileName);
+                filePart.write(file.getAbsolutePath()); // Lưu file vào thư mục gốc của frontend
+                imageUrl = UPLOAD_DIRECTORY + "/" + fileName; // Lưu đường dẫn ảnh vào CSDL
+            }
+
             // Lấy các tham số từ form
             String name = request.getParameter("name");
             String priceStr = request.getParameter("price");
             String quantityStr = request.getParameter("quantity");
-            String imageUrl = request.getParameter("imageUrl");
+            String img = request.getParameter("imageUrl");
             String description = request.getParameter("description");
             String categoryIdStr = request.getParameter("categoryId");
             String status = request.getParameter("status");
@@ -38,6 +65,19 @@ public class AddProductController extends HttpServlet {
             String size = request.getParameter("size");
             String unit = request.getParameter("unit");
             String discountPercentStr = request.getParameter("discountPercent");
+
+            // Chuyển đổi dữ liệu
+            double price = Double.parseDouble(priceStr.trim());
+            int quantity = Integer.parseInt(quantityStr.trim());
+            int categoryId = Integer.parseInt(categoryIdStr.trim());
+            double discountPercent = Double.parseDouble(discountPercentStr.trim());
+
+            // Kiểm tra tỷ lệ giảm giá hợp lệ
+            if (discountPercent < 0 || discountPercent > 1) {
+                errorMessages.add("Tỷ lệ giảm giá không hợp lệ! Phải từ 0 đến 1.");
+            }
+            // Tạo giá giảm
+            double discountPrice = price * (1 - discountPercent);
 
             // Kiểm tra và xử lý null hoặc giá trị trống cho từng trường
             if (name == null || name.trim().isEmpty()) {
@@ -56,39 +96,18 @@ public class AddProductController extends HttpServlet {
                 discountPercentStr = "0"; // Mặc định là 0 nếu không nhập
             }
 
-            // Chuyển đổi dữ liệu
-            double price = Double.parseDouble(priceStr.trim());
-            int quantity = Integer.parseInt(quantityStr.trim());
-            int categoryId = Integer.parseInt(categoryIdStr.trim());
-            double discountPercent = Double.parseDouble(discountPercentStr.trim());
-
-            // Kiểm tra tỷ lệ giảm giá hợp lệ
-            if (discountPercent < 0 || discountPercent > 1) {
-                errorMessages.add("Tỷ lệ giảm giá không hợp lệ! Phải từ 0 đến 1.");
-            }
-
             // Nếu có lỗi, không tiếp tục thêm sản phẩm
             if (!errorMessages.isEmpty()) {
-                List<Product> products = productService.getAllProducts(); // Lấy danh sách sản phẩm mới nhất
-                request.setAttribute("products", products); // Đặt danh sách sản phẩm vào request
                 request.setAttribute("errors", errorMessages);
-                request.getRequestDispatcher("/admin/pages/products.jsp").forward(request, response);
+                request.getRequestDispatcher("/products-list").forward(request, response);
                 return;
             }
 
-            // Tạo giá giảm
-            double discountPrice = price * (1 - discountPercent);
-
             // Tạo đối tượng Product
-            Product product = new Product(
-                    0, name, price, quantity, imageUrl, description, categoryId, status,
-                    supplier, color, size, unit, 0, 0, discountPercent, discountPrice,
-                    new Timestamp(System.currentTimeMillis()), new Timestamp(System.currentTimeMillis())
-            );
+            Product product = new Product(0, name, price, quantity, imageUrl, description, categoryId, status, supplier, color, size, unit, 0, 0, discountPercent, discountPrice, new Timestamp(System.currentTimeMillis()), new Timestamp(System.currentTimeMillis()));
 
             // Gọi ProductService để thêm sản phẩm
             boolean isAdded = productService.addProduct(product);
-
             // Gửi thông báo thành công hoặc thất bại
             if (isAdded) {
                 request.setAttribute("message", "Thêm sản phẩm thành công!");
@@ -100,23 +119,24 @@ public class AddProductController extends HttpServlet {
         } catch (Exception e) {
             errorMessages.add("Lỗi: " + e.getMessage());
         }
-
         // Hiển thị thông báo lỗi nếu có
         if (!errorMessages.isEmpty()) {
             request.setAttribute("errors", errorMessages);
         }
-        // Lấy danh sách sản phẩm mới nhất từ cơ sở dữ liệu
-        List<Product> products = null;
-        try {
-            products = productService.getAllProducts();
-
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        request.setAttribute("products", products);
-
         // Chuyển hướng về trang sản phẩm
-        request.getRequestDispatcher("/admin/pages/products.jsp").forward(request, response);
+        request.getRequestDispatcher("/products-list").forward(request, response);
+    }
+
+    // Lấy tên file từ Part
+    private String getFileName(Part part) {
+        String contentDisposition = part.getHeader("content-disposition");
+        for (String cd : contentDisposition.split(";")) {
+            if (cd.trim().startsWith("filename")) {
+                String fileName = cd.substring(cd.indexOf("=") + 2, cd.length() - 1);
+                return fileName;
+            }
+        }
+        return null;
     }
 
 

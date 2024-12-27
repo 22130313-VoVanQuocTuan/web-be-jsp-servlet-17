@@ -139,6 +139,29 @@
         transform: rotate(90deg);
     }
 
+    .scroll-to-top {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        display: none; /* Ẩn nút ban đầu */
+        background-color: #15283e;
+        color: white;
+        border: none;
+        border-radius: 50%;
+        padding: 10px 15px;
+        font-size: 18px;
+        cursor: pointer;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+        z-index: 1000;
+        transition: all 0.3s ease;
+    }
+
+    .scroll-to-top:hover {
+        background-color: #82a0c2;
+        transform: scale(1.1);
+    }
+
+
 </style>
 <body>
 <!-- ------------------ Điều hướng -------------------->
@@ -263,7 +286,7 @@
             <div class="recentOrders">
                 <div class="cardHeader">
                     <h2>Danh sách sản phẩm</h2>
-                    <a href="#" class="btn">Xem Tất Cả</a>
+                    <a href="products-list?all=true" class="btn">Xem Tất Cả</a>
                 </div>
                 <div class="list-products-content-button">
                     <button id="add-product">Thêm sản phẩm</button>
@@ -284,7 +307,7 @@
                     </thead>
                     <tbody>
                     <!-- Các sản phẩm sẽ được thêm vào đây -->
-                    <c:forEach var="product" items="${products}" begin="0" end="9">
+                    <c:forEach var="product" items="${products}" >
                         <tr>
                             <td><img src="${product.imageUrl}" alt="${product.name}"></td>
                             <td>${product.id}</td>
@@ -297,11 +320,12 @@
                             <td><fmt:formatDate value="${product.createDate}" pattern="dd-MM-yyyy HH:mm:ss"/></td>
                             <td class="v">
                                 <button id="edit-product">Sửa</button>
-                                <button id="deleteBtn" data-product-id="${product.id}">Xóa</button>
+                                <button id="deleteBtn" data-product-id="${product.id}" data-all="${param.all}">Xóa</button>
                             </td>
                         </tr>
                     </c:forEach>
                     </tbody>
+                    <button id="scrollToTop" class="scroll-to-top">⬆</button>
                 </table>
 
                 <!-- Kiểm tra và hiển thị tất cả thông báo lỗi -->
@@ -327,7 +351,7 @@
                 <div id="addProductModal" class="modal">
                     <div class="modal-content">
                         <h3>Thêm sản phẩm mới</h3>
-                        <form id="addProductForm" action="/tqh/add-product" method="post">
+                        <form id="addProductForm" action="/tqh/add-product" method="post" enctype="multipart/form-data">
                             <label for="productName">Tên sản phẩm:</label>
                             <input type="text" id="productName" name="name">
 
@@ -376,7 +400,7 @@
                             </select>
 
                             <label for="productImage">Hình ảnh:</label>
-                            <input type="file" id="productImage" name="imageUrl">
+                            <input type="file" id="productImage" name="imageUrl" accept="image/*" >
 
                             <button type="submit" id="save-Product">Lưu sản phẩm</button>
                             <button type="button" class="close-modal" onclick="closeModal()">Thoát</button>
@@ -458,6 +482,33 @@
     <script src="<c:url value="/admin/js/order.js"/>"></script>
     <script src="<c:url value="/admin/js/index.js"/>"></script>
     <script src="<c:url value="/admin/js/products.js"/>"></script>
+    <script>
+        document.getElementById('view-all-products').addEventListener('click', function (e) {
+            e.preventDefault();
+            // Redirect to servlet with parameter all=true
+            window.location.href = '/products-list?all=true';
+        });
+    </script>
+    <script>// Lấy tham chiếu đến nút
+    const scrollToTopButton = document.getElementById('scrollToTop');
+
+    // Hiển thị nút khi cuộn xuống quá 200px
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 200) {
+            scrollToTopButton.style.display = 'block'; // Hiển thị nút
+        } else {
+            scrollToTopButton.style.display = 'none'; // Ẩn nút
+        }
+    });
+
+    // Xử lý sự kiện click vào nút để quay lại đầu trang
+    scrollToTopButton.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth' // Cuộn mượt
+        });
+    });
+    </script>
 </div>
 </body>
 </html>

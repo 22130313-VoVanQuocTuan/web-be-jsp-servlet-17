@@ -56,7 +56,7 @@
                 <div class="menu">
                     <!-- Logo bên trái -->
                     <div class="logo">
-                        <a href="../../home.jsp"><img src="${pageContext.request.contextPath}/users/img/logo.png" alt="Logo"></a>
+                        <a href="home-page"><img src="${pageContext.request.contextPath}/users/img/logo.png" alt="Logo"></a>
                     </div>
 
                     <!-- Thanh tìm kiếm ở giữa -->
@@ -74,7 +74,7 @@
                     </div>
                     <div class="cart">
                         <div class="cart-wrapper">
-                            <a href="cart.jsp">
+                            <a href="cart-items">
                                 <i class="fas fa-shopping-cart"></i>
                             </a>
                             <span class="cart-count" id="cart-count">${sessionScope.cartItemCount}</span>
@@ -121,26 +121,26 @@
                                 ĐIỆN NƯỚC</a></li>
                         </ul>
                     </li>
-                    <li class="propClone"><a href="../../../home.jsp"><i class="fa-solid fa-house"></i>&nbsp;&nbsp; TRANG CHỦ
+                    <li class="propClone"><a href="home-page"><i class="fa-solid fa-house"></i>&nbsp;&nbsp; TRANG CHỦ
                     </a></li>
-                    <li class="propClone"><a href="../product.jsp"><i class="fa-brands fa-product-hunt"></i>
+                    <li class="propClone"><a href="product"><i class="fa-brands fa-product-hunt"></i>
                         &nbsp;&nbsp;SẢN PHẨM</a>
                     </li>
-                    <li class="propClone"> <a href="../cart.jsp"><i class="fas fa-shopping-cart"></i>&nbsp;&nbsp; GIỎ
+                    <li class="propClone"> <a href="cart-items"><i class="fas fa-shopping-cart"></i>&nbsp;&nbsp; GIỎ
                         HÀNG</a>
                     </li>
                     <li class="propClone">
                         <span class="none-a"> <i class="fa-solid fa-book"></i> &nbsp;&nbsp; HƯỚNG DẪN </span>
                         <ul class="items">
-                            <li><a href="../buying-help.jsp">&nbsp;&nbsp;<i
+                            <li><a href="turn-page?action=buyingHelp">&nbsp;&nbsp;<i
                                     class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;HƯỚNG DẪN
                                 MUA HÀNG</a>
                             </li>
-                            <li><a href="../product_unit.jsp">&nbsp;&nbsp;<i
+                            <li><a href="turn-page?action=productUnit">&nbsp;&nbsp;<i
                                     class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;BẢNG ĐƠN VỊ SẢN PHẨM</a>
                             </li>
 
-                            <li><a href="../term_and_services.jsp">&nbsp;&nbsp;<i
+                            <li><a href="turn-page?action=termAndService">&nbsp;&nbsp;<i
                                     class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;ĐIỀU KHOẢN
                                 VÀ DỊCH VỤ</a>
                             </li>
@@ -180,7 +180,7 @@
                                 <td>${order.shippingAddress}</td>
                                 <td>${order.paymentStatus}</td>
                                 <td>
-                                    <a href="OrderView?id=${order.id}" class="view-detail-btn">Xem</a>
+                                    <a href="informationCustomer?orderId=${order.id}" class="view-detail-btn">Xem</a>
                                 </td>
                             </tr>
                         </c:forEach>
@@ -218,29 +218,39 @@
                             </tr>
                         </thead>
                         <tbody>
+                        <c:forEach var="oi" items="${orderItem}">
                             <tr>
-                                <td>${orderInfo.product_name}</td>
-                                <td>${orderInfo.quantity}</td>
-                                <td>${orderInfo.totalPrice}</td>
-                                <td>${orderInfo.discountAmount}</td>
-                                <td>${orderInfo.totalPrica - orderInfo.discountAmount}</td>
+                                <td>${oi.productName}</td>
+                                <td>${oi.quantity}</td>
+                                <td>${oi.price}</td>
+                                <td>${oi.discount}</td>
+                                <td>${oi.totalPrice}</td>
                             </tr>
-
+                        </c:forEach>
                         </tbody>
                     </table>
+
                     <div class="order-info">
                         <p><strong>Mã đơn hàng:</strong> <span class="info-highlight">${orderInfo.id}</span></p>
-                        <p><strong>Mã khách hàng:</strong> <span class="info-highlight">${orderInfo.user_id}</span></p>
-                        <p><strong>Ngày đặt hàng:</strong> <span class="info-highlight"></span></p>
-                        <p><strong>Tổng tiền:</strong> <span class="info-highlight total-price"><fmt:formatNumber>${orderInfo.totalPrice}</fmt:formatNumber> ₫</span></p>
-                        <p><strong>Trạng thái:</strong> <span class="badge success">${orderInfo.paymentStatus}</span></p>
-                        <p><strong>Địa chỉ:</strong>${info.address}</p>
-                        <p><strong>Người nhận hàng:</strong>${info.fullName}</p>
-                        <p><strong>Ghi chú:</strong> Giao tới tận nhà cho tôi</p>
+                        <p><strong>Tổng tiền:</strong> <span class="info-highlight"><fmt:formatNumber value="${orderInfo.totalPrice}" type="number"/> ₫</span></p>
+                        <p><strong>Phí giao hàng:</strong> <span class="info-highlight"><fmt:formatNumber value="${orderInfo.shippingFee}" type="number"/> ₫</span></p>
+                        <p><strong>Số tiền giảm giá:</strong> <span class="info-highlight total-price"><fmt:formatNumber value="${orderInfo.discountAmount}" type="number"/> ₫</span></p>
+                        <p><strong>Phương thức thanh toán:</strong> <span class="badge success">${orderInfo.paymentMethod}</span></p>
+                        <p><strong>Trạng thái thanh toán:</strong> <span class="badge success">${orderInfo.paymentStatus}</span></p>
+                        <p><strong>Địa chỉ:</strong>${orderInfo.shippingAddress}</p>
+                        <p><strong>Mã sản phẩm:</strong>${orderInfo.productId}</p>
+                        <p><strong>Số lượng:</strong>${orderInfo.quantity}</p>
+                        <p><strong>Email:</strong>${orderInfo.email}</p>
+                        <p><strong>Người nhận hàng:</strong>${orderInfo.name}</p>
+                        <p><strong>Số điện thoại:</strong>${orderInfo.phone}</p>
                     </div>
+
                 </div>
             </div>
         </div>
+        <c:if test="${empty orderInfo}">
+            <p>Không có thông tin đơn hàng</p>
+        </c:if>
 
         <!-- Modal cho chỉnh sửa thông tin  -->
         <div id="editInformationModal" class="modal">
@@ -293,8 +303,8 @@
             <div class="links">
                 <h3>Liên kết</h3>
                 <ul>
-                    <li><a href="introduce.jsp">Giới thiệu</a></li>
-                    <li><a href="term_and_services.jsp">Điều khoản và dịch vụ</a></li>
+                    <li><a href="turn-page?action=introduce">Giới thiệu</a></li>
+                    <li><a href="turn-page?action=termAndService">Điều khoản và dịch vụ</a></li>
                 </ul>
             </div>
             <div class="social-media">
@@ -335,7 +345,7 @@
             // Kiểm tra nếu cần hiển thị modal
             const showModal = "${showModal}" === "true";
             if (showModal) {
-                const modal = document.getElementById('addAccount');
+                const modal = document.getElementById('orderDetailModal');
                 modal.style.display = 'block';
             }
         });

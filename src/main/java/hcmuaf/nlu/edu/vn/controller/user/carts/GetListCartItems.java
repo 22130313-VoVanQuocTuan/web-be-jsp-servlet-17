@@ -40,16 +40,32 @@ public class GetListCartItems  extends HttpServlet {
             req.setAttribute("listItems", listItems); // Nếu có danh sách các item
         }
         //lấy ra tổng số lượng ,tổng  giá
+
+        // tổng giá các sa phẩm
         double totalPrice =  carts.getTotalPrice();
-        req.setAttribute("totalPrice", totalPrice);
+        session.setAttribute("totalPrice", totalPrice);
+
+        //Tổng gia giá
+        double totalDiscount =  carts.getDiscount();
+        session.setAttribute("totalDiscount", totalDiscount);
+
+        //Tổng phí ship
         double totalShippingFee = carts.getTotalPriceShippingFee();
-        req.setAttribute("totalShippingFee", totalShippingFee);
+        session.setAttribute("totalShippingFee", totalShippingFee);
+
+        // Tổng tiền cần thanh toán
         double totalFinalPrice = carts.getFinalTotalPrice();
-        req.setAttribute("totalFinalPrice", totalFinalPrice);
+        session.setAttribute("totalFinalPrice", totalFinalPrice);
+
+        // tổng số lượng sản phâm trong giỏ
         int totalItem = carts.getTotalItem();
-        req.setAttribute("totalItem", totalItem);
         session.setAttribute("cartItemCount", totalItem); // Lưu số lượng sản phẩm vào session
 
         req.getRequestDispatcher("/users/page/cart.jsp").forward(req, resp);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        doGet(req, resp);
     }
 }

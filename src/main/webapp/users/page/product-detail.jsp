@@ -30,7 +30,7 @@
                            Xin chào,  <span
                         id="username">${sessionScope.user.username != null ? sessionScope.user.username : ''}</span>!</span>
 
-                    <form action="account" method="post">
+                    <form action="informationCustomer" method="post">
                         <button type="submit" class="account-link" id="signup-link"
                                 style="display: none;">
                             <i class="fas fa-user-circle"></i> Tài khoản
@@ -57,7 +57,7 @@
                 <div class="menu">
                     <!-- Logo bên trái -->
                     <div class="logo">
-                        <a href="/tqh/home-page"><img src="users/img/logo.png" alt="Logo"></a>
+                        <a href="home-page"><img src="${pageContext.request.contextPath}/users/img/logo.png" alt="Logo"></a>
                     </div>
 
                     <!-- Thanh tìm kiếm ở giữa -->
@@ -75,7 +75,7 @@
                     </div>
                     <div class="cart">
                         <div class="cart-wrapper">
-                            <a href="cart.jsp">
+                            <a href="cart-items">
                                 <i class="fas fa-shopping-cart"></i>
                             </a>
                             <span class="cart-count" id="cart-count">0</span>
@@ -133,15 +133,15 @@
                     <li class="propClone">
                         <span class="none-a"> <i class="fa-solid fa-book"></i> &nbsp;&nbsp; HƯỚNG DẪN </span>
                         <ul class="items">
-                            <li><a href="/tqh/users/page/buying-help.jsp">&nbsp;&nbsp;<i
+                            <li><a href="turn-page?action=buyingHelp">&nbsp;&nbsp;<i
                                     class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;HƯỚNG DẪN
                                 MUA HÀNG</a>
                             </li>
-                            <li><a href="/tqh/users/page/product_unit.jsp">&nbsp;&nbsp;<i
+                            <li><a href="turn-page?action=productUnit">&nbsp;&nbsp;<i
                                     class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;BẢNG ĐƠN VỊ SẢN PHẨM</a>
                             </li>
 
-                            <li><a href="/tqh/users/page/term_and_services.jsp">&nbsp;&nbsp;<i
+                            <li><a href="turn-page?action=termAndService">&nbsp;&nbsp;<i
                                     class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;ĐIỀU KHOẢN
                                 VÀ DỊCH VỤ</a>
                             </li>
@@ -231,8 +231,8 @@
             <div class="links">
                 <h3>Liên kết</h3>
                 <ul>
-                    <li><a href="introduce.jsp">Giới thiệu</a></li>
-                    <li><a href="term_and_services.jsp">Điều khoản và dịch vụ</a></li>
+                    <li><a href="turn-page?action=introduce">Giới thiệu</a></li>
+                    <li><a href="turn-page?action=termAndService">Điều khoản và dịch vụ</a></li>
                 </ul>
             </div>
             <div class="social-media">

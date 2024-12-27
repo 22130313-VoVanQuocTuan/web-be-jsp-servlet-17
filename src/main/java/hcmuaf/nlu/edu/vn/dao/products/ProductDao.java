@@ -3,6 +3,11 @@ package hcmuaf.nlu.edu.vn.dao.products;
 import hcmuaf.nlu.edu.vn.dao.DBConnect;
 import hcmuaf.nlu.edu.vn.model.Product;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -30,7 +35,19 @@ public class ProductDao {
         }
         return products;
     }
-
+    public List<Product> getTop(int limit) throws SQLException {
+        String sql = "SELECT * FROM products LIMIT ?";
+        try (PreparedStatement statement = dbConnect.preparedStatement(sql)) {
+            statement.setInt(1, limit);
+            try (ResultSet rs = statement.executeQuery()) {
+                List<Product> products = new ArrayList<>();
+                while (rs.next()) {
+                    products.add(mapResultSetToProduct(rs));
+                }
+                return products;
+            }
+        }
+    }
 
     // Lấy ra sản phẩm của danh mục dựa vào categoryID
     public List<Product> getAllProductsCategory(int categoryId) throws SQLException {
@@ -85,18 +102,47 @@ public class ProductDao {
     }
 
     // Hàm xóa sản phẩm
-    public boolean deleteProduct(String id) {
-        String sql = "DELETE FROM products WHERE id = ?";
+    public boolean deleteProduct(String id, String realPath) {
+        String sql = "SELECT imageUrl FROM products WHERE id = ?";
+        String imgUrl = null;
+
+        // Bước 1: Lấy imageUrl từ cơ sở dữ liệu
         try (PreparedStatement stmt = dbConnect.preparedStatement(sql)) {
             stmt.setString(1, id);
-            int rowsDeleted = stmt.executeUpdate();
-            return rowsDeleted > 0;
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                imgUrl = rs.getString("imageUrl");
+            }
         } catch (SQLException e) {
             e.printStackTrace();
-            return false;
+            return false;  // Trả về false nếu không lấy được imgUrl
+        }
+
+        // Bước 2: Xóa ảnh nếu tồn tại
+        if (imgUrl != null && !imgUrl.isEmpty()) {
+            // Sử dụng realPath để lấy đường dẫn tuyệt đối đến thư mục ảnh
+            String imgPath = realPath + File.separator + imgUrl;
+            File imgFile = new File(imgPath);
+            if (imgFile.exists()) {
+                if (imgFile.delete()) {
+                    System.out.println("Đã xóa ảnh: " + imgPath);
+                } else {
+                    System.out.println("Không thể xóa ảnh: " + imgPath);
+                }
+            }
+        }
+
+        // Bước 3: Xóa sản phẩm khỏi cơ sở dữ liệu
+        String deleteSql = "DELETE FROM products WHERE id = ?";
+        try (PreparedStatement stmt = dbConnect.preparedStatement(deleteSql)) {
+            stmt.setString(1, id);
+            int rowsDeleted = stmt.executeUpdate();
+            return rowsDeleted > 0;  // Trả về true nếu xóa thành công
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;  // Trả về false nếu lỗi khi xóa sản phẩm
         }
     }
-
 
     // Chuyển đổi (mapping) dữ liệu từ một đối tượng ResultSet
     private Product mapResultSetToProduct(ResultSet rs) throws SQLException {

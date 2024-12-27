@@ -14,22 +14,26 @@ import java.io.IOException;
 public class CreateRatingController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    try {
+
 
         int productId = Integer.parseInt(req.getParameter("productId"));
         int userId = Integer.parseInt(req.getParameter("userId"));
         String content = req.getParameter("content");
 
         int categoryId = Integer.parseInt(req.getParameter("categoryId"));
-        try{
+
         RatingService ratingService = new RatingService();
         Rating rating = new Rating(productId,userId,content);
 
         if(ratingService.addRating(rating)){
+            req.setAttribute("productId", productId);
+            req.setAttribute("categoryId", categoryId);
             req.setAttribute("rating", "Đánh giá thành công");
-            resp.sendRedirect(req.getContextPath() + "/product-detail?id=" + productId + "&categoryId=" + categoryId + "&rating=success");
+            req.getRequestDispatcher( "/product-detail?id=" + productId + "&categoryId=" + categoryId + "&rating=success").forward(req, resp);
         }else{
             req.setAttribute("rating", "Đánh giá thất bại");
-            resp.sendRedirect(req.getContextPath() + "/product-detail?id=" + productId + "&categoryId=" + categoryId + "&rating=fail");
+            req.getRequestDispatcher( "/product-detail?id=" + productId + "&categoryId=" + categoryId + "&rating=fail").forward(req, resp);
 
         }
 
@@ -37,9 +41,7 @@ public class CreateRatingController extends HttpServlet {
     }
     catch(Exception e){
         req.setAttribute("rating", "lỗi hệ thống");
-        req.setAttribute("categoryId", categoryId);
-        req.setAttribute("id", productId);
-        resp.sendRedirect(req.getContextPath() + "/product-detail?id=" + productId + "&categoryId=" + categoryId + "&rating=fail");
+        resp.sendRedirect(req.getContextPath() + "/home-page");
       }
     }
 

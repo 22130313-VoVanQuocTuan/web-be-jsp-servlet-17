@@ -89,7 +89,7 @@
             <div class="menu">
                 <!-- Logo bên trái -->
                 <div class="logo">
-                    <a href="home.jsp"><img src="users/img/logo.png" alt="Logo"></a>
+                    <a href="home-page"><img src="${pageContext.request.contextPath}/users/img/logo.png" alt="Logo"></a>
                 </div>
 
                 <!-- Thanh tìm kiếm ở giữa -->
@@ -154,27 +154,27 @@
                             ĐIỆN NƯỚC</a></li>
                     </ul>
                 </li>
-                <li class="propClone"><a href="home.jsp"><i class="fa-solid fa-house"></i>&nbsp;&nbsp; TRANG
+                <li class="propClone"><a href="home-page"><i class="fa-solid fa-house"></i>&nbsp;&nbsp; TRANG
                     CHỦ
                 </a></li>
-                <li class="propClone"><a href="${pageContext.request.contextPath}/users/page/product.jsp"><i class="fa-brands fa-product-hunt"></i>
+                <li class="propClone"><a href="product"><i class="fa-brands fa-product-hunt"></i>
                     &nbsp;&nbsp;SẢN PHẨM</a>
                 </li>
-                <li class="propClone"><a href="../cart.jsp"><i class="fas fa-shopping-cart"></i>&nbsp;&nbsp; GIỎ
+                <li class="propClone"><a href="cart-items"><i class="fas fa-shopping-cart"></i>&nbsp;&nbsp; GIỎ
                     HÀNG</a>
                 </li>
                 <li class="propClone">
                     <span class="none-a"> <i class="fa-solid fa-book"></i> &nbsp;&nbsp; HƯỚNG DẪN </span>
                     <ul class="items">
-                        <li><a href="../buying-help.jsp">&nbsp;&nbsp;<i
+                        <li><a href="turn-page?action=buyingHelp">&nbsp;&nbsp;<i
                                 class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;HƯỚNG DẪN
                             MUA HÀNG</a>
                         </li>
-                        <li><a href="../product_unit.jsp">&nbsp;&nbsp;<i
+                        <li><a href="turn-page?action=productUnit">&nbsp;&nbsp;<i
                                 class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;BẢNG ĐƠN VỊ SẢN PHẨM</a>
                         </li>
 
-                        <li><a href="../term_and_services.jsp">&nbsp;&nbsp;<i
+                        <li><a href="turn-page?action=termAndService">&nbsp;&nbsp;<i
                                 class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;ĐIỀU KHOẢN
                             VÀ DỊCH VỤ</a>
                         </li>
@@ -193,30 +193,31 @@
         <div class="box1">
             <div class="form-group1">
                 <div class="info"> Thông tin nhận hàng</div>
+                <form action="update-info-shipping" method="post">
                 <div class="form-group">
-                    <input type="email" id="email" class="back email" placeholder="Email" required>
+                    <input type="email" name="email" id="email" class="back email" placeholder="Email" required value="${shippingAddress.email}">
                     <div id="email-error" class="error-message" style="color: red; display: none;">Vui lòng nhập
                         email.
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <input type="text" id="name" class="back name" placeholder="Họ và tên" required>
+                    <input type="text" name="name" id="name" class="back name" placeholder="Họ và tên" required value="${shippingAddress.name}">
                     <div id="name-error" class="error-message" style="color: red; display: none;">Vui lòng nhập
                         họ và tên.
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <input type="tel" id="phone" class="back phone" placeholder="Số điện thoại" required>
+                    <input type="tel" name="phoneNumber" id="phone" class="back phone" placeholder="Số điện thoại" required value="${shippingAddress.phoneNumber}">
                     <div id="phone-error" class="error-message" style="color: red; display: none;">Vui lòng nhập
                         số điện thoại.
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <input type="text" id="address" class="back address" placeholder="Nhập địa chỉ (tùy chọn)"
-                           required>
+                    <input type="text" name="address" id="address" class="back address" placeholder="Nhập địa chỉ (tùy chọn)"
+                           required value="${shippingAddress.address}">
                     <div id="address-error" class="error-message" style="color: red; display: none;">Vui lòng
                         nhập địa chỉ.
                     </div>
@@ -224,10 +225,16 @@
 
 
                 <div class="form-group">
-                        <textarea style="font-family: Arial, Helvetica, sans-serif; width: 95%;" type="text" id="note"
-                                  class="note" placeholder="Ghi chú (tùy chọn)"></textarea>
+                        <textarea style="font-family: Arial, Helvetica, sans-serif; width: 95%;" type="text" name="note"  id="note"
+                                  class="note" placeholder="Ghi chú (tùy chọn)">${shippingAddress.note}</textarea>
                 </div>
-                <button class="save" title="bt">Lưu</button>
+
+                    <c:if test="${not empty error}">
+                        <div class="alert alert-danger">${error}</div>
+                    </c:if>
+                <button class="save" title="bt">Cập nhật</button>
+
+                </form>
 
             </div>
 
@@ -279,14 +286,16 @@
                 <div class="total p"></div>
             </div>
             <div class="totals">
-                <c:forEach var="c" items="${itemCart}">
-                <div class="total p">Giảm giá: <fmt:formatNumber value="${c.discountAmount}" type="number"/>đ
+
+                <div class="total p">Giảm giá: <fmt:formatNumber value="${sessionScope.totalDiscount}" type="number"/>₫
+                </div>
+                <div class="total p">Phí vận chuyển: <fmt:formatNumber value="${sessionScope.totalShippingFee}" type="number"/>₫
                 </div>
                 <div class="totals">
-                    <div class="total p">Tổng cộng: <fmt:formatNumber value="${c.totalPrice}" type="number" />đ
+                    <div class="total p">Tổng cộng: <fmt:formatNumber value="${sessionScope.totalFinalPrice}" type="number" />₫
                     </div>
                 </div>
-                </c:forEach>
+
 
                 <div class="sub">
                     <div class="hrep p"><a href="cart-items" style="text-decoration: none;">
@@ -405,8 +414,8 @@
             <div class="links">
                 <h3>Liên kết</h3>
                 <ul>
-                    <li><a href="introduce.jsp">Giới thiệu</a></li>
-                    <li><a href="term_and_services.jsp">Điều khoản và dịch vụ</a></li>
+                    <li><a href="turn-page?action=introduce">Giới thiệu</a></li>
+                    <li><a href="turn-page?action=termAndService">Điều khoản và dịch vụ</a></li>
                 </ul>
             </div>
             <div class="social-media">

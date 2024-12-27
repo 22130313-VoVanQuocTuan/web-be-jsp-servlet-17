@@ -33,6 +33,10 @@ public class Carts {
     public int getTotalItem() {
         return items.values().stream().mapToInt(CartItems::getQuantity).sum();
     }
+    // Tính tổng giá trị giảm giá
+    public double getDiscount() {
+        return items.values().stream().mapToDouble(CartItems :: getDiscountAmount).sum() + discountAmount;
+    }
 
     // Tính tổng giá của các sản phẩm trong  giỏ
     public double getTotalPrice() {
