@@ -13,8 +13,10 @@ import java.io.IOException;
 public class UpdateStatusPrController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        int id = Integer.parseInt(req.getParameter("id"));
-        String status = req.getParameter("status");
+       try {
+           int id = Integer.parseInt(req.getParameter("id"));
+           String status = req.getParameter("status");
+
         PromotionalService promotionalService = new PromotionalService();
         try {
             if (promotionalService.updateStatusProm(id, status)) {
@@ -27,5 +29,9 @@ public class UpdateStatusPrController extends HttpServlet {
             req.setAttribute("error", "Lỗi hệ thống");
             req.getRequestDispatcher("/promotional-list").forward(req, resp);
         }
+       } catch (NumberFormatException e) {
+           req.setAttribute("error", "Dữ lệu không hợp lệ");
+           req.getRequestDispatcher("/promotional-list").forward(req, resp);
+       }
     }
 }

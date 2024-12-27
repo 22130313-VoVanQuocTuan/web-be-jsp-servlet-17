@@ -96,6 +96,9 @@ public class ProductService {
 
     }
 
-
+    //Lấy danh sách sản phẩm theo tên tìm kiếm
+    public List<Product> getListProductByName(String name) throws SQLException {
+        return productDAO.getListProductByName(name);
+    }
 }
 

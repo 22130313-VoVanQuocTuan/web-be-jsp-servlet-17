@@ -35,6 +35,7 @@ public class ProductDao {
         }
         return products;
     }
+
     public List<Product> getTop(int limit) throws SQLException {
         String sql = "SELECT * FROM products LIMIT ?";
         try (PreparedStatement statement = dbConnect.preparedStatement(sql)) {
@@ -68,6 +69,7 @@ public class ProductDao {
         }
         return products;
     }
+
     //Hàm thêm sản phẩm
     public boolean addProduct(Product product) {
         // Giá đã giảm
@@ -161,5 +163,21 @@ public class ProductDao {
         product.setCreateDate(rs.getTimestamp("createDate"));
         return product;
     }
-}
+
+    public List<Product> getListProductByName(String name) throws SQLException {
+        String sql = "SELECT * FROM products WHERE name LIKE ?";
+        List<Product> products = new ArrayList<>();
+        try (PreparedStatement ptm = dbConnect.preparedStatement(sql)) {
+            ptm.setString(1, "%" + name + "%");
+            ResultSet rs = ptm.executeQuery();
+            while (rs.next()) {
+                products.add(mapResultSetToProduct(rs));
+            }
+
+        }
+        return products;
+    }
+
+    }
+
 

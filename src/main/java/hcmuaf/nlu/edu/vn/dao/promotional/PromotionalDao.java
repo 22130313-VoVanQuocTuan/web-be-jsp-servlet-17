@@ -105,4 +105,28 @@ public class PromotionalDao {
         }
         return false;
     }
+
+    public List<Promotionals> getListPromotionalByValue(double value) {
+        String sql = "select * from promotional WHERE value = ?";
+        List<Promotionals> listPro = new ArrayList<>();
+        try(PreparedStatement ptm = dbConnect.preparedStatement(sql)){
+            ptm.setDouble(1, value);
+            ResultSet rs = ptm.executeQuery();
+            while(rs.next()){
+                int id = rs.getInt("id");
+                String code = rs.getString("code");
+                double values = rs.getDouble("value");
+                Timestamp startDate = rs.getTimestamp("startDate");
+                Timestamp endDate = rs.getTimestamp("endDate");
+                String status = rs.getString("status");
+
+                Promotionals promotionals = new Promotionals(id,code,values,startDate,endDate,status);
+
+                listPro.add(promotionals);
+            }
+            return listPro;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

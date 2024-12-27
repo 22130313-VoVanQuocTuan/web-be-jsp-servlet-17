@@ -8,6 +8,7 @@ import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet(name = "GetProductController", value = "/products-list")
@@ -20,26 +21,33 @@ public class GetProductController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Product> products = null;
+
         // Lấy tham số "all" từ request
         String all = request.getParameter("all");
+        String search = request.getParameter("search");
+        String name = request.getParameter("name");
         try {
-            // Nếu all=true thì lấy tất cả sản phẩm, ngược lại lấy 10 sản phẩm đầu
-            if ("true".equalsIgnoreCase(all)) {
-                products = productService.getAllProducts(); // Lấy tất cả sản phẩm
+            List<Product> products = new ArrayList<>();
+            if (search != null && name != null) {
+                // Tìm kiếm sản phẩm theo tên
+                products = productService.getListProductByName(name);
+            } else if ("true".equalsIgnoreCase(all)) {
+                // Lấy tất cả sản phẩm nếu all=true
+                products = productService.getAllProducts();
             } else {
-                products = productService.getTopProducts(10); // Lấy 10 sản phẩm đầu
+                // Ngược lại, chỉ lấy top 10 sản phẩm
+                products = productService.getTopProducts(10);
             }
+
+            // Truyền danh sách sản phẩm vào request để hiển thị trong JSP
+            request.setAttribute("products", products);
+            request.getRequestDispatcher("/admin/pages/products.jsp").forward(request, response);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
-        // Truyền danh sách sản phẩm vào request để hiển thị trong JSP
-        request.setAttribute("products", products);
-        request.getRequestDispatcher( "/admin/pages/products.jsp").forward(request, response);
     }
 
-    @Override
+        @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     doGet(request, response);
     }

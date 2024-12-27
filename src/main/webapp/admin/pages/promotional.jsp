@@ -26,7 +26,7 @@
             <li>
                 <a href="index.html">
                         <span class="icon">
-                            <img src="/src/Users/img/logo.png" alt="">
+                            <img src="${pageContext.request.contextPath}/users/img/logo.png" alt="">
                         </span>
                     <span class="title">Bán Vật Liệu Xây Dựng </span>
                 </a>
@@ -59,7 +59,7 @@
                 </a>
             </li>
             <li>
-                <a href="order.html">
+                <a href="order">
                         <span class="icon">
                             <ion-icon name="receipt-outline"></ion-icon>
                         </span>
@@ -77,7 +77,7 @@
             </li>
 
             <li>
-                <a href="category.jsp">
+                <a href="category">
                         <span class="icon">
                             <ion-icon name="list-outline"></ion-icon>
                         </span>
@@ -95,7 +95,7 @@
 
 
             <li>
-                <a href="passwordManagement.html">
+                <a href="accounts">
                         <span class="icon">
                             <ion-icon name="lock-closed-outline"></ion-icon>
                         </span>
@@ -122,10 +122,13 @@
             </div>
 
             <div class="search">
-                <label>
-                    <input type="text" placeholder="Tìm kiếm ở đây">
-                    <ion-icon name="search-outline"></ion-icon>
-                </label>
+                <form action="promotional-list" method="GET">
+                    <label>
+                        <input type="text" name="value" placeholder="Tìm kiếm ở đây">
+                        <ion-icon name="search-outline"><button type="submit" style="border: none; background: none; cursor: pointer;"></button></ion-icon>
+                    </label>
+                    <input type="hidden" name="search" value="true">
+                </form>
             </div>
 
             <div class="user">
@@ -140,7 +143,7 @@
             <div class="recentOrders">
                 <div class="cardHeader">
                     <h2>Danh sách mã ưu đãi</h2>
-                    <a href="#" class="btn">Xem Tất Cả</a>
+                    <a href="promotional-list?showAll=true" class="btn">Xem Tất Cả</a>
                 </div>
                 <div class="update-user">
                     <p style="font-size: 20px; margin-bottom: 10px;">Cập nhật trạng thái mã ưu đãi</p>
@@ -149,7 +152,7 @@
                                style="font-size: 15px; padding: 2px; border-radius: 5px;">
                         <select title="choice" name="status" id="statusSelect" required
                                 style="font-size: 15px; border-radius: 5px; padding: 2px;">
-                            <option value="Hoạt đông">Hoạt động</option>
+                            <option value="Hoạt động">Hoạt động</option>
                             <option value="Không hoạt động">Không hoạt động</option>
                         </select>
                         <c:if test="${not empty error}">
