@@ -3,6 +3,7 @@ package hcmuaf.nlu.edu.vn.dao.products;
 import hcmuaf.nlu.edu.vn.dao.DBConnect;
 import hcmuaf.nlu.edu.vn.model.Product;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -101,7 +102,7 @@ public class ProductDao {
     }
 
     // Hàm xóa sản phẩm
-    public boolean deleteProduct(String id) {
+    public boolean deleteProduct(String id, String realPath) {
         String sql = "SELECT imageUrl FROM products WHERE id = ?";
         String imgUrl = null;
 
@@ -119,16 +120,15 @@ public class ProductDao {
 
         // Bước 2: Xóa ảnh nếu tồn tại
         if (imgUrl != null && !imgUrl.isEmpty()) {
-            // Đường dẫn tương đối tới thư mục images
-            String realPath = "D:/web-be-jsp-servlet-17/out/artifacts/tqh/users/img" + imgUrl;
-            Path imgPath = Paths.get(realPath);
-            try {
-                if (Files.exists(imgPath)) {
-                    Files.delete(imgPath);  // Xóa ảnh nếu tồn tại
+            // Sử dụng realPath để lấy đường dẫn tuyệt đối đến thư mục ảnh
+            String imgPath = realPath + File.separator + imgUrl;
+            File imgFile = new File(imgPath);
+            if (imgFile.exists()) {
+                if (imgFile.delete()) {
+                    System.out.println("Đã xóa ảnh: " + imgPath);
+                } else {
+                    System.out.println("Không thể xóa ảnh: " + imgPath);
                 }
-            } catch (IOException e) {
-                e.printStackTrace();
-                // Nếu lỗi xóa ảnh, vẫn tiếp tục xóa sản phẩm từ DB nhưng có thể log lại lỗi xóa ảnh
             }
         }
 

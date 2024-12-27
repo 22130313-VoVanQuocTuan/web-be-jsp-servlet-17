@@ -53,8 +53,8 @@ public class ProductService {
     }
 
     // Hàm xóa sản phẩm
-    public boolean deleteProduct(String id) {
-        return productDAO.deleteProduct(id);
+    public boolean deleteProduct(String id, String realPath) {
+        return productDAO.deleteProduct(id,realPath);
     }
 
     // -------------------Các phương thức filter sản phẩm-------------------------

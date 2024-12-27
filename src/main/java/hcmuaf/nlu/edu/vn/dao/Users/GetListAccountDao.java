@@ -39,4 +39,28 @@ public class GetListAccountDao {
         return listAccount;
     }
 
+    public List<Users> getListUserByName(String name) {
+        List<Users> listAccount = new ArrayList<>();
+        String sql = "select * from users where username like ?";
+        try (PreparedStatement ptm = dbConnect.preparedStatement(sql)) {
+            ptm.setString(1, "%" + name + "%");
+            ResultSet rs = ptm.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String username = rs.getString("username");
+                String email = rs.getString("email");
+                String phoneNumber = rs.getString("phoneNumber");
+                String status = rs.getString("status");
+                String role = rs.getString("role");
+
+                Users user = new Users(id, username, email, phoneNumber, status, role);
+                listAccount.add(user);
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return listAccount;
+
+    }
 }

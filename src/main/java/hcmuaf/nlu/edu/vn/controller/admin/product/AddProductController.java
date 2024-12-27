@@ -39,7 +39,7 @@ public class AddProductController extends HttpServlet {
             // Kiểm tra nếu có file ảnh được tải lên
             if (fileName != null && !fileName.isEmpty()) {
                 // Đảm bảo thư mục lưu ảnh đã tồn tại
-                String uploadPath = getServletContext().getRealPath("")+ File.separator + UPLOAD_DIRECTORY;
+                String uploadPath = getServletContext().getRealPath("") + File.separator + UPLOAD_DIRECTORY;
                 File uploadDir = new File(uploadPath);
                 if (!uploadDir.exists()) {
                     uploadDir.mkdirs(); // Tạo thư mục nếu chưa tồn tại

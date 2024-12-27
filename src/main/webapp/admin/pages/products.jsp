@@ -222,7 +222,7 @@
             </li>
 
             <li>
-                <a href="category.html">
+                <a href="category.jsp">
                         <span class="icon">
                             <ion-icon name="list-outline"></ion-icon>
                         </span>

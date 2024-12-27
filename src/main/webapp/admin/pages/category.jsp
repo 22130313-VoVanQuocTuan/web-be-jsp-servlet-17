@@ -1,3 +1,7 @@
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="vi">
 
@@ -8,9 +12,9 @@
     <title>Bảng điều khiển Quản trị viên </title>
     <!------------------ Kiểu dáng ------------------>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/user.css">
-    <link rel="stylesheet" href="../css/category.css">
+    <link rel="stylesheet" href="<c:url value="/admin/css/style.css"/>">
+    <link rel="stylesheet" href="<c:url value="/admin/css/user.css"/>">
+    <link rel="stylesheet" href="<c:url value="/admin/css/category.css"/>">
 </head>
 <style>
     .add-category {
@@ -43,7 +47,7 @@
                 <li>
                     <a href="index.html">
                         <span class="icon">
-                            <img src="/src/Users/img/logo.png" alt="">
+                            <img src="${pageContext.request.contextPath}/users/img/logo.png" alt="">
                         </span>
                         <span class="title">Bán Vật Liệu Xây Dựng </span>
                     </a>
@@ -59,7 +63,7 @@
                 </li>
 
                 <li>
-                    <a href="user.jsp">
+                    <a href="accounts">
                         <span class="icon">
                             <ion-icon name="people-outline"></ion-icon>
                         </span>
@@ -68,7 +72,7 @@
                 </li>
 
                 <li>
-                    <a href="products.html">
+                    <a href="products-list">
                         <span class="icon">
                             <ion-icon name="cube-outline"></ion-icon>
                         </span>
@@ -76,7 +80,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="order.jsp">
+                    <a href="order">
                         <span class="icon">
                             <ion-icon name="receipt-outline"></ion-icon>
                         </span>
@@ -84,7 +88,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="promotional.html">
+                    <a href="promotional-list">
                         <span class="icon">
                             <ion-icon name="pricetag-outline"></ion-icon>
                         </span>
@@ -93,7 +97,7 @@
                 </li>
 
                 <li>
-                    <a href="category.html">
+                    <a href="category">
                         <span class="icon">
                             <ion-icon name="list-outline"></ion-icon>
                         </span>
@@ -101,7 +105,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="review.html">
+                    <a href="list-rating">
                         <span class="icon">
                             <ion-icon name="chatbubble-outline"></ion-icon>
                         </span>
@@ -111,7 +115,7 @@
 
 
                 <li>
-                    <a href="passwordManagement.html">
+                    <a href="accounts">
                         <span class="icon">
                             <ion-icon name="lock-closed-outline"></ion-icon>
                         </span>
@@ -120,11 +124,11 @@
                 </li>
 
                 <li>
-                    <a href="/src/Users/page/login-signup.jsp">
+                    <a href="logout">
                         <span class="icon">
                             <ion-icon name="log-out-outline"></ion-icon>
                         </span>
-                        <span class="title" onclick="lockout()">Đăng Xuất</span>
+                        <span class="title">Đăng Xuất</span>
                     </a>
                 </li>
             </ul>
@@ -138,11 +142,15 @@
                 </div>
 
 
+
                 <div class="search">
-                    <label>
-                        <input type="text" placeholder="Tìm kiếm ở đây">
-                        <ion-icon name="search-outline"></ion-icon>
-                    </label>
+                    <form action="category" method="GET">
+                        <label>
+                            <input type="text" name="name" placeholder="Tìm kiếm ở đây">
+                                <ion-icon name="search-outline"><button type="submit" style="border: none; background: none; cursor: pointer;"></button></ion-icon>
+                        </label>
+                        <input type="hidden" name="search" value="true">
+                    </form>
                 </div>
 
                 <div class="user">
@@ -158,13 +166,17 @@
                 <div class="recentOrders">
                     <div class="cardHeader">
                         <h2>Danh sách danh mục</h2>
-                        <a href="#" class="btn">Xem Tất Cả</a>
+                        <a href="category?showAll=true" class="btn">Xem Tất Cả</a>
                     </div>
                     <div class="add-category">
                         <p style="font-size: 20px; margin-bottom: 10px;">Thêm danh mục</p>
-
-                        <input type="text" style="font-size: 17px; border-radius: 5px;" placeholder="Nhập tên danh mục">
-                        <button onclick="updateUserStatus()">Thêm</button>
+                        <form action="add-delete-category" method="post">
+                        <input type="text" name="name" style="font-size: 17px; border-radius: 5px;" placeholder="Nhập tên danh mục">
+                            <c:if test="${not empty error}">
+                                <p style="color: red;">${error}</p> <!-- Hiển thị lỗi nếu có -->
+                            </c:if>
+                            <button type="submit" >Thêm</button>
+                        </form>
                     </div>
                     <table>
                         <thead>
@@ -178,117 +190,20 @@
                         </thead>
 
                         <tbody>
+                        <c:forEach var="category" items="${list}">
                             <tr>
-                                <td>1</td>
-                                <td>Gạch xây dựng</td>
-                                <td>2024/07/19</td>
+                                <td>${category.id}</td>
+                                <td>${category.name}</td>
+                                <td>${category.createDate}</td>
 
                                 <td>
                                     <div class="v">
-                                        <button class="delete-btn" data-id="1">Xóa</button>
+                                        <button class="delete-btn" data-id="${category.id}">Xóa</button>
                                     </div>
                                 </td>
 
                             </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Xi măng và vựa</td>
-                                <td>2024/07/19</td>
-
-                                <td>
-                                    <div class="v">
-                                        <button class="delete-btn" data-id="1">Xóa</button>
-                                    </div>
-                                </td>
-
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>Cát,Đá và Sỏi</td>
-                                <td>2024/07/19</td>
-
-                                <td>
-                                    <div class="v">
-                                        <button class="delete-btn" data-id="1">Xóa</button>
-                                    </div>
-                                </td>
-
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td>Thép và sắt</td>
-                                <td>2024/07/19</td>
-
-                                <td>
-                                    <div class="v">
-                                        <button class="delete-btn" data-id="1">Xóa</button>
-                                    </div>
-                                </td>
-
-                            </tr>
-                            <tr>
-                                <td>5</td>
-                                <td>Gỗ và Vậ liệu gỗ</td>
-                                <td>2024/07/19</td>
-
-                                <td>
-                                    <div class="v">
-                                        <button class="delete-btn" data-id="1">Xóa</button>
-                                    </div>
-                                </td>
-
-                            </tr>
-                            <tr>
-                                <td>6</td>
-                                <td>Sơn và Phụ gia</td>
-                                <td>2024/07/19</td>
-
-                                <td>
-                                    <div class="v">
-                                        <button class="delete-btn" data-id="1">Xóa</button>
-                                    </div>
-                                </td>
-
-                            </tr>
-                            <tr>
-                                <td>7</td>
-                                <td>Ngói và tấm lợp</td>
-                                <td>2024/07/19</td>
-
-                                <td>
-                                    <div class="v">
-                                        <button class="delete-btn" data-id="1">Xóa</button>
-                                    </div>
-                                </td>
-
-                            </tr>
-                            <tr>
-                                <td>8</td>
-                                <td>Ống nước và Phụ kiện</td>
-                                <td>2024/07/19</td>
-
-                                <td>
-                                    <div class="v">
-                                        <button class="delete-btn" data-id="1">Xóa</button>
-                                    </div>
-                                </td>
-
-                            </tr>
-                            <tr>
-                                <td>9</td>
-                                <td>Thiết bị điện nước</td>
-                                <td>2024/07/19</td>
-
-                                <td>
-                                    <div class="v">
-                                        <button class="delete-btn" data-id="1">Xóa</button>
-                                    </div>
-                                </td>
-
-                            </tr>
-
-
-
+                        </c:forEach>
                         </tbody>
                     </table>
                 </div>
@@ -298,7 +213,7 @@
                         <h3>Xác nhận xóa</h3>
                         <label>Bạn có chắc chắn muốn xóa tài khoản này?</label>
                         <div class="button-container">
-                            <button class="confirm-delete">Xóa</button>
+                            <button id="confirm-delete" class="confirm-delete">Xóa</button>
                             <button class="close-modal">Hủy</button>
                         </div>
                     </div>
@@ -308,9 +223,8 @@
     </div>
 
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-    <script src="../js/index.js"></script>
-    <script src="../js/user.js"></script>
-    <script src="../js/category.js"></script>
+    <script src="<c:url value="/admin/js/index.js"/>"></script>
+    <script src="<c:url value="/admin/js/category.js"/>"></script>
 
 
 </body>
