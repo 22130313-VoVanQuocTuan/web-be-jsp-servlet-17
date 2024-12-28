@@ -8,10 +8,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -103,11 +100,42 @@ public class ProductDao {
         }
     }
 
+    // Phương thức cập nhật sản phẩm trong cơ sở dữ liệu
+    // Cập nhật thông tin sản phẩm
+    public boolean updateProduct(int id, Product product) {
+        String sql = "UPDATE products SET name = ?, price = ?, quantity = ?, imageUrl = ?, description = ?, categoryId = ?, status = ?, supplier = ?, color = ?, size = ?, unit = ?, view = ?, soldCount = ?, discountPercent = ?, discountPrice = ?, updateDate = ? WHERE id = ?";
+        try (PreparedStatement stmt = dbConnect.preparedStatement(sql)) { // Đảm bảo PreparedStatement được đóng tự động
+            stmt.setString(1, product.getName());
+            stmt.setDouble(2, product.getPrice());
+            stmt.setInt(3, product.getQuantity());
+            stmt.setString(4, product.getImageUrl());
+            stmt.setString(5, product.getDescription());
+            stmt.setInt(6, product.getCategoryId());
+            stmt.setString(7, product.getStatus());
+            stmt.setString(8, product.getSupplier());
+            stmt.setString(9, product.getColor());
+            stmt.setString(10, product.getSize());
+            stmt.setString(11, product.getUnit());
+            stmt.setInt(12, product.getView());
+            stmt.setInt(13, product.getSoldCount());
+            stmt.setDouble(14, product.getDiscountPercent());
+            stmt.setDouble(15, product.getDiscountPrice());
+            stmt.setTimestamp(16, new Timestamp(System.currentTimeMillis())); // Cập nhật thời gian hiện tại
+            stmt.setInt(17, id); // Cập nhật ID sản phẩm
+
+            int rowsUpdated = stmt.executeUpdate(); // Thực hiện câu lệnh SQL
+            return rowsUpdated > 0; // Trả về true nếu có ít nhất 1 dòng được cập nhật
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false; // Nếu không có dòng nào được cập nhật hoặc có lỗi xảy ra
+    }
+
+
     // Hàm xóa sản phẩm
     public boolean deleteProduct(String id, String realPath) {
         String sql = "SELECT imageUrl FROM products WHERE id = ?";
         String imgUrl = null;
-
         // Bước 1: Lấy imageUrl từ cơ sở dữ liệu
         try (PreparedStatement stmt = dbConnect.preparedStatement(sql)) {
             stmt.setString(1, id);
@@ -178,10 +206,6 @@ public class ProductDao {
         return products;
     }
 
-//    public void updateViewProduct(int id) {
-//        String sql = "UPDATE products SET view = ? WHERE id = ?";
-//
-//    }
 }
 
 

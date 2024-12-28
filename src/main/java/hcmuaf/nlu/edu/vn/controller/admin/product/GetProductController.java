@@ -38,7 +38,11 @@ public class GetProductController extends HttpServlet {
                 // Ngược lại, chỉ lấy top 10 sản phẩm
                 products = productService.getTopProducts(10);
             }
-
+            // Mở modal
+            String action = request.getParameter("action");
+            if ("show".equals(action)) {
+                request.setAttribute("showModal", true);
+            }
             // Truyền danh sách sản phẩm vào request để hiển thị trong JSP
             request.setAttribute("products", products);
             request.getRequestDispatcher("/admin/pages/products.jsp").forward(request, response);
@@ -47,9 +51,9 @@ public class GetProductController extends HttpServlet {
         }
     }
 
-        @Override
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    doGet(request, response);
+        doGet(request, response);
     }
 
 }

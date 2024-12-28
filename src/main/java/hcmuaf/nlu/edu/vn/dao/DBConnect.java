@@ -11,7 +11,7 @@ public class DBConnect {
             DBProperties.name() + "?" + DBProperties.option();
 
     // Phương thức lấy PreparedStatement
-    public  PreparedStatement preparedStatement(String sql) {
+    public PreparedStatement preparedStatement(String sql) {
         try {
             // Kiểm tra kết nối
             if (conn == null || conn.isClosed()) {
@@ -28,15 +28,17 @@ public class DBConnect {
             return null; // Nếu có lỗi, trả về null
         }
     }
-        // Phương thức đóng kết nối
-        public void closeConnection() {
-            try {
-                if (conn != null && !conn.isClosed()) {
-                    conn.close();
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
+
+    // Phương thức đóng kết nối
+    public void closeConnection() {
+        try {
+            if (conn != null && !conn.isClosed()) {
+                conn.close();
             }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
+
+}
 

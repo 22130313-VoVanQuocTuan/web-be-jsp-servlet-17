@@ -52,6 +52,11 @@ public class ProductService {
         return productDAO.addProduct(product);
     }
 
+    // Phương thức cập nhật thông tin sản phẩm
+    public boolean updateProduct(int id,Product product) {
+        return productDAO.updateProduct(id,product);
+    }
+
     // Hàm xóa sản phẩm
     public boolean deleteProduct(String id, String realPath) {
         return productDAO.deleteProduct(id,realPath);
