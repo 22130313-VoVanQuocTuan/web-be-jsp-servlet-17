@@ -66,18 +66,7 @@ public class AddProductController extends HttpServlet {
             String unit = request.getParameter("unit");
             String discountPercentStr = request.getParameter("discountPercent");
 
-            // Chuyển đổi dữ liệu
-            double price = Double.parseDouble(priceStr.trim());
-            int quantity = Integer.parseInt(quantityStr.trim());
-            int categoryId = Integer.parseInt(categoryIdStr.trim());
-            double discountPercent = Double.parseDouble(discountPercentStr.trim());
 
-            // Kiểm tra tỷ lệ giảm giá hợp lệ
-            if (discountPercent < 0 || discountPercent > 1) {
-                errorMessages.add("Tỷ lệ giảm giá không hợp lệ! Phải từ 0 đến 1.");
-            }
-            // Tạo giá giảm
-            double discountPrice = price * (1 - discountPercent);
 
             // Kiểm tra và xử lý null hoặc giá trị trống cho từng trường
             if (name == null || name.trim().isEmpty()) {
@@ -102,6 +91,18 @@ public class AddProductController extends HttpServlet {
                 request.getRequestDispatcher("/products-list").forward(request, response);
                 return;
             }
+            // Chuyển đổi dữ liệu
+            double price = Double.parseDouble(priceStr.trim());
+            int quantity = Integer.parseInt(quantityStr.trim());
+            int categoryId = Integer.parseInt(categoryIdStr.trim());
+            double discountPercent = Double.parseDouble(discountPercentStr.trim());
+
+            // Kiểm tra tỷ lệ giảm giá hợp lệ
+            if (discountPercent < 0 || discountPercent > 1) {
+                errorMessages.add("Tỷ lệ giảm giá không hợp lệ! Phải từ 0 đến 1.");
+            }
+            // Tạo giá giảm
+            double discountPrice = price * (1 - discountPercent);
 
             // Tạo đối tượng Product
             Product product = new Product(0, name, price, quantity, imageUrl, description, categoryId, status, supplier, color, size, unit, 0, 0, discountPercent, discountPrice, new Timestamp(System.currentTimeMillis()), new Timestamp(System.currentTimeMillis()));

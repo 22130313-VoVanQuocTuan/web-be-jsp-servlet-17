@@ -45,6 +45,23 @@ public class Product {
         this.createDate = createDate;
         this.updateDate = updateDate;
     }
+    public Product(int id,String name, double price, int quantity, String imageUrl, String description, int categoryId, String status, String supplier, String color, String size, String unit, double discountPercent,double discountPrice) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+        this.quantity = quantity;
+        this.imageUrl = imageUrl;
+        this.description = description;
+        this.categoryId = categoryId;
+        this.status = status;
+        this.supplier = supplier;
+        this.color = color;
+        this.size = size;
+        this.unit = unit;
+        this.discountPercent = discountPercent;
+        this.discountPrice = discountPrice;
+
+    }
 
     public int getId() {
         return id;
