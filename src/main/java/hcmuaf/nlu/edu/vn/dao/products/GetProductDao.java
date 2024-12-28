@@ -41,7 +41,7 @@ public class GetProductDao {
 
                     double discountPercent = rs.getDouble("discountPercent");
                     product.setDiscountPercent(discountPercent); // Giữ nguyên phần trăm giảm giá
-                    product.setDiscountPrice(product.getPrice() - (product.getPrice() * discountPercent / 100)); // Tính giá sau giảm
+                    product.setDiscountPrice(rs.getDouble("discountPrice")); // Tính giá sau giảm
 
                     product.setCreateDate(rs.getTimestamp("createDate"));
                     product.setUpdateDate(rs.getTimestamp("updateDate"));

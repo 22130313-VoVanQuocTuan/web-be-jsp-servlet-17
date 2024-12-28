@@ -178,6 +178,10 @@ public class ProductDao {
         return products;
     }
 
-    }
+//    public void updateViewProduct(int id) {
+//        String sql = "UPDATE products SET view = ? WHERE id = ?";
+//
+//    }
+}
 
 

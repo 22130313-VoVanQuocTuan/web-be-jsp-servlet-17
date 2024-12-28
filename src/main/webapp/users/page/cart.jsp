@@ -192,7 +192,7 @@
 
                 </table>
                 <div class="cart-buttons">
-                    <a href="list-product"><button class="continue-btn">← Tiếp tục xem sản
+                    <a href="product"><button class="continue-btn">← Tiếp tục xem sản
                             phẩm</button></a>
                 </div>
             </div>

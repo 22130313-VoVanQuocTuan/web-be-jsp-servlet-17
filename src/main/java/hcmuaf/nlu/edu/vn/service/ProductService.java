@@ -100,5 +100,10 @@ public class ProductService {
     public List<Product> getListProductByName(String name) throws SQLException {
         return productDAO.getListProductByName(name);
     }
+
+//    // Cập nhật view của sản phẩm
+//    public void updateViewProduct(int id) {
+//        return productDAO.updateViewProduct(id);
+//    }
 }
 
