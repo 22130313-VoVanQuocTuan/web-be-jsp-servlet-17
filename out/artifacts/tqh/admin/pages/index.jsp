@@ -22,7 +22,7 @@
                 <li>
                     <a href="index.html">
                         <span class="icon">
-                            <img src="/src/Users/img/logo.png" alt="">
+                           <img src="${pageContext.request.contextPath}/users/img/logo.png" alt="">
                         </span>
                         <span class="title">Bán Vật Liệu Xây Dựng </span>
                     </a>
@@ -124,7 +124,7 @@
             <div class="cardBox">
                 <div class="card">
                     <div>
-                        <div class="numbers">1,504</div>
+                        <div class="numbers">${totalViews}</div>
                         <div class="cardName">Lượt Xem</div>
                     </div>
 
@@ -135,7 +135,7 @@
 
                 <div class="card">
                     <div>
-                        <div class="numbers">80</div>
+                        <div class="numbers">${totalUsers}</div>
                         <div class="cardName">Số lượng người dùng</div>
                     </div>
 
@@ -146,8 +146,8 @@
 
                 <div class="card">
                     <div>
-                        <div class="numbers">284</div>
-                        <div class="cardName">Nhận Xét</div>
+                        <div class="numbers">${totalRatings}</div>
+                        <div class="cardName">Đánh giá</div>
                     </div>
 
                     <div class="iconBx">
@@ -157,7 +157,7 @@
 
                 <div class="card">
                     <div>
-                        <div class="numbers">10.842.000₫</div>
+                        <div class="numbers">${totalSales}₫</div>
                         <div class="cardName">Doanh Thu</div>
                     </div>
 
