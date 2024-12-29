@@ -64,7 +64,7 @@
                 </li>
 
                 <li>
-                    <a href="promotional.html">
+                    <a href="promotional-list">
                         <span class="icon">
                             <ion-icon name="pricetag-outline"></ion-icon>
                         </span>
@@ -73,7 +73,7 @@
                 </li>
 
                 <li>
-                    <a href="category.jsp">
+                    <a href="category">
                         <span class="icon">
                             <ion-icon name="list-outline"></ion-icon>
                         </span>
@@ -81,7 +81,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="review.html">
+                    <a href="list-rating">
                         <span class="icon">
                             <ion-icon name="chatbubble-outline"></ion-icon>
                         </span>
@@ -89,18 +89,8 @@
                     </a>
                 </li>
 
-
                 <li>
-                    <a href="passwordManagement.html">
-                        <span class="icon">
-                            <ion-icon name="lock-closed-outline"></ion-icon>
-                        </span>
-                        <span class="title">Tài khoản</span>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="/src/Users/page/login-signup.jsp">
+                    <a href="logout">
                         <span class="icon">
                             <ion-icon name="log-out-outline"></ion-icon>
                         </span>

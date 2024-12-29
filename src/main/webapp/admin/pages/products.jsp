@@ -237,17 +237,6 @@
                     <span class="title">Review</span>
                 </a>
             </li>
-
-
-            <li>
-                <a href="accounts">
-                        <span class="icon">
-                            <ion-icon name="lock-closed-outline"></ion-icon>
-                        </span>
-                    <span class="title">Tài khoản</span>
-                </a>
-            </li>
-
             <li>
                 <a href="logout">
                         <span class="icon">
@@ -289,7 +278,7 @@
             <div class="recentOrders">
                 <div class="cardHeader">
                     <h2>Danh sách sản phẩm</h2>
-                    <a href="products-list?all=true" class="btn">Xem Tất Cả</a>
+                    <a href="products-list?showAll=true" class="btn">Xem Tất Cả</a>
                 </div>
                 <div class="list-products-content-button">
                     <button id="add-product">Thêm sản phẩm</button>
@@ -494,13 +483,6 @@
 
     <script src="<c:url value="/admin/js/index.js"/>"></script>
     <script src="<c:url value="/admin/js/products.js"/>"></script>
-    <script>
-        document.getElementById('view-all-products').addEventListener('click', function (e) {
-            e.preventDefault();
-            // Redirect to servlet with parameter all=true
-            window.location.href = '/products-list?all=true';
-        });
-    </script>
     <script>// Lấy tham chiếu đến nút
     const scrollToTopButton = document.getElementById('scrollToTop');
 
