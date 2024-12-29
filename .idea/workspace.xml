@@ -10,15 +10,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a004b204-57db-4d89-8fa2-30bbd0ea2b38" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/classes/hcmuaf/nlu/edu/vn/controller/user/products/GetProductDetailController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/classes/hcmuaf/nlu/edu/vn/controller/user/products/GetProductDetailController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/controller/user/products/GetProductDetailController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/controller/user/products/GetProductDetailController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/dao/products/GetProductDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/dao/products/GetProductDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/dao/products/ProductDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/dao/products/ProductDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/service/ProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/service/ProductService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/admin/pages/order.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/admin/pages/order.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/users/page/cart.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/users/page/cart.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/users/page/product.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/users/page/product.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -187,6 +180,7 @@
       <updated>1735266837100</updated>
       <workItem from="1735266840384" duration="20932000" />
       <workItem from="1735359954002" duration="552000" />
+      <workItem from="1735441415420" duration="1227000" />
     </task>
     <servers />
   </component>
