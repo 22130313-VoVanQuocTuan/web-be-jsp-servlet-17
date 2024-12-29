@@ -189,7 +189,7 @@
             <h3><a href="/tqh/product-category?categoryId=9">Thiết bị điện nước</a></h3>
         </div>
         <div class="slide-discount">
-            <c:forEach var="promotional" items="${sessionScope.promotionals}">
+            <c:forEach var="promotional" items="${sessionScope.promotionals}" begin="0" end="3">
                 <div class="discount">
                     <span class="discount-label">Giảm giá:<fmt:formatNumber value="${promotional.value}" type="number" groupingUsed="true"/>₫</span>
                     <span class="discount-description">${promotional.code}</span>
