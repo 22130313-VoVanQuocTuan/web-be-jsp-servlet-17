@@ -72,4 +72,27 @@ public class RatingDao {
     }
     return false;
     }
+
+    public List<Rating> getListRattingByProductId(String productId) {
+        String sql = "SELECT * FROM rating WHERE productId LIKE ?";
+        try (PreparedStatement ptm = dbConnect.preparedStatement(sql)) {
+            ptm.setString(1, "%"+ productId +"%");
+            ResultSet rs = ptm.executeQuery();
+            List<Rating> list = new ArrayList<>();
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                int productID = rs.getInt("productId");
+                int userId = rs.getInt("userId");
+                String content = rs.getString("content");
+                Date createdAt = rs.getDate("createdAt");
+
+                Rating rating = new Rating(id, productID, userId, content, createdAt);
+                list.add(rating);
+            }
+            return list;
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

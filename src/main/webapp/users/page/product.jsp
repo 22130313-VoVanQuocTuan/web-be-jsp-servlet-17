@@ -63,10 +63,13 @@
                 </div>
 
                 <!-- Thanh tìm kiếm ở giữa -->
-                <div class="search-bar">
-                    <input type="text" placeholder="Tìm kiếm sản phẩm...">
-                    <button title="icon"><i class="fa fa-fw fa-search"></i></button>
-                </div>
+                <form action="product" method="GET">
+                    <div class="search-bar">
+                        <input type="hidden" name="search" value="true">
+                        <input name="name" type="text" placeholder="Tìm kiếm sản phẩm...">
+                        <button type="submit" title="icon"><i class="fa fa-fw fa-search"></i></button>
+                    </div>
+                </form>
 
                 <!-- Thông tin bên phải -->
                 <div class="info">
@@ -186,7 +189,7 @@
             <h3><a href="/tqh/product-category?categoryId=9">Thiết bị điện nước</a></h3>
         </div>
         <div class="slide-discount">
-            <c:forEach var="promotional" items="${sessionScope.promotionals}">
+            <c:forEach var="promotional" items="${sessionScope.promotionals}" begin="0" end="3">
                 <div class="discount">
                     <span class="discount-label">Giảm giá:<fmt:formatNumber value="${promotional.value}" type="number" groupingUsed="true"/>₫</span>
                     <span class="discount-description">${promotional.code}</span>

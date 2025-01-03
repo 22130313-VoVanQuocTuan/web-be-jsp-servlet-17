@@ -171,7 +171,7 @@
             <li>
                 <a href="index.html">
                         <span class="icon">
-                            <img src="/src/Users/img/logo.png" alt="">
+                            <img src="${pageContext.request.contextPath}/users/img/logo.png" alt="">
                         </span>
                     <span class="title">Bán Vật Liệu Xây Dựng </span>
                 </a>
@@ -187,7 +187,7 @@
             </li>
 
             <li>
-                <a href="user.jsp">
+                <a href="accounts">
                         <span class="icon">
                             <ion-icon name="people-outline"></ion-icon>
                         </span>
@@ -196,7 +196,7 @@
             </li>
 
             <li>
-                <a href="products.html">
+                <a href="products-list">
                         <span class="icon">
                             <ion-icon name="cube-outline"></ion-icon>
                         </span>
@@ -204,7 +204,7 @@
                 </a>
             </li>
             <li>
-                <a href="order.jsp">
+                <a href="order">
                         <span class="icon">
                             <ion-icon name="receipt-outline"></ion-icon>
                         </span>
@@ -213,7 +213,7 @@
             </li>
 
             <li>
-                <a href="promotional.html">
+                <a href="promotional-list">
                         <span class="icon">
                             <ion-icon name="pricetag-outline"></ion-icon>
                         </span>
@@ -222,7 +222,7 @@
             </li>
 
             <li>
-                <a href="category.html">
+                <a href="category">
                         <span class="icon">
                             <ion-icon name="list-outline"></ion-icon>
                         </span>
@@ -230,26 +230,15 @@
                 </a>
             </li>
             <li>
-                <a href="review.html">
+                <a href="list-rating">
                         <span class="icon">
                             <ion-icon name="chatbubble-outline"></ion-icon>
                         </span>
                     <span class="title">Review</span>
                 </a>
             </li>
-
-
             <li>
-                <a href="passwordManagement.html">
-                        <span class="icon">
-                            <ion-icon name="lock-closed-outline"></ion-icon>
-                        </span>
-                    <span class="title">Tài khoản</span>
-                </a>
-            </li>
-
-            <li>
-                <a href="/src/Users/page/login-signup.jsp">
+                <a href="logout">
                         <span class="icon">
                             <ion-icon name="log-out-outline"></ion-icon>
                         </span>
@@ -266,14 +255,17 @@
             </div>
 
             <div class="search">
-                <label>
-                    <input type="text" placeholder="Tìm kiếm ở đây">
-                    <ion-icon name="search-outline"></ion-icon>
-                </label>
+                <form action="products-list" method="GET">
+                    <label>
+                        <input type="text" name="name" placeholder="Tìm kiếm ở đây">
+                        <ion-icon name="search-outline"><button type="submit" style="border: none; background: none; cursor: pointer;"></button></ion-icon>
+                    </label>
+                    <input type="hidden" name="search" value="true">
+                </form>
             </div>
 
             <div class="user">
-                <a href="passwordManagement.html">
+                <a href="accounts">
                     <ion-icon name="person"
                               style="color: #000000; font-size: 25px;"></ion-icon>
                 </a>
@@ -286,7 +278,7 @@
             <div class="recentOrders">
                 <div class="cardHeader">
                     <h2>Danh sách sản phẩm</h2>
-                    <a href="products-list?all=true" class="btn">Xem Tất Cả</a>
+                    <a href="products-list?showAll=true" class="btn">Xem Tất Cả</a>
                 </div>
                 <div class="list-products-content-button">
                     <button id="add-product">Thêm sản phẩm</button>
@@ -312,14 +304,14 @@
                             <td><img src="${product.imageUrl}" alt="${product.name}"></td>
                             <td>${product.id}</td>
                             <td>${product.name}</td>
-                            <td><fmt:formatNumber value="${product.discountPrice}" type="number"
+                            <td><fmt:formatNumber value="${product.price}" type="number"
                                                   groupingUsed="true"/>₫
                             </td>
                             <td>${product.quantity}</td>
                             <td>${product.status}</td>
                             <td><fmt:formatDate value="${product.createDate}" pattern="dd-MM-yyyy HH:mm:ss"/></td>
                             <td class="v">
-                                <button id="edit-product">Sửa</button>
+                                <button type="button"><a style="text-decoration: none; color:black" href="/tqh/edit-product?id=${product.id}">Sửa</a></button>
                                 <button id="deleteBtn" data-product-id="${product.id}" data-all="${param.all}">Xóa</button>
                             </td>
                         </tr>
@@ -352,20 +344,21 @@
                     <div class="modal-content">
                         <h3>Thêm sản phẩm mới</h3>
                         <form id="addProductForm" action="/tqh/add-product" method="post" enctype="multipart/form-data">
+
                             <label for="productName">Tên sản phẩm:</label>
-                            <input type="text" id="productName" name="name">
+                            <input type="text" id="productName" name="name" placeholder="Nhập tên sản phẩm">
 
                             <label for="productPrice">Giá:</label>
-                            <input type="text" id="productPrice" name="price">
+                            <input type="text" id="productPrice" name="price" placeholder="Nhập giá">
 
                             <label for="productCategory">Danh mục:</label>
-                            <input type="text" id="productCategory" name="categoryId">
+                            <input type="text" id="productCategory" name="categoryId" placeholder="Nhập số danh mục">
 
                             <label for="discountPercent">Tỷ lệ giảm giá (0 - 1):</label>
-                            <input type="text" id="discountPercent" name="discountPercent">
+                            <input type="text" id="discountPercent" name="discountPercent" placeholder="Nhập tỷ lệ giảm giá">
 
                             <label for="productStock">Tồn kho:</label>
-                            <input type="number" id="productStock" name="quantity">
+                            <input type="number" id="productStock" name="quantity" placeholder="Nhập số lượng">
 
                             <div class="modal-field">
                                 <label for="npp">Nhà phân phối:</label>
@@ -412,53 +405,61 @@
                 <div id="editProductModal" class="modal">
                     <div class="modal-content">
                         <h3>Sửa sản phẩm</h3>
-                        <form id="editProductForm">
-                            <label for="productName">Tên sản phẩm:</label>
-                            <input type="text" id="productName1">
+                        <form id="editProductForm" action="${pageContext.request.contextPath}/edit-product" method="post" enctype="multipart/form-data">
+                        <label for="productName">Tên sản phẩm:</label>
+                            <input type="text" id="productNameEdit" name="name" value="${product.name}" placeholder="Nhập tên sản phẩm" required>
 
                             <label for="productPrice">Giá:</label>
-                            <input type="text" id="productPrice1">
+                            <input type="text" id="productPriceEdit" name="price"value="${product.price}" placeholder="Nhập giá" required>
 
                             <label for="productCategory">Danh mục:</label>
-                            <input type="text" id="productCategory1">
+                            <input type="text" id="productCategoryEdit" name="categoryId" placeholder="Nhập số danh mục" value="${product.categoryId}" required>
+
+                            <label for="discountPercent">Tỷ lệ giảm giá (0 - 1):</label>
+                            <input type="text" id="discountPercentEdit" name="discountPercent" placeholder="Nhập tỷ lệ giảm giá" value="${product.discountPercent}" >
 
                             <label for="productStock">Tồn kho:</label>
-                            <input type="number" id="productStock1">
+                            <input type="number" id="productStockEdit" name="quantity" placeholder="Nhập số lượng"value="${product.quantity}" >
 
                             <div class="modal-field">
                                 <label for="npp">Nhà phân phối:</label>
-                                <input type="text" id="npp1" placeholder="Nhập mã sản phẩm">
+                                <input type="text" id="nppEdit" name="supplier" placeholder="Nhập nhà phân phối" value="${product.supplier}" >
                             </div>
+
                             <div class="modal-field">
                                 <label for="size">Kích thước:</label>
-                                <input type="text" id="size1" placeholder="Nhập kích thước">
+                                <input type="text" id="sizeEdit" name="size" placeholder="Nhập kích thước" value="${product.size}" >
                             </div>
 
                             <div class="modal-field">
                                 <label for="color">Màu sắc:</label>
-                                <input type="text" id="color1" placeholder="Nhập màu sắc">
+                                <input type="text" id="colorEdit" name="color" placeholder="Nhập màu sắc" value="${product.color}" >
                             </div>
 
                             <div class="modal-field">
                                 <label for="unit">Đơn vị tính:</label>
-                                <input type="text" id="unit1" placeholder="Nhập đơn vị tính">
+                                <input type="text" id="unitEdit" name="unit" placeholder="Nhập đơn vị tính" value="${product.unit}" >
                             </div>
 
                             <div class="modal-field">
                                 <label for="description">Mô tả:</label>
-                                <textarea id="description1" rows="3" placeholder="Nhập mô tả sản phẩm"></textarea>
+                                <textarea id="descriptionEdit" name="description" rows="3"
+                                          placeholder="Nhập mô tả sản phẩm"> ${product.description}</textarea>
                             </div>
+
                             <label for="productStatus">Trạng thái:</label>
-                            <select id="productStatus1">
-                                <option value="active">Còn hàng</option>
-                                <option value="inactive">Hết hàng</option>
+                            <select id="productStatusEdit" name="status">
+                                <option value="Còn hàng" ${product.status != null && product.status == 'Còn hàn' ? 'selected' : ''}>Còn hàng</option>
+                                <option value="Hết hàng" ${product.status != null && product.status == 'Hết hàng' ? 'selected' : ''}>Hết hàng</option>
                             </select>
 
                             <label for="productImage">Hình ảnh:</label>
-                            <input type="file" id="productImage1">
+                            <input type="file" id="productImageEdit" name="imageUrl" accept="image/*" >
+                            <input type="hidden" name="currentImageUrl" value="${product.imageUrl}" />
+                            <input type="hidden" name="id" value="${product.id}" />
 
-                            <button id="save-Product1">Lưu thay đổi</button>
-                            <button class="close_modal">Thoát</button>
+                            <button type="submit" id="save-ProductEdit">Lưu thay đổi</button>
+                            <button type="button" class="close-modal">Thoát</button>
                         </form>
                     </div>
                 </div>
@@ -479,16 +480,9 @@
         </div>
     </div>
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-    <script src="<c:url value="/admin/js/order.js"/>"></script>
+
     <script src="<c:url value="/admin/js/index.js"/>"></script>
     <script src="<c:url value="/admin/js/products.js"/>"></script>
-    <script>
-        document.getElementById('view-all-products').addEventListener('click', function (e) {
-            e.preventDefault();
-            // Redirect to servlet with parameter all=true
-            window.location.href = '/products-list?all=true';
-        });
-    </script>
     <script>// Lấy tham chiếu đến nút
     const scrollToTopButton = document.getElementById('scrollToTop');
 
@@ -508,6 +502,17 @@
             behavior: 'smooth' // Cuộn mượt
         });
     });
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Kiểm tra nếu cần hiển thị modal
+            const showModal = "${showModal}" === "true";
+            if (showModal) {
+                const modal = document.getElementById('editProductModal');
+                modal.style.display = 'flex';
+
+            }
+        });
     </script>
 </div>
 </body>

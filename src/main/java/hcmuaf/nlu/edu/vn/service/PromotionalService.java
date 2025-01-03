@@ -36,4 +36,8 @@ public class PromotionalService {
     public boolean updateStatusProm(int id, String status) {
         return promotionalDao.updateStatusProm(id,status);
     }
+
+    public List<Promotionals> getListPromotionalByValue(double value) {
+        return promotionalDao.getListPromotionalByValue(value);
+    }
 }

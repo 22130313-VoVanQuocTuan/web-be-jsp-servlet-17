@@ -40,7 +40,7 @@
                 <li>
                     <a href="index.html">
                         <span class="icon">
-                            <img src="/src/Users/img/logo.png" alt="">
+                            <img src="${pageContext.request.contextPath}/users/img/logo.png" alt="">
                         </span>
                         <span class="title">Bán Vật Liệu Xây Dựng </span>
                     </a>
@@ -73,7 +73,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="order.jsp">
+                    <a href="order">
                         <span class="icon">
                             <ion-icon name="receipt-outline"></ion-icon>
                         </span>
@@ -91,7 +91,7 @@
                 </li>
 
                 <li>
-                    <a href="category.html">
+                    <a href="category">
                         <span class="icon">
                             <ion-icon name="list-outline"></ion-icon>
                         </span>
@@ -107,15 +107,6 @@
                     </a>
                 </li>
 
-
-                <li>
-                    <a href="passwordManagement.html">
-                        <span class="icon">
-                            <ion-icon name="lock-closed-outline"></ion-icon>
-                        </span>
-                        <span class="title">Tài khoản</span>
-                    </a>
-                </li>
 
                 <li>
                     <a href="logout">
@@ -135,14 +126,17 @@
                 </div>
 
                 <div class="search">
-                    <label>
-                        <input type="text" placeholder="Tìm kiếm ở đây">
-                        <ion-icon name="search-outline"></ion-icon>
-                    </label>
+                    <form action="list-rating" method="GET">
+                        <label>
+                            <input type="text" name="productId" placeholder="Tìm kiếm ở đây">
+                            <ion-icon name="search-outline"><button type="submit" style="border: none; background: none; cursor: pointer;"></button></ion-icon>
+                        </label>
+                        <input type="hidden" name="search" value="true">
+                    </form>
                 </div>
 
                 <div class="user">
-                    <a href="passwordManagement.html"> <ion-icon name="person" style="color: #000000; font-size: 25px;"></ion-icon></a>
+                    <a href="accounts"> <ion-icon name="person" style="color: #000000; font-size: 25px;"></ion-icon></a>
 
                 </div>
             </div>
@@ -153,7 +147,7 @@
                 <div class="recentOrders">
                     <div class="cardHeader">
                         <h2>Danh sách đánh giá của khách hàng</h2>
-                        <a href="#" class="btn">Xem Tất Cả</a>
+                        <a href="list-rating?showAll=true" class="btn">Xem Tất Cả</a>
                     </div>
 
                     <table>
@@ -186,7 +180,7 @@
 
 
             </div>
-            <!-- Modal Xóa tài khoản -->
+            <!-- Modal Xóa đánh giá -->
             <div id="delete-modal" class="modal">
                 <div class="modal-content">
                     <h3>Xác nhận xóa</h3>

@@ -22,7 +22,7 @@
                 <li>
                     <a href="index.html">
                         <span class="icon">
-                            <img src="/src/Users/img/logo.png" alt="">
+                           <img src="${pageContext.request.contextPath}/users/img/logo.png" alt="">
                         </span>
                         <span class="title">Bán Vật Liệu Xây Dựng </span>
                     </a>
@@ -64,7 +64,7 @@
                 </li>
 
                 <li>
-                    <a href="promotional.html">
+                    <a href="promotional-list">
                         <span class="icon">
                             <ion-icon name="pricetag-outline"></ion-icon>
                         </span>
@@ -73,7 +73,7 @@
                 </li>
 
                 <li>
-                    <a href="category.html">
+                    <a href="category">
                         <span class="icon">
                             <ion-icon name="list-outline"></ion-icon>
                         </span>
@@ -81,7 +81,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="review.html">
+                    <a href="list-rating">
                         <span class="icon">
                             <ion-icon name="chatbubble-outline"></ion-icon>
                         </span>
@@ -89,18 +89,8 @@
                     </a>
                 </li>
 
-
                 <li>
-                    <a href="passwordManagement.html">
-                        <span class="icon">
-                            <ion-icon name="lock-closed-outline"></ion-icon>
-                        </span>
-                        <span class="title">Tài khoản</span>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="/src/Users/page/login-signup.jsp">
+                    <a href="logout">
                         <span class="icon">
                             <ion-icon name="log-out-outline"></ion-icon>
                         </span>
@@ -134,7 +124,7 @@
             <div class="cardBox">
                 <div class="card">
                     <div>
-                        <div class="numbers">1,504</div>
+                        <div class="numbers">${totalViews}</div>
                         <div class="cardName">Lượt Xem</div>
                     </div>
 
@@ -145,7 +135,7 @@
 
                 <div class="card">
                     <div>
-                        <div class="numbers">80</div>
+                        <div class="numbers">${totalUsers}</div>
                         <div class="cardName">Số lượng người dùng</div>
                     </div>
 
@@ -156,8 +146,8 @@
 
                 <div class="card">
                     <div>
-                        <div class="numbers">284</div>
-                        <div class="cardName">Nhận Xét</div>
+                        <div class="numbers">${totalRatings}</div>
+                        <div class="cardName">Đánh giá</div>
                     </div>
 
                     <div class="iconBx">
@@ -167,7 +157,7 @@
 
                 <div class="card">
                     <div>
-                        <div class="numbers">10.842.000₫</div>
+                        <div class="numbers">${totalSales}₫</div>
                         <div class="cardName">Doanh Thu</div>
                     </div>
 

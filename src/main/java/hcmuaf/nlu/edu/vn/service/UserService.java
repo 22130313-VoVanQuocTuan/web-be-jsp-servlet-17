@@ -191,6 +191,12 @@ public class UserService {
     public boolean deleteAccount(int id) {
         return addDeleteUpdateAccountInAdminDao.deleteAccount(id);
     }
+
+
+    // Lấy danh sách sa phẩm theo tên
+    public List<Users> getListUsersByName(String name) {
+        return getListAccountDao.getListUserByName(name);
+    }
 }
 
 

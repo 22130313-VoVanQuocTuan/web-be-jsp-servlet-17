@@ -27,4 +27,8 @@ public class RatingService {
     }
 
 
+    //Tìm kiếm theo tid sản phẩm
+    public List<Rating> getListRatingByProductId(String productId) {
+        return ratingDao.getListRattingByProductId(productId);
+    }
 }

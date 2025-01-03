@@ -21,7 +21,7 @@ function displayProducts(page) {
     });
 
     // Cập nhật thông tin số trang
-    document.getElementById("page-info").textContent = `Page ${page} of ${totalPages}`;
+    document.getElementById("page-info").textContent = `Trang ${page} của ${totalPages}`;
     document.getElementById("prev").disabled = (page === 1);
     document.getElementById("next").disabled = (page === totalPages);
 }

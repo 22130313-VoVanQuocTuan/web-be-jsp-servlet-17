@@ -1,35 +1,25 @@
 document.addEventListener('DOMContentLoaded', function () {
-    // Lấy tất cả các nút xóa
-    const deleteButtons = document.querySelectorAll('.delete-btn');
-
-    // Hàm hiển thị modal
-    function showModal(modalId) {
-        const modal = document.getElementById(modalId);
-        modal.style.display = 'block';
-    }
-
     // Hàm đóng modal
     function closeModal() {
         const modals = document.querySelectorAll('.modal');
         modals.forEach(modal => modal.style.display = 'none');
     }
 
-    //  Khi nhấn vào nút xóa
-    deleteButtons.forEach(button => {
-        button.addEventListener('click', function () {
-            const row = button.closest('tr');
-            const id = button.getAttribute('data-id');
-            // Hiển thị modal xóa
-            showModal('delete-modal');
+    let deleteModal = document.getElementById('delete-modal'); // Modal xóa tài khoản
+    let confirmDeleteButton = document.getElementById('confirm-delete'); // Nút xác nhận xóa
+    document.querySelectorAll('.delete-btn').forEach(function(button) {
+        button.addEventListener('click', function(e) {
+            e.preventDefault(); // Ngăn chặn hành động mặc định (như điều hướng lại trang)
 
-            // Xử lý khi nhấn "Xóa" trong modal
-            const confirmDeleteButton = document.querySelector('.confirm-delete');
-            confirmDeleteButton.onclick = function () {
-                // Xóa dòng khỏi bảng
-                row.remove();  // Xóa dòng tương ứng trong bảng
-                closeModal();  // Đóng modal sau khi xóa
-                console.log('Xóa tài khoản với ID:', id);  // Hiển thị ID bị xóa
-            };
+            const categoryId = this.getAttribute('data-id'); // Lấy ID từ thuộc tính data-id
+            const url = `add-delete-category?id=${categoryId}&action=delete`; // Đường dẫn xóa tài khoản kèm ID
+
+            // Hiển thị modal xác nhận xóa
+            deleteModal.style.display = 'block';
+
+            confirmDeleteButton.addEventListener('click', function() {
+                window.location.href = url; // Chuyển hướng đến URL xóa tài khoản
+            });
         });
     });
 

@@ -32,10 +32,6 @@ public class ProductService {
     public List<Product> getAllProducts() throws SQLException {
         return productDAO.getAllProducts();
     }
-    // Lấy số lượng sản phẩm giới hạn (ví dụ: 10 sản phẩm)
-    public List<Product> getTopProducts(int limit) throws SQLException {
-        return productDAO.getTop(limit);
-    }
 
     // Lấy ra danh sách tát cả sản phẩm của danh mục
     public List<Product> getAllProductsCategory(int categoryId) throws SQLException {
@@ -50,6 +46,11 @@ public class ProductService {
     //Hàm thêm sản phẩm
     public boolean addProduct(Product product) {
         return productDAO.addProduct(product);
+    }
+
+    // Phương thức cập nhật thông tin sản phẩm
+    public boolean updateProduct(int id,Product product) {
+        return productDAO.updateProduct(id,product);
     }
 
     // Hàm xóa sản phẩm
@@ -96,6 +97,13 @@ public class ProductService {
 
     }
 
+    //Lấy danh sách sản phẩm theo tên tìm kiếm
+    public List<Product> getListProductByName(String name) throws SQLException {
+        return productDAO.getListProductByName(name);
+    }
 
+    public boolean updateViewProduct(int id) {
+        return productDAO.updateViewProduct( id);
+    }
 }
 

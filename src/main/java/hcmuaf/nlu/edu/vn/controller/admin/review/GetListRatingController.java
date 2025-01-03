@@ -1,6 +1,7 @@
 package hcmuaf.nlu.edu.vn.controller.admin.review;
 
 import hcmuaf.nlu.edu.vn.model.Rating;
+import hcmuaf.nlu.edu.vn.model.Users;
 import hcmuaf.nlu.edu.vn.service.RatingService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -10,6 +11,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @WebServlet(name = "ListRating", value = "/list-rating")
 public class GetListRatingController extends HttpServlet {
@@ -17,8 +19,21 @@ public class GetListRatingController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         RatingService ratingService = new RatingService();
 
+        String showAll = req.getParameter("showAll");
+        //tìm kiếm
+        String search = req.getParameter("search");
+        String productId = req.getParameter("productId");
+
         try{
             List<Rating> listRating = ratingService.getListRating();
+            if(search!=null){
+
+                listRating=ratingService.getListRatingByProductId(productId);
+            }
+            if (showAll == null) {
+                // Hiển thị tối đa 10 mục
+                listRating = listRating.stream().limit(10).collect(Collectors.toList());
+            }
             req.setAttribute("listRating", listRating);
             req.getRequestDispatcher( "/admin/pages/review.jsp").forward(req, resp);
         }
