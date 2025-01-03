@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class OrderDao {
@@ -22,27 +23,25 @@ public class OrderDao {
         List<Orders> orders = new ArrayList<Orders>();
         String query = "SELECT * FROM orders";
         try(PreparedStatement ps = dbConnect.preparedStatement(query)) {
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                Orders order = new Orders();
-                order.setId(rs.getInt("id"));
-                order.setUser_id(rs.getInt("userId"));
-                order.setStatus(rs.getString("status"));
-                order.setTotalPrice(rs.getDouble("totalPrice"));
-                order.setDiscountAmount(rs.getDouble("discountAmount"));
-                order.setPaymentMethod(rs.getString("paymentMethod"));
-                order.setPaymentStatus(rs.getString("paymentStatus"));
-                order.setShippingFee(rs.getDouble("shippingFee"));
-                order.setShippingAddress(rs.getString("shippingAddress"));
-                order.setCreatedAt(order.getCreatedAt());
-                order.setUpdatedAt(order.getUpdatedAt());
+            ResultSet resultSets = ps.executeQuery();
+            while (resultSets.next()) {
+                int id = resultSets.getInt("id");
+                int userid = resultSets.getInt("userId");
+                Date createdAt = resultSets.getDate("createdAt");
+                double totalPrice = resultSets.getDouble("totalPrice");
+                String paymentMethod = resultSets.getString("paymentMethod");
+                String paymentStatus = resultSets.getString("paymentStatus");
+                String status = resultSets.getString("status");
+
+                Orders order = new Orders(id, userid, createdAt, totalPrice, paymentMethod, paymentStatus, status);
+
                 orders.add(order);
             }
-
+            return orders;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return orders;
+
     }
 
     // Lấy ra hoá đơn
@@ -53,32 +52,30 @@ public class OrderDao {
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                Orders order = new Orders();
-                order.setId(rs.getInt("id"));
-                order.setUser_id(rs.getInt("userId"));
-                order.setStatus(rs.getString("status"));
-                order.setTotalPrice(rs.getDouble("totalPrice"));
-                order.setDiscountAmount(rs.getDouble("discountAmount"));
-                order.setPaymentMethod(rs.getString("paymentMethod"));
-                order.setPaymentStatus(rs.getString("paymentStatus"));
-                order.setShippingFee(rs.getDouble("shippingFee"));
-                order.setShippingAddress(rs.getString("shippingAddress"));
-                order.setCreatedAt(order.getCreatedAt());
-                order.setUpdatedAt(order.getUpdatedAt());
+                int idd = rs.getInt("id");
+                int userid = rs.getInt("userId");
+                Date createdAt = rs.getDate("createdAt");
+                double totalPrice = rs.getDouble("totalPrice");
+                String paymentMethod = rs.getString("paymentMethod");
+                String paymentStatus = rs.getString("paymentStatus");
+                String status = rs.getString("status");
+
+                Orders order = new Orders(idd, userid, createdAt, totalPrice, paymentMethod, paymentStatus, status);
+
                 orders.add(order);
             }
+            return orders;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
-        return orders;
     }
 
+    //Lấy ra chi tiết hoá đơn
     public OrderDetail getOrderDetail(int id) throws SQLException {
 
         String query = "SELECT o.id, o.totalPrice, o.shippingFee, o.discountAmount, o.paymentMethod, o.paymentStatus, o.shippingAddress, oi.productId,  Sum(oi.quantity) AS quantity, a.email, a.name, a.phoneNumber " +
                 "FROM orders o " +
-                "JOIN orderitems oi ON o.id = oi.orderId " +  // Thêm dấu cách sau ON oi.orderId
+                "JOIN orderitems oi ON o.id = oi.orderId " +
                 "JOIN products p ON oi.productId = p.id " +
                 "JOIN users u ON o.userId = u.id " +
                 "JOIN addressshipping a ON u.id = a.userId " +
@@ -125,12 +122,14 @@ public class OrderDao {
             ResultSet rs = ps.executeQuery();
             List<OrderItem> orderItems = new ArrayList<>();
             while (rs.next()) {
-                OrderItem orderItem = new OrderItem();
-                orderItem.setProductName(rs.getString("productName"));
-                orderItem.setQuantity(rs.getInt("quantity"));
-                orderItem.setPrice(rs.getDouble("price"));
-                orderItem.setDiscount(rs.getDouble("discount"));
-                orderItem.setTotalPrice(rs.getDouble("totalPrice"));
+
+                String productName = rs.getString("productName");
+                int quantity = rs.getInt("quantity");
+                double price = rs.getDouble("price");
+                double discount = rs.getDouble("discount");
+                double totalPrice = rs.getDouble("totalPrice");
+
+                OrderItem orderItem = new OrderItem(productName, quantity, price, discount, totalPrice);
 
                 orderItems.add(orderItem);
             }
@@ -160,17 +159,35 @@ public class OrderDao {
         return null;
     }
 
-    //Xoá sản phẩm
+    //Xoá hoá đơn
     public boolean deleteOrder(int id) throws SQLException {
         String query = "DELETE FROM orders WHERE id = ?";
         try(PreparedStatement ps = dbConnect.preparedStatement(query)){
             ps.setInt(1, id);
             int rowDeleted = ps.executeUpdate();
-            return rowDeleted > 0;
+            if(rowDeleted > 0) {
+                return true;
+            }
         } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
+            throw new RuntimeException(e);
         }
+        return false;
+    }
+
+    //Cập nhật trạng thái đơn hàng
+    public boolean updateOrderStatus(int id, String status) throws SQLException {
+        String query = "UPDATE orders SET status = ? WHERE id = ?";
+        try(PreparedStatement ps = dbConnect.preparedStatement(query)){
+            ps.setString(1, status);
+            ps.setInt(2, id);
+            int rowUpdated = ps.executeUpdate();
+            if(rowUpdated > 0) {
+                return true;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return false;
     }
 
 }

@@ -273,16 +273,18 @@ label {
 
 
 .submit-btn {
-    padding: 12px 20px 12px 20px;
+    padding: 11px 13px 19px 17px;
     border: none;
-    margin: 34px 20px 0 0;
+    margin: 30px 20px 0 8px;
     background-color: #1c293d;
     border-radius: 10px;
     color: white;
     cursor: pointer;
     transition: background-color 0.2s ease;
-    margin-left: -92px;
-    width: 195px;
+    font-size: 13px;
+    margin-left: -100px;
+    width: 90px;
+    height: 36px;
 }
 
 .submit-btn:hover {

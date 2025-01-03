@@ -18,19 +18,16 @@ public class Orders {
     public Orders() {
     }
 
-    public Orders(int id, int userid, double totalPrice, double shippingFee, double discountAmount, String status, String paymentMethod, String paymentStatus, String shippingAddress, Date createdAt, Date updatedAt) {
+    public Orders(int id, int userid, Date createdAt, double totalPrice, String paymentMethod, String paymentStatus, String status) {
         this.id = id;
         this.userid = userid;
+        this.createdAt = createdAt;
         this.totalPrice = totalPrice;
-        this.shippingFee = shippingFee;
-        this.discountAmount = discountAmount;
-        this.status = status;
         this.paymentMethod = paymentMethod;
         this.paymentStatus = paymentStatus;
-        this.shippingAddress = shippingAddress;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
+        this.status = status;
     }
+
 
     public int getId() {
         return id;

@@ -30,7 +30,11 @@ public class AddressShipping {
     }
 
     public AddressShipping(String name, String email, String phoneNumber, String address, String note) {
-
+        this.name = name;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.address = address;
+        this.note = note;
     }
 
     public int getId() {

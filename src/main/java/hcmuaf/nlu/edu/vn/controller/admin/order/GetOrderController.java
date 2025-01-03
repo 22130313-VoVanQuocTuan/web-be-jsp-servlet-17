@@ -1,5 +1,6 @@
 package hcmuaf.nlu.edu.vn.controller.admin.order;
 
+import hcmuaf.nlu.edu.vn.model.Orders;
 import hcmuaf.nlu.edu.vn.service.OrderService;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
@@ -7,8 +8,9 @@ import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 
-@WebServlet(name = "GetOrderItemController", value = "/order")
+@WebServlet(name = "GetOrderItemController", value = "/order-list")
 public class GetOrderController extends HttpServlet {
     private final OrderService orderService;
 
@@ -20,14 +22,16 @@ public class GetOrderController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         try {
-            request.setAttribute("orderList", orderService.getAllOrders());
+            List<Orders> ordersList = orderService.getAllOrders();
+            request.setAttribute("orderList", ordersList);
+            request.getRequestDispatcher("/admin/pages/order.jsp").forward(request, response);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        request.getRequestDispatcher("admin/pages/order.jsp").forward(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        doGet(request, response);
     }
 }
