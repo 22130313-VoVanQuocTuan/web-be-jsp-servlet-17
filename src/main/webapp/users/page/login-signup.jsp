@@ -86,10 +86,13 @@
                 </div>
 
                 <!-- Thanh tìm kiếm ở giữa -->
-                <div class="search-bar">
-                    <input type="text" placeholder="Tìm kiếm sản phẩm...">
-                    <button title="icon"><i class="fa fa-fw fa-search"></i></button>
-                </div>
+                <form action="product" method="GET">
+                    <div class="search-bar">
+                        <input type="hidden" name="search" value="true">
+                        <input name="name" type="text" placeholder="Tìm kiếm sản phẩm...">
+                        <button type="submit" title="icon"><i class="fa fa-fw fa-search"></i></button>
+                    </div>
+                </form>
 
                 <!-- Thông tin bên phải -->
                 <div class="info">

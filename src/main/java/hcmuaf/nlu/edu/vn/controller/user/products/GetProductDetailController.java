@@ -36,7 +36,7 @@ public class GetProductDetailController extends HttpServlet {
         try {
             Product product = productService.getProductById(id);
             List<Product> allProductsCategory = productService.getAllProductsCategory(categoryId);
-        //    productService.updateViewProduct(id);
+            productService.updateViewProduct(id);
             req.setAttribute("product", product);
             req.setAttribute("productCategory", allProductsCategory);
             req.getRequestDispatcher("/users/page/product-detail.jsp").forward(req, resp);

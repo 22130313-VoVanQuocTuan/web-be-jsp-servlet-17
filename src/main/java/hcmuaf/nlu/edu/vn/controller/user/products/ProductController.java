@@ -24,9 +24,14 @@ public class ProductController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Product> products = null;
         List<Promotionals> list = null;
+        String search = request.getParameter("search");
+        String name = request.getParameter("name");
         try {
             products = productService.getAllProducts();
             list = productService.getListPromotional();
+            if(search != null && !search.isEmpty()) {
+                products = productService.getListProductByName(name);
+            }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -37,7 +42,6 @@ public class ProductController extends HttpServlet {
         request.setAttribute("products", products);
         request.getRequestDispatcher("users/page/product.jsp").forward(request, response);
     }
-
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     }

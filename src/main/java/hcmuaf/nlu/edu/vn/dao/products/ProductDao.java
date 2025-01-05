@@ -33,19 +33,6 @@ public class ProductDao {
         return products;
     }
 
-    public List<Product> getTop(int limit) throws SQLException {
-        String sql = "SELECT * FROM products LIMIT ?";
-        try (PreparedStatement statement = dbConnect.preparedStatement(sql)) {
-            statement.setInt(1, limit);
-            try (ResultSet rs = statement.executeQuery()) {
-                List<Product> products = new ArrayList<>();
-                while (rs.next()) {
-                    products.add(mapResultSetToProduct(rs));
-                }
-                return products;
-            }
-        }
-    }
 
     // Lấy ra sản phẩm của danh mục dựa vào categoryID
     public List<Product> getAllProductsCategory(int categoryId) throws SQLException {
@@ -191,9 +178,9 @@ public class ProductDao {
         product.setCreateDate(rs.getTimestamp("createDate"));
         return product;
     }
-
+    // LẤY RA SANR PHẨM THEO TÊN
     public List<Product> getListProductByName(String name) throws SQLException {
-        String sql = "SELECT * FROM products WHERE name LIKE ?";
+        String sql = "SELECT * FROM products WHERE name LIKE ? COLLATE utf8mb4_unicode_ci";
         List<Product> products = new ArrayList<>();
         try (PreparedStatement ptm = dbConnect.preparedStatement(sql)) {
             ptm.setString(1, "%" + name + "%");
@@ -204,6 +191,17 @@ public class ProductDao {
 
         }
         return products;
+    }
+    // UPDATE VIEW
+    public boolean updateViewProduct(int id) {
+        String sql = "UPDATE products SET view = view + 1 WHERE id = ?";
+        try (PreparedStatement stmt = dbConnect.preparedStatement(sql)) {
+            stmt.setInt(1, id);
+            int rowsUpdated = stmt.executeUpdate();
+            return rowsUpdated > 0; // Trả về true nếu cập nhật thành công
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }

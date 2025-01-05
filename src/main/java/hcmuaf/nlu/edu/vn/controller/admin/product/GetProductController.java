@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @WebServlet(name = "GetProductController", value = "/products-list")
 public class GetProductController extends HttpServlet {
@@ -23,20 +24,18 @@ public class GetProductController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         // Lấy tham số "all" từ request
-        String all = request.getParameter("all");
+        String showAll = request.getParameter("showAll");
         String search = request.getParameter("search");
         String name = request.getParameter("name");
         try {
-            List<Product> products = new ArrayList<>();
+            List<Product> products = productService.getAllProducts();
             if (search != null && name != null) {
                 // Tìm kiếm sản phẩm theo tên
                 products = productService.getListProductByName(name);
-            } else if ("true".equalsIgnoreCase(all)) {
-                // Lấy tất cả sản phẩm nếu all=true
-                products = productService.getAllProducts();
-            } else {
-                // Ngược lại, chỉ lấy top 10 sản phẩm
-                products = productService.getTopProducts(10);
+            }
+            if (showAll == null) {
+                // Hiển thị tối đa 10 mục
+                products = products.stream().limit(10).collect(Collectors.toList());
             }
             // Mở modal
             String action = request.getParameter("action");

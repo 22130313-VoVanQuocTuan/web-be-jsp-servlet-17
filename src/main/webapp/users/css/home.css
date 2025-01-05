@@ -115,8 +115,7 @@ p {
     justify-content: center;
     margin-left: 70px;
     margin-right: 20px;
-   
-
+    width: 540px;
 }
 
 #section-header2 .search-bar input {

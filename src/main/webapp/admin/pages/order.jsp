@@ -87,16 +87,6 @@
                 </a>
             </li>
 
-
-            <li>
-                <a href="accounts">
-                        <span class="icon">
-                            <ion-icon name="lock-closed-outline"></ion-icon>
-                        </span>
-                    <span class="title">Tài khoản</span>
-                </a>
-            </li>
-
             <li>
                 <a href="logout">
                         <span class="icon">
