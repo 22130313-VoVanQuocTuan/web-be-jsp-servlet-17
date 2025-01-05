@@ -112,8 +112,10 @@
             </div>
 
             <div class="user">
-                <a href="passwordManagement.html"> <ion-icon name="person"
-                                                             style="color: #000000; font-size: 25px;"></ion-icon></a>
+                <a href="passwordManagement.html">
+                    <ion-icon name="person"
+                              style="color: #000000; font-size: 25px;"></ion-icon>
+                </a>
 
             </div>
         </div>
@@ -127,16 +129,18 @@
                 </div>
                 <div class="update-order">
                     <p style="font-size: 20px; margin-bottom: 10px;">Cập nhật trạng thái hóa đơn</p>
-                    <input type="text" placeholder="Nhập ID hóa cần cập nhật"
-                           style="font-size: 15px; padding: 2px; border-radius: 5px;">
-                    <select title="choice" id="statusSelect"
-                            style="font-size: 15px; border-radius: 5px; padding: 2px;">
-                        <option value="active">Đang xử lý</option>
-                        <option value="inactive">Đã hoàn thành</option>
-                        <option value="pending">Đã hủy</option>
+                    <form action="update-status-order" method="post">
+                        <input type="text" name="id" placeholder="Nhập ID hóa cần cập nhật" required
+                               style="font-size: 15px; padding: 2px; border-radius: 5px;">
+                        <select title="choice" name="status" id="statusSelect" required
+                                style="font-size: 15px; border-radius: 5px; padding: 2px;">
+                            <option value="active">Đang xử lý</option>
+                            <option value="inactive">Đã hoàn thành</option>
+                            <option value="pending">Đã hủy</option>
 
-                    </select>
-                    <button onclick="updateUserStatus()">Cập nhật trạng thái</button>
+                        </select>
+                        <button type="submit" >Cập nhật trạng thái</button>
+                    </form>
                 </div>
                 <table>
                     <thead>
@@ -151,22 +155,23 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <c:forEach var="o" items="${orderList}">
-                    <tr>
-                        <td>${o.id}</td>
-                        <td>${o.user_id}</td>
-                        <td><fmt:formatDate value="${o.createdAt}" pattern="dd-MM-yyyy HH:mm:ss" /></td>
-                        <td><fmt:formatNumber value="${o.totalPrice}" type="number" /></td>
-                        <td>${o.paymentMethod}</td>
-                        <td>${o.paymentStatus}</td>
-                        <td class="v">
-                            <button class="view-detail-btn" data-id="${o.id}">Chi tiết</button>
-                            <button class="delete-btn" data-id="${o.id}">Xóa</button>
-                        </td>
-                        <c:if test="${not empty error}">
-                            <p style="color: red;">${error}</p> <!-- Hiển thị lỗi nếu có -->
-                        </c:if>
-                    </tr>
+                    <c:forEach var="order" items="${orderList}">
+                        <tr>
+                            <td>${order.id}</td>
+                            <td>${order.user_id}</td>
+                            <td><fmt:formatDate value="${order.createdAt}" pattern="dd-MM-yyyy HH:mm:ss"/></td>
+                            <td><fmt:formatNumber value="${order.totalPrice}" type="number"/></td>
+                            <td>${order.paymentMethod}</td>
+                            <td>${order.status}</td>
+                            <td class="v">
+                                <button class="view-detail-btn"><a href="GetDetailOrder?id=${order.id}"></a>Chi tiết
+                                </button>
+                                <button class="delete-btn" data-id="${order.id}">Xóa</button>
+                            </td>
+                            <c:if test="${not empty error}">
+                                <p style="color: red;">${error}</p> <!-- Hiển thị lỗi nếu có -->
+                            </c:if>
+                        </tr>
                     </c:forEach>
 
                     <!-- Thêm các dòng dữ liệu khác tại đây -->
@@ -194,26 +199,35 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <c:forEach var="order" items="orderDetail">
-                        <tr>
-                            <td> Xi măng BC</td>
-                            <td>20</td>
-                            <td>1.000.000 ₫</td>
-                            <td>0 ₫</td>
-                            <td>1.000.000 ₫</td>
-                        </tr>
+                        <c:forEach var="oi" items="${orIt}">
+                            <tr>
+                                <td>${oi.productName}</td>
+                                <td>${oi.quantity}</td>
+                                <td>${oi.price}</td>
+                                <td>${oi.discount}</td>
+                                <td>${oi.totalPrice}</td>
+                            </tr>
                         </c:forEach>
                         </tbody>
                     </table>
                     <div class="order-info">
-                        <p><strong>Mã đơn hàng:</strong> <span class="info-highlight">22</span></p>
-                        <p><strong>Mã khách hàng:</strong> <span class="info-highlight">12</span></p>
-                        <p><strong>Ngày đặt hàng:</strong> <span class="info-highlight">2024-12-12</span></p>
-                        <p><strong>Tổng tiền:</strong> <span class="info-highlight total-price">2.000.000 ₫</span></p>
-                        <p><strong>Trạng thái:</strong> <span class="badge success">Đã thanh toán</span></p>
-                        <p><strong>Địa chỉ:</strong> Bình Thạnh</p>
-                        <p><strong>Người nhận hàng:</strong> Tuấn</p>
-                        <p><strong>Ghi chú:</strong> Giao tới tận nhà cho tôi</p>
+                        <p><strong>Mã đơn hàng:</strong> <span class="info-highlight">${orIn.id}</span></p>
+                        <p><strong>Tổng tiền:</strong> <span class="info-highlight"><fmt:formatNumber
+                                value="${orIn.totalPrice}" type="number"/> ₫</span></p>
+                        <p><strong>Phí giao hàng:</strong> <span class="info-highlight"><fmt:formatNumber
+                                value="${orIn.shippingFee}" type="number"/> ₫</span></p>
+                        <p><strong>Số tiền giảm giá:</strong> <span class="info-highlight total-price"><fmt:formatNumber
+                                value="${orIn.discountAmount}" type="number"/> ₫</span></p>
+                        <p><strong>Phương thức thanh toán:</strong> <span
+                                class="badge success">${orIn.paymentMethod}</span></p>
+                        <p><strong>Trạng thái thanh toán:</strong> <span
+                                class="badge success">${orIn.paymentStatus}</span></p>
+                        <p><strong>Địa chỉ:</strong>${orIn.shippingAddress}</p>
+                        <p><strong>Mã sản phẩm:</strong>${orIn.productId}</p>
+                        <p><strong>Số lượng:</strong>${orIn.quantity}</p>
+                        <p><strong>Email:</strong>${orIn.email}</p>
+                        <p><strong>Người nhận hàng:</strong>${orIn.name}</p>
+                        <p><strong>Số điện thoại:</strong>${orIn.phone}</p>
                     </div>
                 </div>
             </div>
@@ -232,8 +246,19 @@
         </div>
     </div>
 </div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Kiểm tra nếu cần hiển thị modal
+        const showModal = "${showModal}" === "true";
+        if (showModal) {
+            const modal = document.getElementById('orderDetailModal');
+            modal.style.display = 'block';
+        }
+    });
+</script>
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-<script src="admin/js/order.js"></script>
-<script src="admin/js/index.js"></script>
+<script src="<c:url value="/admin/js/order.js"/>"></script>
+<script src="<c:url value="/admin/js/index.js"/>"></script>
 </body>
 </html>

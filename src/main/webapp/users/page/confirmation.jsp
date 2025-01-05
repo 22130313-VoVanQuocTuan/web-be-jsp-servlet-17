@@ -197,45 +197,50 @@
             <div class="form-group1">
                 <div class="info"> Thông tin nhận hàng</div>
                 <form action="update-info-shipping" method="post">
-                <div class="form-group">
-                    <input type="email" name="email" id="email" class="back email" placeholder="Email" required value="${shippingAddress.email}">
-                    <div id="email-error" class="error-message" style="color: red; display: none;">Vui lòng nhập
-                        email.
+                    <div class="form-group">
+                        <input type="email" name="email" id="email" class="back email" placeholder="Email" required
+                               value="${shippingAddress.email}">
+                        <div id="email-error" class="error-message" style="color: red; display: none;">Vui lòng nhập
+                            email.
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-group">
-                    <input type="text" name="name" id="name" class="back name" placeholder="Họ và tên" required value="${shippingAddress.name}">
-                    <div id="name-error" class="error-message" style="color: red; display: none;">Vui lòng nhập
-                        họ và tên.
+                    <div class="form-group">
+                        <input type="text" name="name" id="name" class="back name" placeholder="Họ và tên" required
+                               value="${shippingAddress.name}">
+                        <div id="name-error" class="error-message" style="color: red; display: none;">Vui lòng nhập
+                            họ và tên.
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-group">
-                    <input type="tel" name="phoneNumber" id="phone" class="back phone" placeholder="Số điện thoại" required value="${shippingAddress.phoneNumber}">
-                    <div id="phone-error" class="error-message" style="color: red; display: none;">Vui lòng nhập
-                        số điện thoại.
+                    <div class="form-group">
+                        <input type="tel" name="phoneNumber" id="phone" class="back phone" placeholder="Số điện thoại"
+                               required value="${shippingAddress.phoneNumber}">
+                        <div id="phone-error" class="error-message" style="color: red; display: none;">Vui lòng nhập
+                            số điện thoại.
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-group">
-                    <input type="text" name="address" id="address" class="back address" placeholder="Nhập địa chỉ (tùy chọn)"
-                           required value="${shippingAddress.address}">
-                    <div id="address-error" class="error-message" style="color: red; display: none;">Vui lòng
-                        nhập địa chỉ.
+                    <div class="form-group">
+                        <input type="text" name="address" id="address" class="back address"
+                               placeholder="Nhập địa chỉ (tùy chọn)"
+                               required value="${shippingAddress.address}">
+                        <div id="address-error" class="error-message" style="color: red; display: none;">Vui lòng
+                            nhập địa chỉ.
+                        </div>
                     </div>
-                </div>
 
 
-                <div class="form-group">
-                        <textarea style="font-family: Arial, Helvetica, sans-serif; width: 95%;" type="text" name="note"  id="note"
+                    <div class="form-group">
+                        <textarea style="font-family: Arial, Helvetica, sans-serif; width: 95%;" type="text" name="note"
+                                  id="note"
                                   class="note" placeholder="Ghi chú (tùy chọn)">${shippingAddress.note}</textarea>
-                </div>
+                    </div>
 
                     <c:if test="${not empty error}">
                         <div class="alert alert-danger">${error}</div>
                     </c:if>
-                <button class="save" title="bt">Cập nhật</button>
+                    <button class="save" title="bt">Cập nhật</button>
 
                 </form>
 
@@ -277,11 +282,11 @@
                     <th>Giá</th>
                 </tr>
                 <c:forEach var="c" items="${itemCart}">
-                <tr>
-                    <td>${c.name}</td>
-                    <td>${c.quantity}</td>
-                    <td><fmt:formatNumber value="${c.price}" type="number"/>đ</td>
-                </tr>
+                    <tr>
+                        <td>${c.name}</td>
+                        <td>${c.quantity}</td>
+                        <td><fmt:formatNumber value="${c.price}" type="number"/>đ</td>
+                    </tr>
                 </c:forEach>
 
             </table>
@@ -292,24 +297,24 @@
 
                 <div class="total p">Giảm giá: <fmt:formatNumber value="${sessionScope.totalDiscount}" type="number"/>₫
                 </div>
-                <div class="total p">Phí vận chuyển: <fmt:formatNumber value="${sessionScope.totalShippingFee}" type="number"/>₫
+                <div class="total p">Phí vận chuyển: <fmt:formatNumber value="${sessionScope.totalShippingFee}"
+                                                                       type="number"/>₫
                 </div>
                 <div class="totals">
-                    <div class="total p">Tổng cộng: <fmt:formatNumber value="${sessionScope.totalFinalPrice}" type="number" />₫
+                    <div class="total p">Tổng cộng: <fmt:formatNumber value="${sessionScope.totalFinalPrice}"
+                                                                      type="number"/>₫
                     </div>
                 </div>
-
-
-                <div class="sub">
-                    <div class="hrep p"><a href="cart-items" style="text-decoration: none;">
-                        < Quay về giỏ hàng </a>
+                <c:forEach var="c" items="${cartItem}">
+                    <div class="sub">
+                        <div class="hrep p"><a href="cart-items" style="text-decoration: none;">
+                            < Quay về giỏ hàng </a>
+                        </div>
+                        <a href="confirmOrder=?id${c.id}">
+                            <button class="submit-btn">Đặt hàng</button>
+                        </a>
                     </div>
-
-                    <button type="button" class="submit-btn">
-                        <a href="confirm-Order=?id${id}"></a>Đặt hàng</button>
-
-                </div>
-
+                </c:forEach>
             </div>
 
         </div>
@@ -322,26 +327,26 @@
 
     <!-- Form thanh toán COD -->
 
-    <div id="codForm">
+    <div id="codForm" class="modal">
 
-            <p class="title">Thanh toán khi nhận hàng (COD)</p>
+        <p class="title">Thanh toán khi nhận hàng (COD)</p>
 
-            <table border="1">
-                <tr>
+        <table border="1">
+            <tr>
 
-                    <th>Tên sản phẩm</th>
-                    <th>Số lượng</th>
-                    <th>Giá</th>
-                </tr>
-                <c:forEach var="cart" items="${cartItem}">
+                <th>Tên sản phẩm</th>
+                <th>Số lượng</th>
+                <th>Giá</th>
+            </tr>
+            <c:forEach var="cart" items="${cartItem}">
                 <tr>
                     <td>${cart.name}</td>
                     <td>${cart.quantity}</td>
-                    <td><fmt:formatNumber value="${cart.totalPrice}" type="number" /> đ </td>
+                    <td><fmt:formatNumber value="${cart.totalPrice}" type="number"/> đ</td>
                 </tr>
-                </c:forEach>
+            </c:forEach>
 
-            </table>
+        </table>
         <c:forEach var="cart" items="${cartItem}">
             <p>Số lượng: ${cart.quantity}</p>
             <p>Tổng giá: <fmt:formatNumber value="${cart.price}" type="number"/> ₫ </p>
@@ -356,11 +361,11 @@
             <p>Số điện thoại: ${info.phone}</p>
             <p>Ghi chú: ${info.note}</p>
         </c:forEach>
-            <div class="but">
-                <button onclick="confirmCOD()">Xác nhận đơn hàng</button>
-                <button onclick="closeForm()">Hủy</button>
+        <div class="but">
+            <button onclick="confirmCOD()">Xác nhận đơn hàng</button>
+            <button onclick="closeForm()">Hủy</button>
 
-            </div>
+        </div>
 
     </div>
 
@@ -374,9 +379,9 @@
 
             <table border="1">
                 <tr>
-                    <th>Tên sản phẩm </th>
-                    <th>Số lượng </th>
-                    <th> Giá </th>
+                    <th>Tên sản phẩm</th>
+                    <th>Số lượng</th>
+                    <th> Giá</th>
                 </tr>
 
                 <tr>
@@ -463,7 +468,7 @@
             // Kiểm tra nếu cần hiển thị modal
             const showModal = "${showModal}" === "true";
             if (showModal) {
-                const modal = document.getElementById('addAccount');
+                const modal = document.getElementById('codForm');
                 modal.style.display = 'block';
             }
         });

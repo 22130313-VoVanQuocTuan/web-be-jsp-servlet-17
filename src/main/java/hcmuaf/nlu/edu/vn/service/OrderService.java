@@ -51,7 +51,13 @@ public class OrderService {
         return addOrderDao.getPayment(id);
     }
 
+    //Xoá hoá đơn
     public boolean deleteOrder(int id) throws SQLException {
         return orderDao.deleteOrder(id);
+    }
+
+    //Cập nhật hoá đơn
+    public boolean updateOrderStatus(int id, String status) throws SQLException {
+        return  orderDao.updateOrderStatus(id, status);
     }
 }
