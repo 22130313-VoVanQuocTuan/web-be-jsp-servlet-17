@@ -18,7 +18,7 @@ public class AddOrderDao {
     }
 
     public AddressShipping getInfoAddressShipping (int id){
-        String sql = "SELECT name, email, phoneNumber, address, note FROM addressShipping WHERE userId = ?";
+        String sql = "SELECT name, email, phoneNumber, address, note FROM addressshipping WHERE userId = ?";
         try(PreparedStatement ptm = dbConnect.preparedStatement(sql)){
             ptm.setInt(1, id);
             ResultSet rs = ptm.executeQuery();

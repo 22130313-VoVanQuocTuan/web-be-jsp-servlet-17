@@ -5,7 +5,7 @@ function placeOrder() {
     var phone = document.getElementById('phone').value;
     var address = document.getElementById('address').value;
    
-    var paymentMethod = document.querySelector('input[name="payment"]:checked'); // Kiểm tra nếu đã chọn phương thức thanh toán
+
     
     // Ẩn tất cả thông báo lỗi trước khi kiểm tra
     hideErrorMessages();
@@ -39,17 +39,13 @@ function placeOrder() {
 
    
 
-    // Kiểm tra trường payment method
-    if (!paymentMethod) {
-        document.getElementById('error-message').style.display = 'block'; // Hiển thị thông báo lỗi chung cho phương thức thanh toán
-        isValid = false;
-    }
+
 
     if (isValid) {
         document.getElementById('error-message').style.display = 'none'; // Ẩn thông báo lỗi chung
 
         // Tiến hành xử lý đơn hàng (có thể là mở modal thanh toán hoặc gửi yêu cầu)
-        const paymentMethodValue = paymentMethod.value;
+
         const codForm = document.getElementById('codForm');
         const vnpayForm = document.getElementById('vnpayForm');
         const overlay = document.getElementById('overlay');
@@ -62,16 +58,9 @@ function placeOrder() {
 
         // Hiển thị overlay và khóa cuộn trang
         overlay.style.display = 'block';
-        
 
-        // Hiển thị form thanh toán tương ứng
-        if (paymentMethodValue === 'cod') {
-            codForm.classList.add('show');
-            vnpayForm.classList.remove('show');
-        } else if (paymentMethodValue === 'vnpay') {
-            vnpayForm.classList.add('show');
-            codForm.classList.remove('show');
-        }
+
+
     }
 }
 
@@ -101,16 +90,22 @@ function hideErrorMessages() {
     document.getElementById('error-message').style.display = 'none'; // Ẩn thông báo lỗi chung
 }
 
-// Hàm để đóng form và ẩn overlay
-function closeForm() {
-    const overlay = document.getElementById('overlay');
-    const codForm = document.getElementById('codForm');
-    const vnpayForm = document.getElementById('vnpayForm');
+// Thêm sự kiện cho nút Đặt hàng
+function submitOrder() {
+    placeOrder();
+    // Lấy giá trị của phương thức thanh toán đã chọn
+    var paymentMethod = document.querySelector('input[name="payment"]:checked');
 
-    // Ẩn overlay và form thanh toán
-    overlay.style.display = 'none';
-    document.body.classList.remove('overlay-active'); // Mở cuộn trang lại
+    if (!paymentMethod) {
+        document.getElementById('error-message').style.display = 'block';
+        return;
+    }
 
-    codForm.classList.remove('show');
-    vnpayForm.classList.remove('show');
+    paymentMethod = paymentMethod.value;
+
+    // Tạo URL với tham số phương thức thanh toán
+    var url = "confirmation?paymentMethod=" + paymentMethod;
+
+    // Chuyển hướng người dùng đến URL với tham số
+    window.location.href = url;
 }

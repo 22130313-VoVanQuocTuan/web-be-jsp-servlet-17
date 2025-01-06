@@ -28,24 +28,36 @@ public class AddOrderController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        Carts carts = (Carts) session.getAttribute("cart");
-        Users user = (Users) session.getAttribute("user");
-        List<CartItems> cartItems = cartService.getCartFromSession(session).listItems();
-
         try {
+            String pay = request.getParameter("paymentMethod");
+            if (pay.equals("cod")) {
+                request.setAttribute("showModalCOD", true); // Thêm thuộc tính hiển thị modal
+            }
+            if (pay.equals("vnpay")) {
+                request.setAttribute("showModalVNPAY", true); // Thêm thuộc tính hiển thị modal
+            }
 
-           request.setAttribute("cartItem", cartItems);
-           request.setAttribute("payment", orderService.getPayment(user.getId()));
-           request.setAttribute("infoAddress", orderService.getInfoAddressShipping(user.getId()));
+            HttpSession session = request.getSession();
+            Carts carts = (Carts) session.getAttribute("cart");
+            Users user = (Users) session.getAttribute("user");
+            List<CartItems> cartItems = carts.listItems();
+              try {
+                request.setAttribute("cart", carts);
+                request.setAttribute("cartItem", cartItems);
+                request.setAttribute("infoAddress", orderService.getInfoAddressShipping(user.getId()));
 
-        } catch (RuntimeException | SQLException e) {
+                  // Chuyển tiếp đến ConfirmationController
+                  request.getRequestDispatcher("/confirmation?show=true").forward(request, response);
+            } catch (RuntimeException | SQLException e) {
+                throw new RuntimeException(e);
+            }
+
+
+        } catch (RuntimeException e) {
             throw new RuntimeException(e);
         }
-        request.setAttribute("showModal", true); // Thêm thuộc tính hiển thị modal
-        request.getRequestDispatcher("user/page/confirmation.jsp").forward(request, response);
-    }
 
+    }
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     }

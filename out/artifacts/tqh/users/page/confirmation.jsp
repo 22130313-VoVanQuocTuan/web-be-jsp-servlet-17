@@ -190,52 +190,55 @@
 </div>
 
 <div id="section-content-1">
-
     <div class="index">
-
         <div class="box1">
             <div class="form-group1">
                 <div class="info"> Thông tin nhận hàng</div>
                 <form action="update-info-shipping" method="post">
-                <div class="form-group">
-                    <input type="email" name="email" id="email" class="back email" placeholder="Email" required value="${shippingAddress.email}">
-                    <div id="email-error" class="error-message" style="color: red; display: none;">Vui lòng nhập
-                        email.
+                    <div class="form-group">
+                        <input type="email" name="email" id="email" class="back email" placeholder="Email" required
+                               value="${shipping_address.email}">
+                        <div id="email-error" class="error-message" style="color: red; display: none;">Vui lòng nhập
+                            email.
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-group">
-                    <input type="text" name="name" id="name" class="back name" placeholder="Họ và tên" required value="${shippingAddress.name}">
-                    <div id="name-error" class="error-message" style="color: red; display: none;">Vui lòng nhập
-                        họ và tên.
+                    <div class="form-group">
+                        <input type="text" name="name" id="name" class="back name" placeholder="Họ và tên" required
+                               value="${shipping_address.name}">
+                        <div id="name-error" class="error-message" style="color: red; display: none;">Vui lòng nhập
+                            họ và tên.
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-group">
-                    <input type="tel" name="phoneNumber" id="phone" class="back phone" placeholder="Số điện thoại" required value="${shippingAddress.phoneNumber}">
-                    <div id="phone-error" class="error-message" style="color: red; display: none;">Vui lòng nhập
-                        số điện thoại.
+                    <div class="form-group">
+                        <input type="tel" name="phoneNumber" id="phone" class="back phone" placeholder="Số điện thoại"
+                               required value="${shipping_address.phoneNumber}">
+                        <div id="phone-error" class="error-message" style="color: red; display: none;">Vui lòng nhập
+                            số điện thoại.
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-group">
-                    <input type="text" name="address" id="address" class="back address" placeholder="Nhập địa chỉ (tùy chọn)"
-                           required value="${shippingAddress.address}">
-                    <div id="address-error" class="error-message" style="color: red; display: none;">Vui lòng
-                        nhập địa chỉ.
+                    <div class="form-group">
+                        <input type="text" name="address" id="address" class="back address"
+                               placeholder="Nhập địa chỉ (tùy chọn)"
+                               required value="${shipping_address.address}">
+                        <div id="address-error" class="error-message" style="color: red; display: none;">Vui lòng
+                            nhập địa chỉ.
+                        </div>
                     </div>
-                </div>
 
 
-                <div class="form-group">
-                        <textarea style="font-family: Arial, Helvetica, sans-serif; width: 95%;" type="text" name="note"  id="note"
-                                  class="note" placeholder="Ghi chú (tùy chọn)">${shippingAddress.note}</textarea>
-                </div>
+                    <div class="form-group">
+                        <textarea style="font-family: Arial, Helvetica, sans-serif; width: 95%;" type="text" name="note"
+                                  id="note"
+                                  class="note" placeholder="Ghi chú (tùy chọn)">${shipping_address.note}</textarea>
+                    </div>
 
                     <c:if test="${not empty error}">
                         <div class="alert alert-danger">${error}</div>
                     </c:if>
-                <button class="save" title="bt">Cập nhật</button>
+                    <button class="save" title="bt">Cập nhật</button>
 
                 </form>
 
@@ -259,228 +262,218 @@
                         đầy đủ thông tin để thanh toán.
                     </div>
                 </div>
-
-
             </div>
-
         </div>
 
         <div class="box2">
-
             <div class="order">Đơn hàng</div>
-
             <table border="1">
                 <tr>
-
                     <th>Tên sản phẩm</th>
                     <th>Số lượng</th>
                     <th>Giá</th>
                 </tr>
                 <c:forEach var="c" items="${itemCart}">
-                <tr>
-                    <td>${c.name}</td>
-                    <td>${c.quantity}</td>
-                    <td><fmt:formatNumber value="${c.price}" type="number"/>đ</td>
-                </tr>
+                    <tr>
+                        <td>${c.name}</td>
+                        <td>${c.quantity}</td>
+                        <td><fmt:formatNumber value="${c.price}" type="number"/>đ</td>
+                    </tr>
                 </c:forEach>
-
             </table>
             <div class="totals">
                 <div class="total p"></div>
             </div>
             <div class="totals">
-
                 <div class="total p">Giảm giá: <fmt:formatNumber value="${sessionScope.totalDiscount}" type="number"/>₫
                 </div>
-                <div class="total p">Phí vận chuyển: <fmt:formatNumber value="${sessionScope.totalShippingFee}" type="number"/>₫
+                <div class="total p">Phí vận chuyển: <fmt:formatNumber value="${sessionScope.totalShippingFee}"
+                                                                       type="number"/>₫
                 </div>
                 <div class="totals">
-                    <div class="total p">Tổng cộng: <fmt:formatNumber value="${sessionScope.totalFinalPrice}" type="number" />₫
+                    <div class="total p">Tổng cộng: <fmt:formatNumber value="${sessionScope.totalFinalPrice}"
+                                                                      type="number"/>₫
                     </div>
                 </div>
-
-
                 <div class="sub">
                     <div class="hrep p"><a href="cart-items" style="text-decoration: none;">
                         < Quay về giỏ hàng </a>
                     </div>
-
-                    <button type="button" class="submit-btn">
-                        <a href="confirm-Order=?id${id}"></a>Đặt hàng</button>
-
+                    <a href="#" id="submit-btn">
+                        <button class="submit-btn" onclick="submitOrder()">Đặt hàng</button>
+                    </a>
                 </div>
-
             </div>
-
         </div>
 
     </div>
 
-    <!-- Modal / Form thanh toán COD -->
-    <!-- Overlay tối màn hình -->
-    <div id="overlay" class="overlay" onclick="closeForm()"></div>
+</div>
 
-    <!-- Form thanh toán COD -->
 
-    <div id="codForm">
+<div id="section-footer">
+    <div class="container">
+        <div class="contact-info">
+            <h3>Vật Liệu Xây Dựng TQH </h3>
+            <p>Địa chỉ: Trường ĐH Nông Lâm TP. HCM</p>
+            <p>Điện thoại: 0314 597 812</p>
+            <p>Hotline: 0905 090 252</p>
+            <p>Email: 22130098@st.hcmuaf.edu.vn</p>
+        </div>
+        <div class="links">
+            <h3>Liên kết</h3>
+            <ul>
+                <li><a href="turn-page?action=introduce">Giới thiệu</a></li>
+                <li><a href="turn-page?action=termAndService">Điều khoản và dịch vụ</a></li>
+            </ul>
+        </div>
+        <div class="social-media">
+            <h3>Mạng xã hội</h3>
+            <ul>
+                <li><a href="https://www.facebook.com/profile.php?id=100044411504061"><i
+                        class="fa-brands fa-facebook" style="color: #d1d1d1;"></i></a></li>
+                <li><a href="https://www.instagram.com/paq.2012/"><i class="fa-brands fa-instagram-square"
+                                                                     style="color: #d1d1d1;"></i></a></li>
+                <li><a href="https://x.com/?lang=vi"><i class="fa-brands fa-twitter"
+                                                        style="color: #d1d1d1;"></i></a></li>
+            </ul>
+        </div>
+        <div class="copyright">
+            <p>© 2024: Tất cả quyền được bảo lưu.</p>
+        </div>
+    </div>
+    <div>
+        <li style="list-style-type: none;"><a href="https://zaloweb.me/" target="_blank" rel="noopener"><i
+                class="fa-solid fa-phone call" style="color: rgb(62, 159, 62);"></i></a></li>
+    </div>
+    <div>
+        <li style="list-style-type: none;"><a href="https://www.instagram.com/paq.2012/" target="_blank"
+                                              rel="noopener"><i
+                class="fab fa-instagram icon" style="color: #f12020;"></i></a></li>
+    </div>
+    <div id="fb">
+        <li style="list-style-type: none;"><a href="https://www.facebook.com/profile.php?id=100044411504061"
+                                              target="_blank" rel="noopener"><i
+                class="fa-brands fa-facebook-square icon"
+                style="color: #0911ff;"></i></a></li>
+    </div>
+    <button id="backToTop" title="Quay về đầu trang">⬆</button>
 
-            <p class="title">Thanh toán khi nhận hàng (COD)</p>
+</div>
+<!-- Overlay tối màn hình -->
+<div id="overlay" class="overlay" onclick="closeForm()"></div>
 
+<%--    <!-- Form thanh toán VNPay -->--%>
+
+
+<c:if test="${showModalVNPAY}">
+    <div id="vnpayForm">
+
+        <p class="title">Thanh toán với VNPay <img
+                src="https://vinadesign.vn/uploads/images/2023/05/vnpay-logo-vinadesign-25-12-57-55.jpg" alt="">
+        </p>
+        <form action="payVNPAY" method="post">
             <table border="1">
                 <tr>
+                    <th>Tên sản phẩm</th>
+                    <th>Số lượng</th>
+                    <th> Giá</th>
+                </tr>
 
+                <c:forEach var="cartitem" items="${itemCart}">
+                    <tr>
+                        <td>${cartitem.name}</td>
+                        <td>${cartitem.quantity}</td>
+                        <td><fmt:formatNumber value="${cartitem.totalPrice}" type="number"/> đ</td>
+                    </tr>
+                </c:forEach>
+
+            </table>
+            <p>Số lượng: ${sessionScope.cartItemCount}</p>
+            <p>Tổng giá đã giảm: <fmt:formatNumber value="${sessionScope.totalPrice}" type="number"/> ₫ </p>
+            <p>Phí vận chuyển: <fmt:formatNumber value="${sessionScope.totalShippingFee}" type="number"/> ₫</p>
+            <p>Tổng giá: <fmt:formatNumber value="${sessionScope.totalFinalPrice}" type="number"/>₫</p>
+            <p>Địa chỉ giao: ${shipping_address.address}</p>
+            <p>Email: ${shipping_address.email}</p>
+            <p>Tên người nhận: ${shipping_address.name}</p>
+            <p>Số điện thoại: ${shipping_address.phoneNumber}</p>
+            <p>Ghi chú: ${shipping_address.note}</p>
+            <div class="but">
+                <button type="submit">Xác nhận đơn hàng</button>
+                <button type="button"><a href="confirmation" style="text-decoration: none; color: #FFFFFF">Hủy</a></button>
+            </div>
+        </form>
+    </div>
+</c:if>
+
+
+    <!-- Form thanh toán COD -->
+<c:if test="${showModalCOD}">
+    <div id="codForm" class="modal">
+
+        <p class="title">Thanh toán khi nhận hàng (COD)</p>
+        <form action="payCOD" method="post">
+            <table border="1">
+                <tr>
                     <th>Tên sản phẩm</th>
                     <th>Số lượng</th>
                     <th>Giá</th>
                 </tr>
-                <c:forEach var="cart" items="${cartItem}">
-                <tr>
-                    <td>${cart.name}</td>
-                    <td>${cart.quantity}</td>
-                    <td><fmt:formatNumber value="${cart.totalPrice}" type="number" /> đ </td>
-                </tr>
+                <c:forEach var="cartitem" items="${itemCart}">
+                    <tr>
+                        <td>${cartitem.name}</td>
+                        <td>${cartitem.quantity}</td>
+                        <td><fmt:formatNumber value="${cartitem.totalPrice}" type="number"/> đ</td>
+                    </tr>
                 </c:forEach>
 
             </table>
-        <c:forEach var="cart" items="${cartItem}">
-            <p>Số lượng: ${cart.quantity}</p>
-            <p>Tổng giá: <fmt:formatNumber value="${cart.price}" type="number"/> ₫ </p>
-            <p>Phí vân chuyển: <fmt:formatNumber value="${cart.shippingFee}" type="number"/> ₫</p>
-            <p>Giá gảm: <fmt:formatNumber value="${cart.discountAmount}" type="numbet"/>đ</p>
-            <p>Tổng giá: <fmt:formatNumber value="${cart.totalPricce}" type="numbet"/>₫</p>
-        </c:forEach>
-        <c:forEach var="info" items="${infoAddress}">
-            <p>Địa chỉ giao: ${info.address}</p>
-            <p>Email: ${info.email}</p>
-            <p>Tên người nhận: ${info.name}</p>
-            <p>Số điện thoại: ${info.phone}</p>
-            <p>Ghi chú: ${info.note}</p>
-        </c:forEach>
+            <p>Số lượng: ${sessionScope.cartItemCount}</p>
+            <p>Tổng giá đã giảm: <fmt:formatNumber value="${sessionScope.totalPrice}" type="number"/> ₫ </p>
+            <p>Phí vận chuyển: <fmt:formatNumber value="${sessionScope.totalShippingFee}" type="number"/> ₫</p>
+            <p>Tổng giá: <fmt:formatNumber value="${sessionScope.totalFinalPrice}" type="number"/>₫</p>
+            <p>Địa chỉ giao: ${shipping_address.address}</p>
+            <p>Email: ${shipping_address.email}</p>
+            <p>Tên người nhận: ${shipping_address.name}</p>
+            <p>Số điện thoại: ${shipping_address.phoneNumber}</p>
+            <p>Ghi chú: ${shipping_address.note}</p>
             <div class="but">
-                <button onclick="confirmCOD()">Xác nhận đơn hàng</button>
-                <button onclick="closeForm()">Hủy</button>
-
+                <button type="submit">Xác nhận đơn hàng</button>
+                <button type="button"><a href="confirmation" style="text-decoration: none; color: #FFFFFF">Hủy</a></button>
             </div>
-
+        </form>
     </div>
+</c:if>
 
 
-    <!-- Form thanh toán VNPay -->
-    <div id="vnpayForm">
-        <c:forEach var="cart" items="${cartItem}">
-            <p class="title">Thanh toán với VNPay <img
-                    src="https://vinadesign.vn/uploads/images/2023/05/vnpay-logo-vinadesign-25-12-57-55.jpg" alt=""></p>
 
 
-            <table border="1">
-                <tr>
-                    <th>Tên sản phẩm </th>
-                    <th>Số lượng </th>
-                    <th> Giá </th>
-                </tr>
+<script src="<c:url value="/users/js/comfirmation.js"/>"></script>
+<script src="<c:url value="/users/js/login-signup.js"/>"></script>
+<script src="<c:url value="/users/js/scripts.js"/>" defer></script>
+<!-- JavaScript -->
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Kiểm tra nếu cần hiển thị modal
+        const showModalCOD = "${showModalCOD}" === "true";
+        const showModalVNPAY = "${showModalVNPAY}" === "true";
+        const overlay = document.getElementById("overlay");
 
-                <tr>
-                    <td>${cart.name}</td>
-                    <td>${cart.quantity}</td>
-                    <td><fmt:formatNumber value="${cart.totalPrice}" type="number"/>đ</td>
-                </tr>
-
-            </table>
-            <p>Số lượng: ${cart.quantity}</p>
-            <p>Tổng giá: <fmt:formatNumber value="${cart.price}" type="number"/>₫</p>
-            <p>Phí vân chuyển: <fmt:formatNumber value="${cart.shippingFee}" type="number"/>₫</p>
-            <p>Giá gảm: <fmt:formatNumber value="${cart.discountAmount}" type="numbet"/>đ</p>
-            <p>Tổng giá: <fmt:formatNumber value="${cart.totalPricce}" type="numbet"/>₫</p>
-            <p>Địa chỉ giao: ${infoAddress.address}</p>
-            <p>Email: ${infoAddress.email}</p>
-            <p>Tên người nhận: ${infoAddress.name}</p>
-            <p>Số điện thoại: ${infoAddress.phone}</p>
-            <p>Ghi chú: ${infoAddress.note}</p>
-            <div class="but">
-                <button onclick="confirmVNPAY()">Xác nhận đơn hàng</button>
-                <button onclick="closeForm()">Hủy</button>
-
-            </div>
-        </c:forEach>
-    </div>
-
-
-    <div id="section-footer">
-        <div class="container">
-            <div class="contact-info">
-                <h3>Vật Liệu Xây Dựng TQH </h3>
-                <p>Địa chỉ: Trường ĐH Nông Lâm TP. HCM</p>
-                <p>Điện thoại: 0314 597 812</p>
-                <p>Hotline: 0905 090 252</p>
-                <p>Email: 22130098@st.hcmuaf.edu.vn</p>
-            </div>
-            <div class="links">
-                <h3>Liên kết</h3>
-                <ul>
-                    <li><a href="turn-page?action=introduce">Giới thiệu</a></li>
-                    <li><a href="turn-page?action=termAndService">Điều khoản và dịch vụ</a></li>
-                </ul>
-            </div>
-            <div class="social-media">
-                <h3>Mạng xã hội</h3>
-                <ul>
-                    <li><a href="https://www.facebook.com/profile.php?id=100044411504061"><i
-                            class="fa-brands fa-facebook" style="color: #d1d1d1;"></i></a></li>
-                    <li><a href="https://www.instagram.com/paq.2012/"><i class="fa-brands fa-instagram-square"
-                                                                         style="color: #d1d1d1;"></i></a></li>
-                    <li><a href="https://x.com/?lang=vi"><i class="fa-brands fa-twitter"
-                                                            style="color: #d1d1d1;"></i></a></li>
-                </ul>
-            </div>
-            <div class="copyright">
-                <p>© 2024: Tất cả quyền được bảo lưu.</p>
-            </div>
-        </div>
-        <div>
-            <li style="list-style-type: none;"><a href="https://zaloweb.me/" target="_blank" rel="noopener"><i
-                    class="fa-solid fa-phone call" style="color: rgb(62, 159, 62);"></i></a></li>
-        </div>
-        <div>
-            <li style="list-style-type: none;"><a href="https://www.instagram.com/paq.2012/" target="_blank"
-                                                  rel="noopener"><i
-                    class="fab fa-instagram icon" style="color: #f12020;"></i></a></li>
-        </div>
-        <div id="fb">
-            <li style="list-style-type: none;"><a href="https://www.facebook.com/profile.php?id=100044411504061"
-                                                  target="_blank" rel="noopener"><i
-                    class="fa-brands fa-facebook-square icon"
-                    style="color: #0911ff;"></i></a></li>
-        </div>
-        <button id="backToTop" title="Quay về đầu trang">⬆</button>
-
-    </div>
-    <script src="<c:url value="/users/js/comfirmation.js"/>"></script>
-    <script src="<c:url value="/users/js/login-signup.js"/>"></script>
-    <script src="<c:url value="/users/js/scripts.js"/>" defer></script>
-    <!-- JavaScript -->
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            // Kiểm tra nếu cần hiển thị modal
-            const showModal = "${showModal}" === "true";
-            if (showModal) {
-                const modal = document.getElementById('addAccount');
-                modal.style.display = 'block';
-            }
-        });
-    </script>
-
-    <script>
-        function confirmCOD() {
-            window.location.href = "check-pay.html";
+        if (showModalCOD) {
+            const modal = document.getElementById('codForm');
+            modal.style.display = 'block';
+            overlay.style.display = 'block';
         }
-
-        function confirmVNPAY() {
-
-            window.location.href = "https://sandbox.vnpayment.vn/paymentv2/Transaction/PaymentMethod.html?token=164ebfb0d541460497a3daa60315b2b4";
+        if (showModalVNPAY) {
+            const modal = document.getElementById('vnpayForm');
+            modal.style.display = 'block';
+            overlay.style.display = 'block';
         }
+    });
+</script>
 
-    </script>
-</div>
+
+
 </body>
 
 </html>
