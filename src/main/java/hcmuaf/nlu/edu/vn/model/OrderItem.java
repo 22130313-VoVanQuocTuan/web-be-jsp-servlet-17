@@ -1,5 +1,6 @@
 package hcmuaf.nlu.edu.vn.model;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 public class OrderItem {
@@ -34,7 +35,15 @@ public class OrderItem {
         this.discount = discount;
         this.totalPrice = totalPrice;
     }
-
+    // Constructor
+    public OrderItem(int orderId, int productId, int quantity, double price, double totalPrice, double discount) {
+        this.orderId = orderId;
+        this.productId = productId;
+        this.quantity = quantity;
+        this.price = price;
+        this.totalPrice = totalPrice;
+        this.discount = discount;
+    }
     public String getProductName() {
         return productName;
     }

@@ -158,16 +158,13 @@
     <div id="section-content-1">
 
         <div class="confirmation-container">
-            <div class="icon-check"><i class="fa-regular fa-circle-check" style="color: #22d73a;"></i></div>
-            <h2><i>Cảm ơn bạn đã đặt hàng!</i></h2>
-            <p>Đơn hàng của bạn đã được xác nhận và đang được xử lý.</p>
-
-            <div class="order-details">
-                <p><strong>Mã đơn hàng:</strong> #123456</p>
-                <p><strong>Phương thức thanh toán:</strong> VNPay</p>
-                <p><strong>Địa chỉ giao hàng:</strong> 98A,Đặng Thùy Trâm,p13,Bình Thạnh</p>
-                <p><strong>Email:</strong> v0@gmail.com</p>
+            <div class="icon-check">
+                <i class="${message == 'Thanh toán thất bại' ? 'fa-regular fa-circle-xmark' : 'fa-regular fa-circle-check'}"
+                   style="color: ${message == 'Thanh toán thất bại' ? '#f44336' : '#22d73a'};"></i>
             </div>
+
+            <h2><i>${message}</i></h2>
+            <p>${message == 'Thanh toán thất bại' ? 'Đơn hàng của bạn đã bị thất bại. Vui lòng thử lại.' : 'Đơn hàng của bạn đã được xác nhận và đang được xử lý.'}</p>
 
             <div class="next-steps">
                 <p>Bạn sẽ nhận được email xác nhận với thông tin chi tiết về đơn hàng của mình.</p>
@@ -175,8 +172,9 @@
                 <p>Email: votuan@gmail.com | Số điện thoại: 0909 999 999</p>
             </div>
 
-            <button class="button-check" onclick="goToProduct()">Tiếp tục mua hàng</button>
-            <button class="button-check" onclick="goToHome()">Quay về Trang Chủ</button>
+            <button class="button-check"><a href="product" style="text-decoration: none; color: #fff;">Tiếp tục mua hàng</a></button>
+
+            <button class="button-check"><a href="home-page" style="text-decoration: none; color: #fff;">Quay về Trang Chủ</a></button>
         </div>
 
     </div>

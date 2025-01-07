@@ -1,5 +1,6 @@
 package hcmuaf.nlu.edu.vn.model;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 public class Orders {
@@ -31,7 +32,9 @@ public class Orders {
         this.paymentMethod = paymentMethod;
         this.paymentStatus = paymentStatus;
         this.status = status;
+
     }
+
 
     public Orders(int id, double totalPrice, double shippingFee, double discountAmount, String paymentMethod, String paymentStatus, String shippingAddress, int quantity, String email, String name, String phoneNumber, String note) {
         this.id = id;
@@ -47,6 +50,19 @@ public class Orders {
         this.phoneNumber = phoneNumber;
         this.note = note;
     }
+    public Orders(int userid, double totalPrice, double shippingFee, double discountAmount, String shippingAddress, String paymentMethod, String paymentStatus, String status) {
+
+        this.userid = userid;
+        this.totalPrice = totalPrice;
+        this.paymentMethod = paymentMethod;
+        this.paymentStatus = paymentStatus;
+        this.status = status;
+        this.shippingFee = shippingFee;
+        this.discountAmount = discountAmount;
+        this.shippingAddress = shippingAddress;
+
+    }
+
 
     public int getId() {
         return id;
@@ -56,12 +72,12 @@ public class Orders {
         this.id = id;
     }
 
-    public int getUser_id() {
+    public int getUserId() {
         return userid;
     }
 
-    public void setUser_id(int user_id) {
-        this.userid = user_id;
+    public void setUserIdd(int userId) {
+        this.userid = userId;
     }
 
     public double getTotalPrice() {
@@ -183,24 +199,8 @@ public class Orders {
     public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
     }
-
-    @Override
-    public String toString() {
-        return "Orders{" +
-                "id=" + id +
-                ", user_id=" + userid +
-                ", totalPrice=" + totalPrice +
-                ", shippingFee=" + shippingFee +
-                ", discountAmount=" + discountAmount +
-                ", status='" + status + '\'' +
-                ", paymentMethod='" + paymentMethod + '\'' +
-                ", paymentStatus='" + paymentStatus + '\'' +
-                ", shippingAddress='" + shippingAddress + '\'' +
-                ", createdAt=" + createdAt +
-                ", updatedAt=" + updatedAt +
-                '}';
-    }
 }
+
 
 
 
