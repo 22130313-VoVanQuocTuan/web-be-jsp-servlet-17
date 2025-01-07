@@ -362,13 +362,9 @@
 </div>
 <!-- Overlay tối màn hình -->
 <div id="overlay" class="overlay" onclick="closeForm()"></div>
-
 <%--    <!-- Form thanh toán VNPay -->--%>
-
-
 <c:if test="${showModalVNPAY}">
     <div id="vnpayForm">
-
         <p class="title">Thanh toán với VNPay <img
                 src="https://vinadesign.vn/uploads/images/2023/05/vnpay-logo-vinadesign-25-12-57-55.jpg" alt="">
         </p>
@@ -400,19 +396,18 @@
             <p>Ghi chú: ${shipping_address.note}</p>
             <div class="but">
                 <button type="submit">Xác nhận đơn hàng</button>
-                <button type="button"><a href="confirmation" style="text-decoration: none; color: #FFFFFF">Hủy</a></button>
+                <button type="button"><a href="confirmation" style="text-decoration: none; color: #FFFFFF">Hủy</a>
+                </button>
             </div>
         </form>
     </div>
 </c:if>
-
-
-    <!-- Form thanh toán COD -->
+<!-- Form thanh toán COD -->
 <c:if test="${showModalCOD}">
     <div id="codForm" class="modal">
-
         <p class="title">Thanh toán khi nhận hàng (COD)</p>
         <form action="payCOD" method="post">
+            <input type="hidden" name="payment_method" value="COD">
             <table border="1">
                 <tr>
                     <th>Tên sản phẩm</th>
@@ -429,24 +424,25 @@
 
             </table>
             <p>Số lượng: ${sessionScope.cartItemCount}</p>
-            <p>Tổng giá đã giảm: <fmt:formatNumber value="${sessionScope.totalPrice}" type="number"/> ₫ </p>
+            <p>Giá giảm : ${sessionScope.totalDiscount}</p>
+            <p>Tổng giá : <fmt:formatNumber value="${sessionScope.totalPrice}" type="number"/> ₫ </p>
             <p>Phí vận chuyển: <fmt:formatNumber value="${sessionScope.totalShippingFee}" type="number"/> ₫</p>
-            <p>Tổng giá: <fmt:formatNumber value="${sessionScope.totalFinalPrice}" type="number"/>₫</p>
+            <p>Tổng giá đã giảm <fmt:formatNumber value="${sessionScope.totalFinalPrice}" type="number"/>₫</p>
             <p>Địa chỉ giao: ${shipping_address.address}</p>
             <p>Email: ${shipping_address.email}</p>
             <p>Tên người nhận: ${shipping_address.name}</p>
             <p>Số điện thoại: ${shipping_address.phoneNumber}</p>
             <p>Ghi chú: ${shipping_address.note}</p>
             <div class="but">
+                <!-- Thêm các input hidden để gửi thông tin từ session -->
+                <input type="hidden" name="shipping_address" value="${shipping_address.address}">
                 <button type="submit">Xác nhận đơn hàng</button>
-                <button type="button"><a href="confirmation" style="text-decoration: none; color: #FFFFFF">Hủy</a></button>
+                <button type="button"><a href="confirmation" style="text-decoration: none; color: #FFFFFF">Hủy</a>
+                </button>
             </div>
         </form>
     </div>
 </c:if>
-
-
-
 
 <script src="<c:url value="/users/js/comfirmation.js"/>"></script>
 <script src="<c:url value="/users/js/login-signup.js"/>"></script>
@@ -471,7 +467,6 @@
         }
     });
 </script>
-
 
 
 </body>

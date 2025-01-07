@@ -2,6 +2,7 @@ package hcmuaf.nlu.edu.vn.service;
 
 import hcmuaf.nlu.edu.vn.dao.Orders.OrderDao;
 import hcmuaf.nlu.edu.vn.dao.Orders.AddOrderDao;
+import hcmuaf.nlu.edu.vn.dao.Orders.PaymentDao;
 import hcmuaf.nlu.edu.vn.model.*;
 
 import java.sql.SQLException;
@@ -10,11 +11,13 @@ import java.util.List;
 public class OrderService {
     public OrderDao orderDao;
     public AddOrderDao addOrderDao;
+    public PaymentDao paymentDao;
 
 
     public OrderService() {
         this.orderDao = new OrderDao();
         this.addOrderDao = new AddOrderDao();
+        this.paymentDao = new PaymentDao();
     }
 
     //Lấy ra tất cả danh sách hoá đơn
@@ -59,5 +62,13 @@ public class OrderService {
     //Cập nhật hoá đơn
     public boolean updateOrderStatus(int id, String status) throws SQLException {
         return  orderDao.updateOrderStatus(id, status);
+    }
+    // Tạo order
+    public boolean createOrder(Orders order) {
+        return paymentDao.createOrder(order);
+    }
+    // thêm ortheritem
+    public boolean addOrderItem(OrderItem orderItem) {
+        return paymentDao.addOrderItem(orderItem);
     }
 }
