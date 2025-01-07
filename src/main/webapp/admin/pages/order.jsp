@@ -21,7 +21,7 @@
             <li>
                 <a href="index.html">
                         <span class="icon">
-                            <img src="/src/Users/img/logo.png" alt="">
+                            <img src="<c:url value="/users/img/logo.png"/>" alt="">
                         </span>
                     <span class="title">Bán Vật Liệu Xây Dựng </span>
                 </a>
@@ -105,10 +105,13 @@
             </div>
 
             <div class="search">
-                <label>
-                    <input type="text" placeholder="Tìm kiếm ở đây">
-                    <ion-icon name="search-outline"></ion-icon>
-                </label>
+                <form action="order-list" method="get">
+                    <label>
+                        <input type="text" name="id" placeholder="Tìm kiếm ở đây">
+                        <ion-icon name="search-outline"><button type="submit" style="border: none; background: none; cursor: pointer;"></button></ion-icon>
+                    </label>
+                    <input type="hidden" name="search" value="id">
+                </form>
             </div>
 
             <div class="user">
@@ -125,20 +128,29 @@
             <div class="recentOrders">
                 <div class="cardHeader">
                     <h2>Danh sách hóa đơn</h2>
-                    <a href="#" class="btn">Xem Tất Cả</a>
+                    <a href="order-list?showAll=true" class="btn">Xem Tất Cả</a>
                 </div>
                 <div class="update-order">
                     <p style="font-size: 20px; margin-bottom: 10px;">Cập nhật trạng thái hóa đơn</p>
                     <form action="update-status-order" method="post">
-                        <input type="text" name="id" placeholder="Nhập ID hóa cần cập nhật" required
+                        <input type="text" name="id" placeholder="Nhập ID hóa đơn cần cập nhật" required
                                style="font-size: 15px; padding: 2px; border-radius: 5px;">
                         <select title="choice" name="status" id="statusSelect" required
                                 style="font-size: 15px; border-radius: 5px; padding: 2px;">
-                            <option value="active">Đang xử lý</option>
-                            <option value="inactive">Đã hoàn thành</option>
-                            <option value="pending">Đã hủy</option>
+                            <option value="Đang xử lý">Đang xử lý</option>
+                            <option value="Đã hoàn thành">Đã hoàn thành</option>
+                            <option value="Đã hủy">Đã hủy</option>
 
                         </select>
+                        <c:if test="${not empty error}">
+                            <p style="color: red;">${error}</p> <!-- Hiển thị lỗi nếu có -->
+                        </c:if>
+                        <c:if test="${not empty errorDelete}">
+                            <p style="color: red;">${errorDelete}</p> <!-- Hiển thị lỗi nếu có -->
+                        </c:if>
+                        <c:if test="${not empty successDelete}">
+                            <p style="color: green;">${successDelete}</p> <!-- Hiển thị lỗi nếu có -->
+                        </c:if>
                         <button type="submit" >Cập nhật trạng thái</button>
                     </form>
                 </div>
@@ -164,13 +176,10 @@
                             <td>${order.paymentMethod}</td>
                             <td>${order.status}</td>
                             <td class="v">
-                                <button class="view-detail-btn"><a href="GetDetailOrder?id=${order.id}"></a>Chi tiết
+                                <button> <a href="GetDetailOrder?id=${order.id}" class="view-detail-btn">Chi tiết</a>
                                 </button>
                                 <button class="delete-btn" data-id="${order.id}">Xóa</button>
                             </td>
-                            <c:if test="${not empty error}">
-                                <p style="color: red;">${error}</p> <!-- Hiển thị lỗi nếu có -->
-                            </c:if>
                         </tr>
                     </c:forEach>
 
@@ -212,22 +221,17 @@
                     </table>
                     <div class="order-info">
                         <p><strong>Mã đơn hàng:</strong> <span class="info-highlight">${orIn.id}</span></p>
-                        <p><strong>Tổng tiền:</strong> <span class="info-highlight"><fmt:formatNumber
-                                value="${orIn.totalPrice}" type="number"/> ₫</span></p>
-                        <p><strong>Phí giao hàng:</strong> <span class="info-highlight"><fmt:formatNumber
-                                value="${orIn.shippingFee}" type="number"/> ₫</span></p>
-                        <p><strong>Số tiền giảm giá:</strong> <span class="info-highlight total-price"><fmt:formatNumber
-                                value="${orIn.discountAmount}" type="number"/> ₫</span></p>
-                        <p><strong>Phương thức thanh toán:</strong> <span
-                                class="badge success">${orIn.paymentMethod}</span></p>
-                        <p><strong>Trạng thái thanh toán:</strong> <span
-                                class="badge success">${orIn.paymentStatus}</span></p>
+                        <p><strong>Tổng tiền:</strong> <span class="info-highlight"><fmt:formatNumber value="${orIn.totalPrice}" type="number"/> ₫</span></p>
+                        <p><strong>Phí giao hàng:</strong> <span class="info-highlight"><fmt:formatNumber value="${orIn.shippingFee}" type="number"/> ₫</span></p>
+                        <p><strong>Số tiền giảm giá:</strong> <span class="info-highlight total-price"><fmt:formatNumber value="${orIn.discountAmount}" type="number"/> ₫</span></p>
+                        <p><strong>Phương thức thanh toán:</strong> <span class="badge success">${orIn.paymentMethod}</span></p>
+                        <p><strong>Trạng thái thanh toán:</strong> <span class="badge success">${orIn.paymentStatus}</span></p>
                         <p><strong>Địa chỉ:</strong>${orIn.shippingAddress}</p>
-                        <p><strong>Mã sản phẩm:</strong>${orIn.productId}</p>
                         <p><strong>Số lượng:</strong>${orIn.quantity}</p>
                         <p><strong>Email:</strong>${orIn.email}</p>
                         <p><strong>Người nhận hàng:</strong>${orIn.name}</p>
-                        <p><strong>Số điện thoại:</strong>${orIn.phone}</p>
+                        <p><strong>Số điện thoại:</strong>${orIn.phoneNumber}</p>
+                        <p><strong>Ghi chú:</strong>${orIn.note}</p>
                     </div>
                 </div>
             </div>

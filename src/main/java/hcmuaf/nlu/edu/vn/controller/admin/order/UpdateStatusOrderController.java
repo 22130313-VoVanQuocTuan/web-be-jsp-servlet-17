@@ -28,7 +28,7 @@ public class UpdateStatusOrderController extends HttpServlet {
 
         try {
             if(orderService.updateOrderStatus(id, status)) {
-                response.sendRedirect("/order-list");
+                response.sendRedirect(request.getContextPath() +"/order-list");
             } else {
                 request.setAttribute("error", "Cập nhật không thành công!");
                 request.getRequestDispatcher("/order-list").forward(request, response);

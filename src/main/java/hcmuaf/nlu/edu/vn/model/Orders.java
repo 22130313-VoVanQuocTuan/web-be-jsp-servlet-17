@@ -12,6 +12,11 @@ public class Orders {
     private String paymentMethod;
     private String paymentStatus;
     private String shippingAddress;
+    private int quantity;
+    private String email;
+    private String name;
+    private String phoneNumber;
+    private String note;
     private Date createdAt;
     private Date updatedAt;
 
@@ -28,6 +33,20 @@ public class Orders {
         this.status = status;
     }
 
+    public Orders(int id, double totalPrice, double shippingFee, double discountAmount, String paymentMethod, String paymentStatus, String shippingAddress, int quantity, String email, String name, String phoneNumber, String note) {
+        this.id = id;
+        this.totalPrice = totalPrice;
+        this.shippingFee = shippingFee;
+        this.discountAmount = discountAmount;
+        this.paymentMethod = paymentMethod;
+        this.paymentStatus = paymentStatus;
+        this.shippingAddress = shippingAddress;
+        this.quantity = quantity;
+        this.email = email;
+        this.name = name;
+        this.phoneNumber = phoneNumber;
+        this.note = note;
+    }
 
     public int getId() {
         return id;
@@ -99,6 +118,54 @@ public class Orders {
 
     public void setShippingAddress(String shippingAddress) {
         this.shippingAddress = shippingAddress;
+    }
+
+    public int getUserid() {
+        return userid;
+    }
+
+    public void setUserid(int userid) {
+        this.userid = userid;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
     }
 
     public Date getCreatedAt() {

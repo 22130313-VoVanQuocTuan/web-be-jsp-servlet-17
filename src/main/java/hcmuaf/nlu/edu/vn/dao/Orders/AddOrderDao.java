@@ -1,10 +1,8 @@
 package hcmuaf.nlu.edu.vn.dao.Orders;
 
 import hcmuaf.nlu.edu.vn.dao.DBConnect;
-import hcmuaf.nlu.edu.vn.model.AddressShipping;
+import hcmuaf.nlu.edu.vn.model.OrderItem;
 import hcmuaf.nlu.edu.vn.model.Orders;
-import hcmuaf.nlu.edu.vn.model.Payments;
-import hcmuaf.nlu.edu.vn.model.Users;
 
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -17,61 +15,49 @@ public class AddOrderDao {
         this.dbConnect = new DBConnect();
     }
 
-    public AddressShipping getInfoAddressShipping (int id){
-        String sql = "SELECT name, email, phoneNumber, address, note FROM addressshipping WHERE userId = ?";
-        try(PreparedStatement ptm = dbConnect.preparedStatement(sql)){
-            ptm.setInt(1, id);
-            ResultSet rs = ptm.executeQuery();
-            if(rs.next()){
-                String name = rs.getString("name");
-                String email = rs.getString("email");
-                String phoneNumber = rs.getString("phoneNumber");
-                String address = rs.getString("address");
-                String note = rs.getString("note");
-                return new AddressShipping(name ,email, phoneNumber, address, note);
-            }
+    //Thêm hoá đơn
+    public boolean addOrder(Orders orders) throws SQLException {
+        String query = "INSERT INTO orders (id, userId, totalPrice, shippingFee, discountAmount, status, paymentMethod, paymentStatus, shippingAddress, createdAt, updatedAt) VALUES(?,?,?,?,?,?,?,?,?,NOW(),NOW())";
+        try (PreparedStatement ps = dbConnect.preparedStatement(query)) {
+            ps.setInt(1, orders.getId());
+            ps.setInt(2, orders.getUser_id());
+            ps.setDouble(3, orders.getTotalPrice());
+            ps.setDouble(4, orders.getShippingFee());
+            ps.setDouble(5, orders.getDiscountAmount());
+            ps.setString(6, orders.getStatus());
+            ps.setString(7, orders.getPaymentMethod());
+            ps.setString(8, orders.getPaymentStatus());
+            ps.setString(9, orders.getShippingAddress());
+            ps.setDate(10, new Date(orders.getCreatedAt().getTime()));
+            ps.setDate(11, new Date(orders.getUpdatedAt().getTime()));
+
+            int rows = ps.executeUpdate();
+            return rows > 0;
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return null;
     }
 
-    //Them thanh toan
-    public void addPayment(Payments payments) throws SQLException {
-        String query = "INSERT INTO payments (id, userId, paymentMethod, paymentStatus, paymentDate, paymentAmount) VALUES(?,?,?,?,?,?)";
-        try(PreparedStatement ps = dbConnect.preparedStatement(query)) {
-            ps.setInt(1, payments.getId());
-            ps.setInt(2, payments.getUserId());
-            ps.setString(3, payments.getPaymentMethod());
-            ps.setString(4, payments.getPaymentStatus());
-            ps.setDate(5, (Date) payments.getPaymentDate());
-            ps.setDouble(6, payments.getPaymentAmount());
+    //Them chi tiet hoa don
+    public boolean addOrderItem(OrderItem orderItem) {
+        String query = "INSERT INTO orderitems (id, orderId, productId, quantity, price, totalPrice, discount, createdAt, updatedAt) VALUES(?,?,?,?,?,?,?,NOW(),NOW())";
+        try (PreparedStatement ps = dbConnect.preparedStatement(query)) {
+            ps.setInt(1, orderItem.getId());
+            ps.setInt(2, orderItem.getOrderId());
+            ps.setInt(3, orderItem.getProductId());
+            ps.setInt(4, orderItem.getQuantity());
+            ps.setDouble(5, orderItem.getPrice());
+            ps.setDouble(6, orderItem.getTotalPrice());
+            ps.setDouble(7, orderItem.getDiscount());
+            ps.setDate(8, new Date(orderItem.getCreatedAt().getTime()));
+            ps.setDate(9, new Date(orderItem.getUpdatedAt().getTime()));
 
-            ps.executeUpdate();
-        } catch (RuntimeException e) {
+            int rows = ps.executeUpdate();
+            return rows > 0;
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
-    }
-
-    //Lấy thanh toán ra
-    public Payments getPayment(int id) throws SQLException {
-        String query = "SELECT * FROM payments WHERE userId = ?";
-        try(PreparedStatement ps = dbConnect.preparedStatement(query)) {
-            ps.setInt(1, id);
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                Payments payments = new Payments();
-                payments.setId(rs.getInt("id"));
-                payments.setUserId(rs.getInt("userId"));
-                payments.setPaymentMethod(rs.getString("paymentMethod"));
-                payments.setPaymentStatus(rs.getString("paymentStatus"));
-                payments.setPaymentDate(rs.getDate("paymentDate"));
-                payments.setPaymentAmount(rs.getDouble("paymentAmount"));
-
-                return payments;
-            }
-        }
-        return null;
     }
 
 

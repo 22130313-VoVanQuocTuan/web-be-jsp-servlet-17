@@ -1,7 +1,5 @@
 package hcmuaf.nlu.edu.vn.controller.user.pay;
 
-import hcmuaf.nlu.edu.vn.model.OrderDetail;
-import hcmuaf.nlu.edu.vn.service.OrderService;
 import hcmuaf.nlu.edu.vn.util.VNPayUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;

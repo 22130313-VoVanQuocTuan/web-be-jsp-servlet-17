@@ -71,9 +71,9 @@ public class OrderDao {
     }
 
     //Lấy ra chi tiết hoá đơn
-    public OrderDetail getOrderDetail(int id) throws SQLException {
+    public Orders getOrderDetail(int id) throws SQLException {
 
-        String query = "SELECT o.id, o.totalPrice, o.shippingFee, o.discountAmount, o.paymentMethod, o.paymentStatus, o.shippingAddress, oi.productId,  Sum(oi.quantity) AS quantity, a.email, a.name, a.phoneNumber " +
+        String query = "SELECT o.id, o.totalPrice, o.shippingFee, o.discountAmount, o.paymentMethod, o.paymentStatus, o.shippingAddress, Sum(oi.quantity) AS quantity, a.email, a.name, a.phoneNumber, a.note " +
                 "FROM orders o " +
                 "JOIN orderitems oi ON o.id = oi.orderId " +
                 "JOIN products p ON oi.productId = p.id " +
@@ -81,7 +81,7 @@ public class OrderDao {
                 "JOIN addressshipping a ON u.id = a.userId " +
                 "WHERE o.id=?";
 
-        OrderDetail orderDetail = null;
+        Orders orderDetail = null;
         try (PreparedStatement ps = dbConnect.preparedStatement(query)) {
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
@@ -95,15 +95,13 @@ public class OrderDao {
               String paymentMethod = rs.getString("paymentMethod");
               String paymentStatus = rs.getString("paymentStatus");
               String shippingAddress = rs.getString("shippingAddress");
-              int productId = rs.getInt("productId");
               int quantity = rs.getInt("quantity");
               String email = rs.getString("email");
               String name = rs.getString("name");
                String phoneNumber = rs.getString("phoneNumber");
+               String  note = rs.getString("note");
 
-               orderDetail = new OrderDetail(ids, totalPrice, shippingFee,discountAmount,paymentMethod,paymentStatus,shippingAddress,
-                      productId, quantity, email,name,phoneNumber);
-
+               orderDetail = new Orders(ids, totalPrice, shippingFee, discountAmount, paymentMethod, paymentStatus, shippingAddress, quantity, email, name, phoneNumber, note);
 
             }
             return orderDetail;
@@ -116,7 +114,7 @@ public class OrderDao {
 
     //Lấy sản phẩm của hoá đơn
     public List<OrderItem> orderItems(int id) throws SQLException {
-        String query = "SELECT * FROM orderitems WHERE orderId = ?";
+        String query = "SELECT o.productName, o.quantity, o.price, o.discount, o.totalPrice FROM orderitems o WHERE orderId = ?";
         try(PreparedStatement ps = dbConnect.preparedStatement(query)) {
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
@@ -159,21 +157,6 @@ public class OrderDao {
         return null;
     }
 
-    //Xoá hoá đơn
-    public boolean deleteOrder(int id) throws SQLException {
-        String query = "DELETE FROM orders WHERE id = ?";
-        try(PreparedStatement ps = dbConnect.preparedStatement(query)){
-            ps.setInt(1, id);
-            int rowDeleted = ps.executeUpdate();
-            if(rowDeleted > 0) {
-                return true;
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        return false;
-    }
-
     //Cập nhật trạng thái đơn hàng
     public boolean updateOrderStatus(int id, String status) throws SQLException {
         String query = "UPDATE orders SET status = ? WHERE id = ?";
@@ -189,5 +172,4 @@ public class OrderDao {
         }
         return false;
     }
-
 }

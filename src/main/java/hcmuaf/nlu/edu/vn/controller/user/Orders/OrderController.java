@@ -1,7 +1,7 @@
 package hcmuaf.nlu.edu.vn.controller.user.Orders;
 
-import hcmuaf.nlu.edu.vn.model.OrderDetail;
 import hcmuaf.nlu.edu.vn.model.OrderItem;
+import hcmuaf.nlu.edu.vn.model.Orders;
 import hcmuaf.nlu.edu.vn.model.Users;
 import hcmuaf.nlu.edu.vn.service.OrderService;
 import jakarta.servlet.*;
@@ -39,7 +39,7 @@ public class OrderController extends HttpServlet {
 
             try {
                 List<OrderItem> orderItems = orderService.getOrderItems(idOrder);
-                OrderDetail orderDetail = orderService.getItemOrders(idOrder);
+                Orders orderDetail = orderService.getItemOrders(idOrder);
                 request.setAttribute("orderInfo", orderDetail);
                 request.setAttribute("orderItem", orderItems);
             } catch (SQLException e) {
