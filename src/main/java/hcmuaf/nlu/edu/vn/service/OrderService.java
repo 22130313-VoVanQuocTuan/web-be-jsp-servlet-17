@@ -2,7 +2,6 @@ package hcmuaf.nlu.edu.vn.service;
 
 import hcmuaf.nlu.edu.vn.dao.Orders.OrderDao;
 import hcmuaf.nlu.edu.vn.dao.Orders.AddOrderDao;
-import hcmuaf.nlu.edu.vn.dao.Orders.PaymentDao;
 import hcmuaf.nlu.edu.vn.model.*;
 
 import java.sql.SQLException;
@@ -11,13 +10,11 @@ import java.util.List;
 public class OrderService {
     public OrderDao orderDao;
     public AddOrderDao addOrderDao;
-    public PaymentDao paymentDao;
 
 
     public OrderService() {
         this.orderDao = new OrderDao();
         this.addOrderDao = new AddOrderDao();
-        this.paymentDao = new PaymentDao();
     }
 
     //Lấy ra tất cả danh sách hoá đơn
@@ -50,9 +47,6 @@ public class OrderService {
        return addOrderDao.getInfoAddressShipping(id);
     }
 
-    public Payments getPayment(int id) throws SQLException {
-        return addOrderDao.getPayment(id);
-    }
 
     //Xoá hoá đơn
     public boolean deleteOrder(int id) throws SQLException {
@@ -63,12 +57,20 @@ public class OrderService {
     public boolean updateOrderStatus(int id, String status) throws SQLException {
         return  orderDao.updateOrderStatus(id, status);
     }
-    // Tạo order
-    public boolean createOrder(Orders order) {
-        return paymentDao.createOrder(order);
+
+    //Cập nhật trạng thái thanh toán hoá đơn
+    public boolean updateOrderPaymentStatus(int id, String status) throws SQLException {
+        return  orderDao.updateOrderPaymentStatus(id, status);
     }
-    // thêm ortheritem
-    public boolean addOrderItem(OrderItem orderItem) {
-        return paymentDao.addOrderItem(orderItem);
+
+
+
+    //thêm hoá đơn
+    public Orders addOrder(Orders order) throws SQLException {
+        return addOrderDao.addOrder(order);
+    }
+    //thêm chi tiết hoá đơn
+    public void addOrderItems(OrderItem order) throws SQLException {
+        addOrderDao.addOrderItem(order);
     }
 }

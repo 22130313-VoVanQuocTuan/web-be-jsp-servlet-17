@@ -190,4 +190,20 @@ public class OrderDao {
         return false;
     }
 
+    //Cập nhật trạng thái đơn hàng
+    public boolean updateOrderPaymentStatus(int id, String status) throws SQLException {
+        String query = "UPDATE orders SET paymentStatus = ? WHERE id = ?";
+        try(PreparedStatement ps = dbConnect.preparedStatement(query)){
+            ps.setString(1, status);
+            ps.setInt(2, id);
+            int rowUpdated = ps.executeUpdate();
+            if(rowUpdated > 0) {
+                return true;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return false;
+    }
+
 }
