@@ -11,23 +11,6 @@
   <component name="ChangeListManager">
     <list default="true" id="e3c8a261-b947-405c-a024-5c5b1811d7fd" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/classes/hcmuaf/nlu/edu/vn/dao/Orders/OrderDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/classes/hcmuaf/nlu/edu/vn/dao/Orders/OrderDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/classes/hcmuaf/nlu/edu/vn/model/OrderItem.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/classes/hcmuaf/nlu/edu/vn/model/OrderItem.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/classes/hcmuaf/nlu/edu/vn/model/Orders.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/classes/hcmuaf/nlu/edu/vn/model/Orders.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/classes/hcmuaf/nlu/edu/vn/service/OrderService.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/classes/hcmuaf/nlu/edu/vn/service/OrderService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/page/confirmation.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/tqh/users/page/confirmation.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/controller/user/pay/ConfirmPaymentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/controller/user/pay/ConfirmPaymentController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/controller/user/pay/VNPayController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/controller/user/pay/VNPayController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/dao/Orders/AddOrderDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/dao/Orders/AddOrderDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/dao/Orders/OrderDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/dao/Orders/OrderDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/model/OrderItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/model/OrderItem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/model/Orders.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/model/Orders.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/service/OrderService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/service/OrderService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/util/VNPAYConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/util/VNPAYConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/util/VNPayUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/util/VNPayUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/db.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/db.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/users/page/check-pay.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/users/page/check-pay.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/users/page/confirmation.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/users/page/confirmation.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -189,7 +172,7 @@
       <option name="presentableId" value="Default" />
       <updated>1736150321220</updated>
       <workItem from="1736150326220" duration="17682000" />
-      <workItem from="1736221030607" duration="13142000" />
+      <workItem from="1736221030607" duration="14916000" />
     </task>
     <servers />
   </component>
