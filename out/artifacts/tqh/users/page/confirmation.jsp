@@ -399,6 +399,8 @@
             <p>Số điện thoại: ${shipping_address.phoneNumber}</p>
             <p>Ghi chú: ${shipping_address.note}</p>
             <div class="but">
+                <input type="hidden" name="shippingAddress" value="${shipping_address.address}" />
+                <input type="hidden" name="amount" value="${sessionScope.totalFinalPrice}" />
                 <button type="submit">Xác nhận đơn hàng</button>
                 <button type="button"><a href="confirmation" style="text-decoration: none; color: #FFFFFF">Hủy</a></button>
             </div>

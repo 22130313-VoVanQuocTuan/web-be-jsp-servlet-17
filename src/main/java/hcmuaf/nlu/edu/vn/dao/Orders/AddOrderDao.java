@@ -1,15 +1,9 @@
 package hcmuaf.nlu.edu.vn.dao.Orders;
 
 import hcmuaf.nlu.edu.vn.dao.DBConnect;
-import hcmuaf.nlu.edu.vn.model.AddressShipping;
-import hcmuaf.nlu.edu.vn.model.Orders;
-import hcmuaf.nlu.edu.vn.model.Payments;
-import hcmuaf.nlu.edu.vn.model.Users;
+import hcmuaf.nlu.edu.vn.model.*;
 
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class AddOrderDao {
     final DBConnect dbConnect;
@@ -36,43 +30,62 @@ public class AddOrderDao {
         return null;
     }
 
-    //Them thanh toan
-    public void addPayment(Payments payments) throws SQLException {
-        String query = "INSERT INTO payments (id, userId, paymentMethod, paymentStatus, paymentDate, paymentAmount) VALUES(?,?,?,?,?,?)";
-        try(PreparedStatement ps = dbConnect.preparedStatement(query)) {
-            ps.setInt(1, payments.getId());
-            ps.setInt(2, payments.getUserId());
-            ps.setString(3, payments.getPaymentMethod());
-            ps.setString(4, payments.getPaymentStatus());
-            ps.setDate(5, (Date) payments.getPaymentDate());
-            ps.setDouble(6, payments.getPaymentAmount());
+    //Thêm hóa đơn
+    public Orders addOrder(Orders order) throws SQLException {
+        String query = "INSERT INTO Orders (userId, totalPrice, shippingFee, discountAmount, shippingAddress, paymentMethod, paymentStatus, status, createdAt) "
+                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, NOW())";
 
+        try (PreparedStatement ps = dbConnect.preparedStatement(query)) {
+            // Gán giá trị cho các tham số của PreparedStatement
+            ps.setInt(1, order.getUserId());
+            ps.setDouble(2, order.getTotalPrice());
+            ps.setDouble(3, order.getShippingFee());
+            ps.setDouble(4, order.getDiscountAmount());
+            ps.setString(5, order.getShippingAddress());
+            ps.setString(6, order.getPaymentMethod());
+            ps.setString(7, order.getPaymentStatus());
+            ps.setString(8, order.getStatus());
+
+            // Thực thi câu lệnh insert
             ps.executeUpdate();
-        } catch (RuntimeException e) {
-            throw new RuntimeException(e);
-        }
-    }
 
-    //Lấy thanh toán ra
-    public Payments getPayment(int id) throws SQLException {
-        String query = "SELECT * FROM payments WHERE userId = ?";
-        try(PreparedStatement ps = dbConnect.preparedStatement(query)) {
-            ps.setInt(1, id);
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                Payments payments = new Payments();
-                payments.setId(rs.getInt("id"));
-                payments.setUserId(rs.getInt("userId"));
-                payments.setPaymentMethod(rs.getString("paymentMethod"));
-                payments.setPaymentStatus(rs.getString("paymentStatus"));
-                payments.setPaymentDate(rs.getDate("paymentDate"));
-                payments.setPaymentAmount(rs.getDouble("paymentAmount"));
-
-                return payments;
+            // Lấy ID đơn hàng (orderId) từ cơ sở dữ liệu
+            String selectQuery = "SELECT LAST_INSERT_ID()";
+            try (PreparedStatement selectPs = dbConnect.preparedStatement(selectQuery);
+                 ResultSet rs = selectPs.executeQuery()) {
+                if (rs.next()) {
+                    int orderId = rs.getInt(1); // Lấy id mới được tạo
+                    order.setId(orderId);  // Cập nhật ID cho đối tượng Order
+                }
             }
+        } catch (SQLException e) {
+            System.err.println("Error while inserting order: " + e.getMessage());
+            throw e;
         }
-        return null;
+
+        return order;  // Trả về đối tượng Order đã có ID
     }
+    // Thêm chi tiết hóa đơn
+    public void addOrderItem(OrderItem item) throws SQLException {
+        String query = "INSERT INTO orderitems (orderId, productId, quantity, price, totalPrice, discount, createdAt, updatedAt) " +
+                "VALUES (?, ?, ?, ?, ?, ?, NOW(), NOW())";
+
+        try (PreparedStatement ps = dbConnect.preparedStatement(query)) {
+            // Gán các giá trị cho PreparedStatement
+            ps.setInt(1, item.getOrderId());
+            ps.setInt(2, item.getProductId());
+            ps.setInt(3, item.getQuantity());
+            ps.setDouble(4, item.getPrice());
+            ps.setDouble(5, item.getTotalPrice());
+            ps.setDouble(6, item.getDiscount());
+
+            // Thực thi lệnh SQL
+            ps.executeUpdate();
+        } catch (SQLException e) {
+          e.printStackTrace();
+        }
+    }
+
 
 
 }

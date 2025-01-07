@@ -47,9 +47,6 @@ public class OrderService {
        return addOrderDao.getInfoAddressShipping(id);
     }
 
-    public Payments getPayment(int id) throws SQLException {
-        return addOrderDao.getPayment(id);
-    }
 
     //Xoá hoá đơn
     public boolean deleteOrder(int id) throws SQLException {
@@ -59,5 +56,21 @@ public class OrderService {
     //Cập nhật hoá đơn
     public boolean updateOrderStatus(int id, String status) throws SQLException {
         return  orderDao.updateOrderStatus(id, status);
+    }
+
+    //Cập nhật trạng thái thanh toán hoá đơn
+    public boolean updateOrderPaymentStatus(int id, String status) throws SQLException {
+        return  orderDao.updateOrderPaymentStatus(id, status);
+    }
+
+
+
+    //thêm hoá đơn
+    public Orders addOrder(Orders order) throws SQLException {
+        return addOrderDao.addOrder(order);
+    }
+    //thêm chi tiết hoá đơn
+    public void addOrderItems(OrderItem order) throws SQLException {
+        addOrderDao.addOrderItem(order);
     }
 }

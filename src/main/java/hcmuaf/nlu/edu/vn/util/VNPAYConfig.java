@@ -1,5 +1,7 @@
 package hcmuaf.nlu.edu.vn.util;
 
+import hcmuaf.nlu.edu.vn.dao.DBProperties;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
@@ -8,9 +10,10 @@ public class VNPAYConfig {
     private static final Properties properties = new Properties();
 
     static {
-        try (InputStream input = VNPAYConfig.class.getClassLoader().getResourceAsStream("config.properties")) {
+        try (InputStream input = VNPAYConfig.class.getClassLoader().getResourceAsStream("db.properties")) {
             if (input == null) {
-                System.out.println("Sorry, unable to find config.properties");
+                System.out.println("Sorry, unable to find db.config");
+
 
             }
             // Load các thuộc tính từ file config.properties
