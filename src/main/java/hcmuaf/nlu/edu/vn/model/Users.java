@@ -13,6 +13,7 @@ public class Users {
     private String role;
     private String status;
     private int isEmailVerified;
+    private double totalPrice;
     private Date createDate;
     private Date updateDate;
 
@@ -55,6 +56,12 @@ public class Users {
         this.isEmailVerified = isEmailVerified;
         this.createDate = createDate;
         this.updateDate = updateDate;
+    }
+
+    public Users(int id, String fullName, double totalPrice) {
+        this.id = id;
+        this.fullName = fullName;
+        this.totalPrice = totalPrice;
     }
 
     public int getId() {
@@ -135,6 +142,14 @@ public class Users {
 
     public void setIsEmailVerified(int isEmailVerified) {
         this.isEmailVerified = isEmailVerified;
+    }
+
+    public double getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(double totalPrice) {
+        this.totalPrice = totalPrice;
     }
 
     public Date getCreateDate() {
