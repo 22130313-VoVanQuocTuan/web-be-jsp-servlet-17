@@ -116,14 +116,14 @@ public class OrderDao {
 
     //Lấy sản phẩm của hoá đơn
     public List<OrderItem> orderItems(int id) throws SQLException {
-        String query = "SELECT o.productName, o.quantity, o.price, o.discount, o.totalPrice FROM orderitems o WHERE orderId = ?";
+        String query = "SELECT p.name, o.quantity, o.price, o.discount, o.totalPrice FROM orderitems o JOIN products p ON o.productId = p.id WHERE o.orderId = ?";
         try(PreparedStatement ps = dbConnect.preparedStatement(query)) {
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             List<OrderItem> orderItems = new ArrayList<>();
             while (rs.next()) {
 
-                String productName = rs.getString("productName");
+                String productName = rs.getString("name");
                 int quantity = rs.getInt("quantity");
                 double price = rs.getDouble("price");
                 double discount = rs.getDouble("discount");
