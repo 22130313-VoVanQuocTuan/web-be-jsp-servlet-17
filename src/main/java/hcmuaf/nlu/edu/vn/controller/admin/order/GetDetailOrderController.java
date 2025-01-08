@@ -1,7 +1,7 @@
 package hcmuaf.nlu.edu.vn.controller.admin.order;
 
-import hcmuaf.nlu.edu.vn.model.OrderDetail;
 import hcmuaf.nlu.edu.vn.model.OrderItem;
+import hcmuaf.nlu.edu.vn.model.Orders;
 import hcmuaf.nlu.edu.vn.service.OrderService;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
@@ -24,13 +24,13 @@ public class GetDetailOrderController extends HttpServlet {
         int id = Integer.parseInt(request.getParameter("id"));
         try {
             List<OrderItem> orderItems = orderService.getOrderItems(id);
-            OrderDetail orderDetail = orderService.getItemOrders(id);
+            Orders orderDetail = orderService.getItemOrders(id);
 
             request.setAttribute("orIn", orderDetail);
             request.setAttribute("orIt",orderItems);
 
             request.setAttribute("showModal", true);
-            request.getRequestDispatcher("/order").forward(request, response);
+            request.getRequestDispatcher("/order-list").forward(request, response);
 
         } catch (SQLException e) {
 

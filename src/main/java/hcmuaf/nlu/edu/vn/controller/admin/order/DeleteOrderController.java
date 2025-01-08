@@ -1,7 +1,10 @@
-package hcmuaf.nlu.edu.vn.controller.admin.order; import hcmuaf.nlu.edu.vn.service.OrderService;
+package hcmuaf.nlu.edu.vn.controller.admin.order;
+
+import hcmuaf.nlu.edu.vn.service.OrderService;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
+
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -13,18 +16,27 @@ public class DeleteOrderController extends HttpServlet {
         orderService = new OrderService();
     }
 
-@Override protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    int id = Integer.parseInt(request.getParameter("id"));
-    try {
-        if(orderService.deleteOrder(id)){
-            response.sendRedirect(request.getContextPath()+"/order-list");
-        }else{
-            request.setAttribute("error", "Xóa hoá đơn thất bại.");
-            request.getRequestDispatcher("/order-list").forward(request, response);
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        try {
+
+            if (orderService.deleteOrderItem(id) || orderService.getOrderItems(id).isEmpty()) {
+                if (orderService.deleteOrder(id)) {
+                    request.setAttribute("successDelete", "Xóa hoá đơn thành công.");
+                    request.getRequestDispatcher("/order-list").forward(request, response);
+                }
+
+            } else {
+                request.setAttribute("errorDelete", "Xóa hoá đơn thất bại.");
+                request.getRequestDispatcher("/order-list").forward(request, response);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
-    } catch (SQLException e) {
-        throw new RuntimeException(e);
     }
-}
-@Override protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException { }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    }
 }

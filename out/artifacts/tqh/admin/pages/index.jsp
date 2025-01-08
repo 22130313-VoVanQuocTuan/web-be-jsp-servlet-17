@@ -29,7 +29,7 @@
                 </li>
 
                 <li>
-                    <a href="index.html">
+                    <a href="index.jsp">
                         <span class="icon">
                             <ion-icon name="home-outline"></ion-icon>
                         </span>
@@ -55,7 +55,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="order">
+                    <a href="order-list">
                         <span class="icon">
                             <ion-icon name="receipt-outline"></ion-icon>
                         </span>

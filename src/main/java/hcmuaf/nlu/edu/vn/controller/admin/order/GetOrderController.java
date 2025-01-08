@@ -9,6 +9,7 @@ import jakarta.servlet.annotation.*;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @WebServlet(name = "GetOrderItemController", value = "/order-list")
 public class GetOrderController extends HttpServlet {
@@ -21,10 +22,29 @@ public class GetOrderController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+        String showAll = request.getParameter("showAll");
+        String search = request.getParameter("search");
+        String id = request.getParameter("id");
+
+
         try {
             List<Orders> ordersList = orderService.getAllOrders();
+            if (search != null) {
+                try {
+                    int userId = Integer.parseInt(id);
+                    ordersList = orderService.getOrderById(userId);
+                } catch (NumberFormatException e) {
+                    e.printStackTrace();
+
+                }
+            }
+
+            if (showAll == null) {
+                // Hiển thị tối đa 10 mục
+                ordersList = ordersList.stream().limit(10).collect(Collectors.toList());
+            }
             request.setAttribute("orderList", ordersList);
-            request.getRequestDispatcher("/admin/pages/order.jsp").forward(request, response);
+            request.getRequestDispatcher("admin/pages/order.jsp").forward(request, response);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

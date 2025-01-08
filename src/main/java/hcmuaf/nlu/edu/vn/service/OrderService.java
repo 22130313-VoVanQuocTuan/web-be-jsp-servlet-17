@@ -1,5 +1,6 @@
 package hcmuaf.nlu.edu.vn.service;
 
+import hcmuaf.nlu.edu.vn.dao.Orders.DeleteOrderDao;
 import hcmuaf.nlu.edu.vn.dao.Orders.OrderDao;
 import hcmuaf.nlu.edu.vn.dao.Orders.AddOrderDao;
 import hcmuaf.nlu.edu.vn.model.*;
@@ -10,11 +11,13 @@ import java.util.List;
 public class OrderService {
     public OrderDao orderDao;
     public AddOrderDao addOrderDao;
+    public DeleteOrderDao deleteOrderDao;
 
 
     public OrderService() {
         this.orderDao = new OrderDao();
         this.addOrderDao = new AddOrderDao();
+        this.deleteOrderDao = new DeleteOrderDao();
     }
 
     //Lấy ra tất cả danh sách hoá đơn
@@ -33,7 +36,7 @@ public class OrderService {
     }
 
     //Xem chi tiết hoá đơn
-    public OrderDetail getItemOrders(int id) throws SQLException {
+    public Orders getItemOrders(int id) throws SQLException {
         return orderDao.getOrderDetail(id);
     }
 
@@ -42,15 +45,16 @@ public class OrderService {
         return orderDao.orderItems(id);
     }
 
-    //Lấy ra thông tin địa chỉ giao hàng
-    public AddressShipping getInfoAddressShipping(int id) throws SQLException {
-       return addOrderDao.getInfoAddressShipping(id);
-    }
+
 
 
     //Xoá hoá đơn
     public boolean deleteOrder(int id) throws SQLException {
-        return orderDao.deleteOrder(id);
+        return deleteOrderDao.deleteOrder(id);
+    }
+
+    public boolean deleteOrderItem(int id) throws SQLException {
+        return deleteOrderDao.deleteOrderItem(id);
     }
 
     //Cập nhật hoá đơn

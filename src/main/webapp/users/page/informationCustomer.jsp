@@ -241,19 +241,16 @@
                         <p><strong>Phương thức thanh toán:</strong> <span class="badge success">${orderInfo.paymentMethod}</span></p>
                         <p><strong>Trạng thái thanh toán:</strong> <span class="badge success">${orderInfo.paymentStatus}</span></p>
                         <p><strong>Địa chỉ:</strong>${orderInfo.shippingAddress}</p>
-                        <p><strong>Mã sản phẩm:</strong>${orderInfo.productId}</p>
                         <p><strong>Số lượng:</strong>${orderInfo.quantity}</p>
                         <p><strong>Email:</strong>${orderInfo.email}</p>
                         <p><strong>Người nhận hàng:</strong>${orderInfo.name}</p>
-                        <p><strong>Số điện thoại:</strong>${orderInfo.phone}</p>
+                        <p><strong>Số điện thoại:</strong>${orderInfo.phoneNumber}</p>
+                        <p><strong>Ghi chú:</strong>${orderInfo.note}</p>
                     </div>
 
                 </div>
             </div>
         </div>
-        <c:if test="${empty orderInfo}">
-            <p>Không có thông tin đơn hàng</p>
-        </c:if>
 
         <!-- Modal cho chỉnh sửa thông tin  -->
         <div id="editInformationModal" class="modal">

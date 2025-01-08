@@ -1,7 +1,12 @@
 package hcmuaf.nlu.edu.vn.dao.Orders;
 
 import hcmuaf.nlu.edu.vn.dao.DBConnect;
+
+import hcmuaf.nlu.edu.vn.model.OrderItem;
+import hcmuaf.nlu.edu.vn.model.Orders;
+
 import hcmuaf.nlu.edu.vn.model.*;
+
 
 import java.sql.*;
 
@@ -11,24 +16,7 @@ public class AddOrderDao {
         this.dbConnect = new DBConnect();
     }
 
-    public AddressShipping getInfoAddressShipping (int id){
-        String sql = "SELECT name, email, phoneNumber, address, note FROM addressshipping WHERE userId = ?";
-        try(PreparedStatement ptm = dbConnect.preparedStatement(sql)){
-            ptm.setInt(1, id);
-            ResultSet rs = ptm.executeQuery();
-            if(rs.next()){
-                String name = rs.getString("name");
-                String email = rs.getString("email");
-                String phoneNumber = rs.getString("phoneNumber");
-                String address = rs.getString("address");
-                String note = rs.getString("note");
-                return new AddressShipping(name ,email, phoneNumber, address, note);
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        return null;
-    }
+
 
     //Thêm hóa đơn
     public Orders addOrder(Orders order) throws SQLException {

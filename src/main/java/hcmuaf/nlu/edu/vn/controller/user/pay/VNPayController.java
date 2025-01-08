@@ -1,13 +1,13 @@
 package hcmuaf.nlu.edu.vn.controller.user.pay;
 
 import hcmuaf.nlu.edu.vn.dao.carts.CartItems;
-import hcmuaf.nlu.edu.vn.dao.carts.Carts;
-import hcmuaf.nlu.edu.vn.model.OrderDetail;
+
 import hcmuaf.nlu.edu.vn.model.OrderItem;
 import hcmuaf.nlu.edu.vn.model.Orders;
 import hcmuaf.nlu.edu.vn.model.Users;
 import hcmuaf.nlu.edu.vn.service.CartService;
 import hcmuaf.nlu.edu.vn.service.OrderService;
+
 import hcmuaf.nlu.edu.vn.util.VNPayUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -15,7 +15,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import org.springframework.security.core.userdetails.User;
+
 
 import java.io.IOException;
 import java.sql.SQLException;
