@@ -33,7 +33,7 @@ public class VerifyEmailController extends HttpServlet {
                     //xóa thông tin xác thực
                     userService.deleteVerifyCode(email);
                     // Chuyển hướng đến trang đăng nhập hoặc trang yêu cầu sau khi xác thực thành công
-                    response.sendRedirect(request.getContextPath() + "/users/page/login-signup.jsp"); // Chuyển hướng tới trang đăng nhập
+                    request.getRequestDispatcher( "users/page/login-signup.jsp").forward(request,response); // Chuyển hướng tới trang đăng nhập
                     return; // Thoát khỏi phương thức ngay sau khi chuyển hướng
                 }
             } else {

@@ -11,7 +11,8 @@
   <component name="ChangeListManager">
     <list default="true" id="e3c8a261-b947-405c-a024-5c5b1811d7fd" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/model/Orders.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/model/Orders.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/classes/hcmuaf/nlu/edu/vn/model/Orders.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/classes/hcmuaf/nlu/edu/vn/model/Orders.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/controller/user/account/VerifyEmailController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/controller/user/account/VerifyEmailController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -181,7 +182,7 @@
       <updated>1736150321220</updated>
       <workItem from="1736150326220" duration="17682000" />
       <workItem from="1736221030607" duration="14916000" />
-      <workItem from="1736308104050" duration="209000" />
+      <workItem from="1736308104050" duration="7085000" />
     </task>
     <servers />
   </component>
