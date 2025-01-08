@@ -24,10 +24,11 @@ public class Orders {
     public Orders() {
     }
 
-    public Orders(int id, int userid, Date createdAt, double totalPrice, String paymentMethod, String paymentStatus, String status) {
+    public Orders(int id, int userid, Date createdAt,String shippingAddress, double totalPrice, String paymentMethod, String paymentStatus, String status) {
         this.id = id;
         this.userid = userid;
         this.createdAt = createdAt;
+        this.shippingAddress = shippingAddress;
         this.totalPrice = totalPrice;
         this.paymentMethod = paymentMethod;
         this.paymentStatus = paymentStatus;

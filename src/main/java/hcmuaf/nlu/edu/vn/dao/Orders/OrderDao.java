@@ -18,7 +18,7 @@ public class OrderDao {
         this.dbConnect = new DBConnect();
     }
 
-//    //Xem danh sách hoá đơn
+    //Lấy ra tất cả hoá đơn
     public List<Orders> getAllOrders() throws SQLException {
         List<Orders> orders = new ArrayList<Orders>();
         String query = "SELECT * FROM orders";
@@ -28,12 +28,13 @@ public class OrderDao {
                 int id = resultSets.getInt("id");
                 int userid = resultSets.getInt("userId");
                 Date createdAt = resultSets.getDate("createdAt");
+                String shippingAddress = resultSets.getString("shippingAddress");
                 double totalPrice = resultSets.getDouble("totalPrice");
                 String paymentMethod = resultSets.getString("paymentMethod");
                 String paymentStatus = resultSets.getString("paymentStatus");
                 String status = resultSets.getString("status");
 
-                Orders order = new Orders(id, userid, createdAt, totalPrice, paymentMethod, paymentStatus, status);
+                Orders order = new Orders(id, userid, createdAt,shippingAddress, totalPrice, paymentMethod, paymentStatus, status);
 
                 orders.add(order);
             }
@@ -44,7 +45,7 @@ public class OrderDao {
 
     }
 
-    // Lấy ra hoá đơn
+    // Lấy ra hoá đơn theo id
     public List<Orders> getOrderById(int id) {
         List<Orders> orders = new ArrayList<>();
         String query = "SELECT * FROM orders WHERE userId = ?";
@@ -55,12 +56,13 @@ public class OrderDao {
                 int idd = rs.getInt("id");
                 int userid = rs.getInt("userId");
                 Date createdAt = rs.getDate("createdAt");
+                String shippingAddress = rs.getString("shippingAddress");
                 double totalPrice = rs.getDouble("totalPrice");
                 String paymentMethod = rs.getString("paymentMethod");
                 String paymentStatus = rs.getString("paymentStatus");
                 String status = rs.getString("status");
 
-                Orders order = new Orders(idd, userid, createdAt, totalPrice, paymentMethod, paymentStatus, status);
+                Orders order = new Orders(idd, userid, createdAt,shippingAddress, totalPrice, paymentMethod, paymentStatus, status);
 
                 orders.add(order);
             }

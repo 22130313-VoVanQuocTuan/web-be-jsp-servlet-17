@@ -145,6 +145,9 @@
                         <c:if test="${not empty error}">
                             <p style="color: red;">${error}</p> <!-- Hiển thị lỗi nếu có -->
                         </c:if>
+                        <c:if test="${not empty successStatus}">
+                            <p style="color: green;">${successStatus}</p>
+                        </c:if>
                         <c:if test="${not empty errorDelete}">
                             <p style="color: red;">${errorDelete}</p> <!-- Hiển thị lỗi nếu có -->
                         </c:if>
@@ -170,7 +173,7 @@
                     <c:forEach var="order" items="${orderList}">
                         <tr>
                             <td>${order.id}</td>
-                            <td>${order.user_id}</td>
+                            <td>${order.userId}</td>
                             <td><fmt:formatDate value="${order.createdAt}" pattern="dd-MM-yyyy HH:mm:ss"/></td>
                             <td><fmt:formatNumber value="${order.totalPrice}" type="number"/></td>
                             <td>${order.paymentMethod}</td>
