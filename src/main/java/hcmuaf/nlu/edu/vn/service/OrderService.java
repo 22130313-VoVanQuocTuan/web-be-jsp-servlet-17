@@ -5,7 +5,11 @@ import hcmuaf.nlu.edu.vn.dao.Orders.OrderDao;
 import hcmuaf.nlu.edu.vn.dao.Orders.AddOrderDao;
 import hcmuaf.nlu.edu.vn.model.*;
 
+import java.sql.Date;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 public class OrderService {
@@ -31,7 +35,7 @@ public class OrderService {
     }
 
     // Lấy thông tin người dùng
-    public Users getInfoUser(int id){
+    public Users getInfoUser(int id) {
         return orderDao.getInfoUser(id);
     }
 
@@ -44,10 +48,10 @@ public class OrderService {
     public List<OrderItem> getOrderItems(int id) throws SQLException {
         return orderDao.orderItems(id);
     }
-
-
-
-
+    // hàm xoas hóa đơn trong thông tinn khách hàng
+    public boolean cancelOrder(int id) throws SQLException {
+        return deleteOrderDao.cancelOrder(id);
+    }
     //Xoá hoá đơn
     public boolean deleteOrder(int id) throws SQLException {
         return deleteOrderDao.deleteOrder(id);
@@ -59,20 +63,20 @@ public class OrderService {
 
     //Cập nhật hoá đơn
     public boolean updateOrderStatus(int id, String status) throws SQLException {
-        return  orderDao.updateOrderStatus(id, status);
+        return orderDao.updateOrderStatus(id, status);
     }
 
     //Cập nhật trạng thái thanh toán hoá đơn
     public boolean updateOrderPaymentStatus(int id, String status) throws SQLException {
-        return  orderDao.updateOrderPaymentStatus(id, status);
+        return orderDao.updateOrderPaymentStatus(id, status);
     }
-
 
 
     //thêm hoá đơn
     public Orders addOrder(Orders order) throws SQLException {
         return addOrderDao.addOrder(order);
     }
+
     //thêm chi tiết hoá đơn
     public void addOrderItems(OrderItem order) throws SQLException {
         addOrderDao.addOrderItem(order);
