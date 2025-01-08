@@ -43,16 +43,7 @@ public class Orders {
 
     }
 
-    public Orders(int userId, Double totalPrice, Double shippingFee, Double discountAmount, String shippingAddress, String paymentMethod, String paymentStatus, String status) {
-        this.userid = userId;
-        this.totalPrice = totalPrice;
-        this.shippingFee = shippingFee;
-        this.discountAmount = discountAmount;
-        this.shippingAddress = shippingAddress;
-        this.paymentMethod = paymentMethod;
-        this.paymentStatus = paymentStatus;
-        this.status = status;
-    }
+
 
     public int getId() {
         return id;
@@ -66,7 +57,7 @@ public class Orders {
         return userid;
     }
 
-    public void setUserIdd(int userId) {
+    public void setUserId(int userId) {
         this.userid = userId;
     }
 
