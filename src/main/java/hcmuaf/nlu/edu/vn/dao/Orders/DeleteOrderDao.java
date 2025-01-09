@@ -1,9 +1,14 @@
 package hcmuaf.nlu.edu.vn.dao.Orders;
 
 import hcmuaf.nlu.edu.vn.dao.DBConnect;
+import hcmuaf.nlu.edu.vn.model.Orders;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 
 public class DeleteOrderDao {
     private final DBConnect dbConnect;
@@ -14,12 +19,8 @@ public class DeleteOrderDao {
 
     // Xóa các bản order
     public boolean deleteOrder(int id) throws SQLException {
-
         String deleteOrderQuery = "DELETE FROM orders WHERE id = ?";
-
-        try (
-                PreparedStatement psDeleteOrder = dbConnect.preparedStatement(deleteOrderQuery)) {
-
+        try (PreparedStatement psDeleteOrder = dbConnect.preparedStatement(deleteOrderQuery)) {
             // Xóa hóa đơn từ bảng orders
             psDeleteOrder.setInt(1, id);
             int orderDeleted = psDeleteOrder.executeUpdate();
@@ -44,5 +45,57 @@ public class DeleteOrderDao {
             throw new RuntimeException(e);
         }
     }
+
+    public boolean cancelOrder(int id) throws SQLException {
+        String checkOrderQuery = "SELECT createdAt FROM orders WHERE id = ?";
+        try (PreparedStatement psCheckOrder = dbConnect.preparedStatement(checkOrderQuery)) {
+            psCheckOrder.setInt(1, id);
+            ResultSet rs = psCheckOrder.executeQuery();
+
+            // Kiểm tra xem đơn hàng có tồn tại không
+            if (rs.next()) {
+                Timestamp createdAt = rs.getTimestamp("createdAt");
+                LocalDateTime createdDateTime = createdAt.toLocalDateTime();
+                LocalDateTime now = LocalDateTime.now();
+
+                // Kiểm tra thời gian đã quá 2 ngày chưa
+                long daysDifference = ChronoUnit.DAYS.between(createdDateTime, now);
+                if (daysDifference > 2) {
+                    // Nếu đã quá 2 ngày, không cho phép xóa
+                    return false;
+                }
+
+                // Nếu chưa quá 2 ngày, tiến hành xóa các mục trong bảng orderitems
+                String deleteOrderItemsQuery = "DELETE FROM orderitems WHERE orderId = ?";
+                try (PreparedStatement psDeleteOrderItems = dbConnect.preparedStatement(deleteOrderItemsQuery)) {
+                    psDeleteOrderItems.setInt(1, id);
+                    int rowsDeletedItems = psDeleteOrderItems.executeUpdate();
+
+                    // Kiểm tra xem việc xóa mục trong orderitems có thành công không
+                    if (rowsDeletedItems > 0) {
+                        // Sau khi xóa các mục trong orderitems, hủy đơn hàng trong bảng orders
+                        String deleteOrderQuery = "DELETE FROM orders WHERE id = ?";
+                        try (PreparedStatement psDeleteOrder = dbConnect.preparedStatement(deleteOrderQuery)) {
+                            psDeleteOrder.setInt(1, id);
+                            int rowsDeletedOrder = psDeleteOrder.executeUpdate();
+
+                            // Kiểm tra xem việc xóa đơn hàng có thành công không
+                            if (rowsDeletedOrder > 0) {
+                                return true;
+                            }
+                        }
+                    }
+                }
+            } else {
+                System.out.println("Không tìm thấy đơn hàng với ID: " + id);
+                return false;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Lỗi khi xóa đơn hàng", e);
+        }
+        return false;
+    }
+
+
 
 }

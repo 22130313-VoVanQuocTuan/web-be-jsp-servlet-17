@@ -20,7 +20,7 @@
         <div class="navigation">
             <ul>
                 <li>
-                    <a href="index.html">
+                    <a href="home">
                         <span class="icon">
                            <img src="${pageContext.request.contextPath}/users/img/logo.png" alt="">
                         </span>
@@ -29,7 +29,7 @@
                 </li>
 
                 <li>
-                    <a href="index.jsp">
+                    <a href="home">
                         <span class="icon">
                             <ion-icon name="home-outline"></ion-icon>
                         </span>
@@ -108,10 +108,13 @@
                 </div>
 
                 <div class="search">
-                    <label>
-                        <input type="text" placeholder="Tìm kiếm ở đây">
-                        <ion-icon name="search-outline"></ion-icon>
-                    </label>
+                    <form action="home" method="get">
+                        <label>
+                            <input type="text" name="id" placeholder="Tìm kiếm ở đây">
+                            <ion-icon name="search-outline"><button type="submit" style="border: none; background: none; cursor: pointer;"></button></ion-icon>
+                        </label>
+                        <input type="hidden" name="search" value="id">
+                    </form>
                 </div>
 
                 <div class="user">
@@ -172,69 +175,32 @@
                 <div class="recentOrders">
                     <div class="cardHeader">
                         <h2>Đơn Hàng Gần Đây</h2>
-                        <a href="#" class="btn">Xem Tất Cả</a>
+                        <a href="home?showAll=orders" class="btn">Xem Tất Cả</a>
                     </div>
 
                     <table>
                         <thead>
                             <tr>
-                                <td>Tên</td>
+                                <td>Mã đơn hàng</td>
                                 <td>Giá</td>
                                 <td>Thanh Toán</td>
+                                <td>Ngày đặt hàng</td>
                                 <td>Trạng Thái</td>
                             </tr>
                         </thead>
-
                         <tbody>
+                        <c:forEach var="view" items="${viewOrder}">
                             <tr>
-                                <td>Xi măng SCG-PC40-ELE</td>
-                                <td>300.000₫</td>
-                                <td>Đã Thanh Toán</td>
-                                <td><span class="status delivered">Đã Giao</span></td>
+                                <td>${view.userId}</td>
+                                <td>${view.totalPrice}</td>
+                                <td>${view.paymentStatus}</td>
+                                <td>${view.createdAt}</td>
+                                <td>${view.status}</td>
+<%--                                <td><span class="status delivered">Đã Giao</span></td>--%>
                             </tr>
-
-                            <tr>
-                                <td>Sơn Sắt Giả Gỗ Lotus Meta Coat Primer – 1 Sơn Lót + 1 Sơn Phủ</td>
-                                <td>431.000₫</td>
-                                <td>Chưa Thanh Toán</td>
-                                <td><span class="status inProgress">Đang Tiến Hành</span></td>
-                            </tr>
-
-                            <tr>
-                                <td>Thép cốt bê tông</td>
-                                <td>300.000₫</td>
-                                <td>Đã Thanh Toán</td>
-                                <td><span class="status delivered">Đã Giao</span></td>
-                            </tr>
-
-                            <tr>
-                                <td>Thép hộp vuông mạ kẽm Sendo</td>
-                                <td>600.000₫</td>
-                                <td>Chưa Thanh Toán</td>
-                                <td><span class="status pending">Đang Chờ</span></td>
-                            </tr>
-
-                            <tr>
-                                <td>Máy bơm tăng áp A-130 JAK – Panasonic</td>
-                                <td>2,150,000₫</td>
-                                <td>Đã Thanh Toán</td>
-                                <td><span class="status return">Trả Hàng</span></td>
-                            </tr>
-
-                            <tr>
-                                <td>Đồng hồ điện điện tử LSE LS142 có 1 pha 2 dây</td>
-                                <td>200.000₫</td>
-                                <td>Chưa Thanh Toán</td>
-                                <td><span class="status inProgress">Đang Tiến Hành</span></td>
-                            </tr>
-                            <tr>
-                                <td>Máy nước nóng Beko BWI35S1N-213</td>
-                                <td>2.450.000₫</td>
-                                <td>Chưa Thanh Toán</td>
-                                <td><span class="status inProgress">Đang Tiến Hành</span></td>
-                            </tr>
-
+                            </c:forEach>
                         </tbody>
+
                     </table>
                 </div>
 
@@ -242,76 +208,24 @@
                 <div class="recentCustomers">
                     <div class="cardHeader">
                         <h2>Khách hàng tiềm năng</h2>
+                        <a href="home?showAll=users" class="btn">Xem Tất Cả</a>
                     </div>
                     <table>
+                        <c:forEach var="user" items="${users}">
                         <tr>
                             <td width="60px">
-                                <a href="account.html">
+                                <a href="accounts">
                                     <ion-icon name="person"
                                         style="color: #1841e4; font-size: 20px; text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);"></ion-icon>
                                 </a>
                             </td>
                             <td>
-                                <h4>Nguyễn Văn A </h4>
+                                <h4>${user.fullName}</h4>
                             </td>
                         </tr>
+                        </c:forEach>
 
-                        <tr>
-                            <td width="60px">
-                                <a href="account.html">
-                                    <ion-icon name="person"
-                                        style="color: #1841e4; font-size: 20px; text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);"></ion-icon>
-                                </a>
-                            </td>
-                            <td>
-                                <h4>Trần Thị B <br> </h4>
-                            </td>
-                        </tr>
 
-                        <tr>
-                            <td width="60px">
-                                <a href="account.html">
-                                    <ion-icon name="person"
-                                        style="color: #1841e4; font-size: 20px; text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);"></ion-icon>
-                                </a>
-                            </td>
-                            <td>
-                                <h4>Lê Hoàng C <br> </h4>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td width="60px">
-                                <a href="account.html"> 
-                                    <ion-icon name="person" style="color: #1841e4; font-size: 20px; text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);"></ion-icon>
-                                  </a>        
-                            </td>
-                            <td>
-                                <h4>Phạm Minh D </h4>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td width="60px">
-                                <a href="account.html"> 
-                                    <ion-icon name="person" style="color: #1841e4; font-size: 20px; text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);"></ion-icon>
-                                  </a>        
-                            </td>
-                            <td>
-                                <h4>Đỗ Thị E </h4>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td width="60px">
-                                <a href="account.html"> 
-                                    <ion-icon name="person" style="color: #1841e4; font-size: 20px; text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);"></ion-icon>
-                                  </a>        
-                            </td>
-                            <td>
-                                <h4>Trần Hoàng M </h4>
-                            </td>
-                        </tr>
                     </table>
                 </div>
             </div>

@@ -19,7 +19,7 @@
     <div class="navigation">
         <ul>
             <li>
-                <a href="index.html">
+                <a href="home">
                         <span class="icon">
                             <img src="<c:url value="/users/img/logo.png"/>" alt="">
                         </span>
@@ -28,7 +28,7 @@
             </li>
 
             <li>
-                <a href="index.html">
+                <a href="home">
                         <span class="icon">
                             <ion-icon name="home-outline"></ion-icon>
                         </span>
@@ -54,7 +54,7 @@
                 </a>
             </li>
             <li>
-                <a href="order">
+                <a href="order-list">
                         <span class="icon">
                             <ion-icon name="receipt-outline"></ion-icon>
                         </span>

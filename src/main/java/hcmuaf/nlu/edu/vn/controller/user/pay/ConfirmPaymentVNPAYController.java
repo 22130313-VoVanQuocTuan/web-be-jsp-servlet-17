@@ -1,8 +1,11 @@
 package hcmuaf.nlu.edu.vn.controller.user.pay;
 
+import hcmuaf.nlu.edu.vn.dao.carts.CartItems;
 import hcmuaf.nlu.edu.vn.model.Users;
+import hcmuaf.nlu.edu.vn.service.CartService;
 import hcmuaf.nlu.edu.vn.service.EmailUtilService;
 import hcmuaf.nlu.edu.vn.service.OrderService;
+import hcmuaf.nlu.edu.vn.service.ProductService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -12,6 +15,7 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 
 @WebServlet(name = "ConfirmPayment", value = "/confirm-payment")
 public class ConfirmPaymentVNPAYController extends HttpServlet {
@@ -44,10 +48,21 @@ public class ConfirmPaymentVNPAYController extends HttpServlet {
         int orderId = (Integer) session.getAttribute("orderId");
         OrderService orderService = new OrderService();
         try {
+            CartService cartService = new CartService();
+            ProductService productService = new ProductService();
+            List<CartItems> cartItemsList = cartService.getCartFromSession(session).listItems();
+            for (CartItems cartItem : cartItemsList) {
+                // Cập nhật soldCount trong bảng products
+                boolean isUpdated = productService.updateSoldCountProduct(cartItem.getId(), cartItem.getQuantity());
+                if (!isUpdated) {
+                    System.out.println("Failed to update soldCount for product ID: " + cartItem.getId());
+                }
+            }
             orderService.updateOrderPaymentStatus(orderId, "Đã thanh toán");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+        
 
         // Chuyển tiếp tới file JSP
         //Lấy user từ session để gửi email xác nhận thanh toán

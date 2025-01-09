@@ -1,6 +1,5 @@
 package hcmuaf.nlu.edu.vn.model;
 
-import java.sql.Timestamp;
 import java.util.Date;
 
 public class Orders {
@@ -185,12 +184,12 @@ public class Orders {
         this.note = note;
     }
 
-    public Date getCreatedAt() {
-        return createdAt;
-    }
-
     public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
     }
 
     public Date getUpdatedAt() {
@@ -200,6 +199,7 @@ public class Orders {
     public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
     }
+
 }
 
 

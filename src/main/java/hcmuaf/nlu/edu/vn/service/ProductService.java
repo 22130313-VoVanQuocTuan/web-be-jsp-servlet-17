@@ -101,9 +101,14 @@ public class ProductService {
     public List<Product> getListProductByName(String name) throws SQLException {
         return productDAO.getListProductByName(name);
     }
-
+    // Cập nhật lượt xem khi ấn vào trang chi tiết sản phẩm.
     public boolean updateViewProduct(int id) {
         return productDAO.updateViewProduct( id);
+    }
+
+    // Cập nhật lượt bán
+    public boolean updateSoldCountProduct(int id,int quantity){
+        return productDAO.updateSoldCountProduct(id,quantity);
     }
 }
 

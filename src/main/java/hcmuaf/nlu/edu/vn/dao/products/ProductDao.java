@@ -178,6 +178,7 @@ public class ProductDao {
         product.setCreateDate(rs.getTimestamp("createDate"));
         return product;
     }
+
     // LẤY RA SANR PHẨM THEO TÊN
     public List<Product> getListProductByName(String name) throws SQLException {
         String sql = "SELECT * FROM products WHERE name LIKE ? COLLATE utf8mb4_unicode_ci";
@@ -192,6 +193,7 @@ public class ProductDao {
         }
         return products;
     }
+
     // UPDATE VIEW
     public boolean updateViewProduct(int id) {
         String sql = "UPDATE products SET view = view + 1 WHERE id = ?";
@@ -204,6 +206,20 @@ public class ProductDao {
         }
     }
 
+    // Cập nhật số lượng bán
+    public boolean updateSoldCountProduct(int id, int quantity) {
+        // Sửa câu lệnh SQL: Dùng dấu phẩy để cập nhật nhiều cột
+        String sql = "UPDATE products SET soldCount = soldCount + ?, quantity = quantity - ? WHERE id = ?";
+        try (PreparedStatement stmt = dbConnect.preparedStatement(sql)) {
+            stmt.setInt(1, quantity); // Tham số đầu tiên: số lượng cần cộng vào soldCount
+            stmt.setInt(2, quantity); // Tham số thứ hai: số lượng cần trừ khỏi quantity
+            stmt.setInt(3, id);       // Tham số thứ ba: ID sản phẩm
+            int rowsUpdated = stmt.executeUpdate();
+            return rowsUpdated > 0;   // Trả về true nếu cập nhật thành công
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
 
 
