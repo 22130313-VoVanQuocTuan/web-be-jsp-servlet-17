@@ -239,36 +239,40 @@
             <!-- Đơn hàng gần nhất -->
             <div class="recent-orders">
                 <h2>Đơn hàng gần nhất</h2>
-                <table>
-                    <thead>
-                    <tr>
-                        <th>Mã đơn hàng</th>
-                        <th>Ngày đặt</th>
-                        <th>Địa chỉ</th>
-                        <th>Tình trạng thanh toán</th>
-                        <th>Chi tiết đơn hàng</th>
-                        <th>Hành động</th>
-                    </tr>
-                    </thead>
-
-                    <tbody>
-                    <c:forEach var="order" items="${orders}">
+                <div class="table-container">
+                    <table>
+                        <thead>
                         <tr>
-                            <td>${order.id}</td>
-                            <td>${order.createdAt}</td>
-                            <td>${order.shippingAddress}</td>
-                            <td>${order.paymentStatus}</td>
-                            <td>
-                                <a href="informationCustomer?orderId=${order.id}" class="view-detail-btn"><button>Xem</button></a>
-                            </td>
-                            <td>
-                                <!-- Nút hủy -->
-                                <button id="cancel-order-btn" data-order-id="${order.id}">Hủy đơn</button>
-                            </td>
+                            <th>Mã đơn hàng</th>
+                            <th>Ngày đặt</th>
+                            <th>Địa chỉ</th>
+                            <th>Tình trạng thanh toán</th>
+                            <th>Chi tiết đơn hàng</th>
+                            <th>Hành động</th>
                         </tr>
-                    </c:forEach>
-                    </tbody>
-                </table>
+                        </thead>
+
+                        <tbody>
+                        <c:forEach var="order" items="${orders}">
+                            <tr>
+                                <td>${order.id}</td>
+                                <td>${order.createdAt}</td>
+                                <td>${order.shippingAddress}</td>
+                                <td>${order.paymentStatus}</td>
+                                <td>
+                                    <a href="informationCustomer?orderId=${order.id}" class="view-detail-btn">
+                                        <button>Xem</button>
+                                    </a>
+                                </td>
+                                <td>
+                                    <!-- Nút hủy -->
+                                    <button id="cancel-order-btn" data-order-id="${order.id}">Hủy đơn</button>
+                                </td>
+                            </tr>
+                        </c:forEach>
+                        </tbody>
+                    </table>
+                </div>
             </div>
 
             <!-- Thông tin khách hàng -->
@@ -460,7 +464,7 @@
     window.addEventListener('DOMContentLoaded', function () {
         const alert = document.querySelector('.alert');
         if (alert) {
-            setTimeout(function() {
+            setTimeout(function () {
                 alert.classList.add('fade-out');
             }, 3000);  // 3 giây trước khi bắt đầu hiệu ứng biến mất
         }

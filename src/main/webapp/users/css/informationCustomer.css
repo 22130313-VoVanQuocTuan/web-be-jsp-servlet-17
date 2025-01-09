@@ -67,6 +67,12 @@
     color: #f1f1f1;
     font-weight: bold;
 }
+.table-container {
+    max-height: 300px; /* Giới hạn chiều cao (300px là ví dụ, có thể chỉnh sửa theo ý muốn) */
+    overflow-y: auto; /* Kích hoạt cuộn dọc khi cần thiết */
+    border: 1px solid #ddd; /* Thêm đường viền để dễ nhìn */
+    margin-top: 10px;
+}
 
 table {
     width: 100%;

@@ -305,9 +305,7 @@
                 </div>
             </div>
         </div>
-
     </div>
-
 </div>
 
 
@@ -409,7 +407,6 @@
     <div id="codForm" class="modal">
         <p class="title">Thanh toán khi nhận hàng (COD)</p>
         <form action="payCOD" method="post">
-
             <table border="1">
                 <tr>
                     <th>Tên sản phẩm</th>
@@ -469,8 +466,5 @@
         }
     });
 </script>
-
-
 </body>
-
 </html>
