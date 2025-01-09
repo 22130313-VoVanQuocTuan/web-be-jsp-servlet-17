@@ -685,6 +685,7 @@ p {
 
 .product-one-content-item .product-title .product-price:hover {
     transform: translate(-15px);
+
 }
 
 .product-one-content-item .product-title .product-price:hover li {
@@ -710,6 +711,7 @@ p {
 
 .product-one-content-item .product-title .product-price:hover .add-to-cart {
     display: block;
+    text-decoration: none;
 }
 
 .product-one-content-item .product-title .product-price li {

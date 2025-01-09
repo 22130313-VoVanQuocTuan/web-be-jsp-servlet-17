@@ -188,7 +188,7 @@
         <div class="product-one-content-title">
             <div class="title">
                 <h3>Flash Sale !!</h3>
-                <span><a class="highlight-text" href="users/page/product.jsp">Xem thêm</a></span>
+                <span><a class="highlight-text" href="product">Xem thêm</a></span>
             </div>
         </div>
         <div class="product-one-content-items">

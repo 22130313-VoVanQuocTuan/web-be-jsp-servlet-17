@@ -64,7 +64,7 @@ public class ConfirmPaymentCODController extends HttpServlet {
                   OrderItem orderItem = new OrderItem(o.getId(), cartItem.getId(), cartItem.getQuantity(), cartItem.getPrice(), cartItem.getTotalPrice(), cartItem.getDiscountAmount());
                   orderService.addOrderItems(orderItem);
               }
-              request.setAttribute("message", "Thanh toán thành công");
+              request.setAttribute("message", "Đặt hàng thành công");
               String emailContent = "<html>"
                       + "<body>"
                       + "<h2>Cảm ơn bạn đã đặt hàng tại cửa hàng của chúng tôi!</h2>"

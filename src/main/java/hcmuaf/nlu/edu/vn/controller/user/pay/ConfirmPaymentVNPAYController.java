@@ -54,7 +54,7 @@ public class ConfirmPaymentVNPAYController extends HttpServlet {
         Users user = (Users) session.getAttribute("user");
         double totalFinalPrice = (double) session.getAttribute("totalFinalPrice");
 
-        req.setAttribute("message", "Thanh toán thành công");
+        req.setAttribute("message", "Đặt hàng thành công");
         String emailContent = "<html>"
                 + "<body>"
                 + "<h2>Cảm ơn bạn đã đặt hàng tại cửa hàng của chúng tôi!</h2>"
