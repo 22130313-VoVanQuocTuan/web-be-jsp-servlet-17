@@ -169,7 +169,7 @@
     <div class="navigation">
         <ul>
             <li>
-                <a href="index.html">
+                <a href="home">
                         <span class="icon">
                             <img src="${pageContext.request.contextPath}/users/img/logo.png" alt="">
                         </span>
@@ -178,7 +178,7 @@
             </li>
 
             <li>
-                <a href="index.html">
+                <a href="home">
                         <span class="icon">
                             <ion-icon name="home-outline"></ion-icon>
                         </span>
@@ -204,7 +204,7 @@
                 </a>
             </li>
             <li>
-                <a href="order">
+                <a href="order-list">
                         <span class="icon">
                             <ion-icon name="receipt-outline"></ion-icon>
                         </span>
@@ -234,7 +234,7 @@
                         <span class="icon">
                             <ion-icon name="chatbubble-outline"></ion-icon>
                         </span>
-                    <span class="title">Review</span>
+                    <span class="title">Đánh giá</span>
                 </a>
             </li>
             <li>

@@ -83,7 +83,7 @@
                         <span class="icon">
                             <ion-icon name="chatbubble-outline"></ion-icon>
                         </span>
-                    <span class="title">Review</span>
+                    <span class="title">Đánh giá</span>
                 </a>
             </li>
 
@@ -179,7 +179,7 @@
                             <td>${order.paymentMethod}</td>
                             <td>${order.status}</td>
                             <td class="v">
-                                <button> <a href="GetDetailOrder?id=${order.id}" class="view-detail-btn">Chi tiết</a>
+                                <button> <a href="GetDetailOrder?id=${order.id}" class="view-detail-btn" style="text-decoration: none ; color: #1c293d" >Chi tiết</a>
                                 </button>
                                 <button class="delete-btn" data-id="${order.id}">Xóa</button>
                             </td>
