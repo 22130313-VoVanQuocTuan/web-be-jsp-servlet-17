@@ -38,7 +38,7 @@
         <div class="navigation">
             <ul>
                 <li>
-                    <a href="index.html">
+                    <a href="home">
                         <span class="icon">
                             <img src="${pageContext.request.contextPath}/users/img/logo.png" alt="">
                         </span>
@@ -47,7 +47,7 @@
                 </li>
 
                 <li>
-                    <a href="index.html">
+                    <a href="home">
                         <span class="icon">
                             <ion-icon name="home-outline"></ion-icon>
                         </span>
@@ -73,7 +73,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="order">
+                    <a href="order-list">
                         <span class="icon">
                             <ion-icon name="receipt-outline"></ion-icon>
                         </span>
@@ -103,7 +103,7 @@
                         <span class="icon">
                             <ion-icon name="chatbubble-outline"></ion-icon>
                         </span>
-                        <span class="title">Review</span>
+                        <span class="title">Đánh giá</span>
                     </a>
                 </li>
 
@@ -184,7 +184,7 @@
             <div id="delete-modal" class="modal">
                 <div class="modal-content">
                     <h3>Xác nhận xóa</h3>
-                    <label>Bạn có chắc chắn muốn xóa tài khoản này?</label>
+                    <label>Bạn có chắc chắn muốn xóa đánh giá này?</label>
                     <div class="button-container">
                         <button id="confirm-delete" class="confirm-delete">Xóa</button>
                         <button  class="close-modal">Hủy</button>

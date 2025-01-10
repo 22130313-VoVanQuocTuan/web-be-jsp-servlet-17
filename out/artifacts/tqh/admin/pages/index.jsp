@@ -85,7 +85,7 @@
                         <span class="icon">
                             <ion-icon name="chatbubble-outline"></ion-icon>
                         </span>
-                        <span class="title">Review</span>
+                        <span class="title">Đánh giá</span>
                     </a>
                 </li>
 

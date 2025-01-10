@@ -156,7 +156,6 @@
     </div>
 
     <div id="section-content-1">
-
         <div class="confirmation-container">
             <div class="icon-check">
                 <i class="${message == 'Thanh toán thất bại' ? 'fa-regular fa-circle-xmark' : 'fa-regular fa-circle-check'}"

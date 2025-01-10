@@ -10,17 +10,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a12e9487-9b8e-478d-a647-dcabb69ef86a" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/page/confirmation.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/tqh/users/page/confirmation.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/page/informationCustomer.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/tqh/users/page/informationCustomer.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/controller/user/pay/ConfirmPaymentCODController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/controller/user/pay/ConfirmPaymentCODController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/controller/user/pay/ConfirmPaymentVNPAYController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/controller/user/pay/ConfirmPaymentVNPAYController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/dao/products/ProductDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/dao/products/ProductDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/service/ProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/service/ProductService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/users/css/informationCustomer.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/users/css/informationCustomer.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/users/page/confirmation.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/users/page/confirmation.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/users/page/informationCustomer.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/users/page/informationCustomer.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/admin/pages/products.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/tqh/admin/pages/products.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/admin/pages/user.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/tqh/admin/pages/user.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/admin/pages/category.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/admin/pages/category.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/admin/pages/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/admin/pages/index.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/admin/pages/order.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/admin/pages/order.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/admin/pages/products.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/admin/pages/products.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/admin/pages/promotional.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/admin/pages/promotional.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/admin/pages/review.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/admin/pages/review.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/admin/pages/user.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/admin/pages/user.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/users/css/check-pay.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/users/css/check-pay.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/users/css/home.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/users/css/home.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/users/page/check-pay.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/users/page/check-pay.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,6 +69,7 @@
     &quot;Tomcat Server.Tomcat 10.1.31.executor&quot;: &quot;Run&quot;,
     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/web-be-jsp-servlet-17&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -185,7 +188,12 @@
       <option name="presentableId" value="Default" />
       <updated>1736323544308</updated>
       <workItem from="1736323545382" duration="13232000" />
-      <workItem from="1736389802023" duration="5550000" />
+      <workItem from="1736389802023" duration="6813000" />
+      <workItem from="1736409882487" duration="8235000" />
+      <workItem from="1736446940917" duration="29000" />
+      <workItem from="1736447292003" duration="21000" />
+      <workItem from="1736450437199" duration="67000" />
+      <workItem from="1736499686882" duration="1073000" />
     </task>
     <servers />
   </component>
