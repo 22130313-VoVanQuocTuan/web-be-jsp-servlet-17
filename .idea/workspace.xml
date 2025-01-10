@@ -11,10 +11,6 @@
   <component name="ChangeListManager">
     <list default="true" id="3ddaa021-6bbe-426c-bfa7-4e0b32b33019" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/controller/user/pay/ConfirmPaymentCODController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/controller/user/pay/ConfirmPaymentCODController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/controller/user/pay/ConfirmPaymentVNPAYController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/controller/user/pay/ConfirmPaymentVNPAYController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/home.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/home.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/users/css/home.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/users/css/home.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -177,6 +173,11 @@
       <workItem from="1736347994586" duration="695000" />
       <workItem from="1736353777576" duration="1396000" />
       <workItem from="1736389851882" duration="2075000" />
+      <workItem from="1736425022893" duration="1093000" />
+      <workItem from="1736428429534" duration="114000" />
+      <workItem from="1736429105582" duration="1240000" />
+      <workItem from="1736509142129" duration="2243000" />
+      <workItem from="1736514751631" duration="1928000" />
     </task>
     <servers />
   </component>
