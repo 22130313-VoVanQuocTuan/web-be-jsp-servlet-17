@@ -193,7 +193,7 @@
     <div class="index">
         <div class="box1">
             <div class="form-group1">
-                <div class="info"> Thông tin nhận hàng</div>
+                <div class="info" style="FONT-SIZE: 20PX;font-weight: bold; margin-bottom: 16px;"> Thông tin nhận hàng</div>
                 <form action="update-info-shipping" method="post">
                     <div class="form-group">
                         <input type="email" name="email" id="email" class="back email" placeholder="Email" required

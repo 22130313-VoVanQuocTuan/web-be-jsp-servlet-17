@@ -11,6 +11,13 @@
   <component name="ChangeListManager">
     <list default="true" id="3ddaa021-6bbe-426c-bfa7-4e0b32b33019" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/page/confirmation.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/tqh/users/page/confirmation.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/users/css/buying-help.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/users/css/buying-help.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/users/css/cart.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/users/css/cart.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/users/css/confirmation.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/users/css/confirmation.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/users/css/home.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/users/css/home.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/users/css/terms_and_services.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/users/css/terms_and_services.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/users/page/confirmation.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/users/page/confirmation.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -178,6 +185,7 @@
       <workItem from="1736429105582" duration="1240000" />
       <workItem from="1736509142129" duration="2243000" />
       <workItem from="1736514751631" duration="1928000" />
+      <workItem from="1736660203929" duration="3151000" />
     </task>
     <servers />
   </component>

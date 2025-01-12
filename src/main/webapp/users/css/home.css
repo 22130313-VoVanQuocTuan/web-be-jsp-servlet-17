@@ -573,6 +573,7 @@ p {
     border-radius: 5px;
     margin-left: auto;
     margin-right: auto;
+    width: 82%;
 }
 
 .product-one-content .title {
@@ -810,8 +811,10 @@ p {
     gap: 20px;
     margin-top: 50px;
     background-color: #f7f7f7;
-    
+    width: 84%;
     border-radius: 10px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .selling-products-content {
@@ -947,6 +950,7 @@ p {
     margin-top: 50px;
     margin-left: auto;
     margin-right: auto;
+    width: 82%;
 }
 
 .slider-product-one-content-items {
@@ -1149,7 +1153,7 @@ p {
 /* ---------------------Slider product 2---------------- */
 
 .slider-product-two-content {
-   
+    width: 82%;
     background: linear-gradient(to right, #4f3131, #15283e);
     padding: 10px;
     border-radius: 5px;
@@ -1359,7 +1363,7 @@ p {
 /* ---------------------Slider product 3---------------- */
 
 .slider-product-three-content {
- 
+    width: 82%;
     background: linear-gradient(to right, #4f3131, #15283e);
     padding: 10px;
     border-radius: 5px;
@@ -1571,7 +1575,7 @@ p {
 /* ---------------------Slider product 4---------------- */
 
 .slider-product-four-content {
-    
+    width: 82%;
     background: linear-gradient(to right, #4f3131, #15283e);
     padding: 10px;
     border-radius: 5px;
@@ -1781,7 +1785,7 @@ p {
 /* ---------------------Slider product 5---------------- */
 
 .slider-product-five-content {
-    
+    width: 82%;
     background: linear-gradient(to right, #4f3131, #15283e);
     padding: 10px;
     border-radius: 5px;
@@ -1975,7 +1979,7 @@ p {
 /* ---------------------Slider product 6---------------- */
 
 .slider-product-six-content {
-    
+    width: 82%;
     background: linear-gradient(to right, #4f3131, #15283e);
     padding: 10px;
     border-radius: 5px;
@@ -2185,7 +2189,7 @@ p {
 /* ---------------------Slider product 7---------------- */
 
 .slider-product-seven-content {
-    
+    width:82%;
     background: linear-gradient(to right, #4f3131, #15283e);
     padding: 10px;
     border-radius: 5px;
@@ -2379,7 +2383,7 @@ p {
 /* ---------------------Slider product 8---------------- */
 
 .slider-product-eight-content {
-    
+    width: 82%;
     background: linear-gradient(to right, #4f3131, #15283e);
     padding: 10px;
     border-radius: 5px;
@@ -2589,7 +2593,7 @@ p {
 /* ---------------------Slider product 9---------------- */
 
 .slider-product-nine-content {
-    
+    width: 82%;
     background: linear-gradient(to right, #4f3131, #15283e);
     padding: 10px;
     border-radius: 5px;
