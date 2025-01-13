@@ -27,7 +27,7 @@ public class EmailUtilService {
         final String host = "smtp.gmail.com";
 
         Properties properties = new Properties();
-        properties.put("mail.smtp.host", host);
+        properties.put("mail.smtp.host", host); // gửi mail qua smtp
         properties.put("mail.smtp.port", "587");
         properties.put("mail.smtp.auth", "true");
         properties.put("mail.smtp.starttls.enable", "true");

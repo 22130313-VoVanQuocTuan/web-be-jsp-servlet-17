@@ -161,7 +161,7 @@
                     <div class="add-category">
                         <p style="font-size: 20px; margin-bottom: 10px;">Thêm danh mục</p>
                         <form action="add-delete-category" method="post">
-                        <input type="text" name="name" style="font-size: 17px; border-radius: 5px;" placeholder="Nhập tên danh mục">
+                        <input type="text" name="name" style="font-size: 17px; border-radius: 5px;" placeholder="Nhập tên danh mục" required>
                             <c:if test="${not empty error}">
                                 <p style="color: red;">${error}</p> <!-- Hiển thị lỗi nếu có -->
                             </c:if>

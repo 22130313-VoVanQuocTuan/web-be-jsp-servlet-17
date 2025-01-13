@@ -56,7 +56,6 @@ public class AddProductController extends HttpServlet {
             String name = request.getParameter("name");
             String priceStr = request.getParameter("price");
             String quantityStr = request.getParameter("quantity");
-            String img = request.getParameter("imageUrl");
             String description = request.getParameter("description");
             String categoryIdStr = request.getParameter("categoryId");
             String status = request.getParameter("status");

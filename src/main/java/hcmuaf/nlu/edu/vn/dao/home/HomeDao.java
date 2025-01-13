@@ -61,7 +61,7 @@ public class HomeDao {
 
     // Tổng doanh thu
     public double totalSale() {
-        String sql = "SELECT SUM(totalPrice) FROM orders";
+        String sql = "SELECT SUM(totalPrice) FROM orders where status = 'Đã hoàn thành'";
         try (PreparedStatement stmt = dbConnect.preparedStatement(sql)) {
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {

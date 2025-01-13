@@ -28,9 +28,11 @@ public class UpdateStatusOrderController extends HttpServlet {
 
         try {
             if(orderService.updateOrderStatus(id, status)) {
+                orderService.updateOrderPaymentStatus(id, "Đã thanh toán");
                 request.setAttribute("successStatus", "Cập nhật thành công!");
                 request.getRequestDispatcher("/order-list").forward(request, response);
             } else {
+
                 request.setAttribute("error", "Cập nhật không thành công!");
                 request.getRequestDispatcher("/order-list").forward(request, response);
             }

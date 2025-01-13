@@ -266,7 +266,7 @@
             <div id="verification-modal" class="modal">
                 <div class="modal-content">
                     <button title="close" type="button" class="close-button" id="close-button">
-                        <i class="fas fa-times"></i> <!-- Font Awesome icon for "X" -->
+                     <a href="login?action=login"> <i class="fas fa-times"></i></a>   <!-- Font Awesome icon for "X" -->
                     </button>
 
                     <h1>Xác thực email</h1>

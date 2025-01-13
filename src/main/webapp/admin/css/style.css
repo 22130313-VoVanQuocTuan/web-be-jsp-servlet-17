@@ -290,7 +290,7 @@ body {
 
 .cardHeader .btn {
   position: relative;
-  padding: 5px 10px;
+  padding: 5px 5px;
   background: #4f3131;
   text-decoration: none;
   color: var(--white);
@@ -380,7 +380,7 @@ td {
 /* ------------------Khách hàng gần dây-------------------- */
 .recentCustomers {
   position: relative;
-  display: grid;
+
   min-height: 400px;
   padding: 20px;
   background: var(--white);

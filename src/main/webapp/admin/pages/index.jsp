@@ -160,7 +160,7 @@
 
                 <div class="card">
                     <div>
-                        <div class="numbers">${totalSales}₫</div>
+                        <div class="numbers"><fmt:formatNumber value="${totalSales}" type="number" /> ₫</div>
                         <div class="cardName">Doanh Thu</div>
                     </div>
 
@@ -192,7 +192,7 @@
                         <c:forEach var="view" items="${viewOrder}">
                             <tr>
                                 <td>${view.userId}</td>
-                                <td>${view.totalPrice}</td>
+                                <td><fmt:formatNumber value="${view.totalPrice}" type="number" /></td>
                                 <td>${view.paymentStatus}</td>
                                 <td>${view.createdAt}</td>
                                 <td>${view.status}</td>
@@ -220,7 +220,7 @@
                                 </a>
                             </td>
                             <td>
-                                <h4>${user.fullName}</h4>
+                                <h4 style="padding: 20px;">${user.fullName}</h4>
                             </td>
                         </tr>
                         </c:forEach>
