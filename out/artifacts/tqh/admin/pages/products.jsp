@@ -12,7 +12,11 @@
     <!------------------ Kiểu dáng ------------------>
     <link rel="stylesheet" href="<c:url value="/admin/css/style.css"/>">
     <link rel="stylesheet" href="<c:url value="/admin/css/products.css"/>">
-
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
+    <!-- jQuery và DataTables JS -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
 </head>
 
 <style>
@@ -161,6 +165,17 @@
         transform: scale(1.1);
     }
 
+    /*CSS đè thêm để chỉnh display data table */
+    .dataTables_wrapper .dataTables_filter input {
+        border: 2px solid #15283e !important; /* Đổi viền thành màu xanh đậm */
+        border-radius: 5px !important; /* Bo tròn viền hơn */
+        padding: 8px !important; /* Tăng padding */
+        background-color: #f8f9fa !important; /* Đổi nền input */
+        color: #000 !important; /* Đổi màu chữ */
+        margin-left: 5px !important; /* Tăng khoảng cách */
+        margin-bottom: 10px !important;
+    }
+
 
 </style>
 <body>
@@ -253,17 +268,6 @@
             <div class="toggle">
                 <ion-icon name="menu-outline"></ion-icon>
             </div>
-
-            <div class="search">
-                <form action="products-list" method="GET">
-                    <label>
-                        <input type="text" name="name" placeholder="Tìm kiếm ở đây">
-                        <ion-icon name="search-outline"><button type="submit" style="border: none; background: none; cursor: pointer;"></button></ion-icon>
-                    </label>
-                    <input type="hidden" name="search" value="true">
-                </form>
-            </div>
-
             <div class="user">
                 <a href="accounts">
                     <ion-icon name="person"
@@ -278,13 +282,12 @@
             <div class="recentOrders">
                 <div class="cardHeader">
                     <h2>Danh sách sản phẩm</h2>
-                    <a href="products-list?showAll=true" class="btn">Xem Tất Cả</a>
                 </div>
                 <div class="list-products-content-button">
-                    <button id="add-product">Thêm sản phẩm</button>
+                    <button id="add-product" style="margin-bottom: 10px">Thêm sản phẩm</button>
                 </div>
                 <!-- Table products -->
-                <table>
+                <table  id="productTable" style="margin-top: 10px" >
                     <thead>
                     <tr>
                         <th>Hình ảnh</th>
@@ -516,4 +519,29 @@
     </script>
 </div>
 </body>
+<script>
+    $(document).ready(function () {
+        $('#productTable').DataTable({
+            "paging": true,         // Hiển thị phân trang
+            "searching": true,      // Hiển thị ô tìm kiếm
+            "ordering": true,       // Cho phép sắp xếp cột
+            "info": true,           // Hiển thị thông tin số lượng dữ liệu
+            "lengthMenu": [10, 25, 50, 100], // Số dòng hiển thị mỗi trang
+            "language": {
+                "lengthMenu": "Hiển thị _MENU_ sản phẩm mỗi trang",
+                "zeroRecords": "Không tìm thấy sản phẩm nào",
+                "info": "Trang _PAGE_ trên _PAGES_",
+                "infoEmpty": "Không có sản phẩm",
+                "infoFiltered": "(lọc từ _MAX_ sản phẩm)",
+                "search": "Tìm kiếm:",
+                "paginate": {
+                    "first": "Đầu",
+                    "last": "Cuối",
+                    "next": "Tiếp",
+                    "previous": "Trước"
+                }
+            }
+        });
+    });
+</script>
 </html>

@@ -9,20 +9,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3ddaa021-6bbe-426c-bfa7-4e0b32b33019" name="Changes" comment="">
+    <list default="true" id="57522236-5870-4d88-ac85-6297e208fd32" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/admin/pages/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/tqh/admin/pages/index.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/controller/admin/order/UpdateStatusOrderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/controller/admin/order/UpdateStatusOrderController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/controller/admin/product/AddProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/controller/admin/product/AddProductController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/dao/home/HomeDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/dao/home/HomeDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/filter/AdminFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/filter/AdminFilter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/model/Payments.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/service/EmailUtilService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/service/EmailUtilService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/admin/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/admin/css/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/admin/pages/category.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/admin/pages/category.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/admin/pages/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/admin/pages/index.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/users/page/cart.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/users/page/cart.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/users/page/login-signup.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/users/page/login-signup.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/admin/pages/products.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/tqh/admin/pages/products.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/controller/admin/product/GetProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/controller/admin/product/GetProductController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/admin/css/products.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/admin/css/products.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/admin/pages/products.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/admin/pages/products.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,10 +25,10 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="KubernetesApiPersistence">{}</component>
-  <component name="KubernetesApiProvider">{
-  &quot;isMigrated&quot;: true
-}</component>
+  <component name="KubernetesApiPersistence"><![CDATA[{}]]></component>
+  <component name="KubernetesApiProvider"><![CDATA[{
+  "isMigrated": true
+}]]></component>
   <component name="LogFilters">
     <option name="FILTER_ERRORS" value="false" />
     <option name="FILTER_WARNINGS" value="false" />
@@ -50,32 +43,31 @@
       </MavenGeneralSettings>
     </option>
   </component>
-  <component name="ProjectColorInfo">{
-  &quot;customColor&quot;: &quot;&quot;,
-  &quot;associatedIndex&quot;: 1
-}</component>
-  <component name="ProjectId" id="2rKsKlXc7jLN71kpudibsoKXJWG" />
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 8
+}]]></component>
+  <component name="ProjectId" id="2u44taVrnfGYKHZJ4yaIQhpXMg5" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;Tomcat Server.Tomcat 10.1.31.executor&quot;: &quot;Run&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Artifacts&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.1484375&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.3034483&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "Tomcat Server.Tomcat 10.1.31.executor": "Run",
+    "git-widget-placeholder": "22130098__LamHoangHuy",
+    "kotlin-language-version-configured": "true",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Artifacts",
+    "project.structure.proportion": "0.1484375",
+    "project.structure.side.proportion": "0.3034483",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RunManager">
     <configuration name="Tomcat 10.1.31" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 10.1.31" ALTERNATIVE_JRE_ENABLED="false" nameIsGenerated="true">
       <option name="UPDATING_POLICY" value="restart-server" />
@@ -87,7 +79,7 @@
         </artifact>
       </deployment>
       <server-settings>
-        <option name="BASE_DIRECTORY_NAME" value="c1dc602a-d722-4046-ae79-079b46ca63a9" />
+        <option name="BASE_DIRECTORY_NAME" value="1a5ae5da-c7e1-4c69-bff6-c21bda00e7e9" />
       </server-settings>
       <predefined_log_file enabled="true" id="Tomcat" />
       <predefined_log_file enabled="true" id="Tomcat Catalina" />
@@ -95,7 +87,7 @@
       <predefined_log_file id="Tomcat Host Manager" />
       <predefined_log_file id="Tomcat Localhost Access" />
       <RunnerSettings RunnerId="Debug">
-        <option name="DEBUG_PORT" value="56172" />
+        <option name="DEBUG_PORT" value="50459" />
       </RunnerSettings>
       <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Cover">
         <option name="USE_ENV_VARIABLES" value="true" />
@@ -160,6 +152,7 @@
       <method v="2">
         <option name="Make" enabled="true" />
         <option name="BuildArtifacts" enabled="true">
+          <artifact name="VLXD-TQH:war" />
           <artifact name="tqh" />
         </option>
       </method>
@@ -168,47 +161,24 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-28b599e66164-intellij.indexing.shared.core-IU-242.23339.11" />
-        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-IU-242.23339.11" />
+        <option value="bundled-jdk-9823dce3aa75-28b599e66164-intellij.indexing.shared.core-IU-242.23726.103" />
+        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-IU-242.23726.103" />
       </set>
     </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="3ddaa021-6bbe-426c-bfa7-4e0b32b33019" name="Changes" comment="" />
-      <created>1736319041227</created>
+      <changelist id="57522236-5870-4d88-ac85-6297e208fd32" name="Changes" comment="" />
+      <created>1741494729455</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1736319041227</updated>
-      <workItem from="1736319044782" duration="4791000" />
-      <workItem from="1736347994586" duration="695000" />
-      <workItem from="1736353777576" duration="1396000" />
-      <workItem from="1736389851882" duration="2075000" />
-      <workItem from="1736425022893" duration="1093000" />
-      <workItem from="1736428429534" duration="114000" />
-      <workItem from="1736429105582" duration="1240000" />
-      <workItem from="1736509142129" duration="2243000" />
-      <workItem from="1736514751631" duration="1928000" />
-      <workItem from="1736660203929" duration="8151000" />
-      <workItem from="1736683262652" duration="9962000" />
-      <workItem from="1736732215324" duration="8734000" />
-      <workItem from="1736752011240" duration="4563000" />
+      <updated>1741494729455</updated>
+      <workItem from="1741494731002" duration="4237000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
-  </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State />
-          </value>
-        </entry>
-      </map>
-    </option>
   </component>
 </project>
