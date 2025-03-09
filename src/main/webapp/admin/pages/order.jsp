@@ -236,7 +236,7 @@
                                 </select>
 
                                 <!-- Nút cập nhật -->
-                                <button  type="submit" style="margin-top: 10px; padding: 7px 14px; font-size: 14px; background-color: #007bff;
+                                <button  type="submit" style="margin-top: 10px; padding: 7px 14px; font-size: 14px; background-color: #ea875f;
                                      color: white; border: none; border-radius: 5px; cursor: pointer;">
                                     Cập nhật trạng thái
                                 </button>

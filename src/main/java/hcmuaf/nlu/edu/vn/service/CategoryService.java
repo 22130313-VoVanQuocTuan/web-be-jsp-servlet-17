@@ -28,8 +28,4 @@ public class CategoryService {
         return categoryDao.getAllCategory();
     }
 
-    // Lấy danh sách theo tên
-    public List<Category> getCategory(String name) {
-        return categoryDao.getCategoryByName(name);
-    }
 }
