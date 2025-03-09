@@ -31,7 +31,7 @@ public class LogoutController extends HttpServlet {
                 return;
             }
             // Cập nhật trạng thái người dùng thành "Không hoạt động"
-            userService.UpdateStatusUser("Không hoạt động", user.getId());
+            userService.UpdateStatusOrRoleUser(null,"Không hoạt động", user.getId());
 
             // Hủy session (đăng xuất)
             req.getSession().invalidate();

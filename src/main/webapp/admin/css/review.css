@@ -19,7 +19,7 @@
   .review .recentOrders {
     position: relative;
     display: grid;
-    min-height: 500px;
+    min-height: 275px;
     background: var(--white);
     padding: 20px;
     box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
@@ -85,7 +85,8 @@
     border: none;
     padding: 7px;
     cursor: pointer;
-    background-color: #ffec32;
+    background: #ffffff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     border-radius: 5px;
 }
 /* Nút hành động */
