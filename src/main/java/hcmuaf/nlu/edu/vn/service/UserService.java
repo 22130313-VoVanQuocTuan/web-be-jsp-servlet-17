@@ -8,6 +8,7 @@ import java.security.SecureRandom;
 import java.sql.SQLException;
 import java.util.Base64;
 import java.util.List;
+import java.util.Random;
 
 
 public class UserService {
@@ -125,17 +126,16 @@ public class UserService {
         return resetPasswordDao.findUserByEmail(email);
     }
 
-    // Tạo token
-    public String generateResetToken() {
-        SecureRandom random = new SecureRandom();
-        byte[] bytes = new byte[24];
-        random.nextBytes(bytes);
-        return Base64.getUrlEncoder().withoutPadding().encodeToString(bytes);
+    // Tạo OTP
+    public String generateOTP() {
+        Random random = new Random();
+        int otp = 1000 + random.nextInt(9000); // Tạo số từ 1000 đến 9999
+        return String.valueOf(otp);
     }
 
-    //Thêm token
-    public void saveResetToken(int userId, String token) throws Exception {
-        resetPasswordDao.savePasswordResetToken(userId, token);
+    //Lưu OTP
+    public void saveResetOTP(int userId, String otp) throws Exception {
+        resetPasswordDao.savePasswordResetToken(userId, otp);
     }
 
     // Tim token đã tồn tại trong database

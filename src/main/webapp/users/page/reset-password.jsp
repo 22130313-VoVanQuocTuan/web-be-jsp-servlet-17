@@ -173,6 +173,45 @@
                     </div>
                 </c:if>
 
+                <!-- Form xác thực email -->
+                <div class="overlay" id="overlay"></div>
+                <c:if test="${not empty sessionScope.verificationRequesteds}">
+                    <!-- Modal xác thực email -->
+                    <div id="verification-modal" class="modal">
+                        <div class="modal-content">
+                            <button title="close" type="button" class="close-button" id="close-button">
+                                <a href="login?action=login"> <i class="fas fa-times"></i></a>   <!-- Font Awesome icon for "X" -->
+                            </button>
+
+                            <h1>Xác thực email</h1>
+
+                            <!-- Form xác thực email -->
+                            <form id="verification-form" action="verify-email" method="post">
+                                <div class="verification-code-inputs " style="display: flex; gap: 10px;">
+                                    <input class="verification-code" type="text" name="code1" maxlength="1">
+                                    <input class="verification-code" type="text" name="code2" maxlength="1">
+                                    <input class="verification-code" type="text" name="code3" maxlength="1">
+                                    <input class="verification-code" type="text" name="code4" maxlength="1">
+
+                                </div>
+                                <!-- Thông báo lỗi -->
+                                <div id="error-message" class="error-message">
+                                    <c:if test="${not empty error_code}">
+                                        ${error_code}
+                                    </c:if>
+                                </div>
+                                <button type="submit" id="verify-button">Xác thực</button>
+                            </form>
+
+                            <!-- Form gửi lại mã -->
+                            <form id="reset-password-forms" action="reset-code" method="post">
+                                <button type="submit" class="reset">Gửi lại</button>
+                            </form>
+                        </div>
+                    </div>
+                </c:if>
+            </div>
+
                 <!-- Form đặt lại mật khẩu mới (ẩn khi không có token hợp lệ) -->
                 <c:if test="${not empty verificationRequested}">
                     <div class="form-container set-new-password">
@@ -246,8 +285,14 @@
     <script src="${pageContext.request.contextPath}/users/js/scripts.js" defer></script>
     <script src="${pageContext.request.contextPath}/users/js/reset-password.js"></script>
         <script>
-
+            document.addEventListener("DOMContentLoaded", function () {
+                var verificationRequested = "${verificationRequesteds}";
+                if (verificationRequested) {
+                    document.getElementById("verification-modal").style.display = "block";
+                }
+            });
         </script>
+
 </body>
 
 
