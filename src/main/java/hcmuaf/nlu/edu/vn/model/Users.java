@@ -32,11 +32,13 @@ public class Users {
         this.phoneNumber = phoneNumber;
         this.address = address;
     }
-    public Users(String fullName,String email, String phoneNumber, String address){
+    public Users(String fullName,String email, String phoneNumber, String address, String role, String status){
         this.fullName = fullName;
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.address = address;
+        this.role = role;
+        this.status = status;
     }
 
     public Users(int id, String email, String fullName,

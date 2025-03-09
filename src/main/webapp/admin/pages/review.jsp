@@ -107,6 +107,14 @@
                     </a>
                 </li>
 
+                <li>
+                    <a href="informationCustomer">
+                        <span class="icon">
+                            <ion-icon name="person"></ion-icon>
+                        </span>
+                        <span class="title">Tài khoản</span>
+                    </a>
+                </li>
 
                 <li>
                     <a href="logout">
@@ -136,7 +144,7 @@
                 </div>
 
                 <div class="user">
-                    <a href="accounts"> <ion-icon name="person" style="color: #000000; font-size: 25px;"></ion-icon></a>
+                    <a href="informationCustomer"> <ion-icon name="person" style="color: #000000; font-size: 25px;"></ion-icon></a>
 
                 </div>
             </div>

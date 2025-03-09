@@ -94,6 +94,15 @@
             </li>
 
             <li>
+                <a href="informationCustomer">
+                        <span class="icon">
+                            <ion-icon name="person"></ion-icon>
+                        </span>
+                    <span class="title">Tài khoản</span>
+                </a>
+            </li>
+
+            <li>
                 <a href="logout">
                         <span class="icon">
                             <ion-icon name="log-out-outline"></ion-icon>
@@ -122,7 +131,7 @@
             </div>
 
             <div class="user">
-                <a href="passwordManagement.html">
+                <a href="informationCustomer">
                     <ion-icon name="person"
                               style="color: #000000; font-size: 25px;"></ion-icon>
                 </a>
