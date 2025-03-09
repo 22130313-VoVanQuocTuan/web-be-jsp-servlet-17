@@ -10,12 +10,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="57522236-5870-4d88-ac85-6297e208fd32" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/admin/pages/products.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/tqh/admin/pages/products.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/controller/admin/product/GetProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/controller/admin/product/GetProductController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/admin/css/products.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/admin/css/products.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/admin/pages/products.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/admin/pages/products.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/controller/admin/promotional/GetListPromotional.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/controller/admin/promotional/GetListPromotional.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/controller/admin/promotional/UpdateStatusPrController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/controller/admin/promotional/UpdateStatusPrController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/admin/css/promotional.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/admin/css/promotional.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/admin/pages/promotional.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/admin/pages/promotional.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -174,7 +173,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1741494729455</updated>
-      <workItem from="1741494731002" duration="4237000" />
+      <workItem from="1741494731002" duration="13433000" />
     </task>
     <servers />
   </component>
