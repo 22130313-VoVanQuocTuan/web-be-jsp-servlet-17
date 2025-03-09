@@ -14,6 +14,13 @@
     <link rel="stylesheet" href="<c:url value="/admin/css/style.css"/>">
     <link rel="stylesheet" href="<c:url value="/admin/css/user.css"/>">
 
+    <!-- Thêm jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Thêm DataTables -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+
 </head>
 
 <body>
@@ -92,6 +99,15 @@
             </li>
 
             <li>
+                <a href="informationCustomer">
+                        <span class="icon">
+                            <ion-icon name="person"></ion-icon>
+                        </span>
+                    <span class="title">Tài khoản</span>
+                </a>
+            </li>
+
+            <li>
                 <a href="logout">
                         <span class="icon">
                             <ion-icon name="log-out-outline"></ion-icon>
@@ -109,18 +125,9 @@
                 <ion-icon name="menu-outline"></ion-icon>
             </div>
 
-            <div class="search">
-                <form action="accounts" method="GET">
-                    <label>
-                        <input type="text" name="name" placeholder="Tìm kiếm ở đây">
-                        <ion-icon name="search-outline"><button type="submit" style="border: none; background: none; cursor: pointer;"></button></ion-icon>
-                    </label>
-                    <input type="hidden" name="search" value="true">
-                </form>
-            </div>
 
             <div class="user">
-                <a href="accounts">
+                <a href="informationCustomer">
                     <ion-icon name="person"
                               style="color: #000000; font-size: 25px;"></ion-icon>
                 </a>
@@ -135,29 +142,11 @@
                     <h2>Danh sách người dùng</h2>
                     <a href="accounts?showAll=true" class="btn">Xem Tất Cả</a>
                 </div>
-                <div class="update-user">
-                    <p style="font-size: 20px; margin-bottom: 5px;">Cập nhật trạng thái người dùng</p>
-                    <form action="status-account" method="post">
-                    <input type="text" name="id" placeholder="Nhập ID user cần cập nhật"
-                           style="font-size: 15px; padding: 3px; border-radius: 5px;">
-                    <select title="choice" id="statusSelect" name="status"
-                            style="font-size: 15px; border-radius: 5px; padding: 2px;">
-                        <option value="Hoạt động">Hoạt động</option>
-                        <option value="Không hoạt động">Không hoạt động</option>
-                        <option value="Đang chờ xử lý">Đang chờ xử lý</option>
-                        <option value="Bị đình chỉ">Bị đình chỉ</option>
-                    </select>
-                    <button type="submit">Cập nhật trạng thái</button>
-                    <c:if test="${not empty error}">
-                        <p style="color: red;">${error}</p> <!-- Hiển thị lỗi nếu có -->
-                    </c:if>
-                    </form>
 
-                </div>
                 <div class="list-account-content-button">
                     <button id="add_account">Thêm tài khoản</button>
                 </div>
-                <table>
+                <table id="userTable" class="display">
                     <thead>
                     <tr>
                         <td>id</td>
@@ -177,20 +166,37 @@
                             <td>${list_account.username}</td>
                             <td>${list_account.email}</td>
                             <td>${list_account.phoneNumber}</td>
-                            <td><span class="statusText">${list_account.status}</span></td>
+                            <td><span class="statusText">${list_account.status} </span></td>
                             <td>${list_account.role}</td>
                             <td>
                                 <div class="v">
-                                    <button class="delete-btn" data-id="${list_account.id}">Xóa</button>
-                                    </button>
+                                    <c:choose>
+                                        <c:when test="${list_account.role eq 'admin'}">
+                                            <button style="background: #ccced0 " class="delete-btn"
+                                                    data-id="${list_account.id} " disabled>Ko thể xóa
+                                            </button>
+                                            <button style="background: #ccced0"
+                                                    class="edit-btn"
+                                                    data-id="${list_account.id}"
+                                                    data-status="${list_account.status}"
+                                                    data-role="${list_account.role}" disabled>
+                                                Sửa
+                                            </button>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <button class="delete-btn" data-id="${list_account.id}">Xóa</button>
+                                            <button class="edit-btn"
+                                                    data-id="${list_account.id}"
+                                                    data-status="${list_account.status}"
+                                                    data-role="${list_account.role}">
+                                                Sửa
+                                            </button>
+                                        </c:otherwise>
+                                    </c:choose>
                                 </div>
                             </td>
-
                         </tr>
-
                     </c:forEach>
-
-
                     </tbody>
                 </table>
             </div>
@@ -212,7 +218,7 @@
                     <input type="email" id="email" name="email" required>
 
                     <label for="role">Quyền:</label>
-                    <select id="role" name="role" required>
+                    <select id="userRole" name="role" required>
                         <option value="">Chọn quyền</option>
                         <option value="admin">admin</option>
                         <option value="user">user</option>
@@ -221,7 +227,7 @@
                         <p style="color: red;">${error}</p> <!-- Hiển thị lỗi nếu có -->
                     </c:if>
 
-                    <button id="saveAccount" type="submit">Lưu tài khoản</button>
+                    <button id="saveAccountUser" type="submit">Lưu tài khoản</button>
                     <button type="button" class="close-modal">Thoát</button>
                 </form>
             </div>
@@ -234,9 +240,37 @@
                 <h3>Xác nhận xóa</h3>
                 <label>Bạn có chắc chắn muốn xóa tài khoản này?</label>
                 <div class="button-container">
-                    <button id="confirm-delete" class="confirm-delete" >Xóa</button>
+                    <button id="confirm-delete" class="confirm-delete">Xóa</button>
                     <button class="close-modal">Hủy</button>
                 </div>
+            </div>
+        </div>
+
+        <!--Cập nhật trạng thái và quyền -->
+        <div id="update" class="modal">
+            <div class="modal-content">
+                <h3>Cập nhật trạng thái và quyền</h3>
+                <form id="updateModal" action="update_status_role" method="post">
+                    <input type="hidden" id="userId" name="userId">
+
+                    <label for="status">Trạng thái:</label>
+                    <select id="status" name="status" required>
+                        <option value="Hoạt động">Hoạt động</option>
+                        <option value="Không hoạt động">Không hoạt động</option>
+                        <option value="Bị đình chỉ">Bị đình chỉ</option>
+                        <option value="Đang chờ xử lý">Đang chờ xử lý</option>
+                    </select>
+
+                    <label for="role">Quyền:</label>
+                    <select id="role" name="role" required>  <!-- Đã sửa id role -->
+                        <option value="admin">Admin</option>
+                        <option value="user">User</option>
+                    </select>
+                    <div class="button-container">
+                        <button id="saveAccount" type="submit">Lưu thay đổi</button>
+                        <button type="button" class="close-modal">Thoát</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -256,7 +290,54 @@
         }
     });
 </script>
+<script>
+    $(document).ready(function () {
+        $('#userTable').DataTable({
+            "paging": true,         // Bật phân trang
+            "searching": true,      // Bật tìm kiếm
+            "ordering": true,       // Bật sắp xếp
+            "info": true,           // Hiển thị thông tin tổng số dòng
+            "lengthMenu": [5, 10, 25, 50], // Số dòng hiển thị mỗi trang
+            "language": {
+                "search": "Tìm kiếm:",
+                "lengthMenu": "Hiển thị _MENU_ dòng",
+                "info": "Hiển thị _START_ đến _END_ của _TOTAL_ dòng",
+                "zeroRecords": "Không tìm thấy kết quả",
+                "infoEmpty": "Không có dữ liệu",
+                "paginate": {
+                    "first": "Đầu",
+                    "last": "Cuối",
+                    "next": "Tiếp",
+                    "previous": "Trước"
+                }
+            }
+        });
+    });
+</script>
+<script>
+    $(document).ready(function () {
+        $(".edit-btn").click(function () {
+            var userId = $(this).data("id");  // Lấy ID user
+            var userStatus = $(this).data("status");  // Lấy trạng thái user
+            var userRole = $(this).data("role");  // Lấy quyền user
 
+            // Gán giá trị vào modal
+            $("#userId").val(userId);
+            $("#status").val(userStatus);
+            $("#role").val(userRole);
+
+            // Hiển thị modal
+            $("#update").show();
+        });
+
+        // Ẩn modal khi bấm "Thoát"
+        $(".close-modal").click(function () {
+            $("#update").hide();
+        });
+    });
+
+
+</script>
 
 </body>
 

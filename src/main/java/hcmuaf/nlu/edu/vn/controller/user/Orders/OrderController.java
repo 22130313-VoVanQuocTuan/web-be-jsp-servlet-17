@@ -22,38 +22,51 @@ public class OrderController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-        String orderId = request.getParameter("orderId");
         HttpSession session = request.getSession();
         Users user = (Users) session.getAttribute("user");
+
+        // Kiểm tra nếu chưa đăng nhập
+        if (user == null) {
+            response.sendRedirect("login.jsp");
+            return;
+        }
+
         int id = user.getId();
+        String role = user.getRole(); // Giả sử có phương thức getRole()
+
         try {
             request.setAttribute("orders", orderService.getOrderById(id));
             request.setAttribute("info", orderService.getInfoUser(id));
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
+            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Lỗi truy vấn dữ liệu.");
+            return;
         }
 
+        // Xử lý khi có orderId
+        String orderId = request.getParameter("orderId");
         if (orderId != null) {
-            int idOrder = Integer.parseInt(orderId);
-
             try {
-                List<OrderItem> orderItems = orderService.getOrderItems(idOrder);
-                Orders orderDetail = orderService.getItemOrders(idOrder);
-                request.setAttribute("orderInfo", orderDetail);
-                request.setAttribute("orderItem", orderItems);
-            } catch (SQLException e) {
-                throw new RuntimeException(e); // Log rõ lỗi
+                int idOrder = Integer.parseInt(orderId);
+                request.setAttribute("orderInfo", orderService.getItemOrders(idOrder));
+                request.setAttribute("orderItem", orderService.getOrderItems(idOrder));
+                request.setAttribute("showModal", true);
+            } catch (SQLException | NumberFormatException e) {
+                e.printStackTrace();
+                request.setAttribute("error", "Lỗi lấy thông tin đơn hàng.");
             }
-            System.out.println("showModal: " + request.getAttribute("showModal"));
-            request.setAttribute("showModal", true);
-            request.getRequestDispatcher("users/page/informationCustomer.jsp").forward(request, response);
-        } else {
-            request.getRequestDispatcher("users/page/informationCustomer.jsp").forward(request, response);
         }
+
+        // Kiểm tra role và điều hướng trang
+        String destinationPage = "users/page/informationCustomer.jsp";
+        if ("admin".equalsIgnoreCase(role)) {
+            destinationPage = "admin/pages/account.jsp";
+        }
+        request.getRequestDispatcher(destinationPage).forward(request, response);
     }
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    doGet(request, response);
+        doGet(request, response);
     }
 }

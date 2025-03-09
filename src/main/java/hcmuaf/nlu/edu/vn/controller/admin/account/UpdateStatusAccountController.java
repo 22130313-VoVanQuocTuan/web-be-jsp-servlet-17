@@ -10,12 +10,13 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 
-@WebServlet(name = "updateStatus" , value = "/status-account")
+@WebServlet(name = "updateStatus" , value = "/update_status_role")
 public class UpdateStatusAccountController  extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String ids = req.getParameter("id");
+        String ids = req.getParameter("userId");
         String status = req.getParameter("status");
+        String role = req.getParameter("role");
 
         // Kiểm tra id và status trước khi xử lý
         if (ids == null || ids.trim().isEmpty() || status == null || status.trim().isEmpty()) {
@@ -36,7 +37,7 @@ public class UpdateStatusAccountController  extends HttpServlet {
         UserService userService = new UserService();
         try {
             // Gọi phương thức cập nhật trạng thái
-            if (userService.UpdateStatusUser(status, id)) {
+            if (userService.UpdateStatusOrRoleUser(role,status, id)) {
                 resp.sendRedirect(req.getContextPath() + "/accounts");
             } else {
                 req.setAttribute("error", "Cập nhật trạng thái không thành công.");
@@ -47,4 +48,10 @@ public class UpdateStatusAccountController  extends HttpServlet {
             req.getRequestDispatcher("/accounts").forward(req, resp);
         }
     }
+
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        doPost(req, resp);
     }
+}

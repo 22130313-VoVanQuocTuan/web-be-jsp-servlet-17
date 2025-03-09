@@ -1,5 +1,6 @@
 package hcmuaf.nlu.edu.vn.controller.admin.account;
 
+import hcmuaf.nlu.edu.vn.model.Users;
 import hcmuaf.nlu.edu.vn.service.UserService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -16,7 +17,7 @@ public class DeleteAccountController  extends HttpServlet {
         UserService userService = new UserService();
         int id = Integer.parseInt(req.getParameter("id"));
         if(userService.deleteAccount(id)){
-            resp.sendRedirect(req.getContextPath()+"/accounts");
+             resp.sendRedirect(req.getContextPath()+"/accounts");
         }else{
             req.setAttribute("error", "Xóa tài khoản thất bại.");
             req.getRequestDispatcher("/accounts").forward(req, resp);
