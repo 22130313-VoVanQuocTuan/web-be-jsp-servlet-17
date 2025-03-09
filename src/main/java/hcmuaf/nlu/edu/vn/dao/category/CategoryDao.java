@@ -70,30 +70,4 @@ public class CategoryDao {
         return false;
     }
 
-    //Tìm kiếm theo tên danh mục
-    public List<Category> getCategoryByName(String name) {
-        String sql = "select * from category where name like ?";
-        List<Category> categories = new ArrayList<>();
-        // Kiểm tra null hoặc rỗng trước khi tìm kiếm
-        if (name == null || name.trim().isEmpty()) {
-            return categories; // Trả về danh sách rỗng nếu chuỗi tìm kiếm không hợp lệ
-        }
-
-        try (PreparedStatement ptm = dbConnect.preparedStatement(sql)) {
-            ptm.setString(1, "%" + name.trim() + "%"); // Thêm wildcard % trước và sau từ khóa
-            try (ResultSet rs = ptm.executeQuery()) {
-                while (rs.next()) {
-                    int id = rs.getInt("id");
-                    String nameCt = rs.getString("name");
-                    Timestamp createDate = rs.getTimestamp("createDate");
-                    categories.add(new Category(id, nameCt, createDate));
-                }
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            throw new RuntimeException("Lỗi trong quá trình tìm kiếm danh mục", e);
-        }
-
-        return categories;
-    }
 }

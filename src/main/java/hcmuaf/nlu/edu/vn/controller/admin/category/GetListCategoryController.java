@@ -19,21 +19,10 @@ public class GetListCategoryController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
     try{
-        String showAll = req.getParameter("showAll");
-        String search = req.getParameter("search");
-        String name = req.getParameter("name");
-
 
         CategoryService categoryService = new CategoryService();
         List<Category> list = categoryService.getAllCategory();
-        if(search!=null){
-            list=categoryService.getCategory(name);
 
-        }
-        if (showAll == null) {
-            // Hiển thị tối đa 10 mục
-            list = list.stream().limit(10).collect(Collectors.toList());
-        }
          req.setAttribute("list", list);
          req.getRequestDispatcher("/admin/pages/category.jsp").forward(req, resp);
 

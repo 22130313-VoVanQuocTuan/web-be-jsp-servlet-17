@@ -11,10 +11,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bảng điều khiển Quản trị viên </title>
     <!------------------ Kiểu dáng ------------------>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="<c:url value="/admin/css/style.css"/>">
-    <link rel="stylesheet" href="<c:url value="/admin/css/user.css"/>">
     <link rel="stylesheet" href="<c:url value="/admin/css/category.css"/>">
+    <!-------------------Thêm jQuery----------------->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!------------------- Thêm DataTables ---------------->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 </head>
 <style>
     .add-category {
@@ -141,16 +144,6 @@
 
 
 
-                <div class="search">
-                    <form action="category" method="GET">
-                        <label>
-                            <input type="text" name="name" placeholder="Tìm kiếm ở đây">
-                                <ion-icon name="search-outline"><button type="submit" style="border: none; background: none; cursor: pointer;"></button></ion-icon>
-                        </label>
-                        <input type="hidden" name="search" value="true">
-                    </form>
-                </div>
-
                 <div class="user">
                     <a href="informationCustomer"> <ion-icon name="person" style="color: #000000; font-size: 25px;"></ion-icon></a>
 
@@ -160,11 +153,10 @@
 
 
             <!-------------------- Danh Sách Chi Tiết người dùng------------------ -->
-            <div class="details-user">
-                <div class="recentOrders">
+            <div class="category">
+                <div class="recentCategory">
                     <div class="cardHeader">
                         <h2>Danh sách danh mục</h2>
-                        <a href="category?showAll=true" class="btn">Xem Tất Cả</a>
                     </div>
                     <div class="add-category">
                         <p style="font-size: 20px; margin-bottom: 10px;">Thêm danh mục</p>
@@ -176,7 +168,7 @@
                             <button type="submit" >Thêm</button>
                         </form>
                     </div>
-                    <table>
+                    <table id="categoryTable" class="display">
                         <thead>
                             <tr>
                                 <td>id</td>
@@ -219,6 +211,27 @@
             </div>
         </div>
     </div>
+    <script>
+        $(document).ready(function () {
+            $('#categoryTable').DataTable({
+                "lengthMenu":[5,10,15,20],
+                "language": {
+                    "search": "Tìm kiếm:",
+                    "lengthMenu": "Hiển thị _MENU_ danh mục",
+                    "info": "Hiển thị _START_ đến _END_ của _TOTAL_ danh mục",
+                    "paginate": {
+                        "first": "Đầu",
+                        "last": "Cuối",
+                        "next": ">",
+                        "previous": "<"
+                    },
+                    "zeroRecords": "Không tìm thấy danh mục nào",
+                    "infoEmpty": "Không có danh mục nào để hiển thị",
+                    "infoFiltered": "(Lọc từ _MAX_ danh mục)",
+                }
+            });
+        });
+    </script>
 
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script src="<c:url value="/admin/js/index.js"/>"></script>
