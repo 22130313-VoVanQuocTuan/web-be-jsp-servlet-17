@@ -113,8 +113,8 @@ public class UserService {
     }
 
     // Cập nhật trạng thái user
-    public boolean UpdateStatusUser (String status, int id) throws SQLException {
-      return  logoutDao.UpdateStatusUser(status, id);
+    public boolean UpdateStatusOrRoleUser (String role, String status, int id) throws SQLException {
+      return  logoutDao.UpdateStatusUser(role, status, id);
     }
 
 
@@ -193,10 +193,7 @@ public class UserService {
     }
 
 
-    // Lấy danh sách sa phẩm theo tên
-    public List<Users> getListUsersByName(String name) {
-        return getListAccountDao.getListUserByName(name);
-    }
+
 }
 
 

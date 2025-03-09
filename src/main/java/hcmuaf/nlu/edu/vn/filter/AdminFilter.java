@@ -13,7 +13,7 @@ import java.io.IOException;
 @WebFilter(filterName = "admin-filter", urlPatterns = {"/add-account", "/delete-account", "/accounts", "/status-account",
 "/add-promotional", "/delete-promotional", "/promotional-list", "/update-status-pro","/list-rating" ,"/delete-rating",
 "/category", "/add-delete-category" ,"/add-product","/products-list","/delete-product","/edit-product", "/update-status-order",
-        "/delete-order", "/order-list", "/GetDetailOrder"})
+        "/delete-order", "/order-list", "/GetDetailOrder",})
 public class AdminFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {

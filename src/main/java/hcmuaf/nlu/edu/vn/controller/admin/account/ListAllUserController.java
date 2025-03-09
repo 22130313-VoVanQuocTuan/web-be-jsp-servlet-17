@@ -18,16 +18,9 @@ public class ListAllUserController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         UserService userService = new UserService();
         String showAll = req.getParameter("showAll");
-
-        //tìm kiếm
-        String search = req.getParameter("search");
-        String name = req.getParameter("name");
-
         try {
             List<Users> list = userService.getListUsers();
-            if(search!=null){
-                list=userService.getListUsersByName(name);
-            }
+
             if (showAll == null) {
                 // Hiển thị tối đa 10 mục
                 list = list.stream().limit(10).collect(Collectors.toList());

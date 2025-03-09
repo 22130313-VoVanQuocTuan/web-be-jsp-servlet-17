@@ -90,6 +90,15 @@
                 </li>
 
                 <li>
+                    <a href="informationCustomer">
+                        <span class="icon">
+                            <ion-icon name="person"></ion-icon>
+                        </span>
+                        <span class="title">Tài khoản</span>
+                    </a>
+                </li>
+
+                <li>
                     <a href="logout">
                         <span class="icon">
                             <ion-icon name="log-out-outline"></ion-icon>
@@ -118,7 +127,7 @@
                 </div>
 
                 <div class="user">
-                    <a href="passwordManagement.html"> <ion-icon name="person"
+                    <a href="informationCustomer"> <ion-icon name="person"
                                                                  style="color: #000000; font-size: 25px;"></ion-icon></a>
                 </div>
             </div>
@@ -136,7 +145,7 @@
                     </div>
                 </div>
 
-                <div class="card">
+                <a href="accounts" style="text-decoration: none"><div class="card">
                     <div>
                         <div class="numbers">${totalUsers}</div>
                         <div class="cardName">Số lượng người dùng</div>
@@ -145,18 +154,19 @@
                     <div class="iconBx">
                         <ion-icon name="cart-outline"></ion-icon>
                     </div>
-                </div>
+                </div></a>
 
-                <div class="card">
-                    <div>
+                <a href="list-rating" style="text-decoration: none"><div class="card">
+
+                   <div>
                         <div class="numbers">${totalRatings}</div>
-                        <div class="cardName">Đánh giá</div>
+                       <div class="cardName">Đánh giá</div>
                     </div>
 
                     <div class="iconBx">
                         <ion-icon name="chatbubbles-outline"></ion-icon>
                     </div>
-                </div>
+                </div></a>
 
                 <div class="card">
                     <div>
@@ -220,7 +230,7 @@
                                 </a>
                             </td>
                             <td>
-                                <h4 style="padding: 20px;">${user.fullName}</h4>
+                                <h4>${user.email}</h4>
                             </td>
                         </tr>
                         </c:forEach>

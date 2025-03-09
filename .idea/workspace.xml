@@ -1,3 +1,4 @@
+
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ArtifactsWorkspaceSettings">
@@ -9,25 +10,57 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="57522236-5870-4d88-ac85-6297e208fd32" name="Changes" comment="">
+    <list default="true" id="3ddaa021-6bbe-426c-bfa7-4e0b32b33019" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/controller/admin/promotional/GetListPromotional.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/controller/admin/promotional/GetListPromotional.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/controller/admin/promotional/UpdateStatusPrController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/controller/admin/promotional/UpdateStatusPrController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/admin/css/promotional.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/admin/css/promotional.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/admin/pages/promotional.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/admin/pages/promotional.jsp" afterDir="false" />
+
+      <change beforePath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/controller/admin/category/GetListCategoryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/controller/admin/category/GetListCategoryController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/dao/category/CategoryDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/dao/category/CategoryDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/service/CategoryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/service/CategoryService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/admin/css/category.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/admin/css/category.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/admin/css/user.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/admin/css/user.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/admin/pages/category.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/admin/pages/category.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/admin/pages/order.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/admin/pages/order.jsp" afterDir="false" />
+
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+        <option value="Jsp File" />
+        <option value="CSS File" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="KubernetesApiPersistence"><![CDATA[{}]]></component>
-  <component name="KubernetesApiProvider"><![CDATA[{
-  "isMigrated": true
-}]]></component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;22130225-PhamAnhQuan&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/22130313-VoVanQuocTuan/web-be-jsp-servlet-17.git&quot;,
+    &quot;accountId&quot;: &quot;e6e246d2-6b5c-42fa-a941-479d9f3993c7&quot;
+  }
+}</component>
+  <component name="KubernetesApiPersistence">{}</component>
+  <component name="KubernetesApiProvider">{
+  &quot;isMigrated&quot;: true
+}</component>
   <component name="LogFilters">
     <option name="FILTER_ERRORS" value="false" />
     <option name="FILTER_WARNINGS" value="false" />
@@ -42,20 +75,24 @@
       </MavenGeneralSettings>
     </option>
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 8
-}]]></component>
-  <component name="ProjectId" id="2u44taVrnfGYKHZJ4yaIQhpXMg5" />
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 1
+}</component>
+  <component name="ProjectId" id="2rKsKlXc7jLN71kpudibsoKXJWG" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "Tomcat Server.Tomcat 10.1.31.executor": "Run",
-    "git-widget-placeholder": "22130098__LamHoangHuy",
+    "git-widget-placeholder": "22130225__Quan",
     "kotlin-language-version-configured": "true",
+
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -64,9 +101,12 @@
     "project.structure.last.edited": "Artifacts",
     "project.structure.proportion": "0.1484375",
     "project.structure.side.proportion": "0.3034483",
+
+
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+
   <component name="RunManager">
     <configuration name="Tomcat 10.1.31" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 10.1.31" ALTERNATIVE_JRE_ENABLED="false" nameIsGenerated="true">
       <option name="UPDATING_POLICY" value="restart-server" />
@@ -78,7 +118,7 @@
         </artifact>
       </deployment>
       <server-settings>
-        <option name="BASE_DIRECTORY_NAME" value="1a5ae5da-c7e1-4c69-bff6-c21bda00e7e9" />
+        <option name="BASE_DIRECTORY_NAME" value="c757dca5-568c-409a-a25a-e07b9dc796af" />
       </server-settings>
       <predefined_log_file enabled="true" id="Tomcat" />
       <predefined_log_file enabled="true" id="Tomcat Catalina" />
@@ -86,7 +126,7 @@
       <predefined_log_file id="Tomcat Host Manager" />
       <predefined_log_file id="Tomcat Localhost Access" />
       <RunnerSettings RunnerId="Debug">
-        <option name="DEBUG_PORT" value="50459" />
+        <option name="DEBUG_PORT" value="63440" />
       </RunnerSettings>
       <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Cover">
         <option name="USE_ENV_VARIABLES" value="true" />
@@ -151,7 +191,6 @@
       <method v="2">
         <option name="Make" enabled="true" />
         <option name="BuildArtifacts" enabled="true">
-          <artifact name="VLXD-TQH:war" />
           <artifact name="tqh" />
         </option>
       </method>
@@ -168,16 +207,63 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="57522236-5870-4d88-ac85-6297e208fd32" name="Changes" comment="" />
-      <created>1741494729455</created>
+      <changelist id="3ddaa021-6bbe-426c-bfa7-4e0b32b33019" name="Changes" comment="" />
+      <created>1736319041227</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1741494729455</updated>
-      <workItem from="1741494731002" duration="13433000" />
+      <updated>1736319041227</updated>
+      <workItem from="1736319044782" duration="4791000" />
+      <workItem from="1736347994586" duration="695000" />
+      <workItem from="1736353777576" duration="1396000" />
+      <workItem from="1736389851882" duration="2075000" />
+      <workItem from="1736425022893" duration="1093000" />
+      <workItem from="1736428429534" duration="114000" />
+      <workItem from="1736429105582" duration="1240000" />
+      <workItem from="1736509142129" duration="2243000" />
+      <workItem from="1736514751631" duration="1928000" />
+      <workItem from="1736660203929" duration="8151000" />
+      <workItem from="1736683262652" duration="9962000" />
+      <workItem from="1736732215324" duration="8734000" />
+      <workItem from="1736752011240" duration="4563000" />
+
+      <workItem from="1741490906882" duration="3898000" />
+      <workItem from="1741494847213" duration="5293000" />
+      <workItem from="1741500421447" duration="473000" />
+      <workItem from="1741500907779" duration="1185000" />
+      <workItem from="1741506620689" duration="1123000" />
+      <workItem from="1741507757801" duration="1526000" />
+      <workItem from="1741509303933" duration="1165000" />
+      <workItem from="1741510486351" duration="797000" />
+
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+
+          <url>file://$PROJECT_DIR$/src/main/webapp/admin/pages/order.jsp</url>
+          <line>22</line>
+
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+
 </project>
