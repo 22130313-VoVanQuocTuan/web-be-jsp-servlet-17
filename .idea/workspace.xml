@@ -1,3 +1,4 @@
+
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ArtifactsWorkspaceSettings">
@@ -100,6 +101,7 @@
     "project.structure.last.edited": "Artifacts",
     "project.structure.proportion": "0.1484375",
     "project.structure.side.proportion": "0.3034483",
+
 
     "vue.rearranger.settings.migration": "true"
   }
@@ -263,4 +265,5 @@
       </breakpoints>
     </breakpoint-manager>
   </component>
+
 </project>

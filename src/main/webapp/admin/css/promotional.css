@@ -7,7 +7,7 @@ button {
   cursor: pointer;
   transition: all 0.3s ease;
   color: #15283e;
-  background: #ffec32;
+  background: #ffffff;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
@@ -31,7 +31,6 @@ button {
     width: 80%;
     max-width: 400px;
     border-radius: 8px;
-    margin-left: 45%;
   }
   .modal-content:hover {
     transform: scale(1.02);
@@ -40,13 +39,14 @@ button {
   /* ==================== Thêm ưu đãi==========================  */
   .list-promotions-content-button button {
     padding: 8px;
-    font-size: 11px;
+    font-size: 15px;
     float: right;
     border-radius: 5px;
     background-color: #4f3131;
     text-decoration: none;
     color: var(--gray);
     font-weight: bold;
+    margin-bottom: 15px;
   }
 
   .list-promotions-content-button a:hover {
