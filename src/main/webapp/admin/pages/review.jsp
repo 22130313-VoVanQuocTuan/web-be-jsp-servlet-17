@@ -14,6 +14,13 @@
 
     <link rel="stylesheet" href="<c:url value="/admin/css/style.css"/>">
     <link rel="stylesheet" href="<c:url value="/admin/css/review.css"/>">
+
+    <!-- Thêm jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Thêm DataTables -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 </head>
 <style>
     .add-category {
@@ -133,15 +140,6 @@
                     <ion-icon name="menu-outline"></ion-icon>
                 </div>
 
-                <div class="search">
-                    <form action="list-rating" method="GET">
-                        <label>
-                            <input type="text" name="productId" placeholder="Tìm kiếm ở đây">
-                            <ion-icon name="search-outline"><button type="submit" style="border: none; background: none; cursor: pointer;"></button></ion-icon>
-                        </label>
-                        <input type="hidden" name="search" value="true">
-                    </form>
-                </div>
 
                 <div class="user">
                     <a href="informationCustomer"> <ion-icon name="person" style="color: #000000; font-size: 25px;"></ion-icon></a>
@@ -155,10 +153,10 @@
                 <div class="recentOrders">
                     <div class="cardHeader">
                         <h2>Danh sách đánh giá của khách hàng</h2>
-                        <a href="list-rating?showAll=true" class="btn">Xem Tất Cả</a>
+
                     </div>
 
-                    <table>
+                    <table id="reviewTable">
                         <thead>
                             <tr>
                                 <td>Mã sản phẩm</td>
@@ -206,6 +204,31 @@
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script src="<c:url value="/admin/js/index.js"/>"></script>
     <script src ="<c:url value="/admin/js/review.js"/>"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#reviewTable').DataTable({
+                    "padding" : true,
+                    "search" : true,
+                    "ordering" : true,
+                    "info": true,
+                      "lengthMenu": [5, 10, 25, 50], // Số dòng hiển thị mỗi trang
+                "language": {
+                    "search": "Tìm kiếm:",
+                    "lengthMenu": "Hiển thị _MENU_ dòng",
+                    "info": "Hiển thị _START_ đến _END_ của _TOTAL_ dòng",
+                    "zeroRecords": "Không tìm thấy kết quả",
+                    "infoEmpty": "Không có dữ liệu",
+                    "paginate": {
+                        "first": "Đầu",
+                        "last": "Cuối",
+                        "next": "Tiếp",
+                        "previous": "Trước"
+                    }
+                }
+            });
+        });
+    </script>
 
 </body>
 
