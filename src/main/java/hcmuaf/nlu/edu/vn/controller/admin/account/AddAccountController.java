@@ -26,7 +26,7 @@ public class AddAccountController extends HttpServlet {
             if(userService.addAccount(username, password, email,role)) {
                 Users user = userService.getUser(username);
                 userService.verifyEmail(email);
-                userService.UpdateStatusUser("Đang chờ xử lý", user.getId());
+                userService.UpdateStatusOrRoleUser(null, "Đang chờ xử lý", user.getId());
                 resp.sendRedirect(req.getContextPath()+"/accounts");
             } else {
             req.setAttribute("error", "Email hoặc tài khoản đã tồn tại.");

@@ -10,19 +10,29 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3ddaa021-6bbe-426c-bfa7-4e0b32b33019" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/admin/pages/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/tqh/admin/pages/index.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/controller/admin/order/UpdateStatusOrderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/controller/admin/order/UpdateStatusOrderController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/controller/admin/product/AddProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/controller/admin/product/AddProductController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/dao/home/HomeDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/dao/home/HomeDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/filter/AdminFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/filter/AdminFilter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/model/Payments.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/service/EmailUtilService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/service/EmailUtilService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/admin/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/admin/css/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/admin/pages/category.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/admin/pages/category.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/admin/pages/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/admin/pages/index.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/users/page/cart.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/users/page/cart.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/users/page/login-signup.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/users/page/login-signup.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/classes/hcmuaf/nlu/edu/vn/controller/user/Orders/OrderController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/classes/hcmuaf/nlu/edu/vn/controller/user/Orders/OrderController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/classes/hcmuaf/nlu/edu/vn/controller/user/products/GetProductDetailController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/classes/hcmuaf/nlu/edu/vn/controller/user/products/GetProductDetailController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/classes/hcmuaf/nlu/edu/vn/dao/Orders/OrderDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/classes/hcmuaf/nlu/edu/vn/dao/Orders/OrderDao.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/classes/hcmuaf/nlu/edu/vn/model/OrderItem.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/classes/hcmuaf/nlu/edu/vn/model/OrderItem.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/classes/hcmuaf/nlu/edu/vn/model/Orders.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/classes/hcmuaf/nlu/edu/vn/model/Orders.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/classes/hcmuaf/nlu/edu/vn/service/OrderService.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/tqh/WEB-INF/classes/hcmuaf/nlu/edu/vn/service/OrderService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/admin/pages/user.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/tqh/admin/pages/user.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/controller/admin/account/AddAccountController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/controller/admin/account/AddAccountController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/controller/admin/account/DeleteAccountController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/controller/admin/account/DeleteAccountController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/controller/admin/account/ListAllUserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/controller/admin/account/ListAllUserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/controller/admin/account/UpdateStatusAccountController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/controller/admin/account/UpdateStatusAccountController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/controller/user/account/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/controller/user/account/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/controller/user/account/LogoutController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/controller/user/account/LogoutController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/dao/Users/GetListAccountDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/dao/Users/GetListAccountDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/dao/Users/LoginDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/dao/Users/LoginDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/dao/Users/LogoutDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/dao/Users/LogoutDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/admin/css/user.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/admin/css/user.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/admin/js/passwordManagement.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/admin/js/passwordManagement.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/admin/pages/user.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/admin/pages/user.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -73,9 +83,17 @@
     &quot;project.structure.last.edited&quot;: &quot;Artifacts&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.1484375&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.3034483&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;project.propVCSSupport.Mappings&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
+  <component name="RunDashboard">
+    <option name="excludedTypes">
+      <set>
+        <option value="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" />
+      </set>
+    </option>
+  </component>
   <component name="RunManager">
     <configuration name="Tomcat 10.1.31" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 10.1.31" ALTERNATIVE_JRE_ENABLED="false" nameIsGenerated="true">
       <option name="UPDATING_POLICY" value="restart-server" />
@@ -87,7 +105,7 @@
         </artifact>
       </deployment>
       <server-settings>
-        <option name="BASE_DIRECTORY_NAME" value="c1dc602a-d722-4046-ae79-079b46ca63a9" />
+        <option name="BASE_DIRECTORY_NAME" value="c757dca5-568c-409a-a25a-e07b9dc796af" />
       </server-settings>
       <predefined_log_file enabled="true" id="Tomcat" />
       <predefined_log_file enabled="true" id="Tomcat Catalina" />
@@ -95,7 +113,7 @@
       <predefined_log_file id="Tomcat Host Manager" />
       <predefined_log_file id="Tomcat Localhost Access" />
       <RunnerSettings RunnerId="Debug">
-        <option name="DEBUG_PORT" value="56172" />
+        <option name="DEBUG_PORT" value="63440" />
       </RunnerSettings>
       <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Cover">
         <option name="USE_ENV_VARIABLES" value="true" />
@@ -194,6 +212,12 @@
       <workItem from="1736683262652" duration="9962000" />
       <workItem from="1736732215324" duration="8734000" />
       <workItem from="1736752011240" duration="4563000" />
+      <workItem from="1740025460646" duration="546000" />
+      <workItem from="1740026105316" duration="1254000" />
+      <workItem from="1740996353296" duration="3839000" />
+      <workItem from="1741095193973" duration="2282000" />
+      <workItem from="1741408160092" duration="15021000" />
+      <workItem from="1741487892953" duration="1797000" />
     </task>
     <servers />
   </component>
