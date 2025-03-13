@@ -221,6 +221,7 @@ button {
     color: #000000;
     background: #ffffff;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+
 }
 .statusText{
     padding: 2px;
@@ -279,7 +280,8 @@ button {
   font-weight: bold;
   text-align: center;
   text-transform: uppercase;
-  color: #FFC857;
+    background: #ffffff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   background: none;
   margin-bottom: 20px;
   letter-spacing: 1px;

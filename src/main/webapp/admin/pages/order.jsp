@@ -12,6 +12,11 @@
     <!------------------ Kiểu dáng ------------------>
     <link rel="stylesheet" href="admin/css/style.css">
     <link rel="stylesheet" href="admin/css/order.css">
+    <!-------------------Thêm jQuery----------------->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Thêm DataTables -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 </head>
 <body>
 <!-- ------------------ Điều hướng -------------------->
@@ -88,6 +93,15 @@
             </li>
 
             <li>
+                <a href="informationCustomer">
+                        <span class="icon">
+                            <ion-icon name="person"></ion-icon>
+                        </span>
+                    <span class="title">Tài khoản</span>
+                </a>
+            </li>
+
+            <li>
                 <a href="logout">
                         <span class="icon">
                             <ion-icon name="log-out-outline"></ion-icon>
@@ -115,7 +129,7 @@
             </div>
 
             <div class="user">
-                <a href="passwordManagement.html">
+                <a href="informationCustomer">
                     <ion-icon name="person"
                               style="color: #000000; font-size: 25px;"></ion-icon>
                 </a>
@@ -128,36 +142,8 @@
             <div class="recentOrders">
                 <div class="cardHeader">
                     <h2>Danh sách hóa đơn</h2>
-                    <a href="order-list?showAll=true" class="btn">Xem Tất Cả</a>
                 </div>
-                <div class="update-order">
-                    <p style="font-size: 20px; margin-bottom: 10px;">Cập nhật trạng thái hóa đơn</p>
-                    <form action="update-status-order" method="post">
-                        <input type="text" name="id" placeholder="Nhập ID hóa đơn cần cập nhật" required
-                               style="font-size: 15px; padding: 2px; border-radius: 5px;">
-                        <select title="choice" name="status" id="statusSelect" required
-                                style="font-size: 15px; border-radius: 5px; padding: 2px;">
-                            <option value="Đang xử lý">Đang xử lý</option>
-                            <option value="Đã hoàn thành">Đã hoàn thành</option>
-                            <option value="Đã hủy">Đã hủy</option>
-
-                        </select>
-                        <c:if test="${not empty error}">
-                            <p style="color: red;">${error}</p> <!-- Hiển thị lỗi nếu có -->
-                        </c:if>
-                        <c:if test="${not empty successStatus}">
-                            <p style="color: green;">${successStatus}</p>
-                        </c:if>
-                        <c:if test="${not empty errorDelete}">
-                            <p style="color: red;">${errorDelete}</p> <!-- Hiển thị lỗi nếu có -->
-                        </c:if>
-                        <c:if test="${not empty successDelete}">
-                            <p style="color: green;">${successDelete}</p> <!-- Hiển thị lỗi nếu có -->
-                        </c:if>
-                        <button type="submit" >Cập nhật trạng thái</button>
-                    </form>
-                </div>
-                <table>
+                <table id="orderTable" class="display">
                     <thead>
                     <tr>
                         <td>Mã đơn hàng</td>
@@ -177,7 +163,17 @@
                             <td><fmt:formatDate value="${order.createdAt}" pattern="dd-MM-yyyy HH:mm:ss"/></td>
                             <td><fmt:formatNumber value="${order.totalPrice}" type="number"/></td>
                             <td>${order.paymentMethod}</td>
-                            <td>${order.status}</td>
+                            <td><c:choose>
+                                <c:when test="${order.status == 'Đã hoàn thành'}">
+                                    <span class="badge success">Đã hoàn thành</span>
+                                </c:when>
+                                <c:when test="${order.status == 'Đã huỷ'}">
+                                    <span class="badge danger">Đã huỷ</span>
+                                </c:when>
+                                <c:when test="${order.status == 'Chờ xác nhận'}">
+                                    <span class="badge warning">Chờ xác nhận</span>
+                                </c:when>
+                            </c:choose></td>
                             <td class="v">
                                 <button> <a href="GetDetailOrder?id=${order.id}" class="view-detail-btn" style="text-decoration: none ; color: #1c293d" >Chi tiết</a>
                                 </button>
@@ -235,6 +231,32 @@
                         <p><strong>Người nhận hàng:</strong>${orIn.name}</p>
                         <p><strong>Số điện thoại:</strong>${orIn.phoneNumber}</p>
                         <p><strong>Ghi chú:</strong>${orIn.note}</p>
+                        <div class="update-order">
+                            <p style="font-size: 16px; margin-bottom: 5px;">Cập nhật trạng thái đơn hàng</p>
+                            <form action="update-status-order" method="post">
+                                <input type="hidden" name="id" value="${orIn.id}"> <!-- Đảm bảo gửi ID đơn hàng -->
+
+                                <label for="statusSelect">Chọn trạng thái:</label>
+                                <select title="choice" id="statusSelect" name="status"
+                                        style="font-size: 14px; border-radius: 5px; padding: 5px; margin-left: 10px; margin-right: 10px;">
+                                    <option value="Đã hoàn thành">Đã hoàn thành</option>
+                                    <option value="Đã huỷ">Đã huỷ</option>
+                                    <option value="Chờ xác nhận">Chờ xác nhận</option>
+                                </select>
+
+                                <!-- Nút cập nhật -->
+                                <button  type="submit" style="margin-top: 10px; padding: 7px 14px; font-size: 14px; background-color: #ea875f;
+                                     color: white; border: none; border-radius: 5px; cursor: pointer;">
+                                    Cập nhật trạng thái
+                                </button>
+
+                                <!-- Hiển thị lỗi nếu có -->
+                                <c:if test="${not empty error}">
+                                    <p style="color: red;">${error}</p>
+                                </c:if>
+                            </form>
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -262,6 +284,29 @@
             const modal = document.getElementById('orderDetailModal');
             modal.style.display = 'block';
         }
+    });
+</script>
+<script>
+    $(document).ready(function () {
+        $('#orderTable').DataTable({
+            "paging": true,         // Bật phân trang
+            "searching": true,      // Bật tìm kiếm
+            "ordering": true,       // Bật sắp xếp
+            "info": true,           // Hiển thị thông tin tổng số dòng
+            "lengthMenu": [5,10,15,20],
+            "language": {
+                "lengthMenu": "Hiển thị _MENU_ dòng mỗi trang",
+                "zeroRecords": "Không tìm thấy đơn hàng nào",
+                "info": "Hiển thị _PAGE_ của _PAGES_",
+                "search": "Tìm kiếm: ",
+                "paginate": {
+                    "first": "Đầu",
+                    "last": "Cuối",
+                    "previous": "<",
+                    "next": ">"
+                }
+            }
+        });
     });
 </script>
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>

@@ -142,7 +142,7 @@ public class OrderDao {
 
     // Lấy thông tin user
     public Users getInfoUser (int id){
-        String sql = "SELECT fullName, email, phoneNumber, address FROM users WHERE id = ?";
+        String sql = "SELECT fullName, email, phoneNumber, address, role, status FROM users WHERE id = ?";
         try(PreparedStatement ptm = dbConnect.preparedStatement(sql)){
             ptm.setInt(1, id);
             ResultSet rs = ptm.executeQuery();
@@ -151,7 +151,9 @@ public class OrderDao {
                 String email = rs.getString("email");
                 String phoneNumber = rs.getString("phoneNumber");
                 String address = rs.getString("address");
-                return new Users(fullName,email, phoneNumber, address);
+                String role = rs.getString("role");
+                String status = rs.getString("status");
+                return new Users(fullName,email, phoneNumber, address, role, status);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);

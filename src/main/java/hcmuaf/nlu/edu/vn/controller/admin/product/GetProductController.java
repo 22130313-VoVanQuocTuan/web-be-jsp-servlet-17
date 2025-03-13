@@ -24,19 +24,10 @@ public class GetProductController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         // Lấy tham số "all" từ request
-        String showAll = request.getParameter("showAll");
-        String search = request.getParameter("search");
+
         String name = request.getParameter("name");
         try {
             List<Product> products = productService.getAllProducts();
-            if (search != null && name != null) {
-                // Tìm kiếm sản phẩm theo tên
-                products = productService.getListProductByName(name);
-            }
-            if (showAll == null) {
-                // Hiển thị tối đa 10 mục
-                products = products.stream().limit(10).collect(Collectors.toList());
-            }
             // Mở modal
             String action = request.getParameter("action");
             if ("show".equals(action)) {

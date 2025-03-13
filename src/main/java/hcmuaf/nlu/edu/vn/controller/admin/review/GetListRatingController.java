@@ -19,21 +19,9 @@ public class GetListRatingController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         RatingService ratingService = new RatingService();
 
-        String showAll = req.getParameter("showAll");
-        //tìm kiếm
-        String search = req.getParameter("search");
-        String productId = req.getParameter("productId");
-
         try{
             List<Rating> listRating = ratingService.getListRating();
-            if(search!=null){
 
-                listRating=ratingService.getListRatingByProductId(productId);
-            }
-            if (showAll == null) {
-                // Hiển thị tối đa 10 mục
-                listRating = listRating.stream().limit(10).collect(Collectors.toList());
-            }
             req.setAttribute("listRating", listRating);
             req.getRequestDispatcher( "/admin/pages/review.jsp").forward(req, resp);
         }

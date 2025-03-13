@@ -16,9 +16,42 @@
     <link rel="stylesheet" href="<c:url value="/admin/css/style.css"/>">
     <link rel="stylesheet" href="<c:url value="/admin/css/promotional.css"/>">
 
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
+    <!-- jQuery và DataTables JS -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+
 </head>
 
 <body>
+<style>
+    /*CSS đè thêm để chỉnh display data table */
+    .dataTables_wrapper .dataTables_filter input {
+        border: 2px solid #15283e !important; /* Đổi viền thành màu xanh đậm */
+        border-radius: 5px !important; /* Bo tròn viền hơn */
+        padding: 8px !important; /* Tăng padding */
+        background-color: #f8f9fa !important; /* Đổi nền input */
+        color: #000 !important; /* Đổi màu chữ */
+        margin-left: 5px !important; /* Tăng khoảng cách */
+        margin-bottom: 10px !important;
+    }
+
+    .toggle-status {
+        accent-color: #4CAF50; /* Màu xanh lá */
+        width: 18px;
+        height: 18px;
+    }
+
+    .status-container {
+        display: flex;
+        align-items: center; /* Căn giữa checkbox và text */
+        gap: 8px; /* Tạo khoảng cách giữa checkbox và chữ */
+        text-align: center;
+        justify-content: center;
+        align-content: center;
+    }
+</style>
 <!-- ------------------ Điều hướng -------------------->
 <div class="container">
     <div class="navigation">
@@ -94,6 +127,15 @@
             </li>
 
             <li>
+                <a href="informationCustomer">
+                        <span class="icon">
+                            <ion-icon name="person"></ion-icon>
+                        </span>
+                    <span class="title">Tài khoản</span>
+                </a>
+            </li>
+
+            <li>
                 <a href="logout">
                         <span class="icon">
                             <ion-icon name="log-out-outline"></ion-icon>
@@ -111,18 +153,8 @@
                 <ion-icon name="menu-outline"></ion-icon>
             </div>
 
-            <div class="search">
-                <form action="promotional-list" method="GET">
-                    <label>
-                        <input type="text" name="value" placeholder="Tìm kiếm ở đây">
-                        <ion-icon name="search-outline"><button type="submit" style="border: none; background: none; cursor: pointer;"></button></ion-icon>
-                    </label>
-                    <input type="hidden" name="search" value="true">
-                </form>
-            </div>
-
             <div class="user">
-                <a href="passwordManagement.html">
+                <a href="informationCustomer">
                     <ion-icon name="person"
                               style="color: #000000; font-size: 25px;"></ion-icon>
                 </a>
@@ -133,30 +165,29 @@
             <div class="recentOrders">
                 <div class="cardHeader">
                     <h2>Danh sách mã ưu đãi</h2>
-                    <a href="promotional-list?showAll=true" class="btn">Xem Tất Cả</a>
                 </div>
-                <div class="update-user">
-                    <p style="font-size: 20px; margin-bottom: 10px;">Cập nhật trạng thái mã ưu đãi</p>
-                    <form action="update-status-pro" method="post">
-                        <input type="text" name="id" placeholder="Nhập ID mã ưu đãi cần cập nhật" required
-                               style="font-size: 15px; padding: 2px; border-radius: 5px;">
-                        <select title="choice" name="status" id="statusSelect" required
-                                style="font-size: 15px; border-radius: 5px; padding: 2px;">
-                            <option value="Hoạt động">Hoạt động</option>
-                            <option value="Không hoạt động">Không hoạt động</option>
-                        </select>
-                        <c:if test="${not empty error}">
-                            <p style="color: red;">${error}</p> <!-- Hiển thị lỗi nếu có -->
-                        </c:if>
-                        <button type="submit">Cập nhật trạng thái</button>
-                    </form>
-                </div>
+                <%--                <div class="update-user">--%>
+                <%--                    <p style="font-size: 20px; margin-bottom: 10px;">Cập nhật trạng thái mã ưu đãi</p>--%>
+                <%--                    <form action="update-status-pro" method="post">--%>
+                <%--                        <input type="text" name="id" placeholder="Nhập ID mã ưu đãi cần cập nhật" required--%>
+                <%--                               style="font-size: 15px; padding: 2px; border-radius: 5px;">--%>
+                <%--                        <select title="choice" name="status" id="statusSelect" required--%>
+                <%--                                style="font-size: 15px; border-radius: 5px; padding: 2px;">--%>
+                <%--                            <option value="Hoạt động">Hoạt động</option>--%>
+                <%--                            <option value="Không hoạt động">Không hoạt động</option>--%>
+                <%--                        </select>--%>
+                <%--                        <c:if test="${not empty error}">--%>
+                <%--                            <p style="color: red;">${error}</p> <!-- Hiển thị lỗi nếu có -->--%>
+                <%--                        </c:if>--%>
+                <%--                        <button type="submit">Cập nhật trạng thái</button>--%>
+                <%--                    </form>--%>
+                <%--                </div>--%>
 
                 <div class="list-promotions-content-button">
                     <button id="add_Promotions">Thêm ưu đãi</button>
                 </div>
 
-                <table>
+                <table id="productTable">
                     <thead>
                     <tr>
                         <td>id</td>
@@ -179,7 +210,16 @@
                             </td>
                             <td><fmt:formatDate value="${promotion.startDate}" pattern="dd-MM-yyyy HH:mm:ss"/></td>
                             <td><fmt:formatDate value="${promotion.endDate}" pattern="dd-MM-yyyy HH:mm:ss"/></td>
-                            <td><span class="statusText">${promotion.status}</span></td>
+                            <td>
+                                <div class="status-container">
+                                    <span class="statusText" style="display: none;">${promotion.status}</span>
+                                    <input type="checkbox" class="toggle-status" data-id="${promotion.id}"
+                                        ${promotion.status == 'Hoạt động' ? 'checked' : ''}>
+                                    <span class="status-text">
+                                            ${promotion.status == 'Hoạt động' ? 'Hoạt động' : 'Không hoạt động'}
+                                    </span>
+                                </div>
+                            </td>
                             <td>
                                 <div class="v">
                                     <button class="delete-btn" data-id="${promotion.id}">Xóa</button>
@@ -276,6 +316,10 @@
         </div>
     </div>
 </div>
+<div id="errorMessage"
+     style="display: none; color: white; background-color: red; padding: 10px; text-align: center; position: fixed; top: 10px; left: 50%; transform: translateX(-50%); border-radius: 5px;">
+    Lỗi hệ thống, vui lòng thử lại!
+</div>
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 <script src="<c:url value="/admin/js/index.js"/>"></script>
 <script src="<c:url value="/admin/js/promotional.js"/>"></script>
@@ -288,6 +332,61 @@
             modal.style.display = 'block';
         }
     });
+</script>
+<script>
+    $(document).ready(function () {
+        $('#productTable').DataTable({
+            "paging": true,         // Hiển thị phân trang
+            "searching": true,      // Hiển thị ô tìm kiếm
+            "ordering": true,       // Cho phép sắp xếp cột
+            "info": true,           // Hiển thị thông tin số lượng dữ liệu
+            "lengthMenu": [5, 10, 25, 50, 100], // Số dòng hiển thị mỗi trang
+            "language": {
+                "lengthMenu": "Hiển thị _MENU_ voucher mỗi trang",
+                "zeroRecords": "Không tìm thấy sản phẩm nào",
+                "info": "Trang _PAGE_ trên _PAGES_",
+                "infoEmpty": "Không có sản phẩm",
+                "infoFiltered": "(lọc từ _MAX_ sản phẩm)",
+                "search": "Tìm kiếm:",
+                "paginate": {
+                    "first": "Đầu",
+                    "last": "Cuối",
+                    "next": "Tiếp",
+                    "previous": "Trước"
+                }
+            }
+        });
+    });
+
+    //     Cập nhật trang thái của voicher =AJAX
+    $(".toggle-status").on("change", function () {
+        let checkbox = $(this);
+        let id = checkbox.data("id");
+        let oldStatus = checkbox.is(":checked") ? "Không hoạt động" : "Hoạt động"; // Trạng thái trước khi thay đổi
+        let newStatus = checkbox.is(":checked") ? "Hoạt động" : "Không hoạt động";
+
+        // Cập nhật ngay trên giao diện (chưa lưu vào server)
+        checkbox.next(".status-text").text(newStatus);
+
+        $.ajax({
+            url: "/tqh/update-status-pro",
+            type: "POST",
+            data: {id: id, status: newStatus},
+            dataType: "json",
+            success: function (response) {
+                console.log("Phản hồi từ server:", response);
+            },
+            error: function () {
+                // Hiển thị thông báo lỗi
+                $("#errorMessage").fadeIn().delay(2000).fadeOut();
+
+                // Quay lại trạng thái ban đầu
+                checkbox.prop("checked", !checkbox.prop("checked"));
+                checkbox.next(".status-text").text(oldStatus);
+            }
+        });
+    });
+
 </script>
 
 </body>
