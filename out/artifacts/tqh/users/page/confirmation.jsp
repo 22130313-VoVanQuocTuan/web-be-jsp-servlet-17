@@ -380,6 +380,10 @@
                         <td>${cartitem.quantity}</td>
                         <td><fmt:formatNumber value="${cartitem.totalPrice}" type="number"/> đ</td>
                     </tr>
+                    <!-- Input hidden để giữ lại thông tin của mỗi sản phẩm -->
+                    <input type="hidden" name="cartItemName" value="${cartitem.name}">
+                    <input type="hidden" name="cartItemQuantity" value="${cartitem.quantity}">
+                    <input type="hidden" name="cartItemTotalPrice" value="${cartitem.totalPrice}">
                 </c:forEach>
 
             </table>
@@ -408,6 +412,10 @@
 
             <div class="but">
                 <input type="hidden" name="shippingAddress" value="${shipping_address.address}"/>
+                <input type="hidden" name="hidden_email" value="${shipping_address.email}">
+                <input type="hidden" name="hidden_name" value="${shipping_address.name}">
+                <input type="hidden" name="hidden_phoneNumber" value="${shipping_address.phoneNumber}">
+                <input type="hidden" name="hidden_note" value="${shipping_address.note}">
                 <input type="hidden" name="amount" value="${sessionScope.totalFinalPrice}"/>
                 <button type="submit">Xác nhận đơn hàng</button>
                 <button type="button"><a href="confirmation" style="text-decoration: none; color: #FFFFFF">Hủy</a>
@@ -433,6 +441,12 @@
                         <td>${cartitem.quantity}</td>
                         <td><fmt:formatNumber value="${cartitem.totalPrice}" type="number"/> đ</td>
                     </tr>
+
+                    <!-- Input hidden để giữ lại thông tin của mỗi sản phẩm -->
+                    <input type="hidden" name="cartItemName" value="${cartitem.name}">
+                    <input type="hidden" name="cartItemQuantity" value="${cartitem.quantity}">
+                    <input type="hidden" name="cartItemTotalPrice" value="${cartitem.totalPrice}">
+
                 </c:forEach>
 
             </table>
@@ -463,6 +477,11 @@
             <div class="but">
                 <!-- Thêm các input hidden để gửi thông tin từ session -->
                 <input type="hidden" name="shipping_address" value="${shipping_address.address}">
+                <input type="hidden" name="hidden_email" value="${shipping_address.email}">
+                <input type="hidden" name="hidden_name" value="${shipping_address.name}">
+                <input type="hidden" name="hidden_phoneNumber" value="${shipping_address.phoneNumber}">
+                <input type="hidden" name="hidden_note" value="${shipping_address.note}">
+
                 <button type="submit">Xác nhận đơn hàng</button>
                 <button type="button"><a href="confirmation" style="text-decoration: none; color: #FFFFFF">Hủy</a>
                 </button>
