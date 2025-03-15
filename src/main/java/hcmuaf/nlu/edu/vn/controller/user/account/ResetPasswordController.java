@@ -61,27 +61,27 @@ public class ResetPasswordController extends HttpServlet {
         session.setAttribute("user", user);
         if (user != null) {
             // Tạo token reset mật khẩu
-            String otp = userService.generateOTP();
-            req.setAttribute("otp", otp);
+            String token = userService.generateResetToken();
+            req.setAttribute("token", token);
 
             // Kiểm tra xem token đã tồn tại hay chưa, nếu có thì cập nhật lại
             var resetPassword = userService.findResetTokenByUserId(user.getId());
             if (resetPassword != null) {
                 // nếu có tồn tại thì cập nhật
-                userService.updateResetTokenForEmail(email, otp);
+                userService.updateResetTokenForEmail(email, token);
             } else {
                 //  Lưu token mới vào cơ sở dữ liệu
-                userService.saveResetOTP(user.getId(), otp);
+                userService.saveResetToken(user.getId(), token);
             }
 
-
+            // Tạo đường dẫn reset mật khẩu với token
+            String resetLink = req.getRequestURL().toString() + "?token=" + URLEncoder.encode(token, StandardCharsets.UTF_8);
             // Sửa lại phần email để đảm bảo đường link có thể nhấn vào
-            String emailBody = "Mã OTP để lấy lại mật  khẩu của bạn là: " + otp;
+            String emailBody = "<html><body>Nhấp vào link này để xác nhận lấy lại mật khẩu: <a href=\"" + resetLink + "\">Reset mật khẩu</a></body></html>";
 
             try {
                 emailUtil.sendEmailAsync(email, "Lấy lại mật khẩu", emailBody);
                 req.setAttribute("error_email", "Email xác thực đã gửi đến bạn");
-                req.setAttribute("verificationRequesteds", true); // Đánh dấu yêu cầu xác thực
             } catch (Exception e) {
                 req.setAttribute("error_email", "Không thể gửi email, vui lòng thử lại.");
             }
@@ -117,7 +117,7 @@ public class ResetPasswordController extends HttpServlet {
             userService.invalidateToken(token);
 
             // Chuyển hướng đến trang login
-            req.getRequestDispatcher("/users/page/login-signup.jsp").forward(req, resp);
+            req.getRequestDispatcher( "/users/page/login-signup.jsp").forward(req,resp);
         } else {
             req.setAttribute("verificationRequested", true);
             req.setAttribute("error_token", "Token không hợp lệ hoặc đã hết hạn.");
@@ -127,49 +127,31 @@ public class ResetPasswordController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        UserService userService = new UserService();
+        String token = req.getParameter("token");
 
-        // Lấy mã xác thực từ các trường nhập liệu và kiểm tra null
-        String code1 = req.getParameter("code1") != null ? req.getParameter("code1") : "";
-        String code2 = req.getParameter("code2") != null ? req.getParameter("code2") : "";
-        String code3 = req.getParameter("code3") != null ? req.getParameter("code3") : "";
-        String code4 = req.getParameter("code4") != null ? req.getParameter("code4") : "";
-
-        // Kết hợp các mã thành một chuỗi
-        String code = code1 + code2 + code3 + code4;
-
-        HttpSession session = req.getSession();
-        String email = (String) session.getAttribute("email");
-
-        if (email == null) {
-            req.setAttribute("error_email", "Phiên của bạn đã hết hạn. Vui lòng thử lại.");
-            req.getRequestDispatcher("/users/page/reset-password.jsp").forward(req, resp);
-            return; // Dừng phương thức để tránh xử lý tiếp
-        }
-
-        if (code.isEmpty()) {
-            req.setAttribute("error_email", "Token không hợp lệ.");
-            req.getRequestDispatcher("/users/page/reset-password.jsp").forward(req, resp);
-            return;
-        }
-
-        try {
-            PasswordReset reset = userService.findResetTokenByToken(code);
-
-            if (reset != null && reset.getTokenExpire() != null && reset.getTokenExpire().after(new Timestamp(System.currentTimeMillis()))) {
-                req.setAttribute("verificationRequested", true);
-                req.setAttribute("token", code);
-            } else {
-                req.setAttribute("error_email", "Token không hợp lệ hoặc đã hết hạn.");
+        if (token != null && !token.isEmpty()) {
+            // Kiểm tra tính hợp lệ của token trong cơ sở dữ liệu
+            PasswordReset reset = null;  // Gọi phương thức tìm token
+            try {
+                reset = userService.findResetTokenByToken(token);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
             }
 
-        } catch (Exception e) {
-            req.setAttribute("error_email", "Đã xảy ra lỗi trong quá trình kiểm tra token.");
-            e.printStackTrace(); // Log lỗi ra console để debug
+            if (reset != null && reset.getTokenExpire().after(new Timestamp(System.currentTimeMillis()))) {
+                // Nếu token hợp lệ và chưa hết hạn
+                req.setAttribute("verificationRequested", true);  // Thiết lập flag để hiển thị form đặt lại mật khẩu
+                req.setAttribute("token", token);  // Truyền token vào form
+            } else {
+                // Token không hợp lệ hoặc đã hết hạn
+                req.setAttribute("error_email", "Token không hợp lệ hoặc đã hết hạn.");
+            }
+        } else {
+            req.setAttribute("error_email", "Token không hợp lệ.");
         }
 
+        // Chuyển hướng đến trang reset-password.jsp để hiển thị form
         req.getRequestDispatcher("/users/page/reset-password.jsp").forward(req, resp);
     }
 }
-
 

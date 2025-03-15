@@ -21,10 +21,10 @@
         top: 50%; /* Đặt thông báo vào giữa màn hình theo chiều dọc */
         left: 50%; /* Đặt thông báo vào giữa màn hình theo chiều ngang */
         transform: translate(-50%, -50%); /* Dịch chuyển lại thông báo để nó chính giữa */
-        padding: 20px; /* Đệm để thông báo không dính vào mép */
+        padding: 15px; /* Đệm để thông báo không dính vào mép */
         text-align: center; /* Căn giữa nội dung trong thông báo */
         border-radius: 15px;
-        font-size: 20px; /* Cỡ chữ lớn hơn */
+        font-size: 12px; /* Cỡ chữ lớn hơn */
         font-weight: bold;
         z-index: 9999; /* Đảm bảo thông báo luôn hiển thị phía trên */
         animation: fadeIn 0.5s ease-in-out;
@@ -282,7 +282,10 @@
                 <p><strong>Email:</strong> ${info.email}</p>
                 <p><strong>Số điện thoại:</strong>${info.phoneNumber}</p>
                 <p><strong>Địa chỉ:</strong> ${info.address}</p>
+                <div style="display: flex">
                 <button class="edit-btn" onclick="openModal1()">Chỉnh sửa thông tin</button>
+                    <button class="editPass" onclick="openModalPass()">Đổi Mật Khẩu</button>
+                </div>
             </div>
         </div>
 
@@ -395,6 +398,57 @@
 
         </div>
     </div>
+
+    <div id="updatePassword" class="modal">
+        <div class="modal-content">
+            <span class="close-btn " onclick="openModalPass()" &times;></span>
+            <h2 class="modal-title">Đổi mật khẩu</h2>
+
+            <div class="editInformationContent">
+                <!-- Form chỉnh sửa thông tin -->
+                <form id="updatePass" action="update-pass" method="post">
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Email</label>
+                        <input type="text" name="email" class="form-control" id="email" placeholder="Nhập email của bạn"
+                               required>
+                    </div>
+                    <!-- Thông báo lỗi -->
+                    <c:if test="${not empty errorEmail}">
+                        <p style="color: red;">${errorEmail}</p> <!-- Hiển thị lỗi nếu có -->
+                    </c:if>
+                    <div class="mb-3">
+                        <label for="phone" class="form-label">Mật khẩu cũ</label>
+                        <input type="tel" name="pass" class="form-control" id="pass"
+                               placeholder="Mật kẩu cũ" required>
+                    </div>
+                    <!-- Thông báo lỗi -->
+                    <c:if test="${not empty errorPass}">
+                        <p style="color: red;">${errorPass}</p> <!-- Hiển thị lỗi nếu có -->
+                    </c:if>
+                    <div class="mb-3">
+                        <label for="address" class="form-label">Mật khẩu mới</label>
+                        <textarea class="form-control" name="passNew" id="passNew" rows="3" placeholder="Mật khẩu mới"
+                                  required></textarea>
+                    </div>
+                    <c:if test="${not empty errorPassNew}">
+                        <p style="color: red;">${errorPassNew}</p> <!-- Hiển thị lỗi nếu có -->
+                    </c:if>
+                    <!-- Thông báo lỗi -->
+                    <c:if test="${not empty success}">
+                        <p style="color: red;">${success}</p> <!-- Hiển thị lỗi nếu có -->
+                    </c:if>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary" id="saveChangesPass">Lưu thay đổi</button>
+                        <button type="button" class="btn btn-secondary" onclick="closeModal1()">Hủy</button>
+                    </div>
+                </form>
+            </div>
+
+
+        </div>
+    </div>
+
+
 </div>
 
 </div>
@@ -504,5 +558,16 @@
         });
     });
 </script>
+
+<%-- Kiểm tra lỗi và giữ modal mở --%>
+<c:if test="${not empty errorEmail or not empty errorPass or not empty errorPassNew or not empty success}">
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Mở modal bằng JavaScript
+            var myModal = document.getElementById('updatePassword');
+            myModal.style.display = 'block';
+        });
+    </script>
+</c:if>
 </body>
 </html>

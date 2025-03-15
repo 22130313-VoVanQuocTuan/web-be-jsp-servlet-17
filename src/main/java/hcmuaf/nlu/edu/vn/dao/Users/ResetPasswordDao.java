@@ -35,11 +35,11 @@ public class ResetPasswordDao {
     }
 
     //Lưu thông tin resetPassword
-    public void savePasswordResetToken(int userId, String otp) throws SQLException {
-        String sql = "INSERT INTO passwordreset (userId, resetOTP, OTPExpiry) VALUES (?, ?, DATE_ADD(NOW(), INTERVAL 24 HOUR))";
+    public void savePasswordResetToken(int userId, String token) throws SQLException {
+        String sql = "INSERT INTO passwordreset (userId, resetToken, tokenExpiry) VALUES (?, ?, DATE_ADD(NOW(), INTERVAL 24 HOUR))";
         try (PreparedStatement ptm = dbConnect.preparedStatement(sql)) {
             ptm.setInt(1, userId);
-            ptm.setString(2, otp);
+            ptm.setString(2, token);
             ptm.executeUpdate();
         } finally {
             dbConnect.closeConnection();
@@ -53,18 +53,18 @@ public class ResetPasswordDao {
             ptm.setInt(1, userId);
             ResultSet rs = ptm.executeQuery();
             if (rs.next()) {
-                return new PasswordReset(rs.getInt("id"), rs.getInt("userId"), rs.getString("resetOTP"), rs.getTimestamp("OTPExpiry"));
+                return new PasswordReset(rs.getInt("id"), rs.getInt("userId"), rs.getString("resetToken"), rs.getTimestamp("tokenExpiry"));
             }
         } finally {
             dbConnect.closeConnection();
         }
         return null;
     }
-    // Lấy ra thông tin của resetOTP theo OTP
-    public PasswordReset findResetTokenByToken(String OTP ) throws SQLException {
-        String sql = "SELECT * FROM passwordreset WHERE resetOTP = ?";
+    // Lấy ra thông tin của resetToken theo token
+    public PasswordReset findResetTokenByToken(String token ) throws SQLException {
+        String sql = "SELECT * FROM passwordreset WHERE resetToken = ?";
         try (PreparedStatement ptm = dbConnect.preparedStatement(sql)) {
-            ptm.setString(1, OTP);
+            ptm.setString(1, token);
             ResultSet rs = ptm.executeQuery();
             if (rs.next()) {
                 return new PasswordReset(rs.getInt("id"), rs.getInt("userId"), rs.getString("resetToken"), rs.getTimestamp("tokenExpiry"));
@@ -88,11 +88,11 @@ public class ResetPasswordDao {
     }
 
     //Cập nhật thông tin resetToken khi người dùng gửi lại
-    public void updateResetTokenAndExpiry(String email, String newOTP) throws SQLException {
-        String sql = "UPDATE passwordreset SET resetOTP = ?, OTPExpiry = DATE_ADD(NOW(), INTERVAL 24 HOUR) " +
+    public void updateResetTokenAndExpiry(String email, String newToken) throws SQLException {
+        String sql = "UPDATE passwordreset SET resetToken = ?, tokenExpiry = DATE_ADD(NOW(), INTERVAL 24 HOUR) " +
                 "WHERE userId = (SELECT id FROM users WHERE email = ?)";
         try (PreparedStatement ptm = dbConnect.preparedStatement(sql)) {
-            ptm.setString(1, newOTP);
+            ptm.setString(1, newToken);
             ptm.setString(2, email);
             ptm.executeUpdate();
         } finally {
@@ -100,11 +100,11 @@ public class ResetPasswordDao {
         }
     }
 
-    // Cập   nhật  thông tin resetOTP khi đặt lại pass thành  công
-    public void invalidateToken(String OTP) throws SQLException {
-        String sql = "UPDATE passwordreset SET resetOTP = NULL, OTPExpiry = NULL WHERE resetOTP = ?";
+    // Cập   nhật  thông tin resetToken khi đặt lại pass thành  công
+    public void invalidateToken(String token) throws SQLException {
+        String sql = "UPDATE passwordreset SET resetToken = NULL, tokenExpiry = NULL WHERE resetToken = ?";
         try (PreparedStatement ptm = dbConnect.preparedStatement(sql)) {
-            ptm.setString(1, OTP);
+            ptm.setString(1, token);
             ptm.executeUpdate();
         } finally {
             dbConnect.closeConnection();

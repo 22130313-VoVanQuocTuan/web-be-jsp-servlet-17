@@ -126,18 +126,17 @@ public class UserService {
         return resetPasswordDao.findUserByEmail(email);
     }
 
-    // Tạo OTP
-    public String generateOTP() {
-        Random random = new Random();
-        int otp = 1000 + random.nextInt(9000); // Tạo số từ 1000 đến 9999
-        return String.valueOf(otp);
+    // Tạo token
+    public String generateResetToken() {
+        SecureRandom random = new SecureRandom();
+        byte[] bytes = new byte[24];
+        random.nextBytes(bytes);
+        return Base64.getUrlEncoder().withoutPadding().encodeToString(bytes);
     }
-
-    //Lưu OTP
-    public void saveResetOTP(int userId, String otp) throws Exception {
-        resetPasswordDao.savePasswordResetToken(userId, otp);
+    //Thêm token
+    public void saveResetToken(int userId, String token) throws Exception {
+        resetPasswordDao.savePasswordResetToken(userId, token);
     }
-
     // Tim token đã tồn tại trong database
     public PasswordReset findResetTokenByUserId(int userId) throws Exception {
         return resetPasswordDao.findPasswordResetByUserId(userId);
@@ -192,8 +191,9 @@ public class UserService {
         return addDeleteUpdateAccountInAdminDao.deleteAccount(id);
     }
 
-
-
+    public void updateUserPassword(String newPassword,String email) throws SQLException {
+        usersDao.updatePassword(newPassword, email);
+    }
 }
 
 
