@@ -393,3 +393,62 @@ body.overlay-active {
     color: #2546ea;
     
 }
+/*message error form comfirmation*/
+.captcha-container {
+    background: #f0f4f8; /* Màu nền nhẹ */
+    border: 1px solid #d1d9e6; /* Viền tinh tế */
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+    width: fit-content;
+    margin: 10px auto; /* Căn giữa */
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.captcha-container .title {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.captcha-box {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    justify-content: center;
+    background: #fff;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.captcha-box img {
+    height: 40px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+.captcha-box input {
+    border: 1px solid #ccc;
+    padding: 11px;
+    border-radius: 5px;
+    width: 160px;
+    font-size: 14px;
+    text-align: center;
+}
+
+.captcha-box input:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.error-message {
+    color: red;
+    font-size: 14px;
+    font-weight: bold;
+    margin-left: 12%;
+    margin-top: 2%;
+}

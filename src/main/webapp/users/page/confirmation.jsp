@@ -392,9 +392,23 @@
             <p>Tên người nhận: ${shipping_address.name}</p>
             <p>Số điện thoại: ${shipping_address.phoneNumber}</p>
             <p>Ghi chú: ${shipping_address.note}</p>
+
+            <!-- CAPTCHA -->
+            <div class="captcha-container">
+                <p class ="title">Nhập mã xác nhận:</p>
+                <div class="captcha-box">
+                    <img src="generateCaptcha" alt="Captcha Image">
+                    <input type="text" name="captcha" required placeholder="Nhập mã captcha">
+                </div>
+                <!-- Thông báo lỗi nếu CAPTCHA sai -->
+                <c:if test="${not empty captchaError}">
+                    <p class="error-message">${captchaError}</p>
+                </c:if>
+            </div>
+
             <div class="but">
-                <input type="hidden" name="shippingAddress" value="${shipping_address.address}" />
-                <input type="hidden" name="amount" value="${sessionScope.totalFinalPrice}" />
+                <input type="hidden" name="shippingAddress" value="${shipping_address.address}"/>
+                <input type="hidden" name="amount" value="${sessionScope.totalFinalPrice}"/>
                 <button type="submit">Xác nhận đơn hàng</button>
                 <button type="button"><a href="confirmation" style="text-decoration: none; color: #FFFFFF">Hủy</a>
                 </button>
@@ -432,6 +446,20 @@
             <p>Tên người nhận: ${shipping_address.name}</p>
             <p>Số điện thoại: ${shipping_address.phoneNumber}</p>
             <p>Ghi chú: ${shipping_address.note}</p>
+
+            <!-- CAPTCHA -->
+            <div class="captcha-container">
+                <p class ="title">Nhập mã xác nhận:</p>
+                <div class="captcha-box">
+                    <img src="generateCaptcha" alt="Captcha Image">
+                    <input type="text" name="captcha" required placeholder="Nhập mã captcha">
+                </div>
+                <!-- Thông báo lỗi nếu CAPTCHA sai -->
+                <c:if test="${not empty captchaError}">
+                    <p class="error-message">${captchaError}</p>
+                </c:if>
+            </div>
+
             <div class="but">
                 <!-- Thêm các input hidden để gửi thông tin từ session -->
                 <input type="hidden" name="shipping_address" value="${shipping_address.address}">

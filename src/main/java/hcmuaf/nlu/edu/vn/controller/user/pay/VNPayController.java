@@ -31,6 +31,37 @@ public class VNPayController extends HttpServlet {
         double amount = Double.parseDouble(req.getParameter("amount"));
         HttpSession session = req.getSession();
         Users user = (Users) session.getAttribute("user");
+
+        // CAPTCHA
+        String sessionCaptcha = (String) session.getAttribute("captcha"); // Lấy CAPTCHA từ session
+        String userCaptcha = req.getParameter("captcha"); // Lấy CAPTCHA nhập từ form
+
+        System.out.println("Session CAPTCHA: " + sessionCaptcha);
+        System.out.println("User nhập CAPTCHA: " + userCaptcha);
+        System.out.println("Session ID: " + session.getId());
+
+        if (sessionCaptcha == null) {
+            req.setAttribute("captchaError", "Lỗi: CAPTCHA không tồn tại. Vui lòng thử lại.");
+            req.setAttribute("showModalVNPAY", true); // Giữ lại modal COD
+            req.getRequestDispatcher("users/page/confirmation.jsp").forward(req, resp);
+            return;
+        }
+
+        if (!sessionCaptcha.equals(userCaptcha)) {
+            req.setAttribute("captchaError", "Sai CAPTCHA. Vui lòng nhập lại.");
+            req.setAttribute("showModalVNPAY", true); // Giữ lại modal COD
+            req.getRequestDispatcher("users/page/confirmation.jsp").forward(req, resp);
+            return;
+        }
+
+        // Nếu CAPTCHA đúng, tiếp tục xử lý thanh toán...
+        session.removeAttribute("captcha"); // Xóa CAPTCHA cũ để tránh nhập lại
+
+
+        // Sau khi kiểm tra thành công, xóa CAPTCHA khỏi session để tránh nhập lại lần nữa
+        session.removeAttribute("captcha_code");
+
+
         int userId = user.getId();
         double totalFinalPrice = (double) session.getAttribute("totalFinalPrice");
         double totalShippingFee = (double) session.getAttribute("totalShippingFee");

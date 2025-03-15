@@ -34,6 +34,36 @@ public class ConfirmPaymentCODController extends HttpServlet {
             response.sendRedirect("login"); // Nếu chưa đăng nhập, điều hướng về trang đăng nhập
             return;
         }
+
+        // CAPTCHA
+        String sessionCaptcha = (String) session.getAttribute("captcha"); // Lấy CAPTCHA từ session
+        String userCaptcha = request.getParameter("captcha"); // Lấy CAPTCHA nhập từ form
+
+        System.out.println("Session CAPTCHA: " + sessionCaptcha);
+        System.out.println("User nhập CAPTCHA: " + userCaptcha);
+        System.out.println("Session ID: " + session.getId());
+
+        if (sessionCaptcha == null) {
+            request.setAttribute("captchaError", "Lỗi: CAPTCHA không tồn tại. Vui lòng thử lại.");
+            request.setAttribute("showModalCOD", true); // Giữ lại modal COD
+            request.getRequestDispatcher("users/page/confirmation.jsp").forward(request, response);
+            return;
+        }
+
+        if (!sessionCaptcha.equals(userCaptcha)) {
+            request.setAttribute("captchaError", "Sai CAPTCHA. Vui lòng nhập lại.");
+            request.setAttribute("showModalCOD", true); // Giữ lại modal COD
+            request.getRequestDispatcher("users/page/confirmation.jsp").forward(request, response);
+            return;
+        }
+
+        // Nếu CAPTCHA đúng, tiếp tục xử lý thanh toán...
+        session.removeAttribute("captcha"); // Xóa CAPTCHA cũ để tránh nhập lại
+
+
+        // Sau khi kiểm tra thành công, xóa CAPTCHA khỏi session để tránh nhập lại lần nữa
+        session.removeAttribute("captcha_code");
+
         int userId = user.getId();
         // Lấy các giá trị từ form và session
         String shippingAddress = request.getParameter("shipping_address");
