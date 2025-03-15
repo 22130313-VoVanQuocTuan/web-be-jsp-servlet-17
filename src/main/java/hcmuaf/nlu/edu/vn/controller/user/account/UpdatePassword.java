@@ -31,7 +31,7 @@ public class UpdatePassword extends HttpServlet {
         Users user = (Users) session.getAttribute("user");
 
 
-        if (user == null) {
+        if (!user.getEmail().equals(email)) {
             request.setAttribute("errorEmail", "Email không tồn tại.");
             request.getRequestDispatcher("/informationCustomer").forward(request, response);
         } else {

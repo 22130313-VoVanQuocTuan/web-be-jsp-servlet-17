@@ -23,7 +23,6 @@
         transform: translate(-50%, -50%); /* Dịch chuyển lại thông báo để nó chính giữa */
         padding: 15px; /* Đệm để thông báo không dính vào mép */
         text-align: center; /* Căn giữa nội dung trong thông báo */
-        border-radius: 15px;
         font-size: 12px; /* Cỡ chữ lớn hơn */
         font-weight: bold;
         z-index: 9999; /* Đảm bảo thông báo luôn hiển thị phía trên */
