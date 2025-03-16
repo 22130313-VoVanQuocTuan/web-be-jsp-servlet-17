@@ -67,6 +67,15 @@
             <version>1.6.2</version> <!-- Phiên bản để gửi mail -->
         </dependency>
 
+<!--        fb-->
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20240303</version>
+            <scope>compile</scope>  <!-- Đảm bảo thư viện được đóng gói khi build -->
+        </dependency>
+
+
 
 
     </dependencies>
