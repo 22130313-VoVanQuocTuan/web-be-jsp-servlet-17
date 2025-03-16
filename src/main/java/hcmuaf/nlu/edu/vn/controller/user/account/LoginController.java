@@ -54,7 +54,7 @@ public class LoginController extends HttpServlet {
                          session.removeAttribute("redirectUrl"); // Xóa redirectUrl khỏi session
                          resp.sendRedirect(redirectUrl); // Quay về URL trước đó
                      }else
-                         if ("admin".equals(user.getRole())) {
+                         if ("admin".equals(user.getRole())  || "owner".equals(user.getRole())) {
                              resp.sendRedirect(req.getContextPath() + "/home");
                          } else if ("user".equals(user.getRole())) {
                              resp.sendRedirect(req.getContextPath() + "/home-page");
