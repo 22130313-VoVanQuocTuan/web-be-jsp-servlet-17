@@ -8,6 +8,7 @@ import java.security.SecureRandom;
 import java.sql.SQLException;
 import java.util.Base64;
 import java.util.List;
+import java.util.Random;
 
 
 public class UserService {
@@ -132,12 +133,10 @@ public class UserService {
         random.nextBytes(bytes);
         return Base64.getUrlEncoder().withoutPadding().encodeToString(bytes);
     }
-
     //Thêm token
     public void saveResetToken(int userId, String token) throws Exception {
         resetPasswordDao.savePasswordResetToken(userId, token);
     }
-
     // Tim token đã tồn tại trong database
     public PasswordReset findResetTokenByUserId(int userId) throws Exception {
         return resetPasswordDao.findPasswordResetByUserId(userId);
@@ -192,8 +191,9 @@ public class UserService {
         return addDeleteUpdateAccountInAdminDao.deleteAccount(id);
     }
 
-
-
+    public void updateUserPassword(String newPassword,String email) throws SQLException {
+        usersDao.updatePassword(newPassword, email);
+    }
 }
 
 
