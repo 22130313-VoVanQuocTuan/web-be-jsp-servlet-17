@@ -24,7 +24,7 @@ public class DeleteOrderController extends HttpServlet {
             if (orderService.deleteOrderItem(id) || orderService.getOrderItems(id).isEmpty()) {
                 if (orderService.deleteOrder(id)) {
                     request.setAttribute("successDelete", "Xóa hoá đơn thành công.");
-                    request.getRequestDispatcher("/order-list").forward(request, response);
+                    response.sendRedirect(request.getContextPath()+"/order-list");
                 }
 
             } else {

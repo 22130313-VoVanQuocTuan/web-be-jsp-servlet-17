@@ -231,6 +231,31 @@ td {
   font-size: 15px;
 }
 
+.status {
+  padding: 2px;
+  border-radius: 5px;
+  display: inline-block;
+}
+
+.status-paid {
+  color: #ffffff;
+  background-color: #02bc15;
+  border-radius: 5px;
+}
+
+.status-unpaid {
+  color: #ffffff;
+  background-color: #ffc107;
+  border-radius: 5px;
+}
+
+.update-order label {
+  font-size: 14px;
+}
+.icon-product {
+  margin-right: 8px;
+}
+
 .badge {
   padding: 5px 10px;
   border-radius: 5px;
@@ -240,21 +265,12 @@ td {
   background-color: #02bc15; /* Xanh lá */
   color: white;
 }
-.badge.danger {
-  background-color: #dc3545; /* Đỏ */
-  color: white;
-}
+
 .badge.warning {
   background-color: #ffc107; /* Vàng */
   color: black;
 }
 
-.update-order label {
-  font-size: 14px;
-}
-.icon-product {
-  margin-right: 8px;
-}
 
 /* Animation */
 @keyframes fadeIn {

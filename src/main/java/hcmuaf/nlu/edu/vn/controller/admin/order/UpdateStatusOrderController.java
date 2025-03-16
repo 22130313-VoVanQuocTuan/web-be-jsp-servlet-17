@@ -22,22 +22,36 @@ public class UpdateStatusOrderController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-        int id = Integer.parseInt(request.getParameter("id"));
-        String status = request.getParameter("status");
+        int id;
+        String statusOrder = request.getParameter("statusOrder");
+        String statusPayment = request.getParameter("statusPayment");
 
         try {
-            if(orderService.updateOrderStatus(id, status)) {
-                orderService.updateOrderPaymentStatus(id, "Đã thanh toán");
-                request.setAttribute("successStatus", "Cập nhật thành công!");
-                request.getRequestDispatcher("/order-list").forward(request, response);
-            } else {
+            id = Integer.parseInt(request.getParameter("id"));
+        } catch (NumberFormatException e) {
+            request.setAttribute("error", "ID đơn hàng không hợp lệ.");
+            request.getRequestDispatcher("/order-list").forward(request, response);
+            return;
+        }
 
+        try {
+            boolean isOrderUpdated = orderService.updateOrderStatus(id, statusOrder);
+            boolean isPaymentUpdated = orderService.updateOrderPaymentStatus(id, statusPayment);
+
+            if (isOrderUpdated && isPaymentUpdated) {
+                request.setAttribute("successStatus", "Cập nhật trạng thái đơn hàng và thanh toán thành công!");
+            } else if (isOrderUpdated) {
+                request.setAttribute("successStatus", "Cập nhật trạng thái đơn hàng thành công!");
+            } else if (isPaymentUpdated) {
+                request.setAttribute("successStatus", "Cập nhật trạng thái thanh toán thành công!");
+            } else {
                 request.setAttribute("error", "Cập nhật không thành công!");
-                request.getRequestDispatcher("/order-list").forward(request, response);
             }
+            request.getRequestDispatcher("/order-list").forward(request, response);
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
+            request.setAttribute("error", "Đã xảy ra lỗi khi cập nhật đơn hàng.");
+            request.getRequestDispatcher("/order-list").forward(request, response);
         }
     }
 }
