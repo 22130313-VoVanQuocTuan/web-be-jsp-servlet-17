@@ -22,23 +22,23 @@
 <style>
     /* Định dạng chung cho thông báo lỗi */
     .alert-error {
-        background-color: #f44336; /* Màu đỏ để dễ nhận diện lỗi */
-        color: white; /* Màu chữ trắng */
-        padding: 20px; /* Khoảng cách bên trong */
-        border-radius: 8px; /* Bo góc mềm mại */
-        margin: 15px 0; /* Khoảng cách giữa các thông báo lỗi */
-        font-family: 'Arial', sans-serif; /* Phông chữ dễ đọc */
-        font-size: 16px; /* Kích thước chữ */
+        background-color: #f44336;
+        color: white;
+        padding: 20px;
+        border-radius: 8px;
+        margin: 15px 0;
+        font-family: 'Arial', sans-serif;
+        font-size: 16px;
         position: fixed; /* Đặt vị trí cố định trên màn hình */
-        top: 50%; /* Căn giữa theo chiều dọc */
-        left: 50%; /* Căn giữa theo chiều ngang */
-        transform: translate(-50%, -50%); /* Di chuyển lại 1 nửa chiều rộng và chiều cao để hoàn toàn căn giữa */
-        z-index: 1000; /* Đảm bảo thông báo luôn nổi bật trên các phần tử khác */
-        width: 80%; /* Chiều rộng của thông báo */
-        max-width: 500px; /* Chiều rộng tối đa */
-        text-align: center; /* Căn giữa nội dung */
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Bóng đổ nhẹ cho thông báo */
-        transition: all 0.3s ease; /* Hiệu ứng chuyển động mượt mà */
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 1000;
+        width: 80%;
+        max-width: 500px;
+        text-align: center;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
     }
 
     /* Kiểu danh sách lỗi */
@@ -50,14 +50,14 @@
 
     /* Kiểu cho mỗi mục lỗi */
     .alert-error ul li {
-        margin-bottom: 10px; /* Khoảng cách giữa các lỗi */
-        padding: 10px; /* Khoảng cách trong mỗi lỗi */
-        border: 1px solid #ff0000; /* Viền đỏ quanh mỗi lỗi để làm nổi bật */
-        border-radius: 4px; /* Bo góc của các mục lỗi */
-        background-color: #d32f2f; /* Nền hơi sáng hơn một chút */
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Bóng đổ cho mỗi mục lỗi */
-        text-align: left; /* Căn trái cho các thông báo lỗi */
-        font-weight: bold; /* In đậm văn bản */
+        margin-bottom: 10px;
+        padding: 10px;
+        border: 1px solid #ff0000;
+        border-radius: 4px;
+        background-color: #d32f2f;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        text-align: left;
+        font-weight: bold;
     }
 
     /* Nút đóng thông báo */
@@ -539,7 +539,7 @@
             "language": {
                 "lengthMenu": "Hiển thị _MENU_ sản phẩm mỗi trang",
                 "zeroRecords": "Không tìm thấy sản phẩm nào",
-                "info": "Trang _PAGE_ trên _PAGES_",
+                "info": "Trang _PAGE_ trên tổng _PAGES_ trang",
                 "infoEmpty": "Không có sản phẩm",
                 "infoFiltered": "(lọc từ _MAX_ sản phẩm)",
                 "search": "Tìm kiếm:",

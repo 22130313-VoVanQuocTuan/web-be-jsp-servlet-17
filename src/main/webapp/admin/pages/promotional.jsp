@@ -28,12 +28,10 @@
 <style>
     /*CSS đè thêm để chỉnh display data table */
     .dataTables_wrapper .dataTables_filter input {
-        border: 2px solid #15283e !important; /* Đổi viền thành màu xanh đậm */
-        border-radius: 5px !important; /* Bo tròn viền hơn */
-        padding: 8px !important; /* Tăng padding */
-        background-color: #f8f9fa !important; /* Đổi nền input */
-        color: #000 !important; /* Đổi màu chữ */
-        margin-left: 5px !important; /* Tăng khoảng cách */
+        border: 2px solid #15283e !important;
+        border-radius: 5px !important;
+        padding: 8px !important;
+        color: #000 !important;
         margin-bottom: 10px !important;
     }
 
@@ -344,7 +342,7 @@
             "language": {
                 "lengthMenu": "Hiển thị _MENU_ voucher mỗi trang",
                 "zeroRecords": "Không tìm thấy sản phẩm nào",
-                "info": "Trang _PAGE_ trên _PAGES_",
+                "info": "Trang _PAGE_ trên tổng _PAGES_ trang",
                 "infoEmpty": "Không có sản phẩm",
                 "infoFiltered": "(lọc từ _MAX_ sản phẩm)",
                 "search": "Tìm kiếm:",
