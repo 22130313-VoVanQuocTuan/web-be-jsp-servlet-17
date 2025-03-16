@@ -172,7 +172,6 @@
                         </form>
                     </div>
                 </c:if>
-
                 <!-- Form đặt lại mật khẩu mới (ẩn khi không có token hợp lệ) -->
                 <c:if test="${not empty verificationRequested}">
                     <div class="form-container set-new-password">
@@ -245,9 +244,7 @@
     <script src="${pageContext.request.contextPath}/users/js/login-signup.js"></script>
     <script src="${pageContext.request.contextPath}/users/js/scripts.js" defer></script>
     <script src="${pageContext.request.contextPath}/users/js/reset-password.js"></script>
-        <script>
 
-        </script>
 </body>
 
 

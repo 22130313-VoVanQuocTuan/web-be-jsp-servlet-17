@@ -32,6 +32,9 @@ public class AddDeleteUpdateAccountInAdminDao {
     }
 
 
+
+
+
     public boolean deleteAccount(int id) {
         String sql = "DELETE FROM users WHERE id = ?";
         try (PreparedStatement ptm = dbConnect.preparedStatement(sql)) {

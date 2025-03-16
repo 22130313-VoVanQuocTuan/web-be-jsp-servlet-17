@@ -16,6 +16,7 @@ public class VerifyEmailController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
         UserService userService = new UserService();
         // Lấy mã xác thực từ các trường nhập liệu
         String code1 = request.getParameter("code1");

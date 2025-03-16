@@ -27,7 +27,7 @@ public class AdminFilter implements Filter {
         HttpSession session = req.getSession(false); // nếu chưa đăng nhập thì ko tạo ra session mới
         Users user = (session != null) ? (Users) session.getAttribute("user") : null;
 
-        if (user == null || !user.getRole().equals("admin")) {
+        if (user == null || (!user.getRole().equals("admin") && !user.getRole().equals("owner"))) {
             // Lưu URL hiện tại
             String currentUrl = req.getRequestURI();
             String queryString = req.getQueryString();
