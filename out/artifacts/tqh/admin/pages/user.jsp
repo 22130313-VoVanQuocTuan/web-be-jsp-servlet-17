@@ -22,6 +22,13 @@
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 
 </head>
+<style>
+    .dataTables_wrapper .dataTables_filter input {
+        border: 2px solid #1c1919 !important;
+        margin-bottom: 10px !important;
+    }
+</style>
+
 
 <body>
 <!-- ------------------ Điều hướng -------------------->
@@ -171,18 +178,43 @@
                             <td>
                                 <div class="v">
                                     <c:choose>
-                                        <c:when test="${list_account.role eq 'admin'}">
-                                            <button style="background: #ccced0 " class="delete-btn"
-                                                    data-id="${list_account.id} " disabled>Ko thể xóa
-                                            </button>
-                                            <button style="background: #ccced0"
-                                                    class="edit-btn"
-                                                    data-id="${list_account.id}"
-                                                    data-status="${list_account.status}"
-                                                    data-role="${list_account.role}" disabled>
-                                                Sửa
-                                            </button>
+
+                                        <c:when test="${list_account.role eq 'owner'}">
+                                            <button style="background: #ccced0" class="delete-btn" disabled>Ko thể xóa</button>
+                                            <button style="background: #ccced0" class="edit-btn" disabled>Sửa</button>
                                         </c:when>
+
+
+                                        <c:when test="${list_account.role eq 'admin'}">
+                                            <c:choose>
+
+                                                <c:when test="${sessionScope.user.role eq 'owner'}">
+                                                    <c:choose>
+
+                                                        <c:when test="${sessionScope.user.id eq list_account.id}">
+                                                            <button style="background: #ccced0" class="delete-btn" disabled>Ko thể xóa</button>
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            <button class="delete-btn" data-id="${list_account.id}">Xóa</button>
+                                                        </c:otherwise>
+                                                    </c:choose>
+                                                    <button class="edit-btn"
+                                                            data-id="${list_account.id}"
+                                                            data-status="${list_account.status}"
+                                                            data-role="${list_account.role}">
+                                                        Sửa
+                                                    </button>
+                                                </c:when>
+
+
+                                                <c:otherwise>
+                                                    <button style="background: #ccced0" class="delete-btn" disabled>Ko thể xóa</button>
+                                                    <button style="background: #ccced0" class="edit-btn" disabled>Sửa</button>
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </c:when>
+
+
                                         <c:otherwise>
                                             <button class="delete-btn" data-id="${list_account.id}">Xóa</button>
                                             <button class="edit-btn"
@@ -218,13 +250,21 @@
                     <input type="email" id="email" name="email" required>
 
                     <label for="role">Quyền:</label>
-                    <select id="userRole" name="role" required>
-                        <option value="">Chọn quyền</option>
-                        <option value="admin">admin</option>
-                        <option value="user">user</option>
-                    </select>
+                    <c:choose>
+                        <c:when test="${sessionScope.user.role eq 'owner'}">
+                            <select id="userRole" name="role" required>
+                                <option value="">Chọn quyền</option>
+                                <option value="admin">Admin</option>
+                                <option value="user">User</option>
+                            </select>
+                        </c:when>
+                        <c:otherwise>
+                            <p>Bạn không có quyền chỉnh sửa vai trò.</p>
+                        </c:otherwise>
+                    </c:choose>
+
                     <c:if test="${not empty error}">
-                        <p style="color: red;">${error}</p> <!-- Hiển thị lỗi nếu có -->
+                        <p style="color: red;">${error}</p>
                     </c:if>
 
                     <button id="saveAccountUser" type="submit">Lưu tài khoản</button>
@@ -232,7 +272,6 @@
                 </form>
             </div>
         </div>
-
 
         <!-- Modal Xóa tài khoản -->
         <div id="delete-modal" class="modal">
@@ -301,7 +340,7 @@
             "language": {
                 "search": "Tìm kiếm:",
                 "lengthMenu": "Hiển thị _MENU_ dòng",
-                "info": "Hiển thị _START_ đến _END_ của _TOTAL_ dòng",
+                "info": "Trang _PAGE_ trên tổng _PAGES_ trang",
                 "zeroRecords": "Không tìm thấy kết quả",
                 "infoEmpty": "Không có dữ liệu",
                 "paginate": {
