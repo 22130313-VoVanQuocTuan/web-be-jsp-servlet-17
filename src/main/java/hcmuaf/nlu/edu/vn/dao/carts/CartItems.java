@@ -33,6 +33,13 @@ public class CartItems {
 
     }
 
+    public CartItems(String nameItem, int quantityForm, double totalPriceForm) {
+        this.name = nameItem;
+        this.quantity = quantityForm;
+        this.totalPrice = totalPriceForm;
+
+    }
+
     public int getId() {
         return id;
     }

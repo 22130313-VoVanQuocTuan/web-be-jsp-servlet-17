@@ -3,6 +3,7 @@ package hcmuaf.nlu.edu.vn.controller.user.pay;
 import hcmuaf.nlu.edu.vn.dao.carts.CartItems;
 import hcmuaf.nlu.edu.vn.model.OrderItem;
 import hcmuaf.nlu.edu.vn.model.Orders;
+import hcmuaf.nlu.edu.vn.model.ShippingAddress;
 import hcmuaf.nlu.edu.vn.model.Users;
 import hcmuaf.nlu.edu.vn.service.CartService;
 import hcmuaf.nlu.edu.vn.service.EmailUtilService;
@@ -14,6 +15,8 @@ import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @WebServlet(name = "ConfimPaymentontroller", value = "/payCOD")
@@ -46,9 +49,62 @@ public class ConfirmPaymentCODController extends HttpServlet {
         Double shippingFee = (Double) session.getAttribute("totalShippingFee");
         Double discountAmount = (Double) session.getAttribute("totalDiscount");
 
+
         // Tạo đối tượng Orders
         Orders order = new Orders(userId,totalPrice,shippingFee,discountAmount,shippingAddress,paymentMethod,paymentStatus,status);
         // Tạo đơn hàng và lấy orderId
+        // CAPTCHA
+        String sessionCaptcha = (String) session.getAttribute("captcha"); // Lấy CAPTCHA từ session
+        String userCaptcha = request.getParameter("captcha"); // Lấy CAPTCHA nhập từ form
+
+        System.out.println("Session CAPTCHA: " + sessionCaptcha);
+        System.out.println("User nhập CAPTCHA: " + userCaptcha);
+        System.out.println("Session ID: " + session.getId());
+
+        if (sessionCaptcha == null) {
+            request.setAttribute("captchaError", "Lỗi: CAPTCHA không tồn tại. Vui lòng thử lại.");
+            request.setAttribute("showModalCOD", true); // Giữ lại modal COD
+            request.getRequestDispatcher("users/page/confirmation.jsp").forward(request, response);
+            return;
+        }
+
+        if (!sessionCaptcha.equals(userCaptcha)) {
+            request.setAttribute("captchaError", "Sai CAPTCHA. Vui lòng nhập lại.");
+            request.setAttribute("showModalCOD", true); // Giữ lại modal COD
+
+            // Giữ lại thông tin đã nhập
+            String emailForm = request.getParameter("hidden_email");
+            String nameForm = request.getParameter("hidden_name");
+            String phoneNumberForm = request.getParameter("hidden_phoneNumber");
+            String noteForm = request.getParameter("hidden_note");
+            // Đưa các thông tin đã nhập vào request để JSP hiển thị lại
+            request.setAttribute("shipping_address", new ShippingAddress(emailForm, nameForm,shippingAddress, phoneNumberForm, noteForm));
+
+            // Giữ lại thông tin sản phẩm trong giỏ hàng khi CAPTCHA sai
+            List<String> cartItemNames = Arrays.asList(request.getParameterValues("cartItemName"));
+            List<String> cartItemQuantities = Arrays.asList(request.getParameterValues("cartItemQuantity"));
+            List<String> cartItemTotalPrices = Arrays.asList(request.getParameterValues("cartItemTotalPrice"));
+
+            // Đưa danh sách các mặt hàng vào request để hiển thị lại
+            List<CartItems> cartItems = new ArrayList<>();
+            for (int i = 0; i < cartItemNames.size(); i++) {
+                String nameItem = cartItemNames.get(i);
+                int quantityForm = Integer.parseInt(cartItemQuantities.get(i));
+                double totalPriceForm = Double.parseDouble(cartItemTotalPrices.get(i));
+                cartItems.add(new CartItems(nameItem, quantityForm, totalPriceForm));
+            }
+            request.setAttribute("itemCart", cartItems);
+
+            request.getRequestDispatcher("users/page/confirmation.jsp").forward(request, response);
+            return;
+        }
+
+        // Nếu CAPTCHA đúng, tiếp tục xử lý thanh toán...
+        session.removeAttribute("captcha"); // Xóa CAPTCHA cũ để tránh nhập lại
+
+
+        // Sau khi kiểm tra thành công, xóa CAPTCHA khỏi session để tránh nhập lại lần nữa
+        session.removeAttribute("captcha_code");
 
       try {
           Orders o = orderService.addOrder(order);
@@ -97,5 +153,6 @@ public class ConfirmPaymentCODController extends HttpServlet {
       }catch (SQLException e) {
           throw new RuntimeException(e);
       }
+
     }
 }

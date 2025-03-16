@@ -1,4 +1,3 @@
-
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ArtifactsWorkspaceSettings">
@@ -10,18 +9,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="80f72b8c-df38-4364-a0ce-ef59faf638b2" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/controller/user/account/GoogleAuthCallback.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/controller/user/account/GoogleAuthServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/tqh.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/tqh.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="e44f03f6-bd1e-41c3-9743-7f064263190f" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/js/informationCustomer.js" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/tqh/users/js/informationCustomer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/page/informationCustomer.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/tqh/users/page/informationCustomer.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/controller/user/account/UpdatePassword.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/controller/user/account/UpdatePassword.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/users/page/informationCustomer.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/users/page/informationCustomer.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/users/page/login-signup.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/users/page/login-signup.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/tqh/users/page/confirmation.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/tqh/users/page/confirmation.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/controller/user/pay/ConfirmPaymentCODController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/controller/user/pay/ConfirmPaymentCODController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/controller/user/pay/VNPayController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/controller/user/pay/VNPayController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/dao/carts/CartItems.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/dao/carts/CartItems.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/users/css/confirmation.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/users/css/confirmation.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/users/page/confirmation.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/users/page/confirmation.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,9 +46,9 @@
   </component>
   <component name="ProjectColorInfo"><![CDATA[{
   "customColor": "",
-  "associatedIndex": 1
+  "associatedIndex": 2
 }]]></component>
-  <component name="ProjectId" id="2uLh3G25prfHOAs0bvDVGLS4KOR" />
+  <component name="ProjectId" id="2uL9ihVtbYMbkj750G2lNjDID1J" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -61,8 +56,9 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "Tomcat Server.Tomcat 10.1.31.executor": "Run",
-    "git-widget-placeholder": "22130313__Tuan",
+    "git-widget-placeholder": "22130098__LamHoangHuy",
     "kotlin-language-version-configured": "true",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -86,7 +82,7 @@
         </artifact>
       </deployment>
       <server-settings>
-        <option name="BASE_DIRECTORY_NAME" value="7f71571a-dd79-440f-b87a-a4a58bc9b6ba" />
+        <option name="BASE_DIRECTORY_NAME" value="312039b1-1755-4caf-a26b-c54cb232d2ff" />
       </server-settings>
       <predefined_log_file enabled="true" id="Tomcat" />
       <predefined_log_file enabled="true" id="Tomcat Catalina" />
@@ -94,7 +90,7 @@
       <predefined_log_file id="Tomcat Host Manager" />
       <predefined_log_file id="Tomcat Localhost Access" />
       <RunnerSettings RunnerId="Debug">
-        <option name="DEBUG_PORT" value="63452" />
+        <option name="DEBUG_PORT" value="55177" />
       </RunnerSettings>
       <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Cover">
         <option name="USE_ENV_VARIABLES" value="true" />
@@ -167,25 +163,24 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-28b599e66164-intellij.indexing.shared.core-IU-242.23339.11" />
-        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-IU-242.23339.11" />
+        <option value="bundled-jdk-9823dce3aa75-28b599e66164-intellij.indexing.shared.core-IU-242.24807.4" />
+        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-IU-242.24807.4" />
       </set>
     </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="80f72b8c-df38-4364-a0ce-ef59faf638b2" name="Changes" comment="" />
-      <created>1742033562410</created>
+      <changelist id="e44f03f6-bd1e-41c3-9743-7f064263190f" name="Changes" comment="" />
+      <created>1742017116495</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1742033562410</updated>
-      <workItem from="1742033565544" duration="3882000" />
+      <updated>1742017116495</updated>
+      <workItem from="1742017119006" duration="8685000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
-
 </project>
