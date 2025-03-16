@@ -118,15 +118,6 @@
                 <ion-icon name="menu-outline"></ion-icon>
             </div>
 
-            <div class="search">
-                <form action="order-list" method="get">
-                    <label>
-                        <input type="text" name="id" placeholder="Tìm kiếm ở đây">
-                        <ion-icon name="search-outline"><button type="submit" style="border: none; background: none; cursor: pointer;"></button></ion-icon>
-                    </label>
-                    <input type="hidden" name="search" value="id">
-                </form>
-            </div>
 
             <div class="user">
                 <a href="informationCustomer">

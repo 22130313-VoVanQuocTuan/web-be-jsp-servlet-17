@@ -12,11 +12,29 @@
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4-beta3/css/all.min.css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <link rel="stylesheet" href="<c:url value="/users/css/home.css"/>">
 <link rel="stylesheet" href="<c:url value="/users/css/product.css"/>">
 <link rel="stylesheet" href="<c:url value="/users/css/home.css"/>">
 <link rel="stylesheet" href="<c:url value="/users/css/product.css"/>">
-
+<style>
+    #searchResults {
+        border: 1px solid #ddd;
+        max-height: 300px;
+        overflow-y: auto;
+        background: white;
+        position: absolute;
+        width: 250px;
+    }
+    .result-item {
+        padding: 10px;
+        cursor: pointer;
+        border-bottom: 1px solid #ddd;
+    }
+    .result-item:hover {
+        background-color: #f0f0f0;
+    }
+</style>
 <body>
 <div id="section-header1">
     <div class="container">
@@ -63,11 +81,10 @@
                 </div>
 
                 <!-- Thanh tìm kiếm ở giữa -->
-                <form action="product" method="GET">
+                <form action="product" method="GET" >
                     <div class="search-bar">
-                        <input type="hidden" name="search" value="true">
-                        <input name="name" type="text" placeholder="Tìm kiếm sản phẩm...">
-                        <button type="submit" title="icon"><i class="fa fa-fw fa-search"></i></button>
+                        <input name="name" type="text" placeholder="Tìm kiếm sản phẩm..." id="search-input">
+                        <button title="icon" ><i class="fa fa-fw fa-search"></i></button>
                     </div>
                 </form>
 
@@ -330,5 +347,23 @@
 <script src="${pageContext.request.contextPath}/users/js/product.js"></script>
 <script src="${pageContext.request.contextPath}/users/js/scripts.js"></script>
 <script src="${pageContext.request.contextPath}/users/js/home.js"></script>
+<script>
+    function searchProduct() {
+        let keyword = document.getElementById("searchBox").value;
+        if (keyword.length === 0) {
+            document.querySelector(".product-list").innerHTML = "";
+            return;
+        }
+
+        let xhr = new XMLHttpRequest();
+        xhr.open("GET", "search-product?keyword=" + encodeURIComponent(keyword), true);
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                document.querySelector(".product-list").innerHTML = xhr.responseText; // Chèn HTML vào
+            }
+        };
+        xhr.send();
+    }
+</script>
 </body>
 </html>
