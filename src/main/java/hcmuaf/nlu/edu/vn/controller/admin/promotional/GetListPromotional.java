@@ -18,31 +18,14 @@ public class GetListPromotional extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         PromotionalService promotionalService = new PromotionalService();
-        String showAll = req.getParameter("showAll");
-        //tìm kiếm
-        String search = req.getParameter("search");
         String valueStr = req.getParameter("value");
-        try{
-        List<Promotionals> listPromotional = promotionalService.getListPromotional();
-            if(search!=null){
-                try {
-                    double value = Double.parseDouble(valueStr);
-                    listPromotional = promotionalService.getListPromotionalByValue(value);
-                }catch (NumberFormatException e){
-                    e.printStackTrace();
+        try {
+            List<Promotionals> listPromotional = promotionalService.getListPromotional();
+            req.setAttribute("listPromotional", listPromotional);
+            req.getRequestDispatcher("/admin/pages/promotional.jsp").forward(req, resp);
 
-                }
-            }
-            if (showAll == null) {
-                // Hiển thị tối đa 10 mục
-                listPromotional = listPromotional.stream().limit(10).collect(Collectors.toList());
-            }
-
-        req.setAttribute("listPromotional", listPromotional);
-        req.getRequestDispatcher("/admin/pages/promotional.jsp").forward(req, resp);
-
-    }catch (Exception e){
-        throw new ServletException(e);
+        } catch (Exception e) {
+            throw new ServletException(e);
         }
     }
 
