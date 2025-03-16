@@ -45,16 +45,25 @@ public class ConfirmationController extends HttpServlet {
             request.getRequestDispatcher("/cart-items").forward(request, response);
             return;
         }
+
         ShippingAddress shippingAddress = as.getInfoShippingAddress(user.getId());
-        request.setAttribute("shipping_address", shippingAddress);
-        request.setAttribute("itemCart", ci);
-        // Chuyển đến trang JSP
-        if(pay != null) {
-            if (pay.equals("cod")) {
-                request.setAttribute("showModalCOD", true); // Thêm thuộc tính hiển thị modal
-            }
-            if (pay.equals("vnpay")) {
-                request.setAttribute("showModalVNPAY", true); // Thêm thuộc tính hiển thị modal
+        if (shippingAddress == null ||
+                shippingAddress.getEmail() == null || shippingAddress.getEmail().isEmpty() ||
+                shippingAddress.getAddress() == null || shippingAddress.getAddress().isEmpty() ||
+                shippingAddress.getPhoneNumber() == null || shippingAddress.getPhoneNumber().isEmpty() ||
+                shippingAddress.getName() == null || shippingAddress.getName().isEmpty()) {
+            request.setAttribute("error", "Vui lòng cập nhật đầy đủ thông tin giao hàng");
+        }else {
+            request.setAttribute("shipping_address", shippingAddress);
+            request.setAttribute("itemCart", ci);
+            // Chuyển đến trang JSP
+            if (pay != null) {
+                if (pay.equals("cod")) {
+                    request.setAttribute("showModalCOD", true); // Thêm thuộc tính hiển thị modal
+                }
+                if (pay.equals("vnpay")) {
+                    request.setAttribute("showModalVNPAY", true); // Thêm thuộc tính hiển thị modal
+                }
             }
         }
         request.getRequestDispatcher("users/page/confirmation.jsp").forward(request, response);

@@ -12,29 +12,33 @@
     <!------------------ Kiểu dáng ------------------>
     <link rel="stylesheet" href="<c:url value="/admin/css/style.css"/>">
     <link rel="stylesheet" href="<c:url value="/admin/css/products.css"/>">
-
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
+    <!-- jQuery và DataTables JS -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
 </head>
 
 <style>
     /* Định dạng chung cho thông báo lỗi */
     .alert-error {
-        background-color: #f44336; /* Màu đỏ để dễ nhận diện lỗi */
-        color: white; /* Màu chữ trắng */
-        padding: 20px; /* Khoảng cách bên trong */
-        border-radius: 8px; /* Bo góc mềm mại */
-        margin: 15px 0; /* Khoảng cách giữa các thông báo lỗi */
-        font-family: 'Arial', sans-serif; /* Phông chữ dễ đọc */
-        font-size: 16px; /* Kích thước chữ */
+        background-color: #f44336;
+        color: white;
+        padding: 20px;
+        border-radius: 8px;
+        margin: 15px 0;
+        font-family: 'Arial', sans-serif;
+        font-size: 16px;
         position: fixed; /* Đặt vị trí cố định trên màn hình */
-        top: 50%; /* Căn giữa theo chiều dọc */
-        left: 50%; /* Căn giữa theo chiều ngang */
-        transform: translate(-50%, -50%); /* Di chuyển lại 1 nửa chiều rộng và chiều cao để hoàn toàn căn giữa */
-        z-index: 1000; /* Đảm bảo thông báo luôn nổi bật trên các phần tử khác */
-        width: 80%; /* Chiều rộng của thông báo */
-        max-width: 500px; /* Chiều rộng tối đa */
-        text-align: center; /* Căn giữa nội dung */
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Bóng đổ nhẹ cho thông báo */
-        transition: all 0.3s ease; /* Hiệu ứng chuyển động mượt mà */
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 1000;
+        width: 80%;
+        max-width: 500px;
+        text-align: center;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
     }
 
     /* Kiểu danh sách lỗi */
@@ -46,14 +50,14 @@
 
     /* Kiểu cho mỗi mục lỗi */
     .alert-error ul li {
-        margin-bottom: 10px; /* Khoảng cách giữa các lỗi */
-        padding: 10px; /* Khoảng cách trong mỗi lỗi */
-        border: 1px solid #ff0000; /* Viền đỏ quanh mỗi lỗi để làm nổi bật */
-        border-radius: 4px; /* Bo góc của các mục lỗi */
-        background-color: #d32f2f; /* Nền hơi sáng hơn một chút */
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Bóng đổ cho mỗi mục lỗi */
-        text-align: left; /* Căn trái cho các thông báo lỗi */
-        font-weight: bold; /* In đậm văn bản */
+        margin-bottom: 10px;
+        padding: 10px;
+        border: 1px solid #ff0000;
+        border-radius: 4px;
+        background-color: #d32f2f;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        text-align: left;
+        font-weight: bold;
     }
 
     /* Nút đóng thông báo */
@@ -161,6 +165,17 @@
         transform: scale(1.1);
     }
 
+    /*CSS đè thêm để chỉnh display data table */
+    .dataTables_wrapper .dataTables_filter input {
+        border: 2px solid #15283e !important; /* Đổi viền thành màu xanh đậm */
+        border-radius: 5px !important; /* Bo tròn viền hơn */
+        padding: 8px !important; /* Tăng padding */
+        background-color: #f8f9fa !important; /* Đổi nền input */
+        color: #000 !important; /* Đổi màu chữ */
+        margin-left: 5px !important; /* Tăng khoảng cách */
+        margin-bottom: 10px !important;
+    }
+
 
 </style>
 <body>
@@ -262,17 +277,6 @@
             <div class="toggle">
                 <ion-icon name="menu-outline"></ion-icon>
             </div>
-
-            <div class="search">
-                <form action="products-list" method="GET">
-                    <label>
-                        <input type="text" name="name" placeholder="Tìm kiếm ở đây">
-                        <ion-icon name="search-outline"><button type="submit" style="border: none; background: none; cursor: pointer;"></button></ion-icon>
-                    </label>
-                    <input type="hidden" name="search" value="true">
-                </form>
-            </div>
-
             <div class="user">
                 <a href="informationCustomer">
                     <ion-icon name="person"
@@ -287,13 +291,12 @@
             <div class="recentOrders">
                 <div class="cardHeader">
                     <h2>Danh sách sản phẩm</h2>
-                    <a href="products-list?showAll=true" class="btn">Xem Tất Cả</a>
                 </div>
                 <div class="list-products-content-button">
-                    <button id="add-product">Thêm sản phẩm</button>
+                    <button id="add-product" style="margin-bottom: 10px">Thêm sản phẩm</button>
                 </div>
                 <!-- Table products -->
-                <table>
+                <table  id="productTable" style="margin-top: 10px" >
                     <thead>
                     <tr>
                         <th>Hình ảnh</th>
@@ -525,4 +528,29 @@
     </script>
 </div>
 </body>
+<script>
+    $(document).ready(function () {
+        $('#productTable').DataTable({
+            "paging": true,         // Hiển thị phân trang
+            "searching": true,      // Hiển thị ô tìm kiếm
+            "ordering": true,       // Cho phép sắp xếp cột
+            "info": true,           // Hiển thị thông tin số lượng dữ liệu
+            "lengthMenu": [10, 25, 50, 100], // Số dòng hiển thị mỗi trang
+            "language": {
+                "lengthMenu": "Hiển thị _MENU_ sản phẩm mỗi trang",
+                "zeroRecords": "Không tìm thấy sản phẩm nào",
+                "info": "Trang _PAGE_ trên tổng _PAGES_ trang",
+                "infoEmpty": "Không có sản phẩm",
+                "infoFiltered": "(lọc từ _MAX_ sản phẩm)",
+                "search": "Tìm kiếm:",
+                "paginate": {
+                    "first": "Đầu",
+                    "last": "Cuối",
+                    "next": "Tiếp",
+                    "previous": "Trước"
+                }
+            }
+        });
+    });
+</script>
 </html>
