@@ -40,6 +40,10 @@
     transform: scale(1.1); /* Phóng to mà không ảnh hưởng đến bố cục */
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3); /* Thêm hiệu ứng bóng */
 }
+    .dataTables_wrapper .dataTables_filter input {
+        border: 2px solid #1c1919 !important;
+        margin-bottom: 10px !important;
+    }
 </style>
 
 <body>
@@ -218,7 +222,7 @@
                 "language": {
                     "search": "Tìm kiếm:",
                     "lengthMenu": "Hiển thị _MENU_ danh mục",
-                    "info": "Hiển thị _START_ đến _END_ của _TOTAL_ danh mục",
+                    "info": "Trang _PAGE_ trên tổng _PAGES_ trang",
                     "paginate": {
                         "first": "Đầu",
                         "last": "Cuối",

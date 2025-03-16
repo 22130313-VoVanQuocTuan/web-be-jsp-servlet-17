@@ -18,6 +18,12 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 </head>
+<style>
+    .dataTables_wrapper .dataTables_filter input {
+        border: 2px solid #1c1919 !important;
+        margin-bottom: 10px !important;
+    }
+</style>
 <body>
 <!-- ------------------ Điều hướng -------------------->
 <div class="container">
@@ -152,19 +158,11 @@
                             <td>${order.id}</td>
                             <td>${order.userId}</td>
                             <td><fmt:formatDate value="${order.createdAt}" pattern="dd-MM-yyyy HH:mm:ss"/></td>
-                            <td><fmt:formatNumber value="${order.totalPrice}" type="number"/></td>
+                            <td><fmt:formatNumber value="${order.totalPrice}" type="number"/>đ</td>
                             <td>${order.paymentMethod}</td>
-                            <td><c:choose>
-                                <c:when test="${order.status == 'Đã hoàn thành'}">
-                                    <span class="badge success">Đã hoàn thành</span>
-                                </c:when>
-                                <c:when test="${order.status == 'Đã huỷ'}">
-                                    <span class="badge danger">Đã huỷ</span>
-                                </c:when>
-                                <c:when test="${order.status == 'Chờ xác nhận'}">
-                                    <span class="badge warning">Chờ xác nhận</span>
-                                </c:when>
-                            </c:choose></td>
+                            <td><span class="status ${order.paymentStatus == 'Đã thanh toán' ? 'status-paid' : 'status-unpaid'}">
+                                    ${order.paymentStatus}
+                            </span></td>
                             <td class="v">
                                 <button> <a href="GetDetailOrder?id=${order.id}" class="view-detail-btn" style="text-decoration: none ; color: #1c293d" >Chi tiết</a>
                                 </button>
@@ -202,9 +200,9 @@
                             <tr>
                                 <td>${oi.productName}</td>
                                 <td>${oi.quantity}</td>
-                                <td>${oi.price}</td>
-                                <td>${oi.discount}</td>
-                                <td>${oi.totalPrice}</td>
+                                <td><fmt:formatNumber value="${oi.price}" type="number"/>đ</td>
+                                <td><fmt:formatNumber value="${oi.discount}" type="number"/>đ</td>
+                                <td><fmt:formatNumber value="${oi.totalPrice}" type="number"/>đ</td>
                             </tr>
                         </c:forEach>
                         </tbody>
@@ -228,11 +226,10 @@
                                 <input type="hidden" name="id" value="${orIn.id}"> <!-- Đảm bảo gửi ID đơn hàng -->
 
                                 <label for="statusSelect">Chọn trạng thái:</label>
-                                <select title="choice" id="statusSelect" name="status"
+                                <select title="choice" id="statusSelect" name="statusPayment"
                                         style="font-size: 14px; border-radius: 5px; padding: 5px; margin-left: 10px; margin-right: 10px;">
-                                    <option value="Đã hoàn thành">Đã hoàn thành</option>
-                                    <option value="Đã huỷ">Đã huỷ</option>
-                                    <option value="Chờ xác nhận">Chờ xác nhận</option>
+                                    <option value="Đã thanh toán" ${orIn.paymentStatus == 'Đã thanh toán' ? 'selected' : ''}>Đã thanh toán</option>
+                                    <option value="Chưa thanh toán" ${orIn.paymentStatus == 'Chưa thanh toán' ? 'selected' : ''}>Chưa thanh toán</option>
                                 </select>
 
                                 <!-- Nút cập nhật -->
@@ -288,7 +285,7 @@
             "language": {
                 "lengthMenu": "Hiển thị _MENU_ dòng mỗi trang",
                 "zeroRecords": "Không tìm thấy đơn hàng nào",
-                "info": "Hiển thị _PAGE_ của _PAGES_",
+                "info": "Hiển thị _PAGE_ trên tổng _PAGES_ trang",
                 "search": "Tìm kiếm: ",
                 "paginate": {
                     "first": "Đầu",

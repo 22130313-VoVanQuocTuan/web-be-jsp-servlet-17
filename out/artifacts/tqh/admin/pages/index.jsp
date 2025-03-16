@@ -202,7 +202,7 @@
                         <c:forEach var="view" items="${viewOrder}">
                             <tr>
                                 <td>${view.userId}</td>
-                                <td><fmt:formatNumber value="${view.totalPrice}" type="number" /></td>
+                                <td><fmt:formatNumber value="${view.totalPrice}" type="number" />đ</td>
                                 <td>${view.paymentStatus}</td>
                                 <td>${view.createdAt}</td>
                                 <td>${view.status}</td>
