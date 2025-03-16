@@ -238,7 +238,7 @@
                     <c:if test="${not empty error}">
                         <div class="alert alert-danger">${error}</div>
                     </c:if>
-                    <button class="save" title="bt">Cập nhật</button>
+                    <button class="save" title="bt" type="submit">Cập nhật</button>
 
                 </form>
 
