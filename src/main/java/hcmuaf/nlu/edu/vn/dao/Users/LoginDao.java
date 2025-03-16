@@ -21,14 +21,11 @@ public class LoginDao {
     // Xử lý đăng nhập
     public boolean checkLogin(String username, String password) throws SQLException {
         String sql = "SELECT password FROM users WHERE username=?";
-
         try (PreparedStatement ptm = dbConnect.preparedStatement(sql)) {
             ptm.setString(1, username);
-
             try (ResultSet rs = ptm.executeQuery()) {
                 if (rs.next()) {
                     String hashedPassword = rs.getString("password");
-
                     // So sánh mật khẩu nhập vào với mật khẩu đã mã hóa
                     if (BCrypt.checkpw(password, hashedPassword)) {
                         return true; // Đăng nhập thành công
@@ -66,5 +63,15 @@ public class LoginDao {
     }
 
 
+    public void updatePassword(String newPassword, String email) throws SQLException {
+        String sql = "UPDATE users SET password = ? WHERE email = ?";
+        try(PreparedStatement ptm = dbConnect.preparedStatement(sql)){
+            ptm.setString(1, BCrypt.hashpw(newPassword, BCrypt.gensalt()));
+            ptm.setString(2, email);
+            ptm.executeUpdate();
+
+        }
+
+    }
 }
 
