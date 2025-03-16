@@ -8,30 +8,31 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 @WebServlet(name = "UpdateStatusPro", value = "/update-status-pro")
 public class UpdateStatusPrController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-       try {
-           int id = Integer.parseInt(req.getParameter("id"));
-           String status = req.getParameter("status");
+        resp.setContentType("application/json");
+        resp.setCharacterEncoding("UTF-8");
 
-        PromotionalService promotionalService = new PromotionalService();
         try {
-            if (promotionalService.updateStatusProm(id, status)) {
-                resp.sendRedirect(req.getContextPath() + "/promotional-list");
-            } else {
-                req.setAttribute("error", "Thông tin không chính xác");
-                req.getRequestDispatcher("/promotional-list").forward(req, resp);
-            }
+            int id = Integer.parseInt(req.getParameter("id"));
+            String status = req.getParameter("status");
+
+            PromotionalService promotionalService = new PromotionalService();
+            boolean isUpdated = promotionalService.updateStatusProm(id, status);
+
+            String jsonResponse = isUpdated
+                    ? "{\"success\": true, \"message\": \"Cập nhật trạng thái thành công!\"}"
+                    : "{\"success\": false, \"message\": \"Không tìm thấy mã ưu đãi!\"}";
+
+            resp.getWriter().write(jsonResponse); // Gửi phản hồi về AJAX
+
         } catch (Exception e) {
-            req.setAttribute("error", "Lỗi hệ thống");
-            req.getRequestDispatcher("/promotional-list").forward(req, resp);
+            e.printStackTrace();
+            resp.getWriter().write("{\"success\": false, \"message\": \"Lỗi hệ thống!\"}");
         }
-       } catch (NumberFormatException e) {
-           req.setAttribute("error", "Dữ lệu không hợp lệ");
-           req.getRequestDispatcher("/promotional-list").forward(req, resp);
-       }
     }
 }

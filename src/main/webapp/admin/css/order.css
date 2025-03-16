@@ -18,7 +18,6 @@
 
 .order .recentOrders {
   position: relative;
-  display: grid;
   min-height: 500px;
   background: var(--white);
   padding: 20px;
@@ -32,6 +31,7 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
+  margin-bottom: 5px;
 }
 
 
@@ -74,7 +74,7 @@ td {
 }
 
 .order .recentOrders table tr td {
-  padding: 10px;
+  padding: 5px;
 }
 
 .order .recentOrders table tr td:nth-child(3) {
@@ -85,7 +85,8 @@ td {
   border: none;
   padding: 9px;
   cursor: pointer;
-  background-color: #ffec32;
+  background: #ffffff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   border-radius: 5px;
   font-size: 11px;
 }
@@ -232,17 +233,25 @@ td {
 
 .badge {
   padding: 5px 10px;
-  border-radius: 12px;
-  font-size: 15px;
-  font-weight: bold;
-  display: inline-block;
+  border-radius: 5px;
+  font-size: 12px;
 }
-
 .badge.success {
-  background: #28a745;
+  background-color: #02bc15; /* Xanh lá */
   color: white;
 }
+.badge.danger {
+  background-color: #dc3545; /* Đỏ */
+  color: white;
+}
+.badge.warning {
+  background-color: #ffc107; /* Vàng */
+  color: black;
+}
 
+.update-order label {
+  font-size: 14px;
+}
 .icon-product {
   margin-right: 8px;
 }
