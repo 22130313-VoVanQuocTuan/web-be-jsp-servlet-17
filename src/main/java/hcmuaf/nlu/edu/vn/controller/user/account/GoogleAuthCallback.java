@@ -14,9 +14,11 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Arrays;
 
 @WebServlet(name = "oauth2callback", value = "/oauth2callback")
@@ -67,24 +69,24 @@ public class GoogleAuthCallback extends HttpServlet {
         // Lấy thông tin người dùng
         Userinfoplus userInfo = oauth2.userinfo().get().execute();
 
-        // Tạo đối tượng User để lưu thông tin
-        Users user = new Users();
-        user.setUsername(userInfo.getName());
-        user.setEmail(userInfo.getEmail());
 
         UserService userService = new UserService();
+        try {
+            userService.addAccount( userInfo.getName(), "", userInfo.getEmail(), "user");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+         Users users = new Users();
+        try {
+            users = userService.getUser(userInfo.getName());
+            HttpSession session = request.getSession();
+            session.setAttribute("user", users);
 
-
-
-
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
         // Lưu vào session
-        request.getSession().setAttribute("user", user);
-
-        // In thông tin để kiểm tra
-        System.out.println("Name: " + userInfo.getName());
-        System.out.println("Email: " + userInfo.getEmail());
-        System.out.println("ID: " + userInfo.getId());
-
+        request.getSession().setAttribute("user", users);
         response.sendRedirect(request.getContextPath() + "/home-page");
     }
 }
