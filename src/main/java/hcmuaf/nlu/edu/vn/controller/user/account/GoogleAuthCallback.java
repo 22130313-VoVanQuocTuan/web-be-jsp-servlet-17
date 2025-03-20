@@ -31,6 +31,14 @@ public class GoogleAuthCallback extends HttpServlet {
             throws ServletException, IOException {
 
         String code = request.getParameter("code");
+        String error = request.getParameter("error");
+
+        // Kiểm tra nếu người dùng nhấn "Hủy"
+        if (error != null && error.equals("access_denied")) {
+            request.setAttribute("error_login", "Bạn đã từ chối quyền truy cập bằng Google.");
+            request.getRequestDispatcher("/users/page/login-signup.jsp").forward(request, response);
+            return;
+        }
 
         GoogleClientSecrets.Details web = new GoogleClientSecrets.Details();
         web.setClientId(CLIENT_ID);
@@ -55,6 +63,7 @@ public class GoogleAuthCallback extends HttpServlet {
         String accessToken = tokenResponse.getAccessToken();
         request.getSession().setAttribute("access_token", accessToken);
 
+
         // In accessToken để kiểm tra
         System.out.println("Access Token: " + accessToken);
 
@@ -65,28 +74,50 @@ public class GoogleAuthCallback extends HttpServlet {
         Oauth2 oauth2 = new Oauth2.Builder(new NetHttpTransport(), JacksonFactory.getDefaultInstance(), credential)
                 .setApplicationName("YourAppName")
                 .build();
-
-        // Lấy thông tin người dùng
+// Lấy thông tin người dùng từ Google
         Userinfoplus userInfo = oauth2.userinfo().get().execute();
-
-
         UserService userService = new UserService();
+
         try {
-            userService.addAccount( userInfo.getName(), "", userInfo.getEmail(), "user");
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-         Users users = new Users();
-        try {
-            users = userService.getUser(userInfo.getName());
+            // Kiểm tra xem email đã có trong database chưa
+            Users users = userService.findUserByEmailLogin(userInfo.getEmail());
+
+            if (users == null) {
+                //Nếu chưa có, tạo tài khoản mới
+                userService.addAccount(userInfo.getName(), "", userInfo.getEmail(), "user");
+
+                //Lấy lại thông tin người dùng sau khi tạo tài khoản
+                users = userService.findUserByEmailLogin(userInfo.getName());
+            }
+
+            // Kiểm tra xem tài khoản có bị đình chỉ không
+            if ("Bị đình chỉ".equals(users.getStatus()) || "Đang chờ xử lý".equals(users.getStatus())) {
+                request.setAttribute("error_login", "Tài khoản đã bị cấm hoặc đang xử lý");
+                request.getRequestDispatcher("/users/page/login-signup.jsp").forward(request, response);
+                return;
+            }
+
+            //Lưu thông tin vào session
             HttpSession session = request.getSession();
             session.setAttribute("user", users);
+
+            //  Cập nhật trạng thái người dùng thành "Hoạt động"
+            userService.UpdateStatusOrRoleUserLoginLogout( "Hoạt động", users.getId());
+
+            // Quay về trang trước đó nếu có
+            String redirectUrl = (String) session.getAttribute("redirectUrl");
+            if (redirectUrl != null) {
+                session.removeAttribute("redirectUrl");
+                response.sendRedirect(redirectUrl);
+                return;
+            }
+
+            //  Điều hướng theo vai trò
+            String targetPage = "admin".equals(users.getRole()) || "owner".equals(users.getRole()) ? "/home" : "/home-page";
+            response.sendRedirect(request.getContextPath() + targetPage);
 
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        // Lưu vào session
-        request.getSession().setAttribute("user", users);
-        response.sendRedirect(request.getContextPath() + "/home-page");
     }
 }

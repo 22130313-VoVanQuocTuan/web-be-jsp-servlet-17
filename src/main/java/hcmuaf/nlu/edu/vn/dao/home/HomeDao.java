@@ -1,6 +1,7 @@
 package hcmuaf.nlu.edu.vn.dao.home;
 
 import hcmuaf.nlu.edu.vn.dao.DBConnect;
+import hcmuaf.nlu.edu.vn.model.Banner;
 import hcmuaf.nlu.edu.vn.model.Orders;
 import hcmuaf.nlu.edu.vn.model.Users;
 
@@ -61,7 +62,7 @@ public class HomeDao {
 
     // Tổng doanh thu
     public double totalSale() {
-        String sql = "SELECT SUM(totalPrice) FROM orders where status = 'Đã hoàn thành'";
+        String sql = "SELECT SUM(totalPrice) FROM orders where paymentStatus = 'Đã thanh toán'";
         try (PreparedStatement stmt = dbConnect.preparedStatement(sql)) {
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
@@ -115,5 +116,45 @@ public class HomeDao {
 
         return orders;
     }
+
+    // Hàm lấy 1 banner ad duy nhất từ CSDL
+    public Banner getSingleBanner() {
+        Banner banner = new Banner();
+        String sql = "SELECT  * FROM banners WHERE type = 'ad'";
+        try (PreparedStatement stmt = dbConnect.preparedStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
+            if (rs.next()) {
+                int id = rs.getInt("id");
+                String image = rs.getString("image_url");
+                String type = rs.getString("type");
+
+                banner = new Banner(id,image,type);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return banner; // Trả về null nếu không có dữ liệu
+    }
+    // Hàm lấy banner slider từ CSDL
+    public List<Banner> getListBanner() {
+        List<Banner> banners = new ArrayList<>();
+        String sql = "SELECT * FROM banners WHERE type = 'slider'";
+        try (PreparedStatement stmt = dbConnect.preparedStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String image = rs.getString("image_url");
+                String type = rs.getString("type");
+                // Tạo đối tượng Banner và thêm vào danh sách
+                Banner banner = new Banner(id, image, type);
+                banners.add(banner);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return banners;
+    }
+
+
 
 }

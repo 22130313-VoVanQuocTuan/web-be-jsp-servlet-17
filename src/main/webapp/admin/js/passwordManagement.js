@@ -28,6 +28,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
             // Lấy giá trị data-id của nút đã nhấn
             const id = button.getAttribute('data-id');
+            const status = button.getAttribute('data-status');
+
+
             console.log("button thứ :" + id); // In ra ID, ví dụ: "1"
 
             // Hiển thị modal chỉnh sửa

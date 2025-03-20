@@ -108,6 +108,7 @@
 }
     
 #delete-modal .modal-content h3 {
+    color: #FFC857;
       font-size: 1.5rem;
       font-weight: bold;
       text-align: center;
@@ -160,3 +161,4 @@ button {
     background: #ffffff;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
+
