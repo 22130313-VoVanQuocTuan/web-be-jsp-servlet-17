@@ -17,15 +17,15 @@ public class ListAllUserController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         UserService userService = new UserService();
-        String showAll = req.getParameter("showAll");
+
         try {
             List<Users> list = userService.getListUsers();
+            List<Users> listUser = list.stream()
+                    .filter(users -> "user".equals(users.getRole()))
+                    .collect(Collectors.toList());
 
-            if (showAll == null) {
-                // Hiển thị tối đa 10 mục
-                list = list.stream().limit(10).collect(Collectors.toList());
-            }
-            req.setAttribute("list_user", list);
+
+            req.setAttribute("list_user", listUser);
             req.getRequestDispatcher("/admin/pages/user.jsp").forward(req, resp);
         } catch (Exception e) {
             throw new RuntimeException(e);

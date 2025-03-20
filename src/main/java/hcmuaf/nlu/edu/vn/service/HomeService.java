@@ -1,6 +1,7 @@
 package hcmuaf.nlu.edu.vn.service;
 
 import hcmuaf.nlu.edu.vn.dao.home.HomeDao;
+import hcmuaf.nlu.edu.vn.model.Banner;
 import hcmuaf.nlu.edu.vn.model.Orders;
 import hcmuaf.nlu.edu.vn.model.Users;
 
@@ -41,5 +42,14 @@ public class HomeService {
     //Lấy ra danh sách hoá đơn gần đây
     public List<Orders> getOrder() {
         return homeDao.getOrderNew();
+    }
+
+    // Lây ra banner
+    public Banner getSingleBanner() {
+        return homeDao.getSingleBanner();
+    }
+    // Hàm lấy banner slider từ CSDL
+    public List<Banner> getListBanner() {
+        return homeDao.getListBanner();
     }
 }

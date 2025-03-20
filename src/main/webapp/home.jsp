@@ -1,3 +1,4 @@
+<%@ page import="hcmuaf.nlu.edu.vn.model.Banner" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
@@ -13,7 +14,6 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4-beta3/css/all.min.css"/>
 <link rel="stylesheet" href="<c:url value="/users/css/home.css"/>">
-
 <body>
 <div id="section-header1">
     <div class="container">
@@ -160,18 +160,12 @@
 
 <div id="section-slider">
     <div class="slide-show-content-container">
-        <p class="title-w" id="animatedText">Xây dựng nền móng vững chắc - Khởi tạo những công trình bền vững cùng
-            bạn!</p>
+        <p class="title-w" id="animatedText">Xây dựng nền móng vững chắc - Khởi tạo những công trình bền vững cùng bạn!</p>
         <div class="slide-show-content-image">
-
-            <img src="<c:url value="/users/img/slider1.png"/>" alt="baner">
-            <img src="<c:url value="/users/img/slider2.png"/>" alt="baner">
-            <img src="<c:url value="/users/img/slider3.png"/>" alt="baner">
-            <img src="<c:url value="/users/img/slider4.png"/>" alt="baner">
-            <img src="<c:url value="/users/img/slider5.png"/>" alt="baner">
-            <img src="<c:url value="/users/img/slider6.png"/>" alt="baner">
+            <c:forEach var="banner" items="${banners_Slider}">
+                <img src="${banner.image_url}" alt="banner">
+            </c:forEach>
         </div>
-        .
         <div class="slide-show-content-btn">
             <div class="nut_trai">
                 <i class="fa-solid fa-chevron-left"></i>
@@ -182,6 +176,7 @@
         </div>
     </div>
 </div>
+
 <div id="section-content">
     <!-- List Product flash sales -->
     <div class="product-one-content">
@@ -1302,26 +1297,19 @@
         </div>
     </div>
 </div>
-
-<!-- Banner -->
-<div class="popup-banner" id="popupBanner" style="display: none;">
+<div class="popup-banner" id="popupBanner">
     <div class="popup-content">
-        <!-- Ảnh banner -->
-        <img src="users/img/baner.png" alt="Sự kiện ưu đãi" class="banner-image">
-
-        <!-- Nội dung banner -->
-        <div class="banner-details">
-            <h2 class="banner-title">Sự Kiện Giảm Giá Đặc Biệt Mừng Giáng Sinh</h2>
-            <p class="banner-desc">Giảm giá lên đến 50% cho các sản phẩm</p>
-            <a href="product" class="banner-btn">Mua Ngay</a>
+        <div class="banner-item" style="display: block;">
+            <a href="product"><img class="banner-image" src="${banners.image_url}"></a>
         </div>
-
-        <!-- Nút đóng banner -->
+        <!-- Nút đóng -->
         <div class="closee-button" onclick="closePopup()">
             <i class="fa-solid fa-x"></i>
         </div>
     </div>
 </div>
+
+
 
 <div id="section-footer">
     <div class="container">
@@ -1381,25 +1369,27 @@
 <script src="<c:url value="/users/js/login-signup.js"/>"></script>
 <script src="users/js/scripts.js"></script>
 <script>
-    // Mở banner tự động khi trang tải xong
-    window.onload = function () {
-        openPopup(); // Gọi hàm mở popup
-    };
+    document.addEventListener("DOMContentLoaded", function () {
+        let popupBanner = document.getElementById("popupBanner");
 
-    function openPopup() {
-        // Hiển thị banner và ngừng cuộn trang
-        document.getElementById("popupBanner").style.display = "flex";
-        document.body.classList.add("no-scroll");
-    }
+        // Mở popup banner
+        function openPopup() {
+            popupBanner.style.display = "flex";
+        }
 
-    function closePopup() {
-        // Ẩn banner và khôi phục cuộn trang
-        document.getElementById("popupBanner").style.display = "none";
-        document.body.classList.remove("no-scroll");
-    }
+        // Đóng popup banner
+        function closePopup() {
+            popupBanner.style.display = "none";
+        }
+
+        // Mở popup khi trang tải xong
+        window.onload = function () {
+            openPopup();
+        };
+
+        // Đóng popup khi nhấn nút đóng
+        document.querySelector(".closee-button").addEventListener("click", closePopup);
+    });
 </script>
-
-
 </body>
-
 </html>

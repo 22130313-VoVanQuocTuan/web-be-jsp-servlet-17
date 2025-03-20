@@ -117,6 +117,10 @@ public class UserService {
     public boolean UpdateStatusOrRoleUser (String role, String status, int id) throws SQLException {
       return  logoutDao.UpdateStatusUser(role, status, id);
     }
+    // Cập nhật trạng thái user khi đăng nhập đăng xuất
+    public boolean UpdateStatusOrRoleUserLoginLogout (String status, int id) throws SQLException {
+        return  logoutDao.UpdateStatusUserLoginLogout(status, id);
+    }
 
 
 
@@ -124,6 +128,9 @@ public class UserService {
     // Lấy user theo email
     public Users findUserByEmail(String email) throws Exception {
         return resetPasswordDao.findUserByEmail(email);
+    }
+    public Users findUserByEmailLogin(String email) throws Exception {
+        return resetPasswordDao.findUserByEmailLogin(email);
     }
 
     // Tạo token

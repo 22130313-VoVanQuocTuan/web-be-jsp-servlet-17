@@ -1,6 +1,8 @@
 package hcmuaf.nlu.edu.vn.controller.user.products;
 
+import hcmuaf.nlu.edu.vn.model.Banner;
 import hcmuaf.nlu.edu.vn.model.Product;
+import hcmuaf.nlu.edu.vn.service.HomeService;
 import hcmuaf.nlu.edu.vn.service.ProductService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -12,9 +14,11 @@ import java.io.IOException;
 import java.util.List;
 
 @WebServlet(name = "home-page", value = "/home-page")
-public class GetListPDiscountController extends HttpServlet {
+public class HomeController extends HttpServlet {
     private  final ProductService productService ;
-    public GetListPDiscountController() {
+    private final HomeService homeService ;
+    public HomeController() {
+       homeService = new HomeService();
         productService = new ProductService();
     }
 
@@ -24,10 +28,19 @@ public class GetListPDiscountController extends HttpServlet {
             List<Product> products = productService.getListProductDiscount();
             List<Product> productsCategory = productService.getAllProducts();
             List<Product> productPopular = productService.getPopularProducts();
+            List<Banner> bannerSlider = homeService.getListBanner();
+            try {
+                Banner banner = homeService.getSingleBanner();
+                req.setAttribute("banners", banner);
+            }catch (Exception e){
+                System.out.println(e.toString());
+            }
+
             // Gửi dữ liệu sản phẩm và categoryId đến JSP để hiển thị
             req.setAttribute("productsCategory", productsCategory);
             req.setAttribute("productPopular", productPopular);
             req.setAttribute("products", products);
+            req.setAttribute("banners_Slider", bannerSlider);
             req.getRequestDispatcher("home.jsp").forward(req, resp);
 
         }catch (Exception e){

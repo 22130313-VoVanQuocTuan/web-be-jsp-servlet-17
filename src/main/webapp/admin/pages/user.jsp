@@ -113,6 +113,14 @@
                     <span class="title">Tài khoản</span>
                 </a>
             </li>
+            <li>
+                <a href="list_admin_owner">
+                        <span class="icon">
+                            <ion-icon name="settings"></ion-icon>
+                        </span>
+                    <span class="title">Quản lý quản trị viên</span>
+                </a>
+            </li>
 
             <li>
                 <a href="logout">
@@ -180,7 +188,7 @@
                                     <c:choose>
 
                                         <c:when test="${list_account.role eq 'owner'}">
-                                            <button style="background: #ccced0" class="delete-btn" disabled>Ko thể xóa</button>
+                                            <button style="background: #ccced0" class="delete-btn" disabled>Xóa</button>
                                             <button style="background: #ccced0" class="edit-btn" disabled>Sửa</button>
                                         </c:when>
 
@@ -192,7 +200,7 @@
                                                     <c:choose>
 
                                                         <c:when test="${sessionScope.user.id eq list_account.id}">
-                                                            <button style="background: #ccced0" class="delete-btn" disabled>Ko thể xóa</button>
+                                                            <button style="background: #ccced0" class="delete-btn" disabled>Xóa</button>
                                                         </c:when>
                                                         <c:otherwise>
                                                             <button class="delete-btn" data-id="${list_account.id}">Xóa</button>
@@ -208,7 +216,7 @@
 
 
                                                 <c:otherwise>
-                                                    <button style="background: #ccced0" class="delete-btn" disabled>Ko thể xóa</button>
+                                                    <button style="background: #ccced0" class="delete-btn" disabled>Xóa</button>
                                                     <button style="background: #ccced0" class="edit-btn" disabled>Sửa</button>
                                                 </c:otherwise>
                                             </c:choose>
@@ -250,21 +258,12 @@
                     <input type="email" id="email" name="email" required>
 
                     <label for="role">Quyền:</label>
-                    <c:choose>
-                        <c:when test="${sessionScope.user.role eq 'owner'}">
-                            <select id="userRole" name="role" required>
-                                <option value="">Chọn quyền</option>
+                    <select id="userRole" name="role" required>
                                 <option value="admin">Admin</option>
                                 <option value="user">User</option>
-                            </select>
-                        </c:when>
-                        <c:otherwise>
-                            <p>Bạn không có quyền chỉnh sửa vai trò.</p>
-                        </c:otherwise>
-                    </c:choose>
-
+                    </select>
                     <c:if test="${not empty error}">
-                        <p style="color: red;">${error}</p>
+                       <p style="color: red;">${error}</p>
                     </c:if>
 
                     <button id="saveAccountUser" type="submit">Lưu tài khoản</button>
@@ -293,18 +292,20 @@
                     <input type="hidden" id="userId" name="userId">
 
                     <label for="status">Trạng thái:</label>
-                    <select id="status" name="status" required>
-                        <option value="Hoạt động">Hoạt động</option>
-                        <option value="Không hoạt động">Không hoạt động</option>
+                    <select id="status" name="status">
                         <option value="Bị đình chỉ">Bị đình chỉ</option>
                         <option value="Đang chờ xử lý">Đang chờ xử lý</option>
                     </select>
 
                     <label for="role">Quyền:</label>
-                    <select id="role" name="role" required>  <!-- Đã sửa id role -->
-                        <option value="admin">Admin</option>
-                        <option value="user">User</option>
-                    </select>
+                    <c:choose>
+                        <c:when test="${ sessionScope.user.role eq 'owner'}">
+                            <select id="role" name="role" required>
+                                <option value="admin">Admin</option>
+                                <option value="user">User</option>
+                            </select>
+                        </c:when>
+                    </c:choose>
                     <div class="button-container">
                         <button id="saveAccount" type="submit">Lưu thay đổi</button>
                         <button type="button" class="close-modal">Thoát</button>

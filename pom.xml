@@ -93,6 +93,15 @@
             <version>v2-rev20200213-1.30.9</version>
         </dependency>
 
+<!--        fb-->
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20240303</version>
+            <scope>compile</scope>  <!-- Đảm bảo thư viện được đóng gói khi build -->
+        </dependency>
+
+
 
 
     </dependencies>
