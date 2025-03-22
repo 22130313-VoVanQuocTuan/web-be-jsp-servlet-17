@@ -18,6 +18,41 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 </head>
+<style>
+    @media print {
+        body {
+            font-size: 14px; /* Giữ font chữ nhỏ gọn */
+            background-color: white; /* Đảm bảo nền trắng khi xuất PDF */
+        }
+
+        .modal {
+            width: 100%;
+            max-width: 800px; /* Giữ kích thước modal hợp lý */
+        }
+
+        .order-detail-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .order-detail-table th, .order-detail-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 5px 10px;
+            color: white;
+            border-radius: 4px;
+        }
+
+        .badge.success {
+            background-color: #28a745; /* Màu xanh của trạng thái thanh toán */
+        }
+    }
+
+</style>
 <body>
 <!-- ------------------ Điều hướng -------------------->
 <div class="container">
@@ -180,6 +215,7 @@
 
 
         </div>
+
         <!-- Modal Chi tiết đơn hàng -->
         <div id="orderDetailModal" class="modal">
             <div class="modal-content">
@@ -247,7 +283,9 @@
                                 </c:if>
                             </form>
                         </div>
-
+                        <button id="exportPDF" style="padding: 10px 20px; background-color: #28a745; color: white; border: none; border-radius: 5px; cursor: pointer;">
+                            Xuất PDF
+                        </button>
                     </div>
                 </div>
             </div>
@@ -266,7 +304,6 @@
         </div>
     </div>
 </div>
-
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         // Kiểm tra nếu cần hiển thị modal
@@ -300,6 +337,37 @@
         });
     });
 </script>
+
+<!-- Thêm thư viện -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        document.getElementById("exportPDF").addEventListener("click", function () {
+            console.log("Bắt đầu xuất PDF...");
+
+            let modalContent = document.querySelector(".modal-content");
+            // Tăng chiều cao modal để đảm bảo toàn bộ nội dung hiển thị
+            modalContent.style.maxHeight = "none";
+            modalContent.style.overflow = "visible";
+
+
+            html2canvas(modalContent, { scale: 2 }).then(canvas => {
+                let imgData = canvas.toDataURL("image/png");
+                const { jsPDF } = window.jspdf;
+                let doc = new jsPDF("p", "mm", "a4"); // Khổ A4
+
+                let imgWidth = 190;
+                let imgHeight = (canvas.height * imgWidth) / canvas.width;
+
+                doc.addImage(imgData, "PNG", 10, 10, imgWidth, imgHeight);
+                doc.save(`HoaDon_${Date.now()}.pdf`); // Xuất file
+            });
+        });
+    });
+</script>
+
+
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 <script src="<c:url value="/admin/js/order.js"/>"></script>
 <script src="<c:url value="/admin/js/index.js"/>"></script>
