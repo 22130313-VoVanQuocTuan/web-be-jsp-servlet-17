@@ -8,6 +8,8 @@ import org.springframework.security.crypto.bcrypt.BCrypt;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class LoginDao {
     private final DBConnect dbConnect;
@@ -72,6 +74,28 @@ public class LoginDao {
 
         }
 
+    }
+
+    public Map<String, Boolean> getUserPermissions(String userId, String module) {
+        Map<String, Boolean> permissions = new HashMap<>();
+        String sql = "SELECT canView, canAdd, canEdit, canDelete FROM permissions WHERE userId = ? AND module = ?";
+        try (  PreparedStatement stmt = dbConnect.preparedStatement(sql)) {
+
+            stmt.setString(1, userId);
+            stmt.setString(2, module);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                permissions.put("canView", rs.getInt("canView") == 1);
+                permissions.put("canAdd", rs.getInt("canAdd") == 1);
+                permissions.put("canEdit", rs.getInt("canEdit") == 1);
+                permissions.put("canDelete", rs.getInt("canDelete") == 1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return permissions;
     }
 }
 

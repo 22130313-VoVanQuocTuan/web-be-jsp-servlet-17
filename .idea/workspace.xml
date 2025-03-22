@@ -10,12 +10,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8ba81345-c045-47d1-b0e1-422837de127e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/controller/admin/account/UpdatePermissionsController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/dao/Users/PermissionDao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/model/Permissions.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/service/PermissionService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/controller/admin/account/GetUserPermissionsController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/model/Users.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/model/Users.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/controller/admin/account/ListAllAccountAdminOwnerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/controller/admin/account/ListAllAccountAdminOwnerController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/dao/Users/LoginDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/dao/Users/LoginDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hcmuaf/nlu/edu/vn/service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/admin/css/account.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/admin/css/account.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/admin/css/user.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/admin/css/user.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/admin/js/passwordManagement.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/admin/js/passwordManagement.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/admin/pages/manager_admin.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/admin/pages/manager_admin.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -65,7 +67,7 @@
   &quot;keyToString&quot;: {
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;Tomcat Server.Tomcat 10.1.31.executor&quot;: &quot;Run&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Merging master&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
@@ -80,6 +82,7 @@
 }</component>
   <component name="RunManager">
     <configuration name="Tomcat 10.1.31" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 10.1.31" ALTERNATIVE_JRE_ENABLED="false" nameIsGenerated="true">
+      <option name="BROWSER_ID" value="37cae5b9-e8b2-4949-9172-aafa37fbc09c" />
       <option name="UPDATING_POLICY" value="restart-server" />
       <deployment>
         <artifact name="tqh">
@@ -89,7 +92,7 @@
         </artifact>
       </deployment>
       <server-settings>
-        <option name="BASE_DIRECTORY_NAME" value="151c3d9a-2184-425c-89b6-5275963ab41e" />
+        <option name="BASE_DIRECTORY_NAME" value="af64003d-5224-480a-a145-ed65d5fdf617" />
       </server-settings>
       <predefined_log_file enabled="true" id="Tomcat" />
       <predefined_log_file enabled="true" id="Tomcat Catalina" />
@@ -97,7 +100,7 @@
       <predefined_log_file id="Tomcat Host Manager" />
       <predefined_log_file id="Tomcat Localhost Access" />
       <RunnerSettings RunnerId="Debug">
-        <option name="DEBUG_PORT" value="57676" />
+        <option name="DEBUG_PORT" value="52984" />
       </RunnerSettings>
       <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Cover">
         <option name="USE_ENV_VARIABLES" value="true" />
@@ -186,6 +189,10 @@
       <workItem from="1742124858890" duration="6783000" />
       <workItem from="1742466998942" duration="12045000" />
       <workItem from="1742612371442" duration="312000" />
+      <workItem from="1742621917033" duration="6984000" />
+      <workItem from="1742636348805" duration="524000" />
+      <workItem from="1742636903578" duration="600000" />
+      <workItem from="1742637797523" duration="4544000" />
     </task>
     <servers />
   </component>

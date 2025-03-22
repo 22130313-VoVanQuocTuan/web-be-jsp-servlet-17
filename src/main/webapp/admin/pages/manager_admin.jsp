@@ -187,41 +187,41 @@
                                 <div class="v">
                                     <c:choose>
 
-                                        <c:when test="${list_account.role eq 'owner'}">
-                                            <button style="background: #ccced0" class="delete-btn" disabled>Xóa</button>
-                                            <button style="background: #ccced0" class="edit-btn" disabled>Sửa</button>
-                                        </c:when>
-
-
-                                        <c:when test="${list_account.role eq 'admin'}">
+                                        <c:when test="${sessionScope.user.role eq 'owner'}">
                                             <c:choose>
+                                                <c:when test="${list_account.role eq 'owner'}">
 
-                                                <c:when test="${sessionScope.user.role eq 'owner'}">
-                                                    <c:choose>
+                                                    <button style="background: #ccced0" class="delete-btn" disabled>Xóa</button>
+                                                    <button style="background: #ccced0" class="edit-btn" disabled>Sửa</button>
+                                                </c:when>
+                                                <c:otherwise>
 
-                                                        <c:when test="${sessionScope.user.id eq list_account.id}">
-                                                            <button style="background: #ccced0" class="delete-btn" disabled>Xóa</button>
-                                                        </c:when>
-                                                        <c:otherwise>
-                                                            <button class="delete-btn" data-id="${list_account.id}">Xóa</button>
-                                                        </c:otherwise>
-                                                    </c:choose>
+                                                    <button class="delete-btn" data-id="${list_account.id}">Xóa</button>
                                                     <button class="edit-btn"
                                                             data-id="${list_account.id}"
                                                             data-status="${list_account.status}"
                                                             data-role="${list_account.role}">
                                                         Sửa
                                                     </button>
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </c:when>
+
+
+                                        <c:when test="${sessionScope.user.role eq 'admin'}">
+                                            <c:choose>
+                                                <c:when test="${sessionScope.user.id eq list_account.id}">
+
+                                                    <button style="background: #ccced0" class="delete-btn" disabled>Xóa</button>
+                                                    <button style="background: #ccced0" class="edit-btn" disabled>Sửa</button>
                                                 </c:when>
-
-
                                                 <c:otherwise>
+
                                                     <button style="background: #ccced0" class="delete-btn" disabled>Xóa</button>
                                                     <button style="background: #ccced0" class="edit-btn" disabled>Sửa</button>
                                                 </c:otherwise>
                                             </c:choose>
                                         </c:when>
-
 
                                         <c:otherwise>
                                             <button class="delete-btn" data-id="${list_account.id}">Xóa</button>
@@ -293,22 +293,24 @@
                     <input type="hidden" id="userId" name="userId">
 
                     <label for="module">Chức năng:</label>
-                    <select id="module" name="module">
-                        <option value="Quản lý khách hàng">Quản lý khách hàng</option>
-                        <option value="Quản lý sản phẩm">Quản lý sản phẩm</option>
-                        <option value="Quản lý đơn hàng">Quản lý đơn hàng</option>
-                        <option value="Quản lý đánh giá">Quản lý đánh giá</option>
-                        <option value="Quản lý khuyến mãi">Quản lý khuyến mãi</option>
-                        <option value="Quản lý quản trị viên">Quản lý quản trị viên</option>
-                        <option value="Quản lý danh mục">Quản lý danh mục</option>
+                    <select id="module" name="module" style="margin-right: 100px">
+                        <option value="user">Quản lý khách hàng</option>
+                        <option value="product">Quản lý sản phẩm</option>
+                        <option value="order">Quản lý đơn hàng</option>
+                        <option value="review">Quản lý đánh giá</option>
+                        <option value="promotional">Quản lý khuyến mãi</option>
+                        <option value="admin">Quản lý quản trị viên</option>
+                        <option value="category">Quản lý danh mục</option>
                     </select>
 
-                    <label>Quyền:</label>
-                    <div>
-                        <input type="checkbox" id="canView" name="canView" value="1"> <label for="canView">Xem</label>
-                        <input type="checkbox" id="canAdd" name="canAdd" value="1"> <label for="canAdd">Thêm</label>
-                        <input type="checkbox" id="canEdit" name="canEdit" value="1"> <label for="canEdit">Sửa</label>
-                        <input type="checkbox" id="canDelete" name="canDelete" value="1"> <label for="canDelete">Xóa</label>
+
+                    <div style="margin-top: 15px;">
+                        <label>Quyền:</label>
+                        <input type="checkbox" id="canView" name="canView" value="1" ${permissions.canView ? 'checked' : ''}> <label for="canView">Xem</label>
+                        <input type="checkbox" id="canAdd" name="canAdd" value="1" ${permissions.canAdd ? 'checked' : ''}> <label for="canAdd">Thêm</label>
+                        <input type="checkbox" id="canEdit" name="canEdit" value="1" ${permissions.canEdit ? 'checked' : ''}> <label for="canEdit">Sửa</label>
+                        <input type="checkbox" id="canDelete" name="canDelete" value="1" ${permissions.canDelete ? 'checked' : ''}> <label for="canDelete">Xóa</label>
+
                     </div>
 
                     <div class="button-container">
@@ -363,23 +365,47 @@
     $(document).ready(function () {
         $(".edit-btn").click(function () {
             var userId = $(this).data("id");
-            var userRole = $(this).data("role");
-            var currentUserRole = "${sessionScope.user.role}"; // Lấy role của người đăng nhập
+            var module = $("#module").val(); // Lấy module ban đầu
+            $("#userId").val(userId);// Cập nhật userId vào input ẩn
+            loadPermissions(userId, module);
 
-            // Chỉ cho phép owner chỉnh sửa quyền
-            if (currentUserRole === "owner") {
-                $("#userId").val(userId);
-                $("#updatePermissionsModal").show();
-            } else {
-                alert("Bạn không có quyền thay đổi quyền.");
-            }
+            $("#updatePermissionsModal").show();
         });
 
-        // Ẩn modal khi bấm "Thoát"
         $(".close-modal").click(function () {
             $("#updatePermissionsModal").hide();
         });
+
+        $("#module").change(function () {
+            var userId = $("#userId").val();
+            var module = $(this).val(); // Lấy module mới
+
+            loadPermissions(userId, module);
+        });
+
+        function loadPermissions(userId, module) {
+            $.ajax({
+                url: "get_user_permissions",
+                type: "GET",
+                data: { userId: userId, module: module }, // Gửi thêm module
+                dataType: "json",
+                success: function (data) {
+                    console.log("Received JSON:", data); // Debug
+
+                    $("#canView").prop("checked", data.canView);
+                    $("#canAdd").prop("checked", data.canAdd);
+                    $("#canEdit").prop("checked", data.canEdit);
+                    $("#canDelete").prop("checked", data.canDelete);
+                },
+                error: function (xhr, status, error) {
+                    console.error("Error:", error);
+                    console.error("Response:", xhr.responseText);
+                }
+            });
+        }
     });
+
+
 
 
 
