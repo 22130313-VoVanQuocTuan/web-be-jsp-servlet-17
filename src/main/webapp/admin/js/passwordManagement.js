@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
     // Lấy tất cả các nút chỉnh sửa và xóa
-    const editButtons = document.querySelectorAll('.edit-btn');
+
     const deleteButtons = document.querySelectorAll('.delete-btn');
 
     // Hàm hiển thị modal
@@ -15,28 +15,7 @@ document.addEventListener('DOMContentLoaded', function () {
         modals.forEach(modal => modal.style.display = 'none'); // Ẩn tất cả các modal
     }
 
-    // Khi nhấn vào nút chỉnh sửa
-    editButtons.forEach(button => {
-        button.addEventListener('click', function () {
-            const row = button.closest('tr');
-            const username = row.children[0].textContent;
-            const email = row.children[1].textContent;
 
-            // Điền thông tin vào modal chỉnh sửa
-            document.getElementById('edit-username').value = username;
-            document.getElementById('edit-email').value = email;
-
-            // Lấy giá trị data-id của nút đã nhấn
-            const id = button.getAttribute('data-id');
-            const status = button.getAttribute('data-status');
-
-
-            console.log("button thứ :" + id); // In ra ID, ví dụ: "1"
-
-            // Hiển thị modal chỉnh sửa
-            showModal('edit-modal');
-        });
-    });
 
     // Khi nhấn vào nút xóa
     deleteButtons.forEach(button => {

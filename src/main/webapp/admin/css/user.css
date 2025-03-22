@@ -321,14 +321,9 @@ button {
 }
 
  /* =============== Update modal =========================== */
- #update .modal-content label {
-     color: #F5F5DC;
-     font-weight: bold;
-     text-align: center;
-     margin-bottom: 20px;
- }
 
- #update .modal-content h3 {
+
+ #update .modal-content h3 , #updatePermissionsModal .modal-content h3   {
      font-size: 1.5rem;
      font-weight: bold;
      text-align: center;
@@ -342,14 +337,14 @@ button {
      padding-bottom: 10px;
  }
 
- #update .modal-content .button-container {
+ #update .modal-content .button-container, #updatePermissionsModal .modal-content .button-container {
      display: flex;
      justify-content: flex-end;
      gap: 10px;
      width: 100%;
  }
 
- #update .modal-content .button-container button:first-child {
+ #update .modal-content .button-container button:first-child ,  #updatePermissionsModal .modal-content .button-container button:first-child {
      margin-top: 15px;
      background-color: #f88e62;
      color: #ffffff;
@@ -358,7 +353,8 @@ button {
      cursor: pointer;
  }
 
- #update .modal-content .button-container button:last-child {
+ #update .modal-content .button-container button:last-child ,
+ #updatePermissionsModal .modal-content .button-container button:last-child {
      margin-top: 15px;
      background-color: #f88e62;
      color: #ffffff;
@@ -366,6 +362,11 @@ button {
      padding: 10px 20px;
      cursor: pointer;
  }
- #update .modal-content .button-container button:hover{
+ #update .modal-content .button-container button:hover,
+ #updatePermissionsModal .modal-content .button-container button:hover{
      transform: scale(1.1);
+ }
+
+ #update label, #updatePermissionsModal label {
+     color: white;
  }

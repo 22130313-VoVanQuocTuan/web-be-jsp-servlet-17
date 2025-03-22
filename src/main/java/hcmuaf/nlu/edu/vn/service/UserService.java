@@ -8,6 +8,7 @@ import java.security.SecureRandom;
 import java.sql.SQLException;
 import java.util.Base64;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 
@@ -201,6 +202,10 @@ public class UserService {
 
     public void updateUserPassword(String newPassword,String email) throws SQLException {
         usersDao.updatePassword(newPassword, email);
+    }
+
+    public Map<String, Boolean> getUserPermissions(String userId,String module) {
+        return usersDao.getUserPermissions(userId,module);
     }
 }
 
