@@ -257,7 +257,7 @@
                     <label for="email">Email:</label>
                     <input type="email" id="email" name="email" required>
 
-                    <label for="role">Quyền:</label>
+                    <label for="userRole">Quyền:</label>
                     <select id="userRole" name="role" required>
                         <option value="admin">Admin</option>
                         <option value="user">User</option>
@@ -285,29 +285,34 @@
         </div>
 
         <!--Cập nhật trạng thái và quyền -->
-        <div id="update" class="modal">
+        <!-- Cập nhật quyền -->
+        <div id="updatePermissionsModal" class="modal">
             <div class="modal-content">
-                <h3>Cập nhật trạng thái và quyền</h3>
-                <form id="updateModal" action="update_status_role" method="post">
+                <h3>Cập nhật quyền</h3>
+                <form id="updatePermissionsForm" action="update_permissions" method="post">
                     <input type="hidden" id="userId" name="userId">
 
-                    <label for="status">Trạng thái:</label>
-                    <select id="status" name="status">
-                        <option value="Bị đình chỉ">Bị đình chỉ</option>
-                        <option value="Đang chờ xử lý">Đang chờ xử lý</option>
+                    <label for="module">Chức năng:</label>
+                    <select id="module" name="module">
+                        <option value="Quản lý khách hàng">Quản lý khách hàng</option>
+                        <option value="Quản lý sản phẩm">Quản lý sản phẩm</option>
+                        <option value="Quản lý đơn hàng">Quản lý đơn hàng</option>
+                        <option value="Quản lý đánh giá">Quản lý đánh giá</option>
+                        <option value="Quản lý khuyến mãi">Quản lý khuyến mãi</option>
+                        <option value="Quản lý quản trị viên">Quản lý quản trị viên</option>
+                        <option value="Quản lý danh mục">Quản lý danh mục</option>
                     </select>
 
-                    <label for="role">Quyền:</label>
-                    <c:choose>
-                        <c:when test="${ sessionScope.user.role eq 'owner'}">
-                            <select id="role" name="role" required>
-                                <option value="admin">Admin</option>
-                                <option value="user">User</option>
-                            </select>
-                        </c:when>
-                    </c:choose>
+                    <label>Quyền:</label>
+                    <div>
+                        <input type="checkbox" id="canView" name="canView" value="1"> <label for="canView">Xem</label>
+                        <input type="checkbox" id="canAdd" name="canAdd" value="1"> <label for="canAdd">Thêm</label>
+                        <input type="checkbox" id="canEdit" name="canEdit" value="1"> <label for="canEdit">Sửa</label>
+                        <input type="checkbox" id="canDelete" name="canDelete" value="1"> <label for="canDelete">Xóa</label>
+                    </div>
+
                     <div class="button-container">
-                        <button id="saveAccount" type="submit">Lưu thay đổi</button>
+                        <button type="submit">Lưu thay đổi</button>
                         <button type="button" class="close-modal">Thoát</button>
                     </div>
                 </form>
@@ -357,24 +362,25 @@
 <script>
     $(document).ready(function () {
         $(".edit-btn").click(function () {
-            var userId = $(this).data("id");  // Lấy ID user
-            var userStatus = $(this).data("status");  // Lấy trạng thái user
-            var userRole = $(this).data("role");  // Lấy quyền user
+            var userId = $(this).data("id");
+            var userRole = $(this).data("role");
+            var currentUserRole = "${sessionScope.user.role}"; // Lấy role của người đăng nhập
 
-            // Gán giá trị vào modal
-            $("#userId").val(userId);
-            $("#status").val(userStatus);
-            $("#role").val(userRole);
-
-            // Hiển thị modal
-            $("#update").show();
+            // Chỉ cho phép owner chỉnh sửa quyền
+            if (currentUserRole === "owner") {
+                $("#userId").val(userId);
+                $("#updatePermissionsModal").show();
+            } else {
+                alert("Bạn không có quyền thay đổi quyền.");
+            }
         });
 
         // Ẩn modal khi bấm "Thoát"
         $(".close-modal").click(function () {
-            $("#update").hide();
+            $("#updatePermissionsModal").hide();
         });
     });
+
 
 
 </script>
