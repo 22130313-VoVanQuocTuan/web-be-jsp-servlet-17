@@ -132,6 +132,14 @@
                     <span class="title">Tài khoản</span>
                 </a>
             </li>
+            <li>
+                <a href="list_admin_owner">
+                        <span class="icon">
+                            <ion-icon name="settings"></ion-icon>
+                        </span>
+                    <span class="title">Quản lý quản trị viên</span>
+                </a>
+            </li>
 
             <li>
                 <a href="logout">
@@ -263,7 +271,7 @@
                 <div id="editPromotional" class="modal">
                     <div class="modal-content">
                         <span class="close-btn " onclick="closeModal1()" &times;></span>
-                        <h2 style="color: #FFFFFF" class="modal-title">Chỉnh sửa ưu đãi</h2>
+                        <h2 style="color: #FFC857" class="modal-title">Chỉnh sửa ưu đãi</h2>
 
                         <div class="editPromotional">
                             <!-- Form chỉnh sửa thông tin -->

@@ -97,6 +97,14 @@
                         <span class="title">Tài khoản</span>
                     </a>
                 </li>
+                <li>
+                    <a href="list_admin_owner">
+                        <span class="icon">
+                            <ion-icon name="settings"></ion-icon>
+                        </span>
+                        <span class="title">Quản lý quản trị viên</span>
+                    </a>
+                </li>
 
                 <li>
                     <a href="logout">

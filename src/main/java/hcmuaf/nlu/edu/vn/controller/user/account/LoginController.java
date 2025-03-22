@@ -46,7 +46,7 @@ public class LoginController extends HttpServlet {
                     session.setAttribute("user", user);
 
                     //cập nhật trạng thái
-                    userService.UpdateStatusOrRoleUser(null, "Hoạt động", user.getId());
+                    userService.UpdateStatusOrRoleUserLoginLogout("Hoạt động", user.getId());
 
                     // Quay vể trang gần nhất
                      String redirectUrl = (String) session.getAttribute("redirectUrl");

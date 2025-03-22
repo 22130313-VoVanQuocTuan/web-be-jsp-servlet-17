@@ -59,7 +59,7 @@ public class OrderController extends HttpServlet {
 
         // Kiểm tra role và điều hướng trang
         String destinationPage = "users/page/informationCustomer.jsp";
-        if ("admin".equalsIgnoreCase(role)) {
+        if ("admin".equalsIgnoreCase(role)  || "owner".equalsIgnoreCase(role)) {
             destinationPage = "admin/pages/account.jsp";
         }
         request.getRequestDispatcher(destinationPage).forward(request, response);

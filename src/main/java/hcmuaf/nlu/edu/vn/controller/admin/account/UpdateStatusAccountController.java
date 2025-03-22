@@ -19,8 +19,8 @@ public class UpdateStatusAccountController  extends HttpServlet {
         String role = req.getParameter("role");
 
         // Kiểm tra id và status trước khi xử lý
-        if (ids == null || ids.trim().isEmpty() || status == null || status.trim().isEmpty()) {
-            req.setAttribute("error", "ID hoặc trạng thái không hợp lệ.");
+        if (ids == null || ids.trim().isEmpty()) {
+            req.setAttribute("error", "ID  không hợp lệ.");
             req.getRequestDispatcher("/accounts").forward(req, resp);
             return;
         }
