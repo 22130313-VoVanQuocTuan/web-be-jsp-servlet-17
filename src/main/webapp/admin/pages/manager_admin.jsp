@@ -187,6 +187,7 @@
                                 <div class="v">
                                     <c:choose>
 
+
                                         <c:when test="${sessionScope.user.role eq 'owner'}">
                                             <c:choose>
                                                 <c:when test="${list_account.role eq 'owner'}">
@@ -197,12 +198,14 @@
                                                 <c:otherwise>
 
                                                     <button class="delete-btn" data-id="${list_account.id}">Xóa</button>
+
                                                     <button class="edit-btn"
                                                             data-id="${list_account.id}"
                                                             data-status="${list_account.status}"
                                                             data-role="${list_account.role}">
                                                         Sửa
                                                     </button>
+
                                                 </c:otherwise>
                                             </c:choose>
                                         </c:when>
@@ -217,12 +220,12 @@
                                                 </c:when>
                                                 <c:otherwise>
 
+
                                                     <button style="background: #ccced0" class="delete-btn" disabled>Xóa</button>
                                                     <button style="background: #ccced0" class="edit-btn" disabled>Sửa</button>
                                                 </c:otherwise>
                                             </c:choose>
                                         </c:when>
-
                                         <c:otherwise>
                                             <button class="delete-btn" data-id="${list_account.id}">Xóa</button>
                                             <button class="edit-btn"
@@ -293,6 +296,7 @@
                     <input type="hidden" id="userId" name="userId">
 
                     <label for="module">Chức năng:</label>
+
                     <select id="module" name="module" style="margin-right: 100px">
                         <option value="user">Quản lý khách hàng</option>
                         <option value="product">Quản lý sản phẩm</option>
@@ -365,6 +369,7 @@
     $(document).ready(function () {
         $(".edit-btn").click(function () {
             var userId = $(this).data("id");
+
             var module = $("#module").val(); // Lấy module ban đầu
             $("#userId").val(userId);// Cập nhật userId vào input ẩn
             loadPermissions(userId, module);
@@ -404,6 +409,7 @@
             });
         }
     });
+
 
 
 

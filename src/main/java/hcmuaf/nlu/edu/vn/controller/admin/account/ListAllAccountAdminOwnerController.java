@@ -26,8 +26,6 @@ public class ListAllAccountAdminOwnerController extends HttpServlet {
             resp.sendRedirect(req.getContextPath() + "/logout");
             return;
         }
-
-
         try {
             List<Users> list = userService.getListUsers();
 
