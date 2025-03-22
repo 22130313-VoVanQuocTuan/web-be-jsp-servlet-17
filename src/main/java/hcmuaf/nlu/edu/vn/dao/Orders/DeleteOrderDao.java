@@ -46,6 +46,32 @@ public class DeleteOrderDao {
         }
     }
 
+    //Cập nhật số lượng khi huỷ đơn hàng
+    public void restoreSoldCountProduct(int orderId) {
+        String getOrderItemsQuery = "SELECT productId, quantity FROM orderitems WHERE orderId = ?";
+        try (PreparedStatement psGetOrderItems = dbConnect.preparedStatement(getOrderItemsQuery)) {
+            psGetOrderItems.setInt(1,orderId);
+            ResultSet rs = psGetOrderItems.executeQuery();
+
+            while (rs.next()) {
+                int productId = rs.getInt("productId");
+                int quantity = rs.getInt("quantity");
+
+                // Cập nhật lại bảng sản phẩm
+                String updateProductQuery = "UPDATE products SET quantity = quantity + ?, soldCount = soldCount - ? WHERE id = ?";
+                try (PreparedStatement psUpdateProduct = dbConnect.preparedStatement(updateProductQuery)) {
+                    psUpdateProduct.setInt(1, quantity);
+                    psUpdateProduct.setInt(2, quantity);
+                    psUpdateProduct.setInt(3, productId);
+                    psUpdateProduct.executeUpdate();
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
     public boolean cancelOrder(int id) throws SQLException {
         String checkOrderQuery = "SELECT createdAt FROM orders WHERE id = ?";
         try (PreparedStatement psCheckOrder = dbConnect.preparedStatement(checkOrderQuery)) {
@@ -66,6 +92,7 @@ public class DeleteOrderDao {
                 }
 
                 // Nếu chưa quá 2 ngày, tiến hành xóa các mục trong bảng orderitems
+                restoreSoldCountProduct(id);
                 String deleteOrderItemsQuery = "DELETE FROM orderitems WHERE orderId = ?";
                 try (PreparedStatement psDeleteOrderItems = dbConnect.preparedStatement(deleteOrderItemsQuery)) {
                     psDeleteOrderItems.setInt(1, id);

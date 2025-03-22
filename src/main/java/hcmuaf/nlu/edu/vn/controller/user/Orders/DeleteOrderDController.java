@@ -20,6 +20,8 @@ public class DeleteOrderDController extends HttpServlet {
                 // Kiểm tra và hủy đơn hàng
                 boolean isCanceled = orderService.cancelOrder(Integer.parseInt(orderId));
                 if (isCanceled) {
+                    //Cập nhật số lượng sản phẩm khi huỷ hoá đơn
+                    orderService.restoreCountProduct(Integer.parseInt(orderId));
                     request.setAttribute("message", "Đơn hàng đã được hủy thành công!");
                 } else {
                     request.setAttribute("message", "Không thể hủy đơn hàng vì đã quá 2 ngày!");

@@ -81,4 +81,9 @@ public class OrderService {
     public void addOrderItems(OrderItem order) throws SQLException {
         addOrderDao.addOrderItem(order);
     }
+
+    //Cập nhật số lượng sản phẩm khi huỷ hoá đơn
+    public void restoreCountProduct(int id) throws SQLException {
+        deleteOrderDao.restoreSoldCountProduct(id);
+    }
 }
