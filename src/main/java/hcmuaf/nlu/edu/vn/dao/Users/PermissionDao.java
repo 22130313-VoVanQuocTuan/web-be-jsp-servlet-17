@@ -1,9 +1,11 @@
 package hcmuaf.nlu.edu.vn.dao.Users;
 
 import hcmuaf.nlu.edu.vn.dao.DBConnect;
+import hcmuaf.nlu.edu.vn.model.Permissions;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 
 public class PermissionDao {
@@ -51,6 +53,44 @@ public class PermissionDao {
                 insertStmt.executeUpdate();
             }
         }
+    }
+
+    // kiểm tra quyền
+    public boolean checkPermission(int userId, String module, String permissionType) throws SQLException {
+        String sql = "SELECT " + permissionType + " FROM permissions WHERE userId = ? AND module = ?";
+
+        try (PreparedStatement stmt = dbConnect.preparedStatement(sql)) {
+            stmt.setInt(1, userId);
+            stmt.setString(2, module);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                return rs.getBoolean(permissionType);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public Permissions getPermission(int userId, String module) {
+        String query = "SELECT * FROM permissions WHERE userId = ? AND module = ?";
+        try ( PreparedStatement ps =  dbConnect.preparedStatement(query)) {
+            ps.setInt(1, userId);
+            ps.setString(2, module);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return new Permissions(
+                        rs.getBoolean("canView"),
+                        rs.getBoolean("canAdd"),
+                        rs.getBoolean("canEdit"),
+                        rs.getBoolean("canDelete")
+                );
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
 }

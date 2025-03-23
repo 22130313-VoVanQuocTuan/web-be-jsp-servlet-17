@@ -17,7 +17,14 @@ window.onclick = function (event) {
 // Mở modal
 document.addEventListener("DOMContentLoaded", () => {
     document.querySelector('.edit-btn').addEventListener('click', openModal1);
+    // Nút mở modal đổi mật khẩu
+    document.querySelector('.editPass').addEventListener('click', openModalPass);
 });
+function openModalPass() {
+    console.log("Modal mở");
+    // Hiển thị modal
+    document.getElementById('updatePassword').style.display = 'block';
+}
 function openModal1() {
     console.log("Modal mở");
     // Hiển thị modal
@@ -37,6 +44,7 @@ function openModal1() {
 function closeModal1() {
     console.log("Modal đóng");
     document.getElementById('editInformationModal').style.display = 'none';
+    document.getElementById('updatePassword').style.display = 'none';
 }
 
 

@@ -42,3 +42,12 @@ function updateStatusColors() {
 
 // Gọi hàm để áp dụng màu ngay khi trang được tải
 document.addEventListener("DOMContentLoaded", updateStatusColors);
+// thông báo tắt trong 3s
+window.addEventListener('DOMContentLoaded', function () {
+    const alert = document.querySelector('.alert');
+    if (alert) {
+        setTimeout(function () {
+            alert.classList.add('fade-out');
+        }, 3000);  // 3 giây trước khi bắt đầu hiệu ứng biến mất
+    }
+});

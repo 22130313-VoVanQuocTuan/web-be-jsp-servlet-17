@@ -283,12 +283,19 @@
                 </div>
             </div>
         </div>
+        <%-- Kiểm tra xem có thông báo nào không --%>
+        <c:if test="${not empty sessionScope.errorMessage}">
+            <div class="alert alert-info">
+                    ${sessionScope.errorMessage}
+            </div>
+            <% session.removeAttribute("errorMessage"); %> <!-- Xóa thông báo ngay sau khi hiển thị -->
+        </c:if>
 
         <!--Cập nhật trạng thái và quyền -->
         <div id="update" class="modal">
             <div class="modal-content">
                 <h3>Cập nhật trạng thái và quyền</h3>
-                <form id="updateModal" action="update_status_role" method="post">
+                <form id="updateModal" action="update-status-role-account" method="post">
                     <input type="hidden" id="userId" name="userId">
 
                     <label for="status">Trạng thái:</label>
@@ -320,6 +327,7 @@
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 <script src="<c:url value="/admin/js/index.js"/>"></script>
 <script src="<c:url value="/admin/js/passwordManagement.js"/>"></script>
+
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         // Kiểm tra nếu cần hiển thị modal

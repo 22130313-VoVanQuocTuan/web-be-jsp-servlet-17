@@ -11,7 +11,7 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
-@WebServlet(name = "update_permissions", value = "/update_permissions")
+@WebServlet(name = "update_permissions", value = "/update-permissions-admin")
 public class UpdatePermissionsController extends HttpServlet {
     private PermissionService permissionService = new PermissionService();
 

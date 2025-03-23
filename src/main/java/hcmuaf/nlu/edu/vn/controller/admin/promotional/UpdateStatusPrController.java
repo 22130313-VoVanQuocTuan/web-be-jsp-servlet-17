@@ -10,7 +10,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-@WebServlet(name = "UpdateStatusPro", value = "/update-status-pro")
+@WebServlet(name = "UpdateStatusPro", value = "/update-status-promotional")
 public class UpdateStatusPrController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

@@ -10,7 +10,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 
-@WebServlet(name = "updateStatus" , value = "/update_status_role")
+@WebServlet(name = "updateStatus" , value = "/update-status-role-account")
 public class UpdateStatusAccountController  extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
