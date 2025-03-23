@@ -23,6 +23,39 @@
         border: 2px solid #1c1919 !important;
         margin-bottom: 10px !important;
     }
+
+    @media print {
+        body {
+            font-size: 14px; /* Giữ font chữ nhỏ gọn */
+            background-color: white; /* Đảm bảo nền trắng khi xuất PDF */
+        }
+
+        .modal {
+            width: 100%;
+            max-width: 800px; /* Giữ kích thước modal hợp lý */
+        }
+
+        .order-detail-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .order-detail-table th, .order-detail-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 5px 10px;
+            color: white;
+            border-radius: 4px;
+        }
+
+        .badge.success {
+            background-color: #28a745; /* Màu xanh của trạng thái thanh toán */
+        }
+    }
 </style>
 <body>
 <!-- ------------------ Điều hướng -------------------->
@@ -245,12 +278,14 @@
                                      color: white; border: none; border-radius: 5px; cursor: pointer;">
                                     Cập nhật trạng thái
                                 </button>
-
                                 <!-- Hiển thị lỗi nếu có -->
                                 <c:if test="${not empty error}">
                                     <p style="color: red;">${error}</p>
                                 </c:if>
                             </form>
+                            <button id="exportPDF" type="button" style="padding: 10px 20px; background-color: #28a745; color: white; border: none;margin-top: 15px; border-radius: 5px; cursor: pointer;">
+                                Xuất PDF
+                            </button>
                         </div>
 
                     </div>
@@ -309,6 +344,35 @@
                     "next": ">"
                 }
             }
+        });
+    });
+</script>
+
+<!-- Thêm thư viện -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        document.getElementById("exportPDF").addEventListener("click", function () {
+            console.log("Bắt đầu xuất PDF...");
+
+            let modalContent = document.querySelector(".modal-content");
+            // Tăng chiều cao modal để đảm bảo toàn bộ nội dung hiển thị
+            modalContent.style.maxHeight = "none";
+            modalContent.style.overflow = "visible";
+
+
+            html2canvas(modalContent, { scale: 2 }).then(canvas => {
+                let imgData = canvas.toDataURL("image/png");
+                const { jsPDF } = window.jspdf;
+                let doc = new jsPDF("p", "mm", "a4"); // Khổ A4
+
+                let imgWidth = 190;
+                let imgHeight = (canvas.height * imgWidth) / canvas.width;
+
+                doc.addImage(imgData, "PNG", 10, 10, imgWidth, imgHeight);
+                doc.save(`HoaDon_${Date.now()}.pdf`); // Xuất file
+            });
         });
     });
 </script>
