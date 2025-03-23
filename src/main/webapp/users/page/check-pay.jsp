@@ -158,12 +158,12 @@
     <div id="section-content-1">
         <div class="confirmation-container">
             <div class="icon-check">
-                <i class="${message == 'Thanh toán thất bại' ? 'fa-regular fa-circle-xmark' : 'fa-regular fa-circle-check'}"
-                   style="color: ${message == 'Thanh toán thất bại' ? '#f44336' : '#22d73a'};"></i>
+                <i class="${sessionScope.message == 'Thanh toán thất bại' ? 'fa-regular fa-circle-xmark' : 'fa-regular fa-circle-check'}"
+                   style="color: ${sessionScope.message == 'Thanh toán thất bại' ? '#f44336' : '#22d73a'};"></i>
             </div>
 
-            <h2><i>${message}</i></h2>
-            <p>${message == 'Thanh toán thất bại' ? 'Đơn hàng của bạn đã bị thất bại. Vui lòng thử lại.' : 'Đơn hàng của bạn đã được xác nhận và đang được xử lý.'}</p>
+            <h2><i>${sessionScope.message}</i></h2>
+            <p>${sessionScope.message == 'Thanh toán thất bại' ? 'Đơn hàng của bạn đã bị thất bại. Vui lòng thử lại.' : 'Đơn hàng của bạn đã được xác nhận và đang được xử lý.'}</p>
 
             <div class="next-steps">
                 <p>Bạn sẽ nhận được email xác nhận với thông tin chi tiết về đơn hàng của mình.</p>
@@ -171,9 +171,8 @@
                 <p>Email: votuan@gmail.com | Số điện thoại: 0909 999 999</p>
             </div>
 
-            <button class="button-check"><a href="product" style="text-decoration: none; color: #fff;">Tiếp tục mua hàng</a></button>
-
-            <button class="button-check"><a href="home-page" style="text-decoration: none; color: #fff;">Quay về Trang Chủ</a></button>
+            <button class="button-check"><a href="product">Tiếp tục mua hàng</a></button>
+            <button class="button-check"><a href="home-page">Quay về Trang Chủ</a></button>
         </div>
 
     </div>

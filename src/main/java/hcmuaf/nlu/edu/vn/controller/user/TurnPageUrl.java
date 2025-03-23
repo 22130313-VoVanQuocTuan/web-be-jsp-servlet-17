@@ -28,5 +28,8 @@ public class TurnPageUrl extends HttpServlet {
         if("resetPass".equals(action)) {
             req.getRequestDispatcher("/users/page/reset-password.jsp").forward(req, resp);
         }
+        if("checkpay".equals(action)) {
+            req.getRequestDispatcher("/users/page/check-pay.jsp").forward(req, resp);
+        }
     }
 }

@@ -186,7 +186,7 @@ html{
   
   /* Hiệu ứng khi di chuột vào button */
   .checkout-btn:hover {
-    background-color: #001f7f;
+    background-color: #007bff;
     color: white;
     font-weight: 600; /* Màu sáng hơn khi di chuột */
   }

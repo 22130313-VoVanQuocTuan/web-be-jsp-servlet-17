@@ -69,7 +69,7 @@ public class ConfirmPaymentVNPAYController extends HttpServlet {
         Users user = (Users) session.getAttribute("user");
         double totalFinalPrice = (double) session.getAttribute("totalFinalPrice");
 
-        req.setAttribute("message", "Đặt hàng thành công");
+        session.setAttribute("message", "Đặt hàng thành công");
         String emailContent = "<html>"
                 + "<body>"
                 + "<h2>Cảm ơn bạn đã đặt hàng tại cửa hàng của chúng tôi!</h2>"
@@ -89,6 +89,6 @@ public class ConfirmPaymentVNPAYController extends HttpServlet {
 
         emailUtilService.sendEmailAsync(user.getEmail(), "Xác nhận thanh toán", emailContent);
         session.removeAttribute("cart");
-        req.getRequestDispatcher("users/page/check-pay.jsp").forward(req, resp);
+        resp.sendRedirect(req.getContextPath()+ "/turn-page?action=checkpay");
     }
 }

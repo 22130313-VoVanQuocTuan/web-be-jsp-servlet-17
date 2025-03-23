@@ -123,7 +123,7 @@ public class ConfirmPaymentCODController extends HttpServlet {
                       System.out.println("Failed to update soldCount for product ID: " + cartItem.getId());
                   }
               }
-              request.setAttribute("message", "Đặt hàng thành công");
+              session.setAttribute("message", "Đặt hàng thành công");
               String emailContent = "<html>"
                       + "<body>"
                       + "<h2>Cảm ơn bạn đã đặt hàng tại cửa hàng của chúng tôi!</h2>"
@@ -144,11 +144,11 @@ public class ConfirmPaymentCODController extends HttpServlet {
               emailUtilService.sendEmailAsync(user.getEmail(), "Xác nhận thanh toán", emailContent);
 
               session.removeAttribute("cart");
-              request.getRequestDispatcher("users/page/check-pay.jsp").forward(request, response);
+              response.sendRedirect(request.getContextPath()+ "/turn-page?action=checkpay");
               // Nếu tất cả thành công, chuyển hướng tới trang thanh toán thành công
           }else{
-              request.setAttribute("message", "Thanh toán thất bại");
-              request.getRequestDispatcher("users/page/check-pay.jsp").forward(request, response);
+              session.setAttribute("message", "Thanh toán thất bại");
+              response.sendRedirect(request.getContextPath()+ "/turn-page?action=checkpay");
           }
       }catch (SQLException e) {
           throw new RuntimeException(e);

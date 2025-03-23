@@ -41,7 +41,7 @@
     }
 
     .save:hover {
-        background-color: #24a220;
+        background-color: #007bff;
     }
 
     .sub .p:hover {
