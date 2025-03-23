@@ -10,6 +10,100 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vật Liệu Xây Dựng TQH </title>
 </head>
+<style>
+    .slide-discount {
+        width: 27%; /* Chiếm toàn bộ chiều rộng */
+        margin: auto;
+        margin-top: 5%;
+        padding: 10px;
+        background-color: #ffffff;
+        border-radius: 16px;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    }
+
+    .swiper {
+        width: 100%; /* Chiếm toàn bộ chiều rộng */
+        height: auto; /* Chiều cao tự động theo nội dung */
+    }
+
+    .swiper-slide {
+        background-color: transparent; /* Không có nền để dễ nhìn */
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .discount-item {
+        background: #ffffff; /* Màu nền trắng */
+        color: #FF0000; /* Chữ màu đỏ */
+        padding: 15px;
+        margin: 5px;
+        border-radius: 12px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        width: 90%; /* Chiều rộng mỗi mã giảm giá */
+        max-width: 300px;
+    }
+
+    .discount-item:hover {
+        transform: scale(1.05);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .discount-label {
+        font-size: 18px;
+        margin-bottom: 6px;
+        text-transform: uppercase;
+        font-weight: bold;
+    }
+
+    .discount-description {
+        font-size: 16px;
+    }
+
+    .swiper-button-next,
+    .swiper-button-prev {
+        background-color: #e0e0e0; /* Nền xám nhẹ */
+        border-radius: 50%;
+        padding: 6px;
+        width: 40px;
+        height: 40px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .swiper-button-next:hover,
+    .swiper-button-prev:hover {
+        background-color: #cccccc; /* Màu xám đậm hơn khi hover */
+        transform: scale(1.1);
+    }
+
+    .swiper-button-next::after,
+    .swiper-button-prev::after {
+        color: #ffffff; /* Màu trắng cho dấu mũi tên */
+        font-size: 20px; /* Tăng kích thước nếu cần */
+    }
+
+    .swiper-pagination-bullet {
+        background-color: #ffffff !important; /* Màu trắng */
+        opacity: 0.8;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .swiper-pagination-bullet:hover {
+        background-color: #d3d3d3 !important; /* Màu xám nhạt khi hover */
+        transform: scale(1.2);
+    }
+
+    .swiper-pagination-bullet-active {
+        background-color: #ffffff !important; /* Màu trắng khi đang active */
+        width: 12px;
+        height: 12px;
+    }
+
+</style>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4-beta3/css/all.min.css"/>
@@ -160,7 +254,8 @@
 
 <div id="section-slider">
     <div class="slide-show-content-container">
-        <p class="title-w" id="animatedText">Xây dựng nền móng vững chắc - Khởi tạo những công trình bền vững cùng bạn!</p>
+        <p class="title-w" id="animatedText">Xây dựng nền móng vững chắc - Khởi tạo những công trình bền vững cùng
+            bạn!</p>
         <div class="slide-show-content-image">
             <c:forEach var="banner" items="${banners_Slider}">
                 <img src="${banner.image_url}" alt="banner">
@@ -214,8 +309,37 @@
     </div>
     <!-- SẢN PHẨM BÁN CHẠY -->
     <div class="selling-products-container">
-        <div class="imgSale">
-            <img src="users/img_product/inax-khuyen-mai-mua-dong.png" alt="">
+        <div class="slide-discount">
+            <div class="swiper mySwiper">
+                <div class="swiper-wrapper">
+                    <c:forEach var="promotional" items="${sessionScope.promotionals}" varStatus="status">
+                        <c:if test="${status.index % 4 == 0}">
+                            <div class="swiper-slide">
+                        </c:if>
+
+                        <div class="discount-item">
+                            <div class="discount-label">
+                                Giảm giá: <fmt:formatNumber value="${promotional.value}" type="number"
+                                                            groupingUsed="true"/>₫
+                            </div>
+                            <div class="discount-description">
+                                Mã: ${promotional.code}
+                            </div>
+                        </div>
+
+                        <c:if test="${(status.index + 1) % 4 == 0 || status.last}">
+                            </div>
+                        </c:if>
+                    </c:forEach>
+                </div>
+
+                <!-- Add Pagination -->
+                <div class="swiper-pagination"></div>
+
+                <!-- Add Navigation -->
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+            </div>
         </div>
         <div class="selling-products-content">
             <h4><i class="fa-regular fa-gem" style="color: #f8f9fc;"></i>TOP SẢN PHẨM BÁN CHẠY</h4>
@@ -239,6 +363,7 @@
             </div>
         </div>
     </div>
+
     <!-- List Slider Products 1 -->
     <div class="slider-product-one-content">
         <div class="slider-product-one-content-title">
@@ -1310,7 +1435,6 @@
 </div>
 
 
-
 <div id="section-footer">
     <div class="container">
         <div class="contact-info">
@@ -1389,6 +1513,29 @@
 
         // Đóng popup khi nhấn nút đóng
         document.querySelector(".closee-button").addEventListener("click", closePopup);
+    });
+</script>
+<!-- Link Swiper's CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css">
+<!-- Swiper JS -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+<script>
+    var swiper = new Swiper(".mySwiper", {
+        slidesPerView: 1, // Mỗi slide chỉ chứa 1 nhóm 4 mã giảm giá
+        spaceBetween: 10,
+        loop: true,
+        autoplay: {
+            delay: 3000, // Tự động trượt sau 3 giây
+            disableOnInteraction: false,
+        },
+        pagination: {
+            el: ".swiper-pagination",
+            clickable: true,
+        },
+        navigation: {
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev",
+        },
     });
 </script>
 </body>
