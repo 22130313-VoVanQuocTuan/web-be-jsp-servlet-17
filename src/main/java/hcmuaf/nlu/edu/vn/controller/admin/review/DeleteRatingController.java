@@ -14,7 +14,7 @@ public class DeleteRatingController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int id = Integer.parseInt(req.getParameter("id"));
-        RatingService ratingService = new RatingService();
+         RatingService ratingService = new RatingService();
         try {
             if (ratingService.deleteRating(id)) {
                 resp.sendRedirect(req.getContextPath()+"/list-rating");

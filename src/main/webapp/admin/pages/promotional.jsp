@@ -318,6 +318,13 @@
                         </div>
                     </div>
                 </div>
+                <%-- Kiểm tra xem có thông báo nào không --%>
+                <c:if test="${not empty sessionScope.errorMessage}">
+                    <div class="alert alert-info">
+                            ${sessionScope.errorMessage}
+                    </div>
+                    <% session.removeAttribute("errorMessage"); %> <!-- Xóa thông báo ngay sau khi hiển thị -->
+                </c:if>
             </div>
         </div>
     </div>

@@ -4,15 +4,19 @@ public class Permissions {
     private int id;
     private int userId;
     private String module;
-    private int canView;
-    private int canAdd;
-    private int canEdit;
-    private int canDelete;
+    private boolean canView;
+    private boolean canAdd;
+    private boolean canEdit;
+    private boolean canDelete;
 
-    public Permissions() {
+    public Permissions(boolean canView, boolean canAdd, boolean canEdit, boolean canDelete) {
+        this.canView = canView;
+        this.canAdd = canAdd;
+        this.canDelete = canDelete;
+        this.canEdit = canEdit;
     }
 
-    public Permissions(int id, int userId, String module, int canView, int canAdd, int canEdit, int canDelete) {
+    public Permissions(int id, int userId, String module, boolean canView, boolean canAdd, boolean canEdit, boolean canDelete) {
         this.id = id;
         this.userId = userId;
         this.module = module;
@@ -46,35 +50,35 @@ public class Permissions {
         this.module = module;
     }
 
-    public int getCanView() {
+    public boolean getCanView() {
         return canView;
     }
 
-    public void setCanView(int canView) {
+    public void setCanView(boolean canView) {
         this.canView = canView;
     }
 
-    public int getCanAdd() {
+    public boolean getCanAdd() {
         return canAdd;
     }
 
-    public void setCanAdd(int canAdd) {
+    public void setCanAdd(boolean canAdd) {
         this.canAdd = canAdd;
     }
 
-    public int getCanEdit() {
+    public boolean getCanEdit() {
         return canEdit;
     }
 
-    public void setCanEdit(int canEdit) {
+    public void setCanEdit(boolean canEdit) {
         this.canEdit = canEdit;
     }
 
-    public int getCanDelete() {
+    public boolean getCanDelete() {
         return canDelete;
     }
 
-    public void setCanDelete(int canDelete) {
+    public void setCanDelete(boolean canDelete) {
         this.canDelete = canDelete;
     }
 }

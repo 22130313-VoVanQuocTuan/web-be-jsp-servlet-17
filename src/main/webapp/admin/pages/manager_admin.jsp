@@ -292,7 +292,7 @@
         <div id="updatePermissionsModal" class="modal">
             <div class="modal-content">
                 <h3>Cập nhật quyền</h3>
-                <form id="updatePermissionsForm" action="update_permissions" method="post">
+                <form id="updatePermissionsForm" action="update-permissions-admin" method="post">
                     <input type="hidden" id="userId" name="userId">
 
                     <label for="module">Chức năng:</label>
@@ -324,6 +324,13 @@
                 </form>
             </div>
         </div>
+        <%-- Kiểm tra xem có thông báo nào không --%>
+        <c:if test="${not empty sessionScope.errorMessage}">
+            <div class="alert alert-info">
+                    ${sessionScope.errorMessage}
+            </div>
+            <% session.removeAttribute("errorMessage"); %> <!-- Xóa thông báo ngay sau khi hiển thị -->
+        </c:if>
     </div>
 
 </div>
