@@ -77,7 +77,7 @@
                         <span class="icon">
                             <ion-icon name="people-outline"></ion-icon>
                         </span>
-                    <span class="title">Khách Hàng</span>
+                    <span class="title">Quản lý khách Hàng</span>
                 </a>
             </li>
 
@@ -86,7 +86,7 @@
                         <span class="icon">
                             <ion-icon name="cube-outline"></ion-icon>
                         </span>
-                    <span class="title">Sản phẩm</span>
+                    <span class="title">Quản lý sản phẩm</span>
                 </a>
             </li>
             <li>
@@ -94,16 +94,15 @@
                         <span class="icon">
                             <ion-icon name="receipt-outline"></ion-icon>
                         </span>
-                    <span class="title">Hóa đơn</span>
+                    <span class="title">Quản lý hóa đơn</span>
                 </a>
             </li>
-
             <li>
                 <a href="promotional-list">
                         <span class="icon">
                             <ion-icon name="pricetag-outline"></ion-icon>
                         </span>
-                    <span class="title">Mã giảm giá</span>
+                    <span class="title">Quản lý mã giảm giá</span>
                 </a>
             </li>
 
@@ -112,7 +111,7 @@
                         <span class="icon">
                             <ion-icon name="list-outline"></ion-icon>
                         </span>
-                    <span class="title">Danh mục</span>
+                    <span class="title">Quản lý danh mục</span>
                 </a>
             </li>
             <li>
@@ -120,7 +119,7 @@
                         <span class="icon">
                             <ion-icon name="chatbubble-outline"></ion-icon>
                         </span>
-                    <span class="title">Đánh giá</span>
+                    <span class="title">Quản lý đánh giá</span>
                 </a>
             </li>
 
@@ -129,7 +128,7 @@
                         <span class="icon">
                             <ion-icon name="person"></ion-icon>
                         </span>
-                    <span class="title">Tài khoản</span>
+                    <span class="title">Quản lý tài khoản</span>
                 </a>
             </li>
             <li>
