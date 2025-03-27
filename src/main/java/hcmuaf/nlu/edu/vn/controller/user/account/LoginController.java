@@ -1,6 +1,7 @@
 package hcmuaf.nlu.edu.vn.controller.user.account;
 
 import hcmuaf.nlu.edu.vn.model.Users;
+import hcmuaf.nlu.edu.vn.service.SessionManager;
 import hcmuaf.nlu.edu.vn.service.UserService;
 import hcmuaf.nlu.edu.vn.util.logUtil.LogLevel;
 import hcmuaf.nlu.edu.vn.util.logUtil.LogUtilDao;
@@ -68,6 +69,8 @@ public class LoginController extends HttpServlet {
                     // lưu session
                     HttpSession session = req.getSession();
                     session.setAttribute("user", user);
+                    // Lưu session vào SessionManager
+                    SessionManager.addSession(user.getId(), session);
                     userService.UpdateStatusOrRoleUserLoginLogout("Hoạt động", user.getId());
 
                     //cập nhật trạng thái
