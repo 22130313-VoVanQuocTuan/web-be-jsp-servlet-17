@@ -16,7 +16,7 @@ public class DeleteAccountController  extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         UserService userService = new UserService();
         int id = Integer.parseInt(req.getParameter("id"));
-        if(userService.deleteAccount(id)){
+        if(userService.softDeleteUser(id)){
              resp.sendRedirect(req.getContextPath()+"/accounts");
         }else{
             req.setAttribute("error", "Xóa tài khoản thất bại.");
