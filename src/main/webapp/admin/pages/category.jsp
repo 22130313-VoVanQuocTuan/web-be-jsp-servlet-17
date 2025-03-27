@@ -150,6 +150,14 @@
                         <span class="title">Quản lý quản trị viên</span>
                     </a>
                 </li>
+                <li>
+                    <a href="listLog">
+                        <span class="icon">
+                            <ion-icon name="time-outline"></ion-icon>
+                        </span>
+                        <span class="title">Quản lý nhật ký</span>
+                    </a>
+                </li>
 
                 <li>
                     <a href="logout">

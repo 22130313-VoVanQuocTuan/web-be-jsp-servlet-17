@@ -24,11 +24,11 @@ public class OrderController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         Users user = (Users) session.getAttribute("user");
-        if (user != null && !user.getRole().equals("user")) {
+          // Kiểm tra nếu chưa đăng nhập
+        if (user == null) {
             response.sendRedirect(request.getContextPath() + "/logout");
             return;
         }
-
 
         int id = user.getId();
         String role = user.getRole(); // Giả sử có phương thức getRole()
