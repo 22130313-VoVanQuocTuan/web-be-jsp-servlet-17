@@ -1,5 +1,6 @@
 package hcmuaf.nlu.edu.vn.controller.admin.account;
 
+import hcmuaf.nlu.edu.vn.service.SessionManager;
 import hcmuaf.nlu.edu.vn.service.UserService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -38,6 +39,8 @@ public class UpdateStatusAccountController  extends HttpServlet {
         try {
             // Gọi phương thức cập nhật trạng thái
             if (userService.UpdateStatusOrRoleUser(role,status, id)) {
+                // Hủy session của người bị hạ quyền
+                SessionManager.invalidateSession(id);
                 resp.sendRedirect(req.getContextPath() + "/accounts");
             } else {
                 req.setAttribute("error", "Cập nhật trạng thái không thành công.");

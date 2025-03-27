@@ -7,6 +7,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.util.List;
@@ -17,6 +18,12 @@ public class ListAllUserController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         UserService userService = new UserService();
+        HttpSession session = req.getSession();
+        Users user = (Users) session.getAttribute("user");
+        if (user == null || (!user.getRole().equals("admin") && !user.getRole().equals("owner"))) {
+            resp.sendRedirect(req.getContextPath() + "/logout");
+            return;
+        }
 
         try {
             List<Users> list = userService.getListUsers();

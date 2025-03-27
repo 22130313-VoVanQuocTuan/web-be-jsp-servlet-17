@@ -1,6 +1,7 @@
 package hcmuaf.nlu.edu.vn.controller.admin.order;
 
 import hcmuaf.nlu.edu.vn.model.Orders;
+import hcmuaf.nlu.edu.vn.model.Users;
 import hcmuaf.nlu.edu.vn.service.OrderService;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
@@ -21,7 +22,12 @@ public class GetOrderController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        HttpSession session = request.getSession();
+        Users user = (Users) session.getAttribute("user");
+        if (user == null || (!user.getRole().equals("admin") && !user.getRole().equals("owner"))) {
+            response.sendRedirect(request.getContextPath() + "/logout");
+            return;
+        }
 
         try {
             List<Orders> ordersList = orderService.getAllOrders();

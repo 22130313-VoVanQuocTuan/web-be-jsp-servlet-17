@@ -18,6 +18,7 @@ public class Users {
     private double totalPrice;
     private Date createDate;
     private Date updateDate;
+    private boolean isDeleted;
     private List<Permission> permissions;  // Danh sách quyền của user
 
     public Users(int id, String email, String fullName, String username, String password, String address, String phoneNumber, String role, String status, int isEmailVerified, double totalPrice, Date createDate, Date updateDate, List<Permission> permissions) {
@@ -37,9 +38,28 @@ public class Users {
         this.permissions = permissions;
     }
 
+    public Users(int id, String email, String fullName, String username, String password, String address, String phoneNumber, String role, String status, int isEmailVerified, double totalPrice, Date createDate, Date updateDate, boolean isDeleted, List<Permission> permissions) {
+        this.id = id;
+        this.email = email;
+        this.fullName = fullName;
+        this.username = username;
+        this.password = password;
+        this.address = address;
+        this.phoneNumber = phoneNumber;
+        this.role = role;
+        this.status = status;
+        this.isEmailVerified = isEmailVerified;
+        this.totalPrice = totalPrice;
+        this.createDate = createDate;
+        this.updateDate = updateDate;
+        this.isDeleted = isDeleted;
+        this.permissions = permissions;
+    }
+
     public Users() {
     }
-    public Users(int id, String username, String email, String phoneNumber,String status,String role){
+
+    public Users(int id, String username, String email, String phoneNumber, String status, String role) {
         this.id = id;
         this.username = username;
         this.email = email;
@@ -47,12 +67,14 @@ public class Users {
         this.status = status;
         this.role = role;
     }
-    public Users(String fullName, String phoneNumber, String address){
+
+    public Users(String fullName, String phoneNumber, String address) {
         this.fullName = fullName;
         this.phoneNumber = phoneNumber;
         this.address = address;
     }
-    public Users(String fullName,String email, String phoneNumber, String address, String role, String status){
+
+    public Users(String fullName, String email, String phoneNumber, String address, String role, String status) {
         this.fullName = fullName;
         this.email = email;
         this.phoneNumber = phoneNumber;
@@ -84,6 +106,16 @@ public class Users {
         this.id = id;
         this.fullName = fullName;
         this.totalPrice = totalPrice;
+    }
+
+    public Users(int id, String username, String email, String phoneNumber, String status, String role, boolean isDeleted) {
+        this.id = id;
+        this.email = email;
+        this.username = username;
+        this.phoneNumber = phoneNumber;
+        this.role = role;
+        this.status = status;
+        this.isDeleted = isDeleted;
     }
 
     public int getId() {

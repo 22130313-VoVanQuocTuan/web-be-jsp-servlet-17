@@ -134,6 +134,14 @@
                     <span class="title">Quản lý quản trị viên</span>
                 </a>
             </li>
+            <li>
+                <a href="listLog">
+                        <span class="icon">
+                            <ion-icon name="time-outline"></ion-icon>
+                        </span>
+                    <span class="title">Quản lý nhật ký</span>
+                </a>
+            </li>
 
             <li>
                 <a href="#" id="logout-link">
@@ -205,12 +213,12 @@
                                             <c:choose>
                                                 <c:when test="${list_account.role eq 'owner'}">
 
-                                                    <button style="background: #ccced0" class="delete-btn" disabled>Xóa</button>
+                                                    <button style="background: #ccced0" class="auth-btn" disabled>Hạ quyền</button>
                                                     <button style="background: #ccced0" class="edit-btn" disabled>Sửa</button>
                                                 </c:when>
                                                 <c:otherwise>
 
-                                                    <button class="delete-btn" data-id="${list_account.id}">Xóa</button>
+                                                    <button class="auth-btn" data-id="${list_account.id}">Hạ quyền</button>
 
                                                     <button class="edit-btn"
                                                             data-id="${list_account.id}"
@@ -228,19 +236,19 @@
                                             <c:choose>
                                                 <c:when test="${sessionScope.user.id eq list_account.id}">
 
-                                                    <button style="background: #ccced0" class="delete-btn" disabled>Xóa</button>
+                                                    <button style="background: #ccced0" class="auth-btn" disabled>Hạ quyền</button>
                                                     <button style="background: #ccced0" class="edit-btn" disabled>Sửa</button>
                                                 </c:when>
                                                 <c:otherwise>
 
 
-                                                    <button style="background: #ccced0" class="delete-btn" disabled>Xóa</button>
+                                                    <button style="background: #ccced0" class="auth-btn" disabled>Hạ quyền</button>
                                                     <button style="background: #ccced0" class="edit-btn" disabled>Sửa</button>
                                                 </c:otherwise>
                                             </c:choose>
                                         </c:when>
                                         <c:otherwise>
-                                            <button class="delete-btn" data-id="${list_account.id}">Xóa</button>
+                                            <button class="auth-btn" data-id="${list_account.id}">Hạ quyền</button>
                                             <button class="edit-btn"
                                                     data-id="${list_account.id}"
                                                     data-status="${list_account.status}"
@@ -288,13 +296,13 @@
             </div>
         </div>
 
-        <!-- Modal Xóa tài khoản -->
+        <!-- Modal hạ quyền tài khoản -->
         <div id="delete-modal" class="modal">
             <div class="modal-content">
-                <h3>Xác nhận xóa</h3>
-                <label>Bạn có chắc chắn muốn xóa tài khoản này?</label>
+                <h3>Xác nhận hạ quyền</h3>
+                <label>Bạn có chắc chắn muốn hạ quyền tài khoản này xuống user không?</label>
                 <div class="button-container">
-                    <button id="confirm-delete" class="confirm-delete">Xóa</button>
+                    <button id="confirm-delete" class="confirm-delete">Đồng ý</button>
                     <button class="close-modal">Hủy</button>
                 </div>
             </div>
@@ -360,7 +368,7 @@
 
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 <script src="<c:url value="/admin/js/index.js"/>"></script>
-<script src="<c:url value="/admin/js/passwordManagement.js"/>"></script>
+<script src="<c:url value="/admin/js/manager_admin_owner.js"/>"></script>
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         // Kiểm tra nếu cần hiển thị modal

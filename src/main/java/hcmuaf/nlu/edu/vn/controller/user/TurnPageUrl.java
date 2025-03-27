@@ -1,10 +1,12 @@
 package hcmuaf.nlu.edu.vn.controller.user;
 
+import hcmuaf.nlu.edu.vn.model.Users;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
@@ -13,6 +15,12 @@ public class TurnPageUrl extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String action = req.getParameter("action");
+        HttpSession session = req.getSession();
+        Users user = (Users) session.getAttribute("user");
+        if (user != null && !user.getRole().equals("user")) {
+            resp.sendRedirect(req.getContextPath() + "/logout");
+            return;
+        }
         if ("buyingHelp".equals(action)) {
             req.getRequestDispatcher("/users/page/buying-help.jsp").forward(req, resp);
         }

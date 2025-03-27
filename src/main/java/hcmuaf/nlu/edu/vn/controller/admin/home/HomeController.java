@@ -24,6 +24,13 @@ public class HomeController extends HttpServlet {
         String showAll = request.getParameter("showAll");
         String id = request.getParameter("id");
 
+        HttpSession session = request.getSession();
+        Users user = (Users) session.getAttribute("user");
+        if (user == null || (!user.getRole().equals("admin") && !user.getRole().equals("owner"))) {
+            response.sendRedirect(request.getContextPath() + "/logout");
+            return;
+        }
+
         try {
 
             // Lấy các dữ liệu từ HomeService

@@ -24,10 +24,9 @@ public class OrderController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         Users user = (Users) session.getAttribute("user");
-
-        // Kiểm tra nếu chưa đăng nhập
+          // Kiểm tra nếu chưa đăng nhập
         if (user == null) {
-            response.sendRedirect("login.jsp");
+            response.sendRedirect(request.getContextPath() + "/logout");
             return;
         }
 

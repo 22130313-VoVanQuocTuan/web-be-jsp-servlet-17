@@ -283,7 +283,15 @@
                 </a>
             </li>
             <li>
-                <a href="#" id="logout-link">
+                <a href="listLog">
+                        <span class="icon">
+                            <ion-icon name="time-outline"></ion-icon>
+                        </span>
+                    <span class="title">Quản lý nhật ký</span>
+                </a>
+            </li>
+            <li>
+                    <a href="#" id="logout-link">
                         <span class="icon">
                             <ion-icon name="log-out-outline"></ion-icon>
                         </span>

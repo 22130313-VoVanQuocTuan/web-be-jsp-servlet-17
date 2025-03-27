@@ -7,6 +7,7 @@ import java.util.List;
 
 public class RatingService {
     private final RatingDao ratingDao;
+
     public RatingService() {
         ratingDao = new RatingDao();
     }
@@ -26,9 +27,23 @@ public class RatingService {
         return ratingDao.addRating(rating);
     }
 
-
     //Tìm kiếm theo tid sản phẩm
     public List<Rating> getListRatingByProductId(String productId) {
         return ratingDao.getListRattingByProductId(productId);
     }
+
+//    // LẤY RA TẤT CẢ ĐÁNH GIÁ .
+//    public List<Rating> getAllRatings() {
+//        return ratingDao.getAllRatings();
+//    }
+//
+//    // XÓA ĐÁNH GIÁ .
+//    public boolean hideRating(int id) {
+//        return ratingDao.hideRating(id);
+//    }
+//
+//    //KHÔI PHỤC ĐÁNH GIÁ ĐÃ XÓA .
+//    public boolean restoreRating(int id) {
+//        return ratingDao.restoreRating(id);
+//    }
 }
