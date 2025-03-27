@@ -91,37 +91,17 @@
                     <button class="menu-toggle"><i class="fa-solid fa-bars"></i> Menu</button>
                     <ul class="nav navbar-nav navbar-center">
                         <li class="propClone">
-                        <span class="none-a"><i class="fa-solid fa-list" style="color: #d0cdcd;"></i> &nbsp;&nbsp; DANH
-                            MỤC SẢN
-                            PHẨM</span>
+                    <span class="none-a">
+                        <i class="fa-solid fa-list" style="color: #d0cdcd;"></i> &nbsp;&nbsp; DANH MỤC SẢN PHẨM
+                    </span>
                             <ul class="items">
-                                <li><a href="/tqh/product-category?categoryId=1">&nbsp;&nbsp;<i
-                                        class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;GẠCH XÂY
-                                    DỰNG</a></li>
-                                <li><a href="/tqh/product-category?categoryId=2">&nbsp;&nbsp;<i
-                                        class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;XI MĂNG VÀ
-                                    VỮA</a></li>
-                                <li><a href="/tqh/product-category?categoryId=3">&nbsp;&nbsp;<i
-                                        class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;CÁT, ĐÁ VÀ
-                                    SỎI</a></li>
-                                <li><a href="/tqh/product-category?categoryId=4">&nbsp;&nbsp;<i
-                                        class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;THÉP VÀ
-                                    SẮT</a></li>
-                                <li><a href="/tqh/product-category?categoryId=5">&nbsp;&nbsp;<i
-                                        class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;GỖ VÀ VẬT
-                                    LIỆU GỖ</a></li>
-                                <li><a href="/tqh/product-category?categoryId=6">&nbsp;&nbsp;<i
-                                        class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;SƠN VÀ PHỤ
-                                    GIA</a></li>
-                                <li><a href="/tqh/product-category?categoryId=7">&nbsp;&nbsp;<i
-                                        class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;NGÓI VÀ TẤM
-                                    LỢP</a></li>
-                                <li><a href="/tqh/product-category?categoryId=8">&nbsp;&nbsp;<i
-                                        class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;ỐNG NƯỚC VÀ
-                                    PHỤ KIỆN</a></li>
-                                <li><a href="/tqh/product-category?categoryId=9">&nbsp;&nbsp;<i
-                                        class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;THIẾT BỊ
-                                    ĐIỆN NƯỚC</a></li>
+                                <c:forEach var="category" items="${categories}">
+                                    <li>
+                                        <a href="/tqh/product-category?categoryId=${category.id}">
+                                            &nbsp;&nbsp;<i class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;${category.name}
+                                        </a>
+                                    </li>
+                                </c:forEach>
                             </ul>
                         </li>
                         <li class="propClone"><a href="home-page"><i class="fa-solid fa-house"></i>&nbsp;&nbsp; TRANG CHỦ
