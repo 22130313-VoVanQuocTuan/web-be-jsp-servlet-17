@@ -207,6 +207,12 @@ public class UserService {
     public Map<String, Boolean> getUserPermissions(String userId,String module) {
         return usersDao.getUserPermissions(userId,module);
     }
+
+
+    // Cập nhật quyền
+    public void updateRoleById(String userId){
+        usersDao.updateRoleById(userId);
+    }
 }
 
 

@@ -23,6 +23,7 @@ public class UserFilter implements Filter {
         HttpSession session = req.getSession(false); // Không tạo session mới nếu chưa đăng nhập
         Users user = (session != null) ? (Users) session.getAttribute("user") : null;
 
+
         if (user == null || !"user".equalsIgnoreCase(user.getRole())) {
             // Lưu URL hiện tại
             String currentUrl = req.getRequestURI();

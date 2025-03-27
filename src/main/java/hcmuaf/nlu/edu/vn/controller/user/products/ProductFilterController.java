@@ -1,6 +1,7 @@
 package hcmuaf.nlu.edu.vn.controller.user.products;
 
 import hcmuaf.nlu.edu.vn.model.Product;
+import hcmuaf.nlu.edu.vn.model.Users;
 import hcmuaf.nlu.edu.vn.service.ProductService;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
@@ -20,6 +21,13 @@ public class ProductFilterController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String filter = request.getParameter("filter");
         String categoryIdParam = request.getParameter("categoryId");
+
+        HttpSession session = request.getSession();
+        Users user = (Users) session.getAttribute("user");
+        if (user != null && !user.getRole().equals("user")) {
+            response.sendRedirect(request.getContextPath() + "/logout");
+            return;
+        }
         List<Product> products = new ArrayList<>();
         try {
             // Kiểm tra và thực hiện lọc theo tham số "filter"

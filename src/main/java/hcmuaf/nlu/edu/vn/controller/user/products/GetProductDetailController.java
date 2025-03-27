@@ -1,12 +1,14 @@
 package hcmuaf.nlu.edu.vn.controller.user.products;
 
 import hcmuaf.nlu.edu.vn.model.Product;
+import hcmuaf.nlu.edu.vn.model.Users;
 import hcmuaf.nlu.edu.vn.service.ProductService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.util.List;
@@ -23,7 +25,12 @@ public class GetProductDetailController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int id = Integer.parseInt(req.getParameter("id"));
         int categoryId = Integer.parseInt(req.getParameter("categoryId"));
-
+        HttpSession session = req.getSession();
+        Users user = (Users) session.getAttribute("user");
+        if (user != null && !user.getRole().equals("user")) {
+            resp.sendRedirect(req.getContextPath() + "/logout");
+            return;
+        }
 
         // nếu có đánh giá
         String ratingStatus = req.getParameter("rating");

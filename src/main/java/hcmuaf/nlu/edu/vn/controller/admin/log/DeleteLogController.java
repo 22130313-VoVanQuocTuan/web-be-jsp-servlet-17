@@ -19,6 +19,7 @@ public class DeleteLogController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
         String id = req.getParameter("id");
         if (id == null || id.isEmpty()) {
             req.setAttribute("error", "Log không tồn tại");
