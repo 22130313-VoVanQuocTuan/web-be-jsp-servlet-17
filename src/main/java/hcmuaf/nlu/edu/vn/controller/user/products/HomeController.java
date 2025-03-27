@@ -3,7 +3,6 @@ package hcmuaf.nlu.edu.vn.controller.user.products;
 import hcmuaf.nlu.edu.vn.model.Banner;
 import hcmuaf.nlu.edu.vn.model.Category;
 import hcmuaf.nlu.edu.vn.model.Product;
-import hcmuaf.nlu.edu.vn.model.Promotionals;
 import hcmuaf.nlu.edu.vn.service.HomeService;
 import hcmuaf.nlu.edu.vn.service.ProductService;
 import jakarta.servlet.ServletException;
@@ -11,7 +10,6 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.util.List;
@@ -32,7 +30,6 @@ public class HomeController extends HttpServlet {
             List<Product> productsCategory = productService.getAllProducts();
             List<Product> productPopular = productService.getPopularProducts();
             List<Banner> bannerSlider = homeService.getListBanner();
-            List<Promotionals> list = productService.getListPromotional();
             try {
                 Banner banner = homeService.getSingleBanner();
                 req.setAttribute("banners", banner);
@@ -41,8 +38,7 @@ public class HomeController extends HttpServlet {
             }catch (Exception e){
                 System.out.println(e.toString());
             }
-            HttpSession session = req.getSession();
-            session.setAttribute("promotionals", list);
+
             // Gửi dữ liệu sản phẩm và categoryId đến JSP để hiển thị
             req.setAttribute("productsCategory", productsCategory);
             req.setAttribute("productPopular", productPopular);
