@@ -27,6 +27,7 @@
         border: 2px solid #1c1919 !important;
         margin-bottom: 10px !important;
     }
+
     .hov a {
         display: flex;
         align-items: center;
@@ -42,8 +43,6 @@
         font-weight: bold;
     }
 </style>
-
-
 <body>
 <!-- ------------------ Điều hướng -------------------->
 <div class="container">
@@ -153,7 +152,6 @@
             </li>
         </ul>
     </div>
-
     <!------------------- Chính ------------------>
     <div class="main">
         <div class="topbar">
@@ -169,16 +167,12 @@
                 </a>
             </div>
         </div>
-
-
         <!-------------------- Danh Sách Chi Tiết người dùng------------------ -->
         <div class="details-user">
             <div class="recentOrders">
                 <div class="cardHeader">
                     <h2>Danh sách người dùng</h2>
-                    <a href="accounts?showAll=true" class="btn">Xem Tất Cả</a>
                 </div>
-
                 <div class="list-account-content-button">
                     <button id="add_account">Thêm tài khoản</button>
                 </div>
@@ -207,24 +201,24 @@
                             <td>
                                 <div class="v">
                                     <c:choose>
-
                                         <c:when test="${list_account.role eq 'owner'}">
                                             <button style="background: #ccced0" class="delete-btn" disabled>Xóa</button>
                                             <button style="background: #ccced0" class="edit-btn" disabled>Sửa</button>
                                         </c:when>
-
-
                                         <c:when test="${list_account.role eq 'admin'}">
                                             <c:choose>
-
                                                 <c:when test="${sessionScope.user.role eq 'owner'}">
                                                     <c:choose>
 
                                                         <c:when test="${sessionScope.user.id eq list_account.id}">
-                                                            <button style="background: #ccced0" class="delete-btn" disabled>Xóa</button>
+                                                            <button style="background: #ccced0" class="delete-btn"
+                                                                    disabled>Xóa
+                                                            </button>
                                                         </c:when>
                                                         <c:otherwise>
-                                                            <button class="delete-btn" data-id="${list_account.id}">Xóa</button>
+                                                            <button class="delete-btn" data-id="${list_account.id}">
+                                                                Xóa
+                                                            </button>
                                                         </c:otherwise>
                                                     </c:choose>
                                                     <button class="edit-btn"
@@ -234,16 +228,15 @@
                                                         Sửa
                                                     </button>
                                                 </c:when>
-
-
                                                 <c:otherwise>
-                                                    <button style="background: #ccced0" class="delete-btn" disabled>Xóa</button>
-                                                    <button style="background: #ccced0" class="edit-btn" disabled>Sửa</button>
+                                                    <button style="background: #ccced0" class="delete-btn" disabled>
+                                                        Xóa
+                                                    </button>
+                                                    <button style="background: #ccced0" class="edit-btn" disabled>Sửa
+                                                    </button>
                                                 </c:otherwise>
                                             </c:choose>
                                         </c:when>
-
-
                                         <c:otherwise>
                                             <button class="delete-btn" data-id="${list_account.id}">Xóa</button>
                                             <button class="edit-btn"
@@ -261,8 +254,6 @@
                     </tbody>
                 </table>
             </div>
-
-
         </div>
         <!-- Thêm tài khoản mới -->
         <div id="addAccount" class="modal">
@@ -280,11 +271,11 @@
 
                     <label for="role">Quyền:</label>
                     <select id="userRole" name="role" required>
-                                <option value="admin">Admin</option>
-                                <option value="user">User</option>
+                        <option value="admin">Admin</option>
+                        <option value="user">User</option>
                     </select>
                     <c:if test="${not empty error}">
-                       <p style="color: red;">${error}</p>
+                        <p style="color: red;">${error}</p>
                     </c:if>
 
                     <button id="saveAccountUser" type="submit">Lưu tài khoản</button>

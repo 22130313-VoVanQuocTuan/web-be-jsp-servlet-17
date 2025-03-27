@@ -17,7 +17,7 @@ public class DeleteAccountController  extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         UserService userService = new UserService();
         int id = Integer.parseInt(req.getParameter("id"));
-        if(userService.deleteAccount(id)){
+        if(userService.softDeleteUser(id)){
             // Hủy session nếu tài khoản bị xóa
              SessionManager.invalidateSession(id);
              resp.sendRedirect(req.getContextPath()+"/accounts");
