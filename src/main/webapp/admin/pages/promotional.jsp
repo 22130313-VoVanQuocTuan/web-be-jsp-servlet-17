@@ -164,11 +164,11 @@
             </li>
 
             <li>
-                <a href="logout">
+                <a href="" id="logout-link">
                         <span class="icon">
                             <ion-icon name="log-out-outline"></ion-icon>
                         </span>
-                    <span class="title">Đăng Xuất</span>
+                    <span class="title" id="log-out">Đăng Xuất</span>
                 </a>
             </li>
         </ul>
@@ -347,6 +347,17 @@
                     </div>
                     <% session.removeAttribute("errorMessage"); %> <!-- Xóa thông báo ngay sau khi hiển thị -->
                 </c:if>
+            </div>
+        </div>
+    </div>
+    <!-- Modal Xác Nhận Đăng Xuất -->
+    <div id="logout-modal" class="modal">
+        <div class="modal-content">
+            <h3>Xác nhận đăng xuất</h3>
+            <label>Bạn có chắc chắn muốn đăng xuất?</label>
+            <div class="button-container">
+                <button id="confirm-logout">Đăng Xuất</button>
+                <button id="cancel-logout">Hủy</button>
             </div>
         </div>
     </div>
