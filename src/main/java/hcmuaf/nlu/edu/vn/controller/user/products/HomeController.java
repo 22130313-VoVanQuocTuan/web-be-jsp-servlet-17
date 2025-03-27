@@ -1,6 +1,7 @@
 package hcmuaf.nlu.edu.vn.controller.user.products;
 
 import hcmuaf.nlu.edu.vn.model.Banner;
+import hcmuaf.nlu.edu.vn.model.Category;
 import hcmuaf.nlu.edu.vn.model.Product;
 import hcmuaf.nlu.edu.vn.model.Promotionals;
 import hcmuaf.nlu.edu.vn.service.HomeService;
@@ -35,6 +36,8 @@ public class HomeController extends HttpServlet {
             try {
                 Banner banner = homeService.getSingleBanner();
                 req.setAttribute("banners", banner);
+                List<Category> categories = productService.getAllCategories();
+                req.setAttribute("categories", categories);
             }catch (Exception e){
                 System.out.println(e.toString());
             }

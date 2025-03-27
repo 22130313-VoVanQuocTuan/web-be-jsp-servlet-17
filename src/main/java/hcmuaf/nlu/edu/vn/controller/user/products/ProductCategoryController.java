@@ -1,5 +1,6 @@
 package hcmuaf.nlu.edu.vn.controller.user.products;
 
+import hcmuaf.nlu.edu.vn.model.Category;
 import hcmuaf.nlu.edu.vn.model.Product;
 import hcmuaf.nlu.edu.vn.service.ProductService;
 import jakarta.servlet.*;
@@ -28,9 +29,11 @@ public class ProductCategoryController extends HttpServlet {
         if (categoryId == -1) return;
         try {
             List<Product> products = productService.getAllProductsCategory(categoryId);
+            List<Category> categories = productService.getAllCategories();
             // Gửi dữ liệu sản phẩm và categoryId đến JSP để hiển thị
             request.setAttribute("products", products);
             request.setAttribute("categoryId", categoryId);
+            request.setAttribute("categories", categories);
             request.getRequestDispatcher("/users/page/product.jsp").forward(request, response);
         } catch (SQLException e) {
             // Xử lý lỗi truy vấn cơ sở dữ liệu

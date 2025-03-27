@@ -3,20 +3,18 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!doctype html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vật Liệu Xây Dựng TQH </title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4-beta3/css/all.min.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="<c:url value="/users/css/home.css"/>">
+    <link rel="stylesheet" href="<c:url value="/users/css/product.css"/>">
+    <link rel="stylesheet" href="<c:url value="/users/css/home.css"/>">
+    <link rel="stylesheet" href="<c:url value="/users/css/product.css"/>">
 </head>
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4-beta3/css/all.min.css"/>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<link rel="stylesheet" href="<c:url value="/users/css/home.css"/>">
-<link rel="stylesheet" href="<c:url value="/users/css/product.css"/>">
-<link rel="stylesheet" href="<c:url value="/users/css/home.css"/>">
-<link rel="stylesheet" href="<c:url value="/users/css/product.css"/>">
 <style>
     #searchResults {
         border: 1px solid #ddd;
@@ -176,35 +174,16 @@
 </div>
 <div class="conten">
     <div class="left-sidebar">
-        <div class="danhmuc"><i class="fa-solid fa-list" style="color: #000000; margin-right: 10px;"></i>Danh mục
+        <div class="danhmuc">
+            <i class="fa-solid fa-list" style="color: #000000; margin-right: 10px;"></i>Danh mục
         </div>
-        <div class="item" data-category="gach-xay-dung">
-            <h3><a href="/tqh/product-category?categoryId=1"></i>Gạch xây dựng</a></h3>
-        </div>
-        <div class="item" data-category="xi-mang-va-vua">
-            <h3><a href="/tqh/product-category?categoryId=2">Xi măng và Vữa</a></h3>
-        </div>
-        <div class="item" data-category="cat-da-va-soi">
-            <h3><a href="/tqh/product-category?categoryId=3">Cát, Đá và Sỏi</a></h3>
-        </div>
-        <div class="item" data-category="thep-va-sat">
-            <h3><a href="/tqh/product-category?categoryId=4">Thép và Sắt</a></h3>
-        </div>
-        <div class="item" data-category="go-va-vat-lieu-go">
-            <h3><a href="/tqh/product-category?categoryId=5">Gỗ và Vật liệu gỗ</a></h3>
-        </div>
-        <div class="item" data-category="son-va-phu-gia">
-            <h3><a href="/tqh/product-category?categoryId=6">Sơn và Phụ gia</a></h3>
-        </div>
-        <div class="item" data-category="ngoi-va-tam-lop">
-            <h3><a href="/tqh/product-category?categoryId=7">Ngói và Tấm lợp</a></h3>
-        </div>
-        <div class="item" data-category="ong-nuoc-va-phu-kien">
-            <h3><a href="/tqh/product-category?categoryId=8">Ống nước và Phụ kiện</a></h3>
-        </div>
-        <div class="item" data-category="thiet-bi-dien-nuoc">
-            <h3><a href="/tqh/product-category?categoryId=9">Thiết bị điện nước</a></h3>
-        </div>
+        <c:forEach var="category" items="${categories}">
+            <div class="item" data-category="${category.id}">
+                <h3>
+                    <a href="/tqh/product-category?categoryId=${category.id}">${category.name}</a>
+                </h3>
+            </div>
+        </c:forEach>
         <div class="slide-discount">
             <c:forEach var="promotional" items="${sessionScope.promotionals}" begin="0" end="3">
                 <div class="discount">
@@ -214,8 +193,6 @@
             </c:forEach>
         </div>
     </div>
-
-
     <!--conten_right-->
     <div class="right">
         <div class="filter">
@@ -245,8 +222,6 @@
                 </div>
             </div>
         </div>
-
-
         <div class="row ps-5" id="product-list">
             <c:if test="${not empty products}">
                 <c:forEach var="product" items="${products}">
@@ -282,8 +257,6 @@
                 <p>Không có sản phẩm nào phù hợp với bộ lọc này.</p>
             </c:if>
         </div>
-
-
         <!--pagination-->
         <div id="pagination" class="pagination">
             <button id="prev" onclick="changePage(-1)">
@@ -293,9 +266,7 @@
             <button id="next" onclick="changePage(1)">>></button>
         </div>
     </div>
-
 </div>
-
 <div id="section-footer">
     <div class="container">
         <div class="contact-info">

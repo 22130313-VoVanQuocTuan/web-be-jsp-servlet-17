@@ -2,6 +2,7 @@ package hcmuaf.nlu.edu.vn.service;
 
 import hcmuaf.nlu.edu.vn.dao.products.*;
 
+import hcmuaf.nlu.edu.vn.model.Category;
 import hcmuaf.nlu.edu.vn.model.Product;
 import hcmuaf.nlu.edu.vn.model.Promotionals;
 
@@ -31,6 +32,9 @@ public class ProductService {
     // Lấy ra danh sách tát cả sản phẩm
     public List<Product> getAllProducts() throws SQLException {
         return productDAO.getAllProducts();
+    }
+    public List<Category> getAllCategories() throws SQLException {
+        return productDAO.getAllCategories();
     }
 
     // Lấy ra danh sách tát cả sản phẩm của danh mục
