@@ -2,6 +2,8 @@ package hcmuaf.nlu.edu.vn.controller.user.account;
 
 import hcmuaf.nlu.edu.vn.model.Users;
 import hcmuaf.nlu.edu.vn.service.UserService;
+import hcmuaf.nlu.edu.vn.util.logUtil.LogLevel;
+import hcmuaf.nlu.edu.vn.util.logUtil.LogUtilDao;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -14,10 +16,15 @@ import java.sql.SQLException;
 
 @WebServlet(name = "logout", value = "/logout")
 public class LogoutController extends HttpServlet {
+    private LogUtilDao logUtilDao;
+
+
+
 
     private final UserService userService;
     public LogoutController() {
         this.userService = new UserService();
+        this.logUtilDao = new LogUtilDao();
     }
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -27,9 +34,10 @@ public class LogoutController extends HttpServlet {
             Users user = (Users) session.getAttribute("user");
             if (user == null) {
                 // Nếu user không tồn
-                req.getRequestDispatcher( "/users/page/login-signup.jsp").forward(req, resp);
+                 req.getRequestDispatcher( "/users/page/login-signup.jsp").forward(req, resp);
                 return;
             }
+              logUtilDao.log(LogLevel.INFO, user.getUsername(), req.getRemoteAddr(), "Đang đăng nhập", "Đã đăng xuất");
             // Cập nhật trạng thái người dùng thành "Không hoạt động"
             userService.UpdateStatusOrRoleUserLoginLogout("Không hoạt động", user.getId());
 

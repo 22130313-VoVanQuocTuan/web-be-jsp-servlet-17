@@ -1,6 +1,7 @@
 package hcmuaf.nlu.edu.vn.dao.products;
 
 import hcmuaf.nlu.edu.vn.dao.DBConnect;
+import hcmuaf.nlu.edu.vn.model.Category;
 import hcmuaf.nlu.edu.vn.model.Product;
 
 import java.io.File;
@@ -32,8 +33,22 @@ public class ProductDao {
         }
         return products;
     }
+    public List<Category> getAllCategories() throws SQLException {
+        List<Category> categories = new ArrayList<>();
+        String sql = "SELECT * FROM category";
 
-
+        try (PreparedStatement stmt = dbConnect.preparedStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
+            while (rs.next()) {
+                categories.add(new Category(
+                        rs.getInt("id"),
+                        rs.getString("name"),
+                        rs.getTimestamp("createDate")
+                ));
+            }
+        }
+        return categories;
+    }
     // Lấy ra sản phẩm của danh mục dựa vào categoryID
     public List<Product> getAllProductsCategory(int categoryId) throws SQLException {
         String sql = "SELECT * FROM products WHERE categoryId = ?";

@@ -2,6 +2,8 @@ package hcmuaf.nlu.edu.vn.controller.user.account;
 
 import hcmuaf.nlu.edu.vn.model.Users;
 import hcmuaf.nlu.edu.vn.service.UserService;
+import hcmuaf.nlu.edu.vn.util.logUtil.LogLevel;
+import hcmuaf.nlu.edu.vn.util.logUtil.LogUtilDao;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -19,6 +21,12 @@ public class LoginController extends HttpServlet {
     public static final long LOCK_TIME = 2 * 60 * 1000; // 2 phút
     private static final int MAX_ATTEMPTS = 5;
     private static final Map<String, LoginAttempt> loginAttempts = new HashMap<>();
+    private LogUtilDao logUtilDao;
+
+    public LoginController() {
+        this.logUtilDao = new LogUtilDao();
+    }
+
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -50,6 +58,7 @@ public class LoginController extends HttpServlet {
 
                 if (user != null && user.getIsEmailVerified() == 1) {
                     if ("Bị đình chỉ".equals(user.getStatus())) {
+                        logUtilDao.log(LogLevel.INFO, user.getUsername(), req.getRemoteAddr(), "Login No", "Không thể đăng nhập vì bị đình chỉ");
                         req.setAttribute("error_login", "Tài khoản đã bị cấm");
                         req.getRequestDispatcher("/users/page/login-signup.jsp").forward(req, resp);
                         return;
@@ -65,18 +74,23 @@ public class LoginController extends HttpServlet {
                     userService.UpdateStatusOrRoleUserLoginLogout("Hoạt động", user.getId());
 
                     // Quay vể trang gần nhất
-                    String redirectUrl = (String) session.getAttribute("redirectUrl");
-                    if (redirectUrl != null) {
-                        session.removeAttribute("redirectUrl"); // Xóa redirectUrl khỏi session
-                        resp.sendRedirect(redirectUrl); // Quay về URL trước đó
-                    } else if ("admin".equals(user.getRole()) || "owner".equals(user.getRole())) {
-                        resp.sendRedirect(req.getContextPath() + "/home");
-                    } else if ("user".equals(user.getRole())) {
-                        resp.sendRedirect(req.getContextPath() + "/home-page");
-                    } else {
-                        req.setAttribute("error_login", "Không tìm thấy người dùng");
-                        req.getRequestDispatcher("/users/page/login-signup.jsp").forward(req, resp);
-                    }
+                     String redirectUrl = (String) session.getAttribute("redirectUrl");
+                     if (redirectUrl != null) {
+                         session.removeAttribute("redirectUrl"); // Xóa redirectUrl khỏi session
+                         resp.sendRedirect(redirectUrl); // Quay về URL trước đó
+                     }else
+                         if ("admin".equals(user.getRole())  || "owner".equals(user.getRole())) {
+                             logUtilDao.log(LogLevel.INFO, user.getUsername(), req.getRemoteAddr(), "Login No", "Login Successful");
+                             resp.sendRedirect(req.getContextPath() + "/home");
+                         } else if ("user".equals(user.getRole())) {
+                             logUtilDao.log(LogLevel.INFO, user.getUsername(), req.getRemoteAddr(), "Login No", "Login Successful");
+                             resp.sendRedirect(req.getContextPath() + "/home-page");
+                         } else {
+
+                             req.setAttribute("error_login", "Không tìm thấy người dùng");
+                             req.getRequestDispatcher("/users/page/login-signup.jsp").forward(req, resp);
+
+                     }
                 } else {
                     req.setAttribute("error_login", "Tài khoản chưa được xác thực, hoặc không tồn tại");
                     req.getRequestDispatcher("/users/page/login-signup.jsp").forward(req, resp);

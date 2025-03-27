@@ -1,5 +1,6 @@
 package hcmuaf.nlu.edu.vn.controller.user.products;
 
+import hcmuaf.nlu.edu.vn.model.Category;
 import hcmuaf.nlu.edu.vn.model.Product;
 import hcmuaf.nlu.edu.vn.model.Promotionals;
 import hcmuaf.nlu.edu.vn.service.ProductService;
@@ -27,12 +28,15 @@ public class ProductController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Product> products;
         List<Promotionals> list = null;
+        List<Category> categories = null;
+
         String search = request.getParameter("search");
         String name = request.getParameter("name");
         String ajax = request.getParameter("ajax");
         try {
             products = productService.getAllProducts();
             list = productService.getListPromotional();
+            categories=productService.getAllCategories();
             if(name != null && !name.isEmpty()) {
                 products = productService.getListProductByName(name);
             }
@@ -65,6 +69,7 @@ public class ProductController extends HttpServlet {
             HttpSession session = request.getSession();
             session.setAttribute("promotionals", list);
             request.setAttribute("products", products);
+            request.setAttribute("categories", categories);
             request.getRequestDispatcher("users/page/product.jsp").forward(request, response);
         }
     }
