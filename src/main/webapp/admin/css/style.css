@@ -24,6 +24,34 @@ body {
   width: 100%;
 }
 
+.modal {
+  display: none;
+  position: fixed;
+  z-index: auto;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.modal-content {
+  background:linear-gradient(to right, #4f3131, #15283e);
+  color: #ffffff;
+  padding: 25px;
+  width: 100%;
+  max-width: 450px;
+  margin: 10% auto;
+  max-height: 60%;
+  overflow-y: auto;
+  border-radius: 15px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+  transform: scale(1);
+  transition: transform 0.3s ease-in-out;
+  margin-left: 40%;
+}
+
 /* -------------------Navigation ------------------- */
 .navigation {
   position: fixed;
@@ -568,4 +596,54 @@ td {
 /* Sử dụng animation fade-out sau 3 giây */
 .fade-out {
   animation: fadeOut 1s ease-in-out forwards;
+}
+/* =============== Logout modal =========================== */
+#logout-modal .modal-content {
+  max-height: 32%;
+}
+
+#logout-modal .modal-content label {
+  color: #F5F5DC;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+#logout-modal .modal-content h3 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-align: center;
+  text-transform: uppercase;
+  color: #FFC857;
+  background: none;
+  margin-bottom: 20px;
+  letter-spacing: 1px;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+  border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+  padding-bottom: 10px;
+}
+
+#logout-modal .modal-content .button-container {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  width: 100%;
+  margin-top: 15px;
+}
+
+#logout-modal button {
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+#confirm-logout {
+  background-color: #f88e62;
+  color: white;
+}
+
+#cancel-logout {
+  background-color: #ccc;
+  color: black;
 }
