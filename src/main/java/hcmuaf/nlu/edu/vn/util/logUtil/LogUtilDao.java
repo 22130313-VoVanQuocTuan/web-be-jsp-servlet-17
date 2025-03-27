@@ -3,9 +3,12 @@ package hcmuaf.nlu.edu.vn.util.logUtil;
 import hcmuaf.nlu.edu.vn.dao.DBConnect;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class LogUtilDao {
     private static DBConnect dbConnect;
@@ -16,7 +19,7 @@ public class LogUtilDao {
     }
 
 
-    public  void log(LogLevel level, String username, String address, String dataBefore, String dataAfter) throws SQLException {
+    public void log(LogLevel level, String username, String address, String dataBefore, String dataAfter) throws SQLException {
         String sql = "INSERT INTO LogHistory (level, username, startLog, address, dataBefore, dataAfter) VALUES (?, ?, ?, ?, ?, ?)";
 
         try (PreparedStatement pstmt = dbConnect.preparedStatement(sql)) {
@@ -33,7 +36,7 @@ public class LogUtilDao {
     }
 
 
-    public   void deleteLog(int id) {
+    public void deleteLog(int id) {
         String sql = "DELETE FROM LogHistory WHERE id = ?";
 
         try (PreparedStatement pstmt = dbConnect.preparedStatement(sql)) {
@@ -49,5 +52,33 @@ public class LogUtilDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public static List<Log> getListLog() {
+        String sql = "SELECT * FROM loghistory";
+        List<Log> logs = new ArrayList<>();
+        try (PreparedStatement ptm = dbConnect.preparedStatement(sql)) {
+            ResultSet rs = ptm.executeQuery();
+            while (rs.next()) {
+                Log log = new Log();
+                log.setId(rs.getInt("id"));
+                log.setLevel(rs.getString("level"));
+                log.setUsername(rs.getString("username"));
+                log.setAddress(rs.getString("address"));
+                Timestamp timestamp = rs.getTimestamp("startLog");
+                if (timestamp != null) {
+                    log.setStartLog(timestamp.toLocalDateTime());
+                }
+               log.setDataBefore(rs.getString("dataBefore"));
+                log.setDataAfter(rs.getString("dataAfter"));
+                logs.add(log);
+
+            }
+            return logs;
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 }

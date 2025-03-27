@@ -9,7 +9,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-@WebServlet("/deleteLog")
+@WebServlet("/delete-Log")
 public class DeleteLogController extends HttpServlet {
     private LogUtilDao logUtilDao ;
 
@@ -28,6 +28,11 @@ public class DeleteLogController extends HttpServlet {
 
         logUtilDao.deleteLog(Integer.parseInt(id));
         req.setAttribute("successful", "Log đã bị xóa");
-        req.getRequestDispatcher("/admin/page/admin_log.jsp").forward(req, resp);
+        req.getRequestDispatcher("/listLog").forward(req, resp);
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        doPost(req, resp);
     }
 }
