@@ -29,21 +29,21 @@ public class FacebookCallbackServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String code = request.getParameter("code");
         if (code == null || code.isEmpty()) {
-            response.sendRedirect("/login");
+            response.sendRedirect("login");
             return;
         }
 
         // Lấy Access Token từ Facebook
         String accessToken = getAccessToken(code);
         if (accessToken == null) {
-            response.sendRedirect("/login");
+            response.sendRedirect("login");
             return;
         }
 
         // Lấy thông tin người dùng từ Facebook
         JSONObject userJson = getUserInfo(accessToken);
         if (userJson == null) {
-            response.sendRedirect("/login");
+            response.sendRedirect("login");
             return;
         }
         // Lưu thông tin vào session
