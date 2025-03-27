@@ -97,5 +97,19 @@ public class LoginDao {
 
         return permissions;
     }
+
+    // hạ quyền user
+    public void updateRoleById(String userId) {
+        String sql = "UPDATE users SET role = ? WHERE id = ?";
+        try(PreparedStatement ptm = dbConnect.preparedStatement(sql)){
+            ptm.setString(1, "user");
+            ptm.setString(2, userId);
+            ptm.executeUpdate();
+
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
 

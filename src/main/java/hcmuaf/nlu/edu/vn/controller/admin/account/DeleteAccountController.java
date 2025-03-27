@@ -1,6 +1,7 @@
 package hcmuaf.nlu.edu.vn.controller.admin.account;
 
 import hcmuaf.nlu.edu.vn.model.Users;
+import hcmuaf.nlu.edu.vn.service.SessionManager;
 import hcmuaf.nlu.edu.vn.service.UserService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -17,6 +18,8 @@ public class DeleteAccountController  extends HttpServlet {
         UserService userService = new UserService();
         int id = Integer.parseInt(req.getParameter("id"));
         if(userService.softDeleteUser(id)){
+            // Hủy session nếu tài khoản bị xóa
+             SessionManager.invalidateSession(id);
              resp.sendRedirect(req.getContextPath()+"/accounts");
         }else{
             req.setAttribute("error", "Xóa tài khoản thất bại.");

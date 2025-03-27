@@ -1,6 +1,7 @@
 package hcmuaf.nlu.edu.vn.controller.admin.product;
 
 import hcmuaf.nlu.edu.vn.model.Product;
+import hcmuaf.nlu.edu.vn.model.Users;
 import hcmuaf.nlu.edu.vn.service.ProductService;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
@@ -24,7 +25,12 @@ public class GetProductController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         // Lấy tham số "all" từ request
-
+        HttpSession session = request.getSession();
+        Users user = (Users) session.getAttribute("user");
+        if (user == null || (!user.getRole().equals("admin") && !user.getRole().equals("owner"))) {
+            response.sendRedirect(request.getContextPath() + "/logout");
+            return;
+        }
         String name = request.getParameter("name");
         try {
             List<Product> products = productService.getAllProducts();

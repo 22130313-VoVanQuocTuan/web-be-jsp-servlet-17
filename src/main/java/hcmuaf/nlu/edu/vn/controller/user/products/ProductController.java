@@ -3,6 +3,7 @@ package hcmuaf.nlu.edu.vn.controller.user.products;
 import hcmuaf.nlu.edu.vn.model.Category;
 import hcmuaf.nlu.edu.vn.model.Product;
 import hcmuaf.nlu.edu.vn.model.Promotionals;
+import hcmuaf.nlu.edu.vn.model.Users;
 import hcmuaf.nlu.edu.vn.service.ProductService;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -29,7 +30,12 @@ public class ProductController extends HttpServlet {
         List<Product> products;
         List<Promotionals> list = null;
         List<Category> categories = null;
-
+        HttpSession session = request.getSession();
+        Users user = (Users) session.getAttribute("user");
+        if (user != null && !user.getRole().equals("user")) {
+            response.sendRedirect(request.getContextPath() + "/logout");
+            return;
+        }
         String search = request.getParameter("search");
         String name = request.getParameter("name");
         String ajax = request.getParameter("ajax");
@@ -66,7 +72,7 @@ public class ProductController extends HttpServlet {
                         + "</div>");
             }
         } else {
-            HttpSession session = request.getSession();
+
             session.setAttribute("promotionals", list);
             request.setAttribute("products", products);
             request.setAttribute("categories", categories);
