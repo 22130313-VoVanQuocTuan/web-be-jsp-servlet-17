@@ -13,6 +13,22 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 
 </head>
+<style>
+    .hov a {
+        display: flex;
+        align-items: center;
+        color: white;
+        text-decoration: none;
+        border-radius: 30px;
+        transition: 0.3s;
+    }
+
+    .hov.active a {
+        background-color: #FFFFFF;
+        color: #4f3131;
+        font-weight: bold;
+    }
+</style>
 
 <body>
     <!-- ------------------ Điều hướng -------------------->
@@ -28,7 +44,7 @@
                     </a>
                 </li>
 
-                <li>
+                <li class="hov active">
                     <a href="home">
                         <span class="icon">
                             <ion-icon name="home-outline"></ion-icon>

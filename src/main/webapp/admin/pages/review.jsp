@@ -43,6 +43,21 @@
         cursor: pointer;
         padding: 5px;
     }
+
+    .hov a {
+        display: flex;
+        align-items: center;
+        color: white;
+        text-decoration: none;
+        border-radius: 30px;
+        transition: 0.3s;
+    }
+
+    .hov.active a {
+        background-color: #FFFFFF;
+        color: #4f3131;
+        font-weight: bold;
+    }
 </style>
 
 <body>
@@ -110,7 +125,7 @@
                         <span class="title">Quản lý danh mục</span>
                     </a>
                 </li>
-                <li>
+                <li class="hov active">
                     <a href="list-rating">
                         <span class="icon">
                             <ion-icon name="chatbubble-outline"></ion-icon>

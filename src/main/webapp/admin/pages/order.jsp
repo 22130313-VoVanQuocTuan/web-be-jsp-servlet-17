@@ -24,6 +24,21 @@
         margin-bottom: 10px !important;
     }
 
+    .hov a {
+        display: flex;
+        align-items: center;
+        color: white;
+        text-decoration: none;
+        border-radius: 30px;
+        transition: 0.3s;
+    }
+
+    .hov.actives a {
+        background-color: #FFFFFF;
+        color: #4f3131;
+        font-weight: bold;
+    }
+
     @media print {
         body {
             font-size: 14px; /* Giữ font chữ nhỏ gọn */
@@ -56,6 +71,7 @@
             background-color: #28a745; /* Màu xanh của trạng thái thanh toán */
         }
     }
+
 </style>
 <body>
 <!-- ------------------ Điều hướng -------------------->
@@ -97,7 +113,7 @@
                     <span class="title">Quản lý sản phẩm</span>
                 </a>
             </li>
-            <li>
+            <li class="hov actives">
                 <a href="order-list">
                         <span class="icon">
                             <ion-icon name="receipt-outline"></ion-icon>

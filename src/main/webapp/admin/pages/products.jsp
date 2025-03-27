@@ -176,6 +176,20 @@
         margin-bottom: 10px !important;
     }
 
+    .hov a {
+        display: flex;
+        align-items: center;
+        color: white;
+        text-decoration: none;
+        border-radius: 30px;
+        transition: 0.3s;
+    }
+
+    .hov.active a {
+        background-color: #FFFFFF;
+        color: #4f3131;
+        font-weight: bold;
+    }
 
 </style>
 <body>
@@ -210,7 +224,7 @@
                 </a>
             </li>
 
-            <li>
+            <li class="hov active">
                 <a href="products-list">
                         <span class="icon">
                             <ion-icon name="cube-outline"></ion-icon>

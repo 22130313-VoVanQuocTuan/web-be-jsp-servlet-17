@@ -13,7 +13,22 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="<c:url value="/admin/css/account.css"/>">
 </head>
+<style>
+    .hov a {
+        display: flex;
+        align-items: center;
+        color: white;
+        text-decoration: none;
+        border-radius: 30px;
+        transition: 0.3s;
+    }
 
+    .hov.active a {
+        background-color: #FFFFFF;
+        color: #4f3131;
+        font-weight: bold;
+    }
+</style>
 <body>
 <!-- ------------------ Điều hướng -------------------->
 <div class="container">
@@ -88,7 +103,7 @@
                 </a>
             </li>
 
-            <li>
+            <li class="hov active">
                 <a href="informationCustomer">
                         <span class="icon">
                             <ion-icon name="person"></ion-icon>
