@@ -382,7 +382,7 @@
         checkbox.next(".status-text").text(newStatus);
 
         $.ajax({
-            url: "/tqh/update-status-pro",
+            url: "/tqh/update-status-promotional",
             type: "POST",
             data: {id: id, status: newStatus},
             dataType: "json",

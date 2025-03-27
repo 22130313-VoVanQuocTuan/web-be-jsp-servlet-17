@@ -1,27 +1,40 @@
 package hcmuaf.nlu.edu.vn.controller.admin.product;
 
+import hcmuaf.nlu.edu.vn.model.Users;
 import hcmuaf.nlu.edu.vn.service.ProductService;
+import hcmuaf.nlu.edu.vn.util.logUtil.LogLevel;
+import hcmuaf.nlu.edu.vn.util.logUtil.LogUtilDao;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 
 import java.io.File;
 import java.io.IOException;
+import java.sql.SQLException;
 
 @WebServlet(name = "DeleteProductController", value = "/delete-product")
 public class DeleteProductController extends HttpServlet {
+    private final LogUtilDao logUtilDao = new LogUtilDao();
     private final ProductService productService = new ProductService();
+
     private static final String UPLOAD_DIRECTORY = "users/img"; // Đảm bảo rằng thư mục này nằm trong thư mục gốc của frontend
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String id = request.getParameter("id");
         String all = request.getParameter("all");
+        HttpSession session = request.getSession();
+        Users user = (Users) session.getAttribute("user");
 
         //Truyền ServletContext vào productService
         String realPath = getServletContext().getRealPath("")+ File.separator + UPLOAD_DIRECTORY;
 
         if (id != null && productService.deleteProduct(id,realPath)) {
+            try {
+                logUtilDao.log(LogLevel.INFO, user.getUsername(), request.getRemoteAddr(), id, "Sản phẩm đã bị xóa");
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
             // Nếu có tham số "all", chuyển hướng đến trang "products-list" với all=true để xem tất cả sản phẩm
             if ("true".equalsIgnoreCase(all)) {
                 response.sendRedirect("products-list?all=true");
