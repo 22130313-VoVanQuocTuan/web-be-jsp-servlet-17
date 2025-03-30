@@ -8,6 +8,12 @@ document.addEventListener('DOMContentLoaded', function () {
         modal.style.display = 'block';
     }
 
+    function formatDateForInput(dateStr) {
+        let parts = dateStr.split(' '); // Tách ngày và giờ
+        let dateParts = parts[0].split('-'); // Tách ngày-tháng-năm
+        return `${dateParts[2]}-${dateParts[1]}-${dateParts[0]}T${parts[1]}`; // Định dạng yyyy-MM-ddTHH:mm
+    }
+
 
     // Xử lý khi nhấn "Xóa" trong modal
             const confirmDeleteButton = document.querySelector('.confirm-delete');
@@ -29,9 +35,17 @@ document.addEventListener('DOMContentLoaded', function () {
                     e.preventDefault(); // Ngăn chặn hành động mặc định
                     showModal('editPromotional');
 
-                    // Lấy ID từ nút bấm
-                    const promotionId = this.getAttribute('data-id-update');
-                    document.getElementById('promotionId').value = promotionId; // Gán vào trường hidden
+                    const promotionId = this.getAttribute('data-up-id');
+                    document.getElementById('promotionId').value = promotionId;
+
+                    const row = this.closest('tr');
+                    const value = row.querySelector('#value').textContent.trim().replace('đ', '').replace(',', '');
+                    const startDate = row.querySelector('#sdate').textContent.trim();
+                    const endDate = row.querySelector('#edate').textContent.trim();
+
+                    document.getElementById('percent').value = value;
+                    document.getElementById('startDate').value = formatDateForInput(startDate);
+                    document.getElementById('endDate').value = formatDateForInput(endDate);
                 });
             });
 

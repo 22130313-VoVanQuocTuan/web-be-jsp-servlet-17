@@ -1,5 +1,6 @@
 package hcmuaf.nlu.edu.vn.controller.admin.promotional;
 
+import hcmuaf.nlu.edu.vn.model.Promotionals;
 import hcmuaf.nlu.edu.vn.service.PromotionalService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -8,6 +9,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -36,7 +38,7 @@ public class UpdatePromotionalController extends HttpServlet {
             // Chuyển hướng đến trang danh sách
             resp.sendRedirect(req.getContextPath() + "/promotional-list");
         }else{
-            req.setAttribute("error", "Thêm thất bại");
+            req.setAttribute("error", "Cập nhật thất bại");
             req.setAttribute("showModal", true); // Thêm thuộc tính hiển thị modal
             req.getRequestDispatcher("/promotional-list").forward(req, resp); // Hiển thị lại form với thông báo lỗi
         }
