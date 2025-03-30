@@ -1,22 +1,27 @@
 package hcmuaf.nlu.edu.vn.controller.admin.home;
 
+import com.google.gson.Gson;
+import hcmuaf.nlu.edu.vn.dao.products.RevenueDAO;
 import hcmuaf.nlu.edu.vn.model.Orders;
 import hcmuaf.nlu.edu.vn.model.Users;
 import hcmuaf.nlu.edu.vn.service.HomeService;
 import hcmuaf.nlu.edu.vn.service.OrderService;
 import hcmuaf.nlu.edu.vn.service.ProductService;
+import hcmuaf.nlu.edu.vn.service.RevenueService;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @WebServlet(name = "HomeController", value = "/home")
 public class HomeController extends HttpServlet {
     private final HomeService homeService = new HomeService();
     private final OrderService orderService = new OrderService();
+    private final RevenueService revenueService = new RevenueService();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -30,9 +35,31 @@ public class HomeController extends HttpServlet {
             response.sendRedirect(request.getContextPath() + "/logout");
             return;
         }
+        // Đoạn tạo biểu đồ doanh thu .
+        String type = request.getParameter("type"); // "week" hoặc "month"
+        List<Map<String, Object>> revenueData = null;
+        try {
+            if ("week".equals(type)) {
+                revenueData = revenueService.getWeeklyRevenue();
+            } else if ("month".equals(type)) {
+                revenueData = revenueService.getMonthlyRevenue();
+            } else if ("year".equals(type)) {
+                revenueData = revenueService.getYearlyRevenue();
+            }
+
+            if (revenueData != null) {
+                String json = new Gson().toJson(revenueData);
+                response.setContentType("application/json");
+                response.setCharacterEncoding("UTF-8");
+                response.getWriter().write(json);
+                return; // Trả về JSON, không tiếp tục xử lý JSP
+            }
+        } catch (Exception e) {
+            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Lỗi khi lấy dữ liệu biểu đồ: " + e.getMessage());
+            return;
+        }
 
         try {
-
             // Lấy các dữ liệu từ HomeService
             int totalViews = homeService.totalView();
             int totalUsers = homeService.totalAccount();
@@ -86,5 +113,4 @@ public class HomeController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     }
-
 }
