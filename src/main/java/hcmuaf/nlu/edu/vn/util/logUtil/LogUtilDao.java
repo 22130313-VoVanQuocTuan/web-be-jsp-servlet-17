@@ -81,4 +81,14 @@ public class LogUtilDao {
         }
 
     }
+
+    public static void cleanLog(String level) throws SQLException {
+        String sql = "DELETE  FROM loghistory WHERE level = ?";
+        try(PreparedStatement ptm = dbConnect.preparedStatement(sql)){
+            ptm.setString(1, level);
+            ptm.executeUpdate();
+
+
+        }
+    }
 }

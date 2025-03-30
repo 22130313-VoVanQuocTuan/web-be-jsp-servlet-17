@@ -224,6 +224,7 @@ public class UserService {
     public void updateRoleById(String userId){
         usersDao.updateRoleById(userId);
     }
+
 }
 
 

@@ -11,6 +11,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet("/listLog")
@@ -24,6 +25,9 @@ public class GetListLog extends HttpServlet {
             return;
         }
         List<Log> logs = LogUtilDao.getListLog(); // Lấy dữ liệu từ database
+        if (logs == null) {
+            logs = new ArrayList<>(); // Tránh lỗi NullPointerException
+        }
         req.setAttribute("logList", logs);
         req.getRequestDispatcher("/admin/pages/manager_log.jsp").forward(req, resp);
     }

@@ -16,7 +16,7 @@ import java.io.IOException;
 @WebFilter(filterName = "admin-filter", urlPatterns = {"/add-account", "/delete-account", "/status-account", "/update-status-role-account","/update-permissions-admin",
 "/add-promotional", "/delete-promotional", "/update-status-promotional" ,"/delete-rating"
         , "/add-delete-category" ,"/add-product","/delete-product","/edit-product", "/update-status-order",
-        "/delete-order","/delete-Log"})
+        "/delete-order","/delete-Log", "/cleanLog"})
 public class AdminFilter implements Filter {
     private PermissionService permissionService;
 

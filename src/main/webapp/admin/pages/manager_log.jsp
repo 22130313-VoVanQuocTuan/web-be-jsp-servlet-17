@@ -189,7 +189,7 @@
             <div class="recentOrders">
                 <div class="cardHeader">
                     <h2>Danh sách lưu trữ log của hệ thống</h2>
-                    <form method="post" action="#">
+                    <form method="post" action="cleanLog">
                         <select name="level">
                             <option value="INFO">INFO</option>
                             <option value="ERROR">ERROR</option>
@@ -204,7 +204,7 @@
                 <table id="logTable">
                     <thead>
                     <tr>
-                        <th>Level</th>  <!-- Thay <td> bằng <th> -->
+                        <th>Level</th>
                         <th>Username</th>
                         <th>Ngày bắt đầu</th>
                         <th>Vị trí</th>
@@ -214,8 +214,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <c:if test="${not empty logList}">
-                        <c:forEach var="log" items="${logList}">
+                       <c:forEach var="log" items="${logList}">
                             <tr>
                                 <td>${log.level}</td>
                                 <td>${log.username}</td>
@@ -228,12 +227,7 @@
                                 </td>
                             </tr>
                         </c:forEach>
-                    </c:if>
-                    <c:if test="${empty logList}">
-                        <tr>
-                            <td colspan="7" style="text-align: center; color: red;">Không có dữ liệu</td>
-                        </tr>
-                    </c:if>
+
                     </tbody>
                 </table>
             </div>
@@ -288,6 +282,7 @@
         });
     });
 </script>
+
 
 </body>
 
