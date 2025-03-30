@@ -96,52 +96,29 @@ public class RatingDao {
         }
     }
 
-//    // LẤY RA TẤT CẢ ĐÁNH GIÁ .
-//    public List<Rating> getAllRatings() {
-//        List<Rating> ratings = new ArrayList<>();
-//        String sql = "SELECT * FROM rating WHERE isDeleted = FALSE";
-//        try (PreparedStatement ptm = dbConnect.preparedStatement(sql);
-//             ResultSet rs = ptm.executeQuery()) {
-//            while (rs.next()) {
-//                ratings.add(new Rating(
-//                        rs.getInt("id"),
-//                        rs.getInt("productId"),
-//                        rs.getInt("userId"),
-//                        rs.getString("content"),
-//                        rs.getDate("createdAt"),
-//                        rs.getBoolean("isDeleted")
-//                ));
-//            }
-//        } catch (SQLException e) {
-//            throw new RuntimeException(e);
-//        }
-//        return ratings;
-//    }
-//
-//    // XÓA ĐÁNH GIÁ .
-//    public boolean hideRating(int id) {
-//        String sql = "UPDATE rating SET isDeleted = TRUE WHERE id = ?";
-//
-//        try (PreparedStatement ptm = dbConnect.preparedStatement(sql)) {
-//            ptm.setInt(1, id);
-//            int row = ptm.executeUpdate();
-//            return row > 0;
-//        } catch (SQLException e) {
-//            throw new RuntimeException(e);
-//        }
-//    }
-//
-//    //KHÔI PHỤC ĐÁNH GIÁ ĐÃ XÓA .
-//    public boolean restoreRating(int id) {
-//        String sql = "UPDATE rating SET isDeleted = FALSE WHERE id = ?";
-//
-//        try (PreparedStatement ptm = dbConnect.preparedStatement(sql)) {
-//            ptm.setInt(1, id);
-//            int row = ptm.executeUpdate();
-//            return row > 0;
-//        } catch (SQLException e) {
-//            throw new RuntimeException(e);
-//        }
-//    }
+    public List<Rating> getRatingsByProductId(int productId) {
+        String sql = "SELECT r.id, r.productId, r.userId, u.username, r.content, r.createdAt " +
+                "FROM rating r JOIN users u ON r.userId = u.id " +
+                "WHERE r.productId = ? ORDER BY r.createdAt DESC";
+        List<Rating> list = new ArrayList<>();
+
+        try (PreparedStatement stmt = dbConnect.preparedStatement(sql)) {
+            stmt.setInt(1, productId);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                int userId = rs.getInt("userId");
+                String username = rs.getString("username");
+                String content = rs.getString("content");
+                Date createdAt = rs.getDate("createdAt");
+
+                list.add(new Rating(id, productId, userId, username,content, createdAt));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
 
 }

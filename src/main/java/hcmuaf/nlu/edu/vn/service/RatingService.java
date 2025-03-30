@@ -32,18 +32,7 @@ public class RatingService {
         return ratingDao.getListRattingByProductId(productId);
     }
 
-//    // LẤY RA TẤT CẢ ĐÁNH GIÁ .
-//    public List<Rating> getAllRatings() {
-//        return ratingDao.getAllRatings();
-//    }
-//
-//    // XÓA ĐÁNH GIÁ .
-//    public boolean hideRating(int id) {
-//        return ratingDao.hideRating(id);
-//    }
-//
-//    //KHÔI PHỤC ĐÁNH GIÁ ĐÃ XÓA .
-//    public boolean restoreRating(int id) {
-//        return ratingDao.restoreRating(id);
-//    }
+    public List<Rating> getRatingsByProductId(int productId) {
+        return ratingDao.getRatingsByProductId(productId);
+    }
 }
