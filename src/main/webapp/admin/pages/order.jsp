@@ -223,7 +223,7 @@
                             <td>${order.id}</td>
                             <td>${order.userId}</td>
                             <td><fmt:formatDate value="${order.createdAt}" pattern="dd-MM-yyyy HH:mm:ss"/></td>
-                            <td><fmt:formatNumber value="${order.totalPrice}" type="number"/>đ</td>
+                            <td><fmt:formatNumber value="${order.totalPrice}" type="number"/>₫</td>
                             <td>${order.paymentMethod}</td>
                             <td><span class="status ${order.paymentStatus == 'Đã thanh toán' ? 'status-paid' : 'status-unpaid'}">
                                     ${order.paymentStatus}
@@ -265,9 +265,9 @@
                             <tr>
                                 <td>${oi.productName}</td>
                                 <td>${oi.quantity}</td>
-                                <td><fmt:formatNumber value="${oi.price}" type="number"/>đ</td>
-                                <td><fmt:formatNumber value="${oi.discount}" type="number"/>đ</td>
-                                <td><fmt:formatNumber value="${oi.totalPrice}" type="number"/>đ</td>
+                                <td><fmt:formatNumber value="${oi.price}" type="number"/>₫</td>
+                                <td><fmt:formatNumber value="${oi.discount}" type="number"/>₫</td>
+                                <td><fmt:formatNumber value="${oi.totalPrice}" type="number"/>₫</td>
                             </tr>
                         </c:forEach>
                         </tbody>

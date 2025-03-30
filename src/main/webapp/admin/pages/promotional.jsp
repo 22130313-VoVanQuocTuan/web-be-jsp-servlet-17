@@ -234,7 +234,7 @@
                             <td>${promotion.id}</td>
                             <td>${promotion.code}</td>
                             <td id="value"><fmt:formatNumber value="${promotion.value}" type="number"
-                                                  groupingUsed="true"/>đ
+                                                  groupingUsed="true"/>₫
                             </td>
                             <td id="sdate"><fmt:formatDate value="${promotion.startDate}" pattern="dd-MM-yyyy HH:mm"/></td>
                             <td id="edate"><fmt:formatDate value="${promotion.endDate}" pattern="dd-MM-yyyy HH:mm"/></td>

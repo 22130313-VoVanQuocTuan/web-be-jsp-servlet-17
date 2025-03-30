@@ -307,9 +307,9 @@
                         <tr>
                             <td>${oi.productName}</td>
                             <td>${oi.quantity}</td>
-                            <td>${oi.price}</td>
-                            <td>${oi.discount}</td>
-                            <td>${oi.totalPrice}</td>
+                            <td><fmt:formatNumber value="${oi.price}" type="number"/>₫</td>
+                            <td><fmt:formatNumber value="${oi.discount}" type="number"/>₫</td>
+                            <td><fmt:formatNumber value="${oi.totalPrice}" type="number"/>₫</td>
                         </tr>
                     </c:forEach>
                     </tbody>

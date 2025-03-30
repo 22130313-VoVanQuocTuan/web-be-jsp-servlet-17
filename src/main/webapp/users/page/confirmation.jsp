@@ -257,7 +257,7 @@
                     <tr>
                         <td>${c.name}</td>
                         <td>${c.quantity}</td>
-                        <td><fmt:formatNumber value="${c.price}" type="number"/>đ</td>
+                        <td><fmt:formatNumber value="${c.price}" type="number"/>₫</td>
                     </tr>
                 </c:forEach>
             </table>
@@ -358,7 +358,7 @@
                     <tr>
                         <td>${cartitem.name}</td>
                         <td>${cartitem.quantity}</td>
-                        <td><fmt:formatNumber value="${cartitem.totalPrice}" type="number"/> đ</td>
+                        <td><fmt:formatNumber value="${cartitem.totalPrice}" type="number"/> ₫</td>
                     </tr>
                     <!-- Input hidden để giữ lại thông tin của mỗi sản phẩm -->
                     <input type="hidden" name="cartItemName" value="${cartitem.name}">
@@ -368,7 +368,7 @@
 
             </table>
             <p>Số lượng: ${sessionScope.cartItemCount}</p>
-            <p>Tổng giá đã giảm: <fmt:formatNumber value="${sessionScope.totalPrice}" type="number"/> ₫ </p>
+            <p>Tổng giá đã giảm: <fmt:formatNumber value="${sessionScope.totalPrice}" type="number"/>₫</p>
             <p>Phí vận chuyển: <fmt:formatNumber value="${sessionScope.totalShippingFee}" type="number"/> ₫</p>
             <p>Tổng giá: <fmt:formatNumber value="${sessionScope.totalFinalPrice}" type="number"/>₫</p>
             <p>Địa chỉ giao: ${shipping_address.address}</p>
