@@ -3,6 +3,7 @@ package hcmuaf.nlu.edu.vn.service;
 import hcmuaf.nlu.edu.vn.dao.promotional.PromotionalDao;
 import hcmuaf.nlu.edu.vn.model.Promotionals;
 
+import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.List;
 
