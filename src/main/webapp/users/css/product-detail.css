@@ -26,40 +26,7 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.review-product {
-    margin-top: 20px;
-}
 
-.review h2 {
-    font-size: 18px;
-    color: #333;
-    margin-bottom: 10px;
-}
-
-.review textarea {
-    width: 80%;
-    height: 150px;
-    padding: 15px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    resize: none;
-    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
-}
-
-.review button {
-    
-    padding: 5px 20px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 14px;
-}
-
-.review button:hover {
-    background-color: #001f7f;
-}
 
 .product-info {
     flex: 2;
@@ -209,7 +176,7 @@
 }
 
 .similar h3:hover {
-    color: #f31911; 
+    color: #f31911;
     cursor: pointer;
 }
 
@@ -241,3 +208,155 @@
         height: auto;
     }
 }
+/*----------Phần review ---------------*/
+/* Bố cục chung */
+.review-product {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+    margin-top: 20px;
+    padding: 20px;
+}
+
+/* Phần nhập đánh giá */
+.review {
+    flex: 1;
+    max-width: 40%;
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-top: 3px solid #007bff;
+}
+
+.review h2 {
+    font-size: 20px;
+    color: #333;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.review textarea {
+    width: 90%;
+    height: 150px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    resize: none;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+    font-size: 14px;
+}
+
+.review button {
+    width: 100%;
+    padding: 8px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px;
+    transition: background-color 0.3s;
+}
+
+.review button:hover {
+    background-color: #0056b3;
+}
+
+/* Phần danh sách đánh giá */
+.review-section {
+    flex: 2;
+    max-width: 60%;
+    padding: 20px;
+    border-top: 3px solid #007bff;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    max-height: 400px;
+    overflow-y: auto;
+    scrollbar-width: none; /* Ẩn scrollbar trên Firefox */
+    -ms-overflow-style: none; /* Ẩn scrollbar trên IE/Edge */
+}
+
+/* Ẩn scrollbar trên Chrome, Safari */
+.review-section::-webkit-scrollbar {
+    display: none;
+}
+
+.review-section h2 {
+    font-size: 22px;
+    color: #333;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+}
+
+/* Một đánh giá */
+.review-item {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    border-left: 6px solid #007bff;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
+    display: flex;
+    flex-direction: column;
+}
+
+.review-item:hover {
+    transform: translateY(-3px);
+    background: #eef2ff;
+}
+
+.review-item p {
+    margin: 5px 0;
+    font-size: 16px;
+    color: #333;
+}
+
+.review-item strong {
+    color: #007bff;
+    font-weight: 600;
+}
+
+.review-item hr {
+    border: none;
+    height: 1px;
+    background: #ccc;
+    margin: 10px 0;
+}
+
+/* Khi chưa có đánh giá */
+.no-review {
+    text-align: center;
+    font-size: 18px;
+    color: #888;
+    padding: 20px;
+    font-style: italic;
+}
+
+/* Responsive cho màn hình nhỏ */
+@media (max-width: 768px) {
+    .review-product {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .review,
+    .review-section {
+        max-width: 100%;
+    }
+
+    .review textarea {
+        height: 120px;
+    }
+
+    .review button {
+        font-size: 14px;
+    }
+}
+

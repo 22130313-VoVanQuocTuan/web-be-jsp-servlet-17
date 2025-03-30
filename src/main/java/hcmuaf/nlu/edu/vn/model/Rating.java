@@ -6,6 +6,7 @@ public class Rating {
     private int id;
     private int productId;
     private int userId;
+    private String username;
     private String content;
     private Date createdAt;
 
@@ -20,6 +21,19 @@ public class Rating {
         this.productId = productId;
         this.userId = userId;
         this.content = content;
+    }
+
+    public Rating(int id, int productId, int userId, String username, String content, Date createdAt) {
+        this.id = id;
+        this.productId = productId;
+        this.userId = userId;
+        this.username = username;
+        this.content = content;
+        this.createdAt = createdAt;
+    }
+
+    public String getUsername() {
+        return username;
     }
 
     public int getId() {
@@ -61,4 +75,5 @@ public class Rating {
     public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
     }
+
 }
