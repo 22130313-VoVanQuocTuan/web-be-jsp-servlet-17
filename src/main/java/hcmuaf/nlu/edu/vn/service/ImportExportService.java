@@ -14,4 +14,14 @@ public class ImportExportService {
     public List<Import_Export_Stock> getListAllImportExportStock(){
         return importExportDao.getListAllImportExportStock();
     }
+
+    // Nhập kho
+    public void importStock(String productId, int quantity) {
+        importExportDao.importStock(productId, quantity);
+    }
+    // Nhập kho
+    public void addInfoImportExportStock(String transactionType, String transactionDate, int userId, String note, double totalCost, double price, int quantity, String productId) {
+
+        importExportDao.addInfoImportExportStock(transactionType, transactionDate, userId, note, totalCost, price, quantity, productId);
+    }
 }

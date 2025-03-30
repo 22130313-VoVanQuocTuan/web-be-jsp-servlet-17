@@ -355,6 +355,7 @@
                             <td class="v">
                                 <button type="button"><a style="text-decoration: none; color:black" href="/tqh/edit-product?id=${product.id}">Sửa</a></button>
                                 <button id="deleteBtn" data-product-id="${product.id}" data-all="${param.all}">Xóa</button>
+                                <button class="btn btn-success" onclick="openImportModal(${product.id}, ${product.price}, '${product.name}')">Nhập kho</button>
                             </td>
                         </tr>
                     </c:forEach>
@@ -380,6 +381,29 @@
                         <span>${message}</span>
                     </div>
                 </c:if>
+
+                <!-- nhập xất kho -->
+                <div id="importModal" class="modal">
+                    <div class="modal-content">
+                    <h3>Nhập kho sản phẩm</h3>
+                        <div id="importStockForm">
+                    <label>Mã sản phẩm:</label>
+                    <input type="text" id="productId" readonly>
+
+                    <label>Tên sản phẩm:</label>
+                    <input type="text" id="productNames" readonly>
+                    <label>Giá sản phẩm:</label>
+                    <input type="number" id="price" readonly>
+
+                    <label>Số lượng nhập:</label>
+                    <input type="number" id="importQuantity">
+
+                    <label>Ghi chú:</label>
+                    <input type="text" id="note"></div>
+                    <button onclick="submitImport()">Xác nhận</button>
+                        <button type="button" class="close-modal" onclick="closeModalImport()">Thoát</button>
+                    </div>
+                </div>
 
                 <!-- Mẫu điền thêm sản phẩm -->
                 <div id="addProductModal" class="modal">

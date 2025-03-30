@@ -9,17 +9,47 @@ public class Import_Export_Stock {
     private String username;
     private String note;
     private double totalCost;
+    private double price;
+    private int quantity;
+    private String productName;
 
     public Import_Export_Stock() {
     }
 
-    public Import_Export_Stock(int id, String transactionType, Date transactionDate, String username, String note, double totalCost) {
+    public Import_Export_Stock(int id, String transactionType, Date transactionDate, String username, String note, double totalCost, double price, int quantity, String productName) {
         this.id = id;
         this.transactionType = transactionType;
         this.transactionDate = transactionDate;
         this.username = username;
         this.note = note;
         this.totalCost = totalCost;
+        this.price = price;
+        this.quantity = quantity;
+        this.productName = productName;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
     }
 
     public int getId() {
