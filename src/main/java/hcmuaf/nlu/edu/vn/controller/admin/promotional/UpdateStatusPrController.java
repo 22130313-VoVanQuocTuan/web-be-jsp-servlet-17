@@ -9,6 +9,9 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 
 @WebServlet(name = "UpdateStatusPro", value = "/update-status-promotional")
 public class UpdateStatusPrController extends HttpServlet {
@@ -20,16 +23,24 @@ public class UpdateStatusPrController extends HttpServlet {
         try {
             int id = Integer.parseInt(req.getParameter("id"));
             String status = req.getParameter("status");
+            String endDateStr = req.getParameter("endDate");
 
-            PromotionalService promotionalService = new PromotionalService();
-            boolean isUpdated = promotionalService.updateStatusProm(id, status);
+            LocalDateTime now = LocalDateTime.now(ZoneId.of("Asia/Ho_Chi_Minh"));
 
-            String jsonResponse = isUpdated
-                    ? "{\"success\": true, \"message\": \"Cập nhật trạng thái thành công!\"}"
-                    : "{\"success\": false, \"message\": \"Không tìm thấy mã ưu đãi!\"}";
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+            LocalDateTime endDate = LocalDateTime.parse(endDateStr, formatter);
+            if(endDate.isAfter(now)) {
+                PromotionalService promotionalService = new PromotionalService();
+                boolean isUpdated = promotionalService.updateStatusProm(id, status);
 
-            resp.getWriter().write(jsonResponse); // Gửi phản hồi về AJAX
+                String jsonResponse = isUpdated
+                        ? "{\"success\": true, \"message\": \"Cập nhật trạng thái thành công!\"}"
+                        : "{\"success\": false, \"message\": \"Không tìm thấy mã ưu đãi!\"}";
 
+                resp.getWriter().write(jsonResponse); // Gửi phản hồi về AJAX
+            } else {
+                resp.getWriter().write("{\"success\": false, \"message\": \"Ngày kết thúc phải lớn hơn ngày hiện tại!\"}");
+            }
         } catch (Exception e) {
             e.printStackTrace();
             resp.getWriter().write("{\"success\": false, \"message\": \"Lỗi hệ thống!\"}");
