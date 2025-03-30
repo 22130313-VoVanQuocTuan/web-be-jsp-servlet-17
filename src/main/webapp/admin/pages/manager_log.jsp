@@ -125,7 +125,7 @@
                     <span class="title">Quản lý danh mục</span>
                 </a>
             </li>
-            <li class="hov active">
+            <li>
                 <a href="list-rating">
                         <span class="icon">
                             <ion-icon name="chatbubble-outline"></ion-icon>
@@ -150,7 +150,7 @@
                     <span class="title">Quản lý quản trị viên</span>
                 </a>
             </li>
-            <li>
+            <li class="hov active">
                 <a href="listLog">
                         <span class="icon">
                             <ion-icon name="time-outline"></ion-icon>
