@@ -80,7 +80,7 @@ public class AdminFilter implements Filter {
     // Kiểm tra quyền theo hành động
     private boolean hasAccess(Permissions permission, String requestUri) {
         if (requestUri.contains("add")) return permission.getCanAdd();
-        if (requestUri.contains("delete")) return permission.getCanDelete();
+        if (requestUri.contains("delete") || requestUri.contains("clean")) return permission.getCanDelete();
         if (requestUri.contains("edit") || requestUri.contains("update")) return permission.getCanEdit();
         return permission.getCanView(); // Mặc định cần quyền xem
     }

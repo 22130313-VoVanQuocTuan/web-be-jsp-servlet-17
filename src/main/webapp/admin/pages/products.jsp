@@ -323,6 +323,7 @@
                 </div>
                 <div class="list-products-content-button">
                     <button id="add-product" style="margin-bottom: 10px">Thêm sản phẩm</button>
+                    <a href="listImportExportStock"><button id="import_export_stock" style="margin-bottom: 10px">Nhập/Xuất kho</button></a>
                 </div>
                 <!-- Table products -->
                 <table  id="productTable" style="margin-top: 10px" >
