@@ -148,7 +148,7 @@ td {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5); /* Tạo hiệu ứng nổi */
   color: #f1f1f1;
   animation: fadeIn 0.3s ease-in-out; /* Thêm hiệu ứng khi modal xuất hiện */
-  margin-left: 40%;
+  margin-left: 20%;
 }
 /* Tùy chỉnh scrollbar */
 .modal-content::-webkit-scrollbar {

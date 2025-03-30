@@ -233,15 +233,11 @@
                         <tr>
                             <td>${promotion.id}</td>
                             <td>${promotion.code}</td>
-                            <td id="value"><fmt:formatNumber value="${promotion.value}" type="number"
+                            <td><fmt:formatNumber value="${promotion.value}" type="number"
                                                   groupingUsed="true"/>đ
                             </td>
-                            <td id="sdate"><fmt:formatDate value="${promotion.startDate}" pattern="dd-MM-yyyy HH:mm"/></td>
-                            <td id="edate"><fmt:formatDate value="${promotion.endDate}" pattern="dd-MM-yyyy HH:mm"/></td>
-                            <!-- Input ẩn chứa endDate đúng format -->
-                            <input type="hidden" class="endDate-hidden"
-                                   value="<fmt:formatDate value='${promotion.endDate}' pattern='yyyy-MM-dd\'T\'HH:mm'/>"/>
-
+                            <td><fmt:formatDate value="${promotion.startDate}" pattern="dd-MM-yyyy HH:mm:ss"/></td>
+                            <td><fmt:formatDate value="${promotion.endDate}" pattern="dd-MM-yyyy HH:mm:ss"/></td>
                             <td>
                                 <div class="status-container">
                                     <span class="statusText" style="display: none;">${promotion.status}</span>
@@ -254,8 +250,8 @@
                             </td>
                             <td>
                                 <div class="v">
-                                    <button class="edit-btn" data-up-id="${promotion.id}">Sửa</button>
                                     <button class="delete-btn" data-id="${promotion.id}">Xóa</button>
+                                    <button class="edit-btn" data-id-update="${promotion.id}">Sửa</button>
                                 </div>
                             </td>
 
@@ -299,23 +295,24 @@
                         <span class="close-btn " onclick="closeModal1()" &times;></span>
                         <h2 style="color: #FFC857" class="modal-title">Chỉnh sửa ưu đãi</h2>
 
+                        <div class="editPromotional">
                             <!-- Form chỉnh sửa thông tin -->
-                            <form id="editInfoForm" action="update-promotional" method="POST" >
+                            <form id="editInfoForm" action="update-promotional" method="POST">
                                 <input type="hidden" name="id" id="promotionId">
                                 <div class="mb-3">
                                     <label for="percent" class="form-label">Giá trị:</label>
                                     <input type="number" name="value" class="form-control" id="percent"
-                                           placeholder="Nhập giá trị"  required>
+                                           placeholder="Nhập giá trị" required>
                                 </div>
                                 <div class="mb-3">
                                     <label for="startDate" class="form-label">Ngày bắt đầu:</label>
                                     <input type="datetime-local" name="startDate" class="form-control" id="startDate"
-                                           placeholder="Nhập ngày bắt đầu"  required>
+                                           placeholder="Nhập ngày bắt đầu" required>
                                 </div>
                                 <div class="mb-3">
                                     <label for="endDate" class="form-label">Ngày kết thúc:</label>
                                     <input type="datetime-local" class="form-control" name="endDate" id="endDate"
-                                           placeholder="Nhập ngày kết thúc" required>
+                                           placeholder="Nhập địa chỉ" required></input>
                                 </div>
                                 <!-- Thông báo lỗi -->
                                 <c:if test="${not empty error}">
@@ -326,6 +323,8 @@
                                     <button type="button" class="close-modal btn btn-secondary ">Hủy</button>
                                 </div>
                             </form>
+                        </div>
+
 
                     </div>
                 </div>
@@ -381,17 +380,6 @@
     });
 </script>
 <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        // Kiểm tra nếu cần hiển thị modal
-        const showModal = "${showModal}" === "true";
-        if (showModal) {
-            const modal = document.getElementById('editPromotional');
-            modal.style.display = 'flex';
-
-        }
-    });
-</script>
-<script>
     $(document).ready(function () {
         $('#productTable').DataTable({
             "paging": true,         // Hiển thị phân trang
@@ -420,14 +408,8 @@
     $(".toggle-status").on("change", function () {
         let checkbox = $(this);
         let id = checkbox.data("id");
-        let endDate = checkbox.closest("tr").find(".endDate-hidden").val();
         let oldStatus = checkbox.is(":checked") ? "Không hoạt động" : "Hoạt động"; // Trạng thái trước khi thay đổi
         let newStatus = checkbox.is(":checked") ? "Hoạt động" : "Không hoạt động";
-        if (!endDate) {
-            alert("Ngày kết thúc không được để trống!");
-            checkbox.prop("checked", !checkbox.prop("checked")); // Quay lại trạng thái ban đầu
-            return;
-        }
 
         // Cập nhật ngay trên giao diện (chưa lưu vào server)
         checkbox.next(".status-text").text(newStatus);
@@ -435,21 +417,10 @@
         $.ajax({
             url: "/tqh/update-status-promotional",
             type: "POST",
-            data: {id: id, status: newStatus, endDate: endDate},
+            data: {id: id, status: newStatus},
             dataType: "json",
             success: function (response) {
                 console.log("Phản hồi từ server:", response);
-                if (!response.success) {
-                    alert(response.message);
-                    checkbox.prop("checked", !checkbox.prop("checked"));
-                    if (newStatus != "Hoạt động") {
-                        checkbox.next(".status-text").text(newStatus);
-                    } else {
-                        checkbox.next(".status-text").text(oldStatus);
-                    }
-                } else {
-                    checkbox.next(".status-text").text(newStatus)
-                }
             },
             error: function () {
                 // Hiển thị thông báo lỗi

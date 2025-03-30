@@ -129,24 +129,4 @@ public class PromotionalDao {
             throw new RuntimeException(e);
         }
     }
-
-    public Promotionals getPromotional(int id) throws SQLException {
-       String sql = "select * from promotional WHERE id = ?";
-       Promotionals promotional = null;
-       try (PreparedStatement preparedStatement = dbConnect.preparedStatement(sql)) {
-           preparedStatement.setInt(1, id);
-           try (ResultSet rs = preparedStatement.executeQuery()) {
-               if (rs.next()) {
-                   promotional = new Promotionals();
-                   promotional.setId(rs.getInt("id"));
-                   promotional.setValue(rs.getDouble("value"));
-                   promotional.setStartDate(rs.getTimestamp("startDate"));
-                   promotional.setEndDate(rs.getTimestamp("endDate"));
-               }
-           }
-       } catch (SQLException e) {
-           throw new RuntimeException("Error" + e.getMessage());
-       }
-        return promotional;
-    }
 }

@@ -32,9 +32,6 @@ public class Promotionals {
         this.status = status;
     }
 
-    public Promotionals() {
-
-    }
 
 
     public Timestamp getStartDate() {
