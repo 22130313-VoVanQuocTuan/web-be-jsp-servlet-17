@@ -18,7 +18,7 @@ public class GetListAccountDao {
     //Lấy ra danh sách tài khoản
     public List<Users> getListAccount() {
         List<Users> listAccount = new ArrayList<>();
-        String sql = "select * from users  WHERE isDeleted = FALSE";
+        String sql = "select * from users  WHERE isDeleted = FALSE OR isDeleted IS NULL";
         try (PreparedStatement ptm = dbConnect.preparedStatement(sql)) {
             ResultSet rs = ptm.executeQuery();
             while (rs.next()) {
