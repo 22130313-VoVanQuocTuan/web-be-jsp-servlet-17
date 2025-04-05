@@ -24,7 +24,6 @@ public class ImportExportDao {
         List<Import_Export_Stock> listAllImportExportStock = new ArrayList<>();
         String sql = "select s.id, s.transactionType, s.transactionDate, u.username," +
                 "s.note,s.quantity, p.name  from stocktransaction  s JOIN users u ON s.userId = u.id  JOIN products p ON s.productId = p.id  ORDER BY transactionDate DESC";
-
         try(PreparedStatement ptm = dbConnect.preparedStatement(sql)){
             ResultSet rs = ptm.executeQuery();
             while (rs.next()) {
@@ -47,7 +46,7 @@ public class ImportExportDao {
         return listAllImportExportStock;
     }
 
-    // Lấy ra so luonh hien tai
+   // Lấy ra so luonh hien tai
     public int getQuantity(String productId) {
         String sql = "select quantity from inventory where productId = ?";
         int quantity = 0;
@@ -106,7 +105,6 @@ public class ImportExportDao {
     // Cập nhật số lượng khi xuất kho
     public void exportStock(String productId, int quantity) {
         String sql = "UPDATE inventory SET quantity = quantity - ? WHERE productId = ?";
-
         try (PreparedStatement ptm = dbConnect.preparedStatement(sql)) {
             ptm.setInt(1, quantity);
             ptm.setString(2, productId);
@@ -124,9 +122,9 @@ public class ImportExportDao {
     }
 
     // Lưu thông tin nhaapj kho
+
     public void addInfoImportExportStock(String transactionType, String transactionDate, int userId, String note, int quantity, String productId) {
         String sql = "INSERT INTO stocktransaction (transactionType, transactionDate, userId, note, quantity, productId) VALUES (?, ?, ?, ?, ?,?)";
-
         try (PreparedStatement ptm = dbConnect.preparedStatement(sql)) {
             ptm.setString(1, transactionType);
             ptm.setString(2, transactionDate);
@@ -134,14 +132,11 @@ public class ImportExportDao {
             ptm.setString(4, note);
             ptm.setInt(5, quantity);
             ptm.setString(6, productId);
-
-
             ptm.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException("Lỗi khi lưu nhập kho!", e);
         }
     }
-
     public void updateInventoryStatus(String productId) {
         String sql = "UPDATE inventory " +
                 "SET status = CASE " +

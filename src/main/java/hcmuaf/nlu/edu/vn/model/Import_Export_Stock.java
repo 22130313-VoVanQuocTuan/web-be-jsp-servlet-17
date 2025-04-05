@@ -23,8 +23,6 @@ public class Import_Export_Stock {
         this.quantity = quantity;
         this.productName = productName;
     }
-
-
     public int getQuantity() {
         return quantity;
     }

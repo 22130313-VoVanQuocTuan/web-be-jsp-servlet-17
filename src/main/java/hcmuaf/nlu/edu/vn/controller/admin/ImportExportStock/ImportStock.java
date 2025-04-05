@@ -13,11 +13,13 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
+
 import java.io.PrintWriter;
 import java.time.LocalDateTime;
 
 
 @WebServlet("/importInventory")
+
 public class ImportStock extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -27,7 +29,6 @@ public class ImportStock extends HttpServlet {
         ImportExportService service = new ImportExportService();
         HttpSession session = req.getSession();
         Users user = (Users) session.getAttribute("user");
-
         try {
             int quantityInt = Integer.parseInt(quantity);
             service.importStock(productId, quantityInt);
@@ -47,5 +48,6 @@ public class ImportStock extends HttpServlet {
             resp.getWriter().write("{\"error\": \"Có lỗi xảy ra khi nhập kho.\"}");
 
         }
+
     }
 }

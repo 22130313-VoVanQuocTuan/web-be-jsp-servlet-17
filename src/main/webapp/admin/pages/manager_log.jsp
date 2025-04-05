@@ -160,7 +160,7 @@
             </li>
             <li class="hov active">
                 <a href="turn-page?action=log">
-                        <span class="icon">
+                       <span class="icon">
                             <ion-icon name="time-outline"></ion-icon>
                         </span>
                     <span class="title">Quản lý nhật ký</span>

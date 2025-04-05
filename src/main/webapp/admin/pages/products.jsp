@@ -363,7 +363,6 @@
                             <td class="v">
                                 <button type="button"><a style="text-decoration: none; color:black" href="/tqh/edit-product?id=${product.id}">Sửa</a></button>
                                 <button id="deleteBtn" data-product-id="${product.id}" data-all="${param.all}">Xóa</button>
-
                             </td>
                         </tr>
                     </c:forEach>
@@ -389,9 +388,6 @@
                         <span>${message}</span>
                     </div>
                 </c:if>
-
-
-
                 <!-- Mẫu điền thêm sản phẩm -->
                 <div id="addProductModal" class="modal">
                     <div class="modal-content">
