@@ -562,14 +562,13 @@ td {
 .alert {
   position: fixed;
   top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  left: 56%;
+  transform: translate(-50%, -52%);
   padding: 15px;
   text-align: center;
   font-size: 12px;
   font-weight: bold;
   z-index: 9999;
-  animation: fadeIn 0.5s ease-in-out;
   opacity: 1;
 }
 /* Animation cho thông báo khi xuất hiện */

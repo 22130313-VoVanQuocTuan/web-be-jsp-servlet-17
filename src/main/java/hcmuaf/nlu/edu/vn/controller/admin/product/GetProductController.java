@@ -1,5 +1,7 @@
 package hcmuaf.nlu.edu.vn.controller.admin.product;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import hcmuaf.nlu.edu.vn.model.Product;
 import hcmuaf.nlu.edu.vn.model.Users;
 import hcmuaf.nlu.edu.vn.service.ProductService;
@@ -23,7 +25,8 @@ public class GetProductController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
         // Lấy tham số "all" từ request
         HttpSession session = request.getSession();
         Users user = (Users) session.getAttribute("user");
@@ -40,8 +43,11 @@ public class GetProductController extends HttpServlet {
                 request.setAttribute("showModal", true);
             }
             // Truyền danh sách sản phẩm vào request để hiển thị trong JSP
-            request.setAttribute("products", products);
-            request.getRequestDispatcher("/admin/pages/products.jsp").forward(request, response);
+            Gson gson = new GsonBuilder()
+                    .setDateFormat("yyyy-MM-dd HH:mm:ss")
+                    .create();
+            String json = gson.toJson(products);
+            response.getWriter().write(json);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
