@@ -88,7 +88,10 @@ td {
   background: #ffffff;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   border-radius: 5px;
+  margin-right: 5px;
+  margin-left: 3px;
   font-size: 11px;
+  width: max-content;
 }
 .statusText{
   padding: 2px;
@@ -230,23 +233,8 @@ td {
   font-size: 15px;
 }
 
-.status {
-  padding: 2px;
-  border-radius: 5px;
-  display: inline-block;
-}
 
-.status-paid {
-  color: #ffffff;
-  background-color: #02bc15;
-  border-radius: 5px;
-}
 
-.status-unpaid {
-  color: #ffffff;
-  background-color: #ffc107;
-  border-radius: 5px;
-}
 
 .update-order label {
   font-size: 14px;
