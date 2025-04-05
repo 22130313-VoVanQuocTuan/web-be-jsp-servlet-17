@@ -97,7 +97,7 @@
             </li>
 
             <li>
-                <a href="products-list">
+                <a href="turn-page?action=product">
                         <span class="icon">
                             <ion-icon name="cube-outline"></ion-icon>
                         </span>

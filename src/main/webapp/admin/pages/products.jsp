@@ -15,134 +15,11 @@
     <!-- DataTables CSS -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
     <!-- jQuery và DataTables JS -->
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
 </head>
 
 <style>
-    /* Định dạng chung cho thông báo lỗi */
-    .alert-error {
-        background-color: #f44336;
-        color: white;
-        padding: 20px;
-        border-radius: 8px;
-        margin: 15px 0;
-        font-family: 'Arial', sans-serif;
-        font-size: 16px;
-        position: fixed; /* Đặt vị trí cố định trên màn hình */
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        z-index: 1000;
-        width: 80%;
-        max-width: 500px;
-        text-align: center;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        transition: all 0.3s ease;
-    }
-
-    /* Kiểu danh sách lỗi */
-    .alert-error ul {
-        list-style-type: none; /* Loại bỏ dấu chấm đầu dòng */
-        padding: 0;
-        margin: 0;
-    }
-
-    /* Kiểu cho mỗi mục lỗi */
-    .alert-error ul li {
-        margin-bottom: 10px;
-        padding: 10px;
-        border: 1px solid #ff0000;
-        border-radius: 4px;
-        background-color: #d32f2f;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        text-align: left;
-        font-weight: bold;
-    }
-
-    /* Nút đóng thông báo */
-    .alert-error .close {
-        position: absolute;
-        top: 10px;
-        right: 10px;
-        font-size: 20px;
-        color: white;
-        background-color: transparent;
-        border: none;
-        cursor: pointer;
-        transition: transform 0.2s ease;
-    }
-
-    /* Hiệu ứng khi di chuột vào nút đóng */
-    .alert-error .close:hover {
-        transform: rotate(90deg); /* Xoay nút khi di chuột vào */
-    }
-
-    /* Ẩn thông báo khi có class hidden */
-    .alert-error.hidden {
-        display: none; /* Khi có class hidden, ẩn thông báo */
-    }
-
-    /* Thông báo thành công */
-    .alert-success {
-        background-color: #4CAF50; /* Màu xanh lá cây */
-        color: white;
-        padding: 20px;
-        border-radius: 8px;
-        margin: 15px 0;
-        font-family: 'Arial', sans-serif;
-        font-size: 16px;
-        position: fixed;
-        top: 50%;
-        left: 60%;
-        transform: translate(-50%, -50%);
-        z-index: 1000;
-        width: 80%;
-        max-width: 500px;
-        text-align: center;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        transition: all 0.3s ease;
-    }
-
-    /* Thông báo lỗi */
-    .alert-error {
-        background-color: #f44336; /* Màu đỏ */
-        color: white;
-        padding: 20px;
-        border-radius: 8px;
-        margin: 15px 0;
-        font-family: 'Arial', sans-serif;
-        font-size: 16px;
-        position: fixed;
-        top: 50%;
-        left: 60%;
-        transform: translate(-50%, -50%);
-        z-index: 1000;
-        width: 80%;
-        max-width: 500px;
-        text-align: center;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        transition: all 0.3s ease;
-    }
-
-    /* Nút đóng */
-    .alert .close {
-        position: absolute;
-        top: 10px;
-        right: 10px;
-        font-size: 20px;
-        color: white;
-        background-color: transparent;
-        border: none;
-        cursor: pointer;
-        transition: transform 0.2s ease;
-    }
-
-    /* Hiệu ứng khi di chuột vào nút đóng */
-    .alert .close:hover {
-        transform: rotate(90deg);
-    }
-
     .scroll-to-top {
         position: fixed;
         bottom: 20px;
@@ -225,7 +102,7 @@
             </li>
 
             <li class="hov active">
-                <a href="products-list">
+                <a href="turn-page?action=product">
                         <span class="icon">
                             <ion-icon name="cube-outline"></ion-icon>
                         </span>
@@ -299,7 +176,7 @@
                 </a>
             </li>
             <li>
-                    <a href="#" id="logout-link">
+                <a href="#" id="logout-link">
                         <span class="icon">
                             <ion-icon name="log-out-outline"></ion-icon>
                         </span>
@@ -331,10 +208,9 @@
                 </div>
                 <div class="list-products-content-button">
                     <button id="add-product" style="margin-bottom: 10px">Thêm sản phẩm</button>
-
                 </div>
                 <!-- Table products -->
-                <table  id="productTable" style="margin-top: 10px" >
+                <table id="productTable" style="margin-top: 10px">
                     <thead>
                     <tr>
                         <th>Hình ảnh</th>
@@ -348,46 +224,10 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <!-- Các sản phẩm sẽ được thêm vào đây -->
-                    <c:forEach var="product" items="${products}" >
-                        <tr>
-                            <td><img src="${product.imageUrl}" alt="${product.name}"></td>
-                            <td>${product.id}</td>
-                            <td>${product.name}</td>
-                            <td><fmt:formatNumber value="${product.price}" type="number"
-                                                  groupingUsed="true"/>₫
-                            </td>
-                            <td>${product.quantity}</td>
-                            <td>${product.status}</td>
-                            <td><fmt:formatDate value="${product.createDate}" pattern="dd-MM-yyyy HH:mm:ss"/></td>
-                            <td class="v">
-                                <button type="button"><a style="text-decoration: none; color:black" href="/tqh/edit-product?id=${product.id}">Sửa</a></button>
-                                <button id="deleteBtn" data-product-id="${product.id}" data-all="${param.all}">Xóa</button>
-                            </td>
-                        </tr>
-                    </c:forEach>
+
                     </tbody>
                     <button id="scrollToTop" class="scroll-to-top">⬆</button>
                 </table>
-
-                <!-- Kiểm tra và hiển thị tất cả thông báo lỗi -->
-                <c:if test="${not empty errors}">
-                    <div class="alert alert-error">
-                        <ul>
-                            <c:forEach var="error" items="${errors}">
-                                <li>${error}</li>
-                            </c:forEach>
-                        </ul>
-                        <span class="close" onclick="this.parentElement.style.display='none';">&times;</span>
-                    </div>
-                </c:if>
-
-                <!-- Kiểm tra và hiển thị thông báo thành công hoặc thất bại -->
-                <c:if test="${not empty message}">
-                    <div class="alert alert-success">
-                        <span>${message}</span>
-                    </div>
-                </c:if>
                 <!-- Mẫu điền thêm sản phẩm -->
                 <div id="addProductModal" class="modal">
                     <div class="modal-content">
@@ -404,7 +244,8 @@
                             <input type="text" id="productCategory" name="categoryId" placeholder="Nhập số danh mục">
 
                             <label for="discountPercent">Tỷ lệ giảm giá (0 - 1):</label>
-                            <input type="text" id="discountPercent" name="discountPercent" placeholder="Nhập tỷ lệ giảm giá">
+                            <input type="text" id="discountPercent" name="discountPercent"
+                                   placeholder="Nhập tỷ lệ giảm giá">
 
                             <label for="productStock">Tồn kho:</label>
                             <input type="number" id="productStock" name="quantity" placeholder="Nhập số lượng">
@@ -430,11 +271,13 @@
                             </div>
                             <div class="modal-field">
                                 <label for="minimumQuantity">Số lượng tối thiểu</label>
-                                <input type="text" id="minimumQuantity" name="minimumQuantity" placeholder="Nhập số lượng">
+                                <input type="text" id="minimumQuantity" name="minimumQuantity"
+                                       placeholder="Nhập số lượng">
                             </div>
                             <div class="modal-field">
                                 <label for="maximumQuantity">Số lượng tối đa</label>
-                                <input type="text" id="maximumQuantity" name="maximumQuantity" placeholder="Nhập số lượng">
+                                <input type="text" id="maximumQuantity" name="maximumQuantity"
+                                       placeholder="Nhập số lượng">
                             </div>
 
                             <div class="modal-field">
@@ -443,12 +286,11 @@
                                           placeholder="Nhập mô tả sản phẩm"></textarea>
                             </div>
 
-
                             <label for="productImage">Hình ảnh:</label>
-                            <input type="file" id="productImage" name="imageUrl" accept="image/*" >
+                            <input type="file" id="productImage" name="imageUrl" accept="image/*">
 
                             <button type="submit" id="save-Product">Lưu sản phẩm</button>
-                            <button type="button" class="close-modal" onclick="closeModal()">Thoát</button>
+                            <button type="button" class="close-modal">Thoát</button>
                         </form>
                     </div>
                 </div>
@@ -457,49 +299,61 @@
                 <div id="editProductModal" class="modal">
                     <div class="modal-content">
                         <h3>Sửa sản phẩm</h3>
-                        <form id="editProductForm" action="${pageContext.request.contextPath}/edit-product" method="post" enctype="multipart/form-data">
-                        <label for="productName">Tên sản phẩm:</label>
-                            <input type="text" id="productNameEdit" name="name" value="${product.name}" placeholder="Nhập tên sản phẩm" required>
+                        <form id="editProductForm"
+                              method="post" enctype="multipart/form-data">
+                            <label for="productName">Tên sản phẩm:</label>
+                            <input type="hidden" id="productId">
+                            <input type="text" id="productNameEdit" name="name" value="${product.name}"
+                                   placeholder="Nhập tên sản phẩm" required>
 
                             <label for="productPrice">Giá:</label>
-                            <input type="text" id="productPriceEdit" name="price"value="${product.price}" placeholder="Nhập giá" required>
+                            <input type="text" id="productPriceEdit" name="price" value="${product.price}"
+                                   placeholder="Nhập giá" required>
 
                             <label for="productCategory">Danh mục:</label>
-                            <input type="text" id="productCategoryEdit" name="categoryId" placeholder="Nhập số danh mục" value="${product.categoryId}" required>
+                            <input type="text" id="productCategoryEdit" name="categoryId" placeholder="Nhập số danh mục"
+                                   required>
 
                             <label for="discountPercent">Tỷ lệ giảm giá (0 - 1):</label>
-                            <input type="text" id="discountPercentEdit" name="discountPercent" placeholder="Nhập tỷ lệ giảm giá" value="${product.discountPercent}" >
+                            <input type="text" id="discountPercentEdit" name="discountPercent"
+                                   placeholder="Nhập tỷ lệ giảm giá">
 
                             <div class="modal-field">
                                 <label for="npp">Nhà phân phối:</label>
-                                <input type="text" id="nppEdit" name="supplier" placeholder="Nhập nhà phân phối" value="${product.supplier}" >
+                                <input type="text" id="nppEdit" name="supplier" placeholder="Nhập nhà phân phối"
+                                >
                             </div>
 
                             <div class="modal-field">
                                 <label for="size">Kích thước:</label>
-                                <input type="text" id="sizeEdit" name="size" placeholder="Nhập kích thước" value="${product.size}" >
+                                <input type="text" id="sizeEdit" name="size" placeholder="Nhập kích thước"
+                                >
                             </div>
 
                             <div class="modal-field">
                                 <label for="color">Màu sắc:</label>
-                                <input type="text" id="colorEdit" name="color" placeholder="Nhập màu sắc" value="${product.color}" >
+                                <input type="text" id="colorEdit" name="color" placeholder="Nhập màu sắc"
+                                >
                             </div>
 
                             <div class="modal-field">
                                 <label for="unit">Đơn vị tính:</label>
-                                <input type="text" id="unitEdit" name="unit" placeholder="Nhập đơn vị tính" value="${product.unit}" >
+                                <input type="text" id="unitEdit" name="unit" placeholder="Nhập đơn vị tính"
+                                >
                             </div>
 
                             <div class="modal-field">
                                 <label for="description">Mô tả:</label>
                                 <textarea id="descriptionEdit" name="description" rows="3"
-                                          placeholder="Nhập mô tả sản phẩm"> ${product.description}</textarea>
+                                          placeholder="Nhập mô tả sản phẩm"> </textarea>
                             </div>
 
                             <label for="productImage">Hình ảnh:</label>
-                            <input type="file" id="productImageEdit" name="imageUrl" accept="image/*" >
-                            <input type="hidden" name="currentImageUrl" value="${product.imageUrl}" />
-                            <input type="hidden" name="id" value="${product.id}" />
+                            <input type="file" id="productImageEdit" name="imageUrl" accept="image/*">
+                            <img id="currentImage" src="" alt="Current Product Image"
+                                 style="max-width: 200px; max-height: 200px; display: none;">
+                            <input type="hidden" id="currentImageUrl" name="currentImageUrl"/>
+
 
                             <button type="submit" id="save-ProductEdit">Lưu thay đổi</button>
                             <button type="button" class="close-modal">Thoát</button>
@@ -513,19 +367,17 @@
                             <h3>Xác nhận xóa</h3>
                         </div>
                         <p>Bạn chắc chắn muốn xóa sản phẩm này?</p>
+                        <input type="hidden" id="productsId">
                         <div class="modal-actions">
-                            <button id="confirmDelete" class="confirm-delete">Xóa</button>
+                            <button id="confirmDelete" class="confirm-delete" onclick="confirmDelete()">Xóa</button>
                             <button class="close-modal">Hủy</button>
                         </div>
                     </div>
                 </div>
-                <%-- Kiểm tra xem có thông báo nào không --%>
-                <c:if test="${not empty sessionScope.errorMessage}">
-                    <div class="alert alert-info">
-                            ${sessionScope.errorMessage}
-                    </div>
-                    <% session.removeAttribute("errorMessage"); %> <!-- Xóa thông báo ngay sau khi hiển thị -->
-                </c:if>
+
+                <div id="message" class="alert alert-info" style="display: none">
+                    <!-- Thông báo lỗi sẽ được chèn vào đây -->
+                </div>
             </div>
         </div>
     </div>
@@ -565,42 +417,6 @@
         });
     });
     </script>
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            // Kiểm tra nếu cần hiển thị modal
-            const showModal = "${showModal}" === "true";
-            if (showModal) {
-                const modal = document.getElementById('editProductModal');
-                modal.style.display = 'flex';
-
-            }
-        });
-    </script>
 </div>
 </body>
-<script>
-    $(document).ready(function () {
-        $('#productTable').DataTable({
-            "paging": true,         // Hiển thị phân trang
-            "searching": true,      // Hiển thị ô tìm kiếm
-            "ordering": true,       // Cho phép sắp xếp cột
-            "info": true,           // Hiển thị thông tin số lượng dữ liệu
-            "lengthMenu": [10, 25, 50, 100], // Số dòng hiển thị mỗi trang
-            "language": {
-                "lengthMenu": "Hiển thị _MENU_ sản phẩm mỗi trang",
-                "zeroRecords": "Không tìm thấy sản phẩm nào",
-                "info": "Trang _PAGE_ trên tổng _PAGES_ trang",
-                "infoEmpty": "Không có sản phẩm",
-                "infoFiltered": "(lọc từ _MAX_ sản phẩm)",
-                "search": "Tìm kiếm:",
-                "paginate": {
-                    "first": "Đầu",
-                    "last": "Cuối",
-                    "next": "Tiếp",
-                    "previous": "Trước"
-                }
-            }
-        });
-    });
-</script>
 </html>

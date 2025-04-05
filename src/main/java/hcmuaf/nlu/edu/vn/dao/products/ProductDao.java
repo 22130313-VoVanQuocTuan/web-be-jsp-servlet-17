@@ -24,7 +24,7 @@ public class ProductDao {
 
     // lấy ra danh sách tất cả sản phẩm
     public List<Product> getAllProducts() throws SQLException {
-        String sql = "SELECT * FROM products p  JOIN inventory i ON p.id = i.productId";
+        String sql = "SELECT * FROM products p JOIN inventory i ON p.id = i.productId WHERE p.isDeleted = FALSE";
         List<Product> products = new ArrayList<>();
 
         try (PreparedStatement stmt = dbConnect.preparedStatement(sql);
@@ -130,8 +130,7 @@ public class ProductDao {
         }
         return false; // Nếu không có dòng nào được cập nhật hoặc có lỗi xảy ra
     }
-
-
+    
     // Hàm xóa sản phẩm
     public boolean deleteProduct(String id, String realPath) {
         String sql = "SELECT imageUrl FROM products WHERE id = ?";
@@ -162,15 +161,15 @@ public class ProductDao {
             }
         }
 
-        // Bước 3: Xóa sản phẩm khỏi cơ sở dữ liệu
-        String deleteSql = "DELETE FROM products WHERE id = ?";
-        try (PreparedStatement stmt = dbConnect.preparedStatement(deleteSql)) {
+        // Bước 3: Cập nhật trạng thái là đã xóa (soft delete)
+        String softDeleteSql = "UPDATE products SET isDeleted = TRUE WHERE id = ?";
+        try (PreparedStatement stmt = dbConnect.preparedStatement(softDeleteSql)) {
             stmt.setString(1, id);
-            int rowsDeleted = stmt.executeUpdate();
-            return rowsDeleted > 0;  // Trả về true nếu xóa thành công
+            int rowsUpdated = stmt.executeUpdate();
+            return rowsUpdated > 0;  // Trả về true nếu cập nhật thành công
         } catch (SQLException e) {
             e.printStackTrace();
-            return false;  // Trả về false nếu lỗi khi xóa sản phẩm
+            return false;
         }
     }
 
@@ -182,13 +181,21 @@ public class ProductDao {
         product.setImageUrl(rs.getString("imageUrl"));
         product.setPrice(rs.getDouble("price"));
         product.setQuantity(rs.getInt("quantity"));
+        product.setSupplier(rs.getString("supplier"));
+        product.setColor(rs.getString("color"));
+        product.setSize(rs.getString("size"));
+        product.setUnit(rs.getString("unit"));
         product.setCategoryId(rs.getInt("categoryId"));
+        product.setDescription(rs.getString("description"));
         product.setView(rs.getInt("view"));
         product.setSoldCount(rs.getInt("soldCount"));
         product.setStatus(rs.getString("status"));
         product.setDiscountPercent(rs.getDouble("discountPercent") * 100);
         product.setDiscountPrice(product.getPrice() - (product.getPrice() * product.getDiscountPercent() / 100));
-        product.setCreateDate(rs.getTimestamp("createDate"));
+        Timestamp createDate = rs.getTimestamp("createDate");
+        if(createDate != null) {
+            product.setCreateDate(createDate);
+        }
         return product;
     }
 
