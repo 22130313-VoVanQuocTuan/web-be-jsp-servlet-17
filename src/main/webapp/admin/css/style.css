@@ -49,7 +49,7 @@ body {
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
   transform: scale(1);
   transition: transform 0.3s ease-in-out;
-  margin-left: 40%;
+
 }
 
 /* -------------------Navigation ------------------- */
@@ -105,7 +105,7 @@ body {
   position: relative;
   display: block;
   width: 100%;
-  height: 48px;
+  height: 40px;
   display: flex;
   text-decoration: none;
   color: var(--white);
@@ -600,6 +600,7 @@ td {
 /* =============== Logout modal =========================== */
 #logout-modal .modal-content {
   max-height: 32%;
+  overflow-y: hidden;
 }
 
 #logout-modal .modal-content label {

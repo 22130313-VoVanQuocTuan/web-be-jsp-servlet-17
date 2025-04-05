@@ -1,9 +1,9 @@
-package hcmuaf.nlu.edu.vn.controller.admin.ImportExportStock;
+package hcmuaf.nlu.edu.vn.controller.admin.inventory;
 
 import com.google.gson.Gson;
-import hcmuaf.nlu.edu.vn.model.Import_Export_Stock;
+import hcmuaf.nlu.edu.vn.model.Inventory;
 import hcmuaf.nlu.edu.vn.model.Users;
-import hcmuaf.nlu.edu.vn.service.ImportExportService;
+import hcmuaf.nlu.edu.vn.service.InventoryService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -12,18 +12,15 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.List;
 
-@WebServlet("/listImportExportStock")
-public class GetListImportExportController extends HttpServlet {
+@WebServlet("/inventory-list")
+public class GetListAllInventoryController extends HttpServlet {
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType("application/json");
-        resp.setCharacterEncoding("UTF-8");
-        ImportExportService service = new ImportExportService();
-        List<Import_Export_Stock> list = new ArrayList<>();
+        InventoryService service = new InventoryService();
+
         HttpSession session = req.getSession();
         Users user = (Users) session.getAttribute("user");
         if (user == null || (!user.getRole().equals("admin") && !user.getRole().equals("owner"))) {
@@ -32,15 +29,20 @@ public class GetListImportExportController extends HttpServlet {
         }
 
         try {
-            list = service.getListAllImportExportStock(); // Lấy danh sách
-           Gson gson = new Gson();
-           String json = gson.toJson(list);
+            List<Inventory> list;
 
-           resp.getWriter().write(json);
+                 // Nếu không có ngày (mặc định), lấy toàn bộ sản phẩm
+                list = service.getAllInventory();
+                resp.setContentType("application/json");
+                resp.setCharacterEncoding("UTF-8");
+                Gson gson = new Gson();
+                String json = gson.toJson(list);
+                resp.getWriter().write(json);
+
+
+
         } catch (Exception e) {
             e.printStackTrace();
-            resp.getWriter().write("{\"error\": \"Có lỗi xảy ra khi cập nhật kho.\"}");
-
         }
-        }
+    }
 }

@@ -11,6 +11,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 
 @WebServlet("/cleanLog")
@@ -25,7 +26,11 @@ public class CleanLogController extends HttpServlet {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        resp.sendRedirect(req.getContextPath() + "/listLog");
+        resp.setContentType("application/json");
+        resp.setCharacterEncoding("UTF-8");
+        PrintWriter out = resp.getWriter();
+        out.println("{\"message\": \"Làm sạch thành công\"}");
+        out.flush();
 
     }
 

@@ -97,7 +97,7 @@
             </li>
 
             <li>
-                <a href="accounts">
+                <a href="turn-page?action=user">
                         <span class="icon">
                             <ion-icon name="people-outline"></ion-icon>
                         </span>
@@ -111,6 +111,14 @@
                             <ion-icon name="cube-outline"></ion-icon>
                         </span>
                     <span class="title">Quản lý sản phẩm</span>
+                </a>
+            </li>
+            <li>
+                <a href="turn-page?action=inventory">
+                        <span class="icon">
+                            <ion-icon name="storefront-outline"></ion-icon>
+                        </span>
+                    <span class="title">Quản lý tồn kho</span>
                 </a>
             </li>
             <li class="hov active">
@@ -156,7 +164,7 @@
                 </a>
             </li>
             <li>
-                <a href="list_admin_owner">
+                <a href="turn-page?action=managerOwner">
                         <span class="icon">
                             <ion-icon name="settings"></ion-icon>
                         </span>
@@ -164,7 +172,7 @@
                 </a>
             </li>
             <li>
-                <a href="listLog">
+                <a href="turn-page?action=log">
                         <span class="icon">
                             <ion-icon name="time-outline"></ion-icon>
                         </span>
@@ -292,22 +300,22 @@
 
                                 <label for="statusSelect">Chọn trạng thái:</label>
                                 <select title="choice" id="statusSelect" name="statusPayment"
-                                        style="font-size: 14px; border-radius: 5px; padding: 5px; margin-left: 10px; margin-right: 10px;">
+                                        style="font-size: 11px; border-radius: 5px; padding: 5px; margin-left: 10px; margin-right: 10px;">
                                     <option value="Đã thanh toán" ${orIn.paymentStatus == 'Đã thanh toán' ? 'selected' : ''}>Đã thanh toán</option>
                                     <option value="Chưa thanh toán" ${orIn.paymentStatus == 'Chưa thanh toán' ? 'selected' : ''}>Chưa thanh toán</option>
                                 </select>
 
                                 <!-- Nút cập nhật -->
-                                <button  type="submit" style="margin-top: 10px; padding: 7px 14px; font-size: 14px; background-color: #ea875f;
-                                     color: white; border: none; border-radius: 5px; cursor: pointer;">
-                                    Cập nhật trạng thái
+                                <button  type="submit" style="margin-top: 10px; padding: 6px 14px; font-size: 14px; background-color: #483033;
+                                     color: #f7d774; border: none; border-radius: 5px; cursor: pointer;">
+                                    Cập nhật
                                 </button>
                                 <!-- Hiển thị lỗi nếu có -->
                                 <c:if test="${not empty error}">
                                     <p style="color: red;">${error}</p>
                                 </c:if>
                             </form>
-                            <button id="exportPDF" type="button" style="padding: 10px 20px; background-color: #28a745; color: white; border: none;margin-top: 15px; border-radius: 5px; cursor: pointer;">
+                            <button id="exportPDF" type="button" style="padding: 7px 8px; background-color: #891f1f; color: white; border: none;margin-top: 15px; border-radius: 5px; cursor: pointer;">
                                 Xuất PDF
                             </button>
                         </div>
@@ -319,7 +327,7 @@
 
         <!-- Modal Xóa tài khoản -->
         <div id="delete-modal" class="modal">
-            <div class="modal-content">
+            <div class="modal-content"  style="margin-top: 10%;">
                 <h3>Xác nhận xóa</h3>
                 <label>Bạn có chắc chắn muốn xóa hóa đơn này?</label>
                 <div class="button-container">

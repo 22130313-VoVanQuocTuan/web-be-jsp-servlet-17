@@ -68,7 +68,7 @@
             </li>
 
             <li>
-                <a href="accounts">
+                <a href="turn-page?action=user">
                         <span class="icon">
                             <ion-icon name="people-outline"></ion-icon>
                         </span>
@@ -82,6 +82,14 @@
                             <ion-icon name="cube-outline"></ion-icon>
                         </span>
                     <span class="title">Quản lý sản phẩm</span>
+                </a>
+            </li>
+            <li>
+                <a href="turn-page?action=inventory">
+                        <span class="icon">
+                            <ion-icon name="storefront-outline"></ion-icon>
+                        </span>
+                    <span class="title">Quản lý tồn kho</span>
                 </a>
             </li>
             <li>
@@ -127,7 +135,7 @@
                 </a>
             </li>
             <li class="hov active">
-                <a href="list_admin_owner">
+                <a href="turn-page?action=managerOwner">
                         <span class="icon">
                             <ion-icon name="settings"></ion-icon>
                         </span>
@@ -135,7 +143,7 @@
                 </a>
             </li>
             <li>
-                <a href="listLog">
+                <a href="turn-page?action=log">
                         <span class="icon">
                             <ion-icon name="time-outline"></ion-icon>
                         </span>
@@ -174,13 +182,10 @@
         <!-------------------- Danh Sách Chi Tiết người dùng------------------ -->
         <div class="details-user">
             <div class="recentOrders">
-                <div class="cardHeader">
-                    <h2>Danh sách người dùng</h2>
-                    <a href="accounts?showAll=true" class="btn">Xem Tất Cả</a>
-                </div>
+
 
                 <div class="list-account-content-button">
-                    <button id="add_account">Thêm tài khoản</button>
+                    <button id="add_account" onclick="openModalAdd()">Thêm tài khoản</button>
                 </div>
                 <table id="userTable" class="display">
                     <thead>
@@ -196,71 +201,7 @@
                     </thead>
 
                     <tbody>
-                    <c:forEach var="list_account" items="${list_admin_owner}">
-                        <tr>
-                            <td>${list_account.id}</td>
-                            <td>${list_account.username}</td>
-                            <td>${list_account.email}</td>
-                            <td>${list_account.phoneNumber}</td>
-                            <td><span class="statusText">${list_account.status} </span></td>
-                            <td>${list_account.role}</td>
-                            <td>
-                                <div class="v">
-                                    <c:choose>
 
-
-                                        <c:when test="${sessionScope.user.role eq 'owner'}">
-                                            <c:choose>
-                                                <c:when test="${list_account.role eq 'owner'}">
-
-                                                    <button style="background: #ccced0" class="auth-btn" disabled>Hạ quyền</button>
-                                                    <button style="background: #ccced0" class="edit-btn" disabled>Sửa</button>
-                                                </c:when>
-                                                <c:otherwise>
-
-                                                    <button class="auth-btn" data-id="${list_account.id}">Hạ quyền</button>
-
-                                                    <button class="edit-btn"
-                                                            data-id="${list_account.id}"
-                                                            data-status="${list_account.status}"
-                                                            data-role="${list_account.role}">
-                                                        Sửa
-                                                    </button>
-
-                                                </c:otherwise>
-                                            </c:choose>
-                                        </c:when>
-
-
-                                        <c:when test="${sessionScope.user.role eq 'admin'}">
-                                            <c:choose>
-                                                <c:when test="${sessionScope.user.id eq list_account.id}">
-
-                                                    <button style="background: #ccced0" class="auth-btn" disabled>Hạ quyền</button>
-                                                    <button style="background: #ccced0" class="edit-btn" disabled>Sửa</button>
-                                                </c:when>
-                                                <c:otherwise>
-
-
-                                                    <button style="background: #ccced0" class="auth-btn" disabled>Hạ quyền</button>
-                                                    <button style="background: #ccced0" class="edit-btn" disabled>Sửa</button>
-                                                </c:otherwise>
-                                            </c:choose>
-                                        </c:when>
-                                        <c:otherwise>
-                                            <button class="auth-btn" data-id="${list_account.id}">Hạ quyền</button>
-                                            <button class="edit-btn"
-                                                    data-id="${list_account.id}"
-                                                    data-status="${list_account.status}"
-                                                    data-role="${list_account.role}">
-                                                Sửa
-                                            </button>
-                                        </c:otherwise>
-                                    </c:choose>
-                                </div>
-                            </td>
-                        </tr>
-                    </c:forEach>
                     </tbody>
                 </table>
             </div>
@@ -271,7 +212,7 @@
         <div id="addAccount" class="modal">
             <div class="modal-content">
                 <h3>Thêm tài khoản mới</h3>
-                <form id="addAccountForm" action="add-account" method="post">
+                <form id="addAccountForm">
                     <label for="username">Tên tài khoản:</label>
                     <input type="text" id="username" name="username" required>
 
@@ -286,12 +227,10 @@
                         <option value="admin">Admin</option>
                         <option value="user">User</option>
                     </select>
-                    <c:if test="${not empty error}">
-                        <p style="color: red;">${error}</p>
-                    </c:if>
+                    <span class="error" id="emailExit" style="display: none"></span>
 
                     <button id="saveAccountUser" type="submit">Lưu tài khoản</button>
-                    <button type="button" class="close-modal">Thoát</button>
+                    <button type="button" class="close-modal" onclick="closeModalAdd()">Thoát</button>
                 </form>
             </div>
         </div>
@@ -301,9 +240,10 @@
             <div class="modal-content">
                 <h3>Xác nhận hạ quyền</h3>
                 <label>Bạn có chắc chắn muốn hạ quyền tài khoản này xuống user không?</label>
+                <input type="hidden" id="userIdRole" >
                 <div class="button-container">
-                    <button id="confirm-delete" class="confirm-delete">Đồng ý</button>
-                    <button class="close-modal">Hủy</button>
+                    <button id="confirm-delete" class="confirm-delete" onclick="confirmCloseRole()">Đồng ý</button>
+                    <button class="close-modal" onclick="closeModalCloseRole()">Hủy</button>
                 </div>
             </div>
         </div>
@@ -313,19 +253,22 @@
         <div id="updatePermissionsModal" class="modal">
             <div class="modal-content">
                 <h3>Cập nhật quyền</h3>
-                <form id="updatePermissionsForm" action="update-permissions-admin" method="post">
-                    <input type="hidden" id="userId" name="userId">
+                <form id="updatePermissionsForm">
+                    <input type="hidden" id="userId">
 
                     <label for="module">Chức năng:</label>
 
                     <select id="module" name="module" style="margin-right: 100px">
                         <option value="user">Quản lý khách hàng</option>
                         <option value="product">Quản lý sản phẩm</option>
+                        <option value="inventory">Quản lý tồn kho</option>
                         <option value="order">Quản lý đơn hàng</option>
                         <option value="review">Quản lý đánh giá</option>
                         <option value="promotional">Quản lý khuyến mãi</option>
                         <option value="admin">Quản lý quản trị viên</option>
+                        <option value="Log">Quản lý nhật kí</option>
                         <option value="category">Quản lý danh mục</option>
+                        <option value="stocktransaction">Quản lý lịch sử nhập xuất</option>
                     </select>
 
 
@@ -340,18 +283,18 @@
 
                     <div class="button-container">
                         <button type="submit">Lưu thay đổi</button>
-                        <button type="button" class="close-modal">Thoát</button>
+                        <button type="button" class="close-modal" onclick="closeModalEdit()">Thoát</button>
                     </div>
                 </form>
             </div>
         </div>
-        <%-- Kiểm tra xem có thông báo nào không --%>
-        <c:if test="${not empty sessionScope.errorMessage}">
-            <div class="alert alert-info">
-                    ${sessionScope.errorMessage}
-            </div>
-            <% session.removeAttribute("errorMessage"); %> <!-- Xóa thông báo ngay sau khi hiển thị -->
-        </c:if>
+
+
+        </div>
+    <%-- Kiểm tra xem có thông báo nào không --%>
+    <div id="message" class="alert alert-info" style="display: none">
+        <!-- Thông báo lỗi sẽ được chèn vào đây -->
+    </div>
     </div>
     <!-- Modal Xác Nhận Đăng Xuất -->
     <div id="logout-modal" class="modal">
@@ -368,6 +311,9 @@
 
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 <script src="<c:url value="/admin/js/index.js"/>"></script>
+<script>
+    const currentUserRole = '${sessionScope.user.role}';
+</script>
 <script src="<c:url value="/admin/js/manager_admin_owner.js"/>"></script>
 <script>
     document.addEventListener("DOMContentLoaded", function () {
@@ -379,30 +325,7 @@
         }
     });
 </script>
-<script>
-    $(document).ready(function () {
-        $('#userTable').DataTable({
-            "paging": true,         // Bật phân trang
-            "searching": true,      // Bật tìm kiếm
-            "ordering": true,       // Bật sắp xếp
-            "info": true,           // Hiển thị thông tin tổng số dòng
-            "lengthMenu": [5, 10, 25, 50], // Số dòng hiển thị mỗi trang
-            "language": {
-                "search": "Tìm kiếm:",
-                "lengthMenu": "Hiển thị _MENU_ dòng",
-                "info": "Trang _PAGE_ trên tổng _PAGES_ trang",
-                "zeroRecords": "Không tìm thấy kết quả",
-                "infoEmpty": "Không có dữ liệu",
-                "paginate": {
-                    "first": "Đầu",
-                    "last": "Cuối",
-                    "next": "Tiếp",
-                    "previous": "Trước"
-                }
-            }
-        });
-    });
-</script>
+
 <script>
     $(document).ready(function () {
         $(".edit-btn").click(function () {

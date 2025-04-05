@@ -9,20 +9,24 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 
 @WebServlet(name = "updateStatus" , value = "/update-status-role-account")
 public class UpdateStatusAccountController  extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+       resp.setContentType("application/json");
+       resp.setCharacterEncoding("UTF-8");
         String ids = req.getParameter("userId");
         String status = req.getParameter("status");
         String role = req.getParameter("role");
 
         // Kiểm tra id và status trước khi xử lý
         if (ids == null || ids.trim().isEmpty()) {
-            req.setAttribute("error", "ID  không hợp lệ.");
-            req.getRequestDispatcher("/accounts").forward(req, resp);
+            PrintWriter out = resp.getWriter();
+            out.println("{\"error\": true, \"message\":\"Cập nhật thất bại.\"}");
+            out.flush();
             return;
         }
 
@@ -30,8 +34,9 @@ public class UpdateStatusAccountController  extends HttpServlet {
         try {
             id = Integer.parseInt(ids); // Chuyển đổi id sang số nguyên
         } catch (NumberFormatException e) {
-            req.setAttribute("error", "ID không phải là số hợp lệ.");
-            req.getRequestDispatcher("/accounts").forward(req, resp);
+            PrintWriter out = resp.getWriter();
+            out.println("{\"error\": true, \"message\":\"Cập nhật thất bại.\"}");
+            out.flush();
             return;
         }
 
@@ -41,14 +46,18 @@ public class UpdateStatusAccountController  extends HttpServlet {
             if (userService.UpdateStatusOrRoleUser(role,status, id)) {
                 // Hủy session của người bị hạ quyền
                 SessionManager.invalidateSession(id);
-                resp.sendRedirect(req.getContextPath() + "/accounts");
+                PrintWriter out = resp.getWriter();
+                out.println("{\"message\":\"Cập nhật thành công\"}");
+                out.flush();
             } else {
-                req.setAttribute("error", "Cập nhật trạng thái không thành công.");
-                req.getRequestDispatcher("/accounts").forward(req, resp);
+                PrintWriter out = resp.getWriter();
+                out.println("{\"message\":\"Cập nhật không thành công\"}");
+                out.flush();
             }
         } catch (SQLException e) {
-            req.setAttribute("error", "Lỗi hệ thống: " + e.getMessage());
-            req.getRequestDispatcher("/accounts").forward(req, resp);
+            PrintWriter out = resp.getWriter();
+            out.println("{\"error\": true, \"message\":\"Cập nhật thất bại.\"}");
+            out.flush();
         }
     }
 

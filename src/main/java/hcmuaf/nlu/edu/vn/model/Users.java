@@ -19,9 +19,9 @@ public class Users {
     private Date createDate;
     private Date updateDate;
     private boolean isDeleted;
-    private List<Permission> permissions;  // Danh sách quyền của user
 
-    public Users(int id, String email, String fullName, String username, String password, String address, String phoneNumber, String role, String status, int isEmailVerified, double totalPrice, Date createDate, Date updateDate, List<Permission> permissions) {
+
+    public Users(int id, String email, String fullName, String username, String password, String address, String phoneNumber, String role, String status, int isEmailVerified, double totalPrice, Date createDate, Date updateDate) {
         this.id = id;
         this.email = email;
         this.fullName = fullName;
@@ -35,10 +35,10 @@ public class Users {
         this.totalPrice = totalPrice;
         this.createDate = createDate;
         this.updateDate = updateDate;
-        this.permissions = permissions;
+
     }
 
-    public Users(int id, String email, String fullName, String username, String password, String address, String phoneNumber, String role, String status, int isEmailVerified, double totalPrice, Date createDate, Date updateDate, boolean isDeleted, List<Permission> permissions) {
+    public Users(int id, String email, String fullName, String username, String password, String address, String phoneNumber, String role, String status, int isEmailVerified, double totalPrice, Date createDate, Date updateDate, boolean isDeleted) {
         this.id = id;
         this.email = email;
         this.fullName = fullName;
@@ -53,7 +53,7 @@ public class Users {
         this.createDate = createDate;
         this.updateDate = updateDate;
         this.isDeleted = isDeleted;
-        this.permissions = permissions;
+
     }
 
     public Users() {
@@ -222,13 +222,7 @@ public class Users {
         this.updateDate = updateDate;
     }
 
-    public List<Permission> getPermissions() {
-        return permissions;
-    }
 
-    public void setPermissions(List<Permission> permissions) {
-        this.permissions = permissions;
-    }
 
     @Override
     public String toString() {

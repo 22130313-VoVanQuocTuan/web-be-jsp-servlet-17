@@ -91,7 +91,7 @@ td {
 }
 
 .import_export .recentOrders table tr td {
-    padding: 10px;
+    padding: 5px;
 }
 
 .import_export .recentOrders table tr td:nth-child(3) {
@@ -119,31 +119,8 @@ button {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
-/* Định dạng modal */
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.4);
-}
 
-.modal-content {
-    background: linear-gradient(to left, #4f3131, #15283e);
-    margin: 20% auto;
-    padding: 20px;
-    border-color: #f88e62;
-    width: 80%;
-    max-width: 400px;
-    border-radius: 8px;
-    margin-left: 45%;
-}
-.modal-content:hover {
-    transform: scale(1.02);
-}
+
 /* =============== Delete modal =========================== */
 #delete-modal .modal-content label {
     color: #F5F5DC;

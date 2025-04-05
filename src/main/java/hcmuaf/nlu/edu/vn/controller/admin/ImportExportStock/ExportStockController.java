@@ -1,6 +1,5 @@
 package hcmuaf.nlu.edu.vn.controller.admin.ImportExportStock;
 
-import com.google.api.client.util.DateTime;
 import com.google.gson.Gson;
 import hcmuaf.nlu.edu.vn.model.Inventory;
 import hcmuaf.nlu.edu.vn.model.Users;
@@ -16,9 +15,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDateTime;
 
-
-@WebServlet("/importInventory")
-public class ImportStock extends HttpServlet {
+@WebServlet("/exportInventory")
+public class ExportStockController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String productId = req.getParameter("productId");
@@ -30,22 +28,21 @@ public class ImportStock extends HttpServlet {
 
         try {
             int quantityInt = Integer.parseInt(quantity);
-            service.importStock(productId, quantityInt);
+            service.exportStock(productId, quantityInt);
             service.updateInventoryStatus(productId);
-            service.addInfoImportExportStock("Nhập kho", String.valueOf(LocalDateTime.now()), user.getId(), note, quantityInt, productId);
+            service.addInfoImportExportStock("Xuất kho", String.valueOf(LocalDateTime.now()), user.getId(), note, quantityInt, productId);
 
-            // Gửi response JSON về client
+
             resp.setContentType("application/json");
             resp.setCharacterEncoding("UTF-8");
             PrintWriter out = resp.getWriter();
-            out.println("{\"message\":\"Nhập hàng thành công.\"}");
+            out.println("{\"message\":\"Xuất hàng thành công.\"}");
             out.flush();
         } catch (Exception e) {
             e.printStackTrace();
             resp.setContentType("application/json");
             resp.setCharacterEncoding("UTF-8");
-            resp.getWriter().write("{\"error\": \"Có lỗi xảy ra khi nhập kho.\"}");
-
+            resp.getWriter().write("{\"error\": \"Có lỗi xảy ra khi xuất kho.\"}");
         }
     }
 }

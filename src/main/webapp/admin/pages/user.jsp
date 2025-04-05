@@ -67,7 +67,7 @@
             </li>
 
             <li class="hov active">
-                <a href="accounts">
+                <a href="turn-page?action=user">
                         <span class="icon">
                             <ion-icon name="people-outline"></ion-icon>
                         </span>
@@ -81,6 +81,14 @@
                             <ion-icon name="cube-outline"></ion-icon>
                         </span>
                     <span class="title">Quản lý sản phẩm</span>
+                </a>
+            </li>
+            <li>
+                <a href="turn-page?action=inventory">
+                        <span class="icon">
+                            <ion-icon name="storefront-outline"></ion-icon>
+                        </span>
+                    <span class="title">Quản lý tồn kho</span>
                 </a>
             </li>
             <li>
@@ -126,7 +134,7 @@
                 </a>
             </li>
             <li>
-                <a href="list_admin_owner">
+                <a href="turn-page?action=managerOwner">
                         <span class="icon">
                             <ion-icon name="settings"></ion-icon>
                         </span>
@@ -134,7 +142,7 @@
                 </a>
             </li>
             <li>
-                <a href="listLog">
+                <a href="turn-page?action=log">
                         <span class="icon">
                             <ion-icon name="time-outline"></ion-icon>
                         </span>
@@ -174,7 +182,7 @@
                     <h2>Danh sách người dùng</h2>
                 </div>
                 <div class="list-account-content-button">
-                    <button id="add_account">Thêm tài khoản</button>
+                    <button id="add_account" onclick="openModalAdd()">Thêm tài khoản</button>
                 </div>
                 <table id="userTable" class="display">
                     <thead>
@@ -190,67 +198,7 @@
                     </thead>
 
                     <tbody>
-                    <c:forEach var="list_account" items="${list_user}">
-                        <tr>
-                            <td>${list_account.id}</td>
-                            <td>${list_account.username}</td>
-                            <td>${list_account.email}</td>
-                            <td>${list_account.phoneNumber}</td>
-                            <td><span class="statusText">${list_account.status} </span></td>
-                            <td>${list_account.role}</td>
-                            <td>
-                                <div class="v">
-                                    <c:choose>
-                                        <c:when test="${list_account.role eq 'owner'}">
-                                            <button style="background: #ccced0" class="delete-btn" disabled>Xóa</button>
-                                            <button style="background: #ccced0" class="edit-btn" disabled>Sửa</button>
-                                        </c:when>
-                                        <c:when test="${list_account.role eq 'admin'}">
-                                            <c:choose>
-                                                <c:when test="${sessionScope.user.role eq 'owner'}">
-                                                    <c:choose>
 
-                                                        <c:when test="${sessionScope.user.id eq list_account.id}">
-                                                            <button style="background: #ccced0" class="delete-btn"
-                                                                    disabled>Xóa
-                                                            </button>
-                                                        </c:when>
-                                                        <c:otherwise>
-                                                            <button class="delete-btn" data-id="${list_account.id}">
-                                                                Xóa
-                                                            </button>
-                                                        </c:otherwise>
-                                                    </c:choose>
-                                                    <button class="edit-btn"
-                                                            data-id="${list_account.id}"
-                                                            data-status="${list_account.status}"
-                                                            data-role="${list_account.role}">
-                                                        Sửa
-                                                    </button>
-                                                </c:when>
-                                                <c:otherwise>
-                                                    <button style="background: #ccced0" class="delete-btn" disabled>
-                                                        Xóa
-                                                    </button>
-                                                    <button style="background: #ccced0" class="edit-btn" disabled>Sửa
-                                                    </button>
-                                                </c:otherwise>
-                                            </c:choose>
-                                        </c:when>
-                                        <c:otherwise>
-                                            <button class="delete-btn" data-id="${list_account.id}">Xóa</button>
-                                            <button class="edit-btn"
-                                                    data-id="${list_account.id}"
-                                                    data-status="${list_account.status}"
-                                                    data-role="${list_account.role}">
-                                                Sửa
-                                            </button>
-                                        </c:otherwise>
-                                    </c:choose>
-                                </div>
-                            </td>
-                        </tr>
-                    </c:forEach>
                     </tbody>
                 </table>
             </div>
@@ -259,7 +207,7 @@
         <div id="addAccount" class="modal">
             <div class="modal-content">
                 <h3>Thêm tài khoản mới</h3>
-                <form id="addAccountForm" action="add-account" method="post">
+                <form id="addAccountForm">
                     <label for="username">Tên tài khoản:</label>
                     <input type="text" id="username" name="username" required>
 
@@ -274,12 +222,10 @@
                         <option value="admin">Admin</option>
                         <option value="user">User</option>
                     </select>
-                    <c:if test="${not empty error}">
-                        <p style="color: red;">${error}</p>
-                    </c:if>
+                    <span class="error" id="emailExit" style="display: none"></span>
 
                     <button id="saveAccountUser" type="submit">Lưu tài khoản</button>
-                    <button type="button" class="close-modal">Thoát</button>
+                    <button type="button" class="close-modal" onclick="closeModalAdd()">Thoát</button>
                 </form>
             </div>
         </div>
@@ -289,26 +235,24 @@
             <div class="modal-content">
                 <h3>Xác nhận xóa</h3>
                 <label>Bạn có chắc chắn muốn xóa tài khoản này?</label>
+                <input type="hidden" id="userIdDelete">
                 <div class="button-container">
-                    <button id="confirm-delete" class="confirm-delete">Xóa</button>
-                    <button class="close-modal">Hủy</button>
+                    <button id="confirm-delete" class="confirm-delete" onclick="deleteUser()">Xóa</button>
+                    <button class="close-modal" onclick="closeModalDelete()">Hủy</button>
                 </div>
             </div>
         </div>
         <%-- Kiểm tra xem có thông báo nào không --%>
-        <c:if test="${not empty sessionScope.errorMessage}">
-            <div class="alert alert-info">
-                    ${sessionScope.errorMessage}
-            </div>
-            <% session.removeAttribute("errorMessage"); %> <!-- Xóa thông báo ngay sau khi hiển thị -->
-        </c:if>
+        <div id="message" class="alert alert-info" style="display: none">
+            <!-- Thông báo lỗi sẽ được chèn vào đây -->
+        </div>
 
         <!--Cập nhật trạng thái và quyền -->
         <div id="update" class="modal">
             <div class="modal-content">
                 <h3>Cập nhật trạng thái và quyền</h3>
-                <form id="updateModal" action="update-status-role-account" method="post">
-                    <input type="hidden" id="userId" name="userId">
+                <form id="updateModal" >
+                    <input type="hidden" id="userId">
 
                     <label for="status">Trạng thái:</label>
                     <select id="status" name="status">
@@ -327,7 +271,7 @@
                     </c:choose>
                     <div class="button-container">
                         <button id="saveAccount" type="submit">Lưu thay đổi</button>
-                        <button type="button" class="close-modal">Thoát</button>
+                        <button type="button" class="close-modal" onclick="closeModalEdit()">Thoát</button>
                     </div>
                 </form>
             </div>
@@ -360,30 +304,7 @@
         }
     });
 </script>
-<script>
-    $(document).ready(function () {
-        $('#userTable').DataTable({
-            "paging": true,         // Bật phân trang
-            "searching": true,      // Bật tìm kiếm
-            "ordering": true,       // Bật sắp xếp
-            "info": true,           // Hiển thị thông tin tổng số dòng
-            "lengthMenu": [5, 10, 25, 50], // Số dòng hiển thị mỗi trang
-            "language": {
-                "search": "Tìm kiếm:",
-                "lengthMenu": "Hiển thị _MENU_ dòng",
-                "info": "Trang _PAGE_ trên tổng _PAGES_ trang",
-                "zeroRecords": "Không tìm thấy kết quả",
-                "infoEmpty": "Không có dữ liệu",
-                "paginate": {
-                    "first": "Đầu",
-                    "last": "Cuối",
-                    "next": "Tiếp",
-                    "previous": "Trước"
-                }
-            }
-        });
-    });
-</script>
+
 <script>
     $(document).ready(function () {
         $(".edit-btn").click(function () {

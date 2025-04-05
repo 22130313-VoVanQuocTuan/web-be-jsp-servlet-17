@@ -38,6 +38,7 @@ public class UpdateStatusOrderController extends HttpServlet {
             boolean isOrderUpdated = orderService.updateOrderStatus(id, statusOrder);
             boolean isPaymentUpdated = orderService.updateOrderPaymentStatus(id, statusPayment);
 
+
             if (isOrderUpdated && isPaymentUpdated) {
                 request.setAttribute("successStatus", "Cập nhật trạng thái đơn hàng và thanh toán thành công!");
             } else if (isOrderUpdated) {

@@ -84,7 +84,7 @@
             </li>
 
             <li>
-                <a href="accounts">
+                <a href="turn-page?action=user">
                         <span class="icon">
                             <ion-icon name="people-outline"></ion-icon>
                         </span>
@@ -98,6 +98,14 @@
                             <ion-icon name="cube-outline"></ion-icon>
                         </span>
                     <span class="title">Quản lý sản phẩm</span>
+                </a>
+            </li>
+            <li>
+                <a href="turn-page?action=inventory">
+                        <span class="icon">
+                            <ion-icon name="storefront-outline"></ion-icon>
+                        </span>
+                    <span class="title">Quản lý tồn kho</span>
                 </a>
             </li>
             <li>
@@ -143,7 +151,7 @@
                 </a>
             </li>
             <li>
-                <a href="list_admin_owner">
+                <a href="turn-page?action=managerOwner">
                         <span class="icon">
                             <ion-icon name="settings"></ion-icon>
                         </span>
@@ -151,7 +159,7 @@
                 </a>
             </li>
             <li class="hov active">
-                <a href="listLog">
+                <a href="turn-page?action=log">
                         <span class="icon">
                             <ion-icon name="time-outline"></ion-icon>
                         </span>
@@ -160,11 +168,11 @@
             </li>
 
             <li>
-                <a href="logout">
+                <a href="" id="logout-link">
                         <span class="icon">
                             <ion-icon name="log-out-outline"></ion-icon>
                         </span>
-                    <span class="title" onclick="lockout()">Đăng Xuất</span>
+                    <span class="title" id="log-out">Đăng Xuất</span>
                 </a>
             </li>
         </ul>
@@ -189,8 +197,8 @@
             <div class="recentOrders">
                 <div class="cardHeader">
                     <h2>Danh sách lưu trữ log của hệ thống</h2>
-                    <form method="post" action="cleanLog">
-                        <select name="level">
+                    <form id="cleanLog">
+                        <select name="level" id="level">
                             <option value="INFO">INFO</option>
                             <option value="ERROR">ERROR</option>
                             <option value="WARNING">WARNING</option>
@@ -203,7 +211,7 @@
 
                 <table id="logTable">
                     <thead>
-                    <tr>
+                    <tr style=" background: linear-gradient(to right, #4f3131, #15283e); color: #FFFFFF;font-size: 13px;">
                         <th>Level</th>
                         <th>Username</th>
                         <th>Ngày bắt đầu</th>
@@ -214,19 +222,6 @@
                     </tr>
                     </thead>
                     <tbody>
-                       <c:forEach var="log" items="${logList}">
-                            <tr>
-                                <td>${log.level}</td>
-                                <td>${log.username}</td>
-                                <td>${log.startLog}</td>
-                                <td>${log.address}</td>
-                                <td>${log.dataBefore}</td>
-                                <td>${log.dataAfter}</td>
-                                <td class="v">
-                                    <button style="color: #000000" class="delete-btn" data-id="${log.id}">Xóa</button>
-                                </td>
-                            </tr>
-                        </c:forEach>
 
                     </tbody>
                 </table>
@@ -237,20 +232,31 @@
             <div class="modal-content">
                 <h3>Xác nhận xóa</h3>
                 <label>Bạn có chắc chắn muốn xóa thông tin  này?</label>
+                <input type="hidden" id="logId">
                 <div class="button-container">
-                    <button id="confirm-delete" class="confirm-delete">Xóa</button>
-                    <button  class="close-modal">Hủy</button>
+                    <button id="confirm-delete" class="confirm-delete" onclick="deleteLog()">Xóa</button>
+                    <button  class="close-modal" onclick="closeModalDeleteLog()">Hủy</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="message" class="alert alert-info" style="display: none">
+            <!-- Thông báo lỗi sẽ được chèn vào đây -->
+        </div>
+
+        <!-- Modal Xác Nhận Đăng Xuất -->
+        <div id="logout-modal" class="modal">
+            <div class="modal-content">
+                <h3>Xác nhận đăng xuất</h3>
+                <label>Bạn có chắc chắn muốn đăng xuất?</label>
+                <div class="button-container">
+                    <button id="confirm-logout">Đăng Xuất</button>
+                    <button id="cancel-logout">Hủy</button>
                 </div>
             </div>
         </div>
     </div>
-    <%-- Kiểm tra xem có thông báo nào không --%>
-    <c:if test="${not empty sessionScope.errorMessage}">
-    <div class="alert alert-info">
-            ${sessionScope.errorMessage}
-    </div
-            <% session.removeAttribute("errorMessage"); %> <!-- Xóa thông báo ngay sau khi hiển thị -->
-    </c:if>
+
 </div>
 
 
@@ -258,30 +264,6 @@
 <script src="<c:url value="/admin/js/index.js"/>"></script>
 <script src ="<c:url value="/admin/js/manager_log.js"/>"></script>
 
-<script>
-    $(document).ready(function () {
-        $('#logTable').DataTable({
-            "padding" : true,
-            "search" : true,
-            "ordering" : true,
-            "info": true,
-            "lengthMenu": [5, 10, 25, 50], // Số dòng hiển thị mỗi trang
-            "language": {
-                "search": "Tìm kiếm:",
-                "lengthMenu": "Hiển thị _MENU_ dòng",
-                "info": "Trang _PAGE_ trên tổng _PAGES_ trang",
-                "zeroRecords": "Không tìm thấy kết quả",
-                "infoEmpty": "Không có dữ liệu",
-                "paginate": {
-                    "first": "Đầu",
-                    "last": "Cuối",
-                    "next": "Tiếp",
-                    "previous": "Trước"
-                }
-            }
-        });
-    });
-</script>
 
 
 </body>

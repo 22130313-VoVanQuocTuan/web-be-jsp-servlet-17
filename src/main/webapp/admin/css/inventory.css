@@ -1,0 +1,301 @@
+/* Tổng thể cho .content */
+:root {
+    --blue: #2a2185;
+    --white: #fff;
+    --gray: #f5f5f5;
+    --black1: #222;
+    --black2: #999;
+}
+.import_export {
+    position: relative;
+    width: 100%;
+    padding-bottom: 20px;
+    display: grid;
+
+    grid-gap: 30px;
+
+}
+/*Thêm sản phẩm*/
+.import_export_stock button {
+    padding: 8px;
+    font-size: 13px;
+    float: right;
+    margin-top: 10px;
+    border-radius: 5px;
+    background-color: #4f3131;
+    text-decoration: none;
+    color: var(--gray);
+    font-weight: bold;
+}
+
+.import_export_stock a:hover {
+    background: linear-gradient(to right, #4f3131, #15283e);
+    color: var(--white);
+}
+
+.import_export .recentOrders {
+    position: relative;
+    display: grid;
+    min-height: 275px;
+    background: var(--white);
+    padding: 20px;
+    box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
+    border-radius: 20px;
+
+    margin-left: 30px;
+}
+
+.import_export .cardHeader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+.import_export table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    margin-bottom: 133px;
+}
+
+.import_export table th,
+td {
+    border: 1px solid #ccc;
+    text-align: center;
+    padding: 15px;
+}
+
+.import_export table thead td {
+    font-weight: 600px;
+    background-color: var(--gray);
+    color: var(--white);
+    font-weight: bolder;
+    background: linear-gradient(to right, #4f3131, #15283e);
+
+}
+
+.import_export .recentOrders table tr {
+    color: var(--black1);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.import_export .recentOrders table tr:last-child {
+    border-bottom: none;
+}
+
+.import_export .recentOrders table tbody tr:hover {
+    background: linear-gradient(to right, #4f3131, #15283e);
+    color: var(--white);
+}
+
+.import_export .recentOrders table tr td {
+    padding: 4px;
+}
+
+.import_export .recentOrders table tr td:nth-child(3) {
+    text-align: center;
+}
+
+.v button{
+    border: none;
+    padding: 7px;
+    cursor: pointer;
+    background: #ffffff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    margin-right: 10px;
+    width: max-content;
+}
+/* Nút hành động */
+button {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 4px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: #15283e;
+    background: #f7d774;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    margin: 4px
+}
+
+/* Định dạng modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content-i {
+    background: linear-gradient(to right, #4f3131, #15283e);
+    color: #ffffff;
+    padding: 15px;
+    width: 28%;
+    margin: 5% auto;
+    border-radius: 15px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+    transform: scale(1);
+    transition: transform 0.3s ease-in-out;
+}
+.modal-content-i:hover {
+    transform: scale(1.02);
+}
+.modal-content-logout {
+    background: linear-gradient(to right, #4f3131, #15283e);
+    color: #ffffff;
+    padding: 15px;
+    width: 28%;
+    margin: 5% auto;
+    border-radius: 15px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+    transform: scale(1);
+    transition: transform 0.3s ease-in-out;
+}
+.modal-content-i:hover {
+    transform: scale(1.02);
+}
+/* =============== Delete modal =========================== */
+#delete-modal .modal-content-i label {
+    color: #F5F5DC;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#delete-modal .modal-content-i h3 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+    text-transform: uppercase;
+    color: #f7d774;
+    background: none;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+    border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+    padding-bottom: 10px;
+}
+
+#delete-modal .modal-content-i .button-container {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    width: 100%;
+}
+
+#delete-modal .modal-content-i .button-container button:first-child {
+    margin-top: 15px;
+    background-color: #f88e62;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+#delete-modal .modal-content-i .button-container button:last-child {
+    margin-top: 15px;
+    background-color: #f88e62;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+#delete-modal .modal-content-i .button-container button:hover{
+    transform: scale(1.1);
+}
+
+/*----------------- Add Product modal --------------*/
+
+#importModal .modal-content-i h3, #exportModal .modal-content h3, #updateQuantityModal h3 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+    background: none;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+    border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+    padding-bottom: 10px;
+}
+
+/* Form Styling */
+#importStockForm ,  #exportStockForm, #updateInventoryForm{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+ #importStockForm label,  #exportStockForm label, #updateInventoryForm label {
+    font-size: 13px;
+    font-weight: bold;
+    color: #f7d774;
+}
+
+ #importStockForm input,  #exportStockForm input, #updateInventoryForm input {
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid #f7d774;
+    border-radius: 8px;
+    padding: 7px;
+    color: #ffffff;
+    font-size: 10px;
+    outline: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+
+
+#importStockForm input:focus, #exportStockForm input:focus, #updateInventoryForm input:focus {
+    border-color: #f88e62;
+    box-shadow: 0 0 8px #f88e62;
+}
+
+
+
+/* Buttons */
+#importStockForm button, #exportStockForm button  {
+    background: #f88e62;
+    color: #ffffff;
+    border: none;
+    padding: 7px 12px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: 0.3s ease, transform 0.3s ease;
+}
+
+#importStockForm button:hover, #exportStockForm button:hover , #updateInventoryForm button:hover {
+    background: #e2704e;
+    transform: scale(1.05);
+}
+
+.close_modal  {
+    background: #4f3131;
+    color: #ffffff;
+    border: 2px solid #ffffff;
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: 0.3s ease, color 0.3s ease;
+}
+
+.close_modal:hover {
+    background: #ffffff;
+    color: #4f3131;
+}
+
+.error{
+    color: #ff0000;
+    font-size: 10px;
+    display: none;
+}

@@ -9,6 +9,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 
 @WebServlet(name = "addAccount" , value = "/add-account")
@@ -20,6 +21,9 @@ public class AddAccountController extends HttpServlet {
         String email = req.getParameter("email");
         String role = req.getParameter("role");
 
+        resp.setContentType("application/json");
+        resp.setCharacterEncoding("UTF-8");
+
 
         UserService userService = new UserService();
         try {
@@ -27,14 +31,17 @@ public class AddAccountController extends HttpServlet {
                 Users user = userService.getUser(username);
                 userService.verifyEmail(email);
                 userService.UpdateStatusOrRoleUser(null, "Đang chờ xử lý", user.getId());
-                resp.sendRedirect(req.getContextPath()+"/accounts");
+                PrintWriter out = resp.getWriter();
+                out.println("{\"message\":\"Thêm tài khoản thành công\"}");
+                out.flush();
             } else {
-            req.setAttribute("error", "Email hoặc tài khoản đã tồn tại.");
-            req.setAttribute("showModal", true); // Thêm thuộc tính hiển thị modal
-            req.getRequestDispatcher("/accounts").forward(req, resp); // Hiển thị lại form với thông báo lỗi
+                PrintWriter out = resp.getWriter();
+                out.println("{\"emailExit\":\"Email hoặc tài khoản đã tồn tại\"}");
+                out.flush();
         }
         } catch (SQLException e) {
             throw new RuntimeException(e);
+
         }
     }
 }
