@@ -20,6 +20,8 @@ import java.util.List;
 public class GetListImportExportController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setContentType("application/json");
+        resp.setCharacterEncoding("UTF-8");
         ImportExportService service = new ImportExportService();
         List<Import_Export_Stock> list = new ArrayList<>();
         HttpSession session = req.getSession();
@@ -31,11 +33,14 @@ public class GetListImportExportController extends HttpServlet {
 
         try {
             list = service.getListAllImportExportStock(); // Lấy danh sách
-            req.setAttribute("listImportExportStock", list);
-            req.getRequestDispatcher("/admin/pages/import_export.jsp").forward(req, resp);
+           Gson gson = new Gson();
+           String json = gson.toJson(list);
+
+           resp.getWriter().write(json);
         } catch (Exception e) {
             e.printStackTrace();
-            resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Lỗi lấy danh sách nhập xuất kho");
+            resp.getWriter().write("{\"error\": \"Có lỗi xảy ra khi cập nhật kho.\"}");
+
         }
         }
 }

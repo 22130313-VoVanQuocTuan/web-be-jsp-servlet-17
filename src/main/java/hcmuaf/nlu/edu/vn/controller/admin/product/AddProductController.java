@@ -1,6 +1,8 @@
 package hcmuaf.nlu.edu.vn.controller.admin.product;
 
+import hcmuaf.nlu.edu.vn.model.Inventory;
 import hcmuaf.nlu.edu.vn.model.Product;
+import hcmuaf.nlu.edu.vn.service.InventoryService;
 import hcmuaf.nlu.edu.vn.service.ProductService;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
@@ -58,11 +60,12 @@ public class AddProductController extends HttpServlet {
             String quantityStr = request.getParameter("quantity");
             String description = request.getParameter("description");
             String categoryIdStr = request.getParameter("categoryId");
-            String status = request.getParameter("status");
-            String supplier = request.getParameter("supplier");
+             String supplier = request.getParameter("supplier");
             String color = request.getParameter("color");
             String size = request.getParameter("size");
             String unit = request.getParameter("unit");
+            int minimumQuantity = Integer.parseInt(request.getParameter("minimumQuantity"));
+            int maximumQuantity = Integer.parseInt(request.getParameter("maximumQuantity"));
             String discountPercentStr = request.getParameter("discountPercent");
 
 
@@ -104,13 +107,31 @@ public class AddProductController extends HttpServlet {
             double discountPrice = price * (1 - discountPercent);
 
             // Tạo đối tượng Product
-            Product product = new Product(0, name, price, quantity, imageUrl, description, categoryId, status, supplier, color, size, unit, 0, 0, discountPercent, discountPrice, new Timestamp(System.currentTimeMillis()), new Timestamp(System.currentTimeMillis()));
+            Product product = new Product(0, name, price, imageUrl, description, categoryId, supplier, color, size, unit, 0, 0, discountPercent, discountPrice, new Timestamp(System.currentTimeMillis()), new Timestamp(System.currentTimeMillis()));
 
             // Gọi ProductService để thêm sản phẩm
             boolean isAdded = productService.addProduct(product);
-            // Gửi thông báo thành công hoặc thất bại
+
             if (isAdded) {
+                // Lấy productId vừa được thêm từ database
+                int productId = productService.getLastInsertedProductId(); // Viết thêm hàm này trong ProductService
+
+                String status = "";
+                if(quantity ==0){
+                    status = "Hết hàng";
+                } else if (quantity>0) {
+                    status= "Còn hàng";
+                }
+
+                // Tạo đối tượng Inventory
+                Inventory inventory = new Inventory(productId, name, quantity, status, minimumQuantity, maximumQuantity);
+
+                // Thêm vào tồn kho
+                InventoryService inventoryService = new InventoryService();
+                inventoryService.addInventory(inventory);
                 request.setAttribute("message", "Thêm sản phẩm thành công!");
+
+
             } else {
                 request.setAttribute("message", "Thêm sản phẩm không thành công.");
             }

@@ -238,8 +238,8 @@
                         Thanh toán qua VNPay
                     </label>
                     <!-- Thông báo lỗi chung -->
-                    <div id="error-message" style="color: red; display: none; margin-top: 20px;">Vui lòng điền
-                        đầy đủ thông tin để thanh toán.
+                    <div id="error-message" style=" color: red; display: block; margin-top: 6px;font-size: 8px;
+                    font-weight: bold; margin-left: 3px;">Vui lòng điền đầy đủ thông tin để thanh toán.
                     </div>
                 </div>
             </div>

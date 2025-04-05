@@ -43,15 +43,34 @@ function updateStatusColors() {
 // Gọi hàm để áp dụng màu ngay khi trang được tải
 document.addEventListener("DOMContentLoaded", updateStatusColors);
 // thông báo tắt trong 3s
-window.addEventListener('DOMContentLoaded', function () {
+// window.addEventListener('DOMContentLoaded', function () {
+//     const alert = document.querySelector('.alert');
+//     if (alert) {
+//         setTimeout(function () {
+//             alert.classList.add('fade-out');
+//         }, 3000);  // 3 giây trước khi bắt đầu hiệu ứng biến mất
+//     }
+// });
+function showAlert() {
     const alert = document.querySelector('.alert');
     if (alert) {
-        setTimeout(function () {
-            alert.classList.add('fade-out');
-        }, 3000);  // 3 giây trước khi bắt đầu hiệu ứng biến mất
-    }
-});
+        alert.style.display = 'block'; // Hiển thị thông báo
 
+
+        alert.classList.remove('fade-out');
+
+        setTimeout(function () {
+            alert.classList.add('fade-out'); // Thêm lớp fade-out để làm mờ thông báo
+        }, 1000);  // 3 giây trước khi bắt đầu hiệu ứng biến mất
+
+        // Sau khi fade-out hoàn thành, ẩn đi thông báo và có thể tái sử dụng
+        alert.addEventListener('transitionend', function() {
+            if (alert.classList.contains('fade-out')) {
+                alert.style.display = 'none'; // Ẩn đi sau khi hiệu ứng fade-out kết thúc
+            }
+        });
+    }
+}
 //Gọi hàm logout
 document.addEventListener("DOMContentLoaded", function () {
     const logoutLink = document.getElementById("logout-link");

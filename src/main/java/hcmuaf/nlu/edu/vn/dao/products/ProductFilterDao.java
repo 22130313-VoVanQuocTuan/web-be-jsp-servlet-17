@@ -19,7 +19,7 @@ public class ProductFilterDao {
     // ----------------- Filter ------------------------------
     // Phương thức lấy sản phẩm phổ biến (được sắp xếp theo số lượng bán)
     public List<Product> getPopularProducts() throws SQLException {
-        String sql = "SELECT * FROM products ORDER BY soldCount DESC";
+        String sql = "SELECT * FROM products p JOIN inventory i ON p.id=i.productId ORDER BY soldCount DESC";
         List<Product> products = new ArrayList<>();
         try (PreparedStatement stmt = dbConnect.preparedStatement(sql);
              ResultSet rs = stmt.executeQuery()) {
@@ -36,7 +36,7 @@ public class ProductFilterDao {
 
     // Phương thức lấy sản phẩm mới nhất (được sắp xếp theo ngày tạo)
     public List<Product> getNewestProducts() throws SQLException {
-        String sql = "SELECT * FROM products ORDER BY createDate DESC";
+        String sql = "SELECT * FROM products p JOIN inventory i ON p.id=i.productId ORDER BY createDate DESC";
         List<Product> products = new ArrayList<>();
         try (PreparedStatement stmt = dbConnect.preparedStatement(sql);
              ResultSet rs = stmt.executeQuery()) {
@@ -53,7 +53,7 @@ public class ProductFilterDao {
 
     // Lấy ra sản phẩm của danh mục với bộ lọc giá cao đến thấp-giảm dần (theo price)
     public List<Product> getProductsByPriceDescending() throws SQLException {
-        String sql = "SELECT * FROM products ORDER BY price DESC";
+        String sql = "SELECT * FROM products p JOIN inventory i ON p.id=i.productId ORDER BY price DESC";
         List<Product> products = new ArrayList<>();
         try (PreparedStatement stmt = dbConnect.preparedStatement(sql);
              ResultSet rs = stmt.executeQuery()) {
@@ -71,7 +71,7 @@ public class ProductFilterDao {
 
     // Lấy ra sản phẩm của danh mục với bộ lọc giá cao đến thấp-tăng dần (theo price)
     public List<Product> getProductsByPriceAscending() throws SQLException {
-        String sql = "SELECT * FROM products ORDER BY price ASC";
+        String sql = "SELECT * FROM products  p JOIN inventory i ON p.id=i.productId ORDER BY price ASC";
         List<Product> products = new ArrayList<>();
         try (PreparedStatement stmt = dbConnect.preparedStatement(sql);
              ResultSet rs = stmt.executeQuery()) {
@@ -91,7 +91,7 @@ public class ProductFilterDao {
     //  ---------------------------  Filter theo danh mục---------------------------
     // Lấy ra sản phẩm của danh mục với bộ lọc phổ biến (theo soldCount)
     public List<Product> getPopularProductsByCategory(int categoryId) throws SQLException {
-        String sql = "SELECT * FROM products WHERE categoryId = ? ORDER BY soldCount DESC";
+        String sql = "SELECT * FROM products p JOIN inventory i ON p.id=i.productId WHERE categoryId = ? ORDER BY soldCount DESC";
         List<Product> products = new ArrayList<>();
         try (PreparedStatement stmt = dbConnect.preparedStatement(sql)) {
             stmt.setInt(1, categoryId);
@@ -106,7 +106,7 @@ public class ProductFilterDao {
 
     // Lấy ra sản phẩm của danh mục với bộ lọc mới nhất (theo createDate)
     public List<Product> getNewestProductsByCategory(int categoryId) throws SQLException {
-        String sql = "SELECT * FROM products WHERE categoryId = ? ORDER BY createDate DESC";
+        String sql = "SELECT * FROM products p JOIN inventory i ON p.id=i.productId WHERE categoryId = ? ORDER BY createDate DESC";
         List<Product> products = new ArrayList<>();
         try (PreparedStatement stmt = dbConnect.preparedStatement(sql)) {
             stmt.setInt(1, categoryId);
@@ -121,7 +121,7 @@ public class ProductFilterDao {
 
     // Lấy ra sản phẩm của danh mục với bộ lọc giá cao đến thấp-giảm dần (theo price)
     public List<Product> getProductsByPriceDescendingAndCategoryId(int categoryId) throws SQLException {
-        String sql = "SELECT * FROM products WHERE categoryId = ? ORDER BY price DESC";
+        String sql = "SELECT * FROM products p JOIN inventory i ON p.id=i.productId WHERE categoryId = ? ORDER BY price DESC";
         List<Product> products = new ArrayList<>();
         try (PreparedStatement stmt = dbConnect.preparedStatement(sql)) {
             stmt.setInt(1, categoryId);
@@ -141,7 +141,7 @@ public class ProductFilterDao {
     }
 
     public List<Product> getProductsByPriceAscendingAndCategoryId(int categoryId) throws SQLException {
-        String sql = "SELECT * FROM products WHERE categoryId = ? ORDER BY price ASC";
+        String sql = "SELECT * FROM products p JOIN inventory i ON p.id=i.productId WHERE categoryId = ? ORDER BY price ASC";
         List<Product> products = new ArrayList<>();
         try (PreparedStatement stmt = dbConnect.preparedStatement(sql)) {
             stmt.setInt(1, categoryId);

@@ -88,7 +88,7 @@
             </li>
 
             <li>
-                <a href="accounts">
+                <a href="turn-page?action=user">
                         <span class="icon">
                             <ion-icon name="people-outline"></ion-icon>
                         </span>
@@ -102,6 +102,14 @@
                             <ion-icon name="cube-outline"></ion-icon>
                         </span>
                     <span class="title">Quản lý sản phẩm</span>
+                </a>
+            </li>
+            <li>
+                <a href="turn-page?action=inventory">
+                        <span class="icon">
+                            <ion-icon name="storefront-outline"></ion-icon>
+                        </span>
+                    <span class="title">Quản lý tồn kho</span>
                 </a>
             </li>
             <li>
@@ -147,7 +155,7 @@
                 </a>
             </li>
             <li>
-                <a href="list_admin_owner">
+                <a href="turn-page?action=managerOwner">
                         <span class="icon">
                             <ion-icon name="settings"></ion-icon>
                         </span>
@@ -155,7 +163,7 @@
                 </a>
             </li>
             <li>
-                <a href="listLog">
+                <a href="turn-page?action=log">
                         <span class="icon">
                             <ion-icon name="time-outline"></ion-icon>
                         </span>

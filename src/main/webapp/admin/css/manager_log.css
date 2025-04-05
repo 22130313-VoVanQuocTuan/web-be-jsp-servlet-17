@@ -74,7 +74,7 @@ td {
 }
 
 .log .recentOrders table tr td {
-    padding: 10px;
+    padding: 0px;
 }
 
 .log .recentOrders table tr td:nth-child(3) {
@@ -117,13 +117,12 @@ button {
 
 .modal-content {
     background: linear-gradient(to left, #4f3131, #15283e);
-    margin: 20% auto;
     padding: 20px;
     border-color: #f88e62;
     width: 80%;
     max-width: 400px;
     border-radius: 8px;
-    margin-left: 45%;
+
 }
 .modal-content:hover {
     transform: scale(1.02);

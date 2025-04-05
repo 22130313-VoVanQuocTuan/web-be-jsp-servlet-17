@@ -196,7 +196,19 @@ public class UserService {
         newUser.setRole(role);
         return addDeleteUpdateAccountInAdminDao.addAccount(newUser);
     }
-
+    public boolean addAccountGGFB(String username, String password, String email, String role) throws SQLException {
+        // Kiểm tra xem email và tên tài khoản đã tồn tại
+        if (signUpDao.checkExistenceEmail(email)) {
+            return false;
+        }
+        // Thêm người dùng vào cơ sở dữ liệu
+        Users newUser = new Users();
+        newUser.setEmail(email);
+        newUser.setUsername(username);
+        newUser.setPassword(password);  // Mã hóa mật khẩu
+        newUser.setRole(role);
+        return addDeleteUpdateAccountInAdminDao.addAccount(newUser);
+    }
     //Xóa tài khoản
     public boolean deleteAccount(int id) {
         return addDeleteUpdateAccountInAdminDao.deleteAccount(id);

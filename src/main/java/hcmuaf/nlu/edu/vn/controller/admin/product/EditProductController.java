@@ -2,6 +2,7 @@ package hcmuaf.nlu.edu.vn.controller.admin.product;
 
 import hcmuaf.nlu.edu.vn.dao.DBConnect;
 import hcmuaf.nlu.edu.vn.model.Product;
+import hcmuaf.nlu.edu.vn.service.InventoryService;
 import hcmuaf.nlu.edu.vn.service.ProductService;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
@@ -41,8 +42,6 @@ public class EditProductController extends HttpServlet {
             double price = Double.parseDouble(request.getParameter("price"));
             int categoryId = Integer.parseInt(request.getParameter("categoryId"));
             String discountPercent = request.getParameter("discountPercent");
-            int quantity = Integer.parseInt(request.getParameter("quantity"));
-            String status = request.getParameter("status");
             String supplier = request.getParameter("supplier");
             String color = request.getParameter("color");
             String size = request.getParameter("size");
@@ -76,8 +75,9 @@ public class EditProductController extends HttpServlet {
             // Lấy phần hình ảnh nếu có
             Part imagePart = request.getPart("imageUrl");
             double discountPrice = discountPercents * price;
-            Product updateProduct = new Product(productId, name, price, quantity, imageUrl, description, categoryId, status, supplier, color, size, unit, discountPercents, discountPrice);
-
+            Product updateProduct = new Product(productId, name, price, imageUrl, description, categoryId, supplier, color, size, unit, discountPercents, discountPrice);
+            InventoryService inventoryService = new InventoryService();
+            inventoryService.updateNameProduct(productId, name);
 
             // Kiểm tra và lưu ảnh nếu có
             if (imagePart != null && imagePart.getSize() > 0) {

@@ -84,4 +84,16 @@ public class SignUpDao {
             dbConnect.closeConnection(); // Đảm bảo đóng kết nối sau khi sử dụng
         }
     }
+
+    public boolean checkExistenceEmail(String email)  throws SQLException {
+        String sql = "SELECT 1 FROM users WHERE  email = ? LIMIT 1";
+        try (PreparedStatement stmt = dbConnect.preparedStatement(sql)) {
+                   stmt.setString(1, email);
+            try (ResultSet rs = stmt.executeQuery()) {
+                return rs.next();
+            }
+
+        }
+
+    }
 }

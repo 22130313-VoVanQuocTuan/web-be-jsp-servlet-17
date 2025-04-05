@@ -216,7 +216,7 @@
             </li>
 
             <li>
-                <a href="accounts">
+                <a href="turn-page?action=user">
                         <span class="icon">
                             <ion-icon name="people-outline"></ion-icon>
                         </span>
@@ -230,6 +230,14 @@
                             <ion-icon name="cube-outline"></ion-icon>
                         </span>
                     <span class="title">Quản lý sản phẩm</span>
+                </a>
+            </li>
+            <li>
+                <a href="turn-page?action=inventory">
+                        <span class="icon">
+                            <ion-icon name="storefront-outline"></ion-icon>
+                        </span>
+                    <span class="title">Quản lý tồn kho</span>
                 </a>
             </li>
             <li>
@@ -275,7 +283,7 @@
                 </a>
             </li>
             <li>
-                <a href="list_admin_owner">
+                <a href="turn-page?action=managerOwner">
                         <span class="icon">
                             <ion-icon name="settings"></ion-icon>
                         </span>
@@ -283,7 +291,7 @@
                 </a>
             </li>
             <li>
-                <a href="listLog">
+                <a href="turn-page?action=log">
                         <span class="icon">
                             <ion-icon name="time-outline"></ion-icon>
                         </span>
@@ -323,7 +331,7 @@
                 </div>
                 <div class="list-products-content-button">
                     <button id="add-product" style="margin-bottom: 10px">Thêm sản phẩm</button>
-                    <a href="listImportExportStock"><button id="import_export_stock" style="margin-bottom: 10px">Nhập/Xuất kho</button></a>
+
                 </div>
                 <!-- Table products -->
                 <table  id="productTable" style="margin-top: 10px" >
@@ -380,12 +388,11 @@
                         <span>${message}</span>
                     </div>
                 </c:if>
-
                 <!-- Mẫu điền thêm sản phẩm -->
                 <div id="addProductModal" class="modal">
                     <div class="modal-content">
                         <h3>Thêm sản phẩm mới</h3>
-                        <form id="addProductForm" action="/tqh/add-product" method="post" enctype="multipart/form-data">
+                        <form id="addProductForm" action="add-product" method="post" enctype="multipart/form-data">
 
                             <label for="productName">Tên sản phẩm:</label>
                             <input type="text" id="productName" name="name" placeholder="Nhập tên sản phẩm">
@@ -421,6 +428,14 @@
                                 <label for="unit">Đơn vị tính:</label>
                                 <input type="text" id="unit" name="unit" placeholder="Nhập đơn vị tính">
                             </div>
+                            <div class="modal-field">
+                                <label for="minimumQuantity">Số lượng tối thiểu</label>
+                                <input type="text" id="minimumQuantity" name="minimumQuantity" placeholder="Nhập số lượng">
+                            </div>
+                            <div class="modal-field">
+                                <label for="maximumQuantity">Số lượng tối đa</label>
+                                <input type="text" id="maximumQuantity" name="maximumQuantity" placeholder="Nhập số lượng">
+                            </div>
 
                             <div class="modal-field">
                                 <label for="description">Mô tả:</label>
@@ -428,11 +443,6 @@
                                           placeholder="Nhập mô tả sản phẩm"></textarea>
                             </div>
 
-                            <label for="productStatus">Trạng thái:</label>
-                            <select id="productStatus" name="status">
-                                <option value="active">Còn hàng</option>
-                                <option value="inactive">Hết hàng</option>
-                            </select>
 
                             <label for="productImage">Hình ảnh:</label>
                             <input type="file" id="productImage" name="imageUrl" accept="image/*" >
@@ -460,9 +470,6 @@
                             <label for="discountPercent">Tỷ lệ giảm giá (0 - 1):</label>
                             <input type="text" id="discountPercentEdit" name="discountPercent" placeholder="Nhập tỷ lệ giảm giá" value="${product.discountPercent}" >
 
-                            <label for="productStock">Tồn kho:</label>
-                            <input type="number" id="productStockEdit" name="quantity" placeholder="Nhập số lượng"value="${product.quantity}" >
-
                             <div class="modal-field">
                                 <label for="npp">Nhà phân phối:</label>
                                 <input type="text" id="nppEdit" name="supplier" placeholder="Nhập nhà phân phối" value="${product.supplier}" >
@@ -488,12 +495,6 @@
                                 <textarea id="descriptionEdit" name="description" rows="3"
                                           placeholder="Nhập mô tả sản phẩm"> ${product.description}</textarea>
                             </div>
-
-                            <label for="productStatus">Trạng thái:</label>
-                            <select id="productStatusEdit" name="status">
-                                <option value="Còn hàng" ${product.status != null && product.status == 'Còn hàn' ? 'selected' : ''}>Còn hàng</option>
-                                <option value="Hết hàng" ${product.status != null && product.status == 'Hết hàng' ? 'selected' : ''}>Hết hàng</option>
-                            </select>
 
                             <label for="productImage">Hình ảnh:</label>
                             <input type="file" id="productImageEdit" name="imageUrl" accept="image/*" >

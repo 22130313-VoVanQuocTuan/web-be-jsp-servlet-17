@@ -4,6 +4,8 @@
 // Hàm đóng modal
 function closeModal() {
     document.getElementById('orderDetailModal').style.display = "none";
+
+
 }
 
 // Đóng modal khi click ra ngoài modal

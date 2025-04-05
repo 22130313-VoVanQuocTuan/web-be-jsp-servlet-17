@@ -16,7 +16,7 @@ public class GetListPDiscountDao {
 
     public List<Product> getistProductDiscount() {
         List<Product> products = new ArrayList<>();
-        String sql = "SELECT * FROM products ORDER BY discountPercent DESC";
+        String sql = "SELECT * FROM products p JOIN inventory i ON p.id=i.productId ORDER BY discountPercent DESC";
 
         try (PreparedStatement ptm = dbConnect.preparedStatement(sql)) {
             ResultSet rs = ptm.executeQuery();

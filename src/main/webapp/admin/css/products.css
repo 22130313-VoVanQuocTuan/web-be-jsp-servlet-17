@@ -315,7 +315,7 @@ td {
 
 /*----------------- Add Product modal --------------*/
 
-#addProductModal .modal-content h3 {
+#addProductModal .modal-content h3,#importModal .modal-content h3 {
   font-size: 1.5rem;
   font-weight: bold;
   text-align: center;
@@ -328,19 +328,19 @@ td {
 }
 
 /* Form Styling */
-#addProductForm {
+#addProductForm, #importStockForm {
   display: flex;
   flex-direction: column;
   gap: 5px;
 }
 
-#addProductForm label {
+#addProductForm label, #importStockForm label {
   font-size: 13px;
   font-weight: bold;
   color: #f7d774;
 }
 
-#addProductForm input {
+#addProductForm input, #importStockForm input {
   background: rgba(255, 255, 255, 0.1);
   border: 2px solid #f7d774;
   border-radius: 8px;
@@ -357,7 +357,7 @@ td {
 }
 
 #addProductForm input:focus,
-#addProductForm select:focus {
+#addProductForm select:focus, #importStockForm input:focus {
   border-color: #f88e62;
   box-shadow: 0 0 8px #f88e62;
 }
@@ -373,7 +373,7 @@ td {
 }
 
 /* Buttons */
-#addProductForm button {
+#addProductForm button, #importStockForm button  {
   background: #f88e62;
   color: #ffffff;
   border: none;
@@ -386,12 +386,12 @@ td {
   transition: 0.3s ease, transform 0.3s ease;
 }
 
-#addProductForm button:hover {
+#addProductForm button:hover ,#importStockForm button:hover {
   background: #e2704e;
   transform: scale(1.05);
 }
 
-.close_modal {
+.close_modal  {
   background: #4f3131;
   color: #ffffff;
   border: 2px solid #ffffff;

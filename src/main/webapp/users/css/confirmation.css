@@ -446,9 +446,9 @@ body.overlay-active {
 }
 
 .error-message {
-    color: red;
-    font-size: 14px;
+    color: #ff3232;
+    font-size: 8px;
     font-weight: bold;
-    margin-left: 12%;
-    margin-top: 2%;
+    margin-left: 1%;
+    margin-top: -4%;
 }

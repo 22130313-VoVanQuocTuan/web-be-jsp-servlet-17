@@ -84,7 +84,7 @@
             </li>
 
             <li>
-                <a href="accounts">
+                <a href="turn-page?action=user">
                         <span class="icon">
                             <ion-icon name="people-outline"></ion-icon>
                         </span>
@@ -92,12 +92,20 @@
                 </a>
             </li>
 
-            <li>
+            <li  >
                 <a href="products-list">
                         <span class="icon">
                             <ion-icon name="cube-outline"></ion-icon>
                         </span>
                     <span class="title">Quản lý sản phẩm</span>
+                </a>
+            </li>
+            <li class="hov active">
+                <a href="turn-page?action=inventory">
+                        <span class="icon">
+                            <ion-icon name="storefront-outline"></ion-icon>
+                        </span>
+                    <span class="title">Quản lý tồn kho</span>
                 </a>
             </li>
             <li>
@@ -125,7 +133,7 @@
                     <span class="title">Quản lý danh mục</span>
                 </a>
             </li>
-            <li class="hov active">
+            <li >
                 <a href="list-rating">
                         <span class="icon">
                             <ion-icon name="chatbubble-outline"></ion-icon>
@@ -143,7 +151,7 @@
                 </a>
             </li>
             <li>
-                <a href="list_admin_owner">
+                <a href="turn-page?action=managerOwner">
                         <span class="icon">
                             <ion-icon name="settings"></ion-icon>
                         </span>
@@ -151,7 +159,7 @@
                 </a>
             </li>
             <li>
-                <a href="listLog">
+                <a href="turn-page?action=log">
                         <span class="icon">
                             <ion-icon name="time-outline"></ion-icon>
                         </span>
@@ -189,39 +197,21 @@
             <div class="recentOrders">
                 <div class="cardHeader">
                     <h2>Danh sách nhập xuất kho</h2>
-                    <div class="import_export_stock" style="display: flex;" >
-                        <button id="import_stock" style="margin-bottom: 10px">Nhập kho</button>
-                        <button id=export_stock style="margin-bottom: 10px">Xuất kho</button>
-                    </div>
-
-                </div>
+                       </div>
 
                 <table id="transactionTable">
                     <thead>
                     <tr>
                         <td>Loại giao dịch</td>
+                        <td>Sản phẩm</td>
+                        <td>Số lượng</td>
                         <td>Ngày thực hiện</td>
                         <td>Nhân viên thực hiện giao dịch</td>
-                        <td>Tổng giá tị giao dịch</td>
                         <td>Ghi chú</td>
                         <td>Hành động</td>
                     </tr>
                     </thead>
                     <tbody>
-                    <c:forEach var="list" items="${listImportExportStock}">
-                        <tr>
-                            <td>${list.transactionType}</td>
-                            <td>${list.transactionDate}</td>
-                            <td>${list.username}</td>
-                            <td>${list.note}</td>
-                            <td>${list.totalCost}</td>
-                            <td class="v">
-                                <button class="delete-btn" data-id="${list.id}">Xóa</button>
-                                <button class="detail-btn" data-id="${list.id}">Chi tiết</button>
-                            </td>
-                        </tr>
-
-                    </c:forEach>
                     <!-- Thêm các dòng dữ liệu khác tại đây -->
                     </tbody>
                 </table>
@@ -229,26 +219,20 @@
 
 
         </div>
-        <!-- Modal Xóa đánh giá -->
+        <!-- Modal Xóa giao diichj -->
         <div id="delete-modal" class="modal">
             <div class="modal-content">
                 <h3>Xác nhận xóa</h3>
-                <label>Bạn có chắc chắn muốn xóa đánh giá này?</label>
+                <label>Bạn có chắc chắn muốn xóa thông tin giao dịch này?</label>
+                <input type="hidden" id="transactionId">
                 <div class="button-container">
-                    <button id="confirm-delete" class="confirm-delete">Xóa</button>
-                    <button  class="close-modal">Hủy</button>
+                    <button id="confirm-delete" onclick="deleteTransactionStock()">Xóa</button>
+                    <button  class="close-modal" onclick="closeModal()">Hủy</button>
                 </div>
             </div>
         </div>
     </div>
-    <%-- Kiểm tra xem có thông báo nào không --%>
-    <c:if test="${not empty sessionScope.errorMessage}">
-    <div class="alert alert-info">
-            ${sessionScope.errorMessage}
-    </div
-            <% session.removeAttribute("errorMessage"); %> <!-- Xóa thông báo ngay sau khi hiển thị -->
-    </c:if>
-            <!-- Modal Xác Nhận Đăng Xuất -->
+   <!-- Modal Xác Nhận Đăng Xuất -->
     <div id="logout-modal" class="modal">
         <div class="modal-content">
             <h3>Xác nhận đăng xuất</h3>
@@ -259,6 +243,10 @@
             </div>
         </div>
     </div>
+    <div id="message" class="alert alert-info" style="display: none">
+        <!-- Thông báo lỗi sẽ được chèn vào đây -->
+    </div>
+
 </div>
 
 
@@ -266,30 +254,6 @@
 <script src="<c:url value="/admin/js/index.js"/>"></script>
 <script src ="<c:url value="/admin/js/import_export.js"/>"></script>
 
-<script>
-    $(document).ready(function () {
-        $('#transactionTable').DataTable({
-            "padding" : true,
-            "search" : true,
-            "ordering" : true,
-            "info": true,
-            "lengthMenu": [5, 10, 25, 50], // Số dòng hiển thị mỗi trang
-            "language": {
-                "search": "Tìm kiếm:",
-                "lengthMenu": "Hiển thị _MENU_ dòng",
-                "info": "Trang _PAGE_ trên tổng _PAGES_ trang",
-                "zeroRecords": "Không tìm thấy kết quả",
-                "infoEmpty": "Không có dữ liệu",
-                "paginate": {
-                    "first": "Đầu",
-                    "last": "Cuối",
-                    "next": "Tiếp",
-                    "previous": "Trước"
-                }
-            }
-        });
-    });
-</script>
 
 </body>
 

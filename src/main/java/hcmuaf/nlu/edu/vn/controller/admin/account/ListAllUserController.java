@@ -1,5 +1,6 @@
 package hcmuaf.nlu.edu.vn.controller.admin.account;
 
+import com.google.gson.Gson;
 import hcmuaf.nlu.edu.vn.model.Users;
 import hcmuaf.nlu.edu.vn.service.UserService;
 import jakarta.servlet.ServletException;
@@ -31,11 +32,15 @@ public class ListAllUserController extends HttpServlet {
                     .filter(users -> "user".equals(users.getRole()))
                     .collect(Collectors.toList());
 
+            Gson gson = new Gson();
+            String json = gson.toJson(listUser);
+            resp.setContentType("application/json");
+            resp.setCharacterEncoding("UTF-8");
+            resp.getWriter().write(json);
 
-            req.setAttribute("list_user", listUser);
-            req.getRequestDispatcher("/admin/pages/user.jsp").forward(req, resp);
         } catch (Exception e) {
             throw new RuntimeException(e);
+
         }
     }
 
