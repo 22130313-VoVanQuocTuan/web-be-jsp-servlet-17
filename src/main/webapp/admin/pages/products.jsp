@@ -207,7 +207,7 @@
                     <h2>Danh sách sản phẩm</h2>
                 </div>
                 <div class="list-products-content-button">
-                    <button id="add-product" style="margin-bottom: 10px">Thêm sản phẩm</button>
+                    <button id="add-product" style="margin-bottom: 10px" onclick="openModalAdd(${product.id})">Thêm sản phẩm</button>
                 </div>
                 <!-- Table products -->
                 <table id="productTable" style="margin-top: 10px">
@@ -233,8 +233,8 @@
                     <div class="modal-content">
                         <h3>Thêm sản phẩm mới</h3>
                         <form id="addProductForm" action="add-product" method="post" enctype="multipart/form-data">
-
                             <label for="productName">Tên sản phẩm:</label>
+                            <input type="hidden" id="producttId">
                             <input type="text" id="productName" name="name" placeholder="Nhập tên sản phẩm">
 
                             <label for="productPrice">Giá:</label>
