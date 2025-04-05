@@ -41,7 +41,7 @@ public class ConfirmPaymentCODController extends HttpServlet {
         // Lấy các giá trị từ form và session
         String shippingAddress = request.getParameter("shipping_address");
         String paymentMethod = "COD"; // lấy giá trị từ hidden field
-        String status= "Đang xử lí ";
+        String status= "Chưa hoàn thành";
         String paymentStatus ="Chưa thanh toán ";
 
         // Lấy thông tin giỏ hàng từ session

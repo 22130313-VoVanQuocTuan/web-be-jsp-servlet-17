@@ -122,7 +122,7 @@
                 </a>
             </li>
             <li class="hov active">
-                <a href="order-list">
+                <a href="turn-page?action=order">
                         <span class="icon">
                             <ion-icon name="receipt-outline"></ion-icon>
                         </span>
@@ -220,31 +220,14 @@
                         <td>Mã khách hàng</td>
                         <td>Ngày đặt hàng</td>
                         <td>Tổng tiền</td>
-                        <td>Hình thức thanh toán</td>
                         <td>Trạng thái</td>
+                        <td>Hình thức thanh toán</td>
+                        <td>Trạng thái thanh toán</td>
                         <td>Hành động</td>
                     </tr>
                     </thead>
                     <tbody>
-                    <c:forEach var="order" items="${orderList}">
-                        <tr>
-                            <td>${order.id}</td>
-                            <td>${order.userId}</td>
-                            <td><fmt:formatDate value="${order.createdAt}" pattern="dd-MM-yyyy HH:mm:ss"/></td>
-                            <td><fmt:formatNumber value="${order.totalPrice}" type="number"/>₫</td>
-                            <td>${order.paymentMethod}</td>
-                            <td><span class="status ${order.paymentStatus == 'Đã thanh toán' ? 'status-paid' : 'status-unpaid'}">
-                                    ${order.paymentStatus}
-                            </span></td>
-                            <td class="v">
-                                <button> <a href="GetDetailOrder?id=${order.id}" class="view-detail-btn" style="text-decoration: none ; color: #1c293d" >Chi tiết</a>
-                                </button>
-                                <button class="delete-btn" data-id="${order.id}">Xóa</button>
-                            </td>
-                        </tr>
-                    </c:forEach>
 
-                    <!-- Thêm các dòng dữ liệu khác tại đây -->
                     </tbody>
                 </table>
             </div>
@@ -258,7 +241,7 @@
                 <h2 class="modal-title">Chi tiết đơn hàng</h2>
                 <div id="orderDetailContent">
                     <!-- Thông tin chi tiết -->
-                    <table class="order-detail-table">
+                    <table id="orderDetail" class="order-detail-table">
                         <thead>
                         <tr>
                             <th>Tên sản phẩm</th>
@@ -269,51 +252,40 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <c:forEach var="oi" items="${orIt}">
-                            <tr>
-                                <td>${oi.productName}</td>
-                                <td>${oi.quantity}</td>
-                                <td><fmt:formatNumber value="${oi.price}" type="number"/>₫</td>
-                                <td><fmt:formatNumber value="${oi.discount}" type="number"/>₫</td>
-                                <td><fmt:formatNumber value="${oi.totalPrice}" type="number"/>₫</td>
-                            </tr>
-                        </c:forEach>
+
                         </tbody>
                     </table>
                     <div class="order-info">
-                        <p><strong>Mã đơn hàng:</strong> <span class="info-highlight">${orIn.id}</span></p>
-                        <p><strong>Tổng tiền:</strong> <span class="info-highlight"><fmt:formatNumber value="${orIn.totalPrice}" type="number"/> ₫</span></p>
-                        <p><strong>Phí giao hàng:</strong> <span class="info-highlight"><fmt:formatNumber value="${orIn.shippingFee}" type="number"/> ₫</span></p>
-                        <p><strong>Số tiền giảm giá:</strong> <span class="info-highlight total-price"><fmt:formatNumber value="${orIn.discountAmount}" type="number"/> ₫</span></p>
-                        <p><strong>Phương thức thanh toán:</strong> <span class="badge success">${orIn.paymentMethod}</span></p>
-                        <p><strong>Trạng thái thanh toán:</strong> <span class="badge success">${orIn.paymentStatus}</span></p>
-                        <p><strong>Địa chỉ:</strong>${orIn.shippingAddress}</p>
-                        <p><strong>Số lượng:</strong>${orIn.quantity}</p>
-                        <p><strong>Email:</strong>${orIn.email}</p>
-                        <p><strong>Người nhận hàng:</strong>${orIn.name}</p>
-                        <p><strong>Số điện thoại:</strong>${orIn.phoneNumber}</p>
-                        <p><strong>Ghi chú:</strong>${orIn.note}</p>
+                        <p><strong>Mã đơn hàng:</strong> <span class="info-highlight" id="modal-order-id"></span></p>
+                        <p><strong>Tổng tiền:</strong> <span class="info-highlight" id="modal-total-price"></span></p>
+                        <p><strong>Phí giao hàng:</strong> <span class="info-highlight" id="modal-shipping-fee"></span></p>
+                        <p><strong>Số tiền giảm giá:</strong> <span class="info-highlight total-price" id="modal-discount-amount"></span></p>
+                        <p><strong>Phương thức thanh toán:</strong> <span class="badge success" id="modal-payment-method"></span></p>
+                        <p><strong>Trạng thái thanh toán:</strong> <span class="badge success" id="modal-payment-status"></span></p>
+                        <p><strong>Địa chỉ:</strong> <span id="modal-address"></span></p>
+                        <p><strong>Số lượng:</strong> <span id="modal-quantity"></span></p>
+                        <p><strong>Email:</strong> <span id="modal-email"></span></p>
+                        <p><strong>Người nhận hàng:</strong> <span id="modal-name"></span></p>
+                        <p><strong>Số điện thoại:</strong> <span id="modal-phone"></span></p>
+                        <p><strong>Ghi chú:</strong> <span id="modal-note"></span></p>
                         <div class="update-order">
                             <p style="font-size: 16px; margin-bottom: 5px;">Cập nhật trạng thái đơn hàng</p>
-                            <form action="update-status-order" method="post">
-                                <input type="hidden" name="id" value="${orIn.id}"> <!-- Đảm bảo gửi ID đơn hàng -->
+                            <form id="orderForm">
+                                <input type="hidden" id="orderId" name="id"> <!-- Đảm bảo gửi ID đơn hàng -->
 
                                 <label for="statusSelect">Chọn trạng thái:</label>
                                 <select title="choice" id="statusSelect" name="statusPayment"
                                         style="font-size: 11px; border-radius: 5px; padding: 5px; margin-left: 10px; margin-right: 10px;">
-                                    <option value="Đã thanh toán" ${orIn.paymentStatus == 'Đã thanh toán' ? 'selected' : ''}>Đã thanh toán</option>
-                                    <option value="Chưa thanh toán" ${orIn.paymentStatus == 'Chưa thanh toán' ? 'selected' : ''}>Chưa thanh toán</option>
+                                    <option value="Đã thanh toán">Đã thanh toán</option>
+                                    <option value="Chưa thanh toán">Chưa thanh toán</option>
                                 </select>
 
                                 <!-- Nút cập nhật -->
                                 <button  type="submit" style="margin-top: 10px; padding: 6px 14px; font-size: 14px; background-color: #483033;
-                                     color: #f7d774; border: none; border-radius: 5px; cursor: pointer;">
+                                    color: #f7d774; border: none; border-radius: 5px; cursor: pointer;">
                                     Cập nhật
                                 </button>
-                                <!-- Hiển thị lỗi nếu có -->
-                                <c:if test="${not empty error}">
-                                    <p style="color: red;">${error}</p>
-                                </c:if>
+
                             </form>
                             <button id="exportPDF" type="button" style="padding: 7px 8px; background-color: #891f1f; color: white; border: none;margin-top: 15px; border-radius: 5px; cursor: pointer;">
                                 Xuất PDF
@@ -330,19 +302,18 @@
             <div class="modal-content"  style="margin-top: 10%;">
                 <h3>Xác nhận xóa</h3>
                 <label>Bạn có chắc chắn muốn xóa hóa đơn này?</label>
+                <input type="hidden" id="orderIdDelete">
                 <div class="button-container">
-                    <button id="confirm-delete" class="confirm-delete">Xóa</button>
-                    <button type="button" class="close-modal">Hủy</button>
+                    <button id="confirm-delete" class="confirm-delete" onclick="deleteOrder()">Xóa</button>
+                    <button type="button" class="close-modal" onclick="closeModals()">Hủy</button>
                 </div>
             </div>
         </div>
         <%-- Kiểm tra xem có thông báo nào không --%>
-        <c:if test="${not empty sessionScope.errorMessage}">
-            <div class="alert alert-info">
-                    ${sessionScope.errorMessage}
-            </div>
-            <% session.removeAttribute("errorMessage"); %> <!-- Xóa thông báo ngay sau khi hiển thị -->
-        </c:if>
+        <div id="message" class="alert alert-info" style="display: none">
+            <!-- Thông báo lỗi sẽ được chèn vào đây -->
+        </div>
+
 
 
     </div>
@@ -361,40 +332,11 @@
 </div>
 
 <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        // Kiểm tra nếu cần hiển thị modal
-        const showModal = "${showModal}" === "true";
-        if (showModal) {
-            const modal = document.getElementById('orderDetailModal');
-            modal.style.display = 'block';
-        }
-    });
-</script>
-<script>
-    $(document).ready(function () {
-        $('#orderTable').DataTable({
-            "paging": true,         // Bật phân trang
-            "searching": true,      // Bật tìm kiếm
-            "ordering": true,       // Bật sắp xếp
-            "info": true,           // Hiển thị thông tin tổng số dòng
-            "lengthMenu": [5,10,15,20],
-            "language": {
-                "lengthMenu": "Hiển thị _MENU_ dòng mỗi trang",
-                "zeroRecords": "Không tìm thấy đơn hàng nào",
-                "info": "Hiển thị _PAGE_ trên tổng _PAGES_ trang",
-                "search": "Tìm kiếm: ",
-                "paginate": {
-                    "first": "Đầu",
-                    "last": "Cuối",
-                    "previous": "<",
-                    "next": ">"
-                }
-            }
-        });
-    });
+
 </script>
 
 <!-- Thêm thư viện -->
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script>
@@ -423,7 +365,8 @@
     });
 </script>
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-<script src="<c:url value="/admin/js/order.js"/>"></script>
 <script src="<c:url value="/admin/js/index.js"/>"></script>
+<script src="<c:url value="/admin/js/order.js"/>"></script>
+
 </body>
 </html>

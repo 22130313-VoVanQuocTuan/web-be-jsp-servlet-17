@@ -165,8 +165,8 @@ public class OrderDao {
     public boolean updateOrderStatus(int id, String status) throws SQLException {
         String query = "UPDATE orders SET status = ? WHERE id = ?";
         try(PreparedStatement ps = dbConnect.preparedStatement(query)){
-            ps.setString(1, status);
             ps.setInt(2, id);
+            ps.setString(1, status);
             int rowUpdated = ps.executeUpdate();
             if(rowUpdated > 0) {
                 return true;
@@ -178,10 +178,10 @@ public class OrderDao {
     }
 
     //Cập nhật trạng thái đơn hàng
-    public boolean updateOrderPaymentStatus(int id, String status) throws SQLException {
+    public boolean updateOrderPaymentStatus(int id, String paymentStatus) throws SQLException {
         String query = "UPDATE orders SET paymentStatus = ? WHERE id = ?";
         try(PreparedStatement ps = dbConnect.preparedStatement(query)){
-            ps.setString(1, status);
+            ps.setString(1, paymentStatus);
             ps.setInt(2, id);
             int rowUpdated = ps.executeUpdate();
             if(rowUpdated > 0) {

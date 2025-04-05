@@ -1,5 +1,6 @@
 package hcmuaf.nlu.edu.vn.controller.admin.order;
 
+import com.google.gson.Gson;
 import hcmuaf.nlu.edu.vn.model.Orders;
 import hcmuaf.nlu.edu.vn.model.Users;
 import hcmuaf.nlu.edu.vn.service.OrderService;
@@ -32,8 +33,12 @@ public class GetOrderController extends HttpServlet {
         try {
             List<Orders> ordersList = orderService.getAllOrders();
 
-            request.setAttribute("orderList", ordersList);
-            request.getRequestDispatcher("admin/pages/order.jsp").forward(request, response);
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+            Gson gson = new Gson();
+            String json = gson.toJson(ordersList);
+            response.getWriter().write(json);
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
