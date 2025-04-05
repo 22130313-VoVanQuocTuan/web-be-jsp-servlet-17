@@ -52,10 +52,14 @@ public class TurnPageUrl extends HttpServlet {
         if("log".equals(action)) {
             req.getRequestDispatcher("/admin/pages/manager_log.jsp").forward(req, resp);
         }
+
         if("product".equals(action)) {
             req.getRequestDispatcher("/admin/pages/products.jsp").forward(req, resp);
         }
 
+        if("order".equals(action)) {
+            req.getRequestDispatcher("/admin/pages/order.jsp").forward(req, resp);
+        }
 
     }
 }

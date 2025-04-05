@@ -118,7 +118,7 @@
                 </a>
             </li>
             <li>
-                <a href="order-list">
+                <a href="turn-page?action=order">
                         <span class="icon">
                             <ion-icon name="receipt-outline"></ion-icon>
                         </span>
@@ -289,7 +289,7 @@
                     <c:forEach var="view" items="${viewOrder}">
                         <tr>
                             <td>${view.userId}</td>
-                            <td><fmt:formatNumber value="${view.totalPrice}" type="number"/>đ</td>
+                            <td><fmt:formatNumber value="${view.totalPrice}" type="number"/>₫</td>
                             <td>${view.paymentStatus}</td>
                             <td>${view.createdAt}</td>
                             <td>${view.status}</td>

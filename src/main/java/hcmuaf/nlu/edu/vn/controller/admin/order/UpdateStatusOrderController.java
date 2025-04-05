@@ -6,6 +6,7 @@ import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 
 @WebServlet(name = "UpdateStatusOrderController", value = "/update-status-order")
@@ -22,37 +23,31 @@ public class UpdateStatusOrderController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int id;
+      response.setContentType("application/json");
+      response.setCharacterEncoding("UTF-8");
+
+        int id = Integer.parseInt(request.getParameter("id"));
         String statusOrder = request.getParameter("statusOrder");
-        String statusPayment = request.getParameter("statusPayment");
+        String statusPayment = request.getParameter("statusSelect");
 
         try {
-            id = Integer.parseInt(request.getParameter("id"));
-        } catch (NumberFormatException e) {
-            request.setAttribute("error", "ID đơn hàng không hợp lệ.");
-            request.getRequestDispatcher("/order-list").forward(request, response);
-            return;
-        }
-
-        try {
-            boolean isOrderUpdated = orderService.updateOrderStatus(id, statusOrder);
-            boolean isPaymentUpdated = orderService.updateOrderPaymentStatus(id, statusPayment);
-
-
-            if (isOrderUpdated && isPaymentUpdated) {
-                request.setAttribute("successStatus", "Cập nhật trạng thái đơn hàng và thanh toán thành công!");
-            } else if (isOrderUpdated) {
-                request.setAttribute("successStatus", "Cập nhật trạng thái đơn hàng thành công!");
-            } else if (isPaymentUpdated) {
-                request.setAttribute("successStatus", "Cập nhật trạng thái thanh toán thành công!");
+          orderService.updateOrderPaymentStatus(id, statusPayment);
+            if (statusPayment.equals("Đã thanh toán")) {
+             orderService.updateOrderStatus(id, "Hoàn thành");
             } else {
-                request.setAttribute("error", "Cập nhật không thành công!");
+              orderService.updateOrderStatus(id, "Chưa hoàn thành");
             }
-            request.getRequestDispatcher("/order-list").forward(request, response);
+
+                PrintWriter out = response.getWriter();
+                out.println("{\"message\":\"Cập nhật thành công\"}");
+                out.flush();
+
+
         } catch (SQLException e) {
             e.printStackTrace();
-            request.setAttribute("error", "Đã xảy ra lỗi khi cập nhật đơn hàng.");
-            request.getRequestDispatcher("/order-list").forward(request, response);
+            PrintWriter out = response.getWriter();
+            out.println("{\"error\": true, \"message\":\"Cập nhật thất bại.\"}");
+            out.flush();
         }
     }
 }
