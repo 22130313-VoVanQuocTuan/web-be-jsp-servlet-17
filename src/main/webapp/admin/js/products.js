@@ -52,38 +52,7 @@ if (alert) {
     }, 3000);
 }
 
-function openImportModal(productId, price, productName) {
-    // Hiển thị modal nhập kho
-    document.getElementById("importModal").style.display = "block";
-    document.getElementById("productId").value = productId;
-    document.getElementById("price").value = price;
-    document.getElementById("productNames").value = productName;
-}
 
-function submitImport() {
-    let productId = document.getElementById("productId").value;
-    let price = document.getElementById("price").value;
-    let quantity = document.getElementById("importQuantity").value;
-    let note = document.getElementById("note").value;
-
-
-    $.ajax({
-        url: "import_stock",
-        type: "POST",
-        data: { productId: productId, quantity: quantity, note: note, price: price  },
-
-        success: function  (response) {
-            closeModalImport();
-            window.location.href = response.redirect;
-
-
-            }
-
-    });
-}
-function closeModalImport() {
-    document.getElementById('importModal').style.display = "none";
-}
 // ----------------------------------------------------------------------------------------------------------
 
 //Sửa sản phẩm

@@ -12,11 +12,12 @@ import jakarta.servlet.http.HttpSession;
 
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 @WebFilter(filterName = "admin-filter", urlPatterns = {"/add-account", "/delete-account", "/status-account", "/update-status-role-account","/update-permissions-admin",
 "/add-promotional", "/delete-promotional", "/update-status-promotional" ,"/delete-rating"
         , "/add-delete-category" ,"/add-product","/delete-product","/edit-product", "/update-status-order",
-        "/delete-order","/delete-Log", "/cleanLog"})
+        "/delete-order","/delete-Log", "/cleanLog", "/updateInventory" , "/import_stock" ,"/export_stock", "/deleteTransactionstock"})
 public class AdminFilter implements Filter {
     private PermissionService permissionService;
 
@@ -55,9 +56,19 @@ public class AdminFilter implements Filter {
             // Đặt thông báo vào session
             session.setAttribute("errorMessage", "Bạn không có quyền truy cập chức năng này.");
 
-            // Chuyển hướng về trang trước đó
-            res.sendRedirect(req.getHeader("Referer") != null ? req.getHeader("Referer") : req.getContextPath() + "/index.jsp");
+            // Kiểm tra nếu là yêu cầu AJAX
+            if ("XMLHttpRequest".equals(((HttpServletRequest) request).getHeader("X-Requested-With"))) {
+                // Gửi thông báo lỗi dưới dạng JSON nếu là AJAX
+                response.setContentType("application/json");
+                PrintWriter out = response.getWriter();
+                out.print("{\"error\": true, \"message\": \"Bạn không có quyền truy cập chức năng này.\"}");
+                out.flush();
+            } else {
+                // Chuyển hướng về trang trước đó nếu không phải là AJAX
+                res.sendRedirect(req.getHeader("Referer") != null ? req.getHeader("Referer") : req.getContextPath() + "/index.jsp");
+            }
             return;
+
         }
 
         chain.doFilter(request, response); // Cho phép tiếp tục request
@@ -73,6 +84,8 @@ public class AdminFilter implements Filter {
         if (requestUri.contains("rating") || requestUri.contains("review")) return "review";
         if (requestUri.contains("promotional")) return "promotional";
         if (requestUri.contains("admin")) return "admin";
+        if (requestUri.contains("Inventory")) return "inventory";
+        if (requestUri.contains("stock")) return "stocktransaction";
         if (requestUri.contains("Log")) return "Log";
         return null;
     }
@@ -81,7 +94,7 @@ public class AdminFilter implements Filter {
     private boolean hasAccess(Permissions permission, String requestUri) {
         if (requestUri.contains("add")) return permission.getCanAdd();
         if (requestUri.contains("delete") || requestUri.contains("clean")) return permission.getCanDelete();
-        if (requestUri.contains("edit") || requestUri.contains("update")) return permission.getCanEdit();
+        if (requestUri.contains("edit") || requestUri.contains("update") || requestUri.contains("import") || requestUri.contains("export"))  return permission.getCanEdit();
         return permission.getCanView(); // Mặc định cần quyền xem
     }
 

@@ -1,5 +1,6 @@
 package hcmuaf.nlu.edu.vn.controller.admin.log;
 
+import com.google.gson.Gson;
 import hcmuaf.nlu.edu.vn.model.Users;
 import hcmuaf.nlu.edu.vn.util.logUtil.Log;
 import hcmuaf.nlu.edu.vn.util.logUtil.LogUtilDao;
@@ -28,7 +29,12 @@ public class GetListLog extends HttpServlet {
         if (logs == null) {
             logs = new ArrayList<>(); // Tránh lỗi NullPointerException
         }
-        req.setAttribute("logList", logs);
-        req.getRequestDispatcher("/admin/pages/manager_log.jsp").forward(req, resp);
+        resp.setContentType("application/json");
+        resp.setCharacterEncoding("UTF-8");
+        Gson gson = new Gson();
+        String json = gson.toJson(logs);
+        resp.getWriter().write(json);
+
+
     }
 }

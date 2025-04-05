@@ -37,5 +37,20 @@ public class TurnPageUrl extends HttpServlet {
         if("import_export".equals(action)) {
             req.getRequestDispatcher("/admin/pages/import_export.jsp").forward(req, resp);
         }
+        if("inventory".equals(action)) {
+            req.getRequestDispatcher("/admin/pages/inventory.jsp").forward(req, resp);
+        }
+        if("history_import_export".equals(action)) {
+            req.getRequestDispatcher("/admin/pages/import_export.jsp").forward(req, resp);
+        }
+        if("user".equals(action)) {
+            req.getRequestDispatcher("/admin/pages/user.jsp").forward(req, resp);
+        }
+        if("managerOwner".equals(action)) {
+            req.getRequestDispatcher("/admin/pages/manager_admin.jsp").forward(req, resp);
+        }
+        if("log".equals(action)) {
+            req.getRequestDispatcher("/admin/pages/manager_log.jsp").forward(req, resp);
+        }
     }
 }

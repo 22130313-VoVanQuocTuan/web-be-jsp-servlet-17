@@ -59,8 +59,8 @@ public class LoginController extends HttpServlet {
 
                 if (user != null && user.getIsEmailVerified() == 1) {
                     if ("Bị đình chỉ".equals(user.getStatus())) {
-                        logUtilDao.log(LogLevel.INFO, user.getUsername(), req.getRemoteAddr(), "Login No", "Không thể đăng nhập vì bị đình chỉ");
                         req.setAttribute("error_login", "Tài khoản đã bị cấm");
+                        LogUtilDao.log(LogLevel.WARNING, username, req.getRemoteAddr(), "Chưa đăng nhập", "Đăng nhập thất bại");
                         req.getRequestDispatcher("/users/page/login-signup.jsp").forward(req, resp);
                         return;
                     }
@@ -95,6 +95,7 @@ public class LoginController extends HttpServlet {
 
                      }
                 } else {
+                    LogUtilDao.log(LogLevel.WARNING, username, req.getRemoteAddr(), "Chưa đăng nhập", "Đăng nhập thất bại");
                     req.setAttribute("error_login", "Tài khoản chưa được xác thực, hoặc không tồn tại");
                     req.getRequestDispatcher("/users/page/login-signup.jsp").forward(req, resp);
                 }
@@ -108,7 +109,7 @@ public class LoginController extends HttpServlet {
         }
     }
 
-    private void handleFailedAttempt(String username, HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    private void handleFailedAttempt(String username, HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException, SQLException {
         LoginAttempt attempt = loginAttempts.getOrDefault(username, new LoginAttempt());
         attempt.incrementAttempts();
         loginAttempts.put(username, attempt);
@@ -117,6 +118,7 @@ public class LoginController extends HttpServlet {
             attempt.lock();
             req.setAttribute("error_login", "Bạn đã nhập sai quá 5 lần. Tài khoản bị khóa trong 2 phút.");
         } else {
+            LogUtilDao.log(LogLevel.WARNING, username, req.getRemoteAddr(), "Chưa đăng nhập", "Đăng nhập thất bại");
             req.setAttribute("error_login", "Tài khoản hoặc mật khẩu không chính xác. Bạn còn " + (MAX_ATTEMPTS - attempt.getAttempts()) + " lần thử.");
         }
 

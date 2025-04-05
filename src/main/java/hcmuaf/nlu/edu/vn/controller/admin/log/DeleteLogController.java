@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 @WebServlet("/delete-Log")
 public class DeleteLogController extends HttpServlet {
@@ -20,15 +21,20 @@ public class DeleteLogController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        String id = req.getParameter("id");
+        resp.setContentType("application/json");
+        resp.setCharacterEncoding("utf-8");
+        String id = req.getParameter("logId");
         if (id == null || id.isEmpty()) {
-            req.setAttribute("error", "Log không tồn tại");
+            PrintWriter out = resp.getWriter();
+            out.println("{\"error\": true, \"message\":\"Xóa thất bại.\"}");
+            out.flush();
             return;
         }
 
         logUtilDao.deleteLog(Integer.parseInt(id));
-        req.setAttribute("successful", "Log đã bị xóa");
-        req.getRequestDispatcher("/listLog").forward(req, resp);
+        PrintWriter out = resp.getWriter();
+        out.println("{\"message\":\"Xóa thành công\"}");
+        out.flush();
     }
 
     @Override

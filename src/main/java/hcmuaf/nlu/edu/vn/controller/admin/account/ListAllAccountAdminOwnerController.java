@@ -1,5 +1,6 @@
 package hcmuaf.nlu.edu.vn.controller.admin.account;
 
+import com.google.gson.Gson;
 import hcmuaf.nlu.edu.vn.model.Users;
 import hcmuaf.nlu.edu.vn.service.UserService;
 import jakarta.servlet.ServletException;
@@ -19,10 +20,12 @@ import java.util.stream.Collectors;
 public class ListAllAccountAdminOwnerController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setContentType("application/json");
+        resp.setCharacterEncoding("UTF-8");
         UserService userService = new UserService();
         HttpSession session = req.getSession();
         Users user = (Users) session.getAttribute("user");
-        if (user == null || (!user.getRole().equals("admin") && !user.getRole().equals("owner"))) {
+        if (user == null || (!user.getRole().equals("owner") && !user.getRole().equals("admin"))) {
             resp.sendRedirect(req.getContextPath() + "/logout");
             return;
         }
@@ -33,8 +36,11 @@ public class ListAllAccountAdminOwnerController extends HttpServlet {
                             .filter(users -> "admin".equals(users.getRole()) || "owner".equals(users.getRole()))
                                     .collect(Collectors.toList());
 
-            req.setAttribute("list_admin_owner", filteredUsers);
-            req.getRequestDispatcher("/admin/pages/manager_admin.jsp").forward(req, resp);
+            Gson gson = new Gson();
+            String json = gson.toJson(filteredUsers);
+            resp.setContentType("application/json");
+            resp.setCharacterEncoding("UTF-8");
+            resp.getWriter().write(json);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

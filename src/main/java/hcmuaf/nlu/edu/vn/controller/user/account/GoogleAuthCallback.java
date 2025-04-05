@@ -77,21 +77,22 @@ public class GoogleAuthCallback extends HttpServlet {
 // Lấy thông tin người dùng từ Google
         Userinfoplus userInfo = oauth2.userinfo().get().execute();
         UserService userService = new UserService();
-
+        System.out.println("User Email: " + userInfo.getEmail());
         try {
             // Kiểm tra xem email đã có trong database chưa
             Users users = userService.findUserByEmailLogin(userInfo.getEmail());
 
             if (users == null) {
                 //Nếu chưa có, tạo tài khoản mới
-                userService.addAccount(userInfo.getName(), "", userInfo.getEmail(), "user");
+                userService.addAccountGGFB(userInfo.getName(), "", userInfo.getEmail(), "user");
 
-                //Lấy lại thông tin người dùng sau khi tạo tài khoản
-                users = userService.findUserByEmailLogin(userInfo.getName());
+
             }
 
+            //Lấy lại thông tin người dùng sau khi tạo tài khoản
+            users = userService.findUserByEmailLogin(userInfo.getEmail());
             // Kiểm tra xem tài khoản có bị đình chỉ không
-            if ("Bị đình chỉ".equals(users.getStatus()) || "Đang chờ xử lý".equals(users.getStatus())) {
+            if("Bị đình chỉ".equals(users.getStatus()) || "Đang chờ xử lý".equals(users.getStatus())) {
                 request.setAttribute("error_login", "Tài khoản đã bị cấm hoặc đang xử lý");
                 request.getRequestDispatcher("/users/page/login-signup.jsp").forward(request, response);
                 return;

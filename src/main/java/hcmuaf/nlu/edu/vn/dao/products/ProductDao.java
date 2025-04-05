@@ -24,7 +24,7 @@ public class ProductDao {
 
     // lấy ra danh sách tất cả sản phẩm
     public List<Product> getAllProducts() throws SQLException {
-        String sql = "SELECT * FROM products";
+        String sql = "SELECT * FROM products p  JOIN inventory i ON p.id = i.productId";
         List<Product> products = new ArrayList<>();
 
         try (PreparedStatement stmt = dbConnect.preparedStatement(sql);
@@ -53,7 +53,7 @@ public class ProductDao {
     }
     // Lấy ra sản phẩm của danh mục dựa vào categoryID
     public List<Product> getAllProductsCategory(int categoryId) throws SQLException {
-        String sql = "SELECT * FROM products WHERE categoryId = ?";
+        String sql = "SELECT * FROM products p  JOIN inventory i ON p.id = i.productId  WHERE categoryId = ?";
         List<Product> products = new ArrayList<>();
 
         try (PreparedStatement stmt = dbConnect.preparedStatement(sql)) {
@@ -74,27 +74,25 @@ public class ProductDao {
     //Hàm thêm sản phẩm
     public boolean addProduct(Product product) {
         // Giá đã giảm
-        String sql = "INSERT INTO products (name, price, quantity, imageUrl, description, categoryId, status, " +
+        String sql = "INSERT INTO products (name, price, imageUrl, description, categoryId, " +
                 "supplier, color, size, unit, view, soldCount, discountPercent, discountPrice, createDate, updateDate) " +
-                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)";
         try (PreparedStatement stmt = dbConnect.preparedStatement(sql);) {
             stmt.setString(1, product.getName());
             stmt.setDouble(2, product.getPrice());
-            stmt.setInt(3, product.getQuantity());
-            stmt.setString(4, product.getImageUrl());
-            stmt.setString(5, product.getDescription());
-            stmt.setInt(6, product.getCategoryId());
-            stmt.setString(7, product.getStatus());
-            stmt.setString(8, product.getSupplier());
-            stmt.setString(9, product.getColor());
-            stmt.setString(10, product.getSize());
-            stmt.setString(11, product.getUnit());
-            stmt.setInt(12, product.getView());
-            stmt.setInt(13, product.getSoldCount());
-            stmt.setDouble(14, product.getDiscountPercent());
-            stmt.setDouble(15, product.getDiscountPrice());
-            stmt.setTimestamp(16, product.getCreateDate());
-            stmt.setTimestamp(17, product.getUpdateDate());
+            stmt.setString(3, product.getImageUrl());
+            stmt.setString(4, product.getDescription());
+            stmt.setInt(5, product.getCategoryId());
+            stmt.setString(6, product.getSupplier());
+            stmt.setString(7, product.getColor());
+            stmt.setString(8, product.getSize());
+            stmt.setString(9, product.getUnit());
+            stmt.setInt(10, product.getView());
+            stmt.setInt(11, product.getSoldCount());
+            stmt.setDouble(12, product.getDiscountPercent());
+            stmt.setDouble(13, product.getDiscountPrice());
+            stmt.setTimestamp(14, product.getCreateDate());
+            stmt.setTimestamp(15, product.getUpdateDate());
             // chèn data vào table
             int rowsAdded = stmt.executeUpdate();
             return rowsAdded > 0;// add thành công trả về true k vè false.
@@ -107,25 +105,23 @@ public class ProductDao {
     // Phương thức cập nhật sản phẩm trong cơ sở dữ liệu
     // Cập nhật thông tin sản phẩm
     public boolean updateProduct(int id, Product product) {
-        String sql = "UPDATE products SET name = ?, price = ?, quantity = ?, imageUrl = ?, description = ?, categoryId = ?, status = ?, supplier = ?, color = ?, size = ?, unit = ?, view = ?, soldCount = ?, discountPercent = ?, discountPrice = ?, updateDate = ? WHERE id = ?";
+        String sql = "UPDATE products SET name = ?, price = ?, imageUrl = ?, description = ?, categoryId = ?,supplier = ?, color = ?, size = ?, unit = ?, view = ?, soldCount = ?, discountPercent = ?, discountPrice = ?, updateDate = ? WHERE id = ?";
         try (PreparedStatement stmt = dbConnect.preparedStatement(sql)) { // Đảm bảo PreparedStatement được đóng tự động
             stmt.setString(1, product.getName());
             stmt.setDouble(2, product.getPrice());
-            stmt.setInt(3, product.getQuantity());
-            stmt.setString(4, product.getImageUrl());
-            stmt.setString(5, product.getDescription());
-            stmt.setInt(6, product.getCategoryId());
-            stmt.setString(7, product.getStatus());
-            stmt.setString(8, product.getSupplier());
-            stmt.setString(9, product.getColor());
-            stmt.setString(10, product.getSize());
-            stmt.setString(11, product.getUnit());
-            stmt.setInt(12, product.getView());
-            stmt.setInt(13, product.getSoldCount());
-            stmt.setDouble(14, product.getDiscountPercent());
-            stmt.setDouble(15, product.getDiscountPrice());
-            stmt.setTimestamp(16, new Timestamp(System.currentTimeMillis())); // Cập nhật thời gian hiện tại
-            stmt.setInt(17, id); // Cập nhật ID sản phẩm
+            stmt.setString(3, product.getImageUrl());
+            stmt.setString(4, product.getDescription());
+            stmt.setInt(5, product.getCategoryId());
+            stmt.setString(6, product.getSupplier());
+            stmt.setString(7, product.getColor());
+            stmt.setString(8, product.getSize());
+            stmt.setString(9, product.getUnit());
+            stmt.setInt(10, product.getView());
+            stmt.setInt(11, product.getSoldCount());
+            stmt.setDouble(12, product.getDiscountPercent());
+            stmt.setDouble(13, product.getDiscountPrice());
+            stmt.setTimestamp(14, new Timestamp(System.currentTimeMillis())); // Cập nhật thời gian hiện tại
+            stmt.setInt(15, id); // Cập nhật ID sản phẩm
 
             int rowsUpdated = stmt.executeUpdate(); // Thực hiện câu lệnh SQL
             return rowsUpdated > 0; // Trả về true nếu có ít nhất 1 dòng được cập nhật
@@ -198,7 +194,7 @@ public class ProductDao {
 
     // LẤY RA SANR PHẨM THEO TÊN
     public List<Product> getListProductByName(String name) throws SQLException {
-        String sql = "SELECT * FROM products WHERE name LIKE ? COLLATE utf8mb4_unicode_ci";
+        String sql = "SELECT * FROM products JOIN inventory i ON p.id = i.productId  WHERE name LIKE ? COLLATE utf8mb4_unicode_ci";
         List<Product> products = new ArrayList<>();
         try (PreparedStatement ptm = dbConnect.preparedStatement(sql)) {
             ptm.setString(1, "%" + name + "%");
@@ -226,7 +222,7 @@ public class ProductDao {
     // Cập nhật số lượng bán
     public boolean updateSoldCountProduct(int id, int quantity) {
         // Sửa câu lệnh SQL: Dùng dấu phẩy để cập nhật nhiều cột
-        String sql = "UPDATE products SET soldCount = soldCount + ?, quantity = quantity - ? WHERE id = ?";
+        String sql = "UPDATE products p JOIN inventory i ON p.id = i.productId SET soldCount = soldCount + ?, i.quantity = i.quantity - ? WHERE id = ?";
         try (PreparedStatement stmt = dbConnect.preparedStatement(sql)) {
             stmt.setInt(1, quantity); // Tham số đầu tiên: số lượng cần cộng vào soldCount
             stmt.setInt(2, quantity); // Tham số thứ hai: số lượng cần trừ khỏi quantity
@@ -237,6 +233,20 @@ public class ProductDao {
             throw new RuntimeException(e);
         }
     }
+
+    public int getLastInsertedProductId() {
+        String sql = "SELECT MAX(id) FROM products"; // Lấy ID lớn nhất (sản phẩm vừa thêm)
+        try (PreparedStatement stmt = dbConnect.preparedStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return -1; // Trả về -1 nếu có lỗi
+    }
+
 }
 
 

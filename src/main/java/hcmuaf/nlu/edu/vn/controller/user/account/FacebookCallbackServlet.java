@@ -85,7 +85,7 @@ public class FacebookCallbackServlet extends HttpServlet {
 
         UserService userService = new UserService();
         try {
-            userService.addAccount(name, "", email, "user");
+            userService.addAccountGGFB(name, "", email, "user");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

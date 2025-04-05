@@ -16,7 +16,7 @@ public class GetProductDao {
     }
 
     public Product getProduct(int id) {
-        String sql = "SELECT * FROM products WHERE id = ?";
+        String sql = "SELECT * FROM products p JOIN inventory i ON p.id=i.productId WHERE id = ?";
         Product product = null; // Khởi tạo giá trị ban đầu là null để kiểm tra sau
         try (PreparedStatement ptm = dbConnect.preparedStatement(sql)) {
             ptm.setInt(1, id); // Gán tham số id vào câu lệnh SQL

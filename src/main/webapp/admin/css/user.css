@@ -78,8 +78,8 @@
   }
   
   .details-user .recentOrders table tr td {
-    padding: 10px;
-    font-size: 13px;
+      padding: 4px;
+    font-size: 12px;
   }
   
   .details-user .recentOrders table tr td:nth-child(3) {
@@ -122,9 +122,10 @@
      padding: 20px;
      border-color: #f88e62;
      width: 80%;
-     max-width: 400px;
+     max-width: 313px;
      border-radius: 8px;
-     margin-left: 45%;
+     overflow-y: hidden;
+     max-height: 70%;
  }
 
  /* Form Styling */
@@ -261,7 +262,6 @@ button {
   width: 80%;
   max-width: 400px;
   border-radius: 8px;
-  margin-left: 45%;
 }
 .modal-content:hover {
   transform: scale(1.02);

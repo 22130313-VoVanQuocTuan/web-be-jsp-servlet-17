@@ -19,7 +19,7 @@ public class LogUtilDao {
     }
 
 
-    public void log(LogLevel level, String username, String address, String dataBefore, String dataAfter) throws SQLException {
+    public static void log(LogLevel level, String username, String address, String dataBefore, String dataAfter) throws SQLException {
         String sql = "INSERT INTO LogHistory (level, username, startLog, address, dataBefore, dataAfter) VALUES (?, ?, ?, ?, ?, ?)";
 
         try (PreparedStatement pstmt = dbConnect.preparedStatement(sql)) {
@@ -55,7 +55,7 @@ public class LogUtilDao {
     }
 
     public static List<Log> getListLog() {
-        String sql = "SELECT * FROM loghistory";
+        String sql = "SELECT * FROM loghistory ORDER BY startLog DESC";
         List<Log> logs = new ArrayList<>();
         try (PreparedStatement ptm = dbConnect.preparedStatement(sql)) {
             ResultSet rs = ptm.executeQuery();
@@ -67,7 +67,7 @@ public class LogUtilDao {
                 log.setAddress(rs.getString("address"));
                 Timestamp timestamp = rs.getTimestamp("startLog");
                 if (timestamp != null) {
-                    log.setStartLog(timestamp.toLocalDateTime());
+                    log.setStartLog(timestamp);  // Lưu trực tiếp Timestamp
                 }
                log.setDataBefore(rs.getString("dataBefore"));
                 log.setDataAfter(rs.getString("dataAfter"));

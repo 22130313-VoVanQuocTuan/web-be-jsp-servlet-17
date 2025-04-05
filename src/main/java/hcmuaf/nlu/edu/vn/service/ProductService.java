@@ -114,5 +114,9 @@ public class ProductService {
     public boolean updateSoldCountProduct(int id,int quantity){
         return productDAO.updateSoldCountProduct(id,quantity);
     }
+
+    public int getLastInsertedProductId() {
+        return productDAO.getLastInsertedProductId();
+    }
 }
 
