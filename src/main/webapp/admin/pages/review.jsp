@@ -126,7 +126,7 @@
                 </li>
 
                 <li>
-                    <a href="category">
+                    <a href="turn-page?action=categories">
                         <span class="icon">
                             <ion-icon name="list-outline"></ion-icon>
                         </span>
