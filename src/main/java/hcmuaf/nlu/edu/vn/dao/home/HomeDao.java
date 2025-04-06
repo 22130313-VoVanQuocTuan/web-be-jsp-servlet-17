@@ -120,7 +120,7 @@ public class HomeDao {
     // Hàm lấy 1 banner ad duy nhất từ CSDL
     public Banner getSingleBanner() {
         Banner banner = new Banner();
-        String sql = "SELECT  * FROM banners WHERE type = 'ad'";
+        String sql = "SELECT  * FROM banners WHERE type = 'ad' ";
         try (PreparedStatement stmt = dbConnect.preparedStatement(sql);
              ResultSet rs = stmt.executeQuery()) {
             if (rs.next()) {
