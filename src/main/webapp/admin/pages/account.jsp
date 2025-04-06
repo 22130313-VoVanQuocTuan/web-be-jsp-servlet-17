@@ -35,7 +35,7 @@
     <div class="navigation">
         <ul>
             <li>
-                <a href="home">
+                <a href="turn-page?action=home">
                         <span class="icon">
                            <img src="${pageContext.request.contextPath}/users/img/logo.png" alt="">
                         </span>
@@ -44,7 +44,7 @@
             </li>
 
             <li>
-                <a href="home">
+                <a href="turn-page?action=home">
                         <span class="icon">
                             <ion-icon name="home-outline"></ion-icon>
                         </span>
@@ -242,7 +242,7 @@
 </div>
 
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-<script src="<c:url value="/admin/js/index.js"/>"></script>
+<script src="<c:url value="/admin/js/configuration.js"/>"></script>
 <script src="<c:url value="/users/js/informationCustomer.js"/>"></script>
 </body>
 

@@ -1,108 +1,200 @@
-/*Menu*/
-let toggle = document.querySelector(".toggle");
-let navigation = document.querySelector(".navigation");
-let main = document.querySelector(".main");
 
-toggle.onclick = function () {
-  navigation.classList.toggle("active");
-  main.classList.toggle("active");
-};   
-/*Logout*/
-function lockout(){
-    window.location.href = "../../users/page/login-signup.jsp"
-}
+document.addEventListener("DOMContentLoaded", function() {
+    loadRevenueData('month');
+    loadDataHome();
+    updateStatusColorsHome();
+
+})
 
 
-function updateStatusColors() {
-    // Lấy tất cả các phần tử có class là "statusText"
-    const statusElements = document.querySelectorAll(".statusText");
+// cập nhật trạng thái theo màu
+function updateStatusColorsHome() {
+    document.querySelectorAll(".status")?.forEach(status => {
+        let text = status.textContent.trim();
+        let colorMap = {
+            "Hoàn thành": "#00d23c",
+            "Chưa hoàn thành": "#ff3a3a",
+            "Đã thanh toán": "#00d23c",
+            "Chưa thanh toán": "#ff3a3a",
+            "Đang xử lý": "#ed8e22",
+        };
 
-    statusElements.forEach((statusElement) => {
-        const status = statusElement.textContent.trim(); // Lấy trạng thái hiện tại
-
-        // Đặt màu nền dựa trên trạng thái
-        switch (status) {
-            case "Hoạt động":
-                statusElement.style.backgroundColor = "#34ec34";
-                break;
-            case "Không hoạt động":
-                statusElement.style.backgroundColor = "#cdcdcd";
-                break;
-            case "Đang chờ xử lý":
-                statusElement.style.backgroundColor = "#ffae18";
-                break;
-            case "Bị đình chỉ":
-                statusElement.style.backgroundColor = "#ff3939";
-                break;
-            default:
-                statusElement.style.backgroundColor = ""; // Mặc định không màu
+        if (colorMap[text]) {
+            status.style.backgroundColor = colorMap[text];
+            status.style.color = "white";
+            status.style.padding = "3px 5px";
+            status.style.borderRadius = "5px";
         }
     });
 }
 
-// Gọi hàm để áp dụng màu ngay khi trang được tải
-document.addEventListener("DOMContentLoaded", updateStatusColors);
-// thông báo tắt trong 3s
-// window.addEventListener('DOMContentLoaded', function () {
-//     const alert = document.querySelector('.alert');
-//     if (alert) {
-//         setTimeout(function () {
-//             alert.classList.add('fade-out');
-//         }, 3000);  // 3 giây trước khi bắt đầu hiệu ứng biến mất
-//     }
-// });
-function showAlert() {
-    const alert = document.querySelector('.alert');
-    if (alert) {
-        alert.style.display = 'block'; // Hiển thị thông báo
 
 
-        alert.classList.remove('fade-out');
 
-        setTimeout(function () {
-            alert.classList.add('fade-out'); // Thêm lớp fade-out để làm mờ thông báo
-        }, 1000);  // 3 giây trước khi bắt đầu hiệu ứng biến mất
+let chartInstance = null; // Đặt ở ngoài để không reset mỗi lần gọi hàm
 
-        // Sau khi fade-out hoàn thành, ẩn đi thông báo và có thể tái sử dụng
-        alert.addEventListener('transitionend', function() {
-            if (alert.classList.contains('fade-out')) {
-                alert.style.display = 'none'; // Ẩn đi sau khi hiệu ứng fade-out kết thúc
+function loadRevenueData(type) {
+    console.log("Fetching revenue for type:", type);
+    $.ajax({
+        url: "revenue-report",
+        type: "GET",
+        data: { type: type },
+        success: function (data) {
+            console.log("Revenue data:", data);
+            if (!Array.isArray(data) || data.length === 0) {
+                console.warn("No revenue data to render.");
+                return;
             }
-        });
-    }
-}
-//Gọi hàm logout
-document.addEventListener("DOMContentLoaded", function () {
-    const logoutLink = document.getElementById("logout-link");
-    const logoutModal = document.getElementById("logout-modal");
-    const confirmLogout = document.getElementById("confirm-logout");
-    const cancelLogout = document.getElementById("cancel-logout");
-    const mainContent = document.body;
-
-    // Khi nhấn vào "Đăng Xuất", hiện modal và làm mờ nền
-    logoutLink.addEventListener("click", function (event) {
-        event.preventDefault(); // Ngăn chặn chuyển hướng ngay lập tức
-        logoutModal.style.display = "flex"; // Hiển thị modal
-        mainContent.classList.add("blur-background");
-    });
-
-    // Khi nhấn nút "Hủy", ẩn modal và bỏ hiệu ứng làm mờ
-    cancelLogout.addEventListener("click", function () {
-        logoutModal.style.display = "none";
-        mainContent.classList.remove("blur-background");
-    });
-
-    // Khi nhấn nút "Đăng Xuất", chuyển hướng đến trang logout
-    confirmLogout.addEventListener("click", function () {
-        window.location.href = "logout"; // Chuyển đến trang đăng xuất
-    });
-
-    // Khi nhấn bên ngoài modal, ẩn modal và bỏ hiệu ứng làm mờ
-    window.addEventListener("click", function (event) {
-        if (event.target === logoutModal) {
-            logoutModal.style.display = "none";
-            mainContent.classList.remove("blur-background");
+            renderChart(data, type);
+        },
+        error: function (xhr, status, error) {
+            console.error("Error loading revenue data:", status, error);
+            alert("Không thể tải dữ liệu biểu đồ doanh thu.");
         }
+    });
+}
+
+function renderChart(data, type) {
+
+    const colors = [
+        'rgba(255, 99, 132, 0.7)',  // Đỏ hồng
+        'rgba(54, 162, 235, 0.7)',  // Xanh dương
+        'rgba(255, 206, 86, 0.7)',  // Vàng
+        'rgba(75, 192, 192, 0.7)',  // Xanh ngọc
+        'rgba(153, 102, 255, 0.7)', // Tím
+        'rgba(255, 159, 64, 0.7)',  // Cam
+        'rgba(0, 204, 102, 0.7)'    // Xanh lá đậm
+    ];
+
+    const labels = data.map(item =>
+        type === 'week' ? item.week :
+            type === 'month' ? item.month :
+                item.year
+    );
+
+    const revenues = data.map(item => item.revenue);
+
+    const backgroundColors = labels.map((_, index) => colors[index % colors.length]);
+    const borderColors = backgroundColors.map(c => c.replace('0.7', '1'));
+
+    const chartData = {
+        labels: labels,
+        datasets: [{
+            label: 'Doanh thu (VNĐ)',
+            data: revenues,
+            backgroundColor: backgroundColors,
+            borderColor: borderColors,
+            borderWidth: 1
+        }]
+    };
+
+    if (chartInstance) {
+        chartInstance.destroy();
+    }
+
+    chartInstance = new Chart(document.getElementById('revenueChart'), {
+        type: 'bar',
+        data: chartData,
+        options: {
+            responsive: true,
+            plugins: {
+                legend: { display: false }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+}
+
+function  loadDataHome(){
+    $.ajax({
+        url: "home",
+        type: "GET",
+        success: function (data) {
+            console.log("Response data:", data);
+            renderDataHomeOrder(data.orderNew);
+            renderDataHomeUser(data.users);
+            document.getElementById("totalViews").innerHTML = data.totalViews.toLocaleString()|| 0 ;
+            document.getElementById("totalUsers").innerHTML = data.totalUsers.toLocaleString() || 0;
+            document.getElementById("totalRatings").innerHTML = data.totalRatings.toLocaleString() || 0;
+            document.getElementById("totalRevenue").innerHTML = (data.totalSales ? data.totalSales.toLocaleString() : "0") + " ₫";
+        }
+    })
+}
+
+function renderDataHomeOrder(data) {
+    console.log(data)
+    const tableBody = document.querySelector("#orderTable tbody");
+    tableBody.innerHTML = ""; // Clear current rows
+
+    data.forEach(view => {
+        const createdAt = new Date(view.createdAt); // Parse string to Date
+        const row = document.createElement("tr");
+        row.innerHTML = `<td>${view.userid}</td>
+                         <td>${view.totalPrice.toLocaleString()} ₫</td>
+                         <td><span class="status">${view.paymentStatus}</span></td>
+                         <td>${createdAt.toLocaleString()}</td>
+                         <td><span class="status">${view.status}</span></td>`;
+        tableBody.appendChild(row);
+    });
+
+    // Lấy DataTable hiện tại và vẽ lại bảng sau khi cập nhật dữ liệu
+    const table = $('#orderTable').DataTable();
+    table.clear(); // Xóa tất cả các hàng cũ
+    table.rows.add(tableBody.querySelectorAll('tr')); // Thêm các hàng mới vào DataTable
+    table.draw(); // Vẽ lại bảng
+    updateStatusColorsHome(); // Cập nhật màu sắc trạng thái
+}
+
+$(document).ready(function () {
+    $('#orderTable').DataTable({
+        "paging": true, // Tính năng phân trang
+        "searching": true, // Tính năng tìm kiếm
+        "ordering": true, // Tính năng sắp xếp
+        "info": true, // Hiển thị thông tin trang
+        "lengthMenu": [5, 10, 25, 50], // Số dòng hiển thị mỗi trang
+        "language": {
+            "search": "Tìm kiếm:",
+            "lengthMenu": "Hiển thị _MENU_ dòng",
+            "info": "Trang _PAGE_ trên tổng _PAGES_ trang",
+            "zeroRecords": "Không tìm thấy kết quả",
+            "infoEmpty": "Không có dữ liệu",
+            "paginate": {
+                "first": "Đầu",
+                "last": "Cuối",
+                "next": "Tiếp",
+                "previous": "Trước"
+            }
+        }
+    });
+
+    // Gọi lại hàm cập nhật màu sắc cho trạng thái khi DataTable vẽ lại bảng (chuyển trang, tìm kiếm, sắp xếp)
+    $('#orderTable').on('draw.dt', function () {
+        updateStatusColorsHome();
     });
 });
+
+function renderDataHomeUser(data){
+    console.log(data)
+    const tableBody = document.querySelector("#customerTable tbody");
+    tableBody.innerHTML = "";
+    data.forEach(user => {
+        const row = document.createElement("tr");
+        row.innerHTML = `<td width="60px">
+                                <a href="accounts">
+                                    <ion-icon name="person"
+                                              style="color: #1841e4; font-size: 20px; text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);"></ion-icon>
+                                </a>
+                            </td>
+                            <td>
+                                <h4>${user.email}</h4>
+                            </td>`;
+        tableBody.appendChild(row);
+    })
+
+}
+
 

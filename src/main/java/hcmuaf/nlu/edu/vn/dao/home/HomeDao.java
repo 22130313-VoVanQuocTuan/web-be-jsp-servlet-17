@@ -97,7 +97,7 @@ public class HomeDao {
     //Lấy ra danh sách hoá đơn gần nhất
     public List<Orders> getOrderNew() {
         List<Orders> orders = new ArrayList<>();
-        String query = "SELECT * FROM orders ORDER BY createdAt DESC";
+        String query = "SELECT * FROM orders WHERE DATE(createdAt) = DATE(NOW())  ORDER BY createdAt DESC";
         try (PreparedStatement preparedStatement = dbConnect.preparedStatement(query)) {
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {

@@ -80,6 +80,7 @@ td {
 .products .recentOrders table tr td {
   font-size: 13px;
   padding: 10px;
+  white-space: nowrap;
 }
 
 .products .recentOrders table tr td:nth-child(3) {

@@ -34,7 +34,7 @@
         cursor: pointer;
         box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
         z-index: 1000;
-        transition: all 0.3s ease;
+
     }
 
     .scroll-to-top:hover {
@@ -75,7 +75,7 @@
     <div class="navigation">
         <ul>
             <li>
-                <a href="home">
+                <a href="turn-page?action=home">
                         <span class="icon">
                             <img src="${pageContext.request.contextPath}/users/img/logo.png" alt="">
                         </span>
@@ -84,7 +84,7 @@
             </li>
 
             <li>
-                <a href="home">
+                <a href="turn-page?action=home">
                         <span class="icon">
                             <ion-icon name="home-outline"></ion-icon>
                         </span>
@@ -395,7 +395,7 @@
 
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 
-    <script src="<c:url value="/admin/js/index.js"/>"></script>
+    <script src="<c:url value="/admin/js/configuration.js"/>"></script>
     <script src="<c:url value="/admin/js/products.js"/>"></script>
     <script>// Lấy tham chiếu đến nút
     const scrollToTopButton = document.getElementById('scrollToTop');
