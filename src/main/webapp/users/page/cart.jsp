@@ -158,9 +158,9 @@
                                 <td><img src="${item.imageUrl}" alt="${item.name}" width="50" height="50"></td>
                                 <td>
                                     <div class="quantity" style="display: flex;">
-                                        <button class="qty-btn minus-btn"><a style="text-decoration: none " href="update-cart?id=${item.id}&quantity=${item.quantity - 1}">-</a></button>
+                                        <a style="text-decoration: none " href="update-cart?id=${item.id}&quantity=${item.quantity - 1}"><button class="qty-btn minus-btn">-</button></a>
                                         <input title="input" type="number" value="${item.quantity}" class="qty-input" min="1" />
-                                        <button class="qty-btn plus-btn"><a style="text-decoration: none " href="update-cart?id=${item.id}&quantity=${item.quantity + 1}">+</a></button>
+                                        <a style="text-decoration: none " href="update-cart?id=${item.id}&quantity=${item.quantity + 1}"><button class="qty-btn plus-btn">+</button></a>
                                     </div>
                                 </td>
                                 <td><fmt:formatNumber value=" ${item.price}" type="number" groupingUsed="true"/>₫</td>
