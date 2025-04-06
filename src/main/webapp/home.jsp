@@ -12,6 +12,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4-beta3/css/all.min.css"/>
     <link rel="stylesheet" href="<c:url value="/users/css/home.css"/>">
+    <!-- Đảm bảo jQuery được tải trước khi dùng -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 </head>
 
 <style>
@@ -234,11 +237,10 @@
 
 <div id="section-slider">
     <div class="slide-show-content-container">
-        <p class="title-w" id="animatedText">Xây dựng nền móng vững chắc - Khởi tạo những công trình bền vững cùng bạn!</p>
-        <div class="slide-show-content-image">
-            <c:forEach var="banner" items="${banners_Slider}">
-                <img src="${banner.image_url}" alt="banner">
-            </c:forEach>
+        <p class="title-w" id="animatedText">Xây dựng nền móng vững chắc - Khởi tạo những công trình bền vững cùng
+            bạn!</p>
+        <div class="slide-show-content-image" id="slider-container">
+            <div id="slider-wrapper"></div>
         </div>
         <div class="slide-show-content-btn">
             <div class="nut_trai">
@@ -1371,10 +1373,12 @@
         </div>
     </div>
 </div>
-<div class="popup-banner" id="popupBanner">
+<div class="popup-banner" id="popupBanner" style="display: none;">
     <div class="popup-content">
         <div class="banner-item" style="display: block;">
-            <a href="product"><img class="banner-image" src="${banners.image_url}"></a>
+            <a href="product">
+                <img class="banner-image" id="popupBannerImage" src="">
+            </a>
         </div>
         <!-- Nút đóng -->
         <div class="closee-button" onclick="closePopup()">
@@ -1382,8 +1386,6 @@
         </div>
     </div>
 </div>
-
-
 
 <div id="section-footer">
     <div class="container">

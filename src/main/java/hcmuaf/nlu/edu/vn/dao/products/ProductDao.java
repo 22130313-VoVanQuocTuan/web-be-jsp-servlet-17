@@ -37,7 +37,7 @@ public class ProductDao {
     }
     public List<Category> getAllCategories() throws SQLException {
         List<Category> categories = new ArrayList<>();
-        String sql = "SELECT * FROM category";
+        String sql = "SELECT * FROM category WHERE is_deleted = false";
 
         try (PreparedStatement stmt = dbConnect.preparedStatement(sql);
              ResultSet rs = stmt.executeQuery()) {
