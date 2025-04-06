@@ -32,6 +32,9 @@ public class GetListPromotional extends HttpServlet {
                 if (now.after(endDate)) {
                     promotional.setStatus("Không hoạt động"); // hoặc false nếu là boolean
                     promotionalService.updateStatusProm("Không hoạt động"); // gọi service cập nhật
+                }else{
+                    promotional.setStatus("Hoạt động"); // hoặc false nếu là boolean
+                    promotionalService.updateStatusProm("Hoạt động"); // gọi service cập nhật
                 }
             }
             Gson gson = new Gson();

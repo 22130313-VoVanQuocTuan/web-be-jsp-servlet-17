@@ -41,4 +41,7 @@ public class PromotionalService {
     public List<Promotionals> getListPromotionalByValue(double value) {
         return promotionalDao.getListPromotionalByValue(value);
     }
+    public Promotionals getPromotional(String code) throws SQLException {
+        return promotionalDao.getPromotional(code);
+    }
 }
