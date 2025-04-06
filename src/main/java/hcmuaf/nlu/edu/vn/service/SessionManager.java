@@ -15,10 +15,15 @@ public class SessionManager {
     // Xóa session khi người dùng bị hạ quyền hoặc xóa tài khoản
     public static void invalidateSession(int userId) {
         HttpSession session = userSessions.get(userId);
-        if (session != null) {
-            session.invalidate();
-            userSessions.remove(userId);
+            if (session != null) {
+                try {
+                    session.invalidate();
+                } catch (IllegalStateException e) {
+                    System.out.println("Session của userId " + userId + " đã bị hủy trước đó.");
+                } finally {
+                    userSessions.remove(userId);
+                }
+            }
         }
-    }
 }
 

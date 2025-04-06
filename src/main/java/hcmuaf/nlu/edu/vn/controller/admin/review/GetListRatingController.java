@@ -1,5 +1,6 @@
 package hcmuaf.nlu.edu.vn.controller.admin.review;
 
+import com.google.gson.Gson;
 import hcmuaf.nlu.edu.vn.model.Rating;
 import hcmuaf.nlu.edu.vn.model.Users;
 import hcmuaf.nlu.edu.vn.service.RatingService;
@@ -18,18 +19,17 @@ import java.util.stream.Collectors;
 public class GetListRatingController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+       resp.setContentType("application/json");
+       resp.setCharacterEncoding("UTF-8");
         RatingService ratingService = new RatingService();
-        HttpSession session = req.getSession();
-        Users user = (Users) session.getAttribute("user");
-        if (user == null || (!user.getRole().equals("admin") && !user.getRole().equals("owner"))) {
-            resp.sendRedirect(req.getContextPath() + "/logout");
-            return;
-        }
+
         try{
             List<Rating> listRating = ratingService.getListRating();
+            Gson gson = new Gson();
+            String json = gson.toJson(listRating);
+            resp.getWriter().write(json);
 
-            req.setAttribute("listRating", listRating);
-            req.getRequestDispatcher( "/admin/pages/review.jsp").forward(req, resp);
+
         }
         catch (Exception e){
             e.printStackTrace();

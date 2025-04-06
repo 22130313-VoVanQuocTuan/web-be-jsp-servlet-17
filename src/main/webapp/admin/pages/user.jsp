@@ -100,7 +100,7 @@
                 </a>
             </li>
             <li>
-                <a href="promotional-list">
+                <a href="turn-page?action=promotional">
                         <span class="icon">
                             <ion-icon name="pricetag-outline"></ion-icon>
                         </span>
@@ -117,7 +117,7 @@
                 </a>
             </li>
             <li>
-                <a href="list-rating">
+                <a href="turn-page?action=rating">
                         <span class="icon">
                             <ion-icon name="chatbubble-outline"></ion-icon>
                         </span>
@@ -256,6 +256,8 @@
 
                     <label for="status">Trạng thái:</label>
                     <select id="status" name="status">
+                        <option value="Hoạt động">Hoạt động</option>
+                        <option value="Không hoạt động">Không hoạt động</option>
                         <option value="Bị đình chỉ">Bị đình chỉ</option>
                         <option value="Đang chờ xử lý">Đang chờ xử lý</option>
                     </select>

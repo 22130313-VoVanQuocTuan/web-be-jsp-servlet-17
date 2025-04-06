@@ -16,6 +16,12 @@ public class TurnPageUrl extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String action = req.getParameter("action");
 
+        HttpSession session = req.getSession();
+        Users user = (Users) session.getAttribute("user");
+        if(user==null){
+            resp.sendRedirect(req.getContextPath()+"/logout");
+            return;
+        }
         if ("buyingHelp".equals(action)) {
             req.getRequestDispatcher("/users/page/buying-help.jsp").forward(req, resp);
         }
@@ -52,14 +58,17 @@ public class TurnPageUrl extends HttpServlet {
         if("log".equals(action)) {
             req.getRequestDispatcher("/admin/pages/manager_log.jsp").forward(req, resp);
         }
-
+        if("rating".equals(action)) {
+            req.getRequestDispatcher("/admin/pages/review.jsp").forward(req, resp);
+        }
+        if("promotional".equals(action)) {
+            req.getRequestDispatcher("/admin/pages/promotional.jsp").forward(req, resp);
+        }
         if("product".equals(action)) {
             req.getRequestDispatcher("/admin/pages/products.jsp").forward(req, resp);
         }
-
         if("order".equals(action)) {
             req.getRequestDispatcher("/admin/pages/order.jsp").forward(req, resp);
         }
-
     }
 }

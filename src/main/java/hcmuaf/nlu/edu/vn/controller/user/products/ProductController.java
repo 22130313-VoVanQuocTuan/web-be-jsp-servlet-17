@@ -34,6 +34,7 @@ public class ProductController extends HttpServlet {
         Users user = (Users) session.getAttribute("user");
         if (user != null && !user.getRole().equals("user")) {
             response.sendRedirect(request.getContextPath() + "/logout");
+            session.removeAttribute("redirectUrl");
             return;
         }
         String search = request.getParameter("search");

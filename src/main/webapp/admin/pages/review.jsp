@@ -117,7 +117,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="promotional-list">
+                    <a href="turn-page?action=promotional">
                         <span class="icon">
                             <ion-icon name="pricetag-outline"></ion-icon>
                         </span>
@@ -134,7 +134,7 @@
                     </a>
                 </li>
                 <li class="hov active">
-                    <a href="list-rating">
+                    <a href="turn-page?action=rating">
                         <span class="icon">
                             <ion-icon name="chatbubble-outline"></ion-icon>
                         </span>
@@ -211,19 +211,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <c:forEach var="rating" items="${listRating}">
-                            <tr>
-                                <td>${rating.productId}</td>
-                                <td>${rating.userId}</td>
-                                <td>${rating.content}</td>
-                                <td>${rating.createdAt}</td>
-                                <td class="v">
-                                    <button class="delete-btn" data-id="${rating.id}">Xóa</button>
-                                </td>
-                            </tr>
 
-                            </c:forEach>
-                            <!-- Thêm các dòng dữ liệu khác tại đây -->
                         </tbody>
                     </table>
                 </div>
@@ -235,20 +223,15 @@
                 <div class="modal-content">
                     <h3>Xác nhận xóa</h3>
                     <label>Bạn có chắc chắn muốn xóa đánh giá này?</label>
+                    <input type="hidden" id="ratingId">
                     <div class="button-container">
-                        <button id="confirm-delete" class="confirm-delete">Xóa</button>
-                        <button  class="close-modal">Hủy</button>
+                        <button id="confirm-delete" class="confirm-delete" onclick="confirmDelete()">Xóa</button>
+                        <button  class="close-modal" onclick="closeModelDelete()">Hủy</button>
                     </div>
                 </div>
             </div>
         </div>
-        <%-- Kiểm tra xem có thông báo nào không --%>
-        <c:if test="${not empty sessionScope.errorMessage}">
-            <div class="alert alert-info">
-                    ${sessionScope.errorMessage}
-            </div
-                    <% session.removeAttribute("errorMessage"); %> <!-- Xóa thông báo ngay sau khi hiển thị -->
-        </c:if>
+
                     <!-- Modal Xác Nhận Đăng Xuất -->
         <div id="logout-modal" class="modal">
             <div class="modal-content">
@@ -260,6 +243,9 @@
                 </div>
             </div>
         </div>
+        <div id="message" class="alert alert-info" style="display: none">
+            <!-- Thông báo lỗi sẽ được chèn vào đây -->
+        </div>
     </div>
 
 
@@ -267,30 +253,6 @@
     <script src="<c:url value="/admin/js/index.js"/>"></script>
     <script src ="<c:url value="/admin/js/review.js"/>"></script>
 
-    <script>
-        $(document).ready(function () {
-            $('#reviewTable').DataTable({
-                    "padding" : true,
-                    "search" : true,
-                    "ordering" : true,
-                    "info": true,
-                      "lengthMenu": [5, 10, 25, 50], // Số dòng hiển thị mỗi trang
-                "language": {
-                    "search": "Tìm kiếm:",
-                    "lengthMenu": "Hiển thị _MENU_ dòng",
-                    "info": "Trang _PAGE_ trên tổng _PAGES_ trang",
-                    "zeroRecords": "Không tìm thấy kết quả",
-                    "infoEmpty": "Không có dữ liệu",
-                    "paginate": {
-                        "first": "Đầu",
-                        "last": "Cuối",
-                        "next": "Tiếp",
-                        "previous": "Trước"
-                    }
-                }
-            });
-        });
-    </script>
 
 </body>
 

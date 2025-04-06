@@ -121,7 +121,7 @@
                 </a>
             </li>
             <li>
-                <a href="promotional-list">
+                <a href="turn-page?action=promotional">
                         <span class="icon">
                             <ion-icon name="pricetag-outline"></ion-icon>
                         </span>
@@ -138,7 +138,7 @@
                 </a>
             </li>
             <li >
-                <a href="list-rating">
+                <a href="turn-page?action=rating">
                         <span class="icon">
                             <ion-icon name="chatbubble-outline"></ion-icon>
                         </span>

@@ -121,7 +121,7 @@
                 </a>
             </li>
             <li class="hov active">
-                <a href="promotional-list">
+                <a href="turn-page?action=promotional">
                         <span class="icon">
                             <ion-icon name="pricetag-outline"></ion-icon>
                         </span>
@@ -138,7 +138,7 @@
                 </a>
             </li>
             <li>
-                <a href="list-rating">
+                <a href="turn-page?action=rating">
                         <span class="icon">
                             <ion-icon name="chatbubble-outline"></ion-icon>
                         </span>
@@ -202,23 +202,6 @@
                 <div class="cardHeader">
                     <h2>Danh sách mã ưu đãi</h2>
                 </div>
-                <%--                <div class="update-user">--%>
-                <%--                    <p style="font-size: 20px; margin-bottom: 10px;">Cập nhật trạng thái mã ưu đãi</p>--%>
-                <%--                    <form action="update-status-pro" method="post">--%>
-                <%--                        <input type="text" name="id" placeholder="Nhập ID mã ưu đãi cần cập nhật" required--%>
-                <%--                               style="font-size: 15px; padding: 2px; border-radius: 5px;">--%>
-                <%--                        <select title="choice" name="status" id="statusSelect" required--%>
-                <%--                                style="font-size: 15px; border-radius: 5px; padding: 2px;">--%>
-                <%--                            <option value="Hoạt động">Hoạt động</option>--%>
-                <%--                            <option value="Không hoạt động">Không hoạt động</option>--%>
-                <%--                        </select>--%>
-                <%--                        <c:if test="${not empty error}">--%>
-                <%--                            <p style="color: red;">${error}</p> <!-- Hiển thị lỗi nếu có -->--%>
-                <%--                        </c:if>--%>
-                <%--                        <button type="submit">Cập nhật trạng thái</button>--%>
-                <%--                    </form>--%>
-                <%--                </div>--%>
-
                 <div class="list-promotions-content-button">
                     <button id="add_Promotions">Thêm ưu đãi</button>
                 </div>
@@ -237,39 +220,6 @@
                     </thead>
 
                     <tbody>
-                    <c:forEach var="promotion" items="${listPromotional}">
-                        <tr>
-                            <td>${promotion.id}</td>
-                            <td>${promotion.code}</td>
-                            <td id="value"><fmt:formatNumber value="${promotion.value}" type="number"
-                                                  groupingUsed="true"/>₫
-                            </td>
-                            <td id="sdate"><fmt:formatDate value="${promotion.startDate}" pattern="dd-MM-yyyy HH:mm"/></td>
-                            <td id="edate"><fmt:formatDate value="${promotion.endDate}" pattern="dd-MM-yyyy HH:mm"/></td>
-                            <!-- Input ẩn chứa endDate đúng format -->
-                            <input type="hidden" class="endDate-hidden"
-                                   value="<fmt:formatDate value='${promotion.endDate}' pattern='yyyy-MM-dd\'T\'HH:mm'/>"/>
-
-                            <td>
-                                <div class="status-container">
-                                    <span class="statusText" style="display: none;">${promotion.status}</span>
-                                    <input type="checkbox" class="toggle-status" data-id="${promotion.id}"
-                                        ${promotion.status == 'Hoạt động' ? 'checked' : ''}>
-                                    <span class="status-text">
-                                            ${promotion.status == 'Hoạt động' ? 'Hoạt động' : 'Không hoạt động'}
-                                    </span>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="v">
-                                    <button class="edit-btn" data-up-id="${promotion.id}">Sửa</button>
-                                    <button class="delete-btn" data-id="${promotion.id}">Xóa</button>
-                                </div>
-                            </td>
-
-                        </tr>
-                    </c:forEach>
-
                     </tbody>
                 </table>
 
@@ -306,13 +256,12 @@
                     <div class="modal-content">
                         <span class="close-btn " onclick="closeModal1()" &times;></span>
                         <h2 style="color: #FFC857" class="modal-title">Chỉnh sửa ưu đãi</h2>
-
                             <!-- Form chỉnh sửa thông tin -->
-                            <form id="editInfoForm" action="update-promotional" method="POST" >
+                            <form id="editInfoForm">
                                 <input type="hidden" name="id" id="promotionId">
                                 <div class="mb-3">
-                                    <label for="percent" class="form-label">Giá trị:</label>
-                                    <input type="number" name="value" class="form-control" id="percent"
+                                    <label for="value" class="form-label">Giá trị:</label>
+                                    <input type="number" name="value" class="form-control" id="value"
                                            placeholder="Nhập giá trị"  required>
                                 </div>
                                 <div class="mb-3">
@@ -325,10 +274,7 @@
                                     <input type="datetime-local" class="form-control" name="endDate" id="endDate"
                                            placeholder="Nhập ngày kết thúc" required>
                                 </div>
-                                <!-- Thông báo lỗi -->
-                                <c:if test="${not empty error}">
-                                    <p style="color: red;">${error}</p> <!-- Hiển thị lỗi nếu có -->
-                                </c:if>
+
                                 <div class="modal-footer">
                                     <button type="submit" class="btn btn-primary" id="saveChanges">Lưu thay đổi</button>
                                     <button type="button" class="close-modal btn btn-secondary ">Hủy</button>
@@ -371,106 +317,10 @@
         </div>
     </div>
 </div>
-<div id="errorMessage"
-     style="display: none; color: white; background-color: red; padding: 10px; text-align: center; position: fixed; top: 10px; left: 50%; transform: translateX(-50%); border-radius: 5px;">
-    Lỗi hệ thống, vui lòng thử lại!
-</div>
+
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 <script src="<c:url value="/admin/js/index.js"/>"></script>
 <script src="<c:url value="/admin/js/promotional.js"/>"></script>
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        // Kiểm tra nếu cần hiển thị modal
-        const showModal = "${showModal}" === "true";
-        if (showModal) {
-            const modal = document.getElementById('addPromotionModal');
-            modal.style.display = 'block';
-        }
-    });
-</script>
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        // Kiểm tra nếu cần hiển thị modal
-        const showModal = "${showModal}" === "true";
-        if (showModal) {
-            const modal = document.getElementById('editPromotional');
-            modal.style.display = 'flex';
-
-        }
-    });
-</script>
-<script>
-    $(document).ready(function () {
-        $('#productTable').DataTable({
-            "paging": true,         // Hiển thị phân trang
-            "searching": true,      // Hiển thị ô tìm kiếm
-            "ordering": true,       // Cho phép sắp xếp cột
-            "info": true,           // Hiển thị thông tin số lượng dữ liệu
-            "lengthMenu": [5, 10, 25, 50, 100], // Số dòng hiển thị mỗi trang
-            "language": {
-                "lengthMenu": "Hiển thị _MENU_ voucher mỗi trang",
-                "zeroRecords": "Không tìm thấy sản phẩm nào",
-                "info": "Trang _PAGE_ trên tổng _PAGES_ trang",
-                "infoEmpty": "Không có sản phẩm",
-                "infoFiltered": "(lọc từ _MAX_ sản phẩm)",
-                "search": "Tìm kiếm:",
-                "paginate": {
-                    "first": "Đầu",
-                    "last": "Cuối",
-                    "next": "Tiếp",
-                    "previous": "Trước"
-                }
-            }
-        });
-    });
-
-    //     Cập nhật trang thái của voicher =AJAX
-    $(".toggle-status").on("change", function () {
-        let checkbox = $(this);
-        let id = checkbox.data("id");
-        let endDate = checkbox.closest("tr").find(".endDate-hidden").val();
-        let oldStatus = checkbox.is(":checked") ? "Không hoạt động" : "Hoạt động"; // Trạng thái trước khi thay đổi
-        let newStatus = checkbox.is(":checked") ? "Hoạt động" : "Không hoạt động";
-        if (!endDate) {
-            alert("Ngày kết thúc không được để trống!");
-            checkbox.prop("checked", !checkbox.prop("checked")); // Quay lại trạng thái ban đầu
-            return;
-        }
-
-        // Cập nhật ngay trên giao diện (chưa lưu vào server)
-        checkbox.next(".status-text").text(newStatus);
-
-        $.ajax({
-            url: "/tqh/update-status-promotional",
-            type: "POST",
-            data: {id: id, status: newStatus, endDate: endDate},
-            dataType: "json",
-            success: function (response) {
-                console.log("Phản hồi từ server:", response);
-                if (!response.success) {
-                    alert(response.message);
-                    checkbox.prop("checked", !checkbox.prop("checked"));
-                    if (newStatus != "Hoạt động") {
-                        checkbox.next(".status-text").text(newStatus);
-                    } else {
-                        checkbox.next(".status-text").text(oldStatus);
-                    }
-                } else {
-                    checkbox.next(".status-text").text(newStatus)
-                }
-            },
-            error: function () {
-                // Hiển thị thông báo lỗi
-                $("#errorMessage").fadeIn().delay(2000).fadeOut();
-
-                // Quay lại trạng thái ban đầu
-                checkbox.prop("checked", !checkbox.prop("checked"));
-                checkbox.next(".status-text").text(oldStatus);
-            }
-        });
-    });
-
-</script>
 
 </body>
 

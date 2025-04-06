@@ -45,7 +45,7 @@ function openDeleteModal(userId) {
     document.getElementById('userIdDelete').value = userId;
     console.log(userId);
 }
-function openEditModal(userId, status, role) {
+function openEditModal(userId,status, role) {
     document.getElementById('update').style.display= "block" // Modal xóa tài khoản
     document.getElementById('userId').value = userId;
     document.getElementById('status').value = status;
@@ -87,7 +87,6 @@ document.getElementById('updateModal').addEventListener('submit', function(event
         type: 'POST',
         data: { userId: userId, status: status, role: role },
         success: function (response) {
-            document.getElementById("message").innerHTML = response.message;
             if (response.error) {
                 document.getElementById("message").innerHTML = response.message;
                 closeModalEdit();
