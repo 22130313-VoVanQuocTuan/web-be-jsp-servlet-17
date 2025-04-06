@@ -7,34 +7,20 @@ import hcmuaf.nlu.edu.vn.service.ProductService;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
-
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.nio.file.Paths;
 
 @MultipartConfig
 @WebServlet(name = "EditProductController ", value = "/edit-product")
 public class EditProductController extends HttpServlet {
 
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // Lấy ID sản phẩm cần sửa
-        ProductService productService = new ProductService();
-        try {
-            int productId = Integer.parseInt(request.getParameter("id"));
-            Product product = productService.getProductById(productId);
-            // Gửi sản phẩm tới JSP
-            request.setAttribute("product", product);
-
-            request.getRequestDispatcher("/products-list?action=show").forward(request, response);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-
-        }
-    }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.setCharacterEncoding("UTF-8");
+        response.setContentType("application/json");
         DBConnect dbConnect = new DBConnect();
         try {
             int productId = Integer.parseInt(request.getParameter("id"));
@@ -47,7 +33,8 @@ public class EditProductController extends HttpServlet {
             String size = request.getParameter("size");
             String unit = request.getParameter("unit");
             String description = request.getParameter("description");
-            String imageUrl = request.getParameter("imageUrl");
+
+
 
             // Kiểm tra và gán giá trị mặc định cho các trường nếu là null hoặc rỗng
             if (supplier == null || supplier.trim().isEmpty()) {
@@ -70,49 +57,51 @@ public class EditProductController extends HttpServlet {
                 discountPercent = "0"; // Mặc định là 0 nếu không nhập
             }
             double discountPercents = Double.parseDouble(discountPercent.trim());
-
-
-            // Lấy phần hình ảnh nếu có
-            Part imagePart = request.getPart("imageUrl");
             double discountPrice = discountPercents * price;
+            System.out.println("discountPrice: " + discountPrice);
+
+            String imageUrl = request.getParameter("currentImageUrl"); // Lấy URL ảnh cũ nếu không có ảnh mới
+            Part imagePart = request.getPart("imageUrl");
+
             Product updateProduct = new Product(productId, name, price, imageUrl, description, categoryId, supplier, color, size, unit, discountPercents, discountPrice);
             InventoryService inventoryService = new InventoryService();
             inventoryService.updateNameProduct(productId, name);
 
-            // Kiểm tra và lưu ảnh nếu có
             if (imagePart != null && imagePart.getSize() > 0) {
-                // Nếu có file mới, lưu file và lấy đường dẫn
+                // Có ảnh mới → lưu lại ảnh
                 String fileName = Paths.get(imagePart.getSubmittedFileName()).getFileName().toString();
-                String uploadPath = getServletContext().getRealPath("") + File.separator + "users" + File.separator + "img"; // Thư mục lưu ảnh
+                String uploadPath = getServletContext().getRealPath("") + File.separator + "users" + File.separator + "img";
                 File uploadDir = new File(uploadPath);
-                if (!uploadDir.exists()) uploadDir.mkdirs(); // Tạo thư mục nếu chưa tồn tại
+                if (!uploadDir.exists()) uploadDir.mkdirs();
 
-                // Lưu file lên thư mục uploads
                 File file = new File(uploadPath + File.separator + fileName);
                 imagePart.write(file.getAbsolutePath());
-                imageUrl = "users/img/" + fileName; // Đường dẫn ảnh để lưu vào cơ sở dữ liệu
-            } else {
-                // Nếu không có hình ảnh mới, sử dụng hình ảnh cũ
-                imageUrl = request.getParameter("currentImageUrl");
+                imageUrl = "users/img/" + fileName;
             }
 
             ProductService productService = new ProductService();
             try {
                 // Cập nhật sản phẩm với hình ảnh mới (hoặc cũ nếu không có hình ảnh mới)
+                // imageUrl đến đây đã được cập nhật: nếu không có ảnh mới thì giữ lại ảnh cũ
                 updateProduct.setImageUrl(imageUrl);
 
                 // Cập nhật sản phẩm
                 boolean isUpdated = productService.updateProduct(productId, updateProduct);
                 System.out.println("Update product status: " + isUpdated);
                 if (isUpdated) {
-                    response.sendRedirect(request.getContextPath() + "/products-list");
+                    PrintWriter out = response.getWriter();
+                    out.println("{\"message\": \"Cập nhât thành công.\"}");
+                    out.flush();
                 }
             } catch (Exception e) {
                 e.printStackTrace();
-                response.sendRedirect(request.getContextPath() + "/products-list");
+                PrintWriter out = response.getWriter();
+                out.println("{\"error\": true, \"message\": \"Cập nhật thất bại.\"}");
+                out.flush();
             }
         } finally {
             dbConnect.closeConnection();
         }
     }
 }
+

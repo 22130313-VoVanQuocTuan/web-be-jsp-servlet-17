@@ -3124,3 +3124,7 @@ body.no-scroll {
     background-color: #ff5959; /* Đổi màu khi hover */
     transform: scale(1.1); /* Phóng to nhẹ khi hover */
 }
+
+.contact-info{
+    padding: 2px;
+}

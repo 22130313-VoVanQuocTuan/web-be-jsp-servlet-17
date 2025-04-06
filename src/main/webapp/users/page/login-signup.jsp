@@ -171,8 +171,8 @@
                     <form id="register-form" action="signup-user" method="post">
                     <h1>Tạo tài khoản</h1>
                     <div class="social-icons">
-                        <a href="loginGG" class="icon-logo google"><i class="fa-brands fa-google-plus-g g"></i></a>
-                        <a href="loginFB" class="icon-logo facebook"><i class="fa-brands fa-facebook-f f"></i></a>
+                        <a href="loginGG" class="icon-logo google" style="text-decoration: none"><i class="fa-brands fa-google-plus-g g"></i></a>
+                        <a href="loginFB" class="icon-logo facebook" style="text-decoration: none"><i class="fa-brands fa-facebook-f f"></i></a>
                     </div>
                     <span>Hoặc sử dụng email để đăng kí tài khoản</span>
 

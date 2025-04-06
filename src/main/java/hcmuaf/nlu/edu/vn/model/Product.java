@@ -21,11 +21,12 @@ public class Product {
     private double discountPrice;
     private Timestamp createDate;
     private Timestamp updateDate;
+    private boolean isDeleted;
 
     public Product() {
     }
 
-    public Product(int id, String name, double price, String imageUrl, String description, int categoryId, String supplier, String color, String size, String unit, int view, int soldCount, double discountPercent,double discountPrice, Timestamp createDate, Timestamp updateDate) {
+    public Product(int id, String name, double price, String imageUrl, String description, int categoryId, String supplier, String color, String size, String unit, int view, int soldCount, double discountPercent, double discountPrice, Timestamp createDate, Timestamp updateDate) {
         this.id = id;
         this.name = name;
         this.price = price;
@@ -43,7 +44,8 @@ public class Product {
         this.createDate = createDate;
         this.updateDate = updateDate;
     }
-    public Product(int id,String name, double price, String imageUrl, String description, int categoryId, String supplier, String color, String size, String unit, double discountPercent,double discountPrice) {
+
+    public Product(int id, String name, double price, String imageUrl, String description, int categoryId, String supplier, String color, String size, String unit, double discountPercent, double discountPrice) {
         this.id = id;
         this.name = name;
         this.price = price;
@@ -170,6 +172,7 @@ public class Product {
     public void setSoldCount(int soldCount) {
         this.soldCount = soldCount;
     }
+
     public double getDiscountPercent() {
         return discountPercent;
     }
@@ -177,6 +180,7 @@ public class Product {
     public void setDiscountPercent(double discountPercent) {
         this.discountPercent = discountPercent;
     }
+
     public double getDiscountPrice() {
         return discountPrice;
     }
@@ -199,5 +203,13 @@ public class Product {
 
     public void setUpdateDate(Timestamp updateDate) {
         this.updateDate = updateDate;
+    }
+
+    public boolean isDeleted() {
+        return isDeleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.isDeleted = deleted;
     }
 }

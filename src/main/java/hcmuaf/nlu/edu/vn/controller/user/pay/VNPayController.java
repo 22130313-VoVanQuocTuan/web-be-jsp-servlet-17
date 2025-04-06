@@ -38,7 +38,7 @@ public class VNPayController extends HttpServlet {
         double totalFinalPrice = (double) session.getAttribute("totalFinalPrice");
         double totalShippingFee = (double) session.getAttribute("totalShippingFee");
         double totalDiscount = (double) session.getAttribute("totalDiscount");
-        String status = "Đang xử lý";
+        String status = "Chưa hoàn thành";
         String paymentStatus = "Chưa thanh toán";
         String paymentMethod = "VNPay";
         String shippingAddress = req.getParameter("shippingAddress");
