@@ -75,6 +75,7 @@ td {
 
 .log .recentOrders table tr td {
     padding: 0px;
+    white-space: nowrap;
 }
 
 .log .recentOrders table tr td:nth-child(3) {

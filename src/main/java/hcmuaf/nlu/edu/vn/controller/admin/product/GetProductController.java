@@ -27,13 +27,7 @@ public class GetProductController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
-        // Lấy tham số "all" từ request
-        HttpSession session = request.getSession();
-        Users user = (Users) session.getAttribute("user");
-        if (user == null || (!user.getRole().equals("admin") && !user.getRole().equals("owner"))) {
-            response.sendRedirect(request.getContextPath() + "/logout");
-            return;
-        }
+
         String name = request.getParameter("name");
         try {
             List<Product> products = productService.getAllProducts();

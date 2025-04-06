@@ -349,6 +349,7 @@ td {
 .details .recentOrders table tr {
   color: var(--black1);
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  white-space: nowrap;
 }
 
 .details .recentOrders table tr:last-child {
@@ -361,7 +362,7 @@ td {
 }
 
 .details .recentOrders table tr td {
-  padding: 10px;
+  padding: 8px;
 }
 
 .details .recentOrders table tr td:nth-child(3) {

@@ -52,8 +52,8 @@ function fetchData(data) {
         row.innerHTML = `
           <td>${order.id}</td>
           <td>${order.userid}</td>
-          <td>${order.createdAt}</td>
-          <td>${order.totalPrice}₫</td>
+          <td>${order.createdAt.toLocaleString()}</td>
+          <td>${order.totalPrice.toLocaleString()}₫</td>
           <td style="width: 130px"><span class="color" >${order.status}</span></td>
           <td>${order.paymentMethod}</td>
           <td style="width: 130px"><span class="color" >${order.paymentStatus}</span></td>

@@ -92,6 +92,7 @@ td {
 
 .import_export .recentOrders table tr td {
     padding: 4px;
+    white-space: nowrap;
 }
 
 .import_export .recentOrders table tr td:nth-child(3) {

@@ -38,7 +38,7 @@ public class DeleteProductController extends HttpServlet {
                 PrintWriter out = response.getWriter();
                 out.println("{\"message\": \"Xoá thành công.\"}");
                 out.flush();
-                logUtilDao.log(LogLevel.INFO, user.getUsername(), request.getRemoteAddr(), id, "Sản phẩm đã bị xóa");
+                logUtilDao.log(LogLevel.WARNING, user.getUsername(), request.getRemoteAddr(), id, "Sản phẩm đã bị xóa");
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }

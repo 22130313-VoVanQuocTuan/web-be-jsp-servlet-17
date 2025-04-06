@@ -79,7 +79,8 @@
   
   .details-user .recentOrders table tr td {
       padding: 4px;
-    font-size: 12px;
+    font-size: 13px;
+      white-space: nowrap;
   }
   
   .details-user .recentOrders table tr td:nth-child(3) {

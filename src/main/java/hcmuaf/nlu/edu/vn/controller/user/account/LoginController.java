@@ -84,7 +84,7 @@ public class LoginController extends HttpServlet {
                      }else
                          if ("admin".equals(user.getRole())  || "owner".equals(user.getRole())) {
                              logUtilDao.log(LogLevel.INFO, user.getUsername(), req.getRemoteAddr(), "Login No", "Login Successful");
-                             resp.sendRedirect(req.getContextPath() + "/home");
+                             resp.sendRedirect(req.getContextPath() + "/turn-page?action=home");
                          } else if ("user".equals(user.getRole())) {
                              logUtilDao.log(LogLevel.INFO, user.getUsername(), req.getRemoteAddr(), "Login No", "Login Successful");
                              resp.sendRedirect(req.getContextPath() + "/home-page");

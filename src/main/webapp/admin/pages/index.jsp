@@ -9,11 +9,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bảng điều khiển Quản trị viên </title>
     <!------------------ Kiểu dáng ------------------>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="<c:url value="/admin/css/style.css"/>">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+
 </head>
 <style>
+    .dataTables_wrapper .dataTables_filter input {
+        border: 2px solid #1c1919 !important;
+        margin-bottom: 10px !important;
+    }
+    .dataTables_wrapper .dataTables_paginate .paginate_button {
+        padding: 0px !important;
+    }
     .hov a {
         display: flex;
         align-items: center;
@@ -75,7 +86,7 @@
     <div class="navigation">
         <ul>
             <li>
-                <a href="home">
+                <a href="turn-page?action=home">
                         <span class="icon">
                            <img src="${pageContext.request.contextPath}/users/img/logo.png" alt="">
                         </span>
@@ -84,7 +95,7 @@
             </li>
 
             <li class="hov active">
-                <a href="home">
+                <a href="turn-page?action=home">
                         <span class="icon">
                             <ion-icon name="home-outline"></ion-icon>
                         </span>
@@ -219,7 +230,7 @@
         <div class="cardBox">
             <div class="card">
                 <div>
-                    <div class="numbers">${totalViews}</div>
+                    <div class="numbers" id="totalViews"></div>
                     <div class="cardName">Lượt Xem</div>
                 </div>
 
@@ -228,10 +239,10 @@
                 </div>
             </div>
 
-            <a href="accounts" style="text-decoration: none">
+            <a href="turn-page?action=user" style="text-decoration: none">
                 <div class="card">
                     <div>
-                        <div class="numbers">${totalUsers}</div>
+                        <div class="numbers" id="totalUsers"></div>
                         <div class="cardName">Số lượng người dùng</div>
                     </div>
 
@@ -241,11 +252,11 @@
                 </div>
             </a>
 
-            <a href="list-rating" style="text-decoration: none">
+            <a href="turn-page?action=rating" style="text-decoration: none">
                 <div class="card">
 
                     <div>
-                        <div class="numbers">${totalRatings}</div>
+                        <div class="numbers" id="totalRatings"></div>
                         <div class="cardName">Đánh giá</div>
                     </div>
 
@@ -257,7 +268,7 @@
 
             <div class="card">
                 <div>
-                    <div class="numbers"><fmt:formatNumber value="${totalSales}" type="number"/> ₫</div>
+                    <div class="numbers" id="totalRevenue"></div>
                     <div class="cardName">Doanh Thu</div>
                 </div>
 
@@ -275,7 +286,7 @@
                     <a href="home?showAll=orders" class="btn">Xem Tất Cả</a>
                 </div>
 
-                <table>
+                <table id="orderTable">
                     <thead>
                     <tr>
                         <td>Mã đơn hàng</td>
@@ -286,16 +297,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <c:forEach var="view" items="${viewOrder}">
-                        <tr>
-                            <td>${view.userId}</td>
-                            <td><fmt:formatNumber value="${view.totalPrice}" type="number"/>₫</td>
-                            <td>${view.paymentStatus}</td>
-                            <td>${view.createdAt}</td>
-                            <td>${view.status}</td>
-                                <%--                                <td><span class="status delivered">Đã Giao</span></td>--%>
-                        </tr>
-                    </c:forEach>
+
                     </tbody>
 
                 </table>
@@ -307,20 +309,10 @@
                     <h2>Khách hàng tiềm năng</h2>
                     <a href="home?showAll=users" class="btn">Xem Tất Cả</a>
                 </div>
-                <table>
-                    <c:forEach var="user" items="${users}">
-                        <tr>
-                            <td width="60px">
-                                <a href="accounts">
-                                    <ion-icon name="person"
-                                              style="color: #1841e4; font-size: 20px; text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);"></ion-icon>
-                                </a>
-                            </td>
-                            <td>
-                                <h4>${user.email}</h4>
-                            </td>
-                        </tr>
-                    </c:forEach>
+                <table id="customerTable">
+                    <tbody>
+
+                    </tbody>
 
 
                 </table>
@@ -330,9 +322,9 @@
         <div class="chart-container">
             <h2>Biểu đồ Doanh thu</h2>
             <div class="button-container">
-                <button onclick="loadChart('week')">Doanh thu theo tuần</button>
-                <button onclick="loadChart('month')">Doanh thu theo tháng</button>
-                <button onclick="loadChart('year')">Doanh thu theo năm</button>
+                <button onclick="loadRevenueData('week')">Doanh thu theo tuần</button>
+                <button onclick="loadRevenueData('month')">Doanh thu theo tháng</button>
+                <button onclick="loadRevenueData('year')">Doanh thu theo năm</button>
             </div>
             <canvas id="revenueChart"></canvas>
         </div>
@@ -353,72 +345,7 @@
 
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 <script src="<c:url value="/admin/js/index.js"/>"></script>
-<script>
-    // Biểu đồ doanh thu
-    let chartInstance = null;
-    // Danh sách màu sắc cố định
-    const colors = [
-        'rgba(255, 99, 132, 0.7)',  // Đỏ hồng
-        'rgba(54, 162, 235, 0.7)',  // Xanh dương
-        'rgba(255, 206, 86, 0.7)',  // Vàng
-        'rgba(75, 192, 192, 0.7)',  // Xanh ngọc
-        'rgba(153, 102, 255, 0.7)', // Tím
-        'rgba(255, 159, 64, 0.7)',  // Cam
-        'rgba(0, 204, 102, 0.7)'    // Xanh lá đậm
-    ];
+<script src="<c:url value="/admin/js/configuration.js"/>"></script>
 
-    function loadChart(type) {
-        fetch('home?type=' + type)
-            .then(response => response.json())
-            .then(data => {
-                if (!Array.isArray(data) || data.length === 0) {
-                    console.error("Dữ liệu trống hoặc không hợp lệ");
-                    return;
-                }
-
-                const labels = data.map(item =>
-                    type === 'week' ? item.week :
-                        type === 'month' ? item.month :
-                            item.year);
-                const revenues = data.map(item => item.revenue);
-
-                // Gán màu sắc tuần tự từ danh sách
-                const backgroundColors = labels.map((_, index) => colors[index % colors.length]);
-                const borderColors = backgroundColors.map(c => c.replace('0.7', '1'));
-
-                const chartData = {
-                    labels: labels,
-                    datasets: [{
-                        label: 'Doanh thu (VNĐ)',
-                        data: revenues,
-                        backgroundColor: backgroundColors,
-                        borderColor: borderColors,
-                        borderWidth: 1
-                    }]
-                };
-
-                if (chartInstance) {
-                    chartInstance.destroy();
-                }
-
-                chartInstance = new Chart(document.getElementById('revenueChart'), {
-                    type: 'bar',
-                    data: chartData,
-                    options: {
-                        responsive: true,
-                        plugins: {
-                            legend: {display: false} // Ẩn chú thích để biểu đồ gọn hơn
-                        },
-                        scales: {
-                            y: {beginAtZero: true}
-                        }
-                    }
-                });
-            })
-            .catch(error => console.error("Lỗi fetch dữ liệu:", error));
-    }
-
-    loadChart('month');
-</script>
 </body>
 </html>

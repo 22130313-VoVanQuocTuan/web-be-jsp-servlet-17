@@ -86,10 +86,7 @@ $(document).ready(function () {
             }
         }
     });
-    // Gọi lại hàm cập nhật màu sắc cho trạng thái khi DataTable vẽ lại bảng (chuyển trang, tìm kiếm, sắp xếp)
-    $('#reviewTable').on('draw.dt', function () {
-        updateStatusColorsLog();
-    });
+
 });
 
 
