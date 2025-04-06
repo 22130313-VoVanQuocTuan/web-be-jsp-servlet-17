@@ -91,11 +91,11 @@ public class PromotionalDao {
     }
 
     //Cập nhật trạng thái ưu  đãi
-    public boolean updateStatusProm(int id, String status) {
-        String sql = "UPDATE promotional SET status = ? WHERE id = ?";
+    public boolean updateStatusProm( String status) {
+        String sql = "UPDATE promotional SET status = ?";
         try(PreparedStatement ptm = dbConnect.preparedStatement(sql)){
             ptm.setString(1, status);
-            ptm.setInt(2, id);
+
             int row = ptm.executeUpdate();
             if (row > 0) {
                 return true;

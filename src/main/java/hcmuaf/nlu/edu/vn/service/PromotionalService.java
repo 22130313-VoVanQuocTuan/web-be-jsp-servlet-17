@@ -34,8 +34,8 @@ public class PromotionalService {
     }
 
     //Cập nhật trạng thái ưu đãi
-    public boolean updateStatusProm(int id, String status) {
-        return promotionalDao.updateStatusProm(id,status);
+    public boolean updateStatusProm(String status) {
+        return promotionalDao.updateStatusProm(status);
     }
 
     public List<Promotionals> getListPromotionalByValue(double value) {

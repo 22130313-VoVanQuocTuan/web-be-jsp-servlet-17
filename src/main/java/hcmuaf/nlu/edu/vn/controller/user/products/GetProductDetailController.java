@@ -33,6 +33,7 @@ public class GetProductDetailController extends HttpServlet {
         Users user = (Users) session.getAttribute("user");
         if (user != null && !user.getRole().equals("user")) {
             resp.sendRedirect(req.getContextPath() + "/logout");
+            session.removeAttribute("redirectUrl");
             return;
         }
 

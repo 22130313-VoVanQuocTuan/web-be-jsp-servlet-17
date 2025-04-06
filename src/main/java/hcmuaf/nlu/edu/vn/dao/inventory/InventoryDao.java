@@ -43,7 +43,7 @@ public class InventoryDao {
     }
     // thêm sản phẩm với số lượng
     public void addInventory(Inventory inventory) {
-       String sql = "INSERT INTO inventory (productId, productName,  quantity,minimumQuantity,maximumQuantity, status) VALUES (?.? ,?,?,?,?)";
+       String sql = "INSERT INTO inventory (productId, productName,  quantity,minimumQuantity,maximumQuantity, status) VALUES (?,? ,?,?,?,?)";
        try (PreparedStatement ptm = dbConnect.preparedStatement(sql)){
            ptm.setInt(1, inventory.getProductId());
            ptm.setString(2, inventory.getProductName());

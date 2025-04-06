@@ -21,24 +21,7 @@ public class UpdateStatusAccountController  extends HttpServlet {
         String ids = req.getParameter("userId");
         String status = req.getParameter("status");
         String role = req.getParameter("role");
-
-        // Kiểm tra id và status trước khi xử lý
-        if (ids == null || ids.trim().isEmpty()) {
-            PrintWriter out = resp.getWriter();
-            out.println("{\"error\": true, \"message\":\"Cập nhật thất bại.\"}");
-            out.flush();
-            return;
-        }
-
-        int id;
-        try {
-            id = Integer.parseInt(ids); // Chuyển đổi id sang số nguyên
-        } catch (NumberFormatException e) {
-            PrintWriter out = resp.getWriter();
-            out.println("{\"error\": true, \"message\":\"Cập nhật thất bại.\"}");
-            out.flush();
-            return;
-        }
+        int id = Integer.parseInt(ids);
 
         UserService userService = new UserService();
         try {
