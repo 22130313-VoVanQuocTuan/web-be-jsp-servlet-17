@@ -130,11 +130,11 @@ public class PromotionalDao {
         }
     }
 
-    public Promotionals getPromotional(int id) throws SQLException {
-       String sql = "select * from promotional WHERE id = ?";
+    public Promotionals getPromotional(String code ) throws SQLException {
+       String sql = "select * from promotional WHERE code = ?";
        Promotionals promotional = null;
        try (PreparedStatement preparedStatement = dbConnect.preparedStatement(sql)) {
-           preparedStatement.setInt(1, id);
+           preparedStatement.setString(1, code);
            try (ResultSet rs = preparedStatement.executeQuery()) {
                if (rs.next()) {
                    promotional = new Promotionals();

@@ -9,6 +9,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
@@ -18,6 +19,8 @@ import java.time.format.DateTimeFormatter;
 public class UpdatePromotionalController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setContentType("application/json");
+        resp.setCharacterEncoding("UTF-8");
         PromotionalService promotionalService = new PromotionalService();
         int id = Integer.parseInt(req.getParameter("id"));
         double value = Double.parseDouble(req.getParameter("value"));
@@ -36,11 +39,13 @@ public class UpdatePromotionalController extends HttpServlet {
 
         if(promotionalService.updatePromotional(id,value, startTimestamp, endTimestamp)){
             // Chuyển hướng đến trang danh sách
-            resp.sendRedirect(req.getContextPath() + "/promotional-list");
+            PrintWriter out = resp.getWriter();
+            out.println("{\"message\": \"Cập nhật thành công.\"}");
+            out.flush();
         }else{
-            req.setAttribute("error", "Cập nhật thất bại");
-            req.setAttribute("showModal", true); // Thêm thuộc tính hiển thị modal
-            req.getRequestDispatcher("/promotional-list").forward(req, resp); // Hiển thị lại form với thông báo lỗi
+            PrintWriter out = resp.getWriter();
+            out.println("{\"error\": true, \"message\":\"Cập nhật thất bại.\"}");
+            out.flush();
         }
     }
 

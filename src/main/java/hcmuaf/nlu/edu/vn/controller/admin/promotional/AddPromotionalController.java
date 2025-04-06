@@ -9,6 +9,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -18,6 +20,8 @@ import java.time.format.DateTimeParseException;
 public class AddPromotionalController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setContentType("application/json");
+        resp.setCharacterEncoding("UTF-8");
         PromotionalService promotionalService = new PromotionalService();
         try {
             // Lấy dữ liệu từ request
@@ -35,19 +39,25 @@ public class AddPromotionalController extends HttpServlet {
             Timestamp startTimestamp = Timestamp.valueOf(startDate);
             Timestamp endTimestamp = Timestamp.valueOf(endDate);
 
+            if(promotionalService.getPromotional(code) != null){
+                PrintWriter out = resp.getWriter();
+                out.println("{\"error\": true, \"message\":\"Ưu đãi đã tồn tại.\"}");
+                out.flush();
+            }else
             if(promotionalService.addPromotional(code, value, startTimestamp, endTimestamp,"Hoạt động")){
-                // Chuyển hướng đến trang danh sách
-                resp.sendRedirect(req.getContextPath() + "/promotional-list");
+                PrintWriter out = resp.getWriter();
+                out.println("{\"message\": \"Thêm ưu đãi thành công.\"}");
+                out.flush();
             }else{
-                req.setAttribute("error", "Thêm thất bại");
-                req.setAttribute("showModal", true); // Thêm thuộc tính hiển thị modal
-                req.getRequestDispatcher("/promotional-list").forward(req, resp); // Hiển thị lại form với thông báo lỗi
+                PrintWriter out = resp.getWriter();
+                out.println("{\"error\": true, \"message\":\"Thêm ưu đãi thất bại.\"}");
+                out.flush();
             }
 
-        } catch (NumberFormatException | DateTimeParseException e) {
-            req.setAttribute("error", "Thêm thất bại, dữ liệu ko hợp lệ");
-            req.setAttribute("showModal", true); // Thêm thuộc tính hiển thị modal
-            req.getRequestDispatcher("/promotional-list").forward(req, resp); // Hiển thị lại form với thông báo lỗi
+        } catch (NumberFormatException | DateTimeParseException | SQLException e) {
+            PrintWriter out = resp.getWriter();
+            out.println("{\"error\": true, \"message\":\"Thêm ưu đãi thất bại.\"}");
+            out.flush();
         }
     }
 }

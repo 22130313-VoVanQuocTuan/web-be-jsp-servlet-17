@@ -203,7 +203,7 @@
                     <h2>Danh sách mã ưu đãi</h2>
                 </div>
                 <div class="list-promotions-content-button">
-                    <button id="add_Promotions">Thêm ưu đãi</button>
+                    <button id="add_Promotions" onclick="openAddPro()">Thêm ưu đãi</button>
                 </div>
 
                 <table id="productTable">
@@ -228,7 +228,7 @@
                 <div id="addPromotionModal" class="modal">
                     <div class="modal-content">
                         <h3>Thêm mã ưu đãi mới</h3>
-                        <form id="addPromotionForm" action="add-promotional" method="post">
+                        <form id="addPromotionForm">
                             <label>Mã ưu đãi:</label>
                             <input type="text" id="promotionCode" name="code" required>
 
@@ -241,11 +241,8 @@
                             <label>Ngày kết thúc:</label>
                             <input type="datetime-local" id="promotionDateEnd" name="endDate" required>
 
-                            <c:if test="${not empty error}">
-                                <p style="color: red;">${error}</p> <!-- Hiển thị lỗi nếu có -->
-                            </c:if>
                             <button type="submit" id="save_Product">Lưu ưu đãi</button>
-                            <button type="button" class="close-modal">Thoát</button>
+                            <button type="button" class="close-modal" onclick="closeModalAddPro()">Thoát</button>
                         </form>
 
                     </div>
@@ -253,15 +250,14 @@
 
                 <!-- Modal cho chỉnh sửa thông tin  -->
                 <div id="editPromotional" class="modal">
-                    <div class="modal-content">
-                        <span class="close-btn " onclick="closeModal1()" &times;></span>
+                    <div class="modal-content" style="overflow-y: hidden;height: 70%; max-height: 99%;">
                         <h2 style="color: #FFC857" class="modal-title">Chỉnh sửa ưu đãi</h2>
                             <!-- Form chỉnh sửa thông tin -->
                             <form id="editInfoForm">
                                 <input type="hidden" name="id" id="promotionId">
                                 <div class="mb-3">
-                                    <label for="value" class="form-label">Giá trị:</label>
-                                    <input type="number" name="value" class="form-control" id="value"
+                                    <label for="promotionValue" class="form-label">Giá trị:</label>
+                                    <input type="number" name="value" class="form-control" id="promotionValue"
                                            placeholder="Nhập giá trị"  required>
                                 </div>
                                 <div class="mb-3">
@@ -277,7 +273,7 @@
 
                                 <div class="modal-footer">
                                     <button type="submit" class="btn btn-primary" id="saveChanges">Lưu thay đổi</button>
-                                    <button type="button" class="close-modal btn btn-secondary ">Hủy</button>
+                                    <button type="button" class="close-modal btn btn-secondary " onclick="closeModalUpdatePro()">Hủy</button>
                                 </div>
                             </form>
 
@@ -289,19 +285,16 @@
                     <div class="modal-content">
                         <h3>Xác nhận xóa</h3>
                         <label>Bạn có chắc chắn muốn xóa ưu đãi này?</label>
+                        <input type="hidden" id="promotionalId">
                         <div class="button-container">
-                            <button id="confirm-delete" class="confirm-delete">Xóa</button>
-                            <button type="button" class="close-modal">Hủy</button>
+                            <button id="confirm-delete" class="confirm-delete" onclick="confirmModalDelete()">Xóa</button>
+                            <button type="button" class="close-modal" onclick="closeModalDeletePro()">Hủy</button>
                         </div>
                     </div>
                 </div>
-                <%-- Kiểm tra xem có thông báo nào không --%>
-                <c:if test="${not empty sessionScope.errorMessage}">
-                    <div class="alert alert-info">
-                            ${sessionScope.errorMessage}
-                    </div>
-                    <% session.removeAttribute("errorMessage"); %> <!-- Xóa thông báo ngay sau khi hiển thị -->
-                </c:if>
+                <div id="message" class="alert alert-info" style="display: none">
+                    <!-- Thông báo lỗi sẽ được chèn vào đây -->
+                </div>
             </div>
         </div>
     </div>
