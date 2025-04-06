@@ -95,7 +95,7 @@
             </li>
 
             <li>
-                <a href="category">
+                <a href="turn-page?action=categories">
                         <span class="icon">
                             <ion-icon name="list-outline"></ion-icon>
                         </span>
@@ -154,9 +154,6 @@
             <div class="toggle">
                 <ion-icon name="menu-outline"></ion-icon>
             </div>
-
-
-
             <div class="user">
                 <a href="informationCustomer"> <ion-icon name="person"
                                                              style="color: #000000; font-size: 25px;"></ion-icon></a>

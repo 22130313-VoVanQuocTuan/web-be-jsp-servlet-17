@@ -1,5 +1,7 @@
 package hcmuaf.nlu.edu.vn.controller.admin.category;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import hcmuaf.nlu.edu.vn.model.Category;
 import hcmuaf.nlu.edu.vn.model.Users;
 import hcmuaf.nlu.edu.vn.service.CategoryService;
@@ -20,25 +22,29 @@ public class GetListCategoryController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-    try{
-        HttpSession session = req.getSession();
-        Users user = (Users) session.getAttribute("user");
-        if (user == null || (!user.getRole().equals("admin") && !user.getRole().equals("owner"))) {
-            resp.sendRedirect(req.getContextPath() + "/logout");
-            return;
+        resp.setCharacterEncoding("UTF-8");
+        resp.setContentType("application/json");
+        try {
+            HttpSession session = req.getSession();
+            Users user = (Users) session.getAttribute("user");
+            if (user == null || (!user.getRole().equals("admin") && !user.getRole().equals("owner"))) {
+                resp.sendRedirect(req.getContextPath() + "/logout");
+                return;
+            }
+
+            CategoryService categoryService = new CategoryService();
+            List<Category> list = categoryService.getAllCategory();
+
+            // Truyền danh sách sản phẩm vào request để hiển thị trong JSP
+            Gson gson = new GsonBuilder()
+                    .setDateFormat("yyyy-MM-dd HH:mm:ss")
+                    .create();
+            String json = gson.toJson(list);
+            resp.getWriter().write(json);
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-
-        CategoryService categoryService = new CategoryService();
-        List<Category> list = categoryService.getAllCategory();
-
-         req.setAttribute("list", list);
-         req.getRequestDispatcher("/admin/pages/category.jsp").forward(req, resp);
-
-    }catch (Exception e){
-        e.printStackTrace();
-        req.getRequestDispatcher("/admin/pages/category.jsp").forward(req, resp);
-
-    }
     }
 
     @Override
