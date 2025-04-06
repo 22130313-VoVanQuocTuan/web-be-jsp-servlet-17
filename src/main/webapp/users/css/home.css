@@ -387,7 +387,7 @@ p {
     font-size: 15px;
     font-weight: bold;
     float: none;
-    width: 257px;
+    width: 234px;
     height: 40px;
     border-bottom: solid 1px gray;
     padding-top: 0px;
@@ -395,8 +395,11 @@ p {
 }
 
 #section-nav ul.navbar-center li ul.items li a {
-   color: #000000;
-   margin-top: 13px;
+    color: #000000;
+    margin-top: 1px;
+    justify-content: flex-start;
+    width: 100%;
+    height: 100%;
 }
 
 #section-nav ul.navbar-center li ul.items li:hover {

@@ -201,7 +201,7 @@ public class ProductDao {
 
     // LẤY RA SANR PHẨM THEO TÊN
     public List<Product> getListProductByName(String name) throws SQLException {
-        String sql = "SELECT * FROM products JOIN inventory i ON p.id = i.productId  WHERE name LIKE ? COLLATE utf8mb4_unicode_ci";
+        String sql = "SELECT * FROM products p JOIN inventory i ON p.id = i.productId  WHERE name LIKE ? COLLATE utf8mb4_unicode_ci";
         List<Product> products = new ArrayList<>();
         try (PreparedStatement ptm = dbConnect.preparedStatement(sql)) {
             ptm.setString(1, "%" + name + "%");
