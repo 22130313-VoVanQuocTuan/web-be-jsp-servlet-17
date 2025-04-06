@@ -6,6 +6,7 @@ public class Category {
     private int id;
     private String name;
     private Timestamp createDate;
+    private boolean isDeleted;
 
     public Category(int id, String name, Timestamp createDate) {
         this.id = id;
@@ -35,5 +36,13 @@ public class Category {
 
     public void setCreateDate(Timestamp createDate) {
         this.createDate = createDate;
+    }
+
+    public boolean isDeleted() {
+        return isDeleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        isDeleted = deleted;
     }
 }
