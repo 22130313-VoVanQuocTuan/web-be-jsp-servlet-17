@@ -1,0 +1,74 @@
+plugins {
+    id 'war' // Để xây dựng file WAR cho ứng dụng web
+    id 'java' // Hỗ trợ Java
+}
+
+group 'hcmuaf.nlu.edu.vn'
+version '1.0-SNAPSHOT'
+
+sourceSets {
+    main {
+        java {
+            srcDirs 'src/main/java'
+        }
+        resources {
+            srcDirs 'src/main/resources'
+        }
+    }
+}
+
+repositories {
+    mavenCentral() // Kho lưu trữ chính
+}
+dependencies {
+    // Jakarta Servlet API (dùng compileOnly thay providedCompile)
+    compileOnly 'jakarta.servlet:jakarta.servlet-api:6.1.0'
+
+    // JUnit 5 (test scope)
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.11.0-M2'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.11.0-M2'
+
+    // JSTL (Jakarta Standard Tag Library)
+    implementation 'jakarta.servlet.jsp.jstl:jakarta.servlet.jsp.jstl-api:3.0.1'
+    implementation 'org.glassfish.web:jakarta.servlet.jsp.jstl:3.0.1'
+
+    // MySQL Connector
+    implementation 'com.mysql:mysql-connector-j:8.4.0'
+
+    // Spring Security Core
+    implementation 'org.springframework.security:spring-security-core:6.3.2'
+
+    // Java Mail API
+    implementation 'javax.mail:javax.mail-api:1.6.2'
+    implementation 'com.sun.mail:javax.mail:1.6.2'
+
+    // Gson
+    implementation 'com.google.code.gson:gson:2.8.9'
+
+    // Google API Client (đồng bộ phiên bản)
+
+    implementation 'com.google.api-client:google-api-client:1.23.0'
+    implementation 'com.google.oauth-client:google-oauth-client-jetty:1.23.0'
+    implementation 'com.google.http-client:google-http-client-jackson:1.23.0'
+    implementation 'com.google.http-client:google-http-client-jackson2:1.23.0'
+    implementation 'com.google.apis:google-api-services-oauth2:v2-rev20200213-1.30.9'
+
+    // JSON (cho Facebook hoặc các mục đích khác)
+    implementation 'org.json:json:20240303'
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_17 // Tương ứng maven.compiler.source
+    targetCompatibility = JavaVersion.VERSION_17 // Tương ứng maven.compiler.target
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8' // Tương ứng project.build.sourceEncoding
+}
+tasks.processResources {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
+
+war {
+    archiveFileName = 'VLXD-TQH.war' // Tên file WAR khi build
+}

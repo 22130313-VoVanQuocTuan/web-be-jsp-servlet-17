@@ -3,6 +3,15 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 
+#gradle
+.gradle/
+build/
+gradle/
+gradlew
+gradlew.bat
+
+
+
 ### IntelliJ IDEA ###
 
 .idea/modules.xml
@@ -12,6 +21,8 @@ target/
 .idea/libraries/
 .idea/workspace.xml
 .idea/
+.idea/encodings.xml
+
 
 *.iws
 *.iml
