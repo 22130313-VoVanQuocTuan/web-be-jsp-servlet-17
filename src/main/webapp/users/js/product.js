@@ -33,50 +33,50 @@ displayProducts(currentPage);
 
 
 
-//  Giuwx trạng thái cảu các item
-
-  // Tìm tất cả các mục trong danh mục
-const items = document.querySelectorAll('.left-sidebar .item');
-
-// Đọc trạng thái từ localStorage và đánh dấu mục đang được chọn
-const selectedCategory = localStorage.getItem('selectedCategory');
-if (selectedCategory) {
-    document.querySelector(`[data-category="${selectedCategory}"]`).classList.add('active');
-}
-
-// Xử lý khi nhấn vào một mục
-items.forEach(item => {
-    item.addEventListener('click', function(event) {
-        // Ngăn chặn hành động mặc định của link
-        event.preventDefault();
-
-        // Xóa lớp "active" khỏi tất cả các mục
-        items.forEach(el => el.classList.remove('active'));
-
-        // Thêm lớp "active" vào mục hiện tại
-        item.classList.add('active');
-
-        // Lưu danh mục đã chọn vào localStorage
-        const category = item.getAttribute('data-category');
-        localStorage.setItem('selectedCategory', category);
-
-        // Lấy đường dẫn từ thẻ <a> và chuyển đến trang đó
-        const link = item.querySelector('a').getAttribute('href');
-        window.location.href = link;
-    });
-});
-
-// Xóa trạng thái khi nhấn ra ngoài (vào bất kỳ vị trí nào khác)
-document.addEventListener('click', function(event) {
-    const isClickInside = event.target.closest('.item');
-    if (!isClickInside) {
-        // Xóa trạng thái trong localStorage
-        localStorage.removeItem('selectedCategory');
-
-        // Xóa lớp "active" khỏi tất cả các mục
-        items.forEach(el => el.classList.remove('active'));
-    }
-});
+// //  Giuwx trạng thái cảu các item
+//
+//   // Tìm tất cả các mục trong danh mục
+// const items = document.querySelectorAll('.left-sidebar .item');
+//
+// // Đọc trạng thái từ localStorage và đánh dấu mục đang được chọn
+// const selectedCategory = localStorage.getItem('selectedCategory');
+// if (selectedCategory) {
+//     document.querySelector(`[data-category="${selectedCategory}"]`).classList.add('active');
+// }
+//
+// // Xử lý khi nhấn vào một mục
+// items.forEach(item => {
+//     item.addEventListener('click', function(event) {
+//         // Ngăn chặn hành động mặc định của link
+//         event.preventDefault();
+//
+//         // Xóa lớp "active" khỏi tất cả các mục
+//         items.forEach(el => el.classList.remove('active'));
+//
+//         // Thêm lớp "active" vào mục hiện tại
+//         item.classList.add('active');
+//
+//         // Lưu danh mục đã chọn vào localStorage
+//         const category = item.getAttribute('data-category');
+//         localStorage.setItem('selectedCategory', category);
+//
+//         // Lấy đường dẫn từ thẻ <a> và chuyển đến trang đó
+//         const link = item.querySelector('a').getAttribute('href');
+//         window.location.href = link;
+//     });
+// });
+//
+// // Xóa trạng thái khi nhấn ra ngoài (vào bất kỳ vị trí nào khác)
+// document.addEventListener('click', function(event) {
+//     const isClickInside = event.target.closest('.item');
+//     if (!isClickInside) {
+//         // Xóa trạng thái trong localStorage
+//         localStorage.removeItem('selectedCategory');
+//
+//         // Xóa lớp "active" khỏi tất cả các mục
+//         items.forEach(el => el.classList.remove('active'));
+//     }
+// });
 
 
 document.addEventListener("DOMContentLoaded", function () {

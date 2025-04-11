@@ -220,7 +220,7 @@
                         <p style="color: #ff0000;">Giá đã giảm: <fmt:formatNumber value="${product.discountPrice}"
                                                                                   type="number"
                                                                                   groupingUsed="true"/>₫</p>
-                        <p>Giảm giá: ${product.discountPercent}%</p>
+                        <p>Giảm giá: ${product.discountPercent*100}%</p>
                         <span style="margin-left: 10px;">
                     <i class="fas fa-eye"></i>
                     <span style="font-size: 0.9em;">${product.view}</span>
