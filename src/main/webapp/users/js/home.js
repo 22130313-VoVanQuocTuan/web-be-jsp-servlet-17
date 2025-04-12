@@ -66,8 +66,6 @@ addToCartButtons.forEach(function(button) {
     });
 });
 
-
-
 });
 
 
