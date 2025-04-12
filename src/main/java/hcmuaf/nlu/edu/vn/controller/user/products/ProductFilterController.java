@@ -1,5 +1,6 @@
 package hcmuaf.nlu.edu.vn.controller.user.products;
 
+import com.google.gson.Gson;
 import hcmuaf.nlu.edu.vn.model.Product;
 import hcmuaf.nlu.edu.vn.model.Users;
 import hcmuaf.nlu.edu.vn.service.ProductService;
@@ -8,6 +9,7 @@ import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,8 +21,12 @@ public class ProductFilterController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.setCharacterEncoding("UTF-8");
+        response.setContentType("application/json");
+
         String filter = request.getParameter("filter");
         String categoryIdParam = request.getParameter("categoryId");
+        System.out.println(categoryIdParam);
 
         HttpSession session = request.getSession();
         Users user = (Users) session.getAttribute("user");
@@ -80,16 +86,15 @@ public class ProductFilterController extends HttpServlet {
                 request.setAttribute("message", "Không có sản phẩm nào theo bộ lọc này.");
             }
 
-            // Truyền danh sách sản phẩm sang JSP
-            request.setAttribute("products", products);
-            request.setAttribute("categoryId", categoryIdParam);
-            // Chuyển hướng tới JSP để hiển thị
-            request.getRequestDispatcher("/users/page/product.jsp").forward(request, response);
+            // Trả về danh sách sản phẩm dưới dạng JSON
+            response.getWriter().write(new Gson().toJson(products));  // Sử dụng Gson để chuyển đổi danh sách thành JSON
+
         } catch (SQLException e) {
             e.printStackTrace();
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Lỗi khi lấy sản phẩm từ cơ sở dữ liệu");
         }
     }
+
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

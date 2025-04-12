@@ -1,6 +1,7 @@
 package hcmuaf.nlu.edu.vn.controller.user.products;
 
 import com.google.gson.Gson;
+import hcmuaf.nlu.edu.vn.model.Promotionals;
 import hcmuaf.nlu.edu.vn.model.Banner;
 import hcmuaf.nlu.edu.vn.model.Category;
 import hcmuaf.nlu.edu.vn.model.Product;
@@ -63,12 +64,14 @@ public class HomeController extends HttpServlet {
             List<Product> products = productService.getListProductDiscount();
             List<Product> productsCategory = productService.getAllProducts();
             List<Product> productPopular = productService.getPopularProducts();
+            List<Promotionals> list = productService.getListPromotional();
             try {
                 List<Category> categories = productService.getAllCategories();
                 req.setAttribute("categories", categories);
             } catch (Exception e) {
                 System.out.println(e.toString());
             }
+            session.setAttribute("promotionals", list);
 
             // Gửi dữ liệu sản phẩm và categoryId đến JSP để hiển thị
             req.setAttribute("productsCategory", productsCategory);

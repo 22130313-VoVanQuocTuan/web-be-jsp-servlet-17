@@ -374,10 +374,6 @@
                         </div>
                     </div>
                 </div>
-
-                <div id="message" class="alert alert-info" style="display: none">
-                    <!-- Thông báo lỗi sẽ được chèn vào đây -->
-                </div>
             </div>
         </div>
     </div>
