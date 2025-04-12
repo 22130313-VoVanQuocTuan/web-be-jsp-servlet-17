@@ -9,6 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vật Liệu Xây Dựng TQH </title>
 </head>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4-beta3/css/all.min.css"/>
@@ -98,12 +99,12 @@
                            Xin chào,  <span
                  id="username">${sessionScope.user.username != null ? sessionScope.user.username : ''}</span>!</span>
 
-                <form action="informationCustomer" method="get">
+                <a href="turn-page?action=infoUser" style="text-decoration: none">
                     <button type="submit" class="account-link" id="signup-link"
                             style="display: none;">
                         <i class="fas fa-user-circle"></i> Tài khoản
                     </button>
-                </form>
+                </a>
                 <form action="login" method="post">
                     <input name="action" type="hidden" value="login"/>
                     <button type="submit" id="login-link">
@@ -208,18 +209,13 @@
     <div class="account-info-page">
         <h1>Thông tin tài khoản</h1>
         <p class="greeting">Xin chào, ${sessionScope.user.username != null ? sessionScope.user.username : ''}</p>
-        <%-- Kiểm tra xem có thông báo nào không --%>
-        <c:if test="${not empty message}">
-            <div class="alert alert-info">
-                    ${message}
-            </div>
-        </c:if>
+
         <div class="content">
             <!-- Đơn hàng gần nhất -->
             <div class="recent-orders">
                 <h2>Đơn hàng gần nhất</h2>
                 <div class="table-container">
-                    <table>
+                    <table id="order" >
                         <thead>
                         <tr>
                             <th>Mã đơn hàng</th>
@@ -231,40 +227,15 @@
                         </tr>
                         </thead>
 
-                        <tbody>
-                        <c:forEach var="order" items="${orders}">
-                            <tr>
-                                <td>${order.id}</td>
-                                <td>${order.createdAt}</td>
-                                <td>${order.shippingAddress}</td>
-                                <td>${order.paymentStatus}</td>
-                                <td>
-                                    <a href="informationCustomer?orderId=${order.id}" class="view-detail-btn">
-                                        <button>Xem</button>
-                                    </a>
-                                </td>
-                                <td>
-                                    <!-- Nút hủy -->
-                                    <button id="cancel-order-btn" data-order-id="${order.id}">Hủy đơn</button>
-                                </td>
-                            </tr>
-                        </c:forEach>
+                        <tbody >
                         </tbody>
                     </table>
                 </div>
             </div>
 
             <!-- Thông tin khách hàng -->
-            <div class="customer-info">
-                <h2>Thông tin khách hàng</h2>
-                <p><strong>Tên:</strong>${info.fullName}</p>
-                <p><strong>Email:</strong> ${info.email}</p>
-                <p><strong>Số điện thoại:</strong>${info.phoneNumber}</p>
-                <p><strong>Địa chỉ:</strong> ${info.address}</p>
-                <div style="display: flex">
-                <button class="edit-btn" onclick="openModal1()">Chỉnh sửa thông tin</button>
-                    <button class="editPass" onclick="openModalPass()">Đổi Mật Khẩu</button>
-                </div>
+            <div class="customer-info" id="infoUser">
+
             </div>
         </div>
 
@@ -276,11 +247,11 @@
             <h2 class="modal-title">Xác nhận hủy đơn hàng</h2>
             <p class="titles">Bạn chắc chắn muốn hủy đơn hàng này?</p>
             <div class="modal-buttons-dele">
-                <form id="cancelOrderForm" method="GET" action="delete-order-infor">
-                    <input type="hidden" id="orderId" name="orderId" value="">
-                    <button type="submit" class="confirm-delete" id="confirmCancelOrderBtn">Hủy đơn hàng</button>
+                <form id="cancelOrderForm">
+                    <input type="hidden" id="orderId" name="orderId">
+                    <button type="submit" class="confirm-delete">Hủy đơn hàng</button>
                 </form>
-                <button type="button" class="close-modal-dele" id="closeModalBtn">Đóng</button>
+                <button type="button" class="close-modal-dele" id="closeModalBtn" onclick="closeModalsCancelOrderModal()">Đóng</button>
             </div>
         </div>
     </div>
@@ -292,7 +263,7 @@
             <h2 class="modal-title">Chi tiết đơn hàng</h2>
             <div id="orderDetailContent">
                 <!-- Thông tin chi tiết -->
-                <table class="order-detail-table">
+                <table class="order-detail-table" id="orderDetail">
                     <thead>
                     <tr>
                         <th>Tên sản phẩm</th>
@@ -303,36 +274,12 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <c:forEach var="oi" items="${orderItem}">
-                        <tr>
-                            <td>${oi.productName}</td>
-                            <td>${oi.quantity}</td>
-                            <td><fmt:formatNumber value="${oi.price}" type="number"/>₫</td>
-                            <td><fmt:formatNumber value="${oi.discount}" type="number"/>₫</td>
-                            <td><fmt:formatNumber value="${oi.totalPrice}" type="number"/>₫</td>
-                        </tr>
-                    </c:forEach>
+
                     </tbody>
                 </table>
 
-                <div class="order-info">
-                    <p><strong>Mã đơn hàng:</strong> <span class="info-highlight">${orderInfo.id}</span></p>
-                    <p><strong>Tổng tiền:</strong> <span class="info-highlight"><fmt:formatNumber
-                            value="${orderInfo.totalPrice}" type="number"/> ₫</span></p>
-                    <p><strong>Phí giao hàng:</strong> <span class="info-highlight"><fmt:formatNumber
-                            value="${orderInfo.shippingFee}" type="number"/> ₫</span></p>
-                    <p><strong>Số tiền giảm giá:</strong> <span class="info-highlight total-price"><fmt:formatNumber
-                            value="${orderInfo.discountAmount}" type="number"/> ₫</span></p>
-                    <p><strong>Phương thức thanh toán:</strong> <span
-                            class="badge success">${orderInfo.paymentMethod}</span></p>
-                    <p><strong>Trạng thái thanh toán:</strong> <span
-                            class="badge success">${orderInfo.paymentStatus}</span></p>
-                    <p><strong>Địa chỉ:</strong>${orderInfo.shippingAddress}</p>
-                    <p><strong>Số lượng:</strong>${orderInfo.quantity}</p>
-                    <p><strong>Email:</strong>${orderInfo.email}</p>
-                    <p><strong>Người nhận hàng:</strong>${orderInfo.name}</p>
-                    <p><strong>Số điện thoại:</strong>${orderInfo.phoneNumber}</p>
-                    <p><strong>Ghi chú:</strong>${orderInfo.note}</p>
+                <div class="order-info" id="order-info" >
+
                 </div>
 
             </div>
@@ -347,26 +294,27 @@
 
             <div class="editInformationContent">
                 <!-- Form chỉnh sửa thông tin -->
-                <form id="editInfoForm" action="update-info" method="post">
+                <form id="editInfoForm">
                     <div class="mb-3">
                         <label for="name" class="form-label">Tên</label>
                         <input type="text" name="fullName" class="form-control" id="name" placeholder="Nhập tên của bạn"
-                               required>
+                               >
+                        <!-- Thông báo lỗi sẽ hiển thị ở đây -->
+                        <span class="error"  id="errorName"></span>
                     </div>
                     <div class="mb-3">
                         <label for="phone" class="form-label">Số điện thoại</label>
                         <input type="tel" name="phoneNumber" class="form-control" id="phone"
-                               placeholder="Nhập số điện thoại" required>
+                               placeholder="Nhập số điện thoại" >
+                        <!-- Thông báo lỗi sẽ hiển thị ở đây -->
+                        <span class="error"  id="errorPhone"></span>
                     </div>
                     <div class="mb-3">
                         <label for="address" class="form-label">Địa chỉ</label>
                         <textarea class="form-control" name="address" id="address" rows="3" placeholder="Nhập địa chỉ"
                                   required></textarea>
+
                     </div>
-                    <!-- Thông báo lỗi -->
-                    <c:if test="${not empty error}">
-                        <p style="color: red;">${error}</p> <!-- Hiển thị lỗi nếu có -->
-                    </c:if>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary" id="saveChanges">Lưu thay đổi</button>
                         <button type="button" class="btn btn-secondary" onclick="closeModal1()">Hủy</button>
@@ -385,37 +333,31 @@
 
             <div class="editInformationContent">
                 <!-- Form chỉnh sửa thông tin -->
-                <form id="updatePass" action="update-pass" method="post">
+                <form id="updatePass" >
                     <div class="mb-3">
                         <label for="name" class="form-label">Email</label>
                         <input type="text" name="email" class="form-control" id="email" placeholder="Nhập email của bạn"
                                required>
+                        <!-- Thông báo lỗi sẽ hiển thị ở đây -->
+                        <span class="error"  id="errorEmail"></span>
                     </div>
-                    <!-- Thông báo lỗi -->
-                    <c:if test="${not empty errorEmail}">
-                        <p style="color: red;">${errorEmail}</p> <!-- Hiển thị lỗi nếu có -->
-                    </c:if>
+
                     <div class="mb-3">
                         <label for="phone" class="form-label">Mật khẩu cũ</label>
                         <input type="tel" name="pass" class="form-control" id="pass"
                                placeholder="Mật kẩu cũ" required>
+                        <!-- Thông báo lỗi sẽ hiển thị ở đây -->
+                        <span class="error"  id="errorPass"></span>
                     </div>
-                    <!-- Thông báo lỗi -->
-                    <c:if test="${not empty errorPass}">
-                        <p style="color: red;">${errorPass}</p> <!-- Hiển thị lỗi nếu có -->
-                    </c:if>
+
                     <div class="mb-3">
                         <label for="address" class="form-label">Mật khẩu mới</label>
-                        <textarea class="form-control" name="passNew" id="passNew" rows="3" placeholder="Mật khẩu mới"
-                                  required></textarea>
+                        <input type="tel" name="pass" class="form-control" id="passConfirm" placeholder="Mật khẩu mới"
+                                  required>
+                        <!-- Thông báo lỗi sẽ hiển thị ở đây -->
+                        <span class="error"  id="errorPassConfirm"></span>
                     </div>
-                    <c:if test="${not empty errorPassNew}">
-                        <p style="color: red;">${errorPassNew}</p> <!-- Hiển thị lỗi nếu có -->
-                    </c:if>
-                    <!-- Thông báo lỗi -->
-                    <c:if test="${not empty success}">
-                        <p style="color: red;">${success}</p> <!-- Hiển thị lỗi nếu có -->
-                    </c:if>
+
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary" id="saveChangesPass">Lưu thay đổi</button>
                         <button type="button" class="btn btn-secondary" onclick="closeModal1()">Hủy</button>
@@ -425,6 +367,10 @@
 
 
         </div>
+    </div>
+    <%-- Kiểm tra xem có thông báo nào không --%>
+    <div id="message" class="alert alert-info" style="display: none">
+        <!-- Thông báo lỗi sẽ được chèn vào đây -->
     </div>
 
 
@@ -483,70 +429,6 @@
 <script src="<c:url value="/users/js/scripts.js"/>"></script>
 <script src="<c:url value="/users/js/login-signup.js"/>"></script>
 <script src="<c:url value="/users/js/informationCustomer.js"/>"></script>
-<script>
-    // mở modal
-    document.addEventListener("DOMContentLoaded", function () {
-        // Kiểm tra nếu cần hiển thị modal
-        const showModal = "${showModal}" === "true";
-        if (showModal) {
-            const modal = document.getElementById('orderDetailModal');
-            modal.style.display = 'block';
-        }
-    });
-    // thông báo tắt trong 3s
-    window.addEventListener('DOMContentLoaded', function () {
-        const alert = document.querySelector('.alert');
-        if (alert) {
-            setTimeout(function () {
-                alert.classList.add('fade-out');
-            }, 3000);  // 3 giây trước khi bắt đầu hiệu ứng biến mất
-        }
-    });
 
-</script>
-<script>
-    // scrip cho nút huy hơn hàng
-    document.addEventListener("DOMContentLoaded", function () {
-        // Lấy tất cả các nút "Hủy đơn hàng"
-        const cancelButtons = document.querySelectorAll("#cancel-order-btn");
-        // Lấy modal và các nút trong modal
-        const modal = document.getElementById("cancelOrderModal");
-        const closeModalBtn = document.getElementById("closeModalBtn");
-        const orderIdInput = document.getElementById("orderId");
-        let currentOrderId = null; // Biến lưu trữ orderId hiện tại
-
-        // Duyệt qua tất cả các nút "Hủy đơn hàng" và thêm sự kiện click
-        cancelButtons.forEach(button => {
-            button.addEventListener("click", function () {
-                currentOrderId = button.getAttribute("data-order-id"); // Lấy id đơn hàng từ data attribute
-                orderIdInput.value = currentOrderId; // Điền id vào input hidden trong form
-                modal.style.display = "block"; // Hiển thị modal khi nút "Hủy" được nhấn
-            });
-        });
-
-        // Khi nhấn nút đóng modal
-        closeModalBtn.addEventListener("click", function () {
-            modal.style.display = "none"; // Ẩn modal
-        });
-
-        // Khi người dùng nhấn ra ngoài modal thì cũng đóng modal
-        window.addEventListener("click", function (event) {
-            if (event.target === modal) {
-                modal.style.display = "none"; // Ẩn modal khi click bên ngoài
-            }
-        });
-    });
-</script>
-
-<%-- Kiểm tra lỗi và giữ modal mở --%>
-<c:if test="${not empty errorEmail or not empty errorPass or not empty errorPassNew or not empty success}">
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            // Mở modal bằng JavaScript
-            var myModal = document.getElementById('updatePassword');
-            myModal.style.display = 'block';
-        });
-    </script>
-</c:if>
 </body>
 </html>
