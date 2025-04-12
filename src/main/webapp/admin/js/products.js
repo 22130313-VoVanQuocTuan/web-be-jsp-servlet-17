@@ -204,7 +204,7 @@ document.getElementById('editProductForm').addEventListener("submit", function (
     formData.append("name", document.getElementById('productNameEdit').value);
     formData.append("price", document.getElementById('productPriceEdit').value);
     formData.append("categoryId", document.getElementById('productCategoryEdit').value);
-    formData.append("discountPercent", discountPercentEdit);
+    formData.set("discountPercent", discountPercentEdit);
     formData.append("supplier", document.getElementById('nppEdit').value);
     formData.append("size", document.getElementById('sizeEdit').value);
     formData.append("color", document.getElementById('colorEdit').value);

@@ -6,10 +6,7 @@ import hcmuaf.nlu.edu.vn.model.Users;
 
 import java.security.SecureRandom;
 import java.sql.SQLException;
-import java.util.Base64;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 
 
 public class UserService {
@@ -113,6 +110,10 @@ public class UserService {
         return usersDao.getUser(username);
     }
 
+    public Users getUserByEmail(String email){
+        return usersDao.getUserByEmail(email);
+    }
+
     // Cập nhật trạng thái user
     public boolean UpdateStatusOrRoleUser(String role, String status, int id) throws SQLException {
         return logoutDao.UpdateStatusUser(role, status, id);
@@ -196,6 +197,7 @@ public class UserService {
         newUser.setRole(role);
         return addDeleteUpdateAccountInAdminDao.addAccount(newUser);
     }
+    // Add account by gg and fb
     public boolean addAccountGGFB(String username, String password, String email, String role) throws SQLException {
         // Kiểm tra xem email và tên tài khoản đã tồn tại
         if (signUpDao.checkExistenceEmail(email)) {
@@ -207,8 +209,12 @@ public class UserService {
         newUser.setUsername(username);
         newUser.setPassword(password);  // Mã hóa mật khẩu
         newUser.setRole(role);
+        newUser.setStatus("Hoạt động");
+        newUser.setCreateDate(new Date());
+        newUser.setIsEmailVerified(1);
         return addDeleteUpdateAccountInAdminDao.addAccount(newUser);
     }
+
     //Xóa tài khoản
     public boolean deleteAccount(int id) {
         return addDeleteUpdateAccountInAdminDao.deleteAccount(id);

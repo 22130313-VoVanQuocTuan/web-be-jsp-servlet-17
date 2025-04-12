@@ -17,12 +17,18 @@ public class AddDeleteUpdateAccountInAdminDao {
 
     // Thêm tài khoản
     public boolean addAccount(Users user) {
-        String sql = "insert into users (username,password,email,role) values(?,?,?,?)";
+        String sql = "INSERT INTO users (username, password, email, role, status, isEmailVerified, createDate) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?)";
+
         try (PreparedStatement ptm = dbConnect.preparedStatement(sql)) {
             ptm.setString(1, user.getUsername());
             ptm.setString(2, BCrypt.hashpw(user.getPassword(), BCrypt.gensalt()));
             ptm.setString(3, user.getEmail());
             ptm.setString(4, user.getRole());
+            ptm.setString(5, user.getStatus());
+            ptm.setInt(6, user.getIsEmailVerified());
+            // Gán createDate từ user (loại Date) sang Timestamp
+            ptm.setTimestamp(7, new java.sql.Timestamp(user.getCreateDate().getTime()));
 
             int rowsInserted = ptm.executeUpdate();
             return rowsInserted > 0;
@@ -31,6 +37,7 @@ public class AddDeleteUpdateAccountInAdminDao {
             return false;
         }
     }
+
 
     public boolean deleteAccount(int id) {
         String sql = "DELETE FROM users WHERE id = ?";
