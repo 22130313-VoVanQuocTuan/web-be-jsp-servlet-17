@@ -77,7 +77,7 @@
                     </div>
                     <div class="cart">
                         <div class="cart-wrapper">
-                            <a href="cart-items">
+                            <a href="turn-page?action=cart">
                                 <i class="fas fa-shopping-cart"></i>
                             </a>
                             <span class="cart-count" id="cart-count">0</span>
@@ -109,7 +109,7 @@
                     <li class="propClone"><a href="product"><i class="fa-brands fa-product-hunt"></i>
                         &nbsp;&nbsp;SẢN PHẨM</a>
                     </li>
-                    <li class="propClone"> <a href="cart-items"><i class="fas fa-shopping-cart"></i>&nbsp;&nbsp; GIỎ
+                    <li class="propClone"> <a href="turn-page?action=cart"><i class="fas fa-shopping-cart"></i>&nbsp;&nbsp; GIỎ
                         HÀNG</a>
                     </li>
                     <li class="propClone">

@@ -5,8 +5,6 @@ import hcmuaf.nlu.edu.vn.dao.carts.VoucherDao;
 import hcmuaf.nlu.edu.vn.model.Product;
 import jakarta.servlet.http.HttpSession;
 
-import java.security.PublicKey;
-
 public class CartService {
     private VoucherDao voucherDao;
     public CartService() {
@@ -32,11 +30,12 @@ public class CartService {
     }
 
     // Xóa sản phẩm khỏi giỏ hàng
-    public void removeFromCart(HttpSession session, int productId) {
+    public boolean removeFromCart(HttpSession session, int productId) {
         Carts cart = getCartFromSession(session);
         if (cart != null) {
             cart.removeItem(productId);
         }
+        return false;
     }
     // áp mã ưu đâĩ
     public double applyVoucher(String voucher) {

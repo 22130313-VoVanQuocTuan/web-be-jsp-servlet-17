@@ -40,6 +40,9 @@ public class TurnPageUrl extends HttpServlet {
         if("checkpay".equals(action)) {
             req.getRequestDispatcher("/users/page/check-pay.jsp").forward(req, resp);
         }
+        if("cart".equals(action)) {
+            req.getRequestDispatcher("/users/page/cart.jsp").forward(req, resp);
+        }
         if("import_export".equals(action)) {
             req.getRequestDispatcher("/admin/pages/import_export.jsp").forward(req, resp);
         }
