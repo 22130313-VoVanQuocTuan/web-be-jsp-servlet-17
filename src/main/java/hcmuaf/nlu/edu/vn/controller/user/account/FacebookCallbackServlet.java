@@ -6,8 +6,6 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import hcmuaf.nlu.edu.vn.model.Users;
 import hcmuaf.nlu.edu.vn.service.UserService;
@@ -23,7 +21,7 @@ import org.json.JSONObject;
 public class FacebookCallbackServlet extends HttpServlet {
     private static final String CLIENT_ID = "9471317702914860";
     private static final String CLIENT_SECRET = "acdfd5e2262c69b80f9ff52f879a3558";
-    private static final String REDIRECT_URI = "http://localhost:8080/tqh/facebook-callback";
+    String REDIRECT_URI = OAuthConfigFB.getRedirectUri();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -32,6 +30,11 @@ public class FacebookCallbackServlet extends HttpServlet {
             response.sendRedirect("login");
             return;
         }
+        System.out.println("Callback URL: " + request.getRequestURL() + "?" + request.getQueryString());
+        System.out.println("Redirect URI: [" + REDIRECT_URI + "] (length=" + REDIRECT_URI.length() + ")");
+
+        String expected = "https://8424-2402-800-63b7-a928-cd56-8096-309-f756.ngrok-free.app/tqh/facebook-callback";
+        System.out.println("Matches expected? " + REDIRECT_URI.equals(expected));
 
         // Lấy Access Token từ Facebook
         String accessToken = getAccessToken(code);
@@ -39,6 +42,9 @@ public class FacebookCallbackServlet extends HttpServlet {
             response.sendRedirect("login");
             return;
         }
+        System.out.println("Code: " + code);
+        System.out.println("Access Token: " + accessToken);
+
 
         // Lấy thông tin người dùng từ Facebook
         JSONObject userJson = getUserInfo(accessToken);
@@ -62,6 +68,9 @@ public class FacebookCallbackServlet extends HttpServlet {
 
         JSONObject jsonResponse = new JSONObject(response);
         return jsonResponse.optString("access_token", null);
+
+
+
     }
 
     //     Lấy thông tin người dùng từ Facebook API.
@@ -73,7 +82,7 @@ public class FacebookCallbackServlet extends HttpServlet {
     }
 
 
-//     Lưu thông tin người dùng vào session.
+    //     Lưu thông tin người dùng vào session.
     private void storeUserInfoInSession(HttpServletRequest request, JSONObject userJson) {
         String name = userJson.optString("name", "Unknown User");
         String email = userJson.optString("email", null);
@@ -90,11 +99,17 @@ public class FacebookCallbackServlet extends HttpServlet {
             throw new RuntimeException(e);
         }
 
-        Users user = userService.getUser(name);
+        Users user = userService.getUserByEmail(email);
         HttpSession session = request.getSession();
         session.setAttribute("user", user);
-    }
+        System.out.println("User JSON: " + userJson.toString());
+        System.out.println("User Email: " + email);
+        System.out.println("User Name: " + name);
+        System.out.println("User from DB: " + user); // Check if it's null
+        System.out.println(">>> Redirect URI từ file config: " + REDIRECT_URI);
 
+
+    }
 
     //     Gửi HTTP Request đến API.
     private String sendHttpRequest(String urlString, String accessToken) throws IOException {

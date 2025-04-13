@@ -24,3 +24,24 @@ document.addEventListener("DOMContentLoaded", function () {
     navMenu.classList.toggle('active'); // Thêm hoặc xóa lớp "active"
   });
 });
+
+function showAlert() {
+    const alert = document.querySelector('.alert');
+    if (alert) {
+        alert.style.display = 'block'; // Hiển thị thông báo
+
+
+        alert.classList.remove('fade-out');
+
+        setTimeout(function () {
+            alert.classList.add('fade-out'); // Thêm lớp fade-out để làm mờ thông báo
+        }, 1000);  // 3 giây trước khi bắt đầu hiệu ứng biến mất
+
+        // Sau khi fade-out hoàn thành, ẩn đi thông báo và có thể tái sử dụng
+        alert.addEventListener('transitionend', function() {
+            if (alert.classList.contains('fade-out')) {
+                alert.style.display = 'none'; // Ẩn đi sau khi hiệu ứng fade-out kết thúc
+            }
+        });
+    }
+}

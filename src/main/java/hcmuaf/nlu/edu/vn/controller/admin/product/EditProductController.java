@@ -56,8 +56,9 @@ public class EditProductController extends HttpServlet {
             if (discountPercent == null || discountPercent.trim().isEmpty()) {
                 discountPercent = "0"; // Mặc định là 0 nếu không nhập
             }
-            double discountPercents = Double.parseDouble(discountPercent.trim());
+            double discountPercents = Double.parseDouble(discountPercent.trim())*100;
             double discountPrice = discountPercents * price;
+            System.out.println("discountPercent : " + discountPercents);
             System.out.println("discountPrice: " + discountPrice);
 
             String imageUrl = request.getParameter("currentImageUrl"); // Lấy URL ảnh cũ nếu không có ảnh mới

@@ -10,12 +10,16 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 @WebServlet(name = "updateInfo" , value = "/update-info")
 public class UpdateInfoController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+
         // Lấy dữ liệu từ form
         UserService userService = new UserService();
         try {
@@ -30,12 +34,13 @@ public class UpdateInfoController extends HttpServlet {
             // Tạo đối tượng Users và gán dữ liệu từ form
             Users updatedUser = new Users(fullName, phoneNumber, address);
             if (userService.setUpdateInfoUser(id, updatedUser)) {    // Gọi service để cập nhật thông tin người dùng
-                // Chuyển hướng về trang thông báo hoặc danh sách người dùng
-                response.sendRedirect(request.getContextPath() + "/informationCustomer");
+                PrintWriter out = response.getWriter();
+                out.println("{\"message\":\"Cập nhật thông tin thành công!\"}");
+                out.flush();
             } else {
-                request.setAttribute("error", "có lỗi xảy ra, vui lòng thử lại!");
-                request.setAttribute("showModal", true); // Thêm thuộc tính hiển thị modal
-                request.getRequestDispatcher("/informationCustomer").forward(request, response); // Hiển thị lại form với thông báo lỗi
+                PrintWriter out = response.getWriter();
+                out.println("{\"error\": true, \"message\":\"Cập nhật thất bại! Có ỗi xảy ra\"}");
+                out.flush();
             }
 
 

@@ -51,12 +51,12 @@
                            Xin chào,  <span
                                id="username">${sessionScope.user.username != null ? sessionScope.user.username : ''}</span>!</span>
 
-                <form action="informationCustomer" method="get">
+                <a href="turn-page?action=infoUser" style="text-decoration: none">
                     <button type="submit" class="account-link" id="signup-link"
                             style="display: none;">
                         <i class="fas fa-user-circle"></i> Tài khoản
                     </button>
-                </form>
+                </a>
                 <form action="login" method="post">
                     <input name="action" type="hidden" value="login"/>
                     <button type="submit" id="login-link">

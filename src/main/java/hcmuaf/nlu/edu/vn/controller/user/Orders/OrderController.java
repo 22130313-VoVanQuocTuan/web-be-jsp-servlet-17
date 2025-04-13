@@ -1,5 +1,6 @@
 package hcmuaf.nlu.edu.vn.controller.user.Orders;
 
+import com.google.gson.Gson;
 import hcmuaf.nlu.edu.vn.model.OrderItem;
 import hcmuaf.nlu.edu.vn.model.Orders;
 import hcmuaf.nlu.edu.vn.model.Users;
@@ -10,7 +11,9 @@ import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @WebServlet(name = "informationCustomer", value = "/informationCustomer")
 public class OrderController extends HttpServlet {
@@ -22,46 +25,38 @@ public class OrderController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+
         HttpSession session = request.getSession();
         Users user = (Users) session.getAttribute("user");
-          // Kiểm tra nếu chưa đăng nhập
-        if (user == null) {
-            response.sendRedirect(request.getContextPath() + "/logout");
-            return;
-        }
 
         int id = user.getId();
-        String role = user.getRole(); // Giả sử có phương thức getRole()
+        String orderId = request.getParameter("orderId");
 
         try {
-            request.setAttribute("orders", orderService.getOrderById(id));
-            request.setAttribute("info", orderService.getInfoUser(id));
-        } catch (SQLException e) {
-            e.printStackTrace();
-            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Lỗi truy vấn dữ liệu.");
-            return;
-        }
-
-        // Xử lý khi có orderId
-        String orderId = request.getParameter("orderId");
-        if (orderId != null) {
-            try {
+            if (orderId != null) {
+                // Trường hợp gọi chi tiết đơn hàng
                 int idOrder = Integer.parseInt(orderId);
-                request.setAttribute("orderInfo", orderService.getItemOrders(idOrder));
-                request.setAttribute("orderItem", orderService.getOrderItems(idOrder));
-                request.setAttribute("showModal", true);
-            } catch (SQLException | NumberFormatException e) {
-                e.printStackTrace();
-                request.setAttribute("error", "Lỗi lấy thông tin đơn hàng.");
-            }
-        }
+                Map<String, Object> dataOrder = new HashMap<>();
+                dataOrder.put("orderInfo", orderService.getItemOrders(idOrder));
+                dataOrder.put("orderItem", orderService.getOrderItems(idOrder));
 
-        // Kiểm tra role và điều hướng trang
-        String destinationPage = "users/page/informationCustomer.jsp";
-        if ("admin".equalsIgnoreCase(role)  || "owner".equalsIgnoreCase(role)) {
-            destinationPage = "admin/pages/account.jsp";
+                String json = new Gson().toJson(dataOrder);
+                response.getWriter().write(json);
+            } else {
+                // Trường hợp lấy danh sách đơn hàng
+                Map<String, Object> data = new HashMap<>();
+                data.put("orders", orderService.getOrderById(id));
+                data.put("info", orderService.getInfoUser(id));
+
+                String json = new Gson().toJson(data);
+                response.getWriter().write(json);
+            }
+        } catch (SQLException | NumberFormatException e) {
+            e.printStackTrace();
+            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Lỗi xử lý dữ liệu.");
         }
-        request.getRequestDispatcher(destinationPage).forward(request, response);
     }
 
     @Override

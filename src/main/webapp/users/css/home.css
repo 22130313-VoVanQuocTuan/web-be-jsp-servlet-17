@@ -3131,3 +3131,57 @@ body.no-scroll {
 .contact-info{
     padding: 2px;
 }
+
+
+/* thong báo lỗi */
+.fade-out {
+    animation: fadeOut 1s ease-in-out forwards;
+}
+.alert-info {
+    background-color: #f7d774;
+    color: #000000;
+    border: 1px solid #bee5eb;
+}
+.alert {
+    position: fixed;
+    top: 50%;
+    left: 56%;
+    transform: translate(-50%, -52%);
+    padding: 15px;
+    text-align: center;
+    font-size: 12px;
+    font-weight: bold;
+    z-index: 9999;
+    opacity: 1;
+}
+/* Animation cho thông báo khi xuất hiện */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+/* Animation cho thông báo khi biến mất */
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        display: none;
+    }
+}
+
+/* Sử dụng animation fade-out sau 3 giây */
+.fade-out {
+    animation: fadeOut 1s ease-in-out forwards;
+}
+
+.error{
+    color: red;
+    font-size: 11px;
+    font-weight: bold;
+}

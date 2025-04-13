@@ -63,6 +63,30 @@ public class LoginDao {
             dbConnect.closeConnection(); //  đóng kết nối sau khi sử dụng
         }
     }
+    //Lấy user
+    public Users getUserByEmail(String email){
+        String sql = "SELECT * FROM users WHERE email = ?";
+        try(PreparedStatement ptm = dbConnect.preparedStatement(sql)){
+            ptm.setString(1, email);
+            ResultSet rs = ptm.executeQuery();
+            Users user = new Users();
+            if(rs.next()){
+                user.setId(rs.getInt("id"));
+                user.setEmail(rs.getString("email"));
+                user.setUsername(rs.getString("username"));
+                user.setRole(rs.getString("role"));
+                user.setIsEmailVerified(rs.getInt("isEmailVerified"));
+                user.setStatus(rs.getString("status"));
+                return user;
+            }
+            return null;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }finally {
+            dbConnect.closeConnection(); //  đóng kết nối sau khi sử dụng
+        }
+    }
+
 
 
     public void updatePassword(String newPassword, String email) throws SQLException {

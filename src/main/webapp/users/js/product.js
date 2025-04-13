@@ -184,7 +184,6 @@ function loadPCategoryById(id) {
         success: function (data) {
             console.log(data);
             renderP(data.products);
-
         },
 
     });
@@ -219,3 +218,34 @@ document.addEventListener('click', function (event) {
         loadP();
     }
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+    const searchInput = document.getElementById("search-input");
+    const productList = document.getElementById("product-list");
+
+    // Lấy context path của ứng dụng
+    const contextPath = window.location.pathname.split("/")[1];
+    const baseUrl = window.location.origin + "/" + contextPath + "/product";
+
+    searchInput.addEventListener("keyup", function () {
+        let keyword = searchInput.value.trim();
+        let url = `${baseUrl}?ajax=true`;
+
+        if (keyword.length > 1) {
+            url += `&name=${encodeURIComponent(keyword)}`;
+        }
+
+        console.log("Gửi request AJAX:", url); // Debug đường dẫn request
+
+        fetch(url)
+            .then(response => response.text()) // Nhận HTML thay vì JSON
+            .then(data => {
+                console.log("HTML nhận được:", data); // Debug dữ liệu nhận về
+                productList.innerHTML = data;
+            })
+            .catch(error => console.error("Lỗi khi tìm kiếm:", error));
+    });
+});
+
+
+
