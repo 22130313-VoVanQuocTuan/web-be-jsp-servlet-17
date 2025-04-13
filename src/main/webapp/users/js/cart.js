@@ -1,39 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const cartItemsContainer = document.querySelector('.cart-items-container');
-
-    if (!cartItemsContainer) {
-        console.error('Không tìm thấy container cho giỏ hàng.');
-        return;
-    }
-
-    // Thao tác với nút cộng/trừ
-    cartItemsContainer.addEventListener('click', function (event) {
-        const target = event.target;
-
-        // Xử lý khi nhấn vào nút cộng hoặc trừ
-        if (target.classList.contains('plus-btn') || target.classList.contains('minus-btn')) {
-            const cartItem = target.closest('.cart-item');
-            const qtyInput = cartItem.querySelector('.qty-input');
-
-            if (!qtyInput) {
-                console.error('Không tìm thấy input số lượng.');
-                return;
-            }
-
-            let qty = parseInt(qtyInput.value);
-
-            if (target.classList.contains('plus-btn')) {
-                qty++;
-            } else if (target.classList.contains('minus-btn') && qty > 1) {
-                qty--;
-            }
-
-            qtyInput.value = qty; // Cập nhật lại giá trị số lượng
-        }
-    });
-
-
-
+    loadCartItems();
+    
     // Áp dụng mã giảm giá
     const applyBtn = document.getElementById('apply-btn');
     const voucherInput = document.getElementById('voucher');
@@ -60,3 +27,106 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 });
+
+function loadCartItems() {
+    $.ajax({
+        url: 'cart-items',
+        type: 'GET',
+        success: function (data) {
+            console.log("Dữ liệu nhận về:", data); // <-- Bạn có thấy log không?
+            console.log("👉 Kiểu dữ liệu:", typeof data);
+            renderCartItems(data);
+
+        },
+        error: function (xhr, status, error) {
+            console.error("Lỗi AJAX:", error);
+        }
+    });
+}
+
+function renderCartItems(data) {
+    const tableCart = document.querySelector("#tableCart tbody");
+    tableCart.innerHTML="";
+
+    data.cartItems.forEach(listItems => {
+        const row = document.createElement("tr");
+         row.innerHTML = `
+                <td>${listItems.name}</td>
+                <td><img src="${listItems.imageUrl}" alt="${listItems.name}" width="50" height="50"></td>
+                <td>
+                    <div class="quantity" style="display: flex;" data-id="${listItems.id}">
+                        <button class="qty-btn minus-btn">-</button>
+                        <input title="input" type="number" value="${listItems.quantity}" class="qty-input" min="1" />
+                        <button class="qty-btn plus-btn">+</button>
+                    </div>
+                </td>
+                <td>${listItems.price.toLocaleString()}₫</td>
+                <td>${listItems.discountAmount.toLocaleString()}₫</td>
+                <td>${listItems.totalPrice.toLocaleString()}₫</td>
+                <td><button onclick="removeItem(${listItems.id})" class="remove-from-cart-button">Xóa</button></td>
+        `;
+        tableCart.append(row);
+    });
+}
+
+$(document).on("click", ".plus-btn, .minus-btn", function () {
+    const parentDiv = $(this).closest(".quantity");
+    const input = parentDiv.find(".qty-input");
+    const id = parentDiv.data("id"); // Lấy id sản phẩm
+    let currentQty = parseInt(input.val());
+
+    if ($(this).hasClass("plus-btn")) {
+        currentQty++;
+    } else {
+        if (currentQty > 1) currentQty--;
+    }
+
+    input.val(currentQty); // Cập nhật input hiển thị
+
+    // Gửi AJAX lên server để cập nhật số lượng
+    $.ajax({
+        url: "update-cart",
+        type: "GET",
+        data: {
+            id: id,
+            quantity: currentQty
+        },
+        success: function (res) {
+            if (res.status === "success") {
+                // Sau khi update xong, gọi lại renderCart để cập nhật lại toàn bộ
+                refreshCart();
+            } else {
+                alert("Lỗi khi cập nhật số lượng.");
+            }
+        }
+    });
+});
+
+function refreshCart() {
+    $.ajax({
+        url: "cart-items",
+        type: "GET",
+        dataType: 'json',
+        success: function (data) {
+            renderCartItems(data);
+            $("#subtotal .value").text(data.totalPrice.toLocaleString());
+            $("#vat .value").text(data.totalShippingFee.toLocaleString());
+            $("#total .value").text(data.totalFinalPrice.toLocaleString());
+            $("#cart-count .cart-count").text(data.totalItem);
+        }
+    });
+}
+
+//Xoá sanr pham trong gio hang
+function removeItem(id) {
+    $.ajax({
+        url: "cart-remove",
+        type: "Get",
+        data: { id: id },
+        success: function (response) {
+                loadCartItems();
+                refreshCart();
+        },
+
+    });
+}

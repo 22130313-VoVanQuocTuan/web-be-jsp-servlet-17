@@ -1,5 +1,6 @@
 package hcmuaf.nlu.edu.vn.controller.user.carts;
 
+import com.google.gson.Gson;
 import hcmuaf.nlu.edu.vn.dao.carts.CartItems;
 import hcmuaf.nlu.edu.vn.dao.carts.Carts;
 import jakarta.servlet.ServletException;
@@ -10,7 +11,10 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 @WebServlet(name = "cart-items", value = "/cart-items")
@@ -20,9 +24,12 @@ public class GetListCartItems  extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         HttpSession session = req.getSession();
+        resp.setContentType("application/json");
+        resp.setCharacterEncoding("UTF-8");
 
         if (session == null) {
-            resp.sendRedirect(req.getContextPath() + "/users/page/login-signup.jsp");
+            resp.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            resp.getWriter().write("{\"error\": true, \"message\": \"Chưa đăng nhập hoặc không có giỏ hàng.\"}");
             return;
         }
         Carts carts = (Carts) session.getAttribute("cart");
@@ -61,8 +68,18 @@ public class GetListCartItems  extends HttpServlet {
         int totalItem = carts.getTotalItem();
         session.setAttribute("cartItemCount", totalItem); // Lưu số lượng sản phẩm vào session
 
-        req.getRequestDispatcher("/users/page/cart.jsp").forward(req, resp);
-    }
+        Map<String, Object> model = new HashMap<>();
+        model.put("totalPrice", totalPrice);
+        model.put("totalShippingFee", totalShippingFee);
+        model.put("totalFinalPrice", totalFinalPrice);
+        model.put("totalItem", totalItem);
+        model.put("cartItems", listItems);
+
+
+        Gson gson = new Gson();
+        String json = gson.toJson(model);
+        resp.getWriter().write(json);
+}
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
