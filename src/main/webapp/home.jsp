@@ -204,7 +204,7 @@
                 </li>
                 <li class="propClone"><a href="home-page"><i class="fa-solid fa-house"></i>&nbsp;&nbsp; TRANG CHỦ </a>
                 </li>
-                <li class="propClone"><a href="product"><i class="fa-brands fa-product-hunt"></i>
+                <li class="propClone"><a href="turn-page-noLogin?action=product"><i class="fa-brands fa-product-hunt"></i>
                     &nbsp;&nbsp;SẢN PHẨM</a>
                 </li>
                 <li class="propClone"><a id="" href="cart-items"><i
@@ -290,8 +290,37 @@
     </div>
     <!-- SẢN PHẨM BÁN CHẠY -->
     <div class="selling-products-container">
-        <div class="imgSale">
-            <img src="users/img_product/inax-khuyen-mai-mua-dong.png" alt="">
+        <div class="slide-discount">
+            <div class="swiper mySwiper">
+                <div class="swiper-wrapper">
+                    <c:forEach var="promotional" items="${sessionScope.promotionals}" varStatus="status">
+                        <c:if test="${status.index % 4 == 0}">
+                            <div class="swiper-slide">
+                        </c:if>
+
+                        <div class="discount-item">
+                            <div class="discount-label">
+                                Giảm giá: <fmt:formatNumber value="${promotional.value}" type="number"
+                                                            groupingUsed="true"/>₫
+                            </div>
+                            <div class="discount-description">
+                                Mã: ${promotional.code}
+                            </div>
+                        </div>
+
+                        <c:if test="${(status.index + 1) % 4 == 0 || status.last}">
+                            </div>
+                        </c:if>
+                    </c:forEach>
+                </div>
+
+                <!-- Add Pagination -->
+                <div class="swiper-pagination"></div>
+
+                <!-- Add Navigation -->
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+            </div>
         </div>
         <div class="selling-products-content">
             <h4><i class="fa-regular fa-gem" style="color: #f8f9fc;"></i>TOP SẢN PHẨM BÁN CHẠY</h4>
@@ -1465,6 +1494,29 @@
 
         // Đóng popup khi nhấn nút đóng
         document.querySelector(".closee-button").addEventListener("click", closePopup);
+    });
+</script>
+<!-- Link Swiper's CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css">
+<!-- Swiper JS -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+<script>
+    var swiper = new Swiper(".mySwiper", {
+        slidesPerView: 1, // Mỗi slide chỉ chứa 1 nhóm 4 mã giảm giá
+        spaceBetween: 10,
+        loop: true,
+        autoplay: {
+            delay: 3000, // Tự động trượt sau 3 giây
+            disableOnInteraction: false,
+        },
+        pagination: {
+            el: ".swiper-pagination",
+            clickable: true,
+        },
+        navigation: {
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev",
+        },
     });
 </script>
 </body>

@@ -1,5 +1,6 @@
 package hcmuaf.nlu.edu.vn.controller.user.products;
 
+import com.google.gson.Gson;
 import hcmuaf.nlu.edu.vn.model.Category;
 import hcmuaf.nlu.edu.vn.model.Product;
 import hcmuaf.nlu.edu.vn.service.ProductService;
@@ -9,9 +10,11 @@ import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-@WebServlet(name = "ProductControllerCategory", value = "/product-category")
+@WebServlet("/product-category")
 public class ProductCategoryController extends HttpServlet {
     private ProductService productService = new ProductService();
 
@@ -19,24 +22,35 @@ public class ProductCategoryController extends HttpServlet {
         this.productService = new ProductService();
     }
 
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+
         // Lấy categoryId từ request
         String categoryIdParam = request.getParameter("categoryId");
-        // Nếu categoryId không hợp lệ, chuyển hướng về trang chủ
-        int categoryId = parseCategoryId(categoryIdParam, response);
-        if (categoryId == -1) return;
+        Map<String, Object> data = new HashMap<>();
+
         try {
-            List<Product> products = productService.getAllProductsCategory(categoryId);
-            List<Category> categories = productService.getAllCategories();
-            // Gửi dữ liệu sản phẩm và categoryId đến JSP để hiển thị
-            request.setAttribute("products", products);
-            request.setAttribute("categoryId", categoryId);
-            request.setAttribute("categories", categories);
-            request.getRequestDispatcher("/users/page/product.jsp").forward(request, response);
+            // Nếu không có categoryId, chỉ trả về danh sách danh mục
+            if (categoryIdParam == null || categoryIdParam.trim().isEmpty()) {
+                List<Category> categories = productService.getAllCategories();
+                data.put("categories", categories);
+            } else {
+                // Nếu có categoryId, trả về cả sản phẩm và danh mục
+                int categoryId = parseCategoryId(categoryIdParam, response);
+                if (categoryId == -1) return;
+
+                List<Product> products = productService.getAllProductsCategory(categoryId);
+                List<Category> categories = productService.getAllCategories();
+
+                data.put("products", products);
+                data.put("categories", categories);
+            }
+
+            String json = new Gson().toJson(data);
+            response.getWriter().write(json);
         } catch (SQLException e) {
-            // Xử lý lỗi truy vấn cơ sở dữ liệu
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Database error");
         }
     }

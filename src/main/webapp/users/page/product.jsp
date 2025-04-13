@@ -14,6 +14,8 @@
     <link rel="stylesheet" href="<c:url value="/users/css/product.css"/>">
     <link rel="stylesheet" href="<c:url value="/users/css/home.css"/>">
     <link rel="stylesheet" href="<c:url value="/users/css/product.css"/>">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 </head>
 <style>
     #searchResults {
@@ -24,11 +26,13 @@
         position: absolute;
         width: 250px;
     }
+
     .result-item {
         padding: 10px;
         cursor: pointer;
         border-bottom: 1px solid #ddd;
     }
+
     .result-item:hover {
         background-color: #f0f0f0;
     }
@@ -79,10 +83,10 @@
                 </div>
 
                 <!-- Thanh tìm kiếm ở giữa -->
-                <form action="product" method="GET" >
+                <form action="product" method="GET">
                     <div class="search-bar">
                         <input name="name" type="text" placeholder="Tìm kiếm sản phẩm..." id="search-input">
-                        <button title="icon" ><i class="fa fa-fw fa-search"></i></button>
+                        <button title="icon"><i class="fa fa-fw fa-search"></i></button>
                     </div>
                 </form>
 
@@ -124,7 +128,7 @@
                 </li>
                 <li class="propClone"><a href="home-page"><i class="fa-solid fa-house"></i>&nbsp;&nbsp; TRANG CHỦ
                 </a></li>
-                <li class="propClone"><a href="product"><i class="fa-brands fa-product-hunt"></i>
+                <li class="propClone"><a href="turn-page-noLogin?action=product"><i class="fa-brands fa-product-hunt"></i>
                     &nbsp;&nbsp;SẢN PHẨM</a>
                 </li>
                 <li class="propClone"><a href="cart-items"><i class="fas fa-shopping-cart"></i>&nbsp;&nbsp; GIỎ
@@ -157,93 +161,47 @@
         <div class="danhmuc">
             <i class="fa-solid fa-list" style="color: #000000; margin-right: 10px;"></i>Danh mục
         </div>
-        <c:forEach var="category" items="${categories}">
-            <div class="item" data-category="${category.id}">
-                <h3>
-                    <a href="/tqh/product-category?categoryId=${category.id}">${category.name}</a>
-                </h3>
-            </div>
-        </c:forEach>
-        <div class="slide-discount">
-            <c:forEach var="promotional" items="${sessionScope.promotionals}" begin="0" end="3">
-                <div class="discount">
-                    <span class="discount-label">Giảm giá:<fmt:formatNumber value="${promotional.value}" type="number" groupingUsed="true"/>₫</span>
-                    <span class="discount-description">${promotional.code}</span>
-                </div>
-            </c:forEach>
+        <div id="category-container" class="item">
+
         </div>
     </div>
     <!--conten_right-->
     <div class="right">
+        <!-- Thẻ input ẩn để chứa categoryId (nên đặt ở đầu trang) -->
+        <input type="hidden" id="categoryId" value="${categoryId}">
         <div class="filter">
-            <p style="background-color: #c8c8c8; padding: 10px; border-radius: 5px;font-size: 15px; height: 15px;">Sắp
-                xếp theo
-                <i class="fa-sharp fa-solid fa-arrow-right" style="margin-left: 15px;"></i>
+            <p style="background-color: #c8c8c8; padding: 10px; border-radius: 5px;font-size: 15px;">
+                Sắp xếp theo <i class="fa-sharp fa-solid fa-arrow-right" style="margin-left: 15px;"></i>
             </p>
+
             <p class="sort">
-                <a style="text-decoration: none; color:#111111"
-                   href="product-filter?filter=popular&categoryId=${categoryId}">Phổ biến</a>
+                <a href="#" class="filter-link" data-filter="popular">Phổ biến</a>
             </p>
-            <p class="sort"><a style="text-decoration: none; color:#111111"
-                               href="product-filter?filter=newest&categoryId=${categoryId}">Mới
-                nhất</a></p>
+
+            <p class="sort">
+                <a href="#" class="filter-link" data-filter="newest">Mới nhất</a>
+            </p>
+
             <div class="sort-price">
-                <p class="sort" style="width: auto;">Bán chạy <i class="fa-solid fa-angle-up fa-rotate-180"
-                                                                 style="color: #000000;"></i></p>
+                <p class="sort" style="width: auto;">
+                    Bán chạy <i class="fa-solid fa-angle-up fa-rotate-180" style="color: #000000;"></i>
+                </p>
                 <div class="dropdown">
                     <ul class="dropdown-content">
-                        <li><a style="text-decoration: none ;color:#111111"
-                               href="product-filter?filter=priceAsc&categoryId=${categoryId}">Giá:
-                            Thấp đến cao</a></li>
-                        <li><a style="text-decoration: none ;color:#111111"
-                               href="product-filter?filter=priceDesc&categoryId=${categoryId}">Giá:
-                            Cao đến thấp</a></li>
+                        <li><a href="#" class="filter-link" data-filter="priceAsc">Giá: Thấp đến cao</a></li>
+                        <li><a href="#" class="filter-link" data-filter="priceDesc">Giá: Cao đến thấp</a></li>
                     </ul>
                 </div>
             </div>
         </div>
+
         <div class="row ps-5" id="product-list">
-            <c:if test="${not empty products}">
-                <c:forEach var="product" items="${products}">
-                    <div class="name-cart">
-                        <p style="position: absolute; padding: 8px; background-color: #ff0000; z-index: 5; border-radius: 10px;">
-                                ${product.discountPercent}%</p>
-                        <a href="product-detail?id=${product.id}&categoryId=${product.categoryId}"><img
-                                src="${product.imageUrl}"
-                                alt="${product.name}"></a>
-                        <h3><a style="color: #110ec6"
-                               href="product-detail?id=${product.id}&categoryId=${product.categoryId}">${product.name}</a>
-                        </h3>
-                        <p>Giá:
-                            <del><fmt:formatNumber value="${product.price}" type="number" groupingUsed="true"/>₫</del>
-                        </p>
-                        <p style="color: #ff0000;">Giá đã giảm: <fmt:formatNumber value="${product.discountPrice}"
-                                                                                  type="number"
-                                                                                  groupingUsed="true"/>₫</p>
-                        <p>Giảm giá: ${product.discountPercent*100}%</p>
-                        <span style="margin-left: 10px;">
-                    <i class="fas fa-eye"></i>
-                    <span style="font-size: 0.9em;">${product.view}</span>
-                </span>
-                        <span style="margin-left: 20px;">
-                    <i class="fas fa-shopping-cart"></i>
-                    <span style="font-size: 0.9em;">${product.soldCount}</span>
-                </span>
-                        <a href="add-cart?id=${product.id}" class="add-cart"><i class="ri-add-circle-line"></i>Thêm</a>
-                    </div>
-                </c:forEach>
-            </c:if>
-            <c:if test="${empty products}">
-                <p>Không có sản phẩm nào phù hợp với bộ lọc này.</p>
-            </c:if>
         </div>
         <!--pagination-->
         <div id="pagination" class="pagination">
-            <button id="prev" onclick="changePage(-1)">
-                <<
-            </button>
+            <button id="prev"> <<</button>
             <span id="page-info"></span>
-            <button id="next" onclick="changePage(1)">>></button>
+            <button id="next"> >></button>
         </div>
     </div>
 </div>
@@ -298,23 +256,6 @@
 <script src="${pageContext.request.contextPath}/users/js/product.js"></script>
 <script src="${pageContext.request.contextPath}/users/js/scripts.js"></script>
 <script src="${pageContext.request.contextPath}/users/js/home.js"></script>
-<script>
-    function searchProduct() {
-        let keyword = document.getElementById("searchBox").value;
-        if (keyword.length === 0) {
-            document.querySelector(".product-list").innerHTML = "";
-            return;
-        }
 
-        let xhr = new XMLHttpRequest();
-        xhr.open("GET", "search-product?keyword=" + encodeURIComponent(keyword), true);
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState === 4 && xhr.status === 200) {
-                document.querySelector(".product-list").innerHTML = xhr.responseText; // Chèn HTML vào
-            }
-        };
-        xhr.send();
-    }
-</script>
 </body>
 </html>
