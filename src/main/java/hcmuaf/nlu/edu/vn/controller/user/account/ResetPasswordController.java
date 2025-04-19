@@ -1,12 +1,10 @@
 package hcmuaf.nlu.edu.vn.controller.user.account;
 
+import com.google.gson.Gson;
 import hcmuaf.nlu.edu.vn.model.PasswordReset;
 import hcmuaf.nlu.edu.vn.model.Users;
 import hcmuaf.nlu.edu.vn.service.EmailUtilService;
 import hcmuaf.nlu.edu.vn.service.UserService;
-
-
-
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -30,10 +28,13 @@ public class ResetPasswordController extends HttpServlet {
         this.emailUtil = new EmailUtilService();
     }
 
-
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setContentType("application/json");
+        resp.setCharacterEncoding("UTF-8");
+        Gson gson = new Gson();
         String action = req.getParameter("action");
+
         try {
             switch (action) {
                 case "request":
@@ -43,13 +44,11 @@ public class ResetPasswordController extends HttpServlet {
                     resetPass(req, resp);
                     break;
                 default:
-                    req.setAttribute("error", "Invalid action.");
-                    req.getRequestDispatcher("/users/page/reset-password.jsp").forward(req, resp);
+                    resp.getWriter().write(gson.toJson(new ResponseMessage(false, "Invalid action.")));
             }
         } catch (Exception e) {
             e.printStackTrace();
-            req.setAttribute("error", "Có lỗi xảy ra, vui lòng thử lại.");
-            req.getRequestDispatcher("/users/page/reset-password.jsp").forward(req, resp);
+            resp.getWriter().write(gson.toJson(new ResponseMessage(false, "Có lỗi xảy ra, vui lòng thử lại.")));
         }
     }
 
@@ -59,11 +58,12 @@ public class ResetPasswordController extends HttpServlet {
         Users user = userService.findUserByEmail(email);
         HttpSession session = req.getSession();
         session.setAttribute("user", user);
+        Gson gson = new Gson();
+        ResponseMessage responseMassage;
+
         if (user != null) {
             // Tạo token reset mật khẩu
             String token = userService.generateResetToken();
-            req.setAttribute("token", token);
-
             // Kiểm tra xem token đã tồn tại hay chưa, nếu có thì cập nhật lại
             var resetPassword = userService.findResetTokenByUserId(user.getId());
             if (resetPassword != null) {
@@ -81,26 +81,27 @@ public class ResetPasswordController extends HttpServlet {
 
             try {
                 emailUtil.sendEmailAsync(email, "Lấy lại mật khẩu", emailBody);
-                req.setAttribute("error_email", "Email xác thực đã gửi đến bạn");
+                responseMassage = new ResponseMessage(true, "Email xác thực đã gửi đến bạn");
             } catch (Exception e) {
-                req.setAttribute("error_email", "Không thể gửi email, vui lòng thử lại.");
+                responseMassage = new ResponseMessage(false, "Không thể gửi email, vui lòng thử lại.");
             }
 
         } else {
-            req.setAttribute("error_email", "Email không tồn tại trong hệ thống.");
+            responseMassage = new ResponseMessage(false, "Email không tồn tại trong hệ thống.");
         }
-        req.getRequestDispatcher("/users/page/reset-password.jsp").forward(req, resp);
-
+        resp.getWriter().write(gson.toJson(responseMassage));
     }
 
     public void resetPass(HttpServletRequest req, HttpServletResponse resp) throws Exception {
         // Lấy token và mật khẩu từ request
         String token = req.getParameter("token");
         String password = req.getParameter("password");
+        Gson gson = new Gson();
+        ResponseMessage responseMassage;
 
         if (token == null || token.isEmpty()) {
-            req.setAttribute("error_token", "Token không hợp lệ.");
-            req.getRequestDispatcher("/users/page/reset-password.jsp").forward(req, resp);
+            responseMassage = new ResponseMessage(false, "Token không hợp lệ.");
+            resp.getWriter().write(gson.toJson(responseMassage));
             return;
         }
         // Kiểm tra token trong cơ sở dữ liệu
@@ -116,12 +117,26 @@ public class ResetPasswordController extends HttpServlet {
             // Vô hiệu hóa token sau khi dùng
             userService.invalidateToken(token);
 
-            // Chuyển hướng đến trang login
-            req.getRequestDispatcher( "/users/page/login-signup.jsp").forward(req,resp);
+            responseMassage = new ResponseMessage(true, "Mật khẩu đã được cập nhật.");
         } else {
-            req.setAttribute("verificationRequested", true);
-            req.setAttribute("error_token", "Token không hợp lệ hoặc đã hết hạn.");
-            req.getRequestDispatcher("/users/page/reset-password.jsp").forward(req, resp);
+            responseMassage = new ResponseMessage(false, "Token không hợp lệ hoặc đã hết hạn.");
+        }
+        resp.getWriter().write(gson.toJson(responseMassage));
+    }
+
+    private static class ResponseMessage {
+        boolean success;
+        String error_email;
+        String error_token;
+
+
+        ResponseMessage(boolean success, String message) {
+            this.success = success;
+            if (message.contains("Email") || message.contains("email")) {
+                this.error_email = message;
+            } else {
+                this.error_token = message;
+            }
         }
     }
 
