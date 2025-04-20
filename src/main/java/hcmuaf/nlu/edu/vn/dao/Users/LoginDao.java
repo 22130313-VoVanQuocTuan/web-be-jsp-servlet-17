@@ -137,5 +137,17 @@ public class LoginDao {
     }
 
 
+    public boolean checkUsername(String username) throws SQLException {
+        String sql = "SELECT username FROM users WHERE username = ?";
+        try(PreparedStatement ptm = dbConnect.preparedStatement(sql)){
+            ptm.setString(1, username);
+
+            ResultSet rs = ptm.executeQuery();
+            if(rs.next()){
+                return true;
+            }
+        }
+        return false;
+    }
 }
 

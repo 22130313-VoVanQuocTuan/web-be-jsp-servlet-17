@@ -269,6 +269,11 @@ public class UserService {
         usersDao.updateRoleById(userId);
     }
 
+    // checkusername
+    public boolean checkUsername(String username) throws SQLException {
+      return  usersDao.checkUsername(username);
+    }
+
 }
 
 

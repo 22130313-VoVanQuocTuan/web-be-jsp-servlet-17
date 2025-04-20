@@ -9,6 +9,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 
 @WebServlet(name = "verify-email", value = "/verify-email")
@@ -17,36 +18,34 @@ public class VerifyEmailController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        PrintWriter out = response.getWriter();
         UserService userService = new UserService();
-        // Lấy mã xác thực từ các trường nhập liệu
-        String code1 = request.getParameter("code1");
-        String code2 = request.getParameter("code2");
-        String code3 = request.getParameter("code3");
-        String code4 = request.getParameter("code4");
+
 
         // Kết hợp các mã thành một chuỗi
-        String code = code1 + code2 + code3 + code4;
-        HttpSession session = request.getSession();
-        String email = (String) session.getAttribute("email");
+        String code = request.getParameter("codes");
+        String email = request.getParameter("email");
+        System.out.println(code);
+        System.out.println(email);
         try {
             if (userService.isCode(email, code)) {
                 if (userService.verifyEmail(email)) {
                     //xóa thông tin xác thực
                     userService.deleteVerifyCode(email);
-                    // Chuyển hướng đến trang đăng nhập hoặc trang yêu cầu sau khi xác thực thành công
-                    request.getRequestDispatcher( "users/page/login-signup.jsp").forward(request,response); // Chuyển hướng tới trang đăng nhập
-                    return; // Thoát khỏi phương thức ngay sau khi chuyển hướng
+                    out.println("{\"message\":\"Xác thực thành công\"}");
+                    out.flush();
                 }
             } else {
-                request.setAttribute("verificationRequested", true);
-                request.setAttribute("error_code", "Mã xác thực không hợp lệ hoặc đã hết hạn.");
+                out.println("{\"error\": true, \"message\":\"Mã code ko hợp lệ\"}");
+
+                out.flush();
             }
         } catch (Exception e) {
-            e.printStackTrace();
-            request.setAttribute("error_code", "Đã xảy ra lỗi, vui lòng thử lại.");
+            out.println("{\"error\": true, \"message\":\"Xác thực thất bại\"}");
+            out.flush();
         }
-        // Giữ lại form ký và thông báo lỗi
-        request.getRequestDispatcher("/users/page/login-signup.jsp").forward(request, response);
 
     }
 
