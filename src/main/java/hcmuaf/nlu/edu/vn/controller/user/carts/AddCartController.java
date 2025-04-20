@@ -27,6 +27,8 @@ public class AddCartController extends HttpServlet {
         HttpSession session = req.getSession();
         // gọi hàm thêm vào giỏ hàng
         cartService.addToCart(session, pid);
-        resp.sendRedirect(req.getContextPath()+"/cart-items");
+        resp.setContentType("application/json");
+        resp.setCharacterEncoding("UTF-8");
+        resp.getWriter().write("{\"status\":\"success\"}");
     }
 }

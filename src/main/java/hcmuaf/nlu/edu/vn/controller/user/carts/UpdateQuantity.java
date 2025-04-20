@@ -14,14 +14,16 @@ import java.io.IOException;
 public class UpdateQuantity extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setContentType("application/json");
+        resp.setCharacterEncoding("UTF-8");
+
         try {
             // Lấy tham số từ request
             String idParam = req.getParameter("id");
             String quantityParam = req.getParameter("quantity");
 
             if (idParam == null || quantityParam == null) {
-                resp.sendRedirect("cart-items"); // Chuyển hướng nếu thiếu tham số
-                return;
+                resp.getWriter().write("{\"status\":\"error\"}");
             }
 
             int id = Integer.parseInt(idParam);
@@ -35,13 +37,14 @@ public class UpdateQuantity extends HttpServlet {
             Carts carts = (Carts) session.getAttribute("cart");
             if (carts != null) {
                 carts.updateQuantity(id, quantity);
+                resp.getWriter().write("{\"status\":\"success\"}");
+            } else {
+                resp.getWriter().write("{\"status\":\"error\", \"message\":\"Giỏ hàng rỗng\"}");
             }
 
-            // Chuyển hướng về trang giỏ hàng
-            resp.sendRedirect("cart-items");
         } catch (NumberFormatException e) {
             // Xử lý ngoại lệ khi tham số không hợp lệ
-            resp.sendRedirect("cart-items");
+            resp.getWriter().write("{\"status\":\"error\", \"message\":\"Lỗi\"}");
         }
     }
 }

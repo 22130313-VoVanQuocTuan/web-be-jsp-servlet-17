@@ -77,7 +77,7 @@
                     </div>
                     <div class="cart">
                         <div class="cart-wrapper">
-                            <a href="cart-items">
+                            <a href="turn-page?action=cart">
                                 <i class="fas fa-shopping-cart"></i>
                             </a>
                             <span class="cart-count" id="cart-count">${sessionScope.cartItemCount}</span>
@@ -109,7 +109,7 @@
                     <li class="propClone"><a href="turn-page-noLogin?action=product"><i class="fa-brands fa-product-hunt"></i>
                         &nbsp;&nbsp;SẢN PHẨM</a>
                     </li>
-                    <li class="propClone"> <a href="cart-items"><i class="fas fa-shopping-cart"></i>&nbsp;&nbsp; GIỎ
+                    <li class="propClone"> <a href="turn-page?action=cart"><i class="fas fa-shopping-cart"></i>&nbsp;&nbsp; GIỎ
                             HÀNG</a>
                     </li>
                     <li class="propClone">
@@ -138,7 +138,7 @@
     <div id="section-content-1">
         <div class="cart-container">
             <div class="cart-left">
-                <table class="cart-table">
+                <table id="tableCart" class="cart-table">
                     <thead style="border-bottom: 2px solid #9e0000;">
                         <tr>
                             <th>Tên sản phẩm</th>
@@ -152,25 +152,6 @@
                     </thead>
 
                         <tbody id="cart-items-container" class="cart-items-container">
-                        <c:forEach var="item" items="${listItems}">
-                                <tr class="cart-item" data-id="${item.id}">
-                                <td>${item.name}</td>
-                                <td><img src="${item.imageUrl}" alt="${item.name}" width="50" height="50"></td>
-                                <td>
-                                    <div class="quantity" style="display: flex;">
-                                        <a style="text-decoration: none " href="update-cart?id=${item.id}&quantity=${item.quantity - 1}"><button class="qty-btn minus-btn">-</button></a>
-                                        <input title="input" type="number" value="${item.quantity}" class="qty-input" min="1" />
-                                        <a style="text-decoration: none " href="update-cart?id=${item.id}&quantity=${item.quantity + 1}"><button class="qty-btn plus-btn">+</button></a>
-                                    </div>
-                                </td>
-                                <td><fmt:formatNumber value=" ${item.price}" type="number" groupingUsed="true"/>₫</td>
-                                <td><fmt:formatNumber value=" ${item.discountAmount}" type="number" groupingUsed="true"/>₫</td>
-                                <td><fmt:formatNumber value=" ${item.totalPrice}" type="number" groupingUsed="true"/>₫</td>
-                                <td>
-                                    <a style="text-decoration: none" href="cart-remove?id=${item.id}" class="remove-from-cart-button">Xóa</a>
-                                </td>
-                            </tr>
-                        </c:forEach>
                     </tbody>
 
                 </table>
@@ -186,20 +167,17 @@
                 <div class="cart-summary">
                     <div class="summary-item">
                         <span>Tạm tính:</span>
-                        <span id="subtotal"><fmt:formatNumber value=" ${sessionScope.totalPrice}" type="number" groupingUsed="true"/>₫</span>
+                        <span id="subtotal"><span class="value">${sessionScope.totalPrice}</span>₫</span>
                     </div>
                     <div class="summary-item">
                         <span>Phí vận chuyển:</span>
-                        <span id="vat"><fmt:formatNumber value=" ${sessionScope.totalShippingFee}" type="number" groupingUsed="true"/>₫</span>
+                        <span id="vat"><span class="value">${sessionScope.totalShippingFee}</span>₫</span>
                     </div>
                 </div>
                 <div class="summary-item total">
                     <span>Tổng cộng:</span>
-                    <span id="total"><fmt:formatNumber value=" ${sessionScope.totalFinalPrice} " type="number" groupingUsed="true"/>₫</span>
+                    <span id="total"><span class="value">${sessionScope.totalFinalPrice}</span>₫</span>
                 </div>
-                <c:if test="${not empty message}">
-                    <div class="alert alert-danger">${message}</div>
-                </c:if>
                 <a href="confirmation"><button class="checkout-btn">Tiến hành thanh toán</button></a>
 
                 <div class="voucher">
@@ -216,7 +194,6 @@
                         </div>
                     </form>
 
-
                     <div class="help">
                         <p><i style="font-size: 15px;" class="fas fa-question-circle spinning-icon"></i></p>
                         <p>Nhập mã ưu đãi nếu có.</p>
@@ -227,6 +204,22 @@
                     </div>
                 </div>
             </div>
+        </div>
+
+        <div id="delete-modal" class="modal">
+            <div class="modal-content"  style="margin-top: 15%;">
+                <h3>Xác nhận xóa</h3>
+                <label>Bạn có chắc chắn muốn xóa sản phẩm này?</label>
+                <input type="hidden" id="cartIdDelete">
+                <div class="button-container">
+                    <button id="confirm-delete" class="confirm-delete" onclick="deleteProduct()">Xóa</button>
+                    <button type="button" class="close-modal" onclick="closeModals()">Hủy</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="message" class="alert alert-info" style="display: none">
+            <!-- Thông báo lỗi sẽ được chèn vào đây -->
         </div>
     </div>
 
@@ -276,10 +269,11 @@
         <button id="backToTop" title="Quay về đầu trang">⬆</button>
 
     </div>
-
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="<c:url value="/users/js/login-signup.js"/>"></script>
-    <script src="<c:url value="/users/js/scripts.js"/>" defer></script>
-    <script src="<c:url value="/users/js/cart.js"/>" defer></script>
+    <script src="<c:url value="/users/js/scripts.js"/>"></script>
+    <script src="<c:url value="/admin/js/configuration.js"/>"></script>
+    <script src="<c:url value="/users/js/cart.js"/>"></script>
 </body>
 
 </html>
