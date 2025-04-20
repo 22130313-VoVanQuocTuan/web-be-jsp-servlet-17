@@ -4,9 +4,9 @@ function placeOrder() {
     var name = document.getElementById('name').value;
     var phone = document.getElementById('phone').value;
     var address = document.getElementById('address').value;
-   
 
-    
+
+
     // Ẩn tất cả thông báo lỗi trước khi kiểm tra
     hideErrorMessages();
 
@@ -37,7 +37,7 @@ function placeOrder() {
         isValid = false;
     }
 
-   
+
 
 
 
@@ -92,7 +92,6 @@ function hideErrorMessages() {
 
 // Thêm sự kiện cho nút Đặt hàng
 function submitOrder() {
-    placeOrder();
     // Lấy giá trị của phương thức thanh toán đã chọn
     var paymentMethod = document.querySelector('input[name="payment"]:checked');
 
@@ -109,3 +108,51 @@ function submitOrder() {
     // Chuyển hướng người dùng đến URL với tham số
     window.location.href = url;
 }
+
+function  closeModals(){
+    document.getElementById("delete-modal").style.display = "none";
+}
+
+function confirmValid() {
+    window.location.href = "turn-page?action=cart";
+}
+
+function showInventoryWarning(productId, availableQuantity) {
+    $('#productId').val(productId);
+    $('#inventory-warning-msg').text("Số lượng sản phẩm mua đã vượt mức hàng tồn kho!");
+
+    // Cập nhật số lượng còn lại
+    $('#inventory-left').text("Chỉ còn lại " + availableQuantity + " sản phẩm trong kho.");
+
+    $('#delete-modal').show();
+}
+
+function checkInventoryAllItems() {
+    placeOrder();
+    const cartItems = document.querySelectorAll('.cart-item');
+
+    cartItems.forEach(item => {
+        const productId = item.dataset.productId;
+        const quantity = item.dataset.quantity;
+        console.log("Sản phẩm", productId);
+        console.log("So luognw", quantity);
+
+        $.ajax({
+            url: 'check-inventory',
+            type: 'Get',
+            data: {
+                productId: productId,
+                quantity: quantity
+            },
+            success: function(response) {
+                if (response.status === 'success') {
+                    submitOrder();
+                } else {
+                    //thì mở model lên
+                    showInventoryWarning(productId, response.availableQuantity);
+                }
+            }
+        });
+    });
+}
+
