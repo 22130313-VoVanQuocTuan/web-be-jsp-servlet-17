@@ -1,7 +1,15 @@
 document.addEventListener('DOMContentLoaded', function () {
+    invalidationVF(); // gọi 1 lần khi trang vừa load
+    invalidation();
+    document.getElementById("register-email").addEventListener('input', invalidation)
+    document.getElementById("register-username").addEventListener('input', invalidation)
+    document.getElementById("register-password").addEventListener('input', invalidation)
+    document.getElementById("verification-code").addEventListener('input', invalidationVF)
+
+
     // Lấy các phần tử DOM
     const container = document.getElementById('container');
-    const registerBtn = document.getElementById('register');
+
     const loginBtn = document.getElementById('login');
     const homeBtn = document.getElementById('home');
     const homeAltBtn = document.getElementById('HOME');
@@ -12,18 +20,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const loginLink = document.getElementById('login-link');
     const signupLink = document.getElementById('signup-link');
     const logoutLink = document.getElementById('logout-link');
+    const  registerBtn = document.getElementById('register');
 
-
-
-    const verifyButton = document.getElementById('verify-button');
-
-    const closeButton = document.getElementById('close-button');
-
-    // Hàm kiểm tra định dạng email
-    function validateEmail(email) {
-        const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-        return emailPattern.test(email);
-    }
 
     // Chuyển đổi giao diện giữa đăng ký và đăng nhập
     if (registerBtn && container) {
@@ -43,8 +41,8 @@ document.addEventListener('DOMContentLoaded', function () {
         homeAltBtn.addEventListener('click', () => window.location.href = '../../home.jsp');
     }
 
-    
-  // Xử lý đăng nhập
+
+    // Xử lý đăng nhập
     const usernameErrorLog = document.getElementById('username-errorlog');
     const passwordErrorLog = document.getElementById('password-errorlog');
 
@@ -89,11 +87,11 @@ document.addEventListener('DOMContentLoaded', function () {
     // Kiểm tra xem username có tồn tại không
     if (username) {
         // Hiển thị thông báo "Xin chào, username!"
-         userGreeting.style.display = "inline";
+        userGreeting.style.display = "inline";
         // Hiển thị các liên kết Logout và Account
-       logoutLink.style.display = "inline";
-       signupLink.style.display = "inline";
-       loginLink.style.display = "none";
+        logoutLink.style.display = "inline";
+        signupLink.style.display = "inline";
+        loginLink.style.display = "none";
     } else {
         // Nếu không có username, ẩn các liên kết Logout và Account
         document.getElementById("user-greeting").style.display = "none";
@@ -101,118 +99,156 @@ document.addEventListener('DOMContentLoaded', function () {
         document.getElementById("signup-link").style.display = "none";
         document.getElementById("login-link").style.display = "inline";
     }
+})
+
+    function invalidation() {
+        const emailInput = document.getElementById('register-email');
+        const usernameInput = document.getElementById('register-username');
+        const passwordInput = document.getElementById('register-password');
+        const submitBtn = document.getElementById('submit-register');
+
+        // Các phần tử hiển thị lỗi (giả định bạn có HTML chứa <small> để hiển thị lỗi)
+        const emailError = document.getElementById('email-error');
+        const usernameError = document.getElementById('username-error');
+        const passwordError = document.getElementById('password-error');
+
+        // Reset lỗi
+        emailError.style.display = 'none';
+        usernameError.style.display = 'none';
+        passwordError.style.display = 'none';
 
 
-    const emailInput = document.getElementById('register-email');
-    const usernameInput = document.getElementById('register-username');
-    const passwordInput = document.getElementById('register-password');
-    const emailError = document.getElementById('email-error');
-    const usernameError = document.getElementById('username-error');
-    const passwordError = document.getElementById('password-error');
-    const registerForm = document.getElementById('register-form');
+        let isValid = true;
 
-    if (registerForm) {
-        registerForm.addEventListener('submit', function (event) {
-            event.preventDefault();  // Ngăn form tự động submit
+        // Validate email
+        const emailValue = emailInput.value.trim();
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailPattern.test(emailValue)) {
+            emailError.textContent = 'Email không hợp lệ.';
+            emailError.style.display = 'block';
+            isValid = false;
 
-            let valid = true;
-            // Xóa thông báo lỗi
-            if (emailError) emailError.textContent = '';
-            if (usernameError) usernameError.textContent = '';
-            if (passwordError) passwordError.textContent = '';
-
-            // Kiểm tra email
-            if (!emailInput.value) {
-                if (emailError) emailError.textContent = 'Vui lòng nhập email';
-                valid = false;
-            } else if (!validateEmail(emailInput.value)) {
-                if (emailError) emailError.textContent = 'Email không đúng định dạng';
-                valid = false;
-            }
-
-            // Kiểm tra tên đăng nhập: không chứa ký tự đặc biệt, độ dài 5-10 ký tự
-            const usernamePattern = /^[a-zA-Z0-9]{5,10}$/;
-            if (!usernameInput.value || !usernamePattern.test(usernameInput.value)) {
-                if (usernameError) usernameError.textContent = 'Tên đăng nhập phải từ 5-10 ký tự và không chứa ký tự đặc biệt';
-                valid = false;
-            }
-
-            // Kiểm tra mật khẩu: không chứa ký tự đặc biệt, độ dài 5-10 ký tự
-            const passwordPattern = /^[a-zA-Z0-9]{5,10}$/;
-            if (!passwordInput.value || !passwordPattern.test(passwordInput.value)) {
-                if (passwordError) passwordError.textContent = 'Mật khẩu phải từ 5-10 ký tự và không chứa ký tự đặc biệt';
-                valid = false;
-            }
-
-            if (valid) {
-                registerForm.submit();  // Nếu hợp lệ, submit form
-            }
-        });
-    }
-    // Xử lý sự kiện đóng form xác thực
-    if (closeButton) {
-        closeButton.addEventListener('click', function () {
-             const modal = document.getElementById("verification-modal") ;
-             modal.style.display = "none";
-             // Xóa giá trị của các ô nhập mã
-       
-        });
-    }
-
-    // Xử lý chuyển ô nhập mã xác thực
-    const inputs = document.querySelectorAll('.verification-code');
-    if (inputs && inputs.length > 0) {
-        inputs.forEach((input, index) => {
-            input.addEventListener('input', (e) => {
-                if (e.target.value.length === 1 && index < inputs.length - 1) {
-                    inputs[index + 1].focus();
-                }
-            });
-
-            input.addEventListener('keydown', (event) => {
-                if (event.key === 'Backspace' && input.value === '' && index > 0) {
-                    inputs[index - 1].focus();
-                }
-            });
-        });
-    }
-
- // Xử lý xác nhận mã
-const errorMessageElement = document.getElementById('error-message');
-if (verifyButton) {
-    verifyButton.addEventListener('click', function (event) {
-        event.preventDefault();
-        const inputs = document.querySelectorAll('.verification-code');
-        let isComplete = true;
-        let enteredCode = "";
-
-        // Kiểm tra nếu tất cả các ô nhập mã đều có giá trị
-        inputs.forEach((input) => {
-            enteredCode += input.value;
-            if (!input.value) {
-                isComplete = false;
-            }
-        });
-
-        // Nếu chưa nhập đủ mã
-        if (!isComplete) {
-            errorMessageElement.innerText = "Vui lòng nhập đủ mã xác thực!";
-            errorMessageElement.style.display = 'block'; // Hiển thị thông báo lỗi
-
-            // Hiệu ứng rung cho các ô nhập mã
-            inputs.forEach(input => {
-                input.classList.add('shake');
-                setTimeout(() => {
-                    input.classList.remove('shake');
-                }, 500); // Loại bỏ hiệu ứng rung sau 0.5s
-            });
-
-        }else{
-            errorMessageElement.innerText = "";
-            const form = document.getElementById("verification-form");
-            form.submit(); // Gửi form nếu hợp lệ
         }
 
-    });
-}
-});
+        // Validate username
+        const usernameValue = usernameInput.value.trim();
+        if (usernameValue.length < 3) {
+            usernameError.textContent = 'Tên người dùng phải từ 3 ký tự.';
+            usernameError.style.display = 'block';
+            isValid = false;
+
+        }
+
+        // Validate password
+        const passwordValue = passwordInput.value.trim();
+        if (passwordValue.length < 6) {
+            passwordError.textContent = 'Mật khẩu phải từ 6 ký tự trở lên.';
+            passwordError.style.display = 'block';
+            isValid = false;
+
+        }
+
+        // Nếu không hợp lệ, ngăn gửi form
+        if (!isValid) {
+            submitBtn.disabled = true;
+            return false;
+        }
+        submitBtn.disabled = false;
+        return true; // hợp lệ thì cho phép submit
+    }
+
+
+    document.getElementById("register-form").addEventListener('submit', function (event) {
+        event.preventDefault();  // Ngăn form tự động submit
+
+        const email = document.getElementById('register-email');
+        const username = document.getElementById('register-username');
+        const password = document.getElementById('register-password');
+        const form = document.getElementById("verification-modal");
+        $.ajax({
+            url: "signup-user",
+            type: "POST",
+            data: {email: email.value, username: username.value, password: password.value},
+
+            success: function (response) {
+                if (response.error) {
+                    document.getElementById("message").innerHTML = response.message;
+                    showAlert();
+
+                } else {
+                    form.style.display = 'block';
+                    document.getElementById("email").value = email.value;
+                }
+            }
+        })
+    })
+
+    function invalidationVF() {
+        const errorSpan = document.getElementById("verification-code-error");
+        const code = document.getElementById("verification-code").value.trim();
+        const bt = document.getElementById("verify-button");
+
+        if (code.length !== 4 || /\D/.test(code)) {
+            errorSpan.textContent = "Vui lòng nhập đủ 4 chữ số hợp lệ";
+            bt.disabled = true;
+        } else {
+            errorSpan.textContent = "";
+            bt.disabled = false;
+        }
+    }
+
+    document.getElementById("verification-form").addEventListener('submit', function (event) {
+        event.preventDefault();
+        // Lấy từng số từ input
+       const codes = document.getElementById("verification-code").value;
+       const errorSpan = document.getElementById("verification-code-error");
+       const  emailVF = document.getElementById("email").value;
+
+        // Gửi AJAX đến servlet
+        $.ajax({
+            url: "verify-email",
+            type: "POST",
+            data: {codes: codes, email: emailVF},
+            success: function (response) {
+                if (response.error) {
+                    errorSpan.textContent = response.message;
+
+
+
+                } else {
+                    closeFormVF();
+                    document.getElementById("message").innerHTML = response.message;
+                    showAlert();
+                }
+            }
+        })
+    })
+
+   // gửi laị mã code
+document.getElementById("reset-password-form").addEventListener("submit", function (event){
+    event.preventDefault();
+    const  emailVF = document.getElementById("email").value;
+    $.ajax({
+        url: "reset-code",
+        type: "POST",
+        data: {email: emailVF},
+        success: function (response) {
+            if (response.error) {
+                document.getElementById("message").innerHTML = response.message;
+                showAlert();
+            }else{
+                document.getElementById("message").innerHTML = response.message;
+                showAlert();
+            }
+        }
+
+    })
+})
+
+
+    function closeFormVF() {
+        document.getElementById("verification-modal").style.display = 'none';
+    }
+
+
+

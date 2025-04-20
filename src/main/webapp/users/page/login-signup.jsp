@@ -11,9 +11,11 @@
 </head>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
       crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4-beta3/css/all.min.css"/>
     <link rel="stylesheet" href="<c:url value="/users/css/home.css"/>">
     <link rel="stylesheet" href="<c:url value="/users/css/login-signup.css"/>">
+
 
 <!-- CSS để hiển thị Modal -->
 <style>
@@ -168,7 +170,7 @@
 
 
             <div class="form-container sign-up">
-                    <form id="register-form" action="signup-user" method="post">
+                    <form id="register-form" >
                     <h1>Tạo tài khoản</h1>
                     <div class="social-icons">
                         <a href="loginGG" class="icon-logo google" style="text-decoration: none"><i class="fa-brands fa-google-plus-g g"></i></a>
@@ -187,11 +189,7 @@
                     <!-- Nhập Password -->
                     <input type="password" name="password" id="register-password" placeholder="Password" >
                     <div id="password-error" style="color: red; font-size: 10px;"></div>
-                    <div id="error-server" style="color: red; font-size: 10px;">
-                        <c:if test="${not empty error_register}">
-                            ${error_register}
-                        </c:if>
-                    </div>
+
                     <!-- Nút đăng ký -->
                     <button type="submit" id="submit-register">Đăng kí</button>
                 </form>
@@ -243,9 +241,9 @@
 
         <!-- Form xác thực email -->
         <div class="overlay" id="overlay"></div>
-        <c:if test="${not empty verificationRequested}">
+
             <!-- Modal xác thực email -->
-            <div id="verification-modal" class="modal">
+            <div id="verification-modal" class="modal" style="display: none;">
                 <div class="modal-content">
                     <button title="close" type="button" class="close-button" id="close-button">
                      <a href="login?action=login"> <i class="fas fa-times"></i></a>   <!-- Font Awesome icon for "X" -->
@@ -254,30 +252,28 @@
                     <h1>Xác thực email</h1>
 
                     <!-- Form xác thực email -->
-                    <form id="verification-form" action="verify-email" method="post">
+                    <form id="verification-form">
                         <div class="verification-code-inputs " style="display: flex; gap: 10px;">
-                            <input class="verification-code" type="text" name="code1" maxlength="1">
-                            <input class="verification-code" type="text" name="code2" maxlength="1">
-                            <input class="verification-code" type="text" name="code3" maxlength="1">
-                            <input class="verification-code" type="text" name="code4" maxlength="1">
+                            <input type="hidden" id="email">
+                            <input id="verification-code" type="text">
+
 
                         </div>
-                        <!-- Thông báo lỗi -->
-                        <div id="error-message" class="error-message">
-                            <c:if test="${not empty error_code}">
-                                ${error_code}
-                            </c:if>
-                        </div>
+                        <span id="verification-code-error" style="color: red; font-size: 10px;" class="error-message"></span>
                         <button type="submit" id="verify-button">Xác thực</button>
                     </form>
 
                     <!-- Form gửi lại mã -->
-                    <form id="reset-password-form" action="reset-code" method="post">
+                    <form id="reset-password-form">
                         <button type="submit" class="reset">Gửi lại</button>
                     </form>
                 </div>
             </div>
-        </c:if>
+
+    </div>
+
+    <div id="message" class="alert alert-info" style="display: none">
+        <!-- Thông báo lỗi sẽ được chèn vào đây -->
     </div>
 
 </div>
