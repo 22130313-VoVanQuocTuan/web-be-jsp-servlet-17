@@ -9,7 +9,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
-@WebServlet(name = "TurnPage", value = "/turn-page-noLogin")
+@WebServlet(name = "TurnPageNoLogin", value = "/turn-page-noLogin")
 public class TurnPageNoLogin extends HttpServlet {
 
         @Override

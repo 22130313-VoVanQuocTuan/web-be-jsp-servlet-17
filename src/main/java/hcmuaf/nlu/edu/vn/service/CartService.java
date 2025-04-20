@@ -34,6 +34,7 @@ public class CartService {
         Carts cart = getCartFromSession(session);
         if (cart != null) {
             cart.removeItem(productId);
+            return true;
         }
         return false;
     }
