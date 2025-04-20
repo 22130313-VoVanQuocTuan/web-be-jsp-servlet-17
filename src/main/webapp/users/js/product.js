@@ -50,8 +50,8 @@ function renderP(data) {
                     <span style='font-size: 0.9em;'>${product.view}</span></span>
                 <span style='margin-left: 20px;'><i class='fas fa-shopping-cart'></i> 
                     <span style='font-size: 0.9em;'>${product.soldCount}</span></span>
-                <a href='add-cart?id=${product.id}' class='add-cart'>
-                    <i class='ri-add-circle-line'></i>Thêm</a>
+                 <button class='add-cart' onclick="addCart(${product.id})">
+                    <i class='ri-add-circle-line'></i>Thêm</button>
             </div>`;
     });
     document.getElementById("product-list").innerHTML = html;
@@ -247,5 +247,34 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
+function addCart(id) {
+    $.ajax({
+        url: "add-cart",
+        type: "GET",
+        data: {
+            id: id,
+        },
+        success: function (res) {
+            if (res.status === "success") {
+                $.ajax({
+                    url: "cart-items",
+                    type: "GET",
+                    dataType: 'json',
+                    success: function (data) {
+                        $("#subtotal .value").text(data.totalPrice.toLocaleString());
+                        $("#vat .value").text(data.totalShippingFee.toLocaleString());
+                        $("#total .value").text(data.totalFinalPrice.toLocaleString());
+                        $("#cart-count").text(data.totalItem);
+                        window.location.href = "turn-page?action=cart";
+                    }
+                });
+
+
+            } else {
+                alert("Lỗi không thêm đươc sản phẩm.");
+            }
+        }
+    });
+}
 
 
