@@ -12,29 +12,27 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4-beta3/css/all.min.css"/>
     <link rel="stylesheet" href="<c:url value="/users/css/home.css"/>">
-    <!-- Đảm bảo jQuery được tải trước khi dùng -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 </head>
-
 <style>
     .slide-discount {
-        width: 27%; /* Chiếm toàn bộ chiều rộng */
+        width: 27%;
         margin: auto;
         margin-top: 5%;
         padding: 10px;
-        background-color: #ffffff;
+        background: linear-gradient(to right, #5a3b3b, #1b334d);
         border-radius: 16px;
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
     }
 
     .swiper {
-        width: 100%; /* Chiếm toàn bộ chiều rộng */
-        height: auto; /* Chiều cao tự động theo nội dung */
+        width: 100%;
+        height: auto;
     }
 
     .swiper-slide {
-        background-color: transparent; /* Không có nền để dễ nhìn */
+        background-color: transparent;
         text-align: center;
         display: flex;
         flex-direction: column;
@@ -43,20 +41,21 @@
     }
 
     .discount-item {
-        background: #ffffff; /* Màu nền trắng */
-        color: #FF0000; /* Chữ màu đỏ */
+        background: #f8f1e9;
+        color: #a83232;
         padding: 15px;
         margin: 5px;
         border-radius: 12px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         transition: transform 0.3s ease, box-shadow 0.3s ease;
-        width: 90%; /* Chiều rộng mỗi mã giảm giá */
+        width: 90%;
         max-width: 300px;
     }
 
     .discount-item:hover {
         transform: scale(1.05);
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        background: #ffffff;
     }
 
     .discount-label {
@@ -64,52 +63,53 @@
         margin-bottom: 6px;
         text-transform: uppercase;
         font-weight: bold;
+        color: #2e4a6b;
     }
 
     .discount-description {
         font-size: 16px;
+        color: #a83232;
     }
 
     .swiper-button-next,
     .swiper-button-prev {
-        background-color: #e0e0e0; /* Nền xám nhẹ */
+        background-color: #3b4a5e;
         border-radius: 50%;
         padding: 6px;
         width: 40px;
         height: 40px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
         transition: background-color 0.3s ease, transform 0.3s ease;
     }
 
     .swiper-button-next:hover,
     .swiper-button-prev:hover {
-        background-color: #cccccc; /* Màu xám đậm hơn khi hover */
+        background-color: #4f6a8c;
         transform: scale(1.1);
     }
 
     .swiper-button-next::after,
     .swiper-button-prev::after {
-        color: #ffffff; /* Màu trắng cho dấu mũi tên */
-        font-size: 20px; /* Tăng kích thước nếu cần */
+        color: #f8f1e9;
+        font-size: 20px;
     }
 
     .swiper-pagination-bullet {
-        background-color: #ffffff !important; /* Màu trắng */
+        background-color: #f8f1e9 !important;
         opacity: 0.8;
         transition: background-color 0.3s ease, transform 0.3s ease;
     }
 
     .swiper-pagination-bullet:hover {
-        background-color: #d3d3d3 !important; /* Màu xám nhạt khi hover */
+        background-color: #d9c8b4 !important;
         transform: scale(1.2);
     }
 
     .swiper-pagination-bullet-active {
-        background-color: #ffffff !important; /* Màu trắng khi đang active */
+        background-color: #a83232 !important;
         width: 12px;
         height: 12px;
     }
-
 </style>
 
 <body>
@@ -126,12 +126,12 @@
                            Xin chào,  <span
                                id="username">${sessionScope.user.username != null ? sessionScope.user.username : ''}</span>!</span>
 
-             <a href="turn-page?action=infoUser" style="text-decoration: none">
+                <a href="turn-page?action=infoUser" style="text-decoration: none">
                     <button type="submit" class="account-link" id="signup-link"
                             style="display: none;">
                         <i class="fas fa-user-circle"></i> Tài khoản
                     </button>
-             </a>
+                </a>
                 <form action="login" method="post">
                     <input name="action" type="hidden" value="login"/>
                     <button type="submit" id="login-link">
@@ -193,7 +193,7 @@
                         <i class="fa-solid fa-list" style="color: #d0cdcd;"></i> &nbsp;&nbsp; DANH MỤC SẢN PHẨM
                     </span>
                     <ul class="items">
-                        <c:forEach var="category" items="${categories}">
+                        <c:forEach var="category" items="${categories_all}">
                             <li>
                                 <a href="/tqh/product-category?categoryId=${category.id}">
                                     &nbsp;&nbsp;<i class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;${category.name}
@@ -204,33 +204,32 @@
                 </li>
                 <li class="propClone"><a href="home-page"><i class="fa-solid fa-house"></i>&nbsp;&nbsp; TRANG CHỦ </a>
                 </li>
-                <li class="propClone"><a href="turn-page-noLogin?action=product"><i class="fa-brands fa-product-hunt"></i>
+                <li class="propClone"><a href="turn-page-noLogin?action=product"><i
+                        class="fa-brands fa-product-hunt"></i>
                     &nbsp;&nbsp;SẢN PHẨM</a>
                 </li>
-                <li class="propClone"><a id="" href="turn-page?action=cart"><i
+                <li class="propClone"><a id="" href="turn-page-noLogin?action=cart"><i
                         class="fas fa-shopping-cart"></i>&nbsp;&nbsp; GIỎ
                     HÀNG</a>
                 </li>
                 <li class="propClone">
                     <span class="none-a"> <i class="fa-solid fa-book"></i> &nbsp;&nbsp; HƯỚNG DẪN </span>
                     <ul class="items">
-                        <li><a href="turn-page?action=buyingHelp">&nbsp;&nbsp;<i
+                        <li><a href="turn-page-noLogin?action=buyingHelp">&nbsp;&nbsp;<i
                                 class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;HƯỚNG DẪN
                             MUA HÀNG</a>
                         </li>
-                        <li><a href="turn-page?action=productUnit">&nbsp;&nbsp;<i
+                        <li><a href="turn-page-noLogin?action=productUnit">&nbsp;&nbsp;<i
                                 class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;BẢNG ĐƠN VỊ SẢN PHẨM</a>
                         </li>
 
-                        <li><a href="turn-page?action=termAndService">&nbsp;&nbsp;<i
+                        <li><a href="turn-page-noLogin?action=termAndService">&nbsp;&nbsp;<i
                                 class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;ĐIỀU KHOẢN
                             VÀ DỊCH VỤ</a>
                         </li>
                     </ul>
                 </li>
-
             </ul>
-
         </div>
     </div>
 </div>
@@ -1405,7 +1404,7 @@
 <div class="popup-banner" id="popupBanner" style="display: none;">
     <div class="popup-content">
         <div class="banner-item" style="display: block;">
-            <a href="product">
+            <a href="turn-page-noLogin?action=product">
                 <img class="banner-image" id="popupBannerImage" src="">
             </a>
         </div>
@@ -1428,15 +1427,15 @@
         <div class="links">
             <h3>Liên kết</h3>
             <ul>
-                <li><a href="turn-page?action=introduce">Giới thiệu</a></li>
-                <li><a href="turn-page?action=termAndService">Điều khoản và dịch vụ</a></li>
+                <li><a href="turn-page-noLogin?action=introduce">Giới thiệu</a></li>
+                <li><a href="turn-page-noLogin?action=termAndService">Điều khoản và dịch vụ</a></li>
             </ul>
         </div>
         <div class="social-media">
             <h3>Mạng xã hội</h3>
             <ul>
                 <li><a href="https://www.facebook.com/profile.php?id=100044411504061"><i
-                        class="fa-brands fa-facebook" style="color: #d1d1d1;"></i></a></li>
+                        class="fa-brands fa-facebook" style="color: #d1d1d1; padding: 15px"></i></a></li>
                 <li><a href="https://www.instagram.com/paq.2012/"><i class="fa-brands fa-instagram-square"
                                                                      style="color: #d1d1d1;"></i></a></li>
                 <li><a href="https://x.com/?lang=vi"><i class="fa-brands fa-twitter"

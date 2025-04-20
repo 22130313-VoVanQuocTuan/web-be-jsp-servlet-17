@@ -2806,7 +2806,7 @@ p {
     max-width: 1038px;
     margin: 0 auto;
     padding: 0 20px;
-    flex-wrap: wrap; /*cho các ptu xuong dong khi màn hình thu nhỏ */
+    flex-wrap: wrap;
 }
 
 #section-footer p,
@@ -2814,6 +2814,7 @@ p {
 #section-footer h3 {
     margin: 0;
     padding: 0;
+    margin-bottom: 10px;
     color: #d1d1d1;
 }
 
@@ -2889,19 +2890,19 @@ p {
         align-items: center;
         text-align: center;
     }
-    
+
     #section-footer .contact-info,
     #section-footer .links,
     #section-footer .social-media,
     #section-footer .copyright {
         margin-bottom: 20px;
     }
-    
+
     #section-footer .social-media ul {
         justify-content: center;
     }
-    
-   
+
+
 }
 
 /* Chỉnh layout cho màn hình rất nhỏ */
@@ -2909,7 +2910,7 @@ p {
     #section-footer h3 {
         font-size: 16px;
     }
-    
+
 }
 
 .fa-phone {

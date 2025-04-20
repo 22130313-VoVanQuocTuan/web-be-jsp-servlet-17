@@ -35,7 +35,7 @@ public class CategoryFilter implements Filter {
             try {
                 List<Category> categories = productService.getAllCategories();
                 // Lưu danh mục vào session để có thể sử dụng trong toàn bộ trang web
-                session.setAttribute("categories", categories);
+                session.setAttribute("categories_all", categories);
             } catch (SQLException e) {
                 throw new ServletException("Lỗi khi lấy danh mục từ database", e);
             }
