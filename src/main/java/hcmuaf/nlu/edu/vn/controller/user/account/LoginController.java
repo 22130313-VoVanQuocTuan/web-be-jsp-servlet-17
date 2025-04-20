@@ -18,7 +18,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @WebServlet(name = "login", value = "/login")
-public class LoginController extends HttpServlet {
+public class  LoginController extends HttpServlet {
     public static final long LOCK_TIME = 2 * 60 * 1000; // 2 phút
     private static final int MAX_ATTEMPTS = 5;
     private static final Map<String, LoginAttempt> loginAttempts = new HashMap<>();

@@ -207,7 +207,7 @@ function renderDataOrder(data) {
         row.innerHTML = `
                                 <td>${order.id}</td>
                                 <td>${order.createdAt}</td>
-                                <td>${order.shippingAddress}</td>
+                                <td><div class="ellipsis">${order.shippingAddress}</div</td>
                                 <td>${order.paymentStatus}</td>
                                 <td>
                                    <button onclick="detailOrder(${order.id})">Xem</button>
