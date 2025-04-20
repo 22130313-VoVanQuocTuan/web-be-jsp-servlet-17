@@ -12,8 +12,8 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
       crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4-beta3/css/all.min.css"/>
-    <link rel="stylesheet" href="<c:url value="/users/css/home.css"/>">
-    <link rel="stylesheet" href="<c:url value="/users/css/login-signup.css"/>">
+<link rel="stylesheet" href="<c:url value="/users/css/home.css"/>">
+<link rel="stylesheet" href="<c:url value="/users/css/login-signup.css"/>">
 
 <!-- CSS để hiển thị Modal -->
 <style>
@@ -67,7 +67,7 @@
         </div>
         <div class="top-right">
             <form action="login" method="post">
-                <input name="action" type="hidden" value="login" />
+                <input name="action" type="hidden" value="login"/>
                 <button type="submit" id="login-link">
                     <span><i class="fa fa-fw fa-user"></i> Đăng Nhập</span>
                 </button>
@@ -132,10 +132,12 @@
                 </li>
                 <li class="propClone"><a href="home-page"><i class="fa-solid fa-house"></i>&nbsp;&nbsp; TRANG CHỦ
                 </a></li>
-                <li class="propClone"><a href="turn-page-noLogin?action=product"><i class="fa-brands fa-product-hunt"></i>
+                <li class="propClone"><a href="turn-page-noLogin?action=product"><i
+                        class="fa-brands fa-product-hunt"></i>
                     &nbsp;&nbsp;SẢN PHẨM</a>
                 </li>
-                <li class="propClone"> <a href="turn-page?action=cart"><i class="fas fa-shopping-cart"></i>&nbsp;&nbsp; GIỎ
+                <li class="propClone"><a href="turn-page?action=cart"><i class="fas fa-shopping-cart"></i>&nbsp;&nbsp;
+                    GIỎ
                     HÀNG</a>
                 </li>
                 <li class="propClone">
@@ -148,98 +150,93 @@
                         <li><a href="turn-page?action=productUnit">&nbsp;&nbsp;<i
                                 class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;BẢNG ĐƠN VỊ SẢN PHẨM</a>
                         </li>
-
                         <li><a href="turn-page?action=termAndService">&nbsp;&nbsp;<i
                                 class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;ĐIỀU KHOẢN
                             VÀ DỊCH VỤ</a>
                         </li>
                     </ul>
                 </li>
-
             </ul>
         </div>
     </div>
 </div>
-
-
 <!-- Content-->
 <div class="content">
     <div class="container" id="container">
+        <div class="form-container sign-up">
+            <form id="register-form" action="signup-user" method="post">
+                <h1>Tạo tài khoản</h1>
+                <div class="social-icons">
+                    <a href="loginGG" class="icon-logo google" style="text-decoration: none"><i
+                            class="fa-brands fa-google-plus-g g"></i></a>
+                    <a href="loginFB" class="icon-logo facebook" style="text-decoration: none"><i
+                            class="fa-brands fa-facebook-f f"></i></a>
+                </div>
+                <span>Hoặc sử dụng email để đăng kí tài khoản</span>
 
+                <!-- Nhập Email -->
+                <input type="email" name="email" id="register-email" placeholder="Email" value="${email}">
+                <div id="email-error" style="color: red; font-size: 10px;"></div>
 
-            <div class="form-container sign-up">
-                    <form id="register-form" action="signup-user" method="post">
-                    <h1>Tạo tài khoản</h1>
-                    <div class="social-icons">
-                        <a href="loginGG" class="icon-logo google" style="text-decoration: none"><i class="fa-brands fa-google-plus-g g"></i></a>
-                        <a href="loginFB" class="icon-logo facebook" style="text-decoration: none"><i class="fa-brands fa-facebook-f f"></i></a>
-                    </div>
-                    <span>Hoặc sử dụng email để đăng kí tài khoản</span>
+                <!-- Nhập Username -->
+                <input type="text" name="username" id="register-username" placeholder="UserName">
+                <div id="username-error" style="color: red; font-size: 10px;"></div>
 
-                    <!-- Nhập Email -->
-                    <input type="email" name="email" id="register-email" placeholder="Email" value="${email}" >
-                    <div id="email-error" style="color: red; font-size: 10px;"></div>
-
-                    <!-- Nhập Username -->
-                    <input type="text" name="username" id="register-username" placeholder="UserName" >
-                    <div id="username-error" style="color: red; font-size: 10px;"></div>
-
-                    <!-- Nhập Password -->
-                    <input type="password" name="password" id="register-password" placeholder="Password" >
-                    <div id="password-error" style="color: red; font-size: 10px;"></div>
-                    <div id="error-server" style="color: red; font-size: 10px;">
-                        <c:if test="${not empty error_register}">
-                            ${error_register}
-                        </c:if>
-                    </div>
-                    <!-- Nút đăng ký -->
-                    <button type="submit" id="submit-register">Đăng kí</button>
-                </form>
-             </div>
-
-
+                <!-- Nhập Password -->
+                <input type="password" name="password" id="register-password" placeholder="Password">
+                <div id="password-error" style="color: red; font-size: 10px;"></div>
+                <div id="error-server" style="color: red; font-size: 10px;">
+                    <c:if test="${not empty error_register}">
+                        ${error_register}
+                    </c:if>
+                </div>
+                <!-- Nút đăng ký -->
+                <button type="submit" id="submit-register">Đăng kí</button>
+            </form>
+        </div>
 
         <div class="form-container sign-in none">
             <form id="login-form" action="login" method="post">
                 <h1>Đăng nhập</h1>
                 <div class="social-icons">
-
                     <a href="loginGG" class="icon-logo"><i class="fa-brands fa-google-plus-g g"></i></a>
                     <a href="loginFB" class="icon-logo"><i class="fa-brands fa-facebook-f f"></i></a>
-
                 </div>
                 <span>Hoặc sử dụng tài khoản đã đăng kí</span>
                 <input type="text" name="username" id="login-username" placeholder="UserName">
-                <span id="username-errorlog" style="color: red; font-size: 10px;" class="error-message"></span> <!-- Thông báo lỗi tên đăng nhập -->
+                <span id="username-errorlog" style="color: red; font-size: 10px;" class="error-message"></span>
+                <!-- Thông báo lỗi tên đăng nhập -->
                 <input type="password" name="password" id="login-password" placeholder="Password">
-                <span id="password-errorlog" style="color: red; font-size: 10px;" class="error-message"></span> <!-- Thông báo lỗi mật khẩu -->
+                <span id="password-errorlog" style="color: red; font-size: 10px;" class="error-message"></span>
+                <!-- Thông báo lỗi mật khẩu -->
                 <div id="error-login" style="color: red; font-size: 10px;">
                     <c:if test="${not empty error_login}">
                         ${error_login}
                     </c:if>
                 </div>
-
-                <a class="blue" href="turn-page?action=resetPass">Quên mật khẩu?</a>
+                <a class="blue" href="turn-page-noLogin?action=resetPass">Quên mật khẩu?</a>
                 <button type="submit" id="login-button">Đăng nhập</button>
             </form>
         </div>
+
         <div class="toggle-container none">
             <div class="toggle">
                 <div class="toggle-panel toggle-left">
                     <h1>Chào mừng, trở lại!</h1>
                     <p>Nhập thông tin cá nhân của bạn để sử dụng tất cả các tính năng của trang web</p>
                     <button class="hidden" id="login">Đăng nhập</button>
-                    <button class="hidden" id="home"><a href="home-page" style="text-decoration: none ;color: #FFFFFF">Trang chủ</a></button>
+                    <button class="hidden" id="home"><a href="home-page" style="text-decoration: none ;color: #FFFFFF">Trang
+                        chủ</a></button>
                 </div>
                 <div class="toggle-panel toggle-right">
                     <h1>Chào, bạn!</h1>
                     <p>Đăng ký với thông tin cá nhân của bạn để sử dụng tất cả các tính năng của trang web</p>
                     <button class="hidden" id="register">Đăng kí</button>
-                    <button class="hidden" id="HOME"><a href="home-page" style="text-decoration: none ;color: #FFFFFF" >Trang chủ</a></button>
+                    <button class="hidden" id="HOME"><a href="home-page" style="text-decoration: none ;color: #FFFFFF">Trang
+                        chủ</a></button>
                 </div>
             </div>
         </div>
-
 
         <!-- Form xác thực email -->
         <div class="overlay" id="overlay"></div>
@@ -248,11 +245,10 @@
             <div id="verification-modal" class="modal">
                 <div class="modal-content">
                     <button title="close" type="button" class="close-button" id="close-button">
-                     <a href="login?action=login"> <i class="fas fa-times"></i></a>   <!-- Font Awesome icon for "X" -->
+                        <a href="login?action=login"> <i class="fas fa-times"></i></a>
+                        <!-- Font Awesome icon for "X" -->
                     </button>
-
                     <h1>Xác thực email</h1>
-
                     <!-- Form xác thực email -->
                     <form id="verification-form" action="verify-email" method="post">
                         <div class="verification-code-inputs " style="display: flex; gap: 10px;">
@@ -260,7 +256,6 @@
                             <input class="verification-code" type="text" name="code2" maxlength="1">
                             <input class="verification-code" type="text" name="code3" maxlength="1">
                             <input class="verification-code" type="text" name="code4" maxlength="1">
-
                         </div>
                         <!-- Thông báo lỗi -->
                         <div id="error-message" class="error-message">
@@ -279,9 +274,7 @@
             </div>
         </c:if>
     </div>
-
 </div>
-
 
 <div id="section-footer">
     <div class="container">
@@ -336,5 +329,4 @@
 <script src="${pageContext.request.contextPath}/users/js/scripts.js"></script>
 
 </body>
-
 </html>
