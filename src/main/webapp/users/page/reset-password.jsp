@@ -142,9 +142,7 @@
                     <span>Nhập địa chỉ email của bạn để nhận liên kết đặt lại mật khẩu.</span>
                     <input type="email" name="email" id="reset-email" placeholder="Email">
                     <div id="email-error" style="color: red;">
-                        <c:if test="${not empty error_email}">
-                            ${error_email}
-                        </c:if>
+
                     </div>
                     <button type="submit">Gửi liên kết đặt lại mật khẩu</button>
                     <p><a href="login?action=login" id="back-to-login">Quay lại đăng nhập</a></p>
@@ -157,9 +155,10 @@
                 <form id="new-password-form">
                     <h1>Đặt lại mật khẩu mới</h1>
                     <input type="hidden" name="action" value="reset"/>
+                    <input type="hidden" name="email" value="${email}"/>
                     <input type="hidden" name="token" value="${token}"/>
                     <input type="password" name="password" id="new-password" placeholder="Mật khẩu mới" required>
-                    <input type="password" id="confirm-password" placeholder="Xác nhận mật khẩu" required>
+                    <input type="password" name="confirmPassword" id="confirm-password" placeholder="Xác nhận mật khẩu" required>
                     <div id="password-error" style="color: red;">
                         <c:if test="${not empty error_token}">
                             ${error_token}

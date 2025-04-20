@@ -4,6 +4,9 @@ import hcmuaf.nlu.edu.vn.dao.Users.*;
 import hcmuaf.nlu.edu.vn.model.PasswordReset;
 import hcmuaf.nlu.edu.vn.model.Users;
 
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.sql.SQLException;
 import java.util.*;
@@ -143,7 +146,7 @@ public class UserService {
     }
 
     //Thêm token
-    public void saveResetToken(int userId, String token) throws Exception {
+    public void     saveResetToken(int userId, String token) throws Exception {
         resetPasswordDao.savePasswordResetToken(userId, token);
     }
 
@@ -156,8 +159,31 @@ public class UserService {
     public PasswordReset findResetTokenByToken(String token) throws Exception {
         return resetPasswordDao.findResetTokenByToken(token);
     }
+    // Hash token
+    public static String hashToken(String token) {
+        try {
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            byte[] hash = digest.digest(token.getBytes(StandardCharsets.UTF_8));
+            StringBuilder hexString = new StringBuilder();
+            for (byte b : hash) {
+                hexString.append(String.format("%02x", b));
+            }
+            return hexString.toString();
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException("Error hashing token", e);
+        }
+    }
 
-    // Cập nhâ lại token
+    public PasswordReset findResetTokenByEmailAndHashedToken(String email, String hashedToken) throws SQLException {
+        return resetPasswordDao.findResetTokenByEmailAndHashedToken(email,hashedToken);
+    }
+
+    // Vô hiệu hóa token sau khi sử dụng
+    public void invalidateTokenByEmail(String email) throws SQLException {
+        resetPasswordDao.invalidateTokenByEmail(email);
+    }
+
+    // Cập nhâp lại token
     public void updateResetTokenForEmail(String email, String newToken) throws Exception {
         resetPasswordDao.updateResetTokenAndExpiry(email, newToken);
     }

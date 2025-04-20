@@ -1,28 +1,18 @@
-document.addEventListener('DOMContentLoaded', function() {
-    // Kiểm tra jQuery
-    if (typeof jQuery === 'undefined') {
-        console.error('jQuery không được tải. Vui lòng kiểm tra đường dẫn jQuery.');
-        alert('jQuery không được tải. Vui lòng kiểm tra console để biết chi tiết.');
-        return;
-    } else {
-        console.log('jQuery đã tải thành công:', jQuery.fn.jquery);
-    }
-
+document.addEventListener('DOMContentLoaded', function () {
     const resetPasswordForm = document.getElementById('reset-password-form');
     const backToLoginLink = document.getElementById('back-to-login');
 
     // Xử lý form gửi yêu cầu reset mật khẩu
     if (resetPasswordForm) {
-        console.log('resetPasswordForm được tìm thấy.');
-        resetPasswordForm.addEventListener('submit', function(event) {
+        resetPasswordForm.addEventListener('submit', function (event) {
             console.log('Form submit được gọi.');
             event.preventDefault(); // Ngăn submit truyền thống
 
             const email = document.getElementById('reset-email').value;
+            console.log(email)
             const errorEmail = document.getElementById('email-error');
 
             let isValid = true;
-
             // Kiểm tra client-side
             if (email === '') {
                 errorEmail.textContent = 'Email không được để trống';
@@ -41,11 +31,11 @@ document.addEventListener('DOMContentLoaded', function() {
                         email: email
                     },
                     dataType: 'json',
-                    beforeSend: function() {
+                    beforeSend: function () {
                         resetPasswordForm.querySelector('button').disabled = true;
                         resetPasswordForm.querySelector('button').textContent = 'Đang gửi...';
                     },
-                    success: function(response) {
+                    success: function (response) {
                         resetPasswordForm.querySelector('button').disabled = false;
                         resetPasswordForm.querySelector('button').textContent = 'Gửi liên kết đặt lại mật khẩu';
                         console.log('AJAX success:', response);
@@ -59,7 +49,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             errorEmail.style.display = 'block';
                         }
                     },
-                    error: function(xhr, status, error) {
+                    error: function (xhr, status, error) {
                         resetPasswordForm.querySelector('button').disabled = false;
                         resetPasswordForm.querySelector('button').textContent = 'Gửi liên kết đặt lại mật khẩu';
                         console.error('AJAX error:', status, error, xhr.responseText);
@@ -70,24 +60,26 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
             }
         });
-    } else {
-        console.error('resetPasswordForm không được tìm thấy.');
+    }
+
+    function getParam(name) {
+        return new URLSearchParams(window.location.search).get(name);
     }
 
     const newPasswordForm = document.getElementById('new-password-form');
     if (newPasswordForm) {
-        console.log('newPasswordForm được tìm thấy.');
-        newPasswordForm.addEventListener('submit', function(event) {
+        newPasswordForm.addEventListener('submit', function (event) {
             console.log('newPasswordForm submit được gọi.');
             event.preventDefault();
 
             const newPassword = document.getElementById('new-password').value;
             const confirmPassword = document.getElementById('confirm-password').value;
+            const email = getParam("email");
+            document.querySelector('input[name="email"]').value = email;
             const token = document.querySelector('input[name="token"]').value;
             const passwordError = document.getElementById('password-error');
-
             console.log('Token:', token);
-            console.log('New Password:', newPassword);
+            console.log('email :', email)
 
             let valid = true;
             passwordError.textContent = '';
@@ -116,14 +108,15 @@ document.addEventListener('DOMContentLoaded', function() {
                     data: {
                         action: 'reset',
                         token: token,
+                        email: email,
                         password: newPassword
                     },
                     dataType: 'json',
-                    beforeSend: function() {
+                    beforeSend: function () {
                         newPasswordForm.querySelector('button').disabled = true;
                         newPasswordForm.querySelector('button').textContent = 'Đang cập nhật...';
                     },
-                    success: function(response) {
+                    success: function (response) {
                         newPasswordForm.querySelector('button').disabled = false;
                         newPasswordForm.querySelector('button').textContent = 'Cập nhật mật khẩu';
                         console.log('AJAX success:', response);
@@ -134,7 +127,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             passwordError.style.display = 'block';
                         }
                     },
-                    error: function(xhr, status, error) {
+                    error: function (xhr, status, error) {
                         newPasswordForm.querySelector('button').disabled = false;
                         newPasswordForm.querySelector('button').textContent = 'Cập nhật mật khẩu';
                         console.error('AJAX error:', status, error, xhr.responseText);
@@ -147,16 +140,16 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
 
-        document.getElementById('new-password').addEventListener('input', function() {
+        document.getElementById('new-password').addEventListener('input', function () {
             document.getElementById('password-error').style.display = 'none';
         });
-        document.getElementById('confirm-password').addEventListener('input', function() {
+        document.getElementById('confirm-password').addEventListener('input', function () {
             document.getElementById('password-error').style.display = 'none';
         });
     }
 
     if (backToLoginLink) {
-        backToLoginLink.addEventListener('click', function() {
+        backToLoginLink.addEventListener('click', function () {
             window.location.href = '/tqh/login?action=login';
         });
     }
