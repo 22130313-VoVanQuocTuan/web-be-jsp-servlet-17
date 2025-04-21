@@ -254,9 +254,10 @@
                     <th>Giá</th>
                 </tr>
                 <c:forEach var="c" items="${itemCart}">
-                    <tr>
+                    <tr class="cart-item"  data-product-id="${c.productId}"
+                        data-quantity="${c.quantity}">
                         <td>${c.name}</td>
-                        <td>${c.quantity}</td>
+                        <td id="cart-quantity">${c.quantity}</td>
                         <td><fmt:formatNumber value="${c.price}" type="number"/>₫</td>
                     </tr>
                 </c:forEach>
@@ -280,12 +281,30 @@
                         < Quay về giỏ hàng </a>
                     </div>
                     <a href="#" id="submit-btn">
-                        <button class="submit-btn" onclick="submitOrder()">Đặt hàng</button>
+                        <button class="submit-btn" onclick="checkInventoryAllItems()">Đặt hàng</button>
                     </a>
                 </div>
             </div>
         </div>
     </div>
+    <div id="delete-modal" class="modals" style="display: none;">
+        <div class="modal-content" style="margin-top: 15%;">
+            <h3>⚠ Cảnh báo số lượng</h3>
+            <label id="inventory-warning-msg">Số lượng sản phẩm mua đã vượt mức hàng tồn kho.</label>
+
+            <!-- Hiển thị tồn kho còn lại -->
+            <p id="inventory-left" style="margin-top: 10px; font-weight: bold; color: red;">
+                <!-- Nội dung sẽ được thay bằng JavaScript -->
+            </p>
+
+            <input type="hidden" id="productId">
+            <div class="button-container">
+                <button type="button" class="close-modal" onclick="confirmValid()">Oke</button>
+                <button type="button" class="close-modal" onclick="closeModals()">Đóng</button>
+            </div>
+        </div>
+    </div>
+
 </div>
 
 
@@ -473,6 +492,7 @@
 <script src="<c:url value="/users/js/comfirmation.js"/>"></script>
 <script src="<c:url value="/users/js/login-signup.js"/>"></script>
 <script src="<c:url value="/users/js/scripts.js"/>" defer></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <!-- JavaScript -->
 <script>
     document.addEventListener("DOMContentLoaded", function () {

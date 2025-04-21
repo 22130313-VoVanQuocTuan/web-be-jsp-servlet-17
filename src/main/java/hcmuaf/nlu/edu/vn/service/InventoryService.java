@@ -36,4 +36,13 @@ public class InventoryService {
     public void updateQuantityInventory(String productId, int quantity, int minInput, int maxInput) {
         inventoryDao.updateQuantityInventory(productId,quantity,minInput,maxInput);
     }
+
+    //Kiểm tra số lượng hàng tồn kho
+    public boolean isValidInventory(int productId, int quantity) {
+        return inventoryDao.isProductAvailable(productId, quantity);
+    }
+
+    public int quantityInventory(int productId) {
+        return inventoryDao.getAvailableQuantity(productId);
+    }
 }
