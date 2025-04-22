@@ -205,6 +205,19 @@
                 </div>
             </div>
         </div>
+
+        <div id="delete-modal" class="modal">
+            <div class="modal-content"  style="margin-top: 15%;">
+                <h3>Xác nhận xóa</h3>
+                <label>Bạn có chắc chắn muốn xóa sản phẩm này?</label>
+                <input type="hidden" id="cartIdDelete">
+                <div class="button-container">
+                    <button id="confirm-delete" class="confirm-delete" onclick="deleteProduct()">Xóa</button>
+                    <button type="button" class="close-modal" onclick="closeModals()">Hủy</button>
+                </div>
+            </div>
+        </div>
+
         <div id="message" class="alert alert-info" style="display: none">
             <!-- Thông báo lỗi sẽ được chèn vào đây -->
         </div>

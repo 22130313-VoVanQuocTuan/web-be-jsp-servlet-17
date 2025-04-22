@@ -13,7 +13,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4-beta3/css/all.min.css"/>
     <link rel="stylesheet" href="<c:url value="/users/css/home.css"/>">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
 </head>
 <style>
     .slide-discount {
@@ -143,9 +142,7 @@
                             style="display: none;"><span>Đăng Xuất</span></button>
                 </form>
             </div>
-
         </div>
-
     </div>
 </div>
 <div class="fixed">
@@ -233,7 +230,6 @@
         </div>
     </div>
 </div>
-
 <div id="section-slider">
     <div class="slide-show-content-container">
         <p class="title-w" id="animatedText">Xây dựng nền móng vững chắc - Khởi tạo những công trình bền vững cùng
@@ -284,7 +280,6 @@
                     </div>
                 </div>
             </c:forEach>
-
         </div>
     </div>
     <!-- SẢN PHẨM BÁN CHẠY -->

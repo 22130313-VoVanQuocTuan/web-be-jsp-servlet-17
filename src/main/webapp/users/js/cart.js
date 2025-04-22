@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
     loadCartItems();
+    refreshCart();
     
     // Áp dụng mã giảm giá
     const applyBtn = document.getElementById('apply-btn');
@@ -63,7 +64,7 @@ function renderCartItems(data) {
                 <td>${listItems.price.toLocaleString()}₫</td>
                 <td>${listItems.discountAmount.toLocaleString()}₫</td>
                 <td>${listItems.totalPrice.toLocaleString()}₫</td>
-                <td><button onclick="removeItem(${listItems.id})" class="remove-from-cart-button">Xóa</button></td>
+                <td><button onclick="openModek(${listItems.id})" class="remove-from-cart-button">Xóa</button></td>
         `;
         tableCart.append(row);
     });
@@ -112,21 +113,42 @@ function refreshCart() {
             $("#subtotal .value").text(data.totalPrice.toLocaleString());
             $("#vat .value").text(data.totalShippingFee.toLocaleString());
             $("#total .value").text(data.totalFinalPrice.toLocaleString());
-            $("#cart-count .cart-count").text(data.totalItem);
+            $("#cart-count").text(data.totalItem);
         }
     });
 }
 
 //Xoá sanr pham trong gio hang
-function removeItem(id) {
+function openModek(id) {
+    document.getElementById('cartIdDelete').value = id;
+    document.getElementById('delete-modal').style.display = 'block';
+}
+
+function  closeModals(){
+    document.getElementById("delete-modal").style.display = "none";
+}
+
+// Xử lý khi nhấn nút "Xóa"
+function deleteProduct() {
+    let cartId = document.getElementById('cartIdDelete').value;
     $.ajax({
-        url: "cart-remove",
-        type: "Get",
-        data: { id: id },
+        url: 'cart-remove',
+        type: 'GET',
+        data: { id: cartId },
         success: function (response) {
+            if (response.error) {
+                document.getElementById("message").innerHTML = response.message;
+                closeModals();
+                showAlert();
+            }else{
                 loadCartItems();
                 refreshCart();
-        },
+                document.getElementById("message").innerHTML = response.message;
+                closeModals();
+                showAlert();
 
-    });
+            }
+        }
+    })
+
 }

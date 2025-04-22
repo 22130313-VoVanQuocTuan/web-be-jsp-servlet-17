@@ -10,19 +10,17 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
-@WebServlet(name = "TurnPage", value = "/turn-page")
+@WebServlet(name = "TurnPageNoLogin", value = "/turn-page")
 public class TurnPageUrl extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String action = req.getParameter("action");
-
         HttpSession session = req.getSession();
         Users user = (Users) session.getAttribute("user");
         if(user==null){
             resp.sendRedirect(req.getContextPath()+"/logout");
             return;
         }
-
         if("checkpay".equals(action)) {
             req.getRequestDispatcher("/users/page/check-pay.jsp").forward(req, resp);
         }

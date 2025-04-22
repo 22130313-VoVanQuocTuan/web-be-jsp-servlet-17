@@ -169,4 +169,36 @@ public class InventoryDao {
                 throw new RuntimeException(e);
             }
     }
+
+    // Kiểm tra sản phẩm có đủ tồn kho không
+    public boolean isProductAvailable(int productId, int qlt) {
+        String sql = "SELECT quantity FROM inventory WHERE productId = ?";
+        try (PreparedStatement ptm = dbConnect.preparedStatement(sql)) {
+            ptm.setInt(1, productId);
+            ResultSet rs = ptm.executeQuery();
+            if (rs.next()) {
+                int quantityIn = rs.getInt("quantity");
+                return qlt <= quantityIn;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return false;
+    }
+
+    public int getAvailableQuantity(int productId) {
+        String sql = "SELECT quantity FROM inventory WHERE productId = ?";
+        try (PreparedStatement ptm = dbConnect.preparedStatement(sql)) {
+            ptm.setInt(1, productId);
+            ResultSet rs = ptm.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("quantity");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return 0; // Không tìm thấy hoặc lỗi thì coi như hết hàng
+    }
+
+
 }

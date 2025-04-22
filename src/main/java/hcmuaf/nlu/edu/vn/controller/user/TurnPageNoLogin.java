@@ -9,13 +9,12 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
-@WebServlet(name = "TurnPage", value = "/turn-page-noLogin")
+@WebServlet(name = "TurnPageNoLogin", value = "/turn-page-noLogin")
 public class TurnPageNoLogin extends HttpServlet {
 
         @Override
         protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
             String action = req.getParameter("action");
-
             if ("buyingHelp".equals(action)) {
                 req.getRequestDispatcher("/users/page/buying-help.jsp").forward(req, resp);
             }
@@ -31,7 +30,6 @@ public class TurnPageNoLogin extends HttpServlet {
             if("resetPass".equals(action)) {
                 req.getRequestDispatcher("/users/page/reset-password.jsp").forward(req, resp);
             }
-
             if("categories".equals(action)) {
                 req.getRequestDispatcher("/users/page/product.jsp").forward(req, resp);
             }

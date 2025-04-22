@@ -85,8 +85,8 @@ function renderP(data) {
                     <span style='font-size: 0.9em;'>${product.view}</span></span>
                 <span style='margin-left: 20px;'><i class='fas fa-shopping-cart'></i> 
                     <span style='font-size: 0.9em;'>${product.soldCount}</span></span>
-                <a href='add-cart?id=${product.id}' class='add-cart'>
-                    <i class='ri-add-circle-line'></i>Thêm</a>
+                 <button class='add-cart' onclick="addCart(${product.id})">
+                    <i class='ri-add-circle-line'></i>Thêm</button>
             </div>`;
     });
     document.getElementById("product-list").innerHTML = html;
@@ -262,3 +262,71 @@ items.forEach(item => {
         loadPCategoryById(category);
     });
 });
+});
+
+document.addEventListener('click', function (event) {
+    const isClickInside = event.target.closest('.item');
+    if (!isClickInside) {
+        localStorage.removeItem('selectedCategory');
+        items.forEach(el => el.classList.remove('active'));
+        loadP();
+    }
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+    const searchInput = document.getElementById("search-input");
+    const productList = document.getElementById("product-list");
+
+    // Lấy context path của ứng dụng
+    const contextPath = window.location.pathname.split("/")[1];
+    const baseUrl = window.location.origin + "/" + contextPath + "/product";
+
+    searchInput.addEventListener("keyup", function () {
+        let keyword = searchInput.value.trim();
+        let url = `${baseUrl}?ajax=true`;
+
+        if (keyword.length > 1) {
+            url += `&name=${encodeURIComponent(keyword)}`;
+        }
+
+        console.log("Gửi request AJAX:", url); // Debug đường dẫn request
+
+        fetch(url)
+            .then(response => response.text()) // Nhận HTML thay vì JSON
+            .then(data => {
+                console.log("HTML nhận được:", data); // Debug dữ liệu nhận về
+                productList.innerHTML = data;
+            })
+            .catch(error => console.error("Lỗi khi tìm kiếm:", error));
+    });
+});
+
+function addCart(id) {
+    $.ajax({
+        url: "add-cart",
+        type: "GET",
+        data: {
+            id: id,
+        },
+        success: function (res) {
+            if (res.status === "success") {
+                $.ajax({
+                    url: "cart-items",
+                    type: "GET",
+                    dataType: 'json',
+                    success: function (data) {
+                        $("#subtotal .value").text(data.totalPrice.toLocaleString());
+                        $("#vat .value").text(data.totalShippingFee.toLocaleString());
+                        $("#total .value").text(data.totalFinalPrice.toLocaleString());
+                        $("#cart-count").text(data.totalItem);
+                        window.location.href = "turn-page?action=cart";
+                    }
+                });
+
+
+            } else {
+                alert("Lỗi không thêm đươc sản phẩm.");
+            }
+        }
+    });
+}

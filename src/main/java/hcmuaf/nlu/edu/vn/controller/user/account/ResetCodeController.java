@@ -9,17 +9,18 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 
 @WebServlet(name = "reset-code", value = "/reset-code")
 public class ResetCodeController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        PrintWriter out = response.getWriter();
         UserService userService = new UserService();
-        HttpSession session = request.getSession();
-        // Kiểm tra email trong session
-        String email = (String) session.getAttribute("email");
+         String email = request.getParameter("email");
         if (email != null) {
             try {
                 //Gọi phương thức gửi lại mã code
@@ -27,14 +28,13 @@ public class ResetCodeController extends HttpServlet {
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
-            // Đăng ký thành công, yêu cầu xác thực
-            request.setAttribute("verificationRequested", true);
-            request.setAttribute("error_code", "Mã xác thực mới đã được gửi đến email của bạn.");
+            out.println("{\"message\":\"Mã xác thực đã được gửi tơí bạn\"}");
+            out.flush();
         } else {
-            request.setAttribute("error_code", "Không tìm thấy email để gửi mã xác thực.");
+            out.println("{\"error\": true, \"message\":\"Có lỗi xảy ra vui lòng thử lại\"}");
+            out.flush();
         }
-        // Trả về trang đăng ký
-        request.getRequestDispatcher("users/page/login-signup.jsp").forward(request, response);
+
     }
     }
 

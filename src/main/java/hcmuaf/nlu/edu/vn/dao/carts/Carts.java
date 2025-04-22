@@ -81,6 +81,7 @@ public class Carts {
     //Map product qua cart
     private CartItems convert(Product product) {
         CartItems item = new CartItems();
+        item.setProductId(product.getId());
         item.setId(product.getId());
         item.setImageUrl(product.getImageUrl());
         item.setQuantity(1);
