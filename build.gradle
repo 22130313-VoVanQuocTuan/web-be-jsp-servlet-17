@@ -1,5 +1,3 @@
-import org.w3c.dom.css.CSSStyleSheet
-
 plugins {
     id 'war' // Để xây dựng file WAR cho ứng dụng web
     id 'java' // Hỗ trợ Java
@@ -8,10 +6,6 @@ plugins {
     id "org.hidetake.ssh" version "2.11.2"
 
 }
-apply plugin: 'org.hidetake.ssh'
-
-group 'hcmuaf.nlu.edu.vn'
-version '1.0-SNAPSHOT'
 
 sourceSets {
     main {
@@ -23,6 +17,11 @@ sourceSets {
         }
     }
 }
+apply plugin: 'org.hidetake.ssh'
+
+group 'hcmuaf.nlu.edu.vn'
+version '1.0-SNAPSHOT'
+
 
 repositories {
     mavenCentral() // Kho lưu trữ chính
@@ -64,9 +63,16 @@ dependencies {
     implementation 'org.json:json:20240303'
 }
 
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8' // Tương ứng project.build.sourceEncoding
+}
+tasks.processResources {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
 remotes {
     host {
-        host = '192.168.31.106'
+        host = '192.168.100.198'
         user = 'admin'
         password = 'admin'
     }
@@ -78,53 +84,50 @@ ssh.settings {
 }
 task docker_app_start {
     doLast {
-        println 'begin docker_app_start';
+        println 'begin docker_app_start'
 
         ssh.run {
             session(remotes.host) {
-                execute 'docker stop tomcat-container, ignoreError: true'
-                execute 'docker run -it --rm -d ' +
-                       '--name tomcat-container '+
-                       '-v /usr/deploy:/usr/local/tomcat/webapps '+
-                        '-p 80:8080 ' +
-                       'tomcat:10.1.39-jre21-temurin-noble '
+                // Dừng container nếu đang chạy
+                execute 'docker stop tomcat10', ignoreError: true
+                // Chạy lại container trong chế độ detached
+                execute 'docker run -d --rm --name tomcat10 ' +
+                        '-v /usr/deploy/:/usr/local/tomcat/webapps ' +
+                        '-p 80:8080 tomcat:10.1.40-jdk17&'
             }
         }
     }
 }
 task docker_upload_file_to_server {
     doLast {
-        println 'begin docker_upload_file_to_server& '
+        println 'begin docker_upload_file_to_server'
         ssh.run {
             session(remotes.host) {
-                remove '/usr/deploy/tqh.war'
-                remove '/usr/deploy/tqh/'
-                put from: "${project.projectDir}/build/libs/tqh.war",
-                into: "/usr/deploy/tqh.war"
+                // Xoá file cũ nếu tồn tại (có thể bị lỗi nếu file không tồn tại, nên có ignoreError)
+                remove 'rm -f /usr/deploy/tqh.war'
+                remove 'rm -rf /usr/deploy/tqh'
+
+                // Upload file WAR từ local
+                put from: file("${project.projectDir}/build/libs/tqh.war"),
+                        into: "/usr/deploy/tqh.war"
+
             }
         }
     }
 }
 task docker_deploy {
-    docker_deploy.dependsOn docker_app_start
-    docker_deploy.dependsOn docker_upload_file_to_server
-    docker_deploy.dependsOn build
-    tasks.getByName('docker_app_start').mustRunAfter
-    docker_upload_file_to_server
+    dependsOn build
+    dependsOn docker_upload_file_to_server
+    dependsOn docker_app_start
+
+    mustRunAfter build, docker_upload_file_to_server
 }
 
 java {
     sourceCompatibility = JavaVersion.VERSION_17 // Tương ứng maven.compiler.source
     targetCompatibility = JavaVersion.VERSION_17 // Tương ứng maven.compiler.target
-}
-
-tasks.withType(JavaCompile) {
-    options.encoding = 'UTF-8' // Tương ứng project.build.sourceEncoding
-}
-tasks.processResources {
-    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-}
+    }
 
 war {
-    archiveFileName = 'tqh.war' // Tên file WAR khi build
+        archiveFileName = 'tqh.war' // Tên file WAR khi build
 }
