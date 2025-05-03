@@ -121,9 +121,9 @@
                 </p>
             </div>
             <div class="top-right">
-                       <span id="user-greeting" style="display: none; color: #ffffff;">
-                           Xin chào,  <span
-                               id="username">${sessionScope.user.username != null ? sessionScope.user.username : ''}</span>!</span>
+                      <span id="user-greeting" style="display: none; color: #ffffff;">
+    Xin chào, <span id="username" data-username="${sessionScope.user.username}">${sessionScope.user.username}</span>!
+</span>
 
                 <a href="turn-page?action=infoUser" style="text-decoration: none">
                     <button type="submit" class="account-link" id="signup-link"
@@ -1540,7 +1540,6 @@
 <script src="users/js/slider_Image-home.js"></script>
 <script src="users/js/slider-products.js"></script>
 <script src="users/js/home.js"></script>
-<script src="<c:url value="/users/js/login-signup.js"/>"></script>
 <script src="users/js/scripts.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>

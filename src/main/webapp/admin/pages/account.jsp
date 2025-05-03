@@ -10,6 +10,7 @@
     <title>Bảng điều khiển Quản trị viên </title>
     <!------------------ Kiểu dáng ------------------>
     <link rel="stylesheet" href="<c:url value="/admin/css/style.css"/>">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="<c:url value="/admin/css/account.css"/>">
 </head>
@@ -112,7 +113,7 @@
             </li>
 
             <li class="hov active">
-                <a href="informationCustomer">
+                <a href="turn-page?action=infoUserAdmin">
                         <span class="icon">
                             <ion-icon name="person"></ion-icon>
                         </span>
@@ -167,16 +168,15 @@
             <!-- Thông tin khách hàng -->
             <div class="customer-info">
                 <h2>Thông tin tài khoản</h2>
-                <p><strong>Tên:</strong>${info.fullName}</p>
-                <p><strong>Email:</strong> ${info.email}</p>
-                <p><strong>Số điện thoại:</strong>${info.phoneNumber}</p>
-                <p><strong>Địa chỉ:</strong> ${info.address}</p>
-                <p><strong>Vai trò:</strong> ${info.role}</p>
-                <p><strong>Trạng thái:</strong> ${info.status}</p>
+                <p><strong>Tên:</strong></p>
+                <p><strong>Email:</strong></p>
+                <p><strong>Số điện thoại:</strong></p>
+                <p><strong>Địa chỉ:</strong></p>
+                <p><strong>Vai trò:</strong></p>
+                <p><strong>Trạng thái:</strong></p>
                 <button class="edit-btn" onclick="openModal1()">Chỉnh sửa thông tin</button>
             </div>
         </div>
-
 
 
         <!-- Modal cho chỉnh sửa thông tin  -->
@@ -187,7 +187,7 @@
 
                 <div class="editInformationContent">
                     <!-- Form chỉnh sửa thông tin -->
-                    <form id="editInfoForm" action="update-info" method="post">
+                    <form id="editInfoForm">
                         <div class="mb-3">
                             <label for="name" class="form-label">Tên</label>
                             <input type="text" name="fullName" class="form-control" id="name" placeholder="Nhập tên của bạn"
@@ -203,10 +203,7 @@
                             <textarea class="form-control" name="address" id="address" rows="3" placeholder="Nhập địa chỉ"
                                       required></textarea>
                         </div>
-                        <!-- Thông báo lỗi -->
-                        <c:if test="${not empty error}">
-                            <p style="color: red;">${error}</p> <!-- Hiển thị lỗi nếu có -->
-                        </c:if>
+
                         <div class="modal-footer">
                             <button type="submit" class="btn btn-primary" id="saveChanges">Lưu thay đổi</button>
                             <button type="button" class="btn btn-secondary" onclick="closeModal1()">Hủy</button>
@@ -218,12 +215,9 @@
             </div>
         </div>
         <%-- Kiểm tra xem có thông báo nào không --%>
-        <c:if test="${not empty sessionScope.errorMessage}">
-            <div class="alert alert-info">
-                    ${sessionScope.errorMessage}
-            </div>
-            <% session.removeAttribute("errorMessage"); %> <!-- Xóa thông báo ngay sau khi hiển thị -->
-        </c:if>
+        <div id="message" class="alert alert-info" style="display: none">
+            <!-- Thông báo lỗi sẽ được chèn vào đây -->
+        </div>
     </div>
     <!-- Modal Xác Nhận Đăng Xuất -->
     <div id="logout-modal" class="modal">
@@ -240,7 +234,7 @@
 
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 <script src="<c:url value="/admin/js/configuration.js"/>"></script>
-<script src="<c:url value="/users/js/informationCustomer.js"/>"></script>
+<script src="<c:url value="/admin/js/account.js"/>"></script>
 </body>
 
 </html>

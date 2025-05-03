@@ -127,7 +127,7 @@
             </li>
 
             <li>
-                <a href="informationCustomer">
+                <a href="turn-page?action=infoUserAdmin">
                         <span class="icon">
                             <ion-icon name="person"></ion-icon>
                         </span>

@@ -263,6 +263,7 @@ items.forEach(item => {
     });
 });
 
+
 document.addEventListener('click', function (event) {
     const isClickInside = event.target.closest('.item');
     if (!isClickInside) {

@@ -20,7 +20,7 @@ public class AddOrderDao {
 
     //Thêm hóa đơn
     public Orders addOrder(Orders order) throws SQLException {
-        String query = "INSERT INTO Orders (userId, totalPrice, shippingFee, discountAmount, shippingAddress, paymentMethod, paymentStatus, status, createdAt) "
+        String query = "INSERT INTO orders (userId, totalPrice, shippingFee, discountAmount, shippingAddress, paymentMethod, paymentStatus, status, createdAt) "
                 + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, NOW())";
 
         try (PreparedStatement ps = dbConnect.preparedStatement(query)) {
