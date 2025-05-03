@@ -156,7 +156,7 @@
 
                 </table>
                 <div class="cart-buttons">
-                    <a href="product"><button class="continue-btn">← Tiếp tục xem sản
+                    <a href="turn-page-noLogin?action=product"><button class="continue-btn">← Tiếp tục xem sản
                             phẩm</button></a>
                 </div>
             </div>

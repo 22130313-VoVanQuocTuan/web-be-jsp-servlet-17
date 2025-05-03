@@ -133,8 +133,8 @@ function displayProducts(page) {
                     <span style='font-size: 0.9em;'>${product.view}</span></span>
                 <span style='margin-left: 20px;'><i class='fas fa-shopping-cart'></i> 
                     <span style='font-size: 0.9em;'>${product.soldCount}</span></span>
-                <a href='add-cart?id=${product.id}' class='add-cart'>
-                    <i class='ri-add-circle-line'></i>Thêm</a>
+                <button type="button" onclick="addCart(${product.id})" class="add-cart" data-id="${product.id}">    
+                    <i class='ri-add-circle-line'></i>Thêm</button>
             </div>`;
     }
 
@@ -261,7 +261,6 @@ items.forEach(item => {
         localStorage.setItem('selectedCategory', category);
         loadPCategoryById(category);
     });
-});
 });
 
 document.addEventListener('click', function (event) {
