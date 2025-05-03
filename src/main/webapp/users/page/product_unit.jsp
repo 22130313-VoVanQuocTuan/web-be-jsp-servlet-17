@@ -101,7 +101,7 @@
                             <ul class="items">
                                 <c:forEach var="category" items="${categories_all}">
                                     <li>
-                                        <a href="/tqh/product-category?categoryId=${category.id}">
+                                        <a href="/tqh/turn-page-noLogin?action=product&categoryId=${category.id}">
                                             &nbsp;&nbsp;<i class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;${category.name}
                                         </a>
                                     </li>

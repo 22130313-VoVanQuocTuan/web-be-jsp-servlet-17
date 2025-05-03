@@ -33,9 +33,23 @@ public class TurnPageNoLogin extends HttpServlet {
             if("categories".equals(action)) {
                 req.getRequestDispatcher("/users/page/product.jsp").forward(req, resp);
             }
-            if("product".equals(action)) {
+            if ("product".equals(action)) {
+                HttpSession session = req.getSession();
+                String categoryId = req.getParameter("categoryId");
+                // Lưu categoryId vào session nếu có
+                if (categoryId != null && !categoryId.trim().isEmpty()) {
+                    try {
+                        Integer.parseInt(categoryId);
+                        session.setAttribute("filterCategoryId", categoryId);
+                    } catch (NumberFormatException e) {
+                        session.removeAttribute("filterCategoryId"); // Xóa nếu không hợp lệ
+                    }
+                } else {
+                    session.removeAttribute("filterCategoryId"); // Xóa nếu không có categoryId
+                }
                 req.getRequestDispatcher("/users/page/product.jsp").forward(req, resp);
             }
+
         }
     }
 
