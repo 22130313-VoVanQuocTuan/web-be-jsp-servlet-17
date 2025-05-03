@@ -15,11 +15,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const homeAltBtn = document.getElementById('HOME');
 
     const loginForm = document.getElementById('login-form');
-    const userGreeting = document.getElementById('user-greeting');
-    const usernameDisplay = document.getElementById('username');
-    const loginLink = document.getElementById('login-link');
-    const signupLink = document.getElementById('signup-link');
-    const logoutLink = document.getElementById('logout-link');
+
     const  registerBtn = document.getElementById('register');
 
 
@@ -82,23 +78,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // Hiển thị thông tin người dùng nếu đã đăng nhập
-    const username = usernameDisplay.textContent.trim();
-    // Kiểm tra xem username có tồn tại không
-    if (username) {
-        // Hiển thị thông báo "Xin chào, username!"
-        userGreeting.style.display = "inline";
-        // Hiển thị các liên kết Logout và Account
-        logoutLink.style.display = "inline";
-        signupLink.style.display = "inline";
-        loginLink.style.display = "none";
-    } else {
-        // Nếu không có username, ẩn các liên kết Logout và Account
-        document.getElementById("user-greeting").style.display = "none";
-        document.getElementById("logout-link").style.display = "none";
-        document.getElementById("signup-link").style.display = "none";
-        document.getElementById("login-link").style.display = "inline";
-    }
+
 })
 
     function invalidation() {

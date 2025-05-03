@@ -20,7 +20,7 @@ public class LogUtilDao {
 
 
     public static void log(LogLevel level, String username, String address, String dataBefore, String dataAfter) throws SQLException {
-        String sql = "INSERT INTO LogHistory (level, username, startLog, address, dataBefore, dataAfter) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO loghistory (level, username, startLog, address, dataBefore, dataAfter) VALUES (?, ?, ?, ?, ?, ?)";
 
         try (PreparedStatement pstmt = dbConnect.preparedStatement(sql)) {
 
@@ -37,7 +37,7 @@ public class LogUtilDao {
 
 
     public void deleteLog(int id) {
-        String sql = "DELETE FROM LogHistory WHERE id = ?";
+        String sql = "DELETE FROM loghistory WHERE id = ?";
 
         try (PreparedStatement pstmt = dbConnect.preparedStatement(sql)) {
 

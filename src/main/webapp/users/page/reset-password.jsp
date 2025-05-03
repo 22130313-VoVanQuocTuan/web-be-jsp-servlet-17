@@ -21,10 +21,9 @@
             </p>
         </div>
         <div class="top-right">
-              <span id="user-greeting" style="display: none; color: #ffffff;">
-                           Xin chào,  <span
-                      id="username">${sessionScope.user.username != null ? sessionScope.user.username : ''}</span>!</span>
-
+        <span id="user-greeting" style="display: none; color: #ffffff;">
+    Xin chào, <span id="username" data-username="${sessionScope.user.username}">${sessionScope.user.username}</span>!
+</span>
             <a href="turn-page?action=infoUser" style="text-decoration: none">
                 <button type="submit" class="account-link" id="signup-link"
                         style="display: none;">
@@ -149,23 +148,7 @@
 
 
 
-    <div id="section-footer">
-        <div class="container">
-            <div class="contact-info">
-                <h3>Vật Liệu Xây Dựng TQH </h3>
-                <p>Địa chỉ: Trường ĐH Nông Lâm TP. HCM</p>
-                <p>Điện thoại: 0314 597 812</p>
-                <p>Hotline: 0905 090 252</p>
-                <p>Email: 22130098@st.hcmuaf.edu.vn</p>
-            </div>
-            <div class="links">
-                <h3>Liên kết</h3>
-                <ul>
-                    <li><a href="turn-page-noLogin?action=introduce">Giới thiệu</a></li>
-                    <li><a href="turn-page-noLogin?action=termAndService">Điều khoản và dịch vụ</a></li>
-                </ul>
-            </div>
-        </c:if>
+
         <!-- Form đặt lại mật khẩu mới -->
         <c:if test="${not empty verificationRequested}">
             <div class="form-container set-new-password">
@@ -186,7 +169,7 @@
             </div>
         </c:if>
     </div>
-</div>
+
 
 <div id="section-footer">
     <div class="container">
@@ -235,7 +218,6 @@
     <button id="backToTop" title="Quay về đầu trang">⬆</button>
 
 </div>
-<script src="${pageContext.request.contextPath}/users/js/login-signup.js"></script>
 <script src="${pageContext.request.contextPath}/users/js/scripts.js" defer></script>
 <script src="${pageContext.request.contextPath}/users/js/reset-password.js"></script>
 </body>
