@@ -1,6 +1,10 @@
 document.addEventListener("DOMContentLoaded", function () {
     const backToTopButton = document.getElementById("backToTop");
-
+    const userGreeting = document.getElementById('user-greeting');
+    const usernameDisplay = document.getElementById('username');
+    const loginLink = document.getElementById('login-link');
+    const signupLink = document.getElementById('signup-link');
+    const logoutLink = document.getElementById('logout-link');
         // Lấy các phần tử
     const menuToggle = document.querySelector('.menu-toggle');
     const navMenu = document.querySelector('.nav');
@@ -22,7 +26,27 @@ document.addEventListener("DOMContentLoaded", function () {
     // Xử lý sự kiện click vào nút menu
     menuToggle.addEventListener('click', () => {
     navMenu.classList.toggle('active'); // Thêm hoặc xóa lớp "active"
-  });
+    });
+
+
+    // Hiển thị thông tin người dùng nếu đã đăng nhập
+    const username = usernameDisplay?.dataset.username?.trim() || "";
+    console.log(">> Username:", username);
+    // Kiểm tra xem username có tồn tại không
+    if (username) {
+        // Hiển thị thông báo "Xin chào, username!"
+        userGreeting.style.display = "inline";
+        // Hiển thị các liên kết Logout và Account
+        logoutLink.style.display = "inline";
+        signupLink.style.display = "inline";
+        loginLink.style.display = "none";
+    } else {
+        // Nếu không có username, ẩn các liên kết Logout và Account
+        document.getElementById("user-greeting").style.display = "none";
+        document.getElementById("logout-link").style.display = "none";
+        document.getElementById("signup-link").style.display = "none";
+        document.getElementById("login-link").style.display = "inline";
+    }
 });
 
 function showAlert() {

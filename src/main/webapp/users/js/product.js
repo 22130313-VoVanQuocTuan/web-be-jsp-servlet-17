@@ -262,7 +262,7 @@ items.forEach(item => {
         loadPCategoryById(category);
     });
 });
-});
+
 
 document.addEventListener('click', function (event) {
     const isClickInside = event.target.closest('.item');
