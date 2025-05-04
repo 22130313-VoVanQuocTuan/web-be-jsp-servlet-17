@@ -73,11 +73,10 @@ public class ProductDao {
 
     //Hàm thêm sản phẩm
     public boolean addProduct(Product product) {
-        // Giá đã giảm
         String sql = "INSERT INTO products (name, price, imageUrl, description, categoryId, " +
-                "supplier, color, size, unit, view, soldCount, discountPercent, discountPrice, createDate, updateDate) " +
-                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)";
-        try (PreparedStatement stmt = dbConnect.preparedStatement(sql);) {
+                "supplier, color, size, unit, view, soldCount, discountPercent, discountPrice, createDate, updateDate, isDeleted) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 0)";
+        try (PreparedStatement stmt = dbConnect.preparedStatement(sql)) {
             stmt.setString(1, product.getName());
             stmt.setDouble(2, product.getPrice());
             stmt.setString(3, product.getImageUrl());
@@ -93,14 +92,15 @@ public class ProductDao {
             stmt.setDouble(13, product.getDiscountPrice());
             stmt.setTimestamp(14, product.getCreateDate());
             stmt.setTimestamp(15, product.getUpdateDate());
-            // chèn data vào table
+
             int rowsAdded = stmt.executeUpdate();
-            return rowsAdded > 0;// add thành công trả về true k vè false.
+            return rowsAdded > 0;
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
         }
     }
+
 
     // Phương thức cập nhật sản phẩm trong cơ sở dữ liệu
     // Cập nhật thông tin sản phẩm
