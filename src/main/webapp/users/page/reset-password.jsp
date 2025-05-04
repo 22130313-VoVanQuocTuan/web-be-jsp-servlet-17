@@ -88,9 +88,9 @@
                         <i class="fa-solid fa-list" style="color: #d0cdcd;"></i> &nbsp;&nbsp; DANH MỤC SẢN PHẨM
                     </span>
                     <ul class="items">
-                        <c:forEach var="category" items="${categories}">
+                        <c:forEach var="category" items="${categories_all}">
                             <li>
-                                <a href="/tqh/product-category?categoryId=${category.id}">
+                                <a href="/tqh/turn-page-noLogin?action=product&categoryId=${category.id}">
                                     &nbsp;&nbsp;<i class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;${category.name}
                                 </a>
                             </li>
@@ -110,15 +110,15 @@
                 <li class="propClone">
                     <span class="none-a"> <i class="fa-solid fa-book"></i> &nbsp;&nbsp; HƯỚNG DẪN </span>
                     <ul class="items">
-                        <li><a href="turn-page?action=buyingHelp">&nbsp;&nbsp;<i
+                        <li><a href="turn-page-noLogin?action=buyingHelp">&nbsp;&nbsp;<i
                                 class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;HƯỚNG DẪN
                             MUA HÀNG</a>
                         </li>
-                        <li><a href="turn-page?action=productUnit">&nbsp;&nbsp;<i
+                        <li><a href="turn-page-noLogin?action=productUnit">&nbsp;&nbsp;<i
                                 class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;BẢNG ĐƠN VỊ SẢN PHẨM</a>
                         </li>
 
-                        <li><a href="turn-page?action=termAndService">&nbsp;&nbsp;<i
+                        <li><a href="turn-page-noLogin?action=termAndService">&nbsp;&nbsp;<i
                                 class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;ĐIỀU KHOẢN
                             VÀ DỊCH VỤ</a>
                         </li>
