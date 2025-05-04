@@ -10,7 +10,7 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
-@WebServlet(name = "TurnPageNoLogin", value = "/turn-page")
+@WebServlet(name = "TurnPageLogin", value = "/turn-page")
 public class TurnPageUrl extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
