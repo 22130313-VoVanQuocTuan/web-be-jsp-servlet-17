@@ -9,23 +9,30 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Lấy các phần tử DOM
     const container = document.getElementById('container');
-
     const loginBtn = document.getElementById('login');
     const homeBtn = document.getElementById('home');
     const homeAltBtn = document.getElementById('HOME');
-
     const loginForm = document.getElementById('login-form');
+    const registerBtn = document.getElementById('register');
 
-    const  registerBtn = document.getElementById('register');
-
+    // Kiểm tra và log để debug
+    console.log('container:', container);
+    console.log('loginBtn:', loginBtn);
+    console.log('registerBtn:', registerBtn);
 
     // Chuyển đổi giao diện giữa đăng ký và đăng nhập
     if (registerBtn && container) {
-        registerBtn.addEventListener('click', () => container.classList.add("active"));
+        registerBtn.addEventListener('click', () => {
+            console.log('Register button clicked');
+            container.classList.add("active");
+        });
     }
 
     if (loginBtn && container) {
-        loginBtn.addEventListener('click', () => container.classList.remove("active"));
+        loginBtn.addEventListener('click', () => {
+            console.log('Login button clicked');
+            container.classList.remove("active");
+        });
     }
 
     // Điều hướng về trang Home
@@ -36,7 +43,6 @@ document.addEventListener('DOMContentLoaded', function () {
     if (homeAltBtn) {
         homeAltBtn.addEventListener('click', () => window.location.href = '../../home.jsp');
     }
-
 
     // Xử lý đăng nhập
     const usernameErrorLog = document.getElementById('username-errorlog');

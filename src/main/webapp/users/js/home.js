@@ -68,6 +68,36 @@ addToCartButtons.forEach(function(button) {
 
 });
 
+function addCart(id) {
+    $.ajax({
+        url: "add-cart",
+        type: "GET",
+        data: {
+            id: id,
+        },
+        success: function (res) {
+            if (res.status === "success") {
+                $.ajax({
+                    url: "cart-items",
+                    type: "GET",
+                    dataType: 'json',
+                    success: function (data) {
+                        $("#subtotal .value").text(data.totalPrice.toLocaleString());
+                        $("#vat .value").text(data.totalShippingFee.toLocaleString());
+                        $("#total .value").text(data.totalFinalPrice.toLocaleString());
+                        $("#cart-count").text(data.totalItem);
+                        window.location.href = "turn-page?action=cart";
+                    }
+                });
+
+
+            } else {
+                alert("Lỗi không thêm đươc sản phẩm.");
+            }
+        }
+    });
+}
+
 
 
 
