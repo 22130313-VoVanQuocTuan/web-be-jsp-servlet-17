@@ -72,9 +72,9 @@ tasks.processResources {
 }
 remotes {
     host {
-        host = '192.168.100.198'
-        user = 'admin'
-        password = 'admin'
+        host = '192.168.136.128'
+        user = 'root'
+        password = 'centos'
     }
 }
 
@@ -89,11 +89,12 @@ task docker_app_start {
         ssh.run {
             session(remotes.host) {
                 // Dừng container nếu đang chạy
-                execute 'docker stop tomcat10', ignoreError: true
+                execute 'docker rm -f tomcat10', ignoreError: true
                 // Chạy lại container trong chế độ detached
                 execute 'docker run -d --rm --name tomcat10 ' +
+                        '--log-driver=json-file --log-opt max-size=10m --log-opt max-file=3 ' +
                         '-v /usr/deploy/:/usr/local/tomcat/webapps ' +
-                        '-p 80:8080 tomcat:10.1.40-jdk17&'
+                        '-p 80:8080 tomcat:10 &'
             }
         }
     }

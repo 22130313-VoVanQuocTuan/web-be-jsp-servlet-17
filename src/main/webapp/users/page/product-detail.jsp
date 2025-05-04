@@ -25,10 +25,9 @@
                 </p>
             </div>
             <div class="top-right">
-                <span id="user-greeting" style="display: none; color: #ffffff;">
-                           Xin chào,  <span
-                        id="username">${sessionScope.user.username != null ? sessionScope.user.username : ''}</span>!</span>
-
+          <span id="user-greeting" style="display: none; color: #ffffff;">
+    Xin chào, <span id="username" data-username="${sessionScope.user.username}">${sessionScope.user.username}</span>!
+</span>
                 <a href="turn-page?action=infoUser" style="text-decoration: none">
                     <button type="submit" class="account-link" id="signup-link"
                             style="display: none;">
@@ -80,7 +79,7 @@
                         <a href="turn-page?action=cart">
                             <i class="fas fa-shopping-cart"></i>
                         </a>
-                        <span class="cart-count" id="cart-count">0</span>
+                        <span class="cart-count" id="cart-count">${empty sessionScope.cartItemCount ? 0 : sessionScope.cartItemCount}</span>
                     </div>
                 </div>
             </div>
@@ -97,7 +96,7 @@
                     <ul class="items">
                         <c:forEach var="category" items="${categories_all}">
                             <li>
-                                <a href="/tqh/product-category?categoryId=${category.id}">
+                                <a href="/tqh/turn-page-noLogin?action=product&categoryId=${category.id}">
                                     &nbsp;&nbsp;<i class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;${category.name}
                                 </a>
                             </li>
@@ -263,7 +262,6 @@
 
 </div>
 
-<script src="<c:url value="/users/js/login-signup.js"/>"></script>
 <script src="<c:url value="/users/js/scripts.js"/>" defer></script>
 </body>
 </html>

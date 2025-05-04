@@ -47,10 +47,9 @@
                 </p>
             </div>
             <div class="top-right">
-                       <span id="user-greeting" style="display: none; color: #ffffff;">
-                           Xin chào,  <span
-                               id="username">${sessionScope.user.username != null ? sessionScope.user.username : ''}</span>!</span>
-
+           <span id="user-greeting" style="display: none; color: #ffffff;">
+    Xin chào, <span id="username" data-username="${sessionScope.user.username}">${sessionScope.user.username}</span>!
+</span>
                 <a href="turn-page?action=infoUser" style="text-decoration: none">
                     <button type="submit" class="account-link" id="signup-link"
                             style="display: none;">
@@ -99,10 +98,10 @@
                 </div>
                 <div class="cart">
                     <div class="cart-wrapper">
-                        <a href="cart-items">
+                        <a href="turn-page?action=cart">
                             <i class="fas fa-shopping-cart"></i>
                         </a>
-                        <span class="cart-count" id="cart-count">${sessionScope.cartItemCount}</span>
+                        <span class="cart-count" id="cart-count">${empty sessionScope.cartItemCount ? 0 : sessionScope.cartItemCount}</span>
                     </div>
                 </div>
             </div>
@@ -119,7 +118,7 @@
                     <ul class="items">
                         <c:forEach var="category" items="${categories_all}">
                             <li>
-                                <a href="/tqh/product-category?categoryId=${category.id}">
+                                <a href="/tqh/turn-page-noLogin?action=product&categoryId=${category.id}">
                                     &nbsp;&nbsp;<i class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;${category.name}
                                 </a>
                             </li>
@@ -203,6 +202,11 @@
             <span id="page-info"></span>
             <button id="next"> >></button>
         </div>
+
+    </div>
+    <%-- Kiểm tra xem có thông báo nào không --%>
+    <div id="message" class="alert alert-info" style="display: none">
+        <!-- Thông báo lỗi sẽ được chèn vào đây -->
     </div>
 </div>
 <div id="section-footer">
@@ -252,10 +256,14 @@
     <button id="backToTop" title="Quay về đầu trang">⬆</button>
 </div>
 
-<script src="${pageContext.request.contextPath}/users/js/login-signup.js"></script>
 <script src="${pageContext.request.contextPath}/users/js/product.js"></script>
 <script src="${pageContext.request.contextPath}/users/js/scripts.js"></script>
 <script src="${pageContext.request.contextPath}/users/js/home.js"></script>
-
+<script>
+    // Truyền filterCategoryId từ session sang JS (sửa cú pháp)
+    const filterCategoryId = <%= session.getAttribute("filterCategoryId") != null ? (String) session.getAttribute("filterCategoryId") : "null" %>;
+    // Khởi tạo trang sản phẩm với filterCategoryId
+    initProductPage(filterCategoryId);
+</script>
 </body>
 </html>

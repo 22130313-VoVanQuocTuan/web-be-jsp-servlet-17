@@ -152,7 +152,7 @@
             </li>
 
             <li>
-                <a href="informationCustomer">
+                <a href="turn-page?action=infoUserAdmin">
                         <span class="icon">
                             <ion-icon name="person"></ion-icon>
                         </span>
@@ -192,7 +192,7 @@
                 <ion-icon name="menu-outline"></ion-icon>
             </div>
             <div class="user">
-                <a href="informationCustomer">
+                <a href="turn-page?action=infoUserAdmin">
                     <ion-icon name="person"
                               style="color: #000000; font-size: 25px;"></ion-icon>
                 </a>
@@ -376,6 +376,9 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div id="message" class="alert alert-info" style="display: none">
+        <!-- Thông báo lỗi sẽ được chèn vào đây -->
     </div>
     <!-- Modal Xác Nhận Đăng Xuất -->
     <div id="logout-modal" class="modal">

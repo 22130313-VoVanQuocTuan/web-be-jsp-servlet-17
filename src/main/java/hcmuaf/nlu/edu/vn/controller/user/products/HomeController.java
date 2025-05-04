@@ -61,22 +61,30 @@ public class HomeController extends HttpServlet {
             return;
         }
         try {
-            List<Product> products = productService.getListProductDiscount();
             List<Product> productsCategory = productService.getAllProducts();
+            long currentTime = System.currentTimeMillis();
+            long lastUpdated = FlashSaleCache.getLastUpdated();
+            long elapsedTime = currentTime - lastUpdated;
+            boolean isHit = elapsedTime <= 3 * 60 * 1000;
+            List<Product> flashSaleProducts = FlashSaleCache.getCachedFlashSaleProducts();
             List<Product> productPopular = productService.getPopularProducts();
-            List<Promotionals> list = productService.getListPromotional();
+            List<Promotionals> promotionalList = productService.getListPromotional();
             try {
                 List<Category> categories = productService.getAllCategories();
                 req.setAttribute("categories", categories);
             } catch (Exception e) {
                 System.out.println(e.toString());
             }
-            session.setAttribute("promotionals", list);
+            session.setAttribute("promotionals", promotionalList);
 
             // Gửi dữ liệu sản phẩm và categoryId đến JSP để hiển thị
             req.setAttribute("productsCategory", productsCategory);
             req.setAttribute("productPopular", productPopular);
-            req.setAttribute("products", products);
+            req.setAttribute("products", flashSaleProducts);
+            req.setAttribute("cacheStatus", isHit ? "HIT" : "MISS");
+            req.setAttribute("lastUpdated", lastUpdated);
+            req.setAttribute("currentTime", currentTime);
+            req.setAttribute("elapsedMinutes", elapsedTime / (60 * 1000));
             req.getRequestDispatcher("home.jsp").forward(req, resp);
 
         } catch (Exception e) {

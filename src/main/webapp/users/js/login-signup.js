@@ -9,27 +9,30 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Lấy các phần tử DOM
     const container = document.getElementById('container');
-
     const loginBtn = document.getElementById('login');
     const homeBtn = document.getElementById('home');
     const homeAltBtn = document.getElementById('HOME');
-
     const loginForm = document.getElementById('login-form');
-    const userGreeting = document.getElementById('user-greeting');
-    const usernameDisplay = document.getElementById('username');
-    const loginLink = document.getElementById('login-link');
-    const signupLink = document.getElementById('signup-link');
-    const logoutLink = document.getElementById('logout-link');
-    const  registerBtn = document.getElementById('register');
+    const registerBtn = document.getElementById('register');
 
+    // Kiểm tra và log để debug
+    console.log('container:', container);
+    console.log('loginBtn:', loginBtn);
+    console.log('registerBtn:', registerBtn);
 
     // Chuyển đổi giao diện giữa đăng ký và đăng nhập
     if (registerBtn && container) {
-        registerBtn.addEventListener('click', () => container.classList.add("active"));
+        registerBtn.addEventListener('click', () => {
+            console.log('Register button clicked');
+            container.classList.add("active");
+        });
     }
 
     if (loginBtn && container) {
-        loginBtn.addEventListener('click', () => container.classList.remove("active"));
+        loginBtn.addEventListener('click', () => {
+            console.log('Login button clicked');
+            container.classList.remove("active");
+        });
     }
 
     // Điều hướng về trang Home
@@ -40,7 +43,6 @@ document.addEventListener('DOMContentLoaded', function () {
     if (homeAltBtn) {
         homeAltBtn.addEventListener('click', () => window.location.href = '../../home.jsp');
     }
-
 
     // Xử lý đăng nhập
     const usernameErrorLog = document.getElementById('username-errorlog');
@@ -82,23 +84,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // Hiển thị thông tin người dùng nếu đã đăng nhập
-    const username = usernameDisplay.textContent.trim();
-    // Kiểm tra xem username có tồn tại không
-    if (username) {
-        // Hiển thị thông báo "Xin chào, username!"
-        userGreeting.style.display = "inline";
-        // Hiển thị các liên kết Logout và Account
-        logoutLink.style.display = "inline";
-        signupLink.style.display = "inline";
-        loginLink.style.display = "none";
-    } else {
-        // Nếu không có username, ẩn các liên kết Logout và Account
-        document.getElementById("user-greeting").style.display = "none";
-        document.getElementById("logout-link").style.display = "none";
-        document.getElementById("signup-link").style.display = "none";
-        document.getElementById("login-link").style.display = "inline";
-    }
+
 })
 
     function invalidation() {

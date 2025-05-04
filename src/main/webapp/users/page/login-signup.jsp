@@ -108,7 +108,7 @@
                         <a id="carts" href="turn-page?action=cart">
                             <i class="fas fa-shopping-cart" style="color: #15283e;"></i>
                         </a>
-                        <span class="cart-count" id="cart-count">0</span>
+                        <span class="cart-count" id="cart-count">${empty sessionScope.cartItemCount ? 0 : sessionScope.cartItemCount}</span>
                     </div>
                 </div>
             </div>
@@ -125,7 +125,7 @@
                     <ul class="items">
                         <c:forEach var="category" items="${categories_all}">
                             <li>
-                                <a href="/tqh/product-category?categoryId=${category.id}">
+                                <a href="/tqh/turn-page-noLogin?action=product&categoryId=${category.id}">
                                     &nbsp;&nbsp;<i class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;${category.name}
                                 </a>
                             </li>
@@ -320,8 +320,8 @@
     <button id="backToTop" title="Quay về đầu trang">⬆</button>
 </div>
 
-<script src="${pageContext.request.contextPath}/users/js/login-signup.js"></script>
 <script src="${pageContext.request.contextPath}/users/js/scripts.js"></script>
+<script src="${pageContext.request.contextPath}/users/js/login-signup.js"></script>
 
 </body>
 </html>

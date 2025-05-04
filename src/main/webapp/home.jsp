@@ -121,9 +121,9 @@
                 </p>
             </div>
             <div class="top-right">
-                       <span id="user-greeting" style="display: none; color: #ffffff;">
-                           Xin chào,  <span
-                               id="username">${sessionScope.user.username != null ? sessionScope.user.username : ''}</span>!</span>
+                      <span id="user-greeting" style="display: none; color: #ffffff;">
+    Xin chào, <span id="username" data-username="${sessionScope.user.username}">${sessionScope.user.username}</span>!
+</span>
 
                 <a href="turn-page?action=infoUser" style="text-decoration: none">
                     <button type="submit" class="account-link" id="signup-link"
@@ -175,7 +175,7 @@
                         <a href="turn-page?action=cart">
                             <i class="fas fa-shopping-cart"></i>
                         </a>
-                        <span class="cart-count" id="cart-count">${sessionScope.cartItemCount}</span>
+                        <span class="cart-count" id="cart-count">${empty sessionScope.cartItemCount ? 0 : sessionScope.cartItemCount}</span>
                     </div>
                 </div>
             </div>
@@ -192,7 +192,7 @@
                     <ul class="items">
                         <c:forEach var="category" items="${categories_all}">
                             <li>
-                                <a href="/tqh/product-category?categoryId=${category.id}">
+                                <a href="/tqh/turn-page-noLogin?action=product&categoryId=${category.id}">
                                     &nbsp;&nbsp;<i class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;${category.name}
                                 </a>
                             </li>
@@ -254,7 +254,8 @@
         <div class="product-one-content-title">
             <div class="title">
                 <h3>Flash Sale !!</h3>
-                <span><a class="highlight-text" href="product">Xem thêm</a></span>
+                <span style="color:red; font-weight: bold; display: none" >(Cache: ${cacheStatus})</span>
+                <span><a class="highlight-text" href="turn-page-noLogin?action=product">Xem thêm</a></span>
             </div>
         </div>
         <div class="product-one-content-items">
@@ -293,7 +294,6 @@
                         <c:if test="${status.index % 4 == 0}">
                             <div class="swiper-slide">
                         </c:if>
-
                         <div class="discount-item">
                             <div class="discount-label">
                                 Giảm giá: <fmt:formatNumber value="${promotional.value}" type="number"
@@ -345,7 +345,7 @@
         <div class="slider-product-one-content-title">
             <div class="title">
                 <h3>Gạch Xây Dựng</h3>
-                <span><a class="highlight-text" href="/tqh/product-category?categoryId=1">Xem thêm</a></span>
+                <span><a class="highlight-text" href="/tqh/turn-page-noLogin?action=product&categoryId=1">Xem thêm</a></span>
             </div>
         </div>
         <div class="slider-product-one-content-container">
@@ -470,7 +470,7 @@
         <div class="slider-product-two-content-title">
             <div class="title">
                 <h3>Xi Măng Và Vữa</h3>
-                <span><a class="highlight-text" href="/tqh/product-category?categoryId=2">Xem thêm</a></span>
+                <span><a class="highlight-text" href="/tqh/turn-page-noLogin?action=product&categoryId=2">Xem thêm</a></span>
             </div>
         </div>
         <div class="slider-product-two-content-container">
@@ -595,7 +595,7 @@
         <div class="slider-product-three-content-title">
             <div class="title">
                 <h3>Cát,Đá Và Sỏi</h3>
-                <span><a class="highlight-text" href="/tqh/product-category?categoryId=3">Xem thêm</a></span>
+                <span><a class="highlight-text" href="/tqh/turn-page-noLogin?action=product&categoryId=3">Xem thêm</a></span>
             </div>
         </div>
         <div class="slider-product-three-content-container">
@@ -720,7 +720,7 @@
         <div class="slider-product-four-content-title">
             <div class="title">
                 <h3>Thép và Sắt</h3>
-                <span><a href="/tqh/product-category?categoryId=4" class="highlight-text">Xem thêm</a></span>
+                <span><a href="/tqh/turn-page-noLogin?action=product&categoryId=4" class="highlight-text">Xem thêm</a></span>
             </div>
         </div>
         <div class="slider-product-four-content-container">
@@ -845,7 +845,7 @@
         <div class="slider-product-five-content-title">
             <div class="title">
                 <h3>Gỗ và Vật liệu gỗ</h3>
-                <span><a href="/tqh/product-category?categoryId=5" class="highlight-text">Xem thêm</a></span>
+                <span><a href="/tqh/turn-page-noLogin?action=product&categoryId=5" class="highlight-text">Xem thêm</a></span>
             </div>
         </div>
         <div class="slider-product-five-content-container">
@@ -970,7 +970,7 @@
         <div class="slider-product-six-content-title">
             <div class="title">
                 <h3>Sơn và Phụ gia</h3>
-                <span><a href="/tqh/product-category?categoryId=6" class="highlight-text">Xem thêm</a></span>
+                <span><a href="/tqh/turn-page-noLogin?action=product&categoryId=6" class="highlight-text">Xem thêm</a></span>
             </div>
         </div>
         <div class="slider-product-six-content-container">
@@ -1095,7 +1095,7 @@
         <div class="slider-product-seven-content-title">
             <div class="title">
                 <h3>Ngói và Tấm lợp</h3>
-                <span><a href="/tqh/product-category?categoryId=7" class="highlight-text">Xem thêm</a></span>
+                <span><a href="/tqh/turn-page-noLogin?action=product&categoryId=7" class="highlight-text">Xem thêm</a></span>
             </div>
         </div>
         <div class="slider-product-seven-content-container">
@@ -1221,7 +1221,7 @@
         <div class="slider-product-eight-content-title">
             <div class="title">
                 <h3>Ống nước và Phụ kiện</h3>
-                <span><a href="/tqh/product-category?categoryId=8"
+                <span><a href="/tqh/turn-page-noLogin?action=product&categoryId=8"
                          class="highlight-text">Xem thêm</a></span>
             </div>
         </div>
@@ -1348,7 +1348,7 @@
         <div class="slider-product-nine-content-title">
             <div class="title">
                 <h3>Thiết bị điện nước</h3>
-                <span><a href="/tqh/product-category?categoryId=9"
+                <span><a href="/tqh/turn-page-noLogin?action=product&categoryId=9"
                          class="highlight-text">Xem thêm</a></span>
             </div>
         </div>
@@ -1540,7 +1540,6 @@
 <script src="users/js/slider_Image-home.js"></script>
 <script src="users/js/slider-products.js"></script>
 <script src="users/js/home.js"></script>
-<script src="<c:url value="/users/js/login-signup.js"/>"></script>
 <script src="users/js/scripts.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
@@ -1588,6 +1587,13 @@
             prevEl: ".swiper-button-prev",
         },
     });
+</script>
+<!-- DEBUG INFO - chỉ thấy khi mở Inspect -->
+<script>
+    console.log("Cache Status: ${cacheStatus}");
+    console.log("Cache Last Updated: ${lastUpdated} ➡" + new Date(${lastUpdated}));
+    console.log(" Current Time: ${currentTime} " + new Date(${currentTime}));
+    console.log("Cache Expired After: ${elapsedMinutes} minutes");
 </script>
 </body>
 </html>

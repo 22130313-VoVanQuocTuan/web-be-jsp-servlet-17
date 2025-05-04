@@ -156,7 +156,7 @@
             </li>
 
             <li>
-                <a href="informationCustomer">
+                <a href="turn-page?action=infoUserAdmin">
                         <span class="icon">
                             <ion-icon name="person"></ion-icon>
                         </span>
@@ -199,7 +199,7 @@
 
 
             <div class="user">
-                <a href="informationCustomer">
+                <a href="turn-page?action=infoUserAdmin">
                     <ion-icon name="person"
                               style="color: #000000; font-size: 25px;"></ion-icon>
                 </a>

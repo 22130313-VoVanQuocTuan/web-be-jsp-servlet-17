@@ -66,5 +66,8 @@ public class TurnPageUrl extends HttpServlet {
         if("infoUser".equals(action)) {
             req.getRequestDispatcher("/users/page/informationCustomer.jsp").forward(req, resp);
         }
+        if("infoUserAdmin".equals(action)) {
+            req.getRequestDispatcher("/admin/pages/account.jsp").forward(req, resp);
+        }
     }
 }

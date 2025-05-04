@@ -244,10 +244,10 @@ public class AddProductController extends HttpServlet {
             double discountPercent = Double.parseDouble(discountPercentStr.trim());
 
             // Tạo giá giảm
-            double discountPrice = price * (1 - discountPercent);
+            double discountPrice = price * discountPercent;
 
             // Tạo đối tượng Product
-            Product product = new Product(0, name, price, imageUrl, description, categoryId, supplier, color, size, unit, 0, 0, discountPercent, discountPrice, new Timestamp(System.currentTimeMillis()), new Timestamp(System.currentTimeMillis()));
+            Product product = new Product(0, name, price, imageUrl, description, categoryId, supplier, color, size, unit, 0, 0, discountPercent, discountPrice, new Timestamp(System.currentTimeMillis()), new Timestamp(System.currentTimeMillis()),false);
 
             // Gọi ProductService để thêm sản phẩm
             boolean isAdded = productService.addProduct(product);
