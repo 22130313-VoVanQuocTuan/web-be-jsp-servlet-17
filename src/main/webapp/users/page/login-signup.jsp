@@ -108,7 +108,7 @@
                         <a id="carts" href="turn-page?action=cart">
                             <i class="fas fa-shopping-cart" style="color: #15283e;"></i>
                         </a>
-                        <span class="cart-count" id="cart-count">${empty sessionScope.cartItemCount ? 0 : sessionScope.cartItemCount}</span>
+                        <span class="cart-count" id="cart-count">0</span>
                     </div>
                 </div>
             </div>
@@ -321,7 +321,6 @@
 </div>
 
 <script src="${pageContext.request.contextPath}/users/js/scripts.js"></script>
-<script src="${pageContext.request.contextPath}/users/js/login-signup.js"></script>
 
 </body>
 </html>

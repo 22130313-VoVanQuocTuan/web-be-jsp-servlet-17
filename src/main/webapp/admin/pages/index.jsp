@@ -219,7 +219,7 @@
             </div>
 
             <div class="user">
-                <a href="turn-page?action=infoUserAdmin">
+                <a href="informationCustomer">
                     <ion-icon name="person"
                               style="color: #000000; font-size: 25px;"></ion-icon>
                 </a>

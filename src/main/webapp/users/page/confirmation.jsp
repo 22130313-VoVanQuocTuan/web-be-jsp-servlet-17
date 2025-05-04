@@ -112,7 +112,7 @@
                         <a href="turn-page?action=cart">
                             <i class="fas fa-shopping-cart"></i>
                         </a>
-                        <span class="cart-count" id="cart-count">${empty sessionScope.cartItemCount ? 0 : sessionScope.cartItemCount}</span>
+                        <span class="cart-count" id="cart-count">${sessionScope.cartItemCount}</span>
                     </div>
                 </div>
             </div>
@@ -276,7 +276,7 @@
                     </div>
                 </div>
                 <div class="sub">
-                    <div class="hrep p"><a href="turn-page?action=cart" style="text-decoration: none;">
+                    <div class="hrep p"><a href="cart-items" style="text-decoration: none;">
                         < Quay về giỏ hàng </a>
                     </div>
                     <a href="#" id="submit-btn">

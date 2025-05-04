@@ -175,7 +175,7 @@
                         <a href="turn-page?action=cart">
                             <i class="fas fa-shopping-cart"></i>
                         </a>
-                        <span class="cart-count" id="cart-count">${empty sessionScope.cartItemCount ? 0 : sessionScope.cartItemCount}</span>
+                        <span class="cart-count" id="cart-count">${sessionScope.cartItemCount}</span>
                     </div>
                 </div>
             </div>
@@ -254,7 +254,7 @@
         <div class="product-one-content-title">
             <div class="title">
                 <h3>Flash Sale !!</h3>
-                <span><a class="highlight-text" href="turn-page-noLogin?action=product">Xem thêm</a></span>
+                <span><a class="highlight-text" href="product">Xem thêm</a></span>
             </div>
         </div>
         <div class="product-one-content-items">
@@ -345,7 +345,7 @@
         <div class="slider-product-one-content-title">
             <div class="title">
                 <h3>Gạch Xây Dựng</h3>
-                <span><a class="highlight-text" href="/tqh/turn-page-noLogin?action=product&categoryId=1">Xem thêm</a></span>
+                <span><a class="highlight-text" href="/tqh/product-category?categoryId=1">Xem thêm</a></span>
             </div>
         </div>
         <div class="slider-product-one-content-container">
@@ -470,7 +470,7 @@
         <div class="slider-product-two-content-title">
             <div class="title">
                 <h3>Xi Măng Và Vữa</h3>
-                <span><a class="highlight-text" href="/tqh/turn-page-noLogin?action=product&categoryId=2">Xem thêm</a></span>
+                <span><a class="highlight-text" href="/tqh/product-category?categoryId=2">Xem thêm</a></span>
             </div>
         </div>
         <div class="slider-product-two-content-container">
@@ -595,7 +595,7 @@
         <div class="slider-product-three-content-title">
             <div class="title">
                 <h3>Cát,Đá Và Sỏi</h3>
-                <span><a class="highlight-text" href="/tqh/turn-page-noLogin?action=product&categoryId=3">Xem thêm</a></span>
+                <span><a class="highlight-text" href="/tqh/product-category?categoryId=3">Xem thêm</a></span>
             </div>
         </div>
         <div class="slider-product-three-content-container">
@@ -720,7 +720,7 @@
         <div class="slider-product-four-content-title">
             <div class="title">
                 <h3>Thép và Sắt</h3>
-                <span><a href="/tqh/turn-page-noLogin?action=product&categoryId=4" class="highlight-text">Xem thêm</a></span>
+                <span><a href="/tqh/product-category?categoryId=4" class="highlight-text">Xem thêm</a></span>
             </div>
         </div>
         <div class="slider-product-four-content-container">
@@ -845,7 +845,7 @@
         <div class="slider-product-five-content-title">
             <div class="title">
                 <h3>Gỗ và Vật liệu gỗ</h3>
-                <span><a href="/tqh/turn-page-noLogin?action=product&categoryId=5" class="highlight-text">Xem thêm</a></span>
+                <span><a href="/tqh/product-category?categoryId=5" class="highlight-text">Xem thêm</a></span>
             </div>
         </div>
         <div class="slider-product-five-content-container">
@@ -970,7 +970,7 @@
         <div class="slider-product-six-content-title">
             <div class="title">
                 <h3>Sơn và Phụ gia</h3>
-                <span><a href="/tqh/turn-page-noLogin?action=product&categoryId=6" class="highlight-text">Xem thêm</a></span>
+                <span><a href="/tqh/product-category?categoryId=6" class="highlight-text">Xem thêm</a></span>
             </div>
         </div>
         <div class="slider-product-six-content-container">
@@ -1095,7 +1095,7 @@
         <div class="slider-product-seven-content-title">
             <div class="title">
                 <h3>Ngói và Tấm lợp</h3>
-                <span><a href="/tqh/turn-page-noLogin?action=product&categoryId=7" class="highlight-text">Xem thêm</a></span>
+                <span><a href="/tqh/product-category?categoryId=7" class="highlight-text">Xem thêm</a></span>
             </div>
         </div>
         <div class="slider-product-seven-content-container">
@@ -1221,7 +1221,7 @@
         <div class="slider-product-eight-content-title">
             <div class="title">
                 <h3>Ống nước và Phụ kiện</h3>
-                <span><a href="/tqh/turn-page-noLogin?action=product&categoryId=8"
+                <span><a href="/tqh/product-category?categoryId=8"
                          class="highlight-text">Xem thêm</a></span>
             </div>
         </div>
@@ -1348,7 +1348,7 @@
         <div class="slider-product-nine-content-title">
             <div class="title">
                 <h3>Thiết bị điện nước</h3>
-                <span><a href="/tqh/turn-page-noLogin?action=product&categoryId=9"
+                <span><a href="/tqh/product-category?categoryId=9"
                          class="highlight-text">Xem thêm</a></span>
             </div>
         </div>
