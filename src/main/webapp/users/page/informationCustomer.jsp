@@ -149,7 +149,7 @@
                         <a href="turn-page?action=cart">
                             <i class="fas fa-shopping-cart"></i>
                         </a>
-                        <span class="cart-count" id="cart-count">${sessionScope.cartItemCount}</span>
+                        <span class="cart-count" id="cart-count">${empty sessionScope.cartItemCount ? 0 : sessionScope.cartItemCount}</span>
                     </div>
                 </div>
             </div>
