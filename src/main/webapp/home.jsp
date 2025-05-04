@@ -192,7 +192,7 @@
                     <ul class="items">
                         <c:forEach var="category" items="${categories_all}">
                             <li>
-                                <a href="/tqh/product-category?categoryId=${category.id}">
+                                <a href="/tqh/turn-page-noLogin?action=product&categoryId=${category.id}">
                                     &nbsp;&nbsp;<i class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;${category.name}
                                 </a>
                             </li>
@@ -275,7 +275,9 @@
                                                   groupingUsed="true"/>₫
                             </li>
                             <li><fmt:formatNumber value="${product.price}" type="number" groupingUsed="true"/>₫</li>
-                            <a href="add-cart?id=${product.id}" class="add-to-cart">Thêm vào giỏ hàng</a>
+                            <button type="button" onclick="addCart(${product.id})" class="add-to-cart" data-id="${product.id}">
+                                Thêm vào giỏ hàng
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -365,7 +367,9 @@
                                         <li><fmt:formatNumber value="${product.price}" type="number"
                                                               groupingUsed="true"/>₫
                                         </li>
-                                        <a href="add-cart?id=${product.id}" class="add-to-cart">Thêm vào giỏ hàng</a>
+                                        <button type="button" onclick="addCart(${product.id})" class="add-to-cart" data-id="${product.id}">
+                                            Thêm vào giỏ hàng
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -389,7 +393,9 @@
                                         <li><fmt:formatNumber value="${product.price}" type="number"
                                                               groupingUsed="true"/>₫
                                         </li>
-                                        <a href="add-cart?id=${product.id}" class="add-to-cart">Thêm vào giỏ hàng</a>
+                                        <button type="button" onclick="addCart(${product.id})" class="add-to-cart" data-id="${product.id}">
+                                            Thêm vào giỏ hàng
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -413,7 +419,9 @@
                                         <li><fmt:formatNumber value="${product.price}" type="number"
                                                               groupingUsed="true"/>₫
                                         </li>
-                                        <a href="add-cart?id=${product.id}" class="add-to-cart">Thêm vào giỏ hàng</a>
+                                        <button type="button" onclick="addCart(${product.id})" class="add-to-cart" data-id="${product.id}">
+                                            Thêm vào giỏ hàng
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -437,7 +445,9 @@
                                         <li><fmt:formatNumber value="${product.price}" type="number"
                                                               groupingUsed="true"/>₫
                                         </li>
-                                        <a href="add-cart?id=${product.id}" class="add-to-cart">Thêm vào giỏ hàng</a>
+                                        <button type="button" onclick="addCart(${product.id})" class="add-to-cart" data-id="${product.id}">
+                                            Thêm vào giỏ hàng
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -482,7 +492,9 @@
                                         <li><fmt:formatNumber value="${product.price}" type="number"
                                                               groupingUsed="true"/>₫
                                         </li>
-                                        <a href="add-cart?id=${product.id}" class="add-to-cart">Thêm vào giỏ hàng</a>
+                                        <button type="button" onclick="addCart(${product.id})" class="add-to-cart" data-id="${product.id}">
+                                            Thêm vào giỏ hàng
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -506,7 +518,9 @@
                                         <li><fmt:formatNumber value="${product.price}" type="number"
                                                               groupingUsed="true"/>₫
                                         </li>
-                                        <a href="add-cart?id=${product.id}" class="add-to-cart">Thêm vào giỏ hàng</a>
+                                        <button type="button" onclick="addCart(${product.id})" class="add-to-cart" data-id="${product.id}">
+                                            Thêm vào giỏ hàng
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -530,7 +544,9 @@
                                         <li><fmt:formatNumber value="${product.price}" type="number"
                                                               groupingUsed="true"/>₫
                                         </li>
-                                        <a href="add-cart?id=${product.id}" class="add-to-cart">Thêm vào giỏ hàng</a>
+                                        <button type="button" onclick="addCart(${product.id})" class="add-to-cart" data-id="${product.id}">
+                                            Thêm vào giỏ hàng
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -554,7 +570,9 @@
                                         <li><fmt:formatNumber value="${product.price}" type="number"
                                                               groupingUsed="true"/>₫
                                         </li>
-                                        <a href="add-cart?id=${product.id}" class="add-to-cart">Thêm vào giỏ hàng</a>
+                                        <button type="button" onclick="addCart(${product.id})" class="add-to-cart" data-id="${product.id}">
+                                            Thêm vào giỏ hàng
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -599,7 +617,9 @@
                                         <li><fmt:formatNumber value="${product.price}" type="number"
                                                               groupingUsed="true"/>₫
                                         </li>
-                                        <a href="add-cart?id=${product.id}" class="add-to-cart">Thêm vào giỏ hàng</a>
+                                        <button type="button" onclick="addCart(${product.id})" class="add-to-cart" data-id="${product.id}">
+                                            Thêm vào giỏ hàng
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -623,7 +643,9 @@
                                         <li><fmt:formatNumber value="${product.price}" type="number"
                                                               groupingUsed="true"/>₫
                                         </li>
-                                        <a href="add-cart?id=${product.id}" class="add-to-cart">Thêm vào giỏ hàng</a>
+                                        <button type="button" onclick="addCart(${product.id})" class="add-to-cart" data-id="${product.id}">
+                                            Thêm vào giỏ hàng
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -647,7 +669,9 @@
                                         <li><fmt:formatNumber value="${product.price}" type="number"
                                                               groupingUsed="true"/>₫
                                         </li>
-                                        <a href="add-cart?id=${product.id}" class="add-to-cart">Thêm vào giỏ hàng</a>
+                                        <button type="button" onclick="addCart(${product.id})" class="add-to-cart" data-id="${product.id}">
+                                            Thêm vào giỏ hàng
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -671,7 +695,9 @@
                                         <li><fmt:formatNumber value="${product.price}" type="number"
                                                               groupingUsed="true"/>₫
                                         </li>
-                                        <a href="add-cart?id=${product.id}" class="add-to-cart">Thêm vào giỏ hàng</a>
+                                        <button type="button" onclick="addCart(${product.id})" class="add-to-cart" data-id="${product.id}">
+                                            Thêm vào giỏ hàng
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -716,7 +742,9 @@
                                         <li><fmt:formatNumber value="${product.price}" type="number"
                                                               groupingUsed="true"/>₫
                                         </li>
-                                        <a href="add-cart?id=${product.id}" class="add-to-cart">Thêm vào giỏ hàng</a>
+                                        <button type="button" onclick="addCart(${product.id})" class="add-to-cart" data-id="${product.id}">
+                                            Thêm vào giỏ hàng
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -740,7 +768,9 @@
                                         <li><fmt:formatNumber value="${product.price}" type="number"
                                                               groupingUsed="true"/>₫
                                         </li>
-                                        <a href="add-cart?id=${product.id}" class="add-to-cart">Thêm vào giỏ hàng</a>
+                                        <button type="button" onclick="addCart(${product.id})" class="add-to-cart" data-id="${product.id}">
+                                            Thêm vào giỏ hàng
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -764,7 +794,9 @@
                                         <li><fmt:formatNumber value="${product.price}" type="number"
                                                               groupingUsed="true"/>₫
                                         </li>
-                                        <a href="add-cart?id=${product.id}" class="add-to-cart">Thêm vào giỏ hàng</a>
+                                        <button type="button" onclick="addCart(${product.id})" class="add-to-cart" data-id="${product.id}">
+                                            Thêm vào giỏ hàng
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -788,7 +820,9 @@
                                         <li><fmt:formatNumber value="${product.price}" type="number"
                                                               groupingUsed="true"/>₫
                                         </li>
-                                        <a href="add-cart?id=${product.id}" class="add-to-cart">Thêm vào giỏ hàng</a>
+                                        <button type="button" onclick="addCart(${product.id})" class="add-to-cart" data-id="${product.id}">
+                                            Thêm vào giỏ hàng
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -833,7 +867,9 @@
                                         <li><fmt:formatNumber value="${product.price}" type="number"
                                                               groupingUsed="true"/>₫
                                         </li>
-                                        <a href="add-cart?id=${product.id}" class="add-to-cart">Thêm vào giỏ hàng</a>
+                                        <button type="button" onclick="addCart(${product.id})" class="add-to-cart" data-id="${product.id}">
+                                            Thêm vào giỏ hàng
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -857,7 +893,9 @@
                                         <li><fmt:formatNumber value="${product.price}" type="number"
                                                               groupingUsed="true"/>₫
                                         </li>
-                                        <a href="add-cart?id=${product.id}" class="add-to-cart">Thêm vào giỏ hàng</a>
+                                        <button type="button" onclick="addCart(${product.id})" class="add-to-cart" data-id="${product.id}">
+                                            Thêm vào giỏ hàng
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -881,7 +919,9 @@
                                         <li><fmt:formatNumber value="${product.price}" type="number"
                                                               groupingUsed="true"/>₫
                                         </li>
-                                        <a href="add-cart?id=${product.id}" class="add-to-cart">Thêm vào giỏ hàng</a>
+                                        <button type="button" onclick="addCart(${product.id})" class="add-to-cart" data-id="${product.id}">
+                                            Thêm vào giỏ hàng
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -905,7 +945,9 @@
                                         <li><fmt:formatNumber value="${product.price}" type="number"
                                                               groupingUsed="true"/>₫
                                         </li>
-                                        <a href="add-cart?id=${product.id}" class="add-to-cart">Thêm vào giỏ hàng</a>
+                                        <button type="button" onclick="addCart(${product.id})" class="add-to-cart" data-id="${product.id}">
+                                            Thêm vào giỏ hàng
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -950,7 +992,9 @@
                                         <li><fmt:formatNumber value="${product.price}" type="number"
                                                               groupingUsed="true"/>₫
                                         </li>
-                                        <a href="add-cart?id=${product.id}" class="add-to-cart">Thêm vào giỏ hàng</a>
+                                        <button type="button" onclick="addCart(${product.id})" class="add-to-cart" data-id="${product.id}">
+                                            Thêm vào giỏ hàng
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -974,7 +1018,9 @@
                                         <li><fmt:formatNumber value="${product.price}" type="number"
                                                               groupingUsed="true"/>₫
                                         </li>
-                                        <a href="add-cart?id=${product.id}" class="add-to-cart">Thêm vào giỏ hàng</a>
+                                        <button type="button" onclick="addCart(${product.id})" class="add-to-cart" data-id="${product.id}">
+                                            Thêm vào giỏ hàng
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -998,7 +1044,9 @@
                                         <li><fmt:formatNumber value="${product.price}" type="number"
                                                               groupingUsed="true"/>₫
                                         </li>
-                                        <a href="add-cart?id=${product.id}" class="add-to-cart">Thêm vào giỏ hàng</a>
+                                        <button type="button" onclick="addCart(${product.id})" class="add-to-cart" data-id="${product.id}">
+                                            Thêm vào giỏ hàng
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -1022,7 +1070,9 @@
                                         <li><fmt:formatNumber value="${product.price}" type="number"
                                                               groupingUsed="true"/>₫
                                         </li>
-                                        <a href="add-cart?id=${product.id}" class="add-to-cart">Thêm vào giỏ hàng</a>
+                                        <button type="button" onclick="addCart(${product.id})" class="add-to-cart" data-id="${product.id}">
+                                            Thêm vào giỏ hàng
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -1067,7 +1117,9 @@
                                         <li><fmt:formatNumber value="${product.price}" type="number"
                                                               groupingUsed="true"/>₫
                                         </li>
-                                        <a href="add-cart?id=${product.id}" class="add-to-cart">Thêm vào giỏ hàng</a>
+                                        <button type="button" onclick="addCart(${product.id})" class="add-to-cart" data-id="${product.id}">
+                                            Thêm vào giỏ hàng
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -1091,7 +1143,9 @@
                                         <li><fmt:formatNumber value="${product.price}" type="number"
                                                               groupingUsed="true"/>₫
                                         </li>
-                                        <a href="add-cart?id=${product.id}" class="add-to-cart">Thêm vào giỏ hàng</a>
+                                        <button type="button" onclick="addCart(${product.id})" class="add-to-cart" data-id="${product.id}">
+                                            Thêm vào giỏ hàng
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -1115,7 +1169,9 @@
                                         <li><fmt:formatNumber value="${product.price}" type="number"
                                                               groupingUsed="true"/>₫
                                         </li>
-                                        <a href="add-cart?id=${product.id}" class="add-to-cart">Thêm vào giỏ hàng</a>
+                                        <button type="button" onclick="addCart(${product.id})" class="add-to-cart" data-id="${product.id}">
+                                            Thêm vào giỏ hàng
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -1139,7 +1195,9 @@
                                         <li><fmt:formatNumber value="${product.price}" type="number"
                                                               groupingUsed="true"/>₫
                                         </li>
-                                        <a href="add-cart?id=${product.id}" class="add-to-cart">Thêm vào giỏ hàng</a>
+                                        <button type="button" onclick="addCart(${product.id})" class="add-to-cart" data-id="${product.id}">
+                                            Thêm vào giỏ hàng
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -1186,7 +1244,9 @@
                                         <li><fmt:formatNumber value="${product.price}" type="number"
                                                               groupingUsed="true"/>₫
                                         </li>
-                                        <a href="add-cart?id=${product.id}" class="add-to-cart">Thêm vào giỏ hàng</a>
+                                        <button type="button" onclick="addCart(${product.id})" class="add-to-cart" data-id="${product.id}">
+                                            Thêm vào giỏ hàng
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -1210,7 +1270,9 @@
                                         <li><fmt:formatNumber value="${product.price}" type="number"
                                                               groupingUsed="true"/>₫
                                         </li>
-                                        <a href="add-cart?id=${product.id}" class="add-to-cart">Thêm vào giỏ hàng</a>
+                                        <button type="button" onclick="addCart(${product.id})" class="add-to-cart" data-id="${product.id}">
+                                            Thêm vào giỏ hàng
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -1234,7 +1296,9 @@
                                         <li><fmt:formatNumber value="${product.price}" type="number"
                                                               groupingUsed="true"/>₫
                                         </li>
-                                        <a href="add-cart?id=${product.id}" class="add-to-cart">Thêm vào giỏ hàng</a>
+                                        <button type="button" onclick="addCart(${product.id})" class="add-to-cart" data-id="${product.id}">
+                                            Thêm vào giỏ hàng
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -1258,7 +1322,9 @@
                                         <li><fmt:formatNumber value="${product.price}" type="number"
                                                               groupingUsed="true"/>₫
                                         </li>
-                                        <a href="add-cart?id=${product.id}" class="add-to-cart">Thêm vào giỏ hàng</a>
+                                        <button type="button" onclick="addCart(${product.id})" class="add-to-cart" data-id="${product.id}">
+                                            Thêm vào giỏ hàng
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -1305,7 +1371,9 @@
                                         <li><fmt:formatNumber value="${product.price}" type="number"
                                                               groupingUsed="true"/>₫
                                         </li>
-                                        <a href="add-cart?id=${product.id}" class="add-to-cart">Thêm vào giỏ hàng</a>
+                                        <button type="button" onclick="addCart(${product.id})" class="add-to-cart" data-id="${product.id}">
+                                            Thêm vào giỏ hàng
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -1329,7 +1397,9 @@
                                         <li><fmt:formatNumber value="${product.price}" type="number"
                                                               groupingUsed="true"/>₫
                                         </li>
-                                        <a href="add-cart?id=${product.id}" class="add-to-cart">Thêm vào giỏ hàng</a>
+                                        <button type="button" onclick="addCart(${product.id})" class="add-to-cart" data-id="${product.id}">
+                                            Thêm vào giỏ hàng
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -1353,7 +1423,9 @@
                                         <li><fmt:formatNumber value="${product.price}" type="number"
                                                               groupingUsed="true"/>₫
                                         </li>
-                                        <a href="add-cart?id=${product.id}" class="add-to-cart">Thêm vào giỏ hàng</a>
+                                        <button type="button" onclick="addCart(${product.id})" class="add-to-cart" data-id="${product.id}">
+                                            Thêm vào giỏ hàng
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -1377,7 +1449,10 @@
                                         <li><fmt:formatNumber value="${product.price}" type="number"
                                                               groupingUsed="true"/>₫
                                         </li>
-                                        <a href="add-cart?id=${product.id}" class="add-to-cart">Thêm vào giỏ hàng</a>
+                                        <button type="button" onclick="addCart(${product.id})" class="add-to-cart" data-id="${product.id}">
+                                            Thêm vào giỏ hàng
+                                        </button>
+
                                     </div>
                                 </div>
                             </div>
@@ -1466,6 +1541,7 @@
 <script src="users/js/slider-products.js"></script>
 <script src="users/js/home.js"></script>
 <script src="users/js/scripts.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         let popupBanner = document.getElementById("popupBanner");

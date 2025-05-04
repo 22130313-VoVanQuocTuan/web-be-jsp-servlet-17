@@ -94,6 +94,7 @@ function hideErrorMessages() {
 function submitOrder() {
     // Lấy giá trị của phương thức thanh toán đã chọn
     var paymentMethod = document.querySelector('input[name="payment"]:checked');
+    console.log("Phương thức đã chọn:", paymentMethod);
 
     if (!paymentMethod) {
         document.getElementById('error-message').style.display = 'block';

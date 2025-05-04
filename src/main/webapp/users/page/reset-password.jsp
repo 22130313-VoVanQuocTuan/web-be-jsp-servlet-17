@@ -21,9 +21,10 @@
             </p>
         </div>
         <div class="top-right">
-        <span id="user-greeting" style="display: none; color: #ffffff;">
-    Xin chào, <span id="username" data-username="${sessionScope.user.username}">${sessionScope.user.username}</span>!
-</span>
+              <span id="user-greeting" style="display: none; color: #ffffff;">
+                           Xin chào,  <span
+                      id="username">${sessionScope.user.username != null ? sessionScope.user.username : ''}</span>!</span>
+
             <a href="turn-page?action=infoUser" style="text-decoration: none">
                 <button type="submit" class="account-link" id="signup-link"
                         style="display: none;">
@@ -86,40 +87,40 @@
                     <span class="none-a">
                         <i class="fa-solid fa-list" style="color: #d0cdcd;"></i> &nbsp;&nbsp; DANH MỤC SẢN PHẨM
                     </span>
-                            <ul class="items">
-                                <c:forEach var="category" items="${categories_all}">
-                                    <li>
-                                        <a href="/tqh/product-category?categoryId=${category.id}">
-                                            &nbsp;&nbsp;<i class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;${category.name}
-                                        </a>
-                                    </li>
-                                </c:forEach>
-                            </ul>
+                    <ul class="items">
+                        <c:forEach var="category" items="${categories_all}">
+                            <li>
+                                <a href="/tqh/turn-page-noLogin?action=product&categoryId=${category.id}">
+                                    &nbsp;&nbsp;<i class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;${category.name}
+                                </a>
+                            </li>
+                        </c:forEach>
+                    </ul>
+                </li>
+                <li class="propClone"><a href="home-page"><i class="fa-solid fa-house"></i>&nbsp;&nbsp; TRANG CHỦ
+                </a></li>
+                <li class="propClone"><a href="turn-page-noLogin?action=product"><i
+                        class="fa-brands fa-product-hunt"></i>
+                    &nbsp;&nbsp;SẢN PHẨM</a>
+                </li>
+                <li class="propClone"><a href="turn-page?action=cart"><i class="fas fa-shopping-cart"></i>&nbsp;&nbsp;
+                    GIỎ
+                    HÀNG</a>
+                </li>
+                <li class="propClone">
+                    <span class="none-a"> <i class="fa-solid fa-book"></i> &nbsp;&nbsp; HƯỚNG DẪN </span>
+                    <ul class="items">
+                        <li><a href="turn-page-noLogin?action=buyingHelp">&nbsp;&nbsp;<i
+                                class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;HƯỚNG DẪN
+                            MUA HÀNG</a>
                         </li>
-                        <li class="propClone"><a href="home-page"><i class="fa-solid fa-house"></i>&nbsp;&nbsp; TRANG CHỦ
-                        </a></li>
-                        <li class="propClone"><a href="turn-page-noLogin?action=product"><i class="fa-brands fa-product-hunt"></i>
-                            &nbsp;&nbsp;SẢN PHẨM</a>
-                        </li>
-                        <li><a href="turn-page?action=productUnit">&nbsp;&nbsp;<i
+                        <li><a href="turn-page-noLogin?action=productUnit">&nbsp;&nbsp;<i
                                 class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;BẢNG ĐƠN VỊ SẢN PHẨM</a>
                         </li>
-                        <li class="propClone">
-                            <span class="none-a"> <i class="fa-solid fa-book"></i> &nbsp;&nbsp; HƯỚNG DẪN </span>
-                            <ul class="items">
-                                <li><a href="turn-page-noLogin?action=buyingHelp">&nbsp;&nbsp;<i
-                                        class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;HƯỚNG DẪN
-                                    MUA HÀNG</a>
-                                </li>
-                                <li><a href="turn-page-noLogin?action=productUnit">&nbsp;&nbsp;<i
-                                        class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;BẢNG ĐƠN VỊ SẢN PHẨM</a>
-                                </li>
 
-                                <li><a href="turn-page-noLogin?action=termAndService">&nbsp;&nbsp;<i
-                                        class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;ĐIỀU KHOẢN
-                                    VÀ DỊCH VỤ</a>
-                                </li>
-                            </ul>
+                        <li><a href="turn-page-noLogin?action=termAndService">&nbsp;&nbsp;<i
+                                class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;ĐIỀU KHOẢN
+                            VÀ DỊCH VỤ</a>
                         </li>
                     </ul>
                 </li>
@@ -141,14 +142,13 @@
                     <span>Nhập địa chỉ email của bạn để nhận liên kết đặt lại mật khẩu.</span>
                     <input type="email" name="email" id="reset-email" placeholder="Email">
                     <div id="email-error" style="color: red;">
+
                     </div>
-                </c:if>
+                    <button type="submit">Gửi liên kết đặt lại mật khẩu</button>
+                    <p><a href="login?action=login" id="back-to-login">Quay lại đăng nhập</a></p>
+                </form>
             </div>
-        </div>
-
-
-
-
+        </c:if>
         <!-- Form đặt lại mật khẩu mới -->
         <c:if test="${not empty verificationRequested}">
             <div class="form-container set-new-password">
@@ -169,7 +169,7 @@
             </div>
         </c:if>
     </div>
-
+</div>
 
 <div id="section-footer">
     <div class="container">
@@ -218,6 +218,7 @@
     <button id="backToTop" title="Quay về đầu trang">⬆</button>
 
 </div>
+<script src="${pageContext.request.contextPath}/users/js/login-signup.js"></script>
 <script src="${pageContext.request.contextPath}/users/js/scripts.js" defer></script>
 <script src="${pageContext.request.contextPath}/users/js/reset-password.js"></script>
 </body>

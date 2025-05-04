@@ -2,42 +2,51 @@
 let currentProducts = []; // Lưu danh sách sản phẩm hiện tại
 const productsPerPage = 12;
 let currentPage = 1;
+let currentCategoryId = null;
 
-// Sự kiện DOMContentLoaded
+function initProductPage(filterCategoryId) {
+    document.addEventListener("DOMContentLoaded", function () {
+        getCategory();
+        // Kiểm tra filterCategoryId để quyết định load sản phẩm
+        if (filterCategoryId !== null && filterCategoryId > 0) {
+            loadPCategoryById(parseInt(filterCategoryId));
+        } else {
+            loadP();
+        }
+        // Tìm kiếm sản phẩm
+        const searchInput = document.getElementById("search-input");
+        const productList = document.getElementById("product-list");
+        const contextPath = window.location.pathname.split("/")[1];
+        const baseUrl = window.location.origin + "/" + contextPath + "/product";
+
+        searchInput.addEventListener("keyup", function () {
+            let keyword = searchInput.value.trim();
+            let url = `${baseUrl}?ajax=true`;
+
+            if (keyword.length > 1) {
+                url += `&name=${encodeURIComponent(keyword)}`;
+            }
+
+            console.log("Gửi request AJAX:", url);
+            fetch(url)
+                .then(response => response.text())
+                .then(data => {
+                    console.log("HTML nhận được:", data);
+                    productList.innerHTML = data;
+                })
+                .catch(error => console.error("Lỗi khi tìm kiếm:", error));
+        });
+    });
+}
+
 document.addEventListener("DOMContentLoaded", function () {
-    getCategory();
-    loadP();
-
-    // Gắn sự kiện cho nút phân trang
-    document.getElementById("prev").addEventListener("click", function () {
+    document.getElementById("prev").addEventListener("click", function (e) {
+        e.stopPropagation(); // Ngăn sự kiện lan truyền
         changePage(-1);
     });
-    document.getElementById("next").addEventListener("click", function () {
+    document.getElementById("next").addEventListener("click", function (e) {
+        e.stopPropagation(); // Ngăn sự kiện lan truyền
         changePage(1);
-    });
-
-    // Tìm kiếm sản phẩm
-    const searchInput = document.getElementById("search-input");
-    const productList = document.getElementById("product-list");
-    const contextPath = window.location.pathname.split("/")[1];
-    const baseUrl = window.location.origin + "/" + contextPath + "/product";
-
-    searchInput.addEventListener("keyup", function () {
-        let keyword = searchInput.value.trim();
-        let url = `${baseUrl}?ajax=true`;
-
-        if (keyword.length > 1) {
-            url += `&name=${encodeURIComponent(keyword)}`;
-        }
-
-        console.log("Gửi request AJAX:", url);
-        fetch(url)
-            .then(response => response.text())
-            .then(data => {
-                console.log("HTML nhận được:", data);
-                productList.innerHTML = data;
-            })
-            .catch(error => console.error("Lỗi khi tìm kiếm:", error));
     });
 });
 
@@ -57,7 +66,6 @@ function loadP() {
         },
         error: function (xhr, status, error) {
             console.error("Lỗi khi tải sản phẩm:", error);
-            document.getElementById("product-list").innerHTML = "<p>Đã xảy ra lỗi khi tải sản phẩm.</p>";
         }
     });
 }
@@ -78,8 +86,8 @@ function renderP(data) {
                     <a style='color: #110ec6' href='product-detail?id=${product.id}&categoryId=${product.categoryId}'>
                         ${product.name}</a>
                 </h3>
-                <p>Giá: <del>${product.price}₫</del></p>
-                <p style='color: #ff0000;'>Giá đã giảm: ${product.discountPrice}₫</p>
+                <p>Giá: <del>${product.price.toLocaleString()} ₫</del></p>
+                <p style='color: #ff0000;'>Giá đã giảm: ${product.discountPrice.toLocaleString()}₫</p>
                 <p>Giảm giá: ${product.discountPercent}%</p>
                 <span style='margin-left: 10px;'><i class='fas fa-eye'></i> 
                     <span style='font-size: 0.9em;'>${product.view}</span></span>
@@ -90,14 +98,17 @@ function renderP(data) {
             </div>`;
     });
     document.getElementById("product-list").innerHTML = html;
-    displayProducts(1); // Hiển thị trang đầu tiên
+    displayProducts(currentPage);
 }
 
 // Hiển thị sản phẩm theo trang
 function displayProducts(page) {
-    const totalPages = Math.ceil(currentProducts.length / productsPerPage);
+    if (currentCategoryId !== null && !isNaN(currentCategoryId) && currentCategoryId > 0) {
+        loadPCategoryById(currentCategoryId);
+        return;
+    }
 
-    if (currentProducts.length === 0) {
+    if (!currentProducts || currentProducts.length === 0) {
         console.warn("Không có sản phẩm nào để hiển thị.");
         document.getElementById("product-list").innerHTML = "<p>Không có sản phẩm nào.</p>";
         document.getElementById("page-info").textContent = "Trang 1 của 1";
@@ -106,10 +117,10 @@ function displayProducts(page) {
         return;
     }
 
+    const totalPages = Math.ceil(currentProducts.length / productsPerPage);
     page = Math.max(1, Math.min(page, totalPages));
     currentPage = page;
 
-    // Tạo HTML cho các sản phẩm trong trang hiện tại
     let html = '';
     const start = (page - 1) * productsPerPage;
     const end = Math.min(start + productsPerPage, currentProducts.length);
@@ -126,15 +137,15 @@ function displayProducts(page) {
                     <a style='color: #110ec6' href='product-detail?id=${product.id}&categoryId=${product.categoryId}'>
                         ${product.name}</a>
                 </h3>
-                <p>Giá: <del>${product.price}₫</del></p>
-                <p style='color: #ff0000;'>Giá đã giảm: ${product.discountPrice}₫</p>
+                <p>Giá: <del>${product.price.toLocaleString()}₫</del></p>
+                <p style='color: #ff0000;'>Giá đã giảm: ${product.discountPrice.toLocaleString()}₫</p>
                 <p>Giảm giá: ${product.discountPercent}%</p>
                 <span style='margin-left: 10px;'><i class='fas fa-eye'></i> 
                     <span style='font-size: 0.9em;'>${product.view}</span></span>
                 <span style='margin-left: 20px;'><i class='fas fa-shopping-cart'></i> 
                     <span style='font-size: 0.9em;'>${product.soldCount}</span></span>
-                <a href='add-cart?id=${product.id}' class='add-cart'>
-                    <i class='ri-add-circle-line'></i>Thêm</a>
+                <button type="button" onclick="addCart(${product.id})" class="add-cart" data-id="${product.id}">    
+                    <i class='ri-add-circle-line'></i>Thêm</button>
             </div>`;
     }
 
@@ -152,7 +163,6 @@ function changePage(offset) {
 }
 
 // Lọc sản phẩm
-let isAjaxProcessing = false;
 $(document).on('click', '.filter-link', function (e) {
     e.preventDefault();
     e.stopPropagation();
@@ -169,9 +179,9 @@ $(document).on('click', '.filter-link', function (e) {
         success: function (data) {
             console.log('Dữ liệu lọc nhận được:', data);
             if (data && Array.isArray(data)) {
-                currentProducts = data; // Lưu danh sách sản phẩm đã lọc
+                currentProducts = data;
+                currentPage = 1; // Mặc định về trang 1 sau khi lọc
                 renderP(data);
-                currentPage = 1;
             } else {
                 console.error('Dữ liệu không hợp lệ:', data);
                 document.getElementById("product-list").innerHTML = "<p>Dữ liệu lọc không hợp lệ.</p>";
@@ -181,12 +191,6 @@ $(document).on('click', '.filter-link', function (e) {
             console.error("Lỗi khi lọc sản phẩm:", error, xhr.status, xhr.responseText);
             document.getElementById("product-list").innerHTML = "<p>Đã xảy ra lỗi khi lọc sản phẩm.</p>";
         },
-        complete: function () {
-            console.log('Hoàn thành yêu cầu lọc');
-            setTimeout(() => {
-                window.isFiltering = false;
-            }, 500);
-        }
     });
 });
 
@@ -227,17 +231,18 @@ function loadCategory(data) {
 
 // Tải sản phẩm theo danh mục
 function loadPCategoryById(id) {
+    console.log('Tải sản phẩm theo danh mục, id:', id);
     $.ajax({
         url: `product-category?categoryId=${id}`,
         type: "GET",
         success: function (data) {
-            console.log(data);
-            currentProducts = data.products || data; // Cập nhật danh sách sản phẩm
+            console.log('Dữ liệu sản phẩm theo danh mục:', data);
+            currentProducts = data.products || data;
+            currentPage = 1; // Mặc định về trang 1 sau khi lọc
             renderP(data.products || data);
         },
         error: function (xhr, status, error) {
             console.error("Lỗi khi tải sản phẩm theo danh mục:", error);
-            document.getElementById("product-list").innerHTML = "<p>Đã xảy ra lỗi khi tải sản phẩm.</p>";
         }
     });
 }
@@ -259,17 +264,19 @@ items.forEach(item => {
         item.classList.add('active');
         const category = item.getAttribute('data-category');
         localStorage.setItem('selectedCategory', category);
+        currentCategoryId = parseInt(category);
         loadPCategoryById(category);
     });
 });
 
-
 document.addEventListener('click', function (event) {
-    const isClickInside = event.target.closest('.item');
+    const isClickInside = event.target.closest('.item') || event.target.closest('#prev') || event.target.closest('#next');
     if (!isClickInside) {
         localStorage.removeItem('selectedCategory');
         items.forEach(el => el.classList.remove('active'));
-        loadP();
+        if (currentCategoryId === null) {
+            loadP();
+        }
     }
 });
 
@@ -289,12 +296,11 @@ document.addEventListener("DOMContentLoaded", function () {
             url += `&name=${encodeURIComponent(keyword)}`;
         }
 
-        console.log("Gửi request AJAX:", url); // Debug đường dẫn request
-
+        console.log("Gửi request AJAX:", url);
         fetch(url)
-            .then(response => response.text()) // Nhận HTML thay vì JSON
+            .then(response => response.text())
             .then(data => {
-                console.log("HTML nhận được:", data); // Debug dữ liệu nhận về
+                console.log("HTML nhận được:", data);
                 productList.innerHTML = data;
             })
             .catch(error => console.error("Lỗi khi tìm kiếm:", error));
@@ -322,10 +328,8 @@ function addCart(id) {
                         window.location.href = "turn-page?action=cart";
                     }
                 });
-
-
             } else {
-                alert("Lỗi không thêm đươc sản phẩm.");
+                alert("Lỗi không thêm được sản phẩm.");
             }
         }
     });

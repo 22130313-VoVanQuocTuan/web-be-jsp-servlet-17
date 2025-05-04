@@ -96,7 +96,7 @@
                         <ul class="items">
                             <c:forEach var="category" items="${categories_all}">
                                 <li>
-                                    <a href="/tqh/product-category?categoryId=${category.id}">
+                                    <a href="/tqh/turn-page-noLogin?action=product&categoryId=${category.id}">
                                         &nbsp;&nbsp;<i class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;${category.name}
                                     </a>
                                 </li>
@@ -155,7 +155,7 @@
 
                 </table>
                 <div class="cart-buttons">
-                    <a href="product"><button class="continue-btn">← Tiếp tục xem sản
+                    <a href="turn-page-noLogin?action=product"><button class="continue-btn">← Tiếp tục xem sản
                             phẩm</button></a>
                 </div>
             </div>
