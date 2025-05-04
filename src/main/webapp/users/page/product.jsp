@@ -118,7 +118,7 @@
                     <ul class="items">
                         <c:forEach var="category" items="${categories_all}">
                             <li>
-                                <a href="/tqh/product-category?categoryId=${category.id}">
+                                <a href="/tqh/turn-page-noLogin?action=product&categoryId=${category.id}">
                                     &nbsp;&nbsp;<i class="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;${category.name}
                                 </a>
                             </li>
@@ -259,6 +259,11 @@
 <script src="${pageContext.request.contextPath}/users/js/product.js"></script>
 <script src="${pageContext.request.contextPath}/users/js/scripts.js"></script>
 <script src="${pageContext.request.contextPath}/users/js/home.js"></script>
-
+<script>
+    // Truyền filterCategoryId từ session sang JS (sửa cú pháp)
+    const filterCategoryId = <%= session.getAttribute("filterCategoryId") != null ? (String) session.getAttribute("filterCategoryId") : "null" %>;
+    // Khởi tạo trang sản phẩm với filterCategoryId
+    initProductPage(filterCategoryId);
+</script>
 </body>
 </html>
