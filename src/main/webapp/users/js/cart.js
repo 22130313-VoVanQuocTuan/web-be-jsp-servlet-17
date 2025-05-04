@@ -35,7 +35,7 @@ function loadCartItems() {
         type: 'GET',
         success: function (data) {
             console.log("Dữ liệu nhận về:", data); // <-- Bạn có thấy log không?
-            console.log("👉 Kiểu dữ liệu:", typeof data);
+            console.log("Kiểu dữ liệu:", typeof data);
             renderCartItems(data);
 
         },
