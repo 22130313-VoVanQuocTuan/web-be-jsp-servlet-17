@@ -58,7 +58,6 @@
                 <div class="logo">
                     <a href="home-page"><img src="${pageContext.request.contextPath}/users/img/logo.png" alt="Logo"></a>
                 </div>
-
                 <!-- Thanh tìm kiếm ở giữa -->
                 <form action="product" method="GET">
                     <div class="search-bar">
@@ -235,6 +234,7 @@
 
 <script src="<c:url value="/users/js/login-signup.js"/>"></script>
 <script src="<c:url value="/users/js/scripts.js"/>" defer></script>
+
 </body>
 
 </html>

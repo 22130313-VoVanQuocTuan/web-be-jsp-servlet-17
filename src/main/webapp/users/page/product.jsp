@@ -47,10 +47,9 @@
                 </p>
             </div>
             <div class="top-right">
-                       <span id="user-greeting" style="display: none; color: #ffffff;">
-                           Xin chào,  <span
-                               id="username">${sessionScope.user.username != null ? sessionScope.user.username : ''}</span>!</span>
-
+           <span id="user-greeting" style="display: none; color: #ffffff;">
+    Xin chào, <span id="username" data-username="${sessionScope.user.username}">${sessionScope.user.username}</span>!
+</span>
                 <a href="turn-page?action=infoUser" style="text-decoration: none">
                     <button type="submit" class="account-link" id="signup-link"
                             style="display: none;">
@@ -203,6 +202,11 @@
             <span id="page-info"></span>
             <button id="next"> >></button>
         </div>
+
+    </div>
+    <%-- Kiểm tra xem có thông báo nào không --%>
+    <div id="message" class="alert alert-info" style="display: none">
+        <!-- Thông báo lỗi sẽ được chèn vào đây -->
     </div>
 </div>
 <div id="section-footer">
@@ -252,7 +256,6 @@
     <button id="backToTop" title="Quay về đầu trang">⬆</button>
 </div>
 
-<script src="${pageContext.request.contextPath}/users/js/login-signup.js"></script>
 <script src="${pageContext.request.contextPath}/users/js/product.js"></script>
 <script src="${pageContext.request.contextPath}/users/js/scripts.js"></script>
 <script src="${pageContext.request.contextPath}/users/js/home.js"></script>
