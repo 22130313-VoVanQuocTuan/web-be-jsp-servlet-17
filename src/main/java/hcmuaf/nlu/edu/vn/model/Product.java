@@ -26,7 +26,7 @@ public class Product {
     public Product() {
     }
 
-    public Product(int id, String name, double price, String imageUrl, String description, int categoryId, String supplier, String color, String size, String unit, int view, int soldCount, double discountPercent, double discountPrice, Timestamp createDate, Timestamp updateDate) {
+    public Product(int id, String name, double price, String imageUrl, String description, int categoryId, String supplier, String color, String size, String unit, int view, int soldCount, double discountPercent, double discountPrice, Timestamp createDate, Timestamp updateDate, boolean isDeleted) {
         this.id = id;
         this.name = name;
         this.price = price;
@@ -43,6 +43,7 @@ public class Product {
         this.discountPrice = discountPrice;
         this.createDate = createDate;
         this.updateDate = updateDate;
+        this.isDeleted = isDeleted;
     }
 
     public Product(int id, String name, double price, String imageUrl, String description, int categoryId, String supplier, String color, String size, String unit, double discountPercent, double discountPrice) {

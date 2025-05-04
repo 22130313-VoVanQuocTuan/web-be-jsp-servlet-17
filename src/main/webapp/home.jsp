@@ -254,6 +254,7 @@
         <div class="product-one-content-title">
             <div class="title">
                 <h3>Flash Sale !!</h3>
+                <span style="color:red; font-weight: bold; display: none" >(Cache: ${cacheStatus})</span>
                 <span><a class="highlight-text" href="turn-page-noLogin?action=product">Xem thêm</a></span>
             </div>
         </div>
@@ -293,7 +294,6 @@
                         <c:if test="${status.index % 4 == 0}">
                             <div class="swiper-slide">
                         </c:if>
-
                         <div class="discount-item">
                             <div class="discount-label">
                                 Giảm giá: <fmt:formatNumber value="${promotional.value}" type="number"
@@ -1587,6 +1587,13 @@
             prevEl: ".swiper-button-prev",
         },
     });
+</script>
+<!-- DEBUG INFO - chỉ thấy khi mở Inspect -->
+<script>
+    console.log("Cache Status: ${cacheStatus}");
+    console.log("Cache Last Updated: ${lastUpdated} ➡" + new Date(${lastUpdated}));
+    console.log(" Current Time: ${currentTime} " + new Date(${currentTime}));
+    console.log("Cache Expired After: ${elapsedMinutes} minutes");
 </script>
 </body>
 </html>

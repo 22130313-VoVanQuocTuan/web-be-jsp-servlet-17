@@ -66,13 +66,13 @@ function loadDataProduct() {
             <td><img src="${product.imageUrl}" alt="${product.name}" width="50"></td>
             <td>${product.id}</td>
             <td>${product.name}</td>
-            <td>${product.price}₫</td>
+            <td>${product.price.toLocaleString()}₫</td>
             <td>${product.quantity}</td>
             <td>${product.status}</td>
             <td>${formattedDate}</td>
             <td class="v">
                 <button type="button" onclick="openModalEdit(${product.id}, '${product.name}' , '${product.price}' , 
-                '${product.categoryId}','${product.discountPercent}','${product.supplier}','${product.size}' , '${product.color}',
+                '${product.categoryId}','${product.discountPercent/100}','${product.supplier}','${product.size}' , '${product.color}',
                 '${product.unit}','${product.description}','${product.imageUrl}')">Sửa </button>
                 <button id="deleteBtn" class="btn-delete" onclick="openModalDelete(${product.id})" >Xóa</button>
             </td>
@@ -199,12 +199,12 @@ document.getElementById('editProductForm').addEventListener("submit", function (
     event.preventDefault();
     // Tạo FormData để gửi các dữ liệu của form (bao gồm cả ảnh)
     var formData = new FormData();
-    const discountPercentEdit = document.getElementById('discountPercentEdit').value / 100;
+    const discountPercentEdit = document.getElementById('discountPercentEdit').value;
     formData.append("id", document.getElementById('productId').value);
     formData.append("name", document.getElementById('productNameEdit').value);
     formData.append("price", document.getElementById('productPriceEdit').value);
     formData.append("categoryId", document.getElementById('productCategoryEdit').value);
-    formData.set("discountPercent", discountPercentEdit);
+    formData.append("discountPercent", discountPercentEdit);
     formData.append("supplier", document.getElementById('nppEdit').value);
     formData.append("size", document.getElementById('sizeEdit').value);
     formData.append("color", document.getElementById('colorEdit').value);
