@@ -311,6 +311,7 @@ function addCart(id) {
     $.ajax({
         url: "add-cart",
         type: "GET",
+        dataType: "json",
         data: {
             id: id,
         },
@@ -328,8 +329,12 @@ function addCart(id) {
                         window.location.href = "turn-page?action=cart";
                     }
                 });
-            } else {
-                alert("Lỗi không thêm được sản phẩm.");
+
+
+
+            } else if (res.status === "unauthenticated") {
+                window.location.href = "login";
+
             }
         }
     });
