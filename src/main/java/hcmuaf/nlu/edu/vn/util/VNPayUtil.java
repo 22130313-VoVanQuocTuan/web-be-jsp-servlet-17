@@ -8,10 +8,7 @@ import java.nio.charset.StandardCharsets;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.UUID;
-import java.util.TreeMap;
+import java.util.*;
 
 public class VNPayUtil {
     public static String createPaymentUrl(HttpServletRequest request, double amount) {
@@ -25,14 +22,19 @@ public class VNPayUtil {
         String vnp_Locale = "vn";
         String vnp_TxnRef = UUID.randomUUID().toString();
 
-        // Thời gian tạo giao dịch
-        String vnp_CreateDate = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+        // Lấy thời gian hiện tại với múi giờ Asia/Ho_Chi_Minh
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+        sdf.setTimeZone(TimeZone.getTimeZone("Asia/Ho_Chi_Minh"));  // Đặt múi giờ
 
-        // Thời gian hết hạn (15 phút sau thời gian tạo)
+        // Lấy thời gian hiện tại
+        Date now = new Date();
+        String vnp_CreateDate = sdf.format(now);  // Thời gian tạo giao dịch
+
+        // Tạo thời gian hết hạn (15 phút sau thời gian hiện tại)
         Calendar calendar = Calendar.getInstance();
+        calendar.setTime(now);
         calendar.add(Calendar.MINUTE, 15);
-        String vnp_ExpireDate = new SimpleDateFormat("yyyyMMddHHmmss").format(calendar.getTime());
-
+        String vnp_ExpireDate = sdf.format(calendar.getTime());  // Thời gian hết hạn giao dịch
         String vnp_IpAddr = request.getRemoteAddr();
 
         // Tạo TreeMap để sắp xếp tham số theo thứ tự alphabet

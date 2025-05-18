@@ -56,7 +56,14 @@ $(document).ready(function () {
                 "next": "Tiếp",
                 "previous": "Trước"
             }
-        }
+
+
+        },
+        "columnDefs": [
+            { "orderable": false, "targets": [0, 1, 3, 4, 5, 6] }  // chỉ cho phép sắp xếp cột 2 (startLog)
+        ]
+
+
     });
     // Gọi lại hàm cập nhật màu sắc cho trạng thái khi DataTable vẽ lại bảng (chuyển trang, tìm kiếm, sắp xếp)
     $('#logTable').on('draw.dt', function () {

@@ -75,13 +75,17 @@ public class OrderDao {
     //Lấy ra chi tiết hoá đơn
     public Orders getOrderDetail(int id) throws SQLException {
 
-        String query = "SELECT o.id, o.totalPrice, o.shippingFee, o.discountAmount, o.paymentMethod, o.paymentStatus, o.shippingAddress, Sum(oi.quantity) AS quantity, a.email, a.name, a.phoneNumber, a.note " +
+        String query = "SELECT o.id, o.totalPrice, o.shippingFee, o.discountAmount, o.paymentMethod, " +
+                "o.paymentStatus, o.shippingAddress, SUM(oi.quantity) AS quantity, " +
+                "a.email, a.name, a.phoneNumber, a.note " +
                 "FROM orders o " +
                 "JOIN orderitems oi ON o.id = oi.orderId " +
                 "JOIN products p ON oi.productId = p.id " +
                 "JOIN users u ON o.userId = u.id " +
                 "JOIN addressshipping a ON u.id = a.userId " +
-                "WHERE o.id=?";
+                "WHERE o.id = ? " +
+                "GROUP BY o.id, o.totalPrice, o.shippingFee, o.discountAmount, o.paymentMethod, " +
+                "o.paymentStatus, o.shippingAddress, a.email, a.name, a.phoneNumber, a.note";
 
         Orders orderDetail = null;
         try (PreparedStatement ps = dbConnect.preparedStatement(query)) {
@@ -89,28 +93,30 @@ public class OrderDao {
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                // Khởi tạo đơn hàng
-            int ids = rs.getInt("id");
-              double totalPrice = rs.getDouble("totalPrice");
-              double shippingFee = rs.getDouble("shippingFee");
-              double discountAmount = rs.getDouble("discountAmount");
-              String paymentMethod = rs.getString("paymentMethod");
-              String paymentStatus = rs.getString("paymentStatus");
-              String shippingAddress = rs.getString("shippingAddress");
-              int quantity = rs.getInt("quantity");
-              String email = rs.getString("email");
-              String name = rs.getString("name");
-               String phoneNumber = rs.getString("phoneNumber");
-               String  note = rs.getString("note");
+                int ids = rs.getInt("id");
+                double totalPrice = rs.getDouble("totalPrice");
+                double shippingFee = rs.getDouble("shippingFee");
+                double discountAmount = rs.getDouble("discountAmount");
+                String paymentMethod = rs.getString("paymentMethod");
+                String paymentStatus = rs.getString("paymentStatus");
+                String shippingAddress = rs.getString("shippingAddress");
+                int quantity = rs.getInt("quantity");
+                String email = rs.getString("email");
+                String name = rs.getString("name");
+                String phoneNumber = rs.getString("phoneNumber");
+                String note = rs.getString("note");
 
-               orderDetail = new Orders(ids, totalPrice, shippingFee, discountAmount, paymentMethod, paymentStatus, shippingAddress, quantity, email, name, phoneNumber, note);
-
+                orderDetail = new Orders(ids, totalPrice, shippingFee, discountAmount,
+                        paymentMethod, paymentStatus, shippingAddress,
+                        quantity, email, name, phoneNumber, note);
             }
-            return orderDetail;
 
+            return orderDetail;
         } catch (SQLException e) {
+            System.err.println("LỖI SQL khi lấy order detail: " + e.getMessage());
             throw new RuntimeException(e);
         }
+
 
     }
 

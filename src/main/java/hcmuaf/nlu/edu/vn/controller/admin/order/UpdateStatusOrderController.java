@@ -1,6 +1,10 @@
 package hcmuaf.nlu.edu.vn.controller.admin.order;
 
+import hcmuaf.nlu.edu.vn.model.Orders;
+import hcmuaf.nlu.edu.vn.model.Users;
 import hcmuaf.nlu.edu.vn.service.OrderService;
+import hcmuaf.nlu.edu.vn.util.logUtil.LogLevel;
+import hcmuaf.nlu.edu.vn.util.logUtil.LogUtilDao;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
@@ -29,15 +33,18 @@ public class UpdateStatusOrderController extends HttpServlet {
         int id = Integer.parseInt(request.getParameter("id"));
         String statusOrder = request.getParameter("statusOrder");
         String statusPayment = request.getParameter("statusSelect");
+        HttpSession session = request.getSession();
+        Users user = (Users) session.getAttribute("user");
 
         try {
+            Orders orders= orderService.getItemOrders(id);
           orderService.updateOrderPaymentStatus(id, statusPayment);
             if (statusPayment.equals("Đã thanh toán")) {
              orderService.updateOrderStatus(id, "Hoàn thành");
             } else {
               orderService.updateOrderStatus(id, "Chưa hoàn thành");
             }
-
+            LogUtilDao.log(LogLevel.INFO, user.getUsername(), request.getRemoteAddr(), orders.getPaymentStatus(), statusPayment);
                 PrintWriter out = response.getWriter();
                 out.println("{\"message\":\"Cập nhật thành công\"}");
                 out.flush();

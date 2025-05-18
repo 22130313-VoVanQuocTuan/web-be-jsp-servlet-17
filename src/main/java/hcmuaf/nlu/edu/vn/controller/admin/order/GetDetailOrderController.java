@@ -1,6 +1,7 @@
 package hcmuaf.nlu.edu.vn.controller.admin.order;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import hcmuaf.nlu.edu.vn.model.OrderItem;
 import hcmuaf.nlu.edu.vn.model.Orders;
 import hcmuaf.nlu.edu.vn.model.Users;
@@ -33,21 +34,24 @@ public class GetDetailOrderController extends HttpServlet {
         }
 
         int id = Integer.parseInt(request.getParameter("id"));
+
         try {
             List<OrderItem> orderItems = orderService.getOrderItems(id);
             Orders orderDetail = orderService.getItemOrders(id);
-
             response.setContentType("application/json");
             response.setCharacterEncoding("UTF-8");
-            Gson gson = new Gson();
+            Gson gson = new GsonBuilder().setPrettyPrinting().create();
             Map<String, Object> result = new HashMap<>();
             result.put("order", orderDetail);
             result.put("items", orderItems);
             String json = gson.toJson(result);
             response.getWriter().write(json);
         } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        e.printStackTrace();
+        response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+        response.setContentType("application/json");
+        response.getWriter().write("{\"error\": \"Lỗi khi truy xuất dữ liệu đơn hàng\"}");
+    }
     }
 
     @Override

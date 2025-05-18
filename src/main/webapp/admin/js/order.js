@@ -47,6 +47,7 @@ function fetchData(data) {
     tableBody.innerHTML = "";
 
     data.forEach(order => {
+        const isCompleted = order.status === "Hoàn thành";
 
         const row = document.createElement("tr");
         row.innerHTML = `
@@ -60,7 +61,7 @@ function fetchData(data) {
           <td class="v" style="display: flex">
             <button class="view-detail-btn" onclick="openModal(${order.id})">Chi tiết
                </button>
-             <button class="delete-btn" onclick="openDeleteModal(${order.id})">Xóa</button>
+            <button class="delete-btn" onclick="openDeleteModal(${order.id})" ${isCompleted ? 'disabled' : ''}>Xóa</button> 
            </td>
         `;
         tableBody.appendChild(row);

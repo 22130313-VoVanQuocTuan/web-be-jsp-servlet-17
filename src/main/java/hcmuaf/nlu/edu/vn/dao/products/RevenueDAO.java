@@ -24,7 +24,7 @@ public class RevenueDAO {
                 ')'
             ) AS week_label, 
             SUM(totalPrice) AS revenue 
-        FROM Orders 
+        FROM orders 
         WHERE paymentStatus = 'Đã thanh toán' AND status = 'Hoàn thành'
         GROUP BY YEARWEEK(createdAt, 1) 
         ORDER BY YEARWEEK(createdAt, 1);
@@ -51,7 +51,7 @@ public class RevenueDAO {
         SELECT 
             DATE_FORMAT(createdAt, '%Y-%m') AS month_label, 
             SUM(totalPrice) AS revenue 
-        FROM Orders 
+        FROM orders 
         WHERE paymentStatus = 'Đã thanh toán' AND status = 'Hoàn thành'
         GROUP BY DATE_FORMAT(createdAt, '%Y-%m') 
         ORDER BY DATE_FORMAT(createdAt, '%Y-%m');
@@ -77,7 +77,7 @@ public class RevenueDAO {
         SELECT 
             YEAR(createdAt) AS year_label, 
             SUM(totalPrice) AS revenue 
-        FROM Orders 
+        FROM orders 
         WHERE paymentStatus = 'Đã thanh toán' AND status = 'Hoàn thành'
         GROUP BY YEAR(createdAt) 
         ORDER BY YEAR(createdAt);
