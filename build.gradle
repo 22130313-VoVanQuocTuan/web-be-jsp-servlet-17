@@ -72,7 +72,7 @@ tasks.processResources {
 }
 remotes {
     host {
-        host = '192.168.136.128'
+        host = '192.168.136.129'
         user = 'root'
         password = 'centos'
     }
