@@ -2,6 +2,7 @@ package hcmuaf.nlu.edu.vn.controller.admin.account;
 
 import hcmuaf.nlu.edu.vn.model.Users;
 import hcmuaf.nlu.edu.vn.service.PermissionService;
+import hcmuaf.nlu.edu.vn.service.SessionManager;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -31,10 +32,19 @@ public class UpdatePermissionsController extends HttpServlet {
 
         int userId = Integer.parseInt(req.getParameter("userId"));
         String module = req.getParameter("module");
-        boolean canView = req.getParameter("canView") != null;
-        boolean canAdd = req.getParameter("canAdd") != null;
-        boolean canEdit = req.getParameter("canEdit") != null;
-        boolean canDelete = req.getParameter("canDelete") != null;
+        String canViewParam = req.getParameter("canView");
+        boolean canView = "true".equalsIgnoreCase(canViewParam) ? true : false;
+
+        String canAddParam = req.getParameter("canAdd");
+        boolean canAdd = "true".equalsIgnoreCase(canAddParam) ? true : false;
+
+        String canEditParam = req.getParameter("canEdit");
+        boolean canEdit = "true".equalsIgnoreCase(canEditParam) ? true : false;
+
+        String canDeleteParam = req.getParameter("canDelete");
+        boolean canDelete = "true".equalsIgnoreCase(canDeleteParam) ? true : false;
+
+
 
         // Cập nhật quyền
         try {

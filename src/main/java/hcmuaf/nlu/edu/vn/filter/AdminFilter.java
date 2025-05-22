@@ -17,7 +17,7 @@ import java.io.PrintWriter;
 @WebFilter(filterName = "admin-filter", urlPatterns = {"/add-account", "/delete-account", "/status-account", "/update-status-role-account","/update-permissions-admin",
 "/add-promotional", "/delete-promotional", "/update-status-promotional" ,"/delete-rating"
         , "/add-delete-category" ,"/add-product","/delete-product","/edit-product", "/update-status-order",
-        "/delete-order","/delete-Log", "/cleanLog", "/updateInventory" , "/import_stock" ,"/export_stock", "/deleteTransactionstock"})
+        "/delete-order","/delete-Log", "/cleanLog", "/updateInventory" , "/importInventory" ,"/exportInventory", "/deleteTransactionstock"})
 public class AdminFilter implements Filter {
     private PermissionService permissionService;
 
@@ -34,6 +34,7 @@ public class AdminFilter implements Filter {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse res = (HttpServletResponse) response;
 
+
         HttpSession session = req.getSession(false);
         Users user = (session != null) ? (Users) session.getAttribute("user") : null;
         System.out.println("Usser: " + user.getId());
@@ -49,7 +50,7 @@ public class AdminFilter implements Filter {
         System.out.println("Request URI: " + requestUri);
         System.out.println("Mapped Module: " + module);
 
-        PermissionService permissionService = new PermissionService();
+
         // Lấy quyền từ DB
         Permissions permission = permissionService.getPermissions(user.getId(), module);
         if (permission == null || !hasAccess(permission, requestUri)) {
@@ -95,6 +96,7 @@ public class AdminFilter implements Filter {
         if (requestUri.contains("add")) return permission.getCanAdd();
         if (requestUri.contains("delete") || requestUri.contains("clean")) return permission.getCanDelete();
         if (requestUri.contains("edit") || requestUri.contains("update") || requestUri.contains("import") || requestUri.contains("export"))  return permission.getCanEdit();
+
         return permission.getCanView(); // Mặc định cần quyền xem
     }
 
