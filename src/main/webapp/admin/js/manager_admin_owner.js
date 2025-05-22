@@ -70,18 +70,17 @@ document.getElementById('updatePermissionsForm').addEventListener('submit', func
 
     let userId = document.getElementById('userId').value;
     let module = document.getElementById('module').value;
-    let canView = document.getElementById('canView').value;
-    let canAdd = document.getElementById('canAdd').value;
-    let canEdit = document.getElementById('canEdit').value;
-    let canDelete = document.getElementById('canDelete').value;
+    let canView = String(document.getElementById('canView').checked); // Ép thành chuỗi
+    let canAdd = String(document.getElementById('canAdd').checked);
+    let canEdit = String(document.getElementById('canEdit').checked);
+    let canDelete = String(document.getElementById('canDelete').checked);
 
     $.ajax({
         url: 'update-permissions-admin',
         type: 'POST',
         data: {userId: userId, module: module, canView: canView, canAdd: canAdd, canEdit: canEdit, canDelete: canDelete },
         success: function (response) {
-            document.getElementById("message").innerHTML = response.message;
-            if (response.error) {
+             if (response.error) {
                 document.getElementById("message").innerHTML = response.message;
                 closeModalEdit();
                 showAlert();
