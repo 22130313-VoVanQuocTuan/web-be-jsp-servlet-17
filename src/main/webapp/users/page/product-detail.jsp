@@ -155,8 +155,9 @@
                 <label for="quantity">Số lượng:</label>
                 <input type="number" id="quantity" name="quantity" min="1" value="1"/>
             </div>
-            <button class="add-to-cart-btn"><a href="add-cart?id=${product.id}"
-                                               style="color: #ffffff; text-decoration: none">Thêm vào giỏ hàng</a>
+            <button type="button" onclick="addCart(${product.id})" class="add-to-cart-btn" data-id="${product.id}">
+                Thêm vào giỏ hàng
+            </button>
             </button>
             <p class="contact">
                 Liên hệ: <strong>0366633518</strong> hoặc <strong>0824.646.746 (Mr.Huy)</strong>
