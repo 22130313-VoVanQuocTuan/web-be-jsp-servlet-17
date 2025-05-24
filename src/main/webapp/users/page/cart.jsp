@@ -15,7 +15,7 @@
 <link rel="stylesheet" href="<c:url value="/users/css/home.css"/>">
 <link rel="stylesheet" href="<c:url value="/users/css/cart.css"/>">
 
-<body>
+<body data-keyword="${keyword}">
     <div id="section-header1">
         <div class="container">
             <div class="banner">
@@ -59,13 +59,10 @@
                     </div>
 
                     <!-- Thanh tìm kiếm ở giữa -->
-                    <form action="product" method="GET">
-                        <div class="search-bar">
-                            <input type="hidden" name="search" value="true">
-                            <input name="name" type="text" placeholder="Tìm kiếm sản phẩm...">
-                            <button type="submit" title="icon"><i class="fa fa-fw fa-search"></i></button>
-                        </div>
-                    </form>
+                    <div class="search-bar">
+                        <input name="name" type="text" placeholder="Tìm kiếm sản phẩm..." id="search-input">
+                        <button title="icon" onclick="triggerSearch()"><i class="fa fa-fw fa-search"></i></button>
+                    </div>
 
                     <!-- Thông tin bên phải -->
                     <div class="info">
@@ -271,7 +268,7 @@
 
     <script src="<c:url value="/users/js/scripts.js"/>"></script>
     <script src="<c:url value="/users/js/cart.js"/>"></script>
-
+    <script src="<c:url value="/users/js/search.js"/>"></script>
 
 </body>
 

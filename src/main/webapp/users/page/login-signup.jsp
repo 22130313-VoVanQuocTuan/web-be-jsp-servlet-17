@@ -59,7 +59,7 @@
         text-align: center;
     }
 </style>
-<body>
+<body data-keyword="${keyword}">
 <div id="section-header1">
     <div class="container">
         <div class="top-left">
@@ -88,13 +88,10 @@
                 </div>
 
                 <!-- Thanh tìm kiếm ở giữa -->
-                <form action="product" method="GET">
-                    <div class="search-bar">
-                        <input type="hidden" name="search" value="true">
-                        <input name="name" type="text" placeholder="Tìm kiếm sản phẩm...">
-                        <button type="submit" title="icon"><i class="fa fa-fw fa-search"></i></button>
-                    </div>
-                </form>
+                <div class="search-bar">
+                    <input name="name" type="text" placeholder="Tìm kiếm sản phẩm..." id="search-input">
+                    <button title="icon" onclick="triggerSearch()"><i class="fa fa-fw fa-search"></i></button>
+                </div>
 
                 <!-- Thông tin bên phải -->
                 <div class="info">
@@ -108,7 +105,8 @@
                         <a id="carts" href="turn-page?action=cart">
                             <i class="fas fa-shopping-cart" style="color: #15283e;"></i>
                         </a>
-                        <span class="cart-count" id="cart-count">${empty sessionScope.cartItemCount ? 0 : sessionScope.cartItemCount}</span>
+                        <span class="cart-count"
+                              id="cart-count">${empty sessionScope.cartItemCount ? 0 : sessionScope.cartItemCount}</span>
                     </div>
                 </div>
             </div>
@@ -166,31 +164,33 @@
 <!-- Content-->
 <div class="content">
     <div class="container" id="container">
-            <div class="form-container sign-up">
-                    <form id="register-form" >
-                    <h1>Tạo tài khoản</h1>
-                    <div class="social-icons">
-                        <a href="loginGG" class="icon-logo google" style="text-decoration: none"><i class="fa-brands fa-google-plus-g g"></i></a>
-                        <a href="loginFB" class="icon-logo facebook" style="text-decoration: none"><i class="fa-brands fa-facebook-f f"></i></a>
-                    </div>
-                    <span>Hoặc sử dụng email để đăng kí tài khoản</span>
+        <div class="form-container sign-up">
+            <form id="register-form">
+                <h1>Tạo tài khoản</h1>
+                <div class="social-icons">
+                    <a href="loginGG" class="icon-logo google" style="text-decoration: none"><i
+                            class="fa-brands fa-google-plus-g g"></i></a>
+                    <a href="loginFB" class="icon-logo facebook" style="text-decoration: none"><i
+                            class="fa-brands fa-facebook-f f"></i></a>
+                </div>
+                <span>Hoặc sử dụng email để đăng kí tài khoản</span>
 
-                    <!-- Nhập Email -->
-                    <input type="email" name="email" id="register-email" placeholder="Email" value="${email}" >
-                    <div id="email-error" style="color: red; font-size: 10px;"></div>
+                <!-- Nhập Email -->
+                <input type="email" name="email" id="register-email" placeholder="Email" value="${email}">
+                <div id="email-error" style="color: red; font-size: 10px;"></div>
 
-                    <!-- Nhập Username -->
-                    <input type="text" name="username" id="register-username" placeholder="UserName" >
-                    <div id="username-error" style="color: red; font-size: 10px;"></div>
+                <!-- Nhập Username -->
+                <input type="text" name="username" id="register-username" placeholder="UserName">
+                <div id="username-error" style="color: red; font-size: 10px;"></div>
 
-                    <!-- Nhập Password -->
-                    <input type="password" name="password" id="register-password" placeholder="Password" >
-                    <div id="password-error" style="color: red; font-size: 10px;"></div>
+                <!-- Nhập Password -->
+                <input type="password" name="password" id="register-password" placeholder="Password">
+                <div id="password-error" style="color: red; font-size: 10px;"></div>
 
-                    <!-- Nút đăng ký -->
-                    <button type="submit" id="submit-register">Đăng kí</button>
-                </form>
-             </div>
+                <!-- Nút đăng ký -->
+                <button type="submit" id="submit-register">Đăng kí</button>
+            </form>
+        </div>
 
 
         <div class="form-container sign-in none">
@@ -239,30 +239,31 @@
         <!-- Form xác thực email -->
         <div class="overlay" id="overlay"></div>
 
-            <!-- Modal xác thực email -->
-            <div id="verification-modal" class="modal" style="display: none;">
-                <div class="modal-content">
-                    <button title="close" type="button" class="close-button" id="close-button">
-                        <a href="login?action=login"> <i class="fas fa-times"></i></a>
-                        <!-- Font Awesome icon for "X" -->
-                    </button>
-                    <h1>Xác thực email</h1>
-                    <!-- Form xác thực email -->
-                    <form id="verification-form">
-                        <div class="verification-code-inputs " style="display: flex; gap: 10px;">
-                            <input type="hidden" id="email">
-                            <input id="verification-code" type="text">
-                        </div>
-                        <span id="verification-code-error" style="color: red; font-size: 10px;" class="error-message"></span>
-                        <button type="submit" id="verify-button">Xác thực</button>
-                    </form>
+        <!-- Modal xác thực email -->
+        <div id="verification-modal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <button title="close" type="button" class="close-button" id="close-button">
+                    <a href="login?action=login"> <i class="fas fa-times"></i></a>
+                    <!-- Font Awesome icon for "X" -->
+                </button>
+                <h1>Xác thực email</h1>
+                <!-- Form xác thực email -->
+                <form id="verification-form">
+                    <div class="verification-code-inputs " style="display: flex; gap: 10px;">
+                        <input type="hidden" id="email">
+                        <input id="verification-code" type="text">
+                    </div>
+                    <span id="verification-code-error" style="color: red; font-size: 10px;"
+                          class="error-message"></span>
+                    <button type="submit" id="verify-button">Xác thực</button>
+                </form>
 
-                    <!-- Form gửi lại mã -->
-                    <form id="reset-password-form">
-                        <button type="submit" class="reset">Gửi lại</button>
-                    </form>
-                </div>
+                <!-- Form gửi lại mã -->
+                <form id="reset-password-form">
+                    <button type="submit" class="reset">Gửi lại</button>
+                </form>
             </div>
+        </div>
 
     </div>
 
@@ -322,6 +323,6 @@
 
 <script src="${pageContext.request.contextPath}/users/js/scripts.js"></script>
 <script src="${pageContext.request.contextPath}/users/js/login-signup.js"></script>
-
+<script src="<c:url value="/users/js/search.js"/>"></script>
 </body>
 </html>

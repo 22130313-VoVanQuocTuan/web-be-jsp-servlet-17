@@ -48,7 +48,7 @@
         color: #f12020;
     }
 </style>
-<body>
+<body data-keyword="${keyword}">
 <div id="section-header1">
     <div class="container">
         <div class="banner">
@@ -92,13 +92,10 @@
                 </div>
 
                 <!-- Thanh tìm kiếm ở giữa -->
-                <form action="product" method="GET">
-                    <div class="search-bar">
-                        <input type="hidden" name="search" value="true">
-                        <input name="name" type="text" placeholder="Tìm kiếm sản phẩm...">
-                        <button type="submit" title="icon"><i class="fa fa-fw fa-search"></i></button>
-                    </div>
-                </form>
+                <div class="search-bar">
+                    <input name="name" type="text" placeholder="Tìm kiếm sản phẩm..." id="search-input">
+                    <button title="icon" onclick="triggerSearch()"><i class="fa fa-fw fa-search"></i></button>
+                </div>
 
                 <!-- Thông tin bên phải -->
                 <div class="info">
@@ -491,7 +488,7 @@
 <script src="<c:url value="/users/js/comfirmation.js"/>"></script>
 <script src="<c:url value="/users/js/scripts.js"/>" defer></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<!-- JavaScript -->
+<script src="<c:url value="/users/js/search.js"/>"></script>
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         // Kiểm tra nếu cần hiển thị modal
