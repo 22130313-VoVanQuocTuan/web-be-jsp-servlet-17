@@ -69,3 +69,38 @@ function showAlert() {
         });
     }
 }
+
+function addCart(id) {
+    $.ajax({
+        url: "add-cart",
+        type: "GET",
+        dataType: "json",
+        data: {
+            id: id,
+        },
+        success: function (res) {
+            if (res.status === "success") {
+                $.ajax({
+                    url: "cart-items",
+                    type: "GET",
+                    dataType: 'json',
+                    success: function (data) {
+                        $("#subtotal .value").text(data.totalPrice.toLocaleString());
+                        $("#vat .value").text(data.totalShippingFee.toLocaleString());
+                        $("#total .value").text(data.totalFinalPrice.toLocaleString());
+                        $("#cart-count").text(data.totalItem);
+                        window.location.href = "turn-page?action=cart";
+                    }
+                });
+
+
+            } else if (res.status === "unauthenticated") {
+                window.location.href = "logout";
+            }
+        },
+        error: function (xhr, status, error) {
+            console.error("AJAX lỗi:", error);
+            console.log("Chi tiết lỗi:", xhr.responseText);
+        }
+    });
+}
