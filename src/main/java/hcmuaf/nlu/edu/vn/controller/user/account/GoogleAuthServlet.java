@@ -16,9 +16,9 @@ import java.util.Arrays;
 
 @WebServlet(   name = "LoginGG" , value = "/loginGG")
 public class GoogleAuthServlet extends HttpServlet {
-    private static final String CLIENT_ID = "411211314163-cdglpiehn92eusikjg120u54t4sc18br.apps.googleusercontent.com";
-    private static final String CLIENT_SECRET = "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";
-    private static final String REDIRECT_URI = "http://localhost:8888/tqh/oauth2callback";
+    private static final String CLIENT_ID = "452111205936-1qshjo4jkek1ilnu7uufgd0oq73c0lbk.apps.googleusercontent.com";
+    private static final String CLIENT_SECRET = "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";
+    private static final String REDIRECT_URI = "https://banvatlieuxaydung.site/tqh/oauth2callback";
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

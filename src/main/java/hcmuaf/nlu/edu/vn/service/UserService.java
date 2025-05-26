@@ -220,6 +220,7 @@ public class UserService {
         newUser.setEmail(email);
         newUser.setUsername(username);
         newUser.setPassword(password);  // Mã hóa mật khẩu
+        newUser.setCreateDate(new Date());
         newUser.setRole(role);
         return addDeleteUpdateAccountInAdminDao.addAccount(newUser);
     }

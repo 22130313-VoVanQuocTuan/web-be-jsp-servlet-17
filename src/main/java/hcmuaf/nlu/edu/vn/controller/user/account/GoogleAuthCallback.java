@@ -23,9 +23,9 @@ import java.util.Arrays;
 
 @WebServlet(name = "oauth2callback", value = "/oauth2callback")
 public class GoogleAuthCallback extends HttpServlet {
-    private static final String CLIENT_ID = "411211314163-cdglpiehn92eusikjg120u54t4sc18br.apps.googleusercontent.com";
-    private static final String CLIENT_SECRET = "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";
-    private static final String REDIRECT_URI = "http://localhost:8888/tqh/oauth2callback";
+    private static final String CLIENT_ID = "452111205936-1qshjo4jkek1ilnu7uufgd0oq73c0lbk.apps.googleusercontent.com";
+    private static final String CLIENT_SECRET = "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";
+    private static final String REDIRECT_URI = "https://banvatlieuxaydung.site/tqh/oauth2callback";
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -84,10 +84,10 @@ public class GoogleAuthCallback extends HttpServlet {
 
             if (users == null) {
                 //Nếu chưa có, tạo tài khoản mới
-                userService.addAccount(userInfo.getName(), "", userInfo.getEmail(), "user");
+                userService.addAccountGGFB(userInfo.getName(), "", userInfo.getEmail(), "user");
 
                 //Lấy lại thông tin người dùng sau khi tạo tài khoản
-                users = userService.findUserByEmailLogin(userInfo.getName());
+                users = userService.findUserByEmailLogin(userInfo.getEmail());
             }
 
             // Kiểm tra xem tài khoản có bị đình chỉ không
