@@ -322,3 +322,25 @@ td {
   transform: scale(1.05);
 }
 
+.btn-transport {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #4CAF50; /* Màu xanh lá */
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  transition: background-color 0.3s, transform 0.2s;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.btn-transport:hover {
+  background-color: #45a049;
+  transform: translateY(-2px);
+}
+
+.btn-transport:active {
+  background-color: #3e8e41;
+  transform: translateY(0);
+}

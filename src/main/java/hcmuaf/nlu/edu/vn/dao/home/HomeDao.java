@@ -78,12 +78,12 @@ public class HomeDao {
     //Lâấy ra danh sách khách hàng tiềm năng
     public List<Users> getUserPotential() {
         List<Users> users = new ArrayList<Users>();
-        String query = "SELECT email, SUM(o.totalPrice) AS total FROM users u JOIN orders o ON u.id = o.userId GROUP BY email ORDER BY total DESC";
+        String query = "SELECT username, SUM(o.totalPrice) AS total FROM users u JOIN orders o ON u.id = o.userId GROUP BY username ORDER BY total DESC";
         try (PreparedStatement preparedStatement = dbConnect.preparedStatement(query)) {
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
                 Users user = new Users();
-                user.setEmail(rs.getString("email"));
+                user.setUsername(rs.getString("username"));
                 user.setTotalPrice(rs.getDouble("total"));
 
                 users.add(user);
@@ -102,7 +102,7 @@ public class HomeDao {
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
                 Orders order = new Orders();
-                order.setUserid(rs.getInt("userId"));
+                order.setId(rs.getInt("id"));
                 order.setTotalPrice(rs.getDouble("totalPrice"));
                 order.setPaymentStatus(rs.getString("paymentStatus"));
                 order.setStatus(rs.getString("status"));

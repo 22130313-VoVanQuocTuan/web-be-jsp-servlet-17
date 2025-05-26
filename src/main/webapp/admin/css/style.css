@@ -288,7 +288,7 @@ body {
 .details {
   position: relative;
   width: 100%;
-  padding: 20px;
+  padding: 7px;
   display: grid;
   grid-template-columns: 2fr 1fr;
   grid-gap: 30px;
@@ -439,7 +439,8 @@ td {
 }
 
 .recentCustomers table tr td {
-  padding: 14px 10px;
+  padding: 6px 10px;
+  white-space: nowrap;
 }
 
 .recentCustomers table tr td h4 {
@@ -647,4 +648,20 @@ td {
 #cancel-logout {
   background-color: #ccc;
   color: black;
+}
+.table-scroll {
+  max-height: 300px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  border-top: 1px solid #eee;
+}
+
+/* Tuỳ chọn: làm mượt thanh cuộn */
+.table-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+
+.table-scroll::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
 }

@@ -25,7 +25,7 @@ public class RevenueDAO {
             ) AS week_label, 
             SUM(totalPrice) AS revenue 
         FROM orders 
-        WHERE status = 'Đã hoàn thành' AND paymentStatus = 'Đã thanh toán' 
+        WHERE status = 'Hoàn thành' AND paymentStatus = 'Đã thanh toán' 
         GROUP BY YEAR(updatedAt), WEEK(updatedAt, 1) 
         ORDER BY YEAR(updatedAt), WEEK(updatedAt, 1);
         """;

@@ -31,20 +31,20 @@ public class UpdateStatusOrderController extends HttpServlet {
       response.setCharacterEncoding("UTF-8");
 
         int id = Integer.parseInt(request.getParameter("id"));
-        String statusOrder = request.getParameter("statusOrder");
-        String statusPayment = request.getParameter("statusSelect");
+       String statusOrder = request.getParameter("statusSelect");
         HttpSession session = request.getSession();
         Users user = (Users) session.getAttribute("user");
 
         try {
             Orders orders= orderService.getItemOrders(id);
-          orderService.updateOrderPaymentStatus(id, statusPayment);
-            if (statusPayment.equals("Đã thanh toán")) {
-             orderService.updateOrderStatus(id, "Hoàn thành");
-            } else {
-              orderService.updateOrderStatus(id, "Chưa hoàn thành");
+            if("Đã giao".equalsIgnoreCase(statusOrder)){
+                orderService.updateOrderStatus(id, "Hoàn thành");
+                orderService.updateOrderStatusPay(id, "Đã thanh toán");
+            }else{
+                orderService.updateOrderStatus(id, statusOrder);
             }
-            LogUtilDao.log(LogLevel.INFO, user.getUsername(), request.getRemoteAddr(), orders.getPaymentStatus(), statusPayment);
+
+            LogUtilDao.log(LogLevel.INFO, user.getUsername(), request.getRemoteAddr(), orders.getStatus(), statusOrder);
                 PrintWriter out = response.getWriter();
                 out.println("{\"message\":\"Cập nhật thành công\"}");
                 out.flush();

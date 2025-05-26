@@ -45,8 +45,8 @@ function loadOrder() {
 function fetchData(data) {
     const tableBody = document.querySelector("#orderTable tbody");
     tableBody.innerHTML = "";
-
-    data.forEach(order => {
+    const filteredData = data.filter(order => order.status === "Hoàn thành");
+    filteredData.forEach(order => {
         const isCompleted = order.status === "Hoàn thành";
 
         const row = document.createElement("tr");
@@ -139,9 +139,7 @@ function openModal(id) {
             document.querySelector("#orderDetailContent").querySelector("p:nth-of-type(11)").innerHTML = `<strong>Số điện thoại:</strong> ${order.phoneNumber}`;
             document.querySelector("#orderDetailContent").querySelector("p:nth-of-type(12)").innerHTML = `<strong>Ghi chú:</strong> ${order.note}`;
 
-            // Cập nhật form cập nhật trạng thái
-            document.querySelector('input[name="id"]').value = order.id;
-            document.querySelector('#statusSelect').value = order.paymentStatus;
+
 
 
         })
@@ -189,39 +187,10 @@ function deleteOrder() {
     })
 
 }
-
-document.getElementById("orderForm").addEventListener("submit", function (event){
-    event.preventDefault();
-    const orderId = document.getElementById("orderId").value;
-    const statusSelect = document.getElementById("statusSelect").value;
-    $.ajax({
-        url: "update-status-order",
-        type: "POST",
-        data: {id: orderId, statusSelect: statusSelect},
-        success: function (response){
-            if(response.error){
-                document.getElementById("message").innerHTML = response.message;
-                closeModalDetail();
-                showAlert();
-            }else{
-                document.getElementById("message").innerHTML = response.message;
-                closeModalDetail();
-                showAlert();
-                loadOrder();
-            }
-        }
-    })
-}
-);
 function  closeModals(){
     document.getElementById("delete-modal").style.display = "none";
 }
 
-
-function  closeModalDetail(){
-    document.getElementById("orderDetailModal").style.display = "none";
-
-}
 
 
 

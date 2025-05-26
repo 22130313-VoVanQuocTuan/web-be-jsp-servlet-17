@@ -75,7 +75,7 @@ public class OrderDao {
     //Lấy ra chi tiết hoá đơn
     public Orders getOrderDetail(int id) throws SQLException {
 
-        String query = "SELECT o.id, o.totalPrice, o.shippingFee, o.discountAmount, o.paymentMethod, " +
+        String query = "SELECT o.id, o.totalPrice, o.shippingFee, o.discountAmount, o.paymentMethod, o.status, " +
                 "o.paymentStatus, o.shippingAddress, SUM(oi.quantity) AS quantity, " +
                 "a.email, a.name, a.phoneNumber, a.note " +
                 "FROM orders o " +
@@ -84,7 +84,7 @@ public class OrderDao {
                 "JOIN users u ON o.userId = u.id " +
                 "JOIN addressshipping a ON u.id = a.userId " +
                 "WHERE o.id = ? " +
-                "GROUP BY o.id, o.totalPrice, o.shippingFee, o.discountAmount, o.paymentMethod, " +
+                "GROUP BY o.id, o.totalPrice, o.shippingFee, o.discountAmount, o.paymentMethod, o.status, " +
                 "o.paymentStatus, o.shippingAddress, a.email, a.name, a.phoneNumber, a.note";
 
         Orders orderDetail = null;
@@ -98,6 +98,7 @@ public class OrderDao {
                 double shippingFee = rs.getDouble("shippingFee");
                 double discountAmount = rs.getDouble("discountAmount");
                 String paymentMethod = rs.getString("paymentMethod");
+                String status = rs.getString("status");
                 String paymentStatus = rs.getString("paymentStatus");
                 String shippingAddress = rs.getString("shippingAddress");
                 int quantity = rs.getInt("quantity");
@@ -107,7 +108,7 @@ public class OrderDao {
                 String note = rs.getString("note");
 
                 orderDetail = new Orders(ids, totalPrice, shippingFee, discountAmount,
-                        paymentMethod, paymentStatus, shippingAddress,
+                        paymentMethod,status, paymentStatus, shippingAddress,
                         quantity, email, name, phoneNumber, note);
             }
 
@@ -168,8 +169,8 @@ public class OrderDao {
     }
 
     //Cập nhật trạng thái đơn hàng
-    public boolean updateOrderStatus(int id, String status) throws SQLException {
-        String query = "UPDATE orders SET status = ? WHERE id = ?";
+    public boolean updateOrderStatusPay(int id, String status) throws SQLException {
+        String query = "UPDATE orders SET paymentStatus = ?, updatedAt = NOW()  WHERE id = ?";
         try(PreparedStatement ps = dbConnect.preparedStatement(query)){
             ps.setInt(2, id);
             ps.setString(1, status);
@@ -198,6 +199,24 @@ public class OrderDao {
         }
         return false;
     }
+    //Cập nhật trạng thái đơn hàng
+    public boolean updateOrderStatus(int id, String status) throws SQLException {
+        String query = "UPDATE orders SET status = ? WHERE id = ?";
+        try(PreparedStatement ps = dbConnect.preparedStatement(query)){
+            ps.setString(1, status);
+            ps.setInt(2, id);
+            int rowUpdated = ps.executeUpdate();
+            if(rowUpdated > 0) {
+                return true;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return false;
+    }
+
+
+
 
 
 }

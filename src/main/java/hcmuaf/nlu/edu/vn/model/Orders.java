@@ -36,12 +36,13 @@ public class Orders {
     }
 
 
-    public Orders(int id, double totalPrice, double shippingFee, double discountAmount, String paymentMethod, String paymentStatus, String shippingAddress, int quantity, String email, String name, String phoneNumber, String note) {
+    public Orders(int id, double totalPrice, double shippingFee, double discountAmount, String paymentMethod,String status, String paymentStatus, String shippingAddress, int quantity, String email, String name, String phoneNumber, String note) {
         this.id = id;
         this.totalPrice = totalPrice;
         this.shippingFee = shippingFee;
         this.discountAmount = discountAmount;
         this.paymentMethod = paymentMethod;
+        this.status = status;
         this.paymentStatus = paymentStatus;
         this.shippingAddress = shippingAddress;
         this.quantity = quantity;

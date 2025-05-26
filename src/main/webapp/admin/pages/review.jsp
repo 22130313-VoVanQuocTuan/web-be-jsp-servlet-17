@@ -196,7 +196,7 @@
             <div class="review">
                 <div class="recentOrders">
                     <div class="cardHeader">
-                        <h2>Danh sách đánh giá của khách hàng</h2>
+                        <h2>DANH SÁCH ĐÁNH GIÁ CỦA KHÁCH HÀNG</h2>
 
                     </div>
 

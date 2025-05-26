@@ -282,8 +282,8 @@
         <div class="details">
             <div class="recentOrders">
                 <div class="cardHeader">
-                    <h2>Đơn Hàng Gần Đây</h2>
-                    <a href="home?showAll=orders" class="btn">Xem Tất Cả</a>
+                    <h2>ĐƠN HÀNG GẦN ĐÂY</h2>
+
                 </div>
 
                 <table id="orderTable">
@@ -306,16 +306,16 @@
             <!-------------------- Khách Hàng Mới------------------->
             <div class="recentCustomers">
                 <div class="cardHeader">
-                    <h2>Khách hàng tiềm năng</h2>
-                    <a href="home?showAll=users" class="btn">Xem Tất Cả</a>
+                    <h2>TOP KHÁCH HÀNG TIỀM NĂNG</h2>
+
                 </div>
-                <table id="customerTable">
-                    <tbody>
-
-                    </tbody>
-
-
-                </table>
+                <div class="table-scroll">
+                    <table id="customerTable">
+                        <tbody>
+                        <!-- Dữ liệu sẽ được render ở đây -->
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
         <%-- -----------------Tạo biểu đồ doanh thu------------------------%>
