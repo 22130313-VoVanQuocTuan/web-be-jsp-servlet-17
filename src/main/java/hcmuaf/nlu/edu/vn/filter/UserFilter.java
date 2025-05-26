@@ -23,21 +23,31 @@ public class UserFilter implements Filter {
         HttpSession session = req.getSession(false); // Không tạo session mới nếu chưa đăng nhập
         Users user = (session != null) ? (Users) session.getAttribute("user") : null;
 
-
         if (user == null || !"user".equalsIgnoreCase(user.getRole())) {
-            // Lưu URL hiện tại
-            String currentUrl = req.getRequestURI();
-            String queryString = req.getQueryString();
-            if (queryString != null) {
-                currentUrl += "?" + queryString; // Gắn query string nếu có
-            }
-            req.getSession(true).setAttribute("redirectUrl", currentUrl);
+            // Nếu là AJAX request thì trả JSON thay vì forward
+            String requestedWith = req.getHeader("X-Requested-With");
+            boolean isAjax = "XMLHttpRequest".equalsIgnoreCase(requestedWith);
 
-            req.getRequestDispatcher ("/users/page/login-signup.jsp").forward(req,res); // Redirect đến trang login nếu không phải user
+            if (isAjax) {
+                res.setContentType("application/json");
+                res.setCharacterEncoding("UTF-8");
+                res.getWriter().write("{\"status\":\"unauthenticated\"}");
+            } else {
+                // Lưu URL hiện tại để chuyển hướng sau khi login
+                String currentUrl = req.getRequestURI();
+                String queryString = req.getQueryString();
+                if (queryString != null) {
+                    currentUrl += "?" + queryString;
+                }
+                req.getSession(true).setAttribute("redirectUrl", currentUrl);
+
+                req.getRequestDispatcher("/users/page/login-signup.jsp").forward(req, res);
+            }
         } else {
-            chain.doFilter(request, response); // Nếu là user, tiếp tục xử lý
+            chain.doFilter(request, response); // Nếu đã login, tiếp tục xử lý
         }
     }
+
 
     @Override
     public void destroy() {

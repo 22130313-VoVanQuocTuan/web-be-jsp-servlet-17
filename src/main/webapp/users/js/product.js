@@ -329,13 +329,14 @@ function addCart(id) {
                         window.location.href = "turn-page?action=cart";
                     }
                 });
-
-
-
             } else if (res.status === "unauthenticated") {
-                window.location.href = "login";
+                window.location.href = "logout";
 
             }
+        },
+        error: function (xhr, status, error) {
+            console.error("AJAX lỗi:", error);
+            console.log("Chi tiết lỗi:", xhr.responseText);
         }
     });
 }
