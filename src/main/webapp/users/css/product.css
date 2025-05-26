@@ -166,7 +166,6 @@ button:hover {
     display: flex;
     width: 100%;
     margin: 20px 0 15px;
-    background-color: #ffffff;
     gap: 20px; /* Giảm gap cho gọn gàng */
     align-items: center;
     padding: 10px 0;

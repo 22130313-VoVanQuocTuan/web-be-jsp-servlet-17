@@ -7,48 +7,26 @@ let currentCategoryId = null;
 function initProductPage(filterCategoryId) {
     document.addEventListener("DOMContentLoaded", function () {
         getCategory();
-        // Kiểm tra filterCategoryId để quyết định load sản phẩm
-        if (filterCategoryId !== null && filterCategoryId > 0) {
+        const keyword = document.body.getAttribute("data-keyword");
+        if (keyword && keyword.trim() !== "") {
+            searchByName(keyword);
+        } else if (filterCategoryId !== null && filterCategoryId > 0) {
             loadPCategoryById(parseInt(filterCategoryId));
         } else {
             loadP();
         }
-        // Tìm kiếm sản phẩm
-        const searchInput = document.getElementById("search-input");
-        const productList = document.getElementById("product-list");
-        const contextPath = window.location.pathname.split("/")[1];
-        const baseUrl = window.location.origin + "/" + contextPath + "/product";
 
-        searchInput.addEventListener("keyup", function () {
-            let keyword = searchInput.value.trim();
-            let url = `${baseUrl}?ajax=true`;
+        document.getElementById("prev").addEventListener("click", function (e) {
+            e.stopPropagation();
+            changePage(-1);
+        });
 
-            if (keyword.length > 1) {
-                url += `&name=${encodeURIComponent(keyword)}`;
-            }
-
-            console.log("Gửi request AJAX:", url);
-            fetch(url)
-                .then(response => response.text())
-                .then(data => {
-                    console.log("HTML nhận được:", data);
-                    productList.innerHTML = data;
-                })
-                .catch(error => console.error("Lỗi khi tìm kiếm:", error));
+        document.getElementById("next").addEventListener("click", function (e) {
+            e.stopPropagation();
+            changePage(1);
         });
     });
 }
-
-document.addEventListener("DOMContentLoaded", function () {
-    document.getElementById("prev").addEventListener("click", function (e) {
-        e.stopPropagation(); // Ngăn sự kiện lan truyền
-        changePage(-1);
-    });
-    document.getElementById("next").addEventListener("click", function (e) {
-        e.stopPropagation(); // Ngăn sự kiện lan truyền
-        changePage(1);
-    });
-});
 
 // Tải danh sách sản phẩm ban đầu
 function loadP() {
@@ -57,14 +35,11 @@ function loadP() {
         return;
     }
     $.ajax({
-        url: 'product',
-        type: 'GET',
-        success: function (data) {
+        url: 'product', type: 'GET', success: function (data) {
             console.log(data);
             currentProducts = data; // Lưu danh sách sản phẩm gốc
             renderP(data);
-        },
-        error: function (xhr, status, error) {
+        }, error: function (xhr, status, error) {
             console.error("Lỗi khi tải sản phẩm:", error);
         }
     });
@@ -174,9 +149,7 @@ $(document).on('click', '.filter-link', function (e) {
     window.isFiltering = true;
 
     $.ajax({
-        url: `product-filter?filter=${filterValue}&categoryId=${categoryId}`,
-        type: 'GET',
-        success: function (data) {
+        url: `product-filter?filter=${filterValue}&categoryId=${categoryId}`, type: 'GET', success: function (data) {
             console.log('Dữ liệu lọc nhận được:', data);
             if (data && Array.isArray(data)) {
                 currentProducts = data;
@@ -186,8 +159,7 @@ $(document).on('click', '.filter-link', function (e) {
                 console.error('Dữ liệu không hợp lệ:', data);
                 document.getElementById("product-list").innerHTML = "<p>Dữ liệu lọc không hợp lệ.</p>";
             }
-        },
-        error: function (xhr, status, error) {
+        }, error: function (xhr, status, error) {
             console.error("Lỗi khi lọc sản phẩm:", error, xhr.status, xhr.responseText);
             document.getElementById("product-list").innerHTML = "<p>Đã xảy ra lỗi khi lọc sản phẩm.</p>";
         },
@@ -197,9 +169,7 @@ $(document).on('click', '.filter-link', function (e) {
 // Tải danh mục
 function getCategory() {
     $.ajax({
-        url: 'product-category',
-        type: 'GET',
-        success: function (data) {
+        url: 'product-category', type: 'GET', success: function (data) {
             console.log("Danh mục:", data);
             if (data.categories && data.categories.length > 0) {
                 loadCategory(data.categories);
@@ -207,8 +177,7 @@ function getCategory() {
                 console.warn("Không có danh mục nào được trả về.");
                 document.getElementById("category-container").innerHTML = "<p>Không có danh mục nào.</p>";
             }
-        },
-        error: function (xhr, status, error) {
+        }, error: function (xhr, status, error) {
             console.error("Lỗi khi tải danh mục:", error);
             document.getElementById("category-container").innerHTML = "<p>Đã xảy ra lỗi khi tải danh mục.</p>";
         }
@@ -220,29 +189,32 @@ function loadCategory(data) {
     let html = '';
     data.forEach(category => {
         html += `
-            <h3>
-                <button onclick="loadPCategoryById(${category.id})">
-                    ${category.name}
-                </button>
-            </h3>`;
+                <h3>
+                    <button onclick="loadPCategoryById(${category.id})">
+                        ${category.name}
+                    </button>
+                </h3>`;
     });
     document.getElementById("category-container").innerHTML = html;
 }
 
-// Tải sản phẩm theo danh mục
+// laoad sản phẩm theo danh mục
 function loadPCategoryById(id) {
+    if (window.isFiltering) return; // Ngăn double-call
     console.log('Tải sản phẩm theo danh mục, id:', id);
+    currentCategoryId = parseInt(id);
+    window.isFiltering = true;
+
     $.ajax({
-        url: `product-category?categoryId=${id}`,
-        type: "GET",
-        success: function (data) {
+        url: `product-category?categoryId=${id}`, type: "GET", success: function (data) {
             console.log('Dữ liệu sản phẩm theo danh mục:', data);
             currentProducts = data.products || data;
-            currentPage = 1; // Mặc định về trang 1 sau khi lọc
-            renderP(data.products || data);
-        },
-        error: function (xhr, status, error) {
+            currentPage = 1;
+            renderP(currentProducts);
+            window.isFiltering = false;
+        }, error: function (xhr, status, error) {
             console.error("Lỗi khi tải sản phẩm theo danh mục:", error);
+            window.isFiltering = false;
         }
     });
 }
@@ -280,48 +252,15 @@ document.addEventListener('click', function (event) {
     }
 });
 
-document.addEventListener("DOMContentLoaded", function () {
-    const searchInput = document.getElementById("search-input");
-    const productList = document.getElementById("product-list");
-
-    // Lấy context path của ứng dụng
-    const contextPath = window.location.pathname.split("/")[1];
-    const baseUrl = window.location.origin + "/" + contextPath + "/product";
-
-    searchInput.addEventListener("keyup", function () {
-        let keyword = searchInput.value.trim();
-        let url = `${baseUrl}?ajax=true`;
-
-        if (keyword.length > 1) {
-            url += `&name=${encodeURIComponent(keyword)}`;
-        }
-
-        console.log("Gửi request AJAX:", url);
-        fetch(url)
-            .then(response => response.text())
-            .then(data => {
-                console.log("HTML nhận được:", data);
-                productList.innerHTML = data;
-            })
-            .catch(error => console.error("Lỗi khi tìm kiếm:", error));
-    });
-});
 
 function addCart(id) {
     $.ajax({
-        url: "add-cart",
-        type: "GET",
-        dataType: "json",
-        data: {
+        url: "add-cart", type: "GET", dataType: "json", data: {
             id: id,
-        },
-        success: function (res) {
+        }, success: function (res) {
             if (res.status === "success") {
                 $.ajax({
-                    url: "cart-items",
-                    type: "GET",
-                    dataType: 'json',
-                    success: function (data) {
+                    url: "cart-items", type: "GET", dataType: 'json', success: function (data) {
                         $("#subtotal .value").text(data.totalPrice.toLocaleString());
                         $("#vat .value").text(data.totalShippingFee.toLocaleString());
                         $("#total .value").text(data.totalFinalPrice.toLocaleString());

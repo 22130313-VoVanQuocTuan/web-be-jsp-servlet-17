@@ -15,7 +15,7 @@
 <link rel="stylesheet" href="<c:url value="/users/css/home.css"/>">
 <link rel="stylesheet" href="<c:url value="/users/css/terms_and_services.css"/>">
 
-<body>
+<body data-keyword="${keyword}">
 <div id="section-header1">
     <div class="container">
         <div class="banner">
@@ -58,13 +58,10 @@
                     <a href="home-page"><img src="${pageContext.request.contextPath}/users/img/logo.png" alt="Logo"></a>
                 </div>
                 <!-- Thanh tìm kiếm ở giữa -->
-                <form action="product" method="GET">
-                    <div class="search-bar">
-                        <input type="hidden" name="search" value="true">
-                        <input name="name" type="text" placeholder="Tìm kiếm sản phẩm...">
-                        <button type="submit" title="icon"><i class="fa fa-fw fa-search"></i></button>
-                    </div>
-                </form>
+                <div class="search-bar">
+                    <input name="name" type="text" placeholder="Tìm kiếm sản phẩm..." id="search-input">
+                    <button title="icon" onclick="triggerSearch()"><i class="fa fa-fw fa-search"></i></button>
+                </div>
 
                 <!-- Thông tin bên phải -->
                 <div class="info">
@@ -78,7 +75,8 @@
                         <a href="turn-page?action=cart">
                             <i class="fas fa-shopping-cart"></i>
                         </a>
-                        <span class="cart-count" id="cart-count">${empty sessionScope.cartItemCount ? 0 : sessionScope.cartItemCount}</span>
+                        <span class="cart-count"
+                              id="cart-count">${empty sessionScope.cartItemCount ? 0 : sessionScope.cartItemCount}</span>
                     </div>
                 </div>
             </div>
@@ -233,7 +231,7 @@
 
 <script src="<c:url value="/users/js/login-signup.js"/>"></script>
 <script src="<c:url value="/users/js/scripts.js"/>" defer></script>
-
+<script src="<c:url value="/users/js/search.js"/>"></script>
 </body>
 
 </html>

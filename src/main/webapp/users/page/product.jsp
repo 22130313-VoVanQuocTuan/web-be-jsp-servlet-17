@@ -37,7 +37,7 @@
         background-color: #f0f0f0;
     }
 </style>
-<body>
+<body data-keyword="${keyword}">
 <div id="section-header1">
     <div class="container">
         <div class="banner">
@@ -82,13 +82,10 @@
                 </div>
 
                 <!-- Thanh tìm kiếm ở giữa -->
-                <form action="product" method="GET">
-                    <div class="search-bar">
-                        <input name="name" type="text" placeholder="Tìm kiếm sản phẩm..." id="search-input">
-                        <button title="icon"><i class="fa fa-fw fa-search"></i></button>
-                    </div>
-                </form>
-
+                <div class="search-bar">
+                    <input name="name" type="text" placeholder="Tìm kiếm sản phẩm..." id="search-input">
+                    <button title="icon" onclick="triggerSearch()"><i class="fa fa-fw fa-search"></i></button>
+                </div>
                 <!-- Thông tin bên phải -->
                 <div class="info">
                     <div class="hotline">
@@ -257,6 +254,7 @@
 </div>
 
 <script src="${pageContext.request.contextPath}/users/js/product.js"></script>
+<script src="${pageContext.request.contextPath}/users/js/search.js"></script>
 <script src="${pageContext.request.contextPath}/users/js/scripts.js"></script>
 <script src="${pageContext.request.contextPath}/users/js/home.js"></script>
 <script>
