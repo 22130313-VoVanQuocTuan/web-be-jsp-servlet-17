@@ -194,7 +194,7 @@
         <div class="category">
             <div class="recentCategory">
                 <div class="cardHeader">
-                    <h2>Danh sách danh mục</h2>
+                    <h2>DANH SÁCH DANH MỤC</h2>
                 </div>
                 <div class="add-category">
                     <p style="font-size: 20px; margin-bottom: 10px;">Thêm danh mục</p>

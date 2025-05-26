@@ -196,7 +196,7 @@
         <div class="import_export">
             <div class="recentOrders">
                 <div class="cardHeader">
-                    <h2>Danh sách nhập xuất kho</h2>
+                    <h2>DANH SÁCH LỊCH SỬ NHẬP XUẤT KHO</h2>
                        </div>
 
                 <table id="transactionTable">

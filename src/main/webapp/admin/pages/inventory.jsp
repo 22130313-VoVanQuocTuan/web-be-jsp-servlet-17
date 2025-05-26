@@ -200,7 +200,7 @@
         <div class="import_export">
             <div class="recentOrders">
                 <div class="cardHeader">
-                    <h2 style="color: #000000;font-size: 20px;">Danh sách sản phẩm tồn kho</h2>
+                    <h2 style="color: #000000;font-size: 20px;">DANH SÁCH SẢN PHẨM TỒN KHO</h2>
                  </div>
                 <div class="list-products-content-button">
                 <a href="turn-page?action=history_import_export"><button id="import_export_stock" style="margin-bottom: 10px; background: #a1e8ff">Xem lịch sử Nhập/Xuất kho</button></a>

@@ -211,7 +211,7 @@
         <div class="order">
             <div class="recentOrders">
                 <div class="cardHeader">
-                    <h2>DANH SÁCH HÓA ĐƠN ĐÃ HOÀN THÀNH</h2>
+                    <h2>DANH SÁCH ĐƠN HÀNG CẦN GIAO</h2>
                 </div>
                 <table id="orderTable" class="display">
                     <thead>
@@ -230,10 +230,7 @@
 
                     </tbody>
                 </table>
-                <a href="turn-page?action=transport" class="btn-transport">Đơn hàng cần vận chuyển</a>
             </div>
-
-
 
 
         </div>
@@ -272,6 +269,27 @@
                         <p><strong>Số điện thoại:</strong> <span id="modal-phone"></span></p>
                         <p><strong>Ghi chú:</strong> <span id="modal-note"></span></p>
                         <div class="update-order">
+                            <p style="font-size: 16px; margin-bottom: 5px;">Cập nhật trạng thái đơn hàng</p>
+                            <form id="orderForm">
+                                <input type="hidden" id="orderId" name="id"> <!-- Đảm bảo gửi ID đơn hàng -->
+
+                                <label for="statusSelect">Chọn trạng thái:</label>
+                                <select title="choice" id="statusSelect" name="statusPayment"
+                                        style="font-size: 11px; border-radius: 5px; padding: 5px; margin-left: 10px; margin-right: 10px;">
+                                    <option value="Đang vận chuyển">Đang vận chuyển </option>
+                                    <option value="Giao hàng thất bại">Giao hàng thất bại</option>
+                                    <option value="Đã giao">Đã giao</option>
+
+
+                                </select>
+
+                                <!-- Nút cập nhật -->
+                                <button  type="submit" style="margin-top: 10px; padding: 6px 14px; font-size: 14px; background-color: #483033;
+                                    color: #f7d774; border: none; border-radius: 5px; cursor: pointer;">
+                                    Cập nhật
+                                </button>
+
+                            </form>
                             <button id="exportPDF" type="button" style="padding: 7px 8px; background-color: #891f1f; color: white; border: none;margin-top: 15px; border-radius: 5px; cursor: pointer;">
                                 Xuất PDF
                             </button>
@@ -282,7 +300,7 @@
             </div>
         </div>
 
-        <!-- Modal Xóa tài khoản -->
+
         <div id="delete-modal" class="modal">
             <div class="modal-content"  style="margin-top: 10%;">
                 <h3>Xác nhận xóa</h3>
@@ -351,7 +369,7 @@
 </script>
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 <script src="<c:url value="/admin/js/configuration.js"/>"></script>
-<script src="<c:url value="/admin/js/order.js"/>"></script>
+<script src="<c:url value="/admin/js/transport.js"/>"></script>
 
 </body>
 </html>

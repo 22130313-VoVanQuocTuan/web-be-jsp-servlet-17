@@ -182,7 +182,9 @@
         <!-------------------- Danh Sách Chi Tiết người dùng------------------ -->
         <div class="details-user">
             <div class="recentOrders">
-
+                <div class="cardHeader">
+                    <h2 style="color: #000000;font-size: 20px;">DANH SÁCH TÀI KHOẢN QUẢN TRỊ</h2>
+                </div>
 
                 <div class="list-account-content-button">
                     <button id="add_account" onclick="openModalAdd()">Thêm tài khoản</button>

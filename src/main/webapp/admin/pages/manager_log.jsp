@@ -196,7 +196,7 @@
         <div class="log">
             <div class="recentOrders">
                 <div class="cardHeader">
-                    <h2>Danh sách lưu trữ log của hệ thống</h2>
+                    <h2>DANH SÁCH LƯU TRỮ LOG CỦA HỆ THỐNG</h2>
                     <form id="cleanLog">
                         <select name="level" id="level">
                             <option value="INFO">INFO</option>

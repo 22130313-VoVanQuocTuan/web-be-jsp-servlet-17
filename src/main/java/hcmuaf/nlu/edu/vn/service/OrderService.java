@@ -62,14 +62,19 @@ public class OrderService {
     }
 
     //Cập nhật hoá đơn
-    public boolean updateOrderStatus(int id, String status) throws SQLException {
-        return orderDao.updateOrderStatus(id, status);
+    public boolean updateOrderStatusPay(int id, String status) throws SQLException {
+        return orderDao.updateOrderStatusPay(id, status);
     }
 
     //Cập nhật trạng thái thanh toán hoá đơn
     public boolean updateOrderPaymentStatus(int id, String status) throws SQLException {
         return orderDao.updateOrderPaymentStatus(id, status);
     }
+    //Cập nhật trạng thái hoá đơn khi cập nhật trong admin
+    public boolean updateOrderStatus(int id, String status) throws SQLException {
+        return orderDao.updateOrderStatus(id, status);
+    }
+
 
 
     //thêm hoá đơn

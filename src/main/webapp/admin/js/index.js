@@ -133,7 +133,7 @@ function renderDataHomeOrder(data) {
     data.forEach(view => {
         const createdAt = new Date(view.createdAt); // Parse string to Date
         const row = document.createElement("tr");
-        row.innerHTML = `<td>${view.userid}</td>
+        row.innerHTML = `<td>${view.id}</td>
                          <td>${view.totalPrice.toLocaleString()} ₫</td>
                          <td><span class="status">${view.paymentStatus}</span></td>
                          <td>${createdAt.toLocaleString()}</td>
@@ -190,8 +190,9 @@ function renderDataHomeUser(data){
                                 </a>
                             </td>
                             <td>
-                                <h4>${user.email}</h4>
-                            </td>`;
+                                <h4>${user.username}</h4>
+                            </td>
+                            <td>${user.totalPrice.toLocaleString()+" ₫"}</td>`;
         tableBody.appendChild(row);
     })
 

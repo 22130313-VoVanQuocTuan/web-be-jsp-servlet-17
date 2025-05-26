@@ -204,7 +204,7 @@
         <div class="products">
             <div class="recentOrders">
                 <div class="cardHeader">
-                    <h2>Danh sách sản phẩm</h2>
+                    <h2>DANH SÁCH SẢN PHẨM</h2>
                 </div>
                 <div class="list-products-content-button">
                     <button id="add-product" style="margin-bottom: 10px" onclick="openModalAdd(${product.id})">Thêm sản phẩm</button>

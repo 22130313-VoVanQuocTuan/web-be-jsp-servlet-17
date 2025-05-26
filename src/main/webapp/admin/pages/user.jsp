@@ -179,7 +179,7 @@
         <div class="details-user">
             <div class="recentOrders">
                 <div class="cardHeader">
-                    <h2>Danh sách người dùng</h2>
+                    <h2>DANH SÁCH NGƯỜI DÙNG</h2>
                 </div>
                 <div class="list-account-content-button">
                     <button id="add_account" onclick="openModalAdd()">Thêm tài khoản</button>

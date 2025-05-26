@@ -167,7 +167,7 @@
         <div class="content">
             <!-- Thông tin khách hàng -->
             <div class="customer-info">
-                <h2>Thông tin tài khoản</h2>
+                <h2> THÔNG TIN TÀI KHOẢN</h2>
                 <p><strong>Tên:</strong></p>
                 <p><strong>Email:</strong></p>
                 <p><strong>Số điện thoại:</strong></p>

@@ -200,7 +200,7 @@
         <div class="details-user">
             <div class="recentOrders">
                 <div class="cardHeader">
-                    <h2>Danh sách mã ưu đãi</h2>
+                    <h2>DANH SÁCH MÃ ƯU ĐÃI</h2>
                 </div>
                 <div class="list-promotions-content-button">
                     <button id="add_Promotions" onclick="openAddPro()">Thêm ưu đãi</button>
