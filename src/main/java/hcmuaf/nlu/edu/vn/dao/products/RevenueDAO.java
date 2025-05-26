@@ -15,20 +15,20 @@ public class RevenueDAO {
     public List<Map<String, Object>> getWeeklyRevenue() {
         List<Map<String, Object>> revenueList = new ArrayList<>();
         String sql = """
-        SELECT 
+        SELECT
             CONCAT(
-                'Tuần ', WEEK(createdAt, 1), ' (', 
-                DATE_FORMAT(DATE_SUB(createdAt, INTERVAL WEEKDAY(createdAt) DAY), '%d/%m'), 
+                'Tuần ', WEEK(MIN(updatedAt), 1), ' (', 
+                DATE_FORMAT(DATE_SUB(MIN(updatedAt), INTERVAL WEEKDAY(MIN(updatedAt)) DAY), '%d/%m/%Y'), 
                 ' - ', 
-                DATE_FORMAT(DATE_ADD(DATE_SUB(createdAt, INTERVAL WEEKDAY(createdAt) DAY), INTERVAL 6 DAY), '%d/%m'), 
+                DATE_FORMAT(DATE_ADD(DATE_SUB(MIN(updatedAt), INTERVAL WEEKDAY(MIN(updatedAt)) DAY), INTERVAL 6 DAY), '%d/%m/%Y'), 
                 ')'
             ) AS week_label, 
             SUM(totalPrice) AS revenue 
         FROM orders 
-        WHERE paymentStatus = 'Đã thanh toán' AND status = 'Hoàn thành'
-        GROUP BY YEARWEEK(createdAt, 1) 
-        ORDER BY YEARWEEK(createdAt, 1);
-    """;
+        WHERE status = 'Đã hoàn thành' AND paymentStatus = 'Đã thanh toán' 
+        GROUP BY YEAR(updatedAt), WEEK(updatedAt, 1) 
+        ORDER BY YEAR(updatedAt), WEEK(updatedAt, 1);
+        """;
 
         try (PreparedStatement stmt = dbConnect.preparedStatement(sql);
              ResultSet rs = stmt.executeQuery()) {
@@ -48,14 +48,14 @@ public class RevenueDAO {
     public List<Map<String, Object>> getMonthlyRevenue() {
         List<Map<String, Object>> revenueList = new ArrayList<>();
         String sql = """
-        SELECT 
-            DATE_FORMAT(createdAt, '%Y-%m') AS month_label, 
-            SUM(totalPrice) AS revenue 
-        FROM orders 
-        WHERE paymentStatus = 'Đã thanh toán' AND status = 'Hoàn thành'
-        GROUP BY DATE_FORMAT(createdAt, '%Y-%m') 
-        ORDER BY DATE_FORMAT(createdAt, '%Y-%m');
-    """;
+                    SELECT 
+                        DATE_FORMAT(createdAt, '%Y-%m') AS month_label, 
+                        SUM(totalPrice) AS revenue 
+                    FROM orders 
+                    WHERE paymentStatus = 'Đã thanh toán' AND status = 'Hoàn thành'
+                    GROUP BY DATE_FORMAT(createdAt, '%Y-%m') 
+                    ORDER BY DATE_FORMAT(createdAt, '%Y-%m');
+                """;
 
         try (PreparedStatement stmt = dbConnect.preparedStatement(sql);
              ResultSet rs = stmt.executeQuery()) {
@@ -71,18 +71,18 @@ public class RevenueDAO {
         }
         return revenueList;
     }
+
     public List<Map<String, Object>> getYearlyRevenue() {
         List<Map<String, Object>> revenueList = new ArrayList<>();
         String sql = """
-        SELECT 
-            YEAR(createdAt) AS year_label, 
-            SUM(totalPrice) AS revenue 
-        FROM orders 
-        WHERE paymentStatus = 'Đã thanh toán' AND status = 'Hoàn thành'
-        GROUP BY YEAR(createdAt) 
-        ORDER BY YEAR(createdAt);
-    """;
-
+                    SELECT 
+                        YEAR(createdAt) AS year_label, 
+                        SUM(totalPrice) AS revenue 
+                    FROM orders 
+                    WHERE paymentStatus = 'Đã thanh toán' AND status = 'Hoàn thành'
+                    GROUP BY YEAR(createdAt) 
+                    ORDER BY YEAR(createdAt);
+                """;
         try (PreparedStatement stmt = dbConnect.preparedStatement(sql);
              ResultSet rs = stmt.executeQuery()) {
             while (rs.next()) {
