@@ -33,6 +33,10 @@
         transition: 0.3s;
     }
 
+    .hov {
+        margin-bottom: 3px;
+    }
+
     .hov.active a {
         background-color: #FFFFFF;
         color: #4f3131;
@@ -70,6 +74,61 @@
         .badge.success {
             background-color: #28a745; /* Màu xanh của trạng thái thanh toán */
         }
+    }
+
+    .notification-bell {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        margin-left: 5px;
+    }
+
+    .notification-bell ion-icon {
+        font-size: 18px;
+    }
+
+    .badge-pending {
+        position: absolute;
+        top: -6px;
+        right: -6px;
+        background-color: #ff4444;
+        color: white;
+        font-size: 9px;
+        width: 14px;
+        height: 14px;
+        line-height: 14px;
+        text-align: center;
+        border-radius: 50%;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+        display: inline-block;
+        font-weight: bold;
+        transition: transform 0.3s ease;
+    }
+    .badge-pending1 {
+        position: absolute;
+        background-color: #ff4444;
+        margin-left: 4px;
+        color: white;
+        font-size: 9px;
+        width: 18px;
+        height: 18px;
+        line-height: 14px;
+        text-align: center;
+        border-radius: 50%;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+        display: inline-block;
+        font-weight: bold;
+        transition: transform 0.3s ease;
+    }
+
+    /* Hiệu ứng khi hover */
+    .notification-bell:hover .badge-pending {
+        transform: scale(1.15);
+    }
+
+    /* Ẩn badge khi không có đơn hàng */
+    #pending-order-count:empty {
+        display: none;
     }
 
 </style>
@@ -123,10 +182,14 @@
             </li>
             <li class="hov active">
                 <a href="turn-page?action=order">
-                        <span class="icon">
-                            <ion-icon name="receipt-outline"></ion-icon>
-                        </span>
+                    <span class="icon">
+                        <ion-icon name="receipt-outline"></ion-icon>
+                    </span>
                     <span class="title">Quản lý hóa đơn</span>
+                    <span class="notification-bell">
+                        <ion-icon name="notifications-outline"></ion-icon>
+                        <span id="pending-order-count" class="badge-pending">0</span>
+                    </span>
                 </a>
             </li>
             <li>
@@ -230,12 +293,10 @@
 
                     </tbody>
                 </table>
-                <a href="turn-page?action=transport" class="btn-transport">Đơn hàng cần vận chuyển</a>
+                <a href="turn-page?action=transport" class="btn-transport">Đơn hàng cần vận chuyển
+                    <span id="pending-order-count1" class="badge-pending1">0</span>
+                </a>
             </div>
-
-
-
-
         </div>
         <!-- Modal Chi tiết đơn hàng -->
         <div id="orderDetailModal" class="modal">
@@ -261,10 +322,14 @@
                     <div class="order-info">
                         <p><strong>Mã đơn hàng:</strong> <span class="info-highlight" id="modal-order-id"></span></p>
                         <p><strong>Tổng tiền:</strong> <span class="info-highlight" id="modal-total-price"></span></p>
-                        <p><strong>Phí giao hàng:</strong> <span class="info-highlight" id="modal-shipping-fee"></span></p>
-                        <p><strong>Số tiền giảm giá:</strong> <span class="info-highlight total-price" id="modal-discount-amount"></span></p>
-                        <p><strong>Phương thức thanh toán:</strong> <span class="badge success" id="modal-payment-method"></span></p>
-                        <p><strong>Trạng thái thanh toán:</strong> <span class="badge success" id="modal-payment-status"></span></p>
+                        <p><strong>Phí giao hàng:</strong> <span class="info-highlight" id="modal-shipping-fee"></span>
+                        </p>
+                        <p><strong>Số tiền giảm giá:</strong> <span class="info-highlight total-price"
+                                                                    id="modal-discount-amount"></span></p>
+                        <p><strong>Phương thức thanh toán:</strong> <span class="badge success"
+                                                                          id="modal-payment-method"></span></p>
+                        <p><strong>Trạng thái thanh toán:</strong> <span class="badge success"
+                                                                         id="modal-payment-status"></span></p>
                         <p><strong>Địa chỉ:</strong> <span id="modal-address"></span></p>
                         <p><strong>Số lượng:</strong> <span id="modal-quantity"></span></p>
                         <p><strong>Email:</strong> <span id="modal-email"></span></p>
@@ -272,7 +337,8 @@
                         <p><strong>Số điện thoại:</strong> <span id="modal-phone"></span></p>
                         <p><strong>Ghi chú:</strong> <span id="modal-note"></span></p>
                         <div class="update-order">
-                            <button id="exportPDF" type="button" style="padding: 7px 8px; background-color: #891f1f; color: white; border: none;margin-top: 15px; border-radius: 5px; cursor: pointer;">
+                            <button id="exportPDF" type="button"
+                                    style="padding: 7px 8px; background-color: #891f1f; color: white; border: none;margin-top: 15px; border-radius: 5px; cursor: pointer;">
                                 Xuất PDF
                             </button>
                         </div>
@@ -284,7 +350,7 @@
 
         <!-- Modal Xóa tài khoản -->
         <div id="delete-modal" class="modal">
-            <div class="modal-content"  style="margin-top: 10%;">
+            <div class="modal-content" style="margin-top: 10%;">
                 <h3>Xác nhận xóa</h3>
                 <label>Bạn có chắc chắn muốn xóa hóa đơn này?</label>
                 <input type="hidden" id="orderIdDelete">
@@ -298,9 +364,6 @@
         <div id="message" class="alert alert-info" style="display: none">
             <!-- Thông báo lỗi sẽ được chèn vào đây -->
         </div>
-
-
-
     </div>
 
     <!-- Modal Xác Nhận Đăng Xuất -->
@@ -316,14 +379,10 @@
     </div>
 </div>
 
-<script>
-
-</script>
-
 <!-- Thêm thư viện -->
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         document.getElementById("exportPDF").addEventListener("click", function () {
@@ -335,9 +394,9 @@
             modalContent.style.overflow = "visible";
 
 
-            html2canvas(modalContent, { scale: 2 }).then(canvas => {
+            html2canvas(modalContent, {scale: 2}).then(canvas => {
                 let imgData = canvas.toDataURL("image/png");
-                const { jsPDF } = window.jspdf;
+                const {jsPDF} = window.jspdf;
                 let doc = new jsPDF("p", "mm", "a4"); // Khổ A4
 
                 let imgWidth = 190;
@@ -349,9 +408,8 @@
         });
     });
 </script>
-<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 <script src="<c:url value="/admin/js/configuration.js"/>"></script>
 <script src="<c:url value="/admin/js/order.js"/>"></script>
-
+<script src="<c:url value="/admin/js/noficationOrder.js"/>"></script>
 </body>
 </html>

@@ -53,29 +53,71 @@
         border-radius: 30px;
         transition: 0.3s;
     }
+    .hov {
+        margin-bottom: 3px;
+    }
 
     .hov.active a {
         background-color: #FFFFFF;
         color: #4f3131;
         font-weight: bold;
     }
+
+    .notification-bell {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        margin-left: 5px;
+    }
+
+    .notification-bell ion-icon {
+        font-size: 18px;
+    }
+
+    .badge-pending {
+        position: absolute;
+        top: -6px;
+        right: -6px;
+        background-color: #ff4444;
+        color: white;
+        font-size: 9px;
+        width: 14px;
+        height: 14px;
+        line-height: 14px;
+        text-align: center;
+        border-radius: 50%;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+        display: inline-block;
+        font-weight: bold;
+        transition: transform 0.3s ease;
+    }
+
+    /* Hiệu ứng khi hover */
+    .notification-bell:hover .badge-pending {
+        transform: scale(1.15);
+    }
+
+    /* Ẩn badge khi không có đơn hàng */
+    #pending-order-count:empty {
+        display: none;
+    }
 </style>
 
 <body>
-    <!-- ------------------ Điều hướng -------------------->
-    <div class="container">
-        <div class="navigation">
-            <ul>
-                <li>
-                    <a href="turn-page?action=home">
+<!-- ------------------ Điều hướng -------------------->
+<div class="container">
+    <div class="navigation">
+        <ul>
+            <li>
+                <a href="turn-page?action=home">
                         <span class="icon">
                             <img src="${pageContext.request.contextPath}/users/img/logo.png" alt="">
                         </span>
                     <span class="title">Bán Vật Liệu Xây Dựng </span>
                 </a>
             </li>
-                <li>
-                    <a href="turn-page?action=home">
+            <li>
+                <a href="turn-page?action=home">
                         <span class="icon">
                             <ion-icon name="home-outline"></ion-icon>
                         </span>
@@ -110,10 +152,14 @@
             </li>
             <li>
                 <a href="turn-page?action=order">
-                        <span class="icon">
-                            <ion-icon name="receipt-outline"></ion-icon>
-                        </span>
+                    <span class="icon">
+                        <ion-icon name="receipt-outline"></ion-icon>
+                    </span>
                     <span class="title">Quản lý hóa đơn</span>
+                    <span class="notification-bell">
+                        <ion-icon name="notifications-outline"></ion-icon>
+                        <span id="pending-order-count" class="badge-pending">0</span>
+                    </span>
                 </a>
             </li>
             <li>
@@ -198,8 +244,9 @@
                 </div>
                 <div class="add-category">
                     <p style="font-size: 20px; margin-bottom: 10px;">Thêm danh mục</p>
-                    <form  id="addCategoryForm">
-                        <input type="text" id="categoryName" name="categoryName" style="font-size: 17px; border-radius: 5px;"
+                    <form id="addCategoryForm">
+                        <input type="text" id="categoryName" name="categoryName"
+                               style="font-size: 17px; border-radius: 5px;"
                                placeholder="Nhập tên danh mục" required>
                         <button type="submit" id="save-category">Thêm</button>
                     </form>
@@ -225,7 +272,8 @@
                     <label>Bạn có chắc chắn muốn xóa danh mục này?</label>
                     <input type="hidden" id="categoryId">
                     <div class="button-container">
-                        <button id="confirm-delete" class="confirm-delete" onclick="confirmDeleteCategory()">Xóa</button>
+                        <button id="confirm-delete" class="confirm-delete" onclick="confirmDeleteCategory()">Xóa
+                        </button>
                         <button class="close-modal">Hủy</button>
                     </div>
                 </div>
@@ -247,12 +295,9 @@
         </div>
     </div>
 </div>
-    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-    <script src="<c:url value="/admin/js/configuration.js"/>"></script>
-    <script src="<c:url value="/admin/js/category.js"/>"></script>
-
-
-
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script src="<c:url value="/admin/js/configuration.js"/>"></script>
+<script src="<c:url value="/admin/js/category.js"/>"></script>
+<script src="<c:url value="/admin/js/noficationOrder.js"/>"></script>
 </body>
-
 </html>

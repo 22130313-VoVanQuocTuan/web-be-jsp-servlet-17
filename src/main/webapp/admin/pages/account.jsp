@@ -23,11 +23,53 @@
         border-radius: 30px;
         transition: 0.3s;
     }
+    .hov {
+        margin-bottom: 3px;
+    }
 
     .hov.active a {
         background-color: #FFFFFF;
         color: #4f3131;
         font-weight: bold;
+    }
+
+    .notification-bell {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        margin-left: 5px;
+    }
+
+    .notification-bell ion-icon {
+        font-size: 18px;
+    }
+
+    .badge-pending {
+        position: absolute;
+        top: -6px;
+        right: -6px;
+        background-color: #ff4444;
+        color: white;
+        font-size: 9px;
+        width: 14px;
+        height: 14px;
+        line-height: 14px;
+        text-align: center;
+        border-radius: 50%;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+        display: inline-block;
+        font-weight: bold;
+        transition: transform 0.3s ease;
+    }
+
+    /* Hiệu ứng khi hover */
+    .notification-bell:hover .badge-pending {
+        transform: scale(1.15);
+    }
+
+    /* Ẩn badge khi không có đơn hàng */
+    #pending-order-count:empty {
+        display: none;
     }
 </style>
 <body>
@@ -80,10 +122,14 @@
             </li>
             <li>
                 <a href="turn-page?action=order">
-                        <span class="icon">
-                            <ion-icon name="receipt-outline"></ion-icon>
-                        </span>
+                    <span class="icon">
+                        <ion-icon name="receipt-outline"></ion-icon>
+                    </span>
                     <span class="title">Quản lý hóa đơn</span>
+                    <span class="notification-bell">
+                        <ion-icon name="notifications-outline"></ion-icon>
+                        <span id="pending-order-count" class="badge-pending">0</span>
+                    </span>
                 </a>
             </li>
             <li>
@@ -156,8 +202,10 @@
                 <ion-icon name="menu-outline"></ion-icon>
             </div>
             <div class="user">
-                <a href="turn-page?action=infoUserAdmin"> <ion-icon name="person"
-                                                             style="color: #000000; font-size: 25px;"></ion-icon></a>
+                <a href="turn-page?action=infoUserAdmin">
+                    <ion-icon name="person"
+                              style="color: #000000; font-size: 25px;"></ion-icon>
+                </a>
             </div>
         </div>
 
@@ -190,7 +238,8 @@
                     <form id="editInfoForm">
                         <div class="mb-3">
                             <label for="name" class="form-label">Tên</label>
-                            <input type="text" name="fullName" class="form-control" id="name" placeholder="Nhập tên của bạn"
+                            <input type="text" name="fullName" class="form-control" id="name"
+                                   placeholder="Nhập tên của bạn"
                                    required>
                         </div>
                         <div class="mb-3">
@@ -200,7 +249,8 @@
                         </div>
                         <div class="mb-3">
                             <label for="address" class="form-label">Địa chỉ</label>
-                            <textarea class="form-control" name="address" id="address" rows="3" placeholder="Nhập địa chỉ"
+                            <textarea class="form-control" name="address" id="address" rows="3"
+                                      placeholder="Nhập địa chỉ"
                                       required></textarea>
                         </div>
 
@@ -235,6 +285,6 @@
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 <script src="<c:url value="/admin/js/configuration.js"/>"></script>
 <script src="<c:url value="/admin/js/account.js"/>"></script>
+<script src="<c:url value="/admin/js/noficationOrder.js"/>"></script>
 </body>
-
 </html>

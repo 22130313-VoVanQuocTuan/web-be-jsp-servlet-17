@@ -26,9 +26,6 @@ public class HomeController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String search = request.getParameter("search");
-        String id = request.getParameter("id");
-
         try {
             // Lấy các dữ liệu từ HomeService
             int totalViews = homeService.totalView();
@@ -37,17 +34,6 @@ public class HomeController extends HttpServlet {
             double totalSales = homeService.totalSale();
             List<Users> users = homeService.getUser();
             List<Orders> orderNew = homeService.getOrder();
-
-            if (search != null) {
-                try {
-                    int userId = Integer.parseInt(id);
-                    orderNew = orderService.getOrderById(userId);
-                } catch (NumberFormatException e) {
-                    e.printStackTrace();
-
-                }
-            }
-
 
             Map<String, Object> summary = new HashMap<>();
             summary.put("orderNew", orderNew);
@@ -61,8 +47,6 @@ public class HomeController extends HttpServlet {
             response.setContentType("application/json");
             response.setCharacterEncoding("UTF-8");
             response.getWriter().write(json);
-
-
 
         } catch (Exception e) {
             throw new ServletException("Lỗi hiển thị", e);
