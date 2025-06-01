@@ -34,6 +34,10 @@
         transition: 0.3s;
     }
 
+    .hov {
+        margin-bottom: 3px;
+    }
+
     .hov.active a {
         background-color: #FFFFFF;
         color: #4f3131;
@@ -78,6 +82,45 @@
 
     canvas {
         max-height: 400px;
+    }
+
+    .notification-bell {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        margin-left: 5px;
+    }
+
+    .notification-bell ion-icon {
+        font-size: 18px;
+    }
+
+    .badge-pending {
+        position: absolute;
+        top: -6px;
+        right: -6px;
+        background-color: #ff4444;
+        color: white;
+        font-size: 9px;
+        width: 14px;
+        height: 14px;
+        line-height: 14px;
+        text-align: center;
+        border-radius: 50%;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+        display: inline-block;
+        font-weight: bold;
+        transition: transform 0.3s ease;
+    }
+
+    /* Hiệu ứng khi hover */
+    .notification-bell:hover .badge-pending {
+        transform: scale(1.15);
+    }
+
+    /* Ẩn badge khi không có đơn hàng */
+    #pending-order-count:empty {
+        display: none;
     }
 </style>
 <body>
@@ -130,10 +173,14 @@
             </li>
             <li>
                 <a href="turn-page?action=order">
-                        <span class="icon">
-                            <ion-icon name="receipt-outline"></ion-icon>
-                        </span>
+                    <span class="icon">
+                        <ion-icon name="receipt-outline"></ion-icon>
+                    </span>
                     <span class="title">Quản lý hóa đơn</span>
+                    <span class="notification-bell">
+                        <ion-icon name="notifications-outline"></ion-icon>
+                        <span id="pending-order-count" class="badge-pending">0</span>
+                    </span>
                 </a>
             </li>
 
@@ -204,18 +251,6 @@
         <div class="topbar">
             <div class="toggle">
                 <ion-icon name="menu-outline"></ion-icon>
-            </div>
-
-            <div class="search">
-                <form action="home" method="get">
-                    <label>
-                        <input type="text" name="id" placeholder="Tìm kiếm ở đây">
-                        <ion-icon name="search-outline">
-                            <button type="submit" style="border: none; background: none; cursor: pointer;"></button>
-                        </ion-icon>
-                    </label>
-                    <input type="hidden" name="search" value="id">
-                </form>
             </div>
 
             <div class="user">
@@ -346,6 +381,6 @@
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 <script src="<c:url value="/admin/js/index.js"/>"></script>
 <script src="<c:url value="/admin/js/configuration.js"/>"></script>
-
+<script src="<c:url value="/admin/js/noficationOrder.js"/>"></script>
 </body>
 </html>

@@ -19,8 +19,8 @@ import org.json.JSONObject;
 
 @WebServlet(name = "FacebookCallbackServlet", value = "/facebook-callback")
 public class FacebookCallbackServlet extends HttpServlet {
-    private static final String CLIENT_ID = "9471317702914860";
-    private static final String CLIENT_SECRET = "acdfd5e2262c69b80f9ff52f879a3558";
+    String CLIENT_ID = OAuthConfigFB.getClientID();
+    String CLIENT_SECRET = OAuthConfigFB.getClientSecret();
     String REDIRECT_URI = OAuthConfigFB.getRedirectUri();
 
     @Override
@@ -32,9 +32,6 @@ public class FacebookCallbackServlet extends HttpServlet {
         }
         System.out.println("Callback URL: " + request.getRequestURL() + "?" + request.getQueryString());
         System.out.println("Redirect URI: [" + REDIRECT_URI + "] (length=" + REDIRECT_URI.length() + ")");
-
-        String expected = "https://8424-2402-800-63b7-a928-cd56-8096-309-f756.ngrok-free.app/tqh/facebook-callback";
-        System.out.println("Matches expected? " + REDIRECT_URI.equals(expected));
 
         // Lấy Access Token từ Facebook
         String accessToken = getAccessToken(code);
@@ -69,11 +66,9 @@ public class FacebookCallbackServlet extends HttpServlet {
         JSONObject jsonResponse = new JSONObject(response);
         return jsonResponse.optString("access_token", null);
 
-
-
     }
 
-    //     Lấy thông tin người dùng từ Facebook API.
+    //  Lấy thông tin người dùng từ Facebook API.
     private JSONObject getUserInfo(String accessToken) throws IOException {
         String userInfoUrl = "https://graph.facebook.com/me?fields=id,name,email,picture";
         String response = sendHttpRequest(userInfoUrl, accessToken);
@@ -81,8 +76,7 @@ public class FacebookCallbackServlet extends HttpServlet {
         return response != null ? new JSONObject(response) : null;
     }
 
-
-    //     Lưu thông tin người dùng vào session.
+    //   Lưu thông tin người dùng vào session.
     private void storeUserInfoInSession(HttpServletRequest request, JSONObject userJson) {
         String name = userJson.optString("name", "Unknown User");
         String email = userJson.optString("email", null);
@@ -107,8 +101,6 @@ public class FacebookCallbackServlet extends HttpServlet {
         System.out.println("User Name: " + name);
         System.out.println("User from DB: " + user); // Check if it's null
         System.out.println(">>> Redirect URI từ file config: " + REDIRECT_URI);
-
-
     }
 
     //     Gửi HTTP Request đến API.

@@ -123,7 +123,7 @@ public class OrderDao {
 
     //Lấy sản phẩm của hoá đơn
     public List<OrderItem> orderItems(int id) throws SQLException {
-        String query = "SELECT p.name, o.quantity, o.price, o.discount, o.totalPrice FROM orderitems o JOIN products p ON o.productId = p.id WHERE o.orderId = ?";
+        String query = "SELECT p.name, o.quantity, o.price, o.discount, o.totalPrice, o.productId FROM orderitems o JOIN products p ON o.productId = p.id WHERE o.orderId = ?";
         try(PreparedStatement ps = dbConnect.preparedStatement(query)) {
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
@@ -135,8 +135,9 @@ public class OrderDao {
                 double price = rs.getDouble("price");
                 double discount = rs.getDouble("discount");
                 double totalPrice = rs.getDouble("totalPrice");
+                int productId = rs.getInt("productId");
 
-                OrderItem orderItem = new OrderItem(productName, quantity, price, discount, totalPrice);
+                OrderItem orderItem = new OrderItem(productName, quantity, price, discount, totalPrice, productId);
 
                 orderItems.add(orderItem);
             }
@@ -214,9 +215,20 @@ public class OrderDao {
         }
         return false;
     }
-
-
-
-
+    // Đếm số lượng đơn hàng chưa hoàn thành( cần vận chuyển)
+    public int getPendingOrderCount() throws SQLException {
+        String sql = "SELECT COUNT(*) FROM orders WHERE status != ?";
+        try (PreparedStatement ps = dbConnect.preparedStatement(sql)) {
+            ps.setString(1, "Hoàn thành");
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt(1);
+                }
+            }
+        } catch (SQLException e) {
+            throw new SQLException("Lỗi khi lấy số lượng đơn hàng chưa hoàn thành: " + e.getMessage(), e);
+        }
+        return 0; // Trả về 0 nếu không có đơn hàng hoặc có lỗi
+    }
 
 }

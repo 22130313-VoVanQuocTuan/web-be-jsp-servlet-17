@@ -32,7 +32,6 @@ public class GetOrderController extends HttpServlet {
 
         try {
             List<Orders> ordersList = orderService.getAllOrders();
-
             response.setContentType("application/json");
             response.setCharacterEncoding("UTF-8");
             Gson gson = new Gson();
