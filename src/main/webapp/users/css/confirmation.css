@@ -45,7 +45,7 @@
     max-width: 350px;
     height: 40px;
     padding: 10px 15px;
-    margin-bottom: 15px;
+    margin-bottom: 5px;
     border: 1px solid #ddd;
     border-radius: 8px;
     font-size: 1rem;
@@ -409,8 +409,8 @@ body.overlay-active {
 .error-message {
     color: #dc3545;
     font-size: 0.9rem;
-    margin-top: 5px;
     text-align: center;
+    margin-bottom: 15px;
 }
 
 /* Scrollbar for Modal */

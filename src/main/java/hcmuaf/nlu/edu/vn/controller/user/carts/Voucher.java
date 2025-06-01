@@ -11,6 +11,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 @WebServlet(name = "voucher", value = "/voucher")
 public class Voucher extends HttpServlet {
@@ -21,28 +22,27 @@ public class Voucher extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        // Lấy mã giảm giá từ request
-        String voucherCode = req.getParameter("voucher").trim();
+        resp.setContentType("application/json");
+        resp.setCharacterEncoding("UTF-8");
 
-        // Kiểm tra giỏ hàng từ session
+        String voucherCode = req.getParameter("voucher").trim();
         HttpSession session = req.getSession();
         Carts carts = (Carts) session.getAttribute("cart");
+        PrintWriter out = resp.getWriter();
 
         if (carts != null) {
-
             double voucherValue = cartService.applyVoucher(voucherCode);
-
-            if (voucherValue > 0) { // Mã giảm giá hợp lệ
-                 carts.applyVoucher(voucherValue);
-                 req.setAttribute("error_code", "Áp dụng mã giảm giá thành công, bạn được giảm " + voucherValue + " ₫");
+            if (voucherValue > 0) {
+                carts.applyVoucher(voucherValue);
+                session.setAttribute("cart", carts); // Lưu giỏ hàng vào session
+                String json = "{\"message\":\"Áp dụng mã giảm giá thành công, bạn được giảm " + voucherValue + "đ\"}";
+                out.println(json);
             } else {
-                req.setAttribute("error_code", "Mã giảm giá không hợp lệ hoặc đã hết hạn!");
+                out.println("{\"message\":\"Mã giảm giá không hợp lệ hoặc đã hết hạn\"}");
             }
         } else {
-            req.setAttribute("error_code", "Giỏ hàng trống!");
+            out.println("{\"message\":\"Giỏ hàng không tồn tại\"}");
         }
-
-        // Chuyển hướng về trang giỏ hàng
-        req.getRequestDispatcher("/cart-items").forward(req, resp);
+        out.flush();
     }
 }

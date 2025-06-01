@@ -150,5 +150,36 @@ function deleteProduct() {
             }
         }
     })
+  }
 
-}
+document.getElementById("apply_voucher").addEventListener('submit', function(event) {
+    event.preventDefault();
+    const voucher = document.getElementById("voucher").value.trim();
+    $.ajax({
+        url: "voucher",
+        type: "GET",
+        data: { voucher: voucher },
+        dataType: 'json',
+        beforeSend: function () {
+            $("#apply-btn").prop("disabled", true).text("Đang áp dụng...");
+        },
+        success: function (response) {
+            const errorMessage = document.getElementById("error-message");
+            errorMessage.innerHTML = response.message || "Không nhận được phản hồi hợp lệ!";
+            errorMessage.style.display = "block";
+            errorMessage.style.color = response.message.includes("thành công") ? "green" : "red";
+            if (response.message.includes("thành công")) {
+                refreshCart(); // Cập nhật giỏ hàng
+            }
+        },
+        error: function (xhr, status, error) {
+            console.error("Lỗi AJAX:", error);
+            document.getElementById("error-message").innerHTML = "Lỗi khi áp dụng mã giảm giá!";
+            document.getElementById("error-message").style.display = "block";
+            document.getElementById("error-message").style.color = "red";
+        },
+        complete: function () {
+            $("#apply-btn").prop("disabled", false).text("Áp dụng");
+        }
+    });
+});
