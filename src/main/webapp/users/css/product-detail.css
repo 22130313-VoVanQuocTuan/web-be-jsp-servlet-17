@@ -267,8 +267,8 @@
 
 /* Phần danh sách đánh giá */
 .review-section {
-    flex: 2;
-    max-width: 60%;
+    flex: 1;
+    max-width: 100%;
     padding: 20px;
     border-top: 3px solid #007bff;
     background-color: #ffffff;

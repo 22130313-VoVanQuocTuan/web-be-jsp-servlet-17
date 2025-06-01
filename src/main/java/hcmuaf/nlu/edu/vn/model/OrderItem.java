@@ -28,12 +28,13 @@ public class OrderItem {
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }
-    public OrderItem(String productName, int quantity, double price, double discount, double totalPrice) {
+    public OrderItem(String productName, int quantity, double price, double discount, double totalPrice, int productId) {
         this.productName = productName;
         this.quantity = quantity;
         this.price = price;
         this.discount = discount;
         this.totalPrice = totalPrice;
+        this.productId = productId;
     }
     // Constructor
     public OrderItem(int orderId, int productId, int quantity, double price, double totalPrice, double discount) {

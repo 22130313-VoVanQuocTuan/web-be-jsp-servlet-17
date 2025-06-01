@@ -218,6 +218,7 @@
                             <th>Ngày đặt</th>
                             <th>Địa chỉ</th>
                             <th>Tình trạng thanh toán</th>
+                            <th>Trạng thái đơn hàng</th>
                             <th>Chi tiết đơn hàng</th>
                             <th>Hành động</th>
                         </tr>
@@ -267,6 +268,7 @@
                         <th>Giá</th>
                         <th>Giảm giá</th>
                         <th>Tổng giá</th>
+                        <th>Đánh giá sản phẩm</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -321,6 +323,31 @@
 
         </div>
     </div>
+
+    <div id="reviewModal" class="modal1">
+        <div class="modal-content1">
+            <span class="close" onclick="closeModal2()">&times;</span>
+
+            <div class="review">
+                <h2>Đánh giá</h2>
+                <form id="ratingForm">
+                    <input type="hidden" id="productId" name="productId" >
+                    <input type="hidden" id="userId" name="userId" value="${sessionScope.user.id}">
+
+                    <textarea name="content" rows="3" placeholder="Ý kiến của bạn..." required></textarea>
+
+                    <c:if test="${not empty rating}">
+                        <p style="color: red;">${rating}</p> <!-- Hiển thị lỗi nếu có -->
+                    </c:if>
+
+                    <button type="submit">Gửi</button>
+                </form>
+                <div id="ratingResult" style="margin-top: 10px; color: red;"></div>
+            </div>
+
+        </div>
+    </div>
+
 
     <div id="updatePassword" class="modal">
         <div class="modal-content">

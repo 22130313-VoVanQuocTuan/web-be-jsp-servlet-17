@@ -210,6 +210,7 @@ function renderDataOrder(data) {
                                 <td>${order.createdAt}</td>
                                 <td><div class="ellipsis">${order.shippingAddress}</div</td>
                                 <td>${order.paymentStatus}</td>
+                                <td>${order.status}</td>
                                 <td>
                                    <button onclick="detailOrder(${order.id})">Xem</button>
                                </td>
@@ -259,7 +260,8 @@ function renderDetailOrderItem(data) {
                         <td>${oi.quantity}</td>
                         <td>${oi.price.toLocaleString()}₫</td>
                         <td>${oi.discount.toLocaleString()}₫</td>
-                        <td>${oi.totalPrice.toLocaleString()}₫</td>`;
+                        <td>${oi.totalPrice.toLocaleString()}₫</td>
+                        <td><button type="button"  onclick="openReviewModal('${oi.productId}')">Đánh giá</button></td>`;
         tableBody.appendChild(row);
     })
 }
@@ -274,6 +276,8 @@ function renderDetailOrderInfo(orderInfo){
                             class="badge success">${orderInfo.paymentMethod}</span></p>
                     <p><strong>Trạng thái thanh toán:</strong> <span
                             class="badge success">${orderInfo.paymentStatus}</span></p>
+                    <p><strong>Trạng thái đơn hàng:</strong><span
+                            class="badge success">${orderInfo.status}</span></p>
                     <p><strong>Địa chỉ:</strong>${orderInfo.shippingAddress}</p>
                     <p><strong>Số lượng:</strong>${orderInfo.quantity}</p>
                     <p><strong>Email:</strong>${orderInfo.email}</p>
@@ -317,4 +321,51 @@ document.getElementById("cancelOrderForm").addEventListener("submit", function (
 function closeModalsCancelOrderModal(){
     document.getElementById("cancelOrderModal").style.display = "none";
 }
+
+function openReviewModal(productId) {
+    document.getElementById("productId").value = productId;
+    document.getElementById("reviewModal").style.display = "block";
+}
+
+function closeModal2() {
+    document.getElementById("reviewModal").style.display = "none";
+}
+
+$(document).ready(function () {
+    $('#ratingForm').submit(function (e) {
+        e.preventDefault(); // Ngăn reload trang
+        const productId = $('#productId').val();
+        const userId = $('#userId').val();
+        const content = $('textarea[name="content"]').val(); // ✅ dòng cần thiết
+        console.log("Product ID:", productId);
+        console.log("User ID:", userId);
+        console.log("Content:", content); // ✅ giờ không lỗi nữa
+        $.ajax({
+            url: 'create-rating',
+            type: 'POST',
+            data: {
+                productId: productId,
+                userId: userId,
+                content: content
+            },
+            success: function (response) {
+                if (response.status === "success") {
+                    $('#ratingResult').css("color", "green").text(response.message || "Đánh giá thành công.");
+                    $('#ratingForm')[0].reset(); // Reset form sau khi gửi
+                    setTimeout(() => {
+                        $('#reviewModal').hide(); // Đóng modal
+                        $('#ratingResult').text("");
+                    }, 500);
+                } else {
+                    $('#ratingResult').css("color", "red").text(response.message || "Có lỗi xảy ra.");
+                }
+            },
+            error: function (xhr, status, error) {
+                console.error(error);
+                $('#ratingResult').css("color", "red").text("Không thể gửi đánh giá. Vui lòng thử lại sau.");
+            }
+        });
+    });
+});
+
 
