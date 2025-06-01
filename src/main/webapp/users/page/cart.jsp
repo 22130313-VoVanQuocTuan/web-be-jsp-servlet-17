@@ -178,15 +178,13 @@
 
                 <div class="voucher">
                     <label for="voucher">Phiếu ưu đãi</label>
-                    <form action="voucher" method="get">
+                    <form id="apply_voucher">
                     <input type="text" name="voucher" id="voucher" placeholder="Mã ưu đãi" />
                     <button type="submit" id="apply-btn" class="apply-btn">
                         Áp dụng
                     </button>
-                        <div id="error-message" style="color: red; font-size: 10px;">
-                            <c:if test="${not empty error_code}">
-                                ${error_code}
-                            </c:if>
+                        <div id="error-message" style="color: red; font-size: 10px; display: none">
+
                         </div>
                     </form>
 

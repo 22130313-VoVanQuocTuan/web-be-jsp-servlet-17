@@ -25,7 +25,7 @@ import java.util.Arrays;
 public class GoogleAuthCallback extends HttpServlet {
     private static final String CLIENT_ID = "452111205936-1qshjo4jkek1ilnu7uufgd0oq73c0lbk.apps.googleusercontent.com";
     private static final String CLIENT_SECRET = "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";
-    private static final String REDIRECT_URI = "https://banvatlieuxaydung.site/tqh/oauth2callback";
+    private static final String REDIRECT_URI = "https://banvatlieuxaydung.site/oauth2callback";
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

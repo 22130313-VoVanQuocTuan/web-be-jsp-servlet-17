@@ -211,9 +211,10 @@
                                   class="note" placeholder="Ghi chú (tùy chọn)">${shipping_address.note}</textarea>
                     </div>
 
-                    <c:if test="${not empty error}">
-                        <div class="alert alert-danger">${error}</div>
-                    </c:if>
+                    <%-- Kiểm tra xem có thông báo nào không --%>
+                    <div id="message" class="alert alert-info" style="display: none">
+                        <!-- Thông báo lỗi sẽ được chèn vào đây -->
+                    </div>
                     <button class="save" title="bt" type="submit">Cập nhật</button>
 
                 </form>
@@ -234,8 +235,8 @@
                         Thanh toán qua VNPay
                     </label>
                     <!-- Thông báo lỗi chung -->
-                    <div id="error-message" style=" color: red; display: block; margin-top: 6px;font-size: 8px;
-                    font-weight: bold; margin-left: 3px;">Vui lòng điền đầy đủ thông tin để thanh toán.
+                    <div id="error-message" style=" color: red; display: none; margin-top: 6px;font-size: 8px;
+                    font-weight: bold; margin-left: 3px;">Vui lòng chọn phương thức thanh toán.
                     </div>
                 </div>
             </div>

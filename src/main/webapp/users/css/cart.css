@@ -212,7 +212,7 @@ html{
   .voucher input {
     width: calc(100% - 90px);
     padding: 5px;
-    margin-right: 10px;
+    margin-right: 0px;
     border: 1px solid #ddd;
     border-radius: 5px;
   }
