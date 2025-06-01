@@ -10,7 +10,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 @WebServlet(name = "LoginFBController", value = "/loginFB")
 public class LoginFBController extends HttpServlet {
-    private static final String CLIENT_ID = "9471317702914860"; // Thay bằng App ID của bạn
+    String CLIENT_ID = OAuthConfigFB.getClientID();
     String REDIRECT_URI = OAuthConfigFB.getRedirectUri();
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

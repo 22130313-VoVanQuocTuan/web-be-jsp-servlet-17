@@ -1,4 +1,3 @@
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
@@ -29,6 +28,7 @@
         border: 2px solid #1c1919 !important;
         margin-bottom: 10px !important;
     }
+
     .dataTables_wrapper .dataTables_paginate .paginate_button {
         padding: 0px !important;
     }
@@ -56,11 +56,53 @@
         border-radius: 30px;
         transition: 0.3s;
     }
+    .hov {
+        margin-bottom: 3px;
+    }
 
     .hov.active a {
         background-color: #FFFFFF;
         color: #4f3131;
         font-weight: bold;
+    }
+
+    .notification-bell {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        margin-left: 5px;
+    }
+
+    .notification-bell ion-icon {
+        font-size: 18px;
+    }
+
+    .badge-pending {
+        position: absolute;
+        top: -6px;
+        right: -6px;
+        background-color: #ff4444;
+        color: white;
+        font-size: 9px;
+        width: 14px;
+        height: 14px;
+        line-height: 14px;
+        text-align: center;
+        border-radius: 50%;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+        display: inline-block;
+        font-weight: bold;
+        transition: transform 0.3s ease;
+    }
+
+    /* Hiệu ứng khi hover */
+    .notification-bell:hover .badge-pending {
+        transform: scale(1.15);
+    }
+
+    /* Ẩn badge khi không có đơn hàng */
+    #pending-order-count:empty {
+        display: none;
     }
 </style>
 
@@ -104,7 +146,7 @@
                     <span class="title">Quản lý sản phẩm</span>
                 </a>
             </li>
-            <li class="hov active" >
+            <li class="hov active">
                 <a href="turn-page?action=inventory">
                         <span class="icon">
                             <ion-icon name="storefront-outline"></ion-icon>
@@ -114,10 +156,14 @@
             </li>
             <li>
                 <a href="turn-page?action=order">
-                        <span class="icon">
-                            <ion-icon name="receipt-outline"></ion-icon>
-                        </span>
+                    <span class="icon">
+                        <ion-icon name="receipt-outline"></ion-icon>
+                    </span>
                     <span class="title">Quản lý hóa đơn</span>
+                    <span class="notification-bell">
+                        <ion-icon name="notifications-outline"></ion-icon>
+                        <span id="pending-order-count" class="badge-pending">0</span>
+                    </span>
                 </a>
             </li>
             <li>
@@ -137,7 +183,7 @@
                     <span class="title">Quản lý danh mục</span>
                 </a>
             </li>
-            <li >
+            <li>
                 <a href="turn-page?action=rating">
                         <span class="icon">
                             <ion-icon name="chatbubble-outline"></ion-icon>
@@ -190,7 +236,9 @@
 
 
             <div class="user">
-                <a href="turn-page?action=infoUserAdmin"> <ion-icon name="person" style="color: #000000; font-size: 25px;"></ion-icon></a>
+                <a href="turn-page?action=infoUserAdmin">
+                    <ion-icon name="person" style="color: #000000; font-size: 25px;"></ion-icon>
+                </a>
 
             </div>
         </div>
@@ -201,9 +249,13 @@
             <div class="recentOrders">
                 <div class="cardHeader">
                     <h2 style="color: #000000;font-size: 20px;">DANH SÁCH SẢN PHẨM TỒN KHO</h2>
-                 </div>
+                </div>
                 <div class="list-products-content-button">
-                <a href="turn-page?action=history_import_export"><button id="import_export_stock" style="margin-bottom: 10px; background: #a1e8ff">Xem lịch sử Nhập/Xuất kho</button></a>
+                    <a href="turn-page?action=history_import_export">
+                        <button id="import_export_stock" style="margin-bottom: 10px; background: #a1e8ff">Xem lịch sử
+                            Nhập/Xuất kho
+                        </button>
+                    </a>
                 </div>
                 <table id="inventoryTable">
                     <thead>
@@ -227,11 +279,11 @@
         </div>
         <!-- Sản phẩm khong ban duoc -->
         <div class="import_export">
-                <div class="recentOrders">
+            <div class="recentOrders">
                 <h3 style="color: red">
                     Sản phẩm không bán được trong vòng:
                 </h3>
-                <select style="width: 70px; margin: 12px 0;"  name="day" id="days" onchange="fetchInventory();">
+                <select style="width: 70px; margin: 12px 0;" name="day" id="days" onchange="fetchInventory();">
                     <option value="1">1 ngày</option>
                     <option value="7">1 tuần</option>
                     <option value="15">15 ngày</option>
@@ -255,8 +307,8 @@
 
                     </tbody>
                 </table>
-                </div>
             </div>
+        </div>
         <!-- Sản phẩm cần nhập kho -->
         <div class="import_export">
             <div class="recentOrders">
@@ -283,82 +335,82 @@
                 </table>
             </div>
         </div>
-        </div>
-        <!-- Modal cập nhật số lượng -->
-        <div id="delete-modal" class="modal">
-            <div class="modal-content-i">
-                <h3>Xác nhận xóa</h3>
-                <label>Bạn có chắc chắn muốn xóa đánh giá này?</label>
-                <div class="button-container">
-                    <button id="confirm-delete" class="confirm-delete">Xóa</button>
-                    <button  class="close-modal">Hủy</button>
-                </div>
-            </div>
-        </div>
     </div>
-    <%-- Kiểm tra xem có thông báo nào không --%>
-    <c:if test="${not empty sessionScope.errorMessage}">
-    <div class="alert alert-info">
-            ${sessionScope.errorMessage}
-    </div
-            <% session.removeAttribute("errorMessage"); %> <!-- Xóa thông báo ngay sau khi hiển thị -->
-    </c:if>
-            <!-- Modal Xác Nhận Đăng Xuất -->
-    <div id="logout-modal" class="modal">
-        <div class="modal-content">
-            <h3>Xác nhận đăng xuất</h3>
-            <label>Bạn có chắc chắn muốn đăng xuất?</label>
+    <!-- Modal cập nhật số lượng -->
+    <div id="delete-modal" class="modal">
+        <div class="modal-content-i">
+            <h3>Xác nhận xóa</h3>
+            <label>Bạn có chắc chắn muốn xóa đánh giá này?</label>
             <div class="button-container">
-                <button id="confirm-logout">Đăng Xuất</button>
-                <button id="cancel-logout">Hủy</button>
+                <button id="confirm-delete" class="confirm-delete">Xóa</button>
+                <button class="close-modal">Hủy</button>
             </div>
         </div>
     </div>
-    <!-- nhập xất kho -->
-    <div id="importModal" class="modal">
-        <div class="modal-content-i">
-            <h3>Nhập kho sản phẩm</h3>
-            <div id="importStockForm">
-                <input type="hidden" id="quantityPresent">
-                <label>Mã sản phẩm:</label>
-                <input type="text" id="productId" readonly>
-
-                <label>Tên sản phẩm:</label>
-                <input type="text" id="productNames" readonly>
-
-                <label>Số lượng nhập:</label>
-                <input type="number" id="importQuantity">
-                <!-- Thông báo lỗi sẽ hiển thị ở đây -->
-                <span class="error" id="errorImport"></span>
-                <label>Ghi chú:</label>
-                <input type="text" id="note"></div>
-            <button id="importBt" onclick="submitImport()">Xác nhận</button>
-            <button type="button" class="close-modal" onclick="closeModalImport()">Thoát</button>
+</div>
+<%-- Kiểm tra xem có thông báo nào không --%>
+<c:if test="${not empty sessionScope.errorMessage}">
+<div class="alert alert-info">
+        ${sessionScope.errorMessage}
+</div
+        <% session.removeAttribute("errorMessage"); %> <!-- Xóa thông báo ngay sau khi hiển thị -->
+</c:if>
+        <!-- Modal Xác Nhận Đăng Xuất -->
+<div id="logout-modal" class="modal">
+    <div class="modal-content">
+        <h3>Xác nhận đăng xuất</h3>
+        <label>Bạn có chắc chắn muốn đăng xuất?</label>
+        <div class="button-container">
+            <button id="confirm-logout">Đăng Xuất</button>
+            <button id="cancel-logout">Hủy</button>
         </div>
     </div>
+</div>
+<!-- nhập xất kho -->
+<div id="importModal" class="modal">
+    <div class="modal-content-i">
+        <h3>Nhập kho sản phẩm</h3>
+        <div id="importStockForm">
+            <input type="hidden" id="quantityPresent">
+            <label>Mã sản phẩm:</label>
+            <input type="text" id="productId" readonly>
 
-    <!-- nhập xất kho -->
-    <div id="exportModal" class="modal">
-        <div class="modal-content-i">
-            <h3>Xuất kho sản phẩm</h3>
-            <div id="exportStockForm">
-                <label>Mã sản phẩm:</label>
-                <input type="text" id="productIds" readonly>
+            <label>Tên sản phẩm:</label>
+            <input type="text" id="productNames" readonly>
 
-                <label>Tên sản phẩm:</label>
-                <input type="text" id="productNamess" readonly>
-
-
-                <label>Số lượng xuất:</label>
-                <input type="number" id="importQuantitys">
-                <!-- Thông báo lỗi sẽ hiển thị ở đây -->
-                <span class="error" id="error"></span>
-                <label>Ghi chú:</label>
-                <input type="text" id="notes"></div>
-            <button id="export" onclick="submitExport()">Xác nhận</button>
-            <button type="button" class="close-modal" onclick="closeModalExport()">Thoát</button>
-        </div>
+            <label>Số lượng nhập:</label>
+            <input type="number" id="importQuantity">
+            <!-- Thông báo lỗi sẽ hiển thị ở đây -->
+            <span class="error" id="errorImport"></span>
+            <label>Ghi chú:</label>
+            <input type="text" id="note"></div>
+        <button id="importBt" onclick="submitImport()">Xác nhận</button>
+        <button type="button" class="close-modal" onclick="closeModalImport()">Thoát</button>
     </div>
+</div>
+
+<!-- nhập xất kho -->
+<div id="exportModal" class="modal">
+    <div class="modal-content-i">
+        <h3>Xuất kho sản phẩm</h3>
+        <div id="exportStockForm">
+            <label>Mã sản phẩm:</label>
+            <input type="text" id="productIds" readonly>
+
+            <label>Tên sản phẩm:</label>
+            <input type="text" id="productNamess" readonly>
+
+
+            <label>Số lượng xuất:</label>
+            <input type="number" id="importQuantitys">
+            <!-- Thông báo lỗi sẽ hiển thị ở đây -->
+            <span class="error" id="error"></span>
+            <label>Ghi chú:</label>
+            <input type="text" id="notes"></div>
+        <button id="export" onclick="submitExport()">Xác nhận</button>
+        <button type="button" class="close-modal" onclick="closeModalExport()">Thoát</button>
+    </div>
+</div>
 
 
 <!-- Cập nhật kho -->
@@ -373,7 +425,7 @@
             <label>Số lượng:</label>
             <input type="number" id="importQuantitysss">
             <!-- Thông báo lỗi sẽ hiển thị ở đây -->
-            <span class="error"  id="errorQuantitysss"></span>
+            <span class="error" id="errorQuantitysss"></span>
             <label>Số lượng tối thiểu:</label>
             <input type="number" id="importQuantityMin">
             <!-- Thông báo lỗi sẽ hiển thị ở đây -->
@@ -381,12 +433,12 @@
             <label>Số lượng tối đa:</label>
             <input type="number" id="importQuantityMax">
             <!-- Thông báo lỗi sẽ hiển thị ở đây -->
-            <span class="error"  id="errorQuantityMax"></span>
+            <span class="error" id="errorQuantityMax"></span>
 
-        <button id="updateQuantity" onclick="updateQuantity()">Cập nhật</button>
-        <button type="button" class="close-modal" onclick="closeModalUpdateInventory()">Thoát</button>
+            <button id="updateQuantity" onclick="updateQuantity()">Cập nhật</button>
+            <button type="button" class="close-modal" onclick="closeModalUpdateInventory()">Thoát</button>
+        </div>
     </div>
-</div>
 </div>
 
 <div id="errorAlert" class="alert alert-info" style="display: none">
@@ -394,15 +446,10 @@
 </div>
 
 
-
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-
 <script src="<c:url value="/admin/js/configuration.js"/>"></script>
-<script src ="<c:url value="/admin/js/inventory.js"/>"></script>
-
-
-
+<script src="<c:url value="/admin/js/inventory.js"/>"></script>
+<script src="<c:url value="/admin/js/noficationOrder.js"/>"></script>
 
 </body>
-
 </html>

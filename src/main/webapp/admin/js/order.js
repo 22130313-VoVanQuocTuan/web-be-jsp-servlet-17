@@ -24,7 +24,6 @@ function updateStatusColorsOrder() {
 }
 
 function loadOrder() {
-
     $.ajax({
         url: "order-list",
         type: "GET",

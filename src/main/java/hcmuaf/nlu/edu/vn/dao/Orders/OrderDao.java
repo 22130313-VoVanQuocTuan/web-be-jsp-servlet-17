@@ -214,9 +214,20 @@ public class OrderDao {
         }
         return false;
     }
-
-
-
-
+    // Đếm số lượng đơn hàng chưa hoàn thành( cần vận chuyển)
+    public int getPendingOrderCount() throws SQLException {
+        String sql = "SELECT COUNT(*) FROM orders WHERE status != ?";
+        try (PreparedStatement ps = dbConnect.preparedStatement(sql)) {
+            ps.setString(1, "Hoàn thành");
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt(1);
+                }
+            }
+        } catch (SQLException e) {
+            throw new SQLException("Lỗi khi lấy số lượng đơn hàng chưa hoàn thành: " + e.getMessage(), e);
+        }
+        return 0; // Trả về 0 nếu không có đơn hàng hoặc có lỗi
+    }
 
 }

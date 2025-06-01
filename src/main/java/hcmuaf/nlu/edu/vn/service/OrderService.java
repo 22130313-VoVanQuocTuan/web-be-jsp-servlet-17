@@ -75,8 +75,6 @@ public class OrderService {
         return orderDao.updateOrderStatus(id, status);
     }
 
-
-
     //thêm hoá đơn
     public Orders addOrder(Orders order) throws SQLException {
         return addOrderDao.addOrder(order);
@@ -85,5 +83,9 @@ public class OrderService {
     //thêm chi tiết hoá đơn
     public void addOrderItems(OrderItem order) throws SQLException {
         addOrderDao.addOrderItem(order);
+    }
+    // Đếm số lượng đơn hàng chưa hoàn thành( cần vận chuyển)
+    public int getPendingOrderCount() throws SQLException {
+        return orderDao.getPendingOrderCount();
     }
 }

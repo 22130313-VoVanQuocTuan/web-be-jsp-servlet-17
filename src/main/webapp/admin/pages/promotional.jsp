@@ -59,10 +59,53 @@
         transition: 0.3s;
     }
 
+    .hov {
+        margin-bottom: 3px;
+    }
+
     .hov.active a {
         background-color: #FFFFFF;
         color: #4f3131;
         font-weight: bold;
+    }
+
+    .notification-bell {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        margin-left: 5px;
+    }
+
+    .notification-bell ion-icon {
+        font-size: 18px;
+    }
+
+    .badge-pending {
+        position: absolute;
+        top: -6px;
+        right: -6px;
+        background-color: #ff4444;
+        color: white;
+        font-size: 9px;
+        width: 14px;
+        height: 14px;
+        line-height: 14px;
+        text-align: center;
+        border-radius: 50%;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+        display: inline-block;
+        font-weight: bold;
+        transition: transform 0.3s ease;
+    }
+
+    /* Hiệu ứng khi hover */
+    .notification-bell:hover .badge-pending {
+        transform: scale(1.15);
+    }
+
+    /* Ẩn badge khi không có đơn hàng */
+    #pending-order-count:empty {
+        display: none;
     }
 </style>
 <!-- ------------------ Điều hướng -------------------->
@@ -114,10 +157,14 @@
             </li>
             <li>
                 <a href="turn-page?action=order">
-                        <span class="icon">
-                            <ion-icon name="receipt-outline"></ion-icon>
-                        </span>
+                    <span class="icon">
+                        <ion-icon name="receipt-outline"></ion-icon>
+                    </span>
                     <span class="title">Quản lý hóa đơn</span>
+                    <span class="notification-bell">
+                        <ion-icon name="notifications-outline"></ion-icon>
+                        <span id="pending-order-count" class="badge-pending">0</span>
+                    </span>
                 </a>
             </li>
             <li class="hov active">
@@ -252,30 +299,32 @@
                 <div id="editPromotional" class="modal">
                     <div class="modal-content" style="overflow-y: hidden;height: 70%; max-height: 99%;">
                         <h2 style="color: #FFC857" class="modal-title">Chỉnh sửa ưu đãi</h2>
-                            <!-- Form chỉnh sửa thông tin -->
-                            <form id="editInfoForm">
-                                <input type="hidden" name="id" id="promotionId">
-                                <div class="mb-3">
-                                    <label for="promotionValue" class="form-label">Giá trị:</label>
-                                    <input type="number" name="value" class="form-control" id="promotionValue"
-                                           placeholder="Nhập giá trị"  required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="startDate" class="form-label">Ngày bắt đầu:</label>
-                                    <input type="datetime-local" name="startDate" class="form-control" id="startDate"
-                                           placeholder="Nhập ngày bắt đầu"  required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="endDate" class="form-label">Ngày kết thúc:</label>
-                                    <input type="datetime-local" class="form-control" name="endDate" id="endDate"
-                                           placeholder="Nhập ngày kết thúc" required>
-                                </div>
+                        <!-- Form chỉnh sửa thông tin -->
+                        <form id="editInfoForm">
+                            <input type="hidden" name="id" id="promotionId">
+                            <div class="mb-3">
+                                <label for="promotionValue" class="form-label">Giá trị:</label>
+                                <input type="number" name="value" class="form-control" id="promotionValue"
+                                       placeholder="Nhập giá trị" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="startDate" class="form-label">Ngày bắt đầu:</label>
+                                <input type="datetime-local" name="startDate" class="form-control" id="startDate"
+                                       placeholder="Nhập ngày bắt đầu" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="endDate" class="form-label">Ngày kết thúc:</label>
+                                <input type="datetime-local" class="form-control" name="endDate" id="endDate"
+                                       placeholder="Nhập ngày kết thúc" required>
+                            </div>
 
-                                <div class="modal-footer">
-                                    <button type="submit" class="btn btn-primary" id="saveChanges">Lưu thay đổi</button>
-                                    <button type="button" class="close-modal btn btn-secondary " onclick="closeModalUpdatePro()">Hủy</button>
-                                </div>
-                            </form>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary" id="saveChanges">Lưu thay đổi</button>
+                                <button type="button" class="close-modal btn btn-secondary "
+                                        onclick="closeModalUpdatePro()">Hủy
+                                </button>
+                            </div>
+                        </form>
 
                     </div>
                 </div>
@@ -287,7 +336,8 @@
                         <label>Bạn có chắc chắn muốn xóa ưu đãi này?</label>
                         <input type="hidden" id="promotionalId">
                         <div class="button-container">
-                            <button id="confirm-delete" class="confirm-delete" onclick="confirmModalDelete()">Xóa</button>
+                            <button id="confirm-delete" class="confirm-delete" onclick="confirmModalDelete()">Xóa
+                            </button>
                             <button type="button" class="close-modal" onclick="closeModalDeletePro()">Hủy</button>
                         </div>
                     </div>
@@ -314,7 +364,6 @@
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 <script src="<c:url value="/admin/js/configuration.js"/>"></script>
 <script src="<c:url value="/admin/js/promotional.js"/>"></script>
-
+<script src="<c:url value="/admin/js/noficationOrder.js"/>"></script>
 </body>
-
 </html>
