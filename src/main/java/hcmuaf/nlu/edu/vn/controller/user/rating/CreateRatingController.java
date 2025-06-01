@@ -9,42 +9,39 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 @WebServlet(name = "CreateRating", value = "/create-rating")
 public class CreateRatingController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-    try {
 
+        resp.setContentType("application/json");
+        resp.setCharacterEncoding("UTF-8");
 
+        PrintWriter out = resp.getWriter();
+
+        try {
         int productId = Integer.parseInt(req.getParameter("productId"));
         int userId = Integer.parseInt(req.getParameter("userId"));
         String content = req.getParameter("content");
 
-        int categoryId = Integer.parseInt(req.getParameter("categoryId"));
-
         RatingService ratingService = new RatingService();
         Rating rating = new Rating(productId,userId,content);
 
-        if(ratingService.addRating(rating)){
-            req.setAttribute("productId", productId);
-            req.setAttribute("categoryId", categoryId);
-            req.setAttribute("rating", "Đánh giá thành công");
-            req.getRequestDispatcher( "/product-detail?id=" + productId + "&categoryId=" + categoryId + "&rating=success").forward(req, resp);
-        }else{
-            req.setAttribute("rating", "Đánh giá thất bại");
-            req.getRequestDispatcher( "/product-detail?id=" + productId + "&categoryId=" + categoryId + "&rating=fail").forward(req, resp);
+            if (ratingService.addRating(rating)) {
+                out.print("{\"status\":\"success\", \"message\":\"Đánh giá thành công\"}");
+            } else {
+                out.print("{\"status\":\"fail\", \"message\":\"Đánh giá thất bại\"}");
+            }
 
+        } catch (Exception e) {
+            e.printStackTrace();
+            out.print("{\"status\":\"error\", \"message\":\"Lỗi hệ thống\"}");
         }
-
-
+        out.flush();
+        out.close();
     }
-    catch(Exception e){
-        req.setAttribute("rating", "lỗi hệ thống");
-        resp.sendRedirect(req.getContextPath() + "/home-page");
-      }
-    }
-
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         doPost(req, resp);

@@ -10,6 +10,7 @@
     <title>Vật Liệu Xây Dựng TQH </title>
 </head>
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4-beta3/css/all.min.css"/>
 <link rel="stylesheet" href="<c:url value="/users/css/home.css"/>">
@@ -162,21 +163,6 @@
         </div>
     </div>
     <div class="review-product">
-        <div class="review">
-            <h2>Đánh giá</h2>
-            <form id="commentform" class="comment-form" action="create-rating" method="post">
-                <input type="hidden" name="productId" value="${product.id}">
-                <input type="hidden" name="userId" value="${sessionScope.user.id}"></input>
-                <input type="hidden" name="categoryId" value="${product.categoryId}"></input>
-                </input>
-                <textarea name="content" rows="3" placeholder="Ý kiến của bạn..." required></textarea>
-                <c:if test="${not empty rating}">
-                    <p style="color: red;">${rating}</p> <!-- Hiển thị lỗi nếu có -->
-                </c:if>
-                <button type="submit">Gửi</button>
-            </form>
-
-        </div>
         <div class="review-section">
             <h2>Đánh giá từ khách hàng</h2>
             <c:if test="${empty ratings}">
