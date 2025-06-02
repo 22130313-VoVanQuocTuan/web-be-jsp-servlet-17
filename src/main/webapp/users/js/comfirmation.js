@@ -118,42 +118,70 @@ function confirmValid() {
     window.location.href = "turn-page?action=cart";
 }
 
-function showInventoryWarning(productId, availableQuantity) {
+function showInventoryWarning(warningItems) {
     $('#productId').val(productId);
-    $('#inventory-warning-msg').text("Số lượng sản phẩm mua đã vượt mức hàng tồn kho!");
 
-    // Cập nhật số lượng còn lại
-    $('#inventory-left').text("Chỉ còn lại " + availableQuantity + " sản phẩm trong kho.");
+    // Hiện thị danh sách sản phẩm hết hàng, số lượng sản phẩm ko đủ mua
+    let warningHTML = "<ul style='color: red; font-weight: bold;'>";
 
+    warningItems.forEach(item => {
+        const { productName, availableQuantity } = item;
+        if (availableQuantity <= 0) {
+            warningHTML += `<li>Sản phẩm <strong>${productName}</strong> đã hết hàng.</li>`;
+        } else {
+            warningHTML += `<li>Sản phẩm <strong>${productName}</strong> chỉ còn <strong>${availableQuantity}</strong> trong hàng tồn kho.</li>`;
+        }
+    });
+
+    warningHTML += "</ul>";
+
+    // Hiển thị thông tin
+    $('#product-out-stock').html(warningHTML);
     $('#delete-modal').show();
 }
 
 function checkInventoryAllItems() {
-    placeOrder();
     const cartItems = document.querySelectorAll('.cart-item');
+    let requests = [];   // Danh sách promises AJAX
+    let warningItems = [];
 
     cartItems.forEach(item => {
         const productId = item.dataset.productId;
         const quantity = item.dataset.quantity;
-        console.log("Sản phẩm", productId);
-        console.log("So luognw", quantity);
+        const productName = item.dataset.productName;
 
-        $.ajax({
+        console.log("productName:", productName);
+        console.log("quantity:", quantity);
+        console.log("productId:", productId);
+
+        const request = $.ajax({
             url: 'check-inventory',
-            type: 'Get',
+            type: 'GET',
             data: {
                 productId: productId,
-                quantity: quantity
-            },
-            success: function(response) {
-                if (response.status === 'success') {
-                    submitOrder();
-                } else {
-                    //thì mở model lên
-                    showInventoryWarning(productId, response.availableQuantity);
-                }
+                quantity: quantity,
+                productName: productName
+            }
+        }).done(function (response) {
+            if (response.status !== 'success') {
+                warningItems.push({
+                    productId: productId,
+                    productName: productName,
+                    availableQuantity: response.availableQuantity
+                });
             }
         });
+
+        requests.push(request);
+    });
+
+    // Sau khi tất cả AJAX hoàn thành
+    Promise.all(requests).then(function () {
+        if (warningItems.length === 0) {
+            submitOrder();
+        } else {
+            showInventoryWarning(warningItems);
+        }
     });
 }
 
