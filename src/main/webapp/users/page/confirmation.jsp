@@ -252,7 +252,7 @@
                 </tr>
                 <c:forEach var="c" items="${itemCart}">
                     <tr class="cart-item"  data-product-id="${c.productId}"
-                        data-quantity="${c.quantity}">
+                        data-quantity="${c.quantity}" data-product-name="${c.name}">
                         <td>${c.name}</td>
                         <td id="cart-quantity">${c.quantity}</td>
                         <td><fmt:formatNumber value="${c.price}" type="number"/>₫</td>
@@ -289,10 +289,11 @@
             <h3>⚠ Cảnh báo số lượng</h3>
             <label id="inventory-warning-msg">Số lượng sản phẩm mua đã vượt mức hàng tồn kho.</label>
 
+            <p id="product-out-stock" style="margin-top: 10px; font-weight: bold; color: red;"></p>
             <!-- Hiển thị tồn kho còn lại -->
-            <p id="inventory-left" style="margin-top: 10px; font-weight: bold; color: red;">
+<%--            <p id="inventory-left" style="margin-top: 10px; font-weight: bold; color: red;">--%>
                 <!-- Nội dung sẽ được thay bằng JavaScript -->
-            </p>
+<%--            </p>--%>
 
             <input type="hidden" id="productId">
             <div class="button-container">

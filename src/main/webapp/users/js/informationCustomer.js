@@ -336,10 +336,10 @@ $(document).ready(function () {
         e.preventDefault(); // Ngăn reload trang
         const productId = $('#productId').val();
         const userId = $('#userId').val();
-        const content = $('textarea[name="content"]').val(); // ✅ dòng cần thiết
+        const content = $('textarea[name="content"]').val();
         console.log("Product ID:", productId);
         console.log("User ID:", userId);
-        console.log("Content:", content); // ✅ giờ không lỗi nữa
+        console.log("Content:", content);
         $.ajax({
             url: 'create-rating',
             type: 'POST',

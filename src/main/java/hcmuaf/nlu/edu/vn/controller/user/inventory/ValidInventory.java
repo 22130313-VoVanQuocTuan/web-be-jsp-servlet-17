@@ -19,6 +19,7 @@ public class ValidInventory extends HttpServlet {
         InventoryService service = new InventoryService();
         int productId = Integer.parseInt(request.getParameter("productId"));
         int quantity = Integer.parseInt(request.getParameter("quantity"));
+        String productName = request.getParameter("productName");
         int availableQuantity = service.quantityInventory(productId); // Lấy tồn kho hiện tại
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
@@ -26,9 +27,11 @@ public class ValidInventory extends HttpServlet {
         Map<String, Object> result = new HashMap<>();
         result.put("check", check);
         result.put("availableQuantity", availableQuantity);
+        result.put("productName", productName);
         if (check) {
             result.put("status", "success");
             result.put("availableQuantity", availableQuantity);
+            result.put("productName", productName);
         } else {
             result.put("status", "error");
             result.put("message", "Số lượng mua vượt quá hàng tồn kho");
